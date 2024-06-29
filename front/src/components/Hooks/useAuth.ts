@@ -12,9 +12,28 @@ export const RegScheme = z.object({
 
 export type RegType = z.infer<typeof RegScheme>;
 
+type LogType = z.infer<typeof LogScheme>;
+
+const LogScheme = z.object({
+	log: z.string(),
+	password: z.string(),
+});
 export const useAuth = () => {
+	/**
+	 * Валидация запросов
+	 */
+	const validateResponse = async (response: Response): Promise<Response> => {
+		if (!response.ok) {
+			throw Error(await response.text());
+		}
+		return response;
+	};
+
+	/**
+	 * Регистрация
+	 */
 	const regMe = async (regData: RegType): Promise<void> => {
-		return fetch("http://localhost:3000", {
+		return fetch("http://localhost:3000/register", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -23,18 +42,9 @@ export const useAuth = () => {
 		}).then(() => undefined);
 	};
 
-	const LogScheme = z.object({
-		log: z.string(),
-		password: z.string(),
-	});
-
-	type LogType = z.infer<typeof LogScheme>;
-	const validateLog = async (response: Response): Promise<Response> => {
-		if (!response.ok) {
-			throw new Error(await response.text());
-		}
-		return response;
-	};
+	/**
+	 * Логинация
+	 */
 	const logMe = (LogData: LogType): Promise<void> => {
 		return fetch("api/reg", {
 			method: "POST",
@@ -43,7 +53,7 @@ export const useAuth = () => {
 			},
 			body: JSON.stringify(LogData),
 		})
-			.then(validateLog)
+			.then(validateResponse)
 			.then(() => undefined);
 	};
 

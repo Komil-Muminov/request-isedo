@@ -5,6 +5,7 @@ import { RegType } from "../../../Hooks/useAuth";
 import { ButtonKM } from "../../../UI/Button/ButtonKM";
 import { queryClient } from "../../../../queryClient";
 import { useAuth } from "../../../Hooks/useAuth";
+import { Loader } from "../../../UI/Loader";
 const Registration = () => {
 	const {
 		register,
@@ -25,7 +26,6 @@ const Registration = () => {
 	const regMutate = useMutation(
 		{
 			mutationFn: () => regMe(data),
-			onSuccess: () => console.log(`YES`),
 			onError: () => console.log(`No`),
 		},
 		queryClient,
@@ -33,6 +33,15 @@ const Registration = () => {
 	const onSubmit = () => {
 		regMutate.mutate();
 	};
+
+	switch (regMutate.status) {
+		case "pending":
+			return <Loader />;
+		case "success":
+			return <Loader />;
+		case "error":
+			return console.log(`ooh it's so sad 1`);
+	}
 
 	return (
 		<>

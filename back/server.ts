@@ -1,13 +1,17 @@
 import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
+import cors from "cors"; // Импортируем cors для обработки CORS запросов
 
 const app = express();
 const port = 3000;
 
-// Промежуточное ПО для парсинга JSON-тел
+// Промежуточное ПО для парсинга JSON-тела
 app.use(bodyParser.json());
 
-// Конечная точка для обработки POST-запросов
+// Подключаем обработку CORS
+app.use(cors());
+
+// Конечная точка для обработки POST-запросов на регистрацию
 app.post("/register", (req: Request, res: Response) => {
 	const { username, password, role } = req.body;
 
