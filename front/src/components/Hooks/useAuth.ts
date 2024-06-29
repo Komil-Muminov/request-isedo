@@ -13,8 +13,8 @@ export const RegScheme = z.object({
 export type RegType = z.infer<typeof RegScheme>;
 
 export const useAuth = () => {
-	const regMe = (regData: RegType): Promise<void> => {
-		return fetch("api/reg", {
+	const regMe = async (regData: RegType): Promise<void> => {
+		return fetch("http://localhost:3000", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

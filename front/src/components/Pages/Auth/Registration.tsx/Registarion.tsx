@@ -1,23 +1,37 @@
 import "./Registarion.css";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { RegType } from "../../../Hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
+import { RegType } from "../../../Hooks/useAuth";
 import { ButtonKM } from "../../../UI/Button/ButtonKM";
+import { queryClient } from "../../../../queryClient";
+import { useAuth } from "../../../Hooks/useAuth";
 const Registration = () => {
 	const {
 		register,
 		handleSubmit,
+		getValues,
 		formState: { errors },
 	} = useForm<RegType>({
 		defaultValues: {
 			username: "",
 			password: "",
+			role: "",
 		},
 	});
 
-	const onSubmit = (data: RegType) => {
-		console.log(data);
+	const { regMe } = useAuth();
+	const data: RegType = getValues();
+	console.log(data);
+	const regMutate = useMutation(
+		{
+			mutationFn: () => regMe(data),
+			onSuccess: () => console.log(`YES`),
+			onError: () => console.log(`No`),
+		},
+		queryClient,
+	);
+	const onSubmit = () => {
+		regMutate.mutate();
 	};
 
 	return (
@@ -61,6 +75,11 @@ const Registration = () => {
 						type="password"
 						name="password"
 					/>
+
+					<select {...register("role")} className="inp reg_inp" id="role">
+						<option value="user">User</option>
+						<option value="admin">Admin</option>
+					</select>
 					<span className="form_errors-text">
 						{errors?.password && errors.password.message}
 					</span>
