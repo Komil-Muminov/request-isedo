@@ -1,0 +1,17 @@
+.register__content {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.register_header-list {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 10px;
+	border-bottom: 1px solid var(--navbottom-links-bottom-line);
+}
+
+.register_add-btn {
+	align-self: flex-end;
+}

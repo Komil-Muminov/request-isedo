@@ -1,0 +1,24 @@
+/* BUTTON */
+.btn {
+	display: flex;
+	justify-content: center;
+
+	padding: 12px 24px;
+	min-width: 64px;
+	outline: none;
+	border: none;
+	border-radius: 10px;
+
+	cursor: pointer;
+	color: var(--white);
+	background-color: var(--edo-color);
+	transition: background-color 0.2s ease-in-out;
+}
+
+.btn:hover:not(:focus-visible) {
+	background-color: var(--edo-hvr-btn);
+}
+
+.btn:disabled {
+	opacity: 0.5;
+}

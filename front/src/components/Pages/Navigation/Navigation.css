@@ -1,0 +1,19 @@
+.navigation__content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.user_info {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+/* User account */
+
+.info_list-item {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}

@@ -1,0 +1,30 @@
+.km__content {
+	background-color: rgb(255, 252, 246);
+	padding: 20px 20px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.121);
+	border-radius: 10px;
+}
+.km__nav {
+	display: flex;
+	gap: 10px;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+
+.km_nav-links {
+	border-radius: 5px;
+	padding: 10px;
+	width: calc((100% - 10px * 3) / 4);
+}
+
+.km_nav-links:focus {
+	transition: background-color 0.2s ease-in-out;
+	border: 1px solid red;
+}
+
+/* КМ КЛАССЫ */
+.km__info-text {
+	color: red;
+	font-size: 20px;
+	font-weight: 600;
+}

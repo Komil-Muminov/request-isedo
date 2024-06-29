@@ -1,0 +1,12 @@
+.auth_logic {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+.submit_btn {
+	max-width: 194px;
+	width: 100%;
+}
