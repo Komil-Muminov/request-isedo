@@ -4,5 +4,11 @@
     "username": "asd@gmail.com",
     "password": "12345678",
     "role": "admin"
+  },
+  {
+    "id": 2,
+    "username": "as1d@gmail.com",
+    "password": "123222",
+    "role": "user"
   }
 ]
