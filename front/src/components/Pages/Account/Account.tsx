@@ -1,25 +1,23 @@
-import { useQuery } from "@tanstack/react-query";
+import { NavBottom } from "../NavBottom/NavBottom";
 import { Region } from "../Region/Region";
-import { Region } from "../Region/Region";
-import { useAuth } from "../Auth/useAuth";
-import { queryClient } from "../../../queryClient";
-export const Account = () => {
-	const { regMe } = useAuth();
-	const queryMe = useQuery(
-		{
-			queryFn: () => regMe(),
-			queryKey: ["RegMe"],
-		},
-		queryClient,
-	);
-
+import { Register } from "../Register/Register";
+import { ZayavkiLinks } from "../ZayavkiLinks/ZayavkiLink";
+// import { Routes, Route } from "react-router-dom";
+const Account = () => {
 	return (
 		<>
 			<section className="sections">
 				<div className="container">
-					<div className="account__content"></div>
+					<div className="account__content">
+						<NavBottom />
+						<ZayavkiLinks />
+						<Region />
+						<Register />
+					</div>
 				</div>
 			</section>
 		</>
 	);
 };
+
+export default Account;

@@ -38,9 +38,9 @@ export const Search: React.FC<{ [key: string]: any }> = ({ rows }: any) => {
 						</Box>
 					</div>
 					{filterByFirstName.map((item) => (
-						<>
-							<Link>{item.firstName}</Link>
-						</>
+						<Link key={item.id} to="/">
+							{item.firstName}
+						</Link>
 					))}
 				</div>
 			</section>

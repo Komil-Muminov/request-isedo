@@ -6,7 +6,7 @@
 	align-items: center;
 }
 .form_errors-text {
-	color: red;
+	color: var(--red);
 }
 
 .reg_inp {

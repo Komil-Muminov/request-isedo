@@ -7,6 +7,7 @@ import { queryClient } from "../../../../queryClient";
 import { useAuth } from "../../../Hooks/useAuth";
 import { Loader } from "../../../UI/Loader";
 const Registration = () => {
+	// Надо доработать
 	const {
 		register,
 		handleSubmit,
@@ -38,9 +39,9 @@ const Registration = () => {
 		case "pending":
 			return <Loader />;
 		case "success":
-			return <Loader />;
+			return <Account />;
 		case "error":
-			return console.log(`ooh it's so sad 1`);
+			return <div>Error</div>;
 	}
 
 	return (
@@ -85,14 +86,20 @@ const Registration = () => {
 						name="password"
 					/>
 
-					<select {...register("role")} className="inp reg_inp" id="role">
+					<select
+						{...register("role")}
+						className="inp reg_inp-select"
+						id="role"
+					>
 						<option value="user">User</option>
 						<option value="admin">Admin</option>
 					</select>
 					<span className="form_errors-text">
 						{errors?.password && errors.password.message}
 					</span>
-					<ButtonKM type="btn submit_btn">Зарегистрироваться</ButtonKM>
+					<ButtonKM isLoading={regMutate.isPending} type="btn submit_btn">
+						Зарегистрироваться
+					</ButtonKM>
 				</form>
 			</div>
 		</>

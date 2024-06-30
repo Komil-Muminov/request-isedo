@@ -43,3 +43,7 @@
 	transform: scale(1);
 	background-color: var(--navbottom-underline);
 }
+
+.navbottom_item:active:not(:focus-visible) {
+	color: var(--blackRgba);
+}

@@ -88,13 +88,13 @@ export const Navigation: React.FC = () => {
 						</div>
 
 						<div className="nav__log">
-							<a href="#">
+							<Link to="/#">
 								<img src={log} alt="log" className="nav__gerb" />
-							</a>
+							</Link>
 						</div>
 
 						<div className="user_info">
-							<Link to={`/auth`}>
+							<Link to={`/account`}>
 								<Avatar className="nav_user-log" alt="user">
 									KM
 								</Avatar>

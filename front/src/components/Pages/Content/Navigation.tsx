@@ -3,7 +3,7 @@ export const Navigation: React.FC = () => {
 		<>
 			<section className="sections navigation__section">
 				<div className="container">
-					<div className="navigation__content">asa</div>
+					<div className="navigation__content"></div>
 				</div>
 			</section>
 		</>
