@@ -27,8 +27,7 @@ function App() {
 				<Routes>
 					<Route path="*" element={<LazyErrorPage />} />
 					<Route path="/" element={<LazyAccount />} />
-					<Route path="/auth" element={<LazyAuthPage />} />
-					<Route path="/auth" element={<LazyAuthPage />} />
+					<Route path="auth" element={<LazyAuthPage />} />
 					<Route path="authorization" element={<LazyAuthorizationPage />} />
 					<Route path="registration" element={<LazyRegistrationPage />} />
 				</Routes>

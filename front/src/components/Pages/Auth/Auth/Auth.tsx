@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Registration from "../Registration.tsx/Registarion";
-import Authorization from "../Authorization/Authorization";
-// import { ButtonKM } from "../../../UI/Button/ButtonKM";
 import "./Auth.css";
 const Auth: React.FC = () => {
 	const [authType, setAuthType] = React.useState<string>("registration");
@@ -17,7 +15,7 @@ const Auth: React.FC = () => {
 		<div className="container">
 			<div className="auth__content">
 				<div className="auth_render">
-					{authType === "registration" ? <Registration /> : <Authorization />}
+					{authType === "registration" && <Registration />}
 				</div>
 
 				<div className="auth_logic">
