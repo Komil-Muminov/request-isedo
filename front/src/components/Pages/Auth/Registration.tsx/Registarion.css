@@ -1,9 +1,7 @@
 .form {
 	display: flex;
-	flex-direction: column;
 	gap: 10px;
 	background-color: rgb(238, 247, 255);
-	align-items: center;
 }
 .form_errors-text {
 	color: var(--red);
@@ -11,26 +9,10 @@
 
 .reg_inp {
 	padding: 13px 13px 13px 13px;
-	border-radius: 10px;
-	border: none;
-	outline: 1px solid var(--blackRgba);
 	transition: background-color 0.2s ease-in-out;
-}
-
-.reg_inp:focus {
-	background-color: var(--inp-bg);
-	outline: 1px solid var(----inp-outline-focus);
 }
 
 .reg_inp-select {
 	padding: 13px 13px 13px 13px;
-	border-radius: 10px;
-	border: none;
-	outline: 1px solid var(--blackRgba);
 	transition: background-color 0.2s ease-in-out;
-}
-
-.reg_inp-select:focus {
-	background-color: var(--inp-bg);
-	outline: 1px solid var(----inp-outline-focus);
 }

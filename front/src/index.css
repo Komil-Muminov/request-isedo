@@ -29,6 +29,21 @@
 	--loader-items: rgb(226, 226, 226);
 }
 
+a:active {
+	color: var(--blackRgba);
+}
+
+input,
+select,
+textarea {
+	background-color: var(--inp-bg);
+	border-radius: 10px;
+	max-width: 200px;
+	width: 100%;
+	border: none;
+	outline: none;
+}
+
 /* @font-face {
   font-family: "Montserrat";
   src: local("Montserrat-ExtraBold"),
@@ -52,7 +67,7 @@
 }
 
 .sections__title {
-	font-size: 20px;
+	font-size: 22px;
 	font-weight: 600;
 }
 

@@ -68,7 +68,7 @@ export const Register: React.FC = () => {
 						>
 							Добавить
 						</ButtonKM>
-						<Search rows={rows} />
+						{/* <Search rows={rows} /> */}
 						<Box sx={{ height: 400, width: "100%" }}>
 							<DataGrid
 								columns={columns}

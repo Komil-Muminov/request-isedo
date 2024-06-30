@@ -1,0 +1,12 @@
+.errorPage__content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	justify-content: center;
+	height: 100vh;
+}
+.errorpage_info-text {
+	max-width: 600px;
+	text-align: center;
+}

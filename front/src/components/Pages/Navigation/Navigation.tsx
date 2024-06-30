@@ -94,7 +94,7 @@ export const Navigation: React.FC = () => {
 						</div>
 
 						<div className="user_info">
-							<Link to={`/account`}>
+							<Link to={`/auth`}>
 								<Avatar className="nav_user-log" alt="user">
 									KM
 								</Avatar>

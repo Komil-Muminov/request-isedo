@@ -15,7 +15,7 @@ const Auth: React.FC = () => {
 
 	return (
 		<div className="container">
-			<div className="authorization__content">
+			<div className="auth__content">
 				<div className="auth_render">
 					{authType === "registration" ? <Registration /> : <Authorization />}
 				</div>
