@@ -1,6 +1,5 @@
 import log from "./log.png";
 import "./Navigation.css";
-import User from "./111.jpg";
 import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 export const Navigation: React.FC = () => {
