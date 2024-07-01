@@ -16,7 +16,7 @@ const Authorization = () => {
 		handleSubmit,
 		formState: { errors },
 		getValues,
-	} = useForm<RegType>({
+	} = useForm<LogType>({
 		defaultValues: {
 			username: "",
 			password: "",
@@ -28,13 +28,12 @@ const Authorization = () => {
 	const logMutate = useMutation(
 		{
 			mutationFn: () => logMe(data),
-			mutationKey: ["someKey"],
 		},
 		queryClient,
 	);
 
 	const onSubmit = (data: LogType) => {
-		logMutate.mutate();
+		logMutate.mutate(data);
 	};
 
 	if (logMutate.isPending) {
@@ -44,12 +43,12 @@ const Authorization = () => {
 		return (
 			<>
 				<Authorization />
-				<p>Ошибка при атворизации</p>
+				<p className="km__info-text">Ошибка логина или пароля</p>
 			</>
 		);
 	}
 	if (logMutate.isSuccess) {
-		return <Account />;
+		return <Account {...data} />;
 	}
 
 	return (

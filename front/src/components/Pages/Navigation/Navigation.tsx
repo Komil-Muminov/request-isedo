@@ -2,7 +2,10 @@ import log from "./log.png";
 import "./Navigation.css";
 import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
-export const Navigation: React.FC = () => {
+export const Navigation: React.FC<{ username: string }> = ({ username }) => {
+	const nameOfUser: string = `${
+		username ? username.slice(0, 1).toUpperCase() : "Кимки Кимкиев"
+	}`;
 	return (
 		<>
 			<section className="sections navigation__section">
@@ -95,7 +98,7 @@ export const Navigation: React.FC = () => {
 						<div className="user_info">
 							<Link to={`/auth`}>
 								<Avatar className="nav_user-log" alt="user">
-									KM
+									{nameOfUser}
 								</Avatar>
 							</Link>
 						</div>

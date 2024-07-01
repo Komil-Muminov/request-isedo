@@ -1,13 +1,15 @@
+// Импортируем необходимые модули
 import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import fs from "fs";
 import path from "path";
 
+// Инициализируем Express приложение
 const app = express();
 const port = 3000;
 
-// Промежуточное ПО для парсинга JSON-тела
+// Промежуточное ПО для парсинга JSON-тела запросов
 app.use(bodyParser.json());
 
 // Подключаем обработку CORS
@@ -71,7 +73,7 @@ app.post("/register", (req: Request, res: Response) => {
 		.json({ message: "Регистрация прошла успешно", user: newUser });
 });
 
-// Конечная точка для обработки POST-запросов на логинацию
+// Конечная точка для обработки POST-запросов на логин
 app.post("/login", (req: Request, res: Response) => {
 	const { username, password } = req.body;
 
@@ -94,8 +96,16 @@ app.post("/login", (req: Request, res: Response) => {
 	}
 
 	// Предполагаем успешное выполнение
-	res.status(200).json({ message: "Логинация прошла успешно", user });
+	res.status(200).json({ message: "Логин успешный", user });
 });
+
+// Конечная точка для получения данных текущего пользователя
+// app.get("/me", (req: Request, res: Response) => {
+// 	// Здесь нужно реализовать логику получения данных о текущем пользователе
+// 	// В данном примере я использовал заглушку для текущего пользователя
+// 	const currentUser = { id: 1, username: "example_user", role: "user" };
+// 	res.status(200).json({ user: currentUser });
+// });
 
 // Запуск сервера
 app.listen(port, () => {

@@ -66,13 +66,13 @@ export const useAuth = () => {
 	// 		body: JSON.stringify(regData),
 	// 	});
 	// };
-	const getMe = (userInfo: LogType): Promise<RegType> => {
-		return fetch("http://localhost:3000/")
+	const getMe = (): Promise<RegType> => {
+		return fetch("http://localhost:3000/me")
 			.then(validateResponse)
 			.then((response) => response.json())
-			.then((data) => data.parse(RegScheme))
-			.then(undefined);
+			.then((data) => RegScheme.parse(data));
 	};
+
 	return {
 		regMe,
 		logMe,

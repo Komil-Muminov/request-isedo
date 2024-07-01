@@ -22,7 +22,6 @@ const LazyAuthPage = lazy(() => import("./components/Pages/Auth/Auth/Auth"));
 function App() {
 	return (
 		<>
-			<Navigation />
 			<Suspense fallback={<div>{<Loader />}</div>}>
 				<Routes>
 					<Route path="*" element={<LazyErrorPage />} />
