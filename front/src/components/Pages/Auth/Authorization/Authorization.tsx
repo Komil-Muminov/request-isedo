@@ -3,22 +3,54 @@ import { useForm } from "react-hook-form";
 import { RegType } from "../../../Hooks/useAuth";
 import { ButtonKM } from "../../../UI/Button/ButtonKM";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../../Hooks/useAuth";
+import { useMutation } from "@tanstack/react-query";
+import { queryClient } from "../../../../queryClient";
+import { LogType } from "../../../Hooks/useAuth";
+import Account from "../../Account/Account";
+import { Loader } from "../../../UI/Loader";
+import Auth from "../Auth/Auth";
 const Authorization = () => {
-	// Надо реализовать
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
+		getValues,
 	} = useForm<RegType>({
 		defaultValues: {
 			username: "",
 			password: "",
 		},
 	});
+	// Надо реализовать
+	const { logMe } = useAuth();
+	const data: LogType = getValues();
+	const logMutate = useMutation(
+		{
+			mutationFn: () => logMe(data),
+			mutationKey: ["someKey"],
+		},
+		queryClient,
+	);
 
-	const onSubmit = (data: RegType) => {
-		console.log(data);
+	const onSubmit = (data: LogType) => {
+		logMutate.mutate();
 	};
+
+	if (logMutate.isPending) {
+		return <Loader />;
+	}
+	if (logMutate.isError) {
+		return (
+			<>
+				<Authorization />
+				<p>Ошибка при атворизации</p>
+			</>
+		);
+	}
+	if (logMutate.isSuccess) {
+		return <Account />;
+	}
 
 	return (
 		<>
@@ -66,7 +98,9 @@ const Authorization = () => {
 							<span className="form_errors-text">
 								{errors?.password && errors.password.message}
 							</span>
-							<ButtonKM type="btn submit_btn">Авторизация</ButtonKM>
+							<ButtonKM isLoading={logMutate.isPending} type="btn submit_btn">
+								Авторизация
+							</ButtonKM>
 						</form>
 					</div>{" "}
 					<Link to={`/auth`}>У вас еще нет аккаунта?</Link>

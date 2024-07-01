@@ -71,6 +71,32 @@ app.post("/register", (req: Request, res: Response) => {
 		.json({ message: "Регистрация прошла успешно", user: newUser });
 });
 
+// Конечная точка для обработки POST-запросов на логинацию
+app.post("/login", (req: Request, res: Response) => {
+	const { username, password } = req.body;
+
+	// Пример валидации (следует реализовать более надежную валидацию)
+	if (!username || !password) {
+		return res.status(400).json({ error: "Отсутствуют обязательные поля" });
+	}
+
+	// Читаем текущих пользователей из файла
+	const users = readUsersFromFile();
+
+	// Проверка имени пользователя и пароля
+	const user = users.find(
+		(user) => user.username === username && user.password === password,
+	);
+	if (!user) {
+		return res
+			.status(401)
+			.json({ error: "Неверное имя пользователя или пароль" });
+	}
+
+	// Предполагаем успешное выполнение
+	res.status(200).json({ message: "Логинация прошла успешно", user });
+});
+
 // Запуск сервера
 app.listen(port, () => {
 	console.log(`Сервер запущен по адресу http://localhost:${port}`);

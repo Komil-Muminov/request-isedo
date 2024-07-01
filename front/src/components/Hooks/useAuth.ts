@@ -12,12 +12,13 @@ export const RegScheme = z.object({
 
 export type RegType = z.infer<typeof RegScheme>;
 
-type LogType = z.infer<typeof LogScheme>;
-
 const LogScheme = z.object({
-	log: z.string(),
+	username: z.string(),
 	password: z.string(),
 });
+
+export type LogType = z.infer<typeof LogScheme>;
+
 export const useAuth = () => {
 	/**
 	 * Валидация запросов
@@ -46,7 +47,7 @@ export const useAuth = () => {
 	 * Логинация
 	 */
 	const logMe = (LogData: LogType): Promise<void> => {
-		return fetch("api/reg", {
+		return fetch("http://localhost:3000/login", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -65,18 +66,17 @@ export const useAuth = () => {
 	// 		body: JSON.stringify(regData),
 	// 	});
 	// };
-	// const getMe = (): Promise<void> => {
-	// 	return fetch("api/reg", {
-	// 		headers: {
-	// 			"Content-Type": "application/json",
-	// 		},
-	// 		body: JSON.stringify(regData),
-	// 	});
-	// };
+	const getMe = (userInfo: LogType): Promise<RegType> => {
+		return fetch("http://localhost:3000/")
+			.then(validateResponse)
+			.then((response) => response.json())
+			.then((data) => data.parse(RegScheme))
+			.then(undefined);
+	};
 	return {
 		regMe,
 		logMe,
+		getMe,
 		// outMe,
-		// getMe,
 	};
 };
