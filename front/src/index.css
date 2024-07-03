@@ -9,6 +9,7 @@
 	text-decoration: none;
 	text-align: center;
 	font-weight: 500;
+	/* color: var(--edo-text-color); */
 }
 
 :root {
@@ -24,6 +25,7 @@
 	--edo-color: #587380;
 	--edo-hvr-btn: #3d4f58;
 	--edo-fs-btn: #607d8b;
+	--edo-text-color: rgb(96, 125, 139);
 	--edo-bg-img: linear-gradient(
 		90deg,
 		rgb(243, 231, 233) 0%,
