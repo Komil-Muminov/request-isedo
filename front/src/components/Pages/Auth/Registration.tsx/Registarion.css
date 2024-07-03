@@ -9,11 +9,15 @@
 }
 
 .reg_inp {
-	padding: 13px 13px 13px 13px;
 	transition: background-color 0.2s ease-in-out;
 }
 
 .reg_inp-select {
-	padding: 13px 13px 13px 13px;
 	transition: background-color 0.2s ease-in-out;
+}
+
+.reg_inp-select {
+	padding: 13px;
+	font-size: 16px;
+	background-color: var(--white);
 }

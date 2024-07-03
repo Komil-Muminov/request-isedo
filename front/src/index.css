@@ -37,6 +37,8 @@
 	--inp-bg: rgba(194, 194, 194, 0.295);
 	--inp-outline-focus: rgb(39, 151, 255);
 	--loader-items: rgb(226, 226, 226);
+
+	--inp-border: #ccc;
 }
 
 a:active {
@@ -50,8 +52,10 @@ textarea {
 	border-radius: 10px;
 	max-width: 200px;
 	width: 100%;
-	border: none;
+	border: 1px solid var(--inp-border);
+	border-radius: 10px;
 	outline: none;
+	padding: 13px 13px 13px 13px;
 }
 
 /* @font-face {

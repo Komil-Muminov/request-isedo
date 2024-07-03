@@ -6,7 +6,10 @@ import { useLocation } from "react-router-dom";
 
 export const Navigation: React.FC = () => {
 	const location = useLocation();
-	const userName: string = location.state?.username;
+	const userName: string = location.state?.username
+		.slice(0, 1)
+		.toUpperCase()
+		.trim();
 
 	return (
 		<>
