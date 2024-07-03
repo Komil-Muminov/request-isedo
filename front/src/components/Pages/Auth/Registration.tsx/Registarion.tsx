@@ -6,8 +6,11 @@ import { ButtonKM } from "../../../UI/Button/ButtonKM";
 import { queryClient } from "../../../../queryClient";
 import { useAuth } from "../../../Hooks/useAuth";
 import { Loader } from "../../../UI/Loader";
-import Account from "../../Account/Account";
 import ErrorPage from "../../ErrorPage/ErrorPage";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Auth from "../Auth/Auth";
+import Authorization from "../Authorization/Authorization";
 const Registration = () => {
 	// Надо доработать
 	const {
@@ -41,75 +44,62 @@ const Registration = () => {
 		case "pending":
 			return <Loader />;
 		case "success":
-			return <Account />;
+			return <Authorization />;
 		case "error":
 			return <ErrorPage />;
 	}
 
 	return (
 		<>
-			{/* Форму необходимо добавить MUI */}
-			<section className="sections">
-				<div className="registration__conten km__content">
-					<form
-						className="form form__content"
-						onSubmit={handleSubmit(onSubmit)}
-					>
-						<input
-							{...register("username", {
-								required: {
-									value: true,
-									message: "это поле объязательно к заполенению",
-								},
-								minLength: {
-									value: 5, // Убедитесь, что значение minLength соответствует сообщению об ошибке
-									message:
-										"Имя пользователя должен содержать минимум 5 символов",
-								},
-							})}
-							placeholder="username"
-							className="inp reg_inp"
-							name="username"
-						/>
+			<form className="form form__content" onSubmit={handleSubmit(onSubmit)}>
+				<input
+					{...register("username", {
+						required: {
+							value: true,
+							message: "это поле объязательно к заполенению",
+						},
+						minLength: {
+							value: 2,
+							message: "Имя пользователя должен содержать минимум 5 символов",
+						},
+					})}
+					placeholder="username"
+					className="inp reg_inp"
+					name="username"
+				/>
 
-						<span className="form_errors-text">
-							{errors?.username && errors.username.message}
-						</span>
+				<span className="form_errors-text">
+					{errors?.username && errors.username.message}
+				</span>
 
-						<input
-							{...register("password", {
-								required: {
-									value: true,
-									message: "Заполните поле password",
-								},
-								minLength: {
-									value: 5,
-									message: "password должен содержать минимум 5 символов",
-								},
-							})}
-							placeholder="password"
-							className="inp reg_inp"
-							type="password"
-							name="password"
-						/>
+				<input
+					{...register("password", {
+						required: {
+							value: true,
+							message: "Заполните поле password",
+						},
+						minLength: {
+							value: 2,
+							message: "password должен содержать минимум 5 символов",
+						},
+					})}
+					placeholder="password"
+					className="inp reg_inp"
+					type="password"
+					name="password"
+				/>
 
-						<select
-							{...register("role")}
-							className="inp reg_inp-select"
-							id="role"
-						>
-							<option value="user">User</option>
-							<option value="admin">Admin</option>
-						</select>
-						<span className="form_errors-text">
-							{errors?.password && errors.password.message}
-						</span>
-						<ButtonKM isLoading={regMutate.isPending} type="btn submit_btn">
-							Зарегистрироваться
-						</ButtonKM>
-					</form>
-				</div>
-			</section>
+				<select {...register("role")} className="inp reg_inp-select" id="role">
+					<option value="user">User</option>
+					<option value="admin">Admin</option>
+				</select>
+				<span className="form_errors-text">
+					{errors?.password && errors.password.message}
+				</span>
+				<ButtonKM isLoading={regMutate.isPending} type="btn submit_btn">
+					Зарегистрироваться
+				</ButtonKM>
+			</form>
 		</>
 	);
 };

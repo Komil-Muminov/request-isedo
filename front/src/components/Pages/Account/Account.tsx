@@ -6,10 +6,10 @@ import { ZayavkiLinks } from "../ZayavkiLinks/ZayavkiLink";
 import { LogType } from "../../Hooks/useAuth";
 
 import { Navigation } from "../Navigation/Navigation";
-const Account: React.FC<LogType> = ({ username, password }) => {
+const Account: React.FC<LogType> = () => {
 	return (
 		<>
-			<Navigation username={username} />
+			<Navigation />
 			<NavBottom />
 			<ZayavkiLinks />
 			<Region />

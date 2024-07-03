@@ -23,6 +23,13 @@
 
 	--edo-color: #587380;
 	--edo-hvr-btn: #3d4f58;
+	--edo-fs-btn: #607d8b;
+	--edo-bg-img: linear-gradient(
+		90deg,
+		rgb(243, 231, 233) 0%,
+		rgb(227, 238, 255) 99%,
+		rgb(227, 238, 255) 100%
+	);
 	--inp-bg: rgba(194, 194, 194, 0.295);
 	--inp-outline-focus: rgb(39, 151, 255);
 

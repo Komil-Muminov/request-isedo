@@ -7,16 +7,16 @@ export const NavBottom: React.FC = () => {
 				<div className="container">
 					<div className="navbottom__content">
 						<nav className="navbottom__links">
-							<Link to="/" className="navbottom_item">
+							<Link to="noLink" className="navbottom_item">
 								Основные документы
 							</Link>
-							<Link to="/" className="navbottom_item">
+							<Link to="noLink" className="navbottom_item">
 								Первичные документы
 							</Link>
-							<Link to="/" className="navbottom_item">
+							<Link to="noLink" className="navbottom_item">
 								Письма
 							</Link>
-							<Link to="/" className="navbottom_item">
+							<Link to="noLink" className="navbottom_item">
 								Заявки
 							</Link>
 						</nav>

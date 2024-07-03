@@ -18,17 +18,21 @@ const LazyAuthorizationPage = lazy(
 	() => import("./components/Pages/Auth/Authorization/Authorization"),
 );
 const LazyAuthPage = lazy(() => import("./components/Pages/Auth/Auth/Auth"));
-
+const LazyUserProfile = lazy(
+	() => import("./components/Pages/UserProfile/Profile"),
+);
 function App() {
 	return (
 		<>
 			<Suspense fallback={<div>{<Loader />}</div>}>
 				<Routes>
 					<Route path="*" element={<LazyErrorPage />} />
-					<Route path="/" element={<LazyAccount />} />
+					<Route path="/" element={<LazyAuthPage />} />
 					<Route path="auth" element={<LazyAuthPage />} />
-					<Route path="authorization" element={<LazyAuthorizationPage />} />
-					<Route path="registration" element={<LazyRegistrationPage />} />
+					<Route path="account" element={<LazyAccount />} />
+					<Route path="uprofile" element={<LazyUserProfile />} />
+					{/* <Route path="authorization" element={<LazyAuthorizationPage />} /> */}
+					{/* <Route path="registration" element={<LazyRegistrationPage />} /> */}
 				</Routes>
 			</Suspense>
 		</>

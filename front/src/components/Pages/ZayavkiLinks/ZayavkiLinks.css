@@ -20,7 +20,7 @@
 
 .zayavki_nav-links:focus {
 	transition: background-color 0.2s ease-in-out;
-	border: 1px solid rgb(78, 255, 166);
+	border: 1px solid var(--edo-fs-btn);
 }
 
 .zayavki_nav-links:active:not(:focus-visible) {
