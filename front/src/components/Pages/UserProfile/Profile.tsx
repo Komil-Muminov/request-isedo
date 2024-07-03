@@ -11,8 +11,7 @@ const Profile: React.FC = () => {
 						<Prev className="profile prev" to={"#"}>
 							Назад
 						</Prev>
-						<div className="profile_info">info</div>
-						<h2 className="sections__title profile_title">Салом, Кимки</h2>
+						<h2 className="sections__title profile_title">Салом, Кимкичон</h2>
 						<div className="profile_avatar">
 							<Avatar className="nav_user-log" alt="user">
 								Avatar
