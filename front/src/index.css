@@ -22,6 +22,8 @@
 	--navbottom-underline: rgba(34, 255, 141, 0.987);
 	--km-content: rgb(255, 252, 246);
 
+	--skillbox-hvr: #ebebeb;
+	--links-outline: #d9d9d9;
 	--edo-color: #587380;
 	--edo-hvr-btn: #3d4f58;
 	--edo-fs-btn: #607d8b;
@@ -34,7 +36,6 @@
 	);
 	--inp-bg: rgba(194, 194, 194, 0.295);
 	--inp-outline-focus: rgb(39, 151, 255);
-
 	--loader-items: rgb(226, 226, 226);
 }
 

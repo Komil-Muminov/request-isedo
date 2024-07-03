@@ -18,9 +18,13 @@
 	transition: background-color 0.2s ease-in-out;
 }
 
+.zayavki_nav-links:hover:not(:focus-visible) {
+	background-color: var(--skillbox-hvr);
+}
+
 .zayavki_nav-links:focus {
 	transition: background-color 0.2s ease-in-out;
-	border: 1px solid var(--edo-fs-btn);
+	border: 1px solid var(--links-outline);
 }
 
 .zayavki_nav-links:active:not(:focus-visible) {

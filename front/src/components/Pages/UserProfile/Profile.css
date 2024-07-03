@@ -1,0 +1,22 @@
+.profile_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.profile__content {
+	display: flex;
+	align-items: center;
+	width: calc((100% - 10px) / 2);
+	width: 100%;
+}
+
+.center_content {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+}
+
+.left_side-content {
+	background: red;
+	padding: 50px;
+}

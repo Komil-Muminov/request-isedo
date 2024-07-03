@@ -1,0 +1,10 @@
+.prevLink {
+	background-color: rgba(237, 235, 235, 0.894);
+	padding: 13px 13px 13px 13px;
+	border-radius: 10px;
+	transition: background-color 0.2s ease-in-out;
+}
+
+.prevLink:hover {
+	background-color: rgba(195, 195, 195, 0.51);
+}
