@@ -1,20 +1,10 @@
 import "./Authorization.css";
 import { useForm } from "react-hook-form";
-import { RegType, LogType, useAuth } from "../../../Hooks/useAuth";
+import { LogType, useAuth } from "../../../Hooks/useAuth";
 import { ButtonKM } from "../../../UI/Button/ButtonKM";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { queryClient } from "../../../../queryClient";
-import Account from "../../Account/Account";
 import { Loader } from "../../../UI/Loader";
-import Auth from "../Auth/Auth";
-import {
-	FormControl,
-	IconButton,
-	InputAdornment,
-	InputLabel,
-	OutlinedInput,
-} from "@mui/material";
 
 const Authorization = () => {
 	const {

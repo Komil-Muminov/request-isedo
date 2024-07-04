@@ -15,9 +15,9 @@ const LazyErrorPage = lazy(
 	() => import("./components/Pages/ErrorPage/ErrorPage"),
 );
 
-const LazyAuthorizationPage = lazy(
-	() => import("./components/Pages/Auth/Authorization/Authorization"),
-);
+// const LazyAuthorizationPage = lazy(
+// 	() => import("./components/Pages/Auth/Authorization/Authorization"),
+// );
 const LazyAuthPage = lazy(() => import("./components/Pages/Auth/Auth/Auth"));
 const LazyUserProfile = lazy(
 	() => import("./components/Pages/UserProfile/Profile"),

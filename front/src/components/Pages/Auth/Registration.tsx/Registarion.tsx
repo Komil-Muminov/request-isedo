@@ -7,9 +7,6 @@ import { queryClient } from "../../../../queryClient";
 import { useAuth } from "../../../Hooks/useAuth";
 import { Loader } from "../../../UI/Loader";
 import ErrorPage from "../../ErrorPage/ErrorPage";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import Auth from "../Auth/Auth";
 import Authorization from "../Authorization/Authorization";
 const Registration = () => {
 	// Надо доработать
