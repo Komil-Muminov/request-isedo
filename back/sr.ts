@@ -1,24 +1,18 @@
-// Импортируем необходимые модули
 import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import fs from "fs";
 import path from "path";
+import multer from "multer";
 
-// Инициализируем Express приложение
 const app = express();
 const port = 3000;
 
-// Промежуточное ПО для парсинга JSON-тела запросов
 app.use(bodyParser.json());
-
-// Подключаем обработку CORS
 app.use(cors());
 
-// Путь к файлу с пользователями
 const usersFilePath = path.join(__dirname, "users.json");
 
-// Функция для чтения данных из JSON-файла
 const readUsersFromFile = (): any[] => {
 	try {
 		const data = fs.readFileSync(usersFilePath, "utf8");
@@ -29,7 +23,6 @@ const readUsersFromFile = (): any[] => {
 	}
 };
 
-// Функция для записи данных в JSON-файл
 const writeUsersToFile = (users: any[]): void => {
 	try {
 		fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2), "utf8");
@@ -38,56 +31,73 @@ const writeUsersToFile = (users: any[]): void => {
 	}
 };
 
-// Конечная точка для обработки POST-запросов на регистрацию
+const storage = multer.diskStorage({
+	destination: (
+		req: Request,
+		file: Express.Multer.File,
+		cb: (error: Error | null, destination: string) => void,
+	) => {
+		cb(null, "uploads/");
+	},
+	filename: (
+		req: Request,
+		file: Express.Multer.File,
+		cb: (error: Error | null, filename: string) => void,
+	) => {
+		cb(null, file.originalname);
+	},
+});
+
+const upload = multer({ storage });
+
+app.post("/upload", upload.single("image"), (req: Request, res: Response) => {
+	const file = req.file;
+	if (!file) {
+		return res.status(400).json({ error: "Файл не был загружен" });
+	}
+	res
+		.status(200)
+		.json({ message: "Файл успешно загружен", filename: file.originalname });
+});
+
 app.post("/register", (req: Request, res: Response) => {
 	const { username, password, role } = req.body;
 
-	// Пример валидации (следует реализовать более надежную валидацию)
 	if (!username || !password || !role) {
 		return res.status(400).json({ error: "Отсутствуют обязательные поля" });
 	}
 
-	// Читаем текущих пользователей из файла
 	const users = readUsersFromFile();
 
-	// Проверка на существующего пользователя (по имени пользователя)
-	const existingUser = users.find((user) => user.username === username);
+	const existingUser = users.find((user: any) => user.username === username);
 	if (existingUser) {
 		return res
 			.status(400)
 			.json({ error: "Пользователь с таким именем уже существует" });
 	}
 
-	// Создаем нового пользователя
 	const newUser = { id: users.length + 1, username, password, role };
 
-	// Добавляем нового пользователя в массив
 	users.push(newUser);
 
-	// Записываем обновленный массив пользователей в файл
 	writeUsersToFile(users);
 
-	// Предполагаем успешное выполнение
 	res
 		.status(200)
 		.json({ message: "Регистрация прошла успешно", user: newUser });
 });
 
-// Конечная точка для обработки POST-запросов на логин
 app.post("/login", (req: Request, res: Response) => {
 	const { username, password } = req.body;
 
-	// Пример валидации (следует реализовать более надежную валидацию)
 	if (!username || !password) {
 		return res.status(400).json({ error: "Отсутствуют обязательные поля" });
 	}
 
-	// Читаем текущих пользователей из файла
 	const users = readUsersFromFile();
 
-	// Проверка имени пользователя и пароля
 	const user = users.find(
-		(user) => user.username === username && user.password === password,
+		(user: any) => user.username === username && user.password === password,
 	);
 	if (!user) {
 		return res
@@ -95,19 +105,9 @@ app.post("/login", (req: Request, res: Response) => {
 			.json({ error: "Неверное имя пользователя или пароль" });
 	}
 
-	// Предполагаем успешное выполнение
 	res.status(200).json({ message: "Логин успешный", user });
 });
 
-// Конечная точка для получения данных текущего пользователя
-// app.get("/me", (req: Request, res: Response) => {
-// 	// Здесь нужно реализовать логику получения данных о текущем пользователе
-// 	// В данном примере я использовал заглушку для текущего пользователя
-// 	const currentUser = { id: 1, username: "example_user", role: "user" };
-// 	res.status(200).json({ user: currentUser });
-// });
-
-// Запуск сервера
 app.listen(port, () => {
 	console.log(`Сервер запущен по адресу http://localhost:${port}`);
 });
