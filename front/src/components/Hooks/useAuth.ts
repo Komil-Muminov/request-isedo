@@ -19,6 +19,19 @@ const LogScheme = z.object({
 
 export type LogType = z.infer<typeof LogScheme>;
 
+// const getType = z.object({
+// 	username: z.string(),
+// 	role: z.string(),
+// 	image: z.string().nullable(),
+// });
+
+// Надо реализовать запрос
+const PhotoScheme = z.object({
+	username: z.string(),
+	photo: z.string(),
+});
+export type PhotoType = z.infer<typeof PhotoScheme>;
+
 export const useAuth = () => {
 	/**
 	 * Валидация запросов
@@ -67,7 +80,7 @@ export const useAuth = () => {
 	// 	});
 	// };
 	const getMe = (): Promise<RegType> => {
-		return fetch("http://localhost:3000/me")
+		return fetch("http://localhost:3000/users/")
 			.then(validateResponse)
 			.then((response) => response.json())
 			.then((data) => RegScheme.parse(data));

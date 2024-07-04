@@ -4,6 +4,7 @@ import { Prev } from "../../UI/PrevLink/Prev";
 import { Avatar } from "@mui/material";
 const Profile: React.FC = () => {
 	return (
+		//Надо реализовать возможность выгрузки фото
 		<>
 			<section className="sections">
 				<div className="container">

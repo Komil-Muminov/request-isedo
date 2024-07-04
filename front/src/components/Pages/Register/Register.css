@@ -12,6 +12,8 @@
 	border-bottom: 1px solid var(--navbottom-links-bottom-line);
 }
 
-.register_add-btn {
+.addrequest_btn {
 	align-self: flex-end;
+	padding: 10px 15px;
+	font-size: 14px;
 }

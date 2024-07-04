@@ -1,9 +1,9 @@
 import "./Register.css";
-import React, { useState } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { ButtonKM } from "../../UI/Button/ButtonKM";
-import { Search } from "../Search/Search";
+import { Link } from "react-router-dom";
+
 // import { SelectChangeEvent } from "@mui/material/Select";
 // import MenuItem from "@mui/material/MenuItem";
 // import FormHelperText from "@mui/material/FormHelperText";
@@ -62,12 +62,14 @@ export const Register: React.FC = () => {
 					<div className="register__content km__content">
 						<p className="km__info-text">* РЕЕСТР</p>
 						<p className="km__info-text">* Блок с фильтрами</p>
-						<ButtonKM
+						<Link
+							to={"/addrequest"}
+							className="btn addrequest_btn"
 							type="btn submit_btn register_add-btn"
 							onClick={() => console.log(`Переход`)}
 						>
 							Добавить
-						</ButtonKM>
+						</Link>
 						{/* <Search rows={rows} /> */}
 						<Box sx={{ height: 400, width: "100%" }}>
 							<DataGrid
