@@ -10,3 +10,9 @@
 	max-width: 600px;
 	text-align: center;
 }
+
+.errorpage_img {
+	max-width: 400px;
+	min-height: 300px;
+	border-radius: 10px;
+}

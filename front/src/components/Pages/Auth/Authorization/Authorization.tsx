@@ -76,7 +76,7 @@ const Authorization = () => {
 				<span className="form_errors-text">
 					{errors?.password && errors.password.message}
 				</span>
-				<ButtonKM isLoading={logMutate.isLoading} type="btn submit_btn">
+				<ButtonKM isLoading={logMutate.isPending} type="btn submit_btn">
 					Авторизация
 				</ButtonKM>
 			</form>

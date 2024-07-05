@@ -29,7 +29,7 @@ const Auth: React.FC = () => {
 							<span className="auth_rechange" onClick={handleClick}>
 								{authType === "registration"
 									? "У вас есть аккаунт ? "
-									: "У вас нет аккаунта ?"}
+									: `У вас нет аккаунта ?`}
 							</span>
 						</div>
 					</div>
@@ -41,33 +41,6 @@ const Auth: React.FC = () => {
 
 export default Auth;
 
-// const [showPassword, setShowPassword] = useState(false);
-
-// const handleClickShowPassword = () => setShowPassword((show) => !show);
-// const handleMouseDownPassword = (
-// 	event: React.MouseEvent<HTMLButtonElement>,
-// ) => {
-// 	event.preventDefault();
-// };
 {
-	/* <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-	<InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-	<OutlinedInput
-		id="outlined-adornment-password"
-		type={showPassword ? "text" : "password"}
-		endAdornment={
-			<InputAdornment position="end">
-				<IconButton
-					aria-label="toggle password visibility"
-					onClick={handleClickShowPassword}
-					onMouseDown={handleMouseDownPassword}
-					edge="end"
-				>
-					{showPassword ? <VisibilityOff /> : <Visibility />}
-				</IconButton>
-			</InputAdornment>
-		}
-		label="Password"
-	/>
-</FormControl>; */
+	/*  */
 }

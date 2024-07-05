@@ -8,6 +8,7 @@ import { useAuth } from "../../../Hooks/useAuth";
 import { Loader } from "../../../UI/Loader";
 import ErrorPage from "../../ErrorPage/ErrorPage";
 import Authorization from "../Authorization/Authorization";
+
 const Registration = () => {
 	// Надо доработать
 	const {

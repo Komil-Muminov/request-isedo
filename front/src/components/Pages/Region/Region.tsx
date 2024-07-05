@@ -49,70 +49,7 @@ export const Region: React.FC = () => {
 			<section className="sections region__section">
 				<div className="container">
 					<h2 className="sections__title">REGION</h2>
-					<div className="region__content km__content">
-						<FormControl sx={{ m: 1, width: 300 }}>
-							<InputLabel id="demo-multiple-checkbox-label">Страна</InputLabel>
-							<Select
-								labelId="demo-multiple-checkbox-label"
-								id="demo-multiple-checkbox"
-								multiple
-								value={personName}
-								onChange={handleChange}
-								input={<OutlinedInput label="Tag" />}
-								renderValue={(selected) => selected.join(", ")}
-								MenuProps={MenuProps}
-							>
-								{names.map((name) => (
-									<MenuItem key={name} value={name}>
-										<Checkbox checked={personName.indexOf(name) > -1} />
-										<ListItemText primary={name} />
-									</MenuItem>
-								))}
-							</Select>
-						</FormControl>
-
-						<FormControl sx={{ m: 1, width: 300 }}>
-							<InputLabel id="demo-multiple-checkbox-label">Город</InputLabel>
-							<Select
-								labelId="demo-multiple-checkbox-label"
-								id="demo-multiple-checkbox"
-								multiple
-								value={personName}
-								onChange={handleChange}
-								input={<OutlinedInput label="Tag" />}
-								renderValue={(selected) => selected.join(", ")}
-								MenuProps={MenuProps}
-							>
-								{names.map((name) => (
-									<MenuItem key={name} value={name}>
-										<Checkbox checked={personName.indexOf(name) > -1} />
-										<ListItemText primary={name} />
-									</MenuItem>
-								))}
-							</Select>
-						</FormControl>
-
-						<FormControl sx={{ m: 1, width: 300 }}>
-							<InputLabel id="demo-multiple-checkbox-label">Регион</InputLabel>
-							<Select
-								labelId="demo-multiple-checkbox-label"
-								id="demo-multiple-checkbox"
-								multiple
-								value={personName}
-								onChange={handleChange}
-								input={<OutlinedInput label="Tag" />}
-								renderValue={(selected) => selected.join(", ")}
-								MenuProps={MenuProps}
-							>
-								{names.map((name) => (
-									<MenuItem key={name} value={name}>
-										<Checkbox checked={personName.indexOf(name) > -1} />
-										<ListItemText primary={name} />
-									</MenuItem>
-								))}
-							</Select>
-						</FormControl>
-					</div>
+					<div className="region__content km__content"></div>
 				</div>
 			</section>
 		</>
