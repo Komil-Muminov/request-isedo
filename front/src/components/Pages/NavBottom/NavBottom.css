@@ -21,6 +21,7 @@
 .navbottom_item {
 	position: relative;
 	max-width: 700px;
+	color: var(--edo-nav-color);
 }
 
 .navbottom_item::after {

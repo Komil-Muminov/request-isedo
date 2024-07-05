@@ -8,8 +8,8 @@
 	text-transform: none;
 	text-decoration: none;
 	text-align: center;
-	font-weight: 500;
-	/* color: var(--edo-text-color); */
+	font-weight: 600;
+	font-family: "Mulish";
 }
 
 :root {
@@ -19,12 +19,14 @@
 	--navbottom-links-bottom-line: rgba(184, 184, 184, 0.667);
 	--blackRgba: rgba(40, 39, 38, 0.579);
 	--black: #000;
-	--navbottom-underline: rgba(34, 255, 141, 0.987);
+	--navbottom-underline: rgb(63, 178, 184);
 	--km-content: rgb(255, 252, 246);
 
 	--skillbox-hvr: #ebebeb;
 	--links-outline: #d9d9d9;
 	--edo-color: #587380;
+	--edo-nav-color: #0f172a;
+	--edo-zayavki-color: #11142d;
 	--edo-hvr-btn: #3d4f58;
 	--edo-fs-btn: #607d8b;
 	--edo-text-color: rgb(96, 125, 139);
@@ -58,15 +60,30 @@ textarea {
 	padding: 13px 13px 13px 13px;
 }
 
-/* @font-face {
-  font-family: "Montserrat";
-  src: local("Montserrat-ExtraBold"),
-    url("../fonts/Montserrat-ExtraBold.woff2") format("woff2"),
-    url("../fonts/Montserrat-ExtraBold.woff") format("woff");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-} */
+@font-face {
+	font-family: "Mulish";
+	src: local("Muller-SemiBold"),
+		url("./assets/fonts/Mulish/Mulish-SemiBold.woff2") format("woff2");
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Mulish";
+	src: url("./assets//fonts//Mulish/Mulish-Light.woff2");
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Mulish";
+	src: url("./assets//fonts//Mulish/Mulish-Regular.woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
 
 /* Global classes */
 .sections {
