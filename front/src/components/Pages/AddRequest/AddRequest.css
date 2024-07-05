@@ -1,3 +1,10 @@
-.addrequest_btn{
-    
+.request_form {
+	display: flex;
+	gap: 5px;
+	flex-wrap: wrap;
+}
+
+.request_inp {
+	/* Надо найти причину по которой данный стиль не работает */
+	width: calc((100% - 5px * 2) / 3);
 }
