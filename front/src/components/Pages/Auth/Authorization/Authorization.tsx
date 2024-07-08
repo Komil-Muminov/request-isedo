@@ -20,12 +20,11 @@ const Authorization = () => {
 	});
 
 	const { logMe } = useAuth();
-	const data: LogType = getValues();
+	// const data: LogType = getValues();
 	const navigate = useNavigate();
 	const logMutate = useMutation({
 		mutationFn: (data: LogType) => logMe(data),
-		onSuccess: () =>
-			navigate("account", { state: { username: data.username } }),
+		onSuccess: () => navigate("account"),
 	});
 
 	const onSubmit = (data: LogType) => {

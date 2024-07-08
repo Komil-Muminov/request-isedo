@@ -1,10 +1,14 @@
+.addRequest__content {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
 .request_form {
 	display: flex;
-	gap: 5px;
+	gap: 10px;
 	flex-wrap: wrap;
 }
 
 .request_inp {
-	/* Надо найти причину по которой данный стиль не работает */
-	width: calc((100% - 5px * 2) / 3);
+	max-width: calc((100% - 10px * 2) / 3);
 }

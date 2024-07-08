@@ -5,9 +5,9 @@ import { Suspense, lazy } from "react";
 import { Loader } from "./components/UI/Loader";
 import { AddRequest } from "./components/Pages/AddRequest/AddRequest";
 
-const LazyRegistrationPage = lazy(
-	() => import("./components/Pages/Auth/Registration.tsx/Registarion"),
-);
+// const LazyRegistrationPage = lazy(
+// 	() => import("./components/Pages/Auth/Registration.tsx/Registarion"),
+// );
 
 const LazyAccount = lazy(() => import("./components/Pages/Account/Account"));
 
@@ -25,6 +25,7 @@ const LazyUserProfile = lazy(
 function App() {
 	return (
 		<>
+			<Navigation />
 			<Suspense fallback={<div>{<Loader />}</div>}>
 				<Routes>
 					<Route path="*" element={<LazyErrorPage />} />

@@ -2,7 +2,6 @@ import "./Auth.css";
 import React from "react";
 import Registration from "../Registration.tsx/Registarion";
 import Authorization from "../Authorization/Authorization";
-import log from "../../../../assets/Formal/log.png";
 const Auth: React.FC = () => {
 	const [authType, setAuthType] = React.useState<string>("registration");
 
@@ -15,7 +14,6 @@ const Auth: React.FC = () => {
 	return (
 		<section className="sections auth__section">
 			<div className="container">
-				<img className={`auth_log`} src={log} alt="герб" />
 				<div className="auth_box">
 					<div className="auth__content km__content">
 						<div className="auth_render">

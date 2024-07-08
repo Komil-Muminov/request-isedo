@@ -1,41 +1,35 @@
-/**
- * Кастомный хук внутри которого есть запросы
- */
-
 import { z } from "zod";
 
 export const RegScheme = z.object({
 	username: z.string(),
-	password: z.string().max(3),
-	role: z.string().max(1),
+	password: z.string().min(3),
+	role: z.string().min(1),
 });
 
 export type RegType = z.infer<typeof RegScheme>;
 
-const LogScheme = z.object({
+export const LogScheme = z.object({
 	username: z.string(),
 	password: z.string(),
 });
 
 export type LogType = z.infer<typeof LogScheme>;
 
-// const getType = z.object({
-// 	username: z.string(),
-// 	role: z.string(),
-// 	image: z.string().nullable(),
-// });
-
-// Надо реализовать запрос
-const PhotoScheme = z.object({
+export const PhotoScheme = z.object({
 	username: z.string(),
 	photo: z.string(),
 });
+
 export type PhotoType = z.infer<typeof PhotoScheme>;
 
 export const useAuth = () => {
-	/**
-	 * Валидация запросов
-	 */
+	// Функция для получения токена из localStorage или другого источника
+	const getToken = (): string | null => {
+		return localStorage.getItem("token");
+		// Замените "token" на имя, которое вы использовали для хранения токена
+	};
+
+	// Валидация ответа от сервера
 	const validateResponse = async (response: Response): Promise<Response> => {
 		if (!response.ok) {
 			throw Error(await response.text());
@@ -43,9 +37,7 @@ export const useAuth = () => {
 		return response;
 	};
 
-	/**
-	 * Регистрация
-	 */
+	// Регистрация пользователя
 	const regMe = async (regData: RegType): Promise<void> => {
 		return fetch("http://localhost:3000/register", {
 			method: "POST",
@@ -56,40 +48,52 @@ export const useAuth = () => {
 		}).then(() => undefined);
 	};
 
-	/**
-	 * Логинация
-	 */
-	const logMe = (LogData: LogType): Promise<void> => {
-		return fetch("http://localhost:3000/login", {
+	// Логин пользователя
+	const logMe = (logData: LogType): Promise<void> => {
+		return fetch(`http://localhost:3000/login`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(LogData),
+			body: JSON.stringify(logData),
 		})
 			.then(validateResponse)
-			.then(() => undefined);
+			.then((response) => {
+				return response.json().then((data) => {
+					localStorage.setItem("token", data.token);
+				});
+			});
 	};
 
-	// const outMe = (): Promise<void> => {
-	// 	return fetch("api/reg", {
-	// 		headers: {
-	// 			"Content-Type": "application/json",
-	// 		},
-	// 		body: JSON.stringify(regData),
-	// 	});
-	// };
-	const getMe = (): Promise<RegType> => {
-		return fetch("http://localhost:3000/users/")
+	// Получение информации о текущем пользователе
+	const getMeScheme = z.object({
+		username: z.string(),
+		role: z.string(),
+		photo: z.string().nullable(),
+	});
+
+	type GetMeType = z.infer<typeof getMeScheme>;
+
+	const getMe = async (): Promise<GetMeType> => {
+		const token = getToken(); // Получаем токен из localStorage
+
+		if (!token) {
+			throw new Error("Токен отсутствует");
+		}
+
+		return fetch(`http://localhost:3000/users/me`, {
+			headers: {
+				Authorization: `Bearer ${token}`, // Передаем токен в заголовке Authorization
+			},
+		})
 			.then(validateResponse)
 			.then((response) => response.json())
-			.then((data) => RegScheme.parse(data));
+			.then((data) => getMeScheme.parse(data));
 	};
 
 	return {
 		regMe,
 		logMe,
 		getMe,
-		// outMe,
 	};
 };

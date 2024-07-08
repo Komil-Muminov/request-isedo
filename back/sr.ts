@@ -4,6 +4,16 @@ import cors from "cors";
 import fs from "fs";
 import path from "path";
 import multer from "multer";
+import jwt from "jsonwebtoken";
+
+// Импорт функций для авторизации
+import {
+	createToken,
+	authorizeToken,
+	authorizeRequest,
+	authorizeResponse,
+	unauthorizeResponse,
+} from "./authFunctions"; // Замените на путь к вашему файлу с функциями авторизации
 
 const app = express();
 const port = 3000;
@@ -54,9 +64,32 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+// Middleware для проверки JWT
+const jwtSecret = "your_jwt_secret";
+
+const authenticateJWT = (req: Request, res: Response, next: () => void) => {
+	const token = req.headers.authorization?.split(" ")[1];
+
+	if (token) {
+		jwt.verify(token, jwtSecret, (err, decoded) => {
+			if (err) {
+				return res
+					.status(401)
+					.json({ error: "Ошибка аутентификации: неверный токен" });
+			}
+			// Добавление декодированных данных в объект запроса для использования в следующем middleware
+			(req as any).userId = (decoded as any).userId; // Добавляем userId в объект запроса
+			next();
+		});
+	} else {
+		res.status(401).json({ error: "Ошибка аутентификации: отсутствует токен" });
+	}
+};
+
 // Маршрут для загрузки файла пользователя
 app.post(
 	"/upload/:username",
+	authenticateJWT,
 	upload.single("image"),
 	(req: Request, res: Response) => {
 		const file = req.file;
@@ -142,15 +175,23 @@ app.post("/login", (req: Request, res: Response) => {
 			.json({ error: "Неверное имя пользователя или пароль" });
 	}
 
-	res.status(200).json({ message: "Логин успешный", user });
+	// Генерация JWT
+	const token = jwt.sign({ userId: user.id }, jwtSecret, {
+		expiresIn: "1h", // Время жизни токена
+	});
+
+	// Устанавливаем токен в куки
+	authorizeResponse(res, user.id);
+
+	res.status(200).json({ message: "Логин успешный", token });
 });
 
 // Маршрут для получения информации о пользователе
-app.get("/user/:username", (req: Request, res: Response) => {
-	const { username } = req.params;
+app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
+	const userId = (req as any).userId; // Получаем userId из объекта запроса
 
 	const users = readUsersFromFile();
-	const user = users.find((user: any) => user.username === username);
+	const user = users.find((user: any) => user.id === userId);
 
 	// Проверка, существует ли пользователь
 	if (!user) {

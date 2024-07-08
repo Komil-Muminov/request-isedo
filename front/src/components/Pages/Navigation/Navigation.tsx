@@ -1,16 +1,29 @@
 import log from "../../../assets/Formal/log.png";
 import "./Navigation.css";
 import { Avatar } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { queryClient } from "../../../queryClient";
+import { useAuth } from "../../Hooks/useAuth";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 export const Navigation: React.FC = () => {
-	const location = useLocation();
-	const userName: string = location.state?.username
-		.slice(0, 1)
-		.toUpperCase()
-		.trim();
+	const { getMe } = useAuth();
+	const getUinfoQuery = useQuery(
+		{
+			queryKey: ["users", "me"],
+			queryFn: () => getMe(),
+		},
+		queryClient,
+	);
 
+	switch (getUinfoQuery.status) {
+		case "pending":
+			return <ErrorPage />;
+		case "success": {
+			getUinfoQuery.data;
+		}
+	}
 	return (
 		<>
 			<section className="sections navigation__section">
@@ -34,7 +47,7 @@ export const Navigation: React.FC = () => {
 											></path>
 										</g>
 									</svg>{" "}
-									ФИО: {userName}
+									Имя: {getUinfoQuery.data?.username}
 								</li>
 
 								<li className="info_list-item">
@@ -53,7 +66,7 @@ export const Navigation: React.FC = () => {
 											></path>
 										</g>
 									</svg>{" "}
-									ФИО: {`ИНФО`}
+									Роль: {getUinfoQuery.data?.role}
 								</li>
 
 								<li className="info_list-item">
@@ -72,7 +85,7 @@ export const Navigation: React.FC = () => {
 											></path>
 										</g>
 									</svg>{" "}
-									ФИО: {`ИНФО`}
+									ФИО: {getUinfoQuery.data?.photo || "null"}
 								</li>
 								{/* Другие элементы списка */}
 							</ul>
@@ -87,7 +100,9 @@ export const Navigation: React.FC = () => {
 						<div className="user_info">
 							<Link to={`/uprofile`}>
 								<Avatar className="nav_user-log" alt="user">
-									{userName}
+									{getUinfoQuery.data?.photo
+										? getUinfoQuery.data?.photo
+										: "null"}
 								</Avatar>
 							</Link>
 						</div>
