@@ -75,7 +75,7 @@ export const useAuth = () => {
 	type GetMeType = z.infer<typeof getMeScheme>;
 
 	const getMe = async (): Promise<GetMeType> => {
-		const token = getToken(); // Получаем токен из localStorage
+		const token = getToken();
 
 		if (!token) {
 			throw new Error("Токен отсутствует");

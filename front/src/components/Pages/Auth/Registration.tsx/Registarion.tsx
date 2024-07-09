@@ -1,10 +1,10 @@
 import "./Registarion.css";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
-import { RegType } from "../../../Hooks/useAuth";
+import { RegType } from "../../../API/Hooks/useAuth";
 import { ButtonKM } from "../../../UI/Button/ButtonKM";
 import { queryClient } from "../../../../queryClient";
-import { useAuth } from "../../../Hooks/useAuth";
+import { useAuth } from "../../../API/Hooks/useAuth";
 import { Loader } from "../../../UI/Loader";
 import ErrorPage from "../../ErrorPage/ErrorPage";
 import Authorization from "../Authorization/Authorization";

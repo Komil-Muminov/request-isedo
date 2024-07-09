@@ -34,8 +34,7 @@ function App() {
 					<Route path="account" element={<LazyAccount />} />
 					<Route path="uprofile" element={<LazyUserProfile />} />
 					<Route path="addrequest" element={<AddRequest />} />
-					{/* <Route path="authorization" element={<LazyAuthorizationPage />} /> */}
-					{/* <Route path="registration" element={<LazyRegistrationPage />} /> */}
+					<Route path="addrequest" element={<AddRequest />} />
 				</Routes>
 			</Suspense>
 		</>

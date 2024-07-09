@@ -4,9 +4,11 @@ import { Avatar } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { queryClient } from "../../../queryClient";
-import { useAuth } from "../../Hooks/useAuth";
+import { useAuth } from "../../API/Hooks/useAuth";
+import { useEffect, useState } from "react";
+import { Loader } from "../../UI/Loader";
 import ErrorPage from "../ErrorPage/ErrorPage";
-
+import { ToUpperCase } from "../../API/Utils/ToUpperCase";
 export const Navigation: React.FC = () => {
 	const { getMe } = useAuth();
 	const getUinfoQuery = useQuery(
@@ -17,13 +19,27 @@ export const Navigation: React.FC = () => {
 		queryClient,
 	);
 
-	switch (getUinfoQuery.status) {
-		case "pending":
-			return <ErrorPage />;
-		case "success": {
-			getUinfoQuery.data;
-		}
+	// Надо правильно типизировать данные и добавить в стейт
+
+	interface TUProps {
+		username: string;
+		role: string;
+		photo: string;
 	}
+	if (getUinfoQuery.status === "pending") {
+		<Loader />;
+	}
+	if (getUinfoQuery.status === "error") {
+		<ErrorPage />;
+	}
+
+	const [uCurrData, setUcurrData] = useState<TUProps[]>([]);
+	useEffect(() => {
+		if (getUinfoQuery.status === "success") {
+			setUcurrData((prev) => [...prev, getUinfoQuery.data]);
+		}
+	}, [getUinfoQuery.status === "success", setUcurrData]);
+
 	return (
 		<>
 			<section className="sections navigation__section">

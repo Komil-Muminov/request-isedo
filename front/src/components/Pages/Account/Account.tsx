@@ -3,7 +3,7 @@ import { Region } from "../Region/Region";
 import { Register } from "../Register/Register";
 import { ZayavkiLinks } from "../ZayavkiLinks/ZayavkiLink";
 
-import { LogType } from "../../Hooks/useAuth";
+import { LogType } from "../../API/Hooks/useAuth";
 
 const Account: React.FC<LogType> = () => {
 	return (

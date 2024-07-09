@@ -1,6 +1,6 @@
 import "./Authorization.css";
 import { useForm } from "react-hook-form";
-import { LogType, useAuth } from "../../../Hooks/useAuth";
+import { LogType, useAuth } from "../../../API/Hooks/useAuth";
 import { ButtonKM } from "../../../UI/Button/ButtonKM";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
