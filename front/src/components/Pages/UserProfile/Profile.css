@@ -13,7 +13,6 @@
 .uInfo_content {
 	display: flex;
 	align-items: center;
-	/* gap: 10px; */
 }
 
 .uLeft_content {
@@ -27,5 +26,7 @@
 
 .uCenter_info {
 	margin: 0 auto;
-	background: red;
+	background: rgba(255, 123, 123, 0.893);
+	padding: 20px 20px;
+	border-radius: 10px;
 }
