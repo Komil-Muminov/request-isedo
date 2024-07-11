@@ -4,18 +4,9 @@ import { Prev } from "../../UI/PrevLink/Prev";
 import { Stepper, StepLabel, Step, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { AddrequestScheme } from "./Addrequest";
+import { steps } from "../../API/Data/Steps/Steps";
 export const AddRequest: React.FC = () => {
-	const steps = [
-		"Select master blaster campaign settings",
-		"Create an ad group",
-		"Create an ad",
-	];
-
 	const [activeStep, setActiveStep] = useState(0);
-
-	const handleNext = () => {
-		setActiveStep((prevActiveStep) => prevActiveStep + 1);
-	};
 
 	const handleBack = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -33,8 +24,13 @@ export const AddRequest: React.FC = () => {
 		},
 	});
 
+	/**
+	 * Inputs disabled
+	 */
+	const [formComplete, setFormComplete] = useState<boolean>(true);
 	const onSubmit = (data: AddrequestScheme) => {
-		console.log(data);
+		setActiveStep((prevActiveStep) => prevActiveStep + 1);
+		setFormComplete((prev) => !prev);
 	};
 
 	return (
@@ -55,16 +51,19 @@ export const AddRequest: React.FC = () => {
 								{...register("boname")}
 								type="text"
 								className="request_inp"
+								disabled={!formComplete}
 							/>
 							<input
 								{...register("accountant")}
 								type="text"
 								className="request_inp"
+								disabled={!formComplete}
 							/>
 							<input
 								{...register("desc")}
 								type="text"
 								className="request_inp"
+								disabled={!formComplete}
 							/>
 							<Button
 								type={`submit`}
@@ -72,7 +71,8 @@ export const AddRequest: React.FC = () => {
 								disabled={
 									!dirtyFields.accountant ||
 									!dirtyFields.boname ||
-									!dirtyFields.desc
+									!dirtyFields.desc ||
+									!formComplete
 								}
 							>
 								Отправить
