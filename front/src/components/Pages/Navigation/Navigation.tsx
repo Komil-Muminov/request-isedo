@@ -8,7 +8,6 @@ import { useAuth } from "../../API/Hooks/useAuth";
 import { useEffect, useState } from "react";
 import { Loader } from "../../UI/Loader";
 import ErrorPage from "../ErrorPage/ErrorPage";
-import { ToUpperCase } from "../../API/Utils/ToUpperCase";
 export const Navigation: React.FC = () => {
 	const { getMe } = useAuth();
 	const getUinfoQuery = useQuery(
@@ -33,12 +32,12 @@ export const Navigation: React.FC = () => {
 		<ErrorPage />;
 	}
 
-	const [uCurrData, setUcurrData] = useState<TUProps[]>([]);
+	const [uCurrData, setUcurrData] = useState<TUProps[] | any[]>([]);
 	useEffect(() => {
 		if (getUinfoQuery.status === "success") {
 			setUcurrData((prev) => [...prev, getUinfoQuery.data]);
 		}
-	}, [getUinfoQuery.status === "success", setUcurrData]);
+	}, [setUcurrData, getUinfoQuery.data]);
 
 	return (
 		<>

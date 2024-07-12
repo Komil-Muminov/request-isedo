@@ -29,6 +29,14 @@ const Profile: React.FC = () => {
 
 	//
 	if (uQuery.status === "success") {
+		try {
+			queryClient.invalidateQueries({ queryKey: ["users", "me"] });
+			// Если код дошел до этой точки, значит, invalidateQueries завершился успешно
+			console.log("invalidateQueries выполнена успешно");
+		} catch (error) {
+			// Если произошла ошибка при вызове invalidateQueries, вы можете её обработать здесь
+			console.error("Ошибка при выполнении invalidateQueries:", error);
+		}
 		return (
 			//Надо реализовать возможность выгрузки фото
 			<>

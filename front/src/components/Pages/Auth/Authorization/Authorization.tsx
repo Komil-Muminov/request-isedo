@@ -5,6 +5,8 @@ import { ButtonKM } from "../../../UI/Button/ButtonKM";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { Loader } from "../../../UI/Loader";
+import { queryClient } from "../../../../queryClient";
+import { useEffect } from "react";
 
 const Authorization = () => {
 	const {
@@ -24,7 +26,6 @@ const Authorization = () => {
 	const navigate = useNavigate();
 	const logMutate = useMutation({
 		mutationFn: (data: LogType) => logMe(data),
-		onSuccess: () => navigate("account"),
 	});
 
 	const onSubmit = (data: LogType) => {
@@ -33,6 +34,19 @@ const Authorization = () => {
 
 	if (logMutate.status === "pending") {
 		return <Loader />;
+	}
+
+	if (logMutate.isSuccess) {
+		// navigate("account");
+		try {
+			queryClient.invalidateQueries({ queryKey: ["users", "me"] });
+			console.log(`logMutate's invalidate success ${logMutate.status}`);
+		} catch (error) {
+			console.log(
+				`logMutate's invalidate is false ${logMutate.status && error}`,
+			);
+		}
+		navigate("account");
 	}
 
 	return (

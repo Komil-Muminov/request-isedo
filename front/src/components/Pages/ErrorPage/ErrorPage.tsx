@@ -12,8 +12,7 @@ const ErrorPage = () => {
 							<img src={ErrorImg} alt="errorpage" className="errorpage_img" />
 						</div>
 						<p className="km__info-text errorpage_info-text">
-							Упс! Страница не найдена. Пожалуйста, проверьте правильность
-							адреса или вернитесь на главную страницу.
+							What are you doing man ?!
 						</p>
 						<Link to={"/account"}>Главная страница</Link>
 					</div>
