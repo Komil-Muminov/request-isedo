@@ -1,28 +1,30 @@
+import React, { useState, useEffect } from "react";
 import "./Loader.css";
-import Backdrop from "@mui/material/Backdrop";
-import CircularProgress from "@mui/material/CircularProgress";
-import Typography from "@mui/material/Typography";
+// import Skeleton from "@mui/material/Skeleton";
+// import Stack from "@mui/material/Stack";
 
-export const Loader = () => (
-	<div className="loader">
-		<Backdrop
-			sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-			open={true}
-		>
-			<CircularProgress color="inherit" />
-			<Typography
-				variant="h6"
-				component="div"
-				sx={{
-					position: "absolute",
-					bottom: "40%",
-					left: "51%",
-					transform: "translate(-50%, -50%)",
-					color: "#fff",
-				}}
-			>
-				Подождите...
-			</Typography>
-		</Backdrop>
-	</div>
-);
+export const Loader = () => {
+	const [visible, setVisible] = useState(true);
+
+	// Анимация исчезновения после 3 секунд
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setVisible(false);
+		}, 3000); // Увеличил время анимации исчезновения до 3 секунд
+
+		return () => clearTimeout(timer);
+	}, []);
+
+	return (
+		<>
+			{visible && (
+				<div className="loading__container">
+					<div className="loading__content">
+						<div className="loading__spinner"></div>
+						<span className="loading__message">Загрузка...</span>
+					</div>
+				</div>
+			)}
+		</>
+	);
+};
