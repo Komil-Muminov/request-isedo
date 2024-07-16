@@ -1,4 +1,4 @@
-import { Loader } from "../Loader";
+import { Loader } from "../Loader/Loader";
 import "./Button.css";
 interface TProps {
 	isLoading?: boolean;

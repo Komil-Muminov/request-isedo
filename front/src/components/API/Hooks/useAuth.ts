@@ -24,10 +24,9 @@ export type PhotoType = z.infer<typeof PhotoScheme>;
 
 export const useAuth = () => {
 	// Функция для получения токена из localStorage или другого источника
-	const getToken = (): string | null => {
-		return localStorage.getItem("token");
-		// Замените "token" на имя, которое вы использовали для хранения токена
-	};
+	// const getToken = (): string | null => {
+	// 	return localStorage.getItem("token");
+	// };
 
 	// Валидация ответа от сервера
 	const validateResponse = async (response: Response): Promise<Response> => {
@@ -75,7 +74,7 @@ export const useAuth = () => {
 	type GetMeType = z.infer<typeof getMeScheme>;
 
 	const getMe = async (): Promise<GetMeType> => {
-		const token = getToken();
+		const token = localStorage.getItem("token");
 
 		if (!token) {
 			throw new Error("Токен отсутствует");
@@ -83,7 +82,7 @@ export const useAuth = () => {
 
 		return fetch(`http://localhost:3000/users/me`, {
 			headers: {
-				Authorization: `Bearer ${token}`, // Передаем токен в заголовке Authorization
+				Authorization: `Bearer ${token}`,
 			},
 		})
 			.then(validateResponse)

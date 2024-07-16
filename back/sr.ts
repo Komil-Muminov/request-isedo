@@ -13,7 +13,7 @@ import {
 	authorizeRequest,
 	authorizeResponse,
 	unauthorizeResponse,
-} from "./authFunctions"; // Замените на путь к вашему файлу с функциями авторизации
+} from "./authFunctions";
 
 const app = express();
 const port = 3000;
@@ -204,6 +204,56 @@ app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
 		photo: user.photo ? `/uploads/${user.photo}` : null,
 	});
 });
+
+// -----------------------------------------------------------------------
+/**
+ * ЗАПРОСЫ
+ */
+
+app.post("/requests", authenticateJWT, (req: Request, res: Response) => {
+	const { boname, accountant, desc } = req.body;
+
+	// Проверка роли пользователя
+	const users = readUsersFromFile();
+	const user = users.find((u: any) => u.id === (req as any).userId);
+
+	if (!user || user.role !== "admin") {
+		return res.status(403).json({ error: "Недостаточно прав" });
+	}
+
+	// Создание файла request.json и сохранение данных
+	const requestData = { boname, accountant, desc };
+	fs.writeFileSync(
+		"request.json",
+		JSON.stringify(requestData, null, 2),
+		"utf8",
+	);
+
+	res.status(201).json({ message: "Заявка успешно создана" });
+});
+
+// Маршрут для получения данных из request.json
+app.get("/requests", authenticateJWT, (req: Request, res: Response) => {
+	// Проверка роли пользователя
+	const users = readUsersFromFile();
+	const user = users.find((u: any) => u.id === (req as any).userId);
+
+	if (!user || user.role !== "admin") {
+		return res.status(403).json({ error: "Недостаточно прав" });
+	}
+
+	try {
+		// Чтение данных из файла request.json
+		const data = fs.readFileSync("request.json", "utf8");
+		const requestData = JSON.parse(data);
+		res.status(200).json(requestData);
+	} catch (err) {
+		console.error("Ошибка при чтении файла request.json:", err);
+		res.status(500).json({ error: "Ошибка сервера при чтении данных" });
+	}
+});
+
+// -----------------------------------------------------------------------
 
 // Запуск сервера
 app.listen(port, () => {

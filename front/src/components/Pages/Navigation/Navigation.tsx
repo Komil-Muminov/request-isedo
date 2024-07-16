@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 import { queryClient } from "../../../queryClient";
 import { useAuth } from "../../API/Hooks/useAuth";
 import { useEffect, useState } from "react";
-import { Loader } from "../../UI/Loader";
 import ErrorPage from "../ErrorPage/ErrorPage";
+import { Loader } from "../../UI/Loader/Loader";
 export const Navigation: React.FC = () => {
 	const { getMe } = useAuth();
 	const getUinfoQuery = useQuery(
@@ -26,18 +26,18 @@ export const Navigation: React.FC = () => {
 		photo: string;
 	}
 	if (getUinfoQuery.status === "pending") {
-		<Loader />;
+		return <Loader />;
 	}
-	if (getUinfoQuery.status === "error") {
-		<ErrorPage />;
-	}
+	// if (getUinfoQuery.status === "error") {
+	// 	<ErrorPage />;
+	// }
 
-	const [uCurrData, setUcurrData] = useState<TUProps[] | any[]>([]);
-	useEffect(() => {
-		if (getUinfoQuery.status === "success") {
-			setUcurrData((prev) => [...prev, getUinfoQuery.data]);
-		}
-	}, [setUcurrData, getUinfoQuery.data]);
+	// const [uCurrData, setUcurrData] = useState<TUProps[] | any[]>([]);
+	// useEffect(() => {
+	// 	if (getUinfoQuery.status === "success") {
+	// 		setUcurrData((prev) => [...prev, getUinfoQuery.data]);
+	// 	}
+	// }, [setUcurrData, getUinfoQuery.data]);
 
 	return (
 		<>

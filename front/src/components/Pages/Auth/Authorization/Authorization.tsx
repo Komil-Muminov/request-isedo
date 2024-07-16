@@ -4,16 +4,14 @@ import { LogType, useAuth } from "../../../API/Hooks/useAuth";
 import { ButtonKM } from "../../../UI/Button/ButtonKM";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { Loader } from "../../../UI/Loader";
 import { queryClient } from "../../../../queryClient";
-import { useEffect } from "react";
+import { Loader } from "../../../UI/Loader/Loader";
 
 const Authorization = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
-		getValues,
+		formState: { errors, dirtyFields },
 	} = useForm<LogType>({
 		defaultValues: {
 			username: "",
@@ -60,12 +58,13 @@ const Authorization = () => {
 						},
 						minLength: {
 							value: 2,
-							message: "Имя пользователя должен содержать минимум 5 символов",
+							message: "Имя пользователя должен содержать минимум 2 символов",
 						},
 					})}
 					placeholder="username"
-					className="inp reg_inp"
+					className="inp"
 					name="username"
+					defaultValue={""}
 				/>
 				<span className="form_errors-text">
 					{errors?.username && errors.username.message}
@@ -78,18 +77,24 @@ const Authorization = () => {
 						},
 						minLength: {
 							value: 2,
-							message: "password должен содержать минимум 5 символов",
+							message: "password должен содержать минимум 2 символов",
 						},
 					})}
 					placeholder="password"
 					className="inp reg_inp"
 					type="password"
 					name="password"
+					defaultValue={""}
+					disabled={!dirtyFields.username}
 				/>
 				<span className="form_errors-text">
 					{errors?.password && errors.password.message}
 				</span>
-				<ButtonKM isLoading={logMutate.isPending} type="btn submit_btn">
+				<ButtonKM
+					disabled={!dirtyFields.username || !dirtyFields.password}
+					isLoading={logMutate.isPending}
+					type="btn submit_btn"
+				>
 					Авторизация
 				</ButtonKM>
 			</form>

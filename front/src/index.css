@@ -37,27 +37,42 @@
 		rgb(227, 238, 255) 100%
 	);
 	--inp-bg: rgba(194, 194, 194, 0.295);
+	--edo-inp-bg: #fff;
 	--inp-outline-focus: rgb(39, 151, 255);
 	--loader-items: rgb(226, 226, 226);
 
 	--inp-border: #ccc;
+	--edo-inp-border: #13b93757;
+	--edo-inp-hvr-border: #16c53c;
+	--edo-inp-active-border: #15ea43;
 }
 
-a:active {
-	color: var(--blackRgba);
-}
-
-input,
-select,
-textarea {
-	background-color: var(--inp-bg);
+.inp,
+.inp_area,
+.inp_slct {
+	background-color: var(--edo-inp-bg);
 	border-radius: 10px;
 	max-width: 200px;
 	width: 100%;
-	border: 1px solid var(--inp-border);
+	border: 1px solid var(--edo-inp-border);
 	border-radius: 10px;
 	outline: none;
 	padding: 13px 13px 13px 13px;
+	transition: all 0.2s ease-in-out;
+}
+
+.inp:hover {
+	border: 1px solid var(--edo-inp-hvr-border);
+}
+
+.inp:focus-visible {
+	border: 1px solid var(--edo-inp-hvr-border);
+}
+.inp:focus {
+	border: 1px solid var(--edo-inp-hvr-border);
+}
+.inp:active {
+	border: 1px solid var(--edo-inp-active-border);
 }
 
 @font-face {

@@ -8,10 +8,6 @@
 	color: var(--red);
 }
 
-.reg_inp {
-	transition: background-color 0.2s ease-in-out;
-}
-
 .reg_inp-select {
 	transition: background-color 0.2s ease-in-out;
 }

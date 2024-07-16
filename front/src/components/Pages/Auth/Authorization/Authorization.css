@@ -8,8 +8,3 @@
 .form_errors-text {
 	color: var(--red);
 }
-
-.reg_inp {
-	padding: 13px 13px 13px 13px;
-	transition: background-color 0.2s ease-in-out;
-}

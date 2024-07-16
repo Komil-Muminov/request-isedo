@@ -1,21 +1,18 @@
-import React, { useState } from "react";
 import "./AddRequest.css";
+import React, { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { Prev } from "../../UI/PrevLink/Prev";
 import { Stepper, StepLabel, Step, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { AddrequestScheme } from "./Addrequest";
 import { steps } from "../../API/Data/Steps/Steps";
-export const AddRequest: React.FC = () => {
+import { postRequest } from "./APIRequests";
+const AddRequest: React.FC = () => {
 	const [activeStep, setActiveStep] = useState(0);
-
-	const handleBack = () => {
-		setActiveStep((prevActiveStep) => prevActiveStep - 1);
-	};
-
 	const {
 		register,
 		handleSubmit,
-		formState: { errors, dirtyFields },
+		formState: { dirtyFields },
 	} = useForm<AddrequestScheme>({
 		defaultValues: {
 			boname: "",
@@ -31,13 +28,15 @@ export const AddRequest: React.FC = () => {
 	const onSubmit = (data: AddrequestScheme) => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1);
 		setFormComplete((prev) => !prev);
+		console.log(`postRequest:${postRequest} + `);
+		postRequest(data);
 	};
-
+	// Надо синхронизировать степы с запросам
 	return (
 		<section className="sections">
 			<div className="container">
 				<div className="addRequest__content km__content">
-					<h1>AddRequest</h1>
+					<h1>Создание</h1>
 					<Stepper activeStep={activeStep} alternativeLabel>
 						{steps.map((label) => (
 							<Step key={label}>
@@ -47,43 +46,69 @@ export const AddRequest: React.FC = () => {
 					</Stepper>
 					<div className="form_content">
 						<form className="request_form ">
+							{/* <label htmlFor="boname">KM</label> */}
 							<input
 								{...register("boname")}
 								type="text"
-								className="request_inp"
+								id="boname"
+								className="inp request_inp"
+								placeholder="БО"
 								disabled={!formComplete}
 							/>
+
 							<input
 								{...register("accountant")}
 								type="text"
-								className="request_inp"
+								className="inp request_inp"
+								placeholder="Бухгалтер"
 								disabled={!formComplete}
 							/>
 							<input
 								{...register("desc")}
 								type="text"
-								className="request_inp"
+								className="inp request_inp"
+								placeholder="Описание"
 								disabled={!formComplete}
 							/>
-							<Button
-								type={`submit`}
-								onClick={handleSubmit(onSubmit)}
-								disabled={
-									!dirtyFields.accountant ||
-									!dirtyFields.boname ||
-									!dirtyFields.desc ||
-									!formComplete
-								}
-							>
-								Отправить
-							</Button>
 						</form>
+						<Button
+							type={`submit`}
+							onClick={handleSubmit(onSubmit)}
+							disabled={
+								!dirtyFields.accountant ||
+								!dirtyFields.boname ||
+								!dirtyFields.desc ||
+								!formComplete
+							}
+						>
+							Отправить
+						</Button>
 					</div>
 				</div>
 				<Prev className="addrequest_prev" to={"#"}>
 					Назад
 				</Prev>
 			</div>
+			<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+				<circle
+					cx="100"
+					cy="100"
+					r="50"
+					stroke="blue"
+					stroke-width="5"
+					fill="none"
+				>
+					<animate
+						attributeName="stroke-dasharray"
+						from="0, 314"
+						to="314, 0"
+						dur="5s"
+						repeatCount="indefinite"
+					/>
+				</circle>
+			</svg>
 		</section>
 	);
 };
+
+export default AddRequest;
