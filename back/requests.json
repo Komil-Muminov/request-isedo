@@ -4,5 +4,11 @@
     "boname": "boName-test",
     "accountant": "bo-buhgalter",
     "desc": "bo-desc-test"
+  },
+  {
+    "id": 2,
+    "boname": "komil boname",
+    "accountant": "komil buhgalter",
+    "desc": "komil desc"
   }
 ]
