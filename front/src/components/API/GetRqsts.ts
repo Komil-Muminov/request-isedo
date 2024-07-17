@@ -18,6 +18,11 @@ export const getRqsts = async (): Promise<GetRqsts[]> => {
 			"Content-Type": "application/json",
 		},
 	})
-		.then((response) => response.json())
+		.then((response) => {
+			if (!response.ok) {
+				throw new Error("Недостаточно прав"); // Ошибка сервера
+			}
+			return response.json();
+		})
 		.then((data) => z.array(GetRqstsScheme).parse(data));
 };

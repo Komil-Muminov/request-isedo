@@ -74,14 +74,16 @@ export const Register: React.FC = () => {
 			<section className="sections register__section">
 				<div className="container">
 					{/* Надо в таблице показать данные */}
-					{rqstsData.map((item) => (
-						<>
-							<p key={item.id}>{item.boname}</p>
-							<p key={item.id}>{item.boname}</p>
-							<p key={item.id}>{item.accountant}</p>
-							<p key={item.id}>{item.desc}</p>
-						</>
-					))}
+					{rqstsData?.length > 0 ? (
+						rqstsData.map((item) => (
+							<>
+								<p>{item.boname}</p>
+							</>
+						))
+					) : (
+						<>{getRqsQuery.error?.message}</>
+					)}
+
 					<div className="register__content km__content">
 						<p className="km__info-text">* РЕЕСТР ---</p>
 						<p className="km__info-text">* Блок с фильтрами</p>
