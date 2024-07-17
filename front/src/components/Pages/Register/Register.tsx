@@ -78,6 +78,8 @@ export const Register: React.FC = () => {
 						rqstsData.map((item) => (
 							<>
 								<p>{item.boname}</p>
+								<p>{item.accountant}</p>
+								<p>{item.desc}</p>
 							</>
 						))
 					) : (
