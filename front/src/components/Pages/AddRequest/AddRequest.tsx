@@ -1,19 +1,18 @@
 import "./AddRequest.css";
 import React, { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
 import { Prev } from "../../UI/PrevLink/Prev";
 import { Stepper, StepLabel, Step, Button } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { AddrequestScheme } from "./Addrequest";
+import { useForm, UseFormReturn } from "react-hook-form";
+import { PostRqstScheme } from "../../API/PostRqsts";
 import { steps } from "../../API/Data/Steps/Steps";
-import { postRequest } from "./APIRequests";
+import { postRequest } from "../../API/PostRqsts";
 const AddRequest: React.FC = () => {
-	const [activeStep, setActiveStep] = useState(0);
+	const [activeStep, setActiveStep] = useState<number>(0);
 	const {
 		register,
 		handleSubmit,
 		formState: { dirtyFields },
-	} = useForm<AddrequestScheme>({
+	}: UseFormReturn<PostRqstScheme> = useForm<PostRqstScheme>({
 		defaultValues: {
 			boname: "",
 			accountant: "",
@@ -24,10 +23,8 @@ const AddRequest: React.FC = () => {
 	/**
 	 * Inputs disabled
 	 */
-	const [formComplete, setFormComplete] = useState<boolean>(true);
-	const onSubmit = (data: AddrequestScheme) => {
+	const onSubmit = (data: PostRqstScheme) => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1);
-		setFormComplete((prev) => !prev);
 		console.log(`postRequest:${postRequest} + `);
 		postRequest(data);
 	};
@@ -53,7 +50,6 @@ const AddRequest: React.FC = () => {
 								id="boname"
 								className="inp request_inp"
 								placeholder="БО"
-								disabled={!formComplete}
 							/>
 
 							<input
@@ -61,14 +57,14 @@ const AddRequest: React.FC = () => {
 								type="text"
 								className="inp request_inp"
 								placeholder="Бухгалтер"
-								disabled={!formComplete}
+								disabled={!dirtyFields.boname}
 							/>
 							<input
 								{...register("desc")}
 								type="text"
 								className="inp request_inp"
 								placeholder="Описание"
-								disabled={!formComplete}
+								disabled={!dirtyFields.accountant}
 							/>
 						</form>
 						<Button
@@ -77,8 +73,7 @@ const AddRequest: React.FC = () => {
 							disabled={
 								!dirtyFields.accountant ||
 								!dirtyFields.boname ||
-								!dirtyFields.desc ||
-								!formComplete
+								!dirtyFields.desc
 							}
 						>
 							Отправить

@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Navigation } from "./components/Pages/Navigation/Navigation";
 import { Suspense, lazy } from "react";
 import { Loader } from "./components/UI/Loader/Loader";
-// import AddRequest from "./components/Pages/AddRequest/AddRequest";
+import AddRequest from "./components/Pages/AddRequest/AddRequest";
 // ------------------------------------------------------
 
 // const LazyRegistrationPage = lazy(
@@ -25,6 +25,7 @@ const LazyErrorPage = lazy(
 const LazyAddRequest = lazy(
 	() => import("./components/Pages/AddRequest/AddRequest"),
 );
+
 function App() {
 	return (
 		<>

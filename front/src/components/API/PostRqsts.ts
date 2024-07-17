@@ -1,4 +1,4 @@
-export interface RequestScheme {
+export interface PostRqstScheme {
 	boname: string;
 	accountant: string;
 	desc: string;
@@ -7,7 +7,8 @@ export interface RequestScheme {
 const token = localStorage.getItem("token");
 
 console.log(token);
-export const postRequest = async (data: RequestScheme): Promise<void> => {
+
+export const postRequest = async (data: PostRqstScheme): Promise<void> => {
 	return fetch(`http://localhost:3000/requests`, {
 		method: "POST",
 		headers: {

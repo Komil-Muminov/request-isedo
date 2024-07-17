@@ -20,11 +20,11 @@ export const Navigation: React.FC = () => {
 
 	// Надо правильно типизировать данные и добавить в стейт
 
-	interface TUProps {
-		username: string;
-		role: string;
-		photo: string;
-	}
+	// interface TUProps {
+	// 	username: string;
+	// 	role: string;
+	// 	photo: string;
+	// }
 	if (getUinfoQuery.status === "pending") {
 		return <Loader />;
 	}

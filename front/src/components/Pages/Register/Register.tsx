@@ -1,15 +1,12 @@
 import "./Register.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
-
-// import { SelectChangeEvent } from "@mui/material/Select";
-// import MenuItem from "@mui/material/MenuItem";
-// import FormHelperText from "@mui/material/FormHelperText";
-// import FormControl from "@mui/material/FormControl";
-// import Pagination from "@mui/material/Pagination";
-// import Stack from "@mui/material/Stack";
+import { useQuery } from "@tanstack/react-query";
+import { queryClient } from "../../../queryClient";
+import { Loader } from "../../UI/Loader/Loader";
+import { getRqsts, GetRqsts } from "../../API/GetRqsts";
 
 export const Register: React.FC = () => {
 	const columns: GridColDef<(typeof rows)[number]>[] = [
@@ -55,10 +52,36 @@ export const Register: React.FC = () => {
 		{ id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
 		{ id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 	];
+
+	const getRqsQuery = useQuery(
+		{
+			queryFn: () => getRqsts(),
+			queryKey: ["requests"],
+		},
+		queryClient,
+	);
+
+	const [rqstsData, setRqstsData] = useState<GetRqsts[]>([]);
+	useEffect(() => {
+		if (getRqsQuery.status === "success") {
+			// setData((prev) => [...prev, ...getRqsQuery.data]);
+			setRqstsData(getRqsQuery.data);
+		}
+	}, [getRqsQuery.data, setRqstsData]);
+
 	return (
 		<>
 			<section className="sections register__section">
 				<div className="container">
+					{/* Надо в таблице показать данные */}
+					{rqstsData.map((item) => (
+						<>
+							<p key={item.id}>{item.boname}</p>
+							<p key={item.id}>{item.boname}</p>
+							<p key={item.id}>{item.accountant}</p>
+							<p key={item.id}>{item.desc}</p>
+						</>
+					))}
 					<div className="register__content km__content">
 						<p className="km__info-text">* РЕЕСТР</p>
 						<p className="km__info-text">* Блок с фильтрами</p>
