@@ -83,7 +83,7 @@ export const Register: React.FC = () => {
 						</>
 					))}
 					<div className="register__content km__content">
-						<p className="km__info-text">* РЕЕСТР</p>
+						<p className="km__info-text">* РЕЕСТР ---</p>
 						<p className="km__info-text">* Блок с фильтрами</p>
 						<Link
 							to={"/addrequest"}
