@@ -32,7 +32,6 @@ function App() {
 			<Navigation />
 			<Suspense fallback={<div>{<Loader />}</div>}>
 				<Routes>
-					fds
 					<Route path="*" element={<LazyErrorPage />} />
 					<Route path="/" element={<LazyAuthPage />} />
 					<Route path="auth" element={<LazyAuthPage />} />
