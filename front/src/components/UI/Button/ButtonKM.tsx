@@ -16,7 +16,11 @@ export const ButtonKM: React.FC<TProps> = ({
 }) => {
 	return (
 		<>
-			<button onClick={onClick} className={`btn ${type}`} disabled={disabled}>
+			<button
+				onClick={onClick}
+				className={`btn ${type}`}
+				disabled={disabled || isLoading}
+			>
 				{isLoading ? <Loader /> : `${children}`}
 			</button>
 		</>
