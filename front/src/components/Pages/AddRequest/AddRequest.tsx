@@ -2,7 +2,7 @@ import "./AddRequest.css";
 import React, { useState } from "react";
 import { Prev } from "../../UI/PrevLink/Prev";
 import { Stepper, StepLabel, Step, Button } from "@mui/material";
-import { useForm, UseFormReturn } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { PostRqstScheme } from "../../API/PostRqsts";
 import { steps } from "../../API/Data/Steps/Steps";
 import { postRequest } from "../../API/PostRqsts";
@@ -12,7 +12,7 @@ const AddRequest: React.FC = () => {
 		register,
 		handleSubmit,
 		formState: { dirtyFields },
-	}: UseFormReturn<PostRqstScheme> = useForm<PostRqstScheme>({
+	} = useForm<PostRqstScheme>({
 		defaultValues: {
 			boname: "",
 			accountant: "",

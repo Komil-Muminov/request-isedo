@@ -11,6 +11,10 @@
 	flex-wrap: wrap;
 }
 
+.url_location {
+	text-align: start;
+}
+
 .zayavki_nav-links {
 	border-radius: 5px;
 	padding: 10px;

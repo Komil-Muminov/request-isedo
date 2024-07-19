@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Navigation } from "./components/Pages/Navigation/Navigation";
 import { Suspense, lazy } from "react";
 import { Loader } from "./components/UI/Loader/Loader";
@@ -26,7 +26,13 @@ const LazyAddRequest = lazy(
 	() => import("./components/Pages/AddRequest/AddRequest"),
 );
 
+const LazyMfrqst = lazy(() => import(`./components/Pages/Mfrqst/Mfrqst`));
+
 function App() {
+
+	
+
+
 	return (
 		<>
 			<Navigation />
@@ -38,6 +44,7 @@ function App() {
 					<Route path="account" element={<LazyAccount />} />
 					<Route path="uprofile" element={<LazyUserProfile />} />
 					<Route path="addrequest" element={<LazyAddRequest />} />
+					<Route path="mfrqst" element={<LazyMfrqst />} />
 				</Routes>
 			</Suspense>
 		</>

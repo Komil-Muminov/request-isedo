@@ -5,8 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { queryClient } from "../../../queryClient";
 import { useAuth } from "../../API/Hooks/useAuth";
-import { useEffect, useState } from "react";
-import ErrorPage from "../ErrorPage/ErrorPage";
 import { Loader } from "../../UI/Loader/Loader";
 export const Navigation: React.FC = () => {
 	const { getMe } = useAuth();
@@ -18,26 +16,9 @@ export const Navigation: React.FC = () => {
 		queryClient,
 	);
 
-	// Надо правильно типизировать данные и добавить в стейт
-
-	// interface TUProps {
-	// 	username: string;
-	// 	role: string;
-	// 	photo: string;
-	// }
 	if (getUinfoQuery.status === "pending") {
 		return <Loader />;
 	}
-	// if (getUinfoQuery.status === "error") {
-	// 	<ErrorPage />;
-	// }
-
-	// const [uCurrData, setUcurrData] = useState<TUProps[] | any[]>([]);
-	// useEffect(() => {
-	// 	if (getUinfoQuery.status === "success") {
-	// 		setUcurrData((prev) => [...prev, getUinfoQuery.data]);
-	// 	}
-	// }, [setUcurrData, getUinfoQuery.data]);
 
 	return (
 		<>
@@ -107,7 +88,7 @@ export const Navigation: React.FC = () => {
 						</div>
 
 						<div className="nav__log">
-							<Link to="/#">
+							<Link to="account">
 								<img src={log} alt="log" className="nav__gerb" />
 							</Link>
 						</div>
