@@ -1,38 +1,81 @@
 .auth__section {
-	/* background-image: var(--edo-bg-img); */
-	background-color: rgba(240, 247, 253, 0.634);
+  /* background-image: var(--edo-bg-img); */
+  /* background-color: rgba(240, 247, 253, 0.634); */
+  background: linear-gradient(to right, #f3e7e9, #e3eeff);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .auth_box {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.auth_box .wrapper-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.auth_box .wrapper-buttons button {
+  padding: 10px;
+  color: #fff;
+  border: none;
+  border-radius: 60px;
+  min-width: 150px;
+  cursor: pointer;
+}
+
+.auth_box .wrapper-buttons button:hover {
+  opacity: 80%;
+  transition: all 200ms;
+}
+
+.btn-reg {
+  background-color: green;
+}
+
+.btn-auth {
+  background-color: var(--edo-color);
 }
 
 .auth_log {
-	padding-top: 20px;
-	align-self: center;
-	margin-bottom: 10px;
-	min-height: 80px;
-	max-width: 80px;
+  padding-top: 20px;
+  align-self: center;
+  margin-bottom: 10px;
+  min-height: 80px;
+  max-width: 80px;
 }
 
 .auth_logic {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .auth_rechange {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .auth_rechange:hover:not(:focus-visible) {
-	color: var(--edo-hvr-btn);
+  color: var(--edo-hvr-btn);
 }
 
 .submit_btn {
-	max-width: 194px;
-	width: 100%;
+  max-width: 194px;
+  width: 100%;
+}
+
+.auth__content {
+  border: 1px solid #00000068;
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 40px;
+  padding: 20px;
+  background-color: #fff;
 }
