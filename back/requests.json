@@ -34,5 +34,11 @@
     "boname": "ff",
     "accountant": "ff",
     "desc": "f"
+  },
+  {
+    "id": 7,
+    "boname": "МФ РТ",
+    "accountant": "МФ РТ",
+    "desc": "МФ РТ"
   }
 ]

@@ -77,6 +77,7 @@ export const Register: React.FC = () => {
 					{rqstsData?.length > 0 ? (
 						rqstsData.map((item) => (
 							<>
+								<p>{item.id}</p>
 								<p>{item.boname}</p>
 								<p>{item.accountant}</p>
 								<p>{item.desc}</p>

@@ -3,7 +3,6 @@ import React from "react";
 import Registration from "../Registration.tsx/Registarion";
 import Authorization from "../Authorization/Authorization";
 import { ButtonKM } from "../../../UI/Button/ButtonKM";
-import { LoaderPoints } from "../../../UI/LoaderPoints/LoaderPoints";
 const Auth: React.FC = () => {
 	const [authType, setAuthType] = React.useState<string>("registration");
 
