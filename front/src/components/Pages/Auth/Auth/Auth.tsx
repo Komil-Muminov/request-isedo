@@ -3,13 +3,18 @@ import React from "react";
 import Registration from "../Registration.tsx/Registarion";
 import Authorization from "../Authorization/Authorization";
 import { ButtonKM } from "../../../UI/Button/ButtonKM";
+import { LoaderPoints } from "../../../UI/LoaderPoints/LoaderPoints";
 const Auth: React.FC = () => {
 	const [authType, setAuthType] = React.useState<string>("registration");
 
 	const handleClick = (state: string) => {
 		setAuthType(state);
 	};
+	// Надо по токену сделать функционал
 
+	if (localStorage.getItem("local")) {
+		console.log(`fkkkkkkkkkkkkkk`);
+	}
 	return (
 		<section className="sections auth__section">
 			<div className="container">

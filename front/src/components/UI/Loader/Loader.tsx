@@ -21,7 +21,7 @@ export const Loader = () => {
 				<div className="loading__container">
 					<div className="loading__content">
 						<div className="loading__spinner"></div>
-						<span className="loading__message">Загрузка...</span>
+						<span className="loading__message">Интизор бошед...</span>
 					</div>
 				</div>
 			)}

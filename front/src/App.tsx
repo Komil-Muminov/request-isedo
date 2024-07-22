@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { Navigation } from "./components/Pages/Navigation/Navigation";
 import { Suspense, lazy } from "react";
 import { Loader } from "./components/UI/Loader/Loader";
-import AddRequest from "./components/Pages/AddRequest/AddRequest";
+// import LoaderPoints from "./components/Pages/AddRequest/AddRequest";
 // ------------------------------------------------------
 
 // const LazyRegistrationPage = lazy(
@@ -28,9 +28,9 @@ const LazyAddRequest = lazy(
 
 const LazyMfrqst = lazy(() => import(`./components/Pages/Mfrqst/Mfrqst`));
 
-					{
-						/* Надо сделать динамический запрос */
-					}
+{
+	/* Надо сделать динамический запрос */
+}
 // const LazyRqst = lazy(() => import("./components/Pages/Rqsts/Rqsts"));
 function App() {
 	return (

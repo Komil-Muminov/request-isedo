@@ -1,4 +1,4 @@
-import { Loader } from "../Loader/Loader";
+import { LoaderPoints } from "../LoaderPoints/LoaderPoints";
 import "./Button.css";
 interface TProps {
 	isLoading?: boolean;
@@ -21,7 +21,7 @@ export const ButtonKM: React.FC<TProps> = ({
 				className={`btn ${type}`}
 				disabled={disabled || isLoading}
 			>
-				{isLoading ? <Loader /> : `${children}`}
+				{isLoading ? <LoaderPoints /> : `${children}`}
 			</button>
 		</>
 	);

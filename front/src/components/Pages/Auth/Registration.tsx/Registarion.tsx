@@ -39,12 +39,8 @@ const Registration = () => {
 	};
 
 	switch (regMutate.status) {
-		case "pending":
-			return <Loader />;
 		case "success":
 			return <Authorization />;
-		case "error":
-			return <ErrorPage />;
 	}
 
 	return (
@@ -109,8 +105,8 @@ const Registration = () => {
 					</span>
 				</div>
 				<ButtonKM
-					disabled={regMutate.isLoading}
-					isLoading={regMutate.isLoading}
+					disabled={regMutate.isPending}
+					isLoading={regMutate.isPending}
 					type="submit"
 				>
 					Зарегистрироваться
