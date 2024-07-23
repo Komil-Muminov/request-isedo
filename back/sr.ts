@@ -212,6 +212,10 @@ app.get("/requests", authenticateJWT, (req: Request, res: Response) => {
 	}
 });
 
+app.post("/logout", authenticateJWT, (req: Request, res: Response) => {
+	res.status(200).json({ message: "Выход успешный" });
+});
+
 app.listen(port, () => {
 	console.log(`Сервер запущен по адресу http://localhost:${port}`);
 });

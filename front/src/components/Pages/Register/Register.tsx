@@ -3,10 +3,11 @@ import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
-import { Loader } from "../../UI/Loader/Loader";
 import { getRqsts, GetRqsts } from "../../API/GetRqsts";
+import { Logout } from "@mui/icons-material";
+import { logout } from "../../API/Logout";
 
 export const Register: React.FC = () => {
 	const getRqsQuery = useQuery(
@@ -66,10 +67,26 @@ export const Register: React.FC = () => {
 		},
 	];
 
+	const logoutMutate = useMutation(
+		{
+			mutationFn: () => logout(),
+			onSuccess: () =>
+				queryClient.invalidateQueries({ queryKey: ["users", "me"] }),
+		},
+		queryClient,
+	);
+
+	// Надо сделать по useEffect logOutmutate
+	useEffect(() => {});
+
 	return (
 		<>
 			<section className="sections register__section">
 				<div className="container">
+					<div onClick={logout}>
+						Выход
+						<Logout />
+					</div>
 					<div className="register__content km__content">
 						<p className="km__info-text">* Блок с фильтрами</p>
 						<p className="km__info-text">* РЕЕСТР ---</p>

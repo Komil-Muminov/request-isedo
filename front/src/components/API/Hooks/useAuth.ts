@@ -48,7 +48,7 @@ export const useAuth = () => {
 	};
 
 	// Логин пользователя
-	const logMe = (logData: LogType): Promise<void> => {
+	const logMe = async (logData: LogType): Promise<void> => {
 		return fetch(`http://localhost:3000/login`, {
 			method: "POST",
 			headers: {
@@ -57,7 +57,7 @@ export const useAuth = () => {
 			body: JSON.stringify(logData),
 		})
 			.then(validateResponse)
-			.then((response) => {
+			.then(async (response) => {
 				return response.json().then((data) => {
 					localStorage.setItem("token", data.token);
 				});
