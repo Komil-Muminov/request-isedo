@@ -28,7 +28,6 @@ const AddRequest: React.FC = () => {
 		console.log(`postRequest:${postRequest} + `);
 		postRequest(data);
 	};
-	// Надо синхронизировать степы с запросам
 	return (
 		<section className="sections">
 			<div className="container">
@@ -43,7 +42,6 @@ const AddRequest: React.FC = () => {
 					</Stepper>
 					<div className="form_content">
 						<form className="request_form ">
-							{/* <label htmlFor="boname">KM</label> */}
 							<input
 								{...register("boname")}
 								type="text"

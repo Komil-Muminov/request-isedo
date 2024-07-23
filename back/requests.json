@@ -40,5 +40,11 @@
     "boname": "МФ РТ",
     "accountant": "МФ РТ",
     "desc": "МФ РТ"
+  },
+  {
+    "id": 8,
+    "boname": "dsa",
+    "accountant": "dsa",
+    "desc": "sda"
   }
 ]
