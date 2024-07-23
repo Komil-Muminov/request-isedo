@@ -1,21 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
+
+.sections.navigation__section {
+  background-color: #fff;
+}
+
 .navigation__content {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 0;
 }
 
 .user_info {
-	display: flex;
-	gap: 10px;
-	align-items: center;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 /* User account */
 
-.info_list-item {
-	display: flex;
-	gap: 10px;
-	align-items: center;
+.nav_info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
+.info_list-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 12px;
+  line-height: 16px;
+}
 
+.mulish-info-list-item {
+  font-family: "Mulish", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nav__log-account {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.account-text {
+  font-weight: 700;
+  color: #000;
+  font-size: 24px;
+}
