@@ -68,32 +68,10 @@ export const Register: React.FC = () => {
 		},
 	];
 
-	const navigate = useNavigate();
-
-	const logoutMutate = useMutation(
-		{
-			mutationFn: () => logout(),
-			onSuccess: () => {
-				queryClient.invalidateQueries({ queryKey: ["users", "me"] });
-				console.log(`logout invalidated usersMe`);
-				navigate("/");
-			},
-		},
-		queryClient,
-	);
-
-	const handleLogout = () => {
-		logoutMutate.mutate();
-	};
-
 	return (
 		<>
 			<section className="sections register__section">
 				<div className="container">
-					<div onClick={handleLogout}>
-						Выход
-						<Logout />
-					</div>
 					<div className="register__content km__content">
 						<p className="km__info-text">* Блок с фильтрами</p>
 						<p className="km__info-text">* РЕЕСТР ---</p>

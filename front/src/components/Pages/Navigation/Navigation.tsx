@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import log from "../../../assets/Formal/log.png";
 import "./Navigation.css";
 import { Avatar } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { Link, useNavigate } from "react-router-dom";
 import { queryClient } from "../../../queryClient";
 import { useAuth } from "../../API/Hooks/useAuth";
 import { Loader } from "../../UI/Loader/Loader";
+import { logout } from "../../API/Logout";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
@@ -21,8 +22,51 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
 export const Navigation: React.FC = () => {
-<<<<<<< HEAD
+	// Logout logic
+	const navigate = useNavigate();
+
+	const logoutMutate = useMutation(
+		{
+			mutationFn: () => logout(),
+			onSuccess: () => {
+				queryClient.invalidateQueries({ queryKey: ["users", "me"] });
+				console.log(`logout invalidated usersMe`);
+				navigate("/");
+			},
+		},
+		queryClient,
+	);
+
+	const handleLogout = () => {
+		logoutMutate.mutate();
+	};
+
+	// UserAvatar
+	const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+	const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+		setAnchorElUser((prevAnchorElUser) =>
+			prevAnchorElUser ? null : event.currentTarget,
+		);
+	};
+
+	const handleToggleUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+		// If the menu is open, close it
+		if (anchorElUser) {
+			setAnchorElUser(null);
+		} else {
+			// Otherwise, open it with the event target as the anchor
+			setAnchorElUser(event.currentTarget);
+		}
+	};
+
+	const handleCloseUserMenu = () => {
+		setAnchorElUser(null);
+	};
+
+	// getInfo about currentUser
 	const { getMe } = useAuth();
+
 	const getUinfoQuery = useQuery(
 		{
 			queryKey: ["users", "me"],
@@ -30,46 +74,14 @@ export const Navigation: React.FC = () => {
 		},
 		queryClient,
 	);
-=======
-  // ============================================================================
-
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser((prevAnchorElUser) =>
-      prevAnchorElUser ? null : event.currentTarget
-    );
-  };
-
-  const handleToggleUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    // If the menu is open, close it
-    if (anchorElUser) {
-      setAnchorElUser(null);
-    } else {
-      // Otherwise, open it with the event target as the anchor
-      setAnchorElUser(event.currentTarget);
-    }
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
-  const { getMe } = useAuth();
-  const getUinfoQuery = useQuery(
-    {
-      queryKey: ["users", "me"],
-      queryFn: () => getMe(),
-    },
-    queryClient
-  );
->>>>>>> 03f1065f62dd0e26e52cc27de15e5303f74b6e9e
 
 	if (getUinfoQuery.status === "pending") {
 		return <Loader />;
 	}
 
 	console.log(getUinfoQuery.data);
+
+	// Надо свг контейнер сделать
 
 	if (getUinfoQuery?.status === "success") {
 		return (
@@ -170,17 +182,108 @@ export const Navigation: React.FC = () => {
 								</Link>
 							</div>
 
-<<<<<<< HEAD
-							<div className="user_info">
-								<Link to={`/uprofile`}>
-									<Avatar
-										className="nav_user-log"
-										alt="user"
-										src="https://i.pravatar.cc/300"
-									>
-										{getUinfoQuery.data?.photo ? getUinfoQuery.data?.photo : ""}
-									</Avatar>
-								</Link>
+							<div className="settings">
+								<NotificationsNoneOutlinedIcon
+									sx={{
+										fontSize: "40px",
+										color: "#959fae",
+										cursor: "pointer",
+										"&:hover": {
+											color: "#afbacb",
+											transition: "all .2s",
+										},
+									}}
+								/>
+								<div className="user_info" onClick={handleToggleUserMenu}>
+									<Box sx={{ flexGrow: 0 }}>
+										<Tooltip title="Open settings">
+											<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+												<Avatar
+													alt="Remy Sharp"
+													src={
+														getUinfoQuery.data?.photo
+															? getUinfoQuery.data.photo
+															: "https://i.pravatar.cc/300"
+													}
+												/>
+											</IconButton>
+										</Tooltip>
+										<Menu
+											sx={{
+												mt: "100px",
+												"& .MuiMenu-paper": {
+													padding: "0 10px", // Измените padding здесь
+													borderRadius: "7px", // Измените border-radius здесь
+												},
+											}}
+											id="menu-appbar"
+											anchorEl={anchorElUser}
+											anchorOrigin={{
+												vertical: "top",
+												horizontal: "right",
+											}}
+											keepMounted
+											transformOrigin={{
+												vertical: "top",
+												horizontal: "right",
+											}}
+											open={Boolean(anchorElUser)}
+											onClose={handleCloseUserMenu}
+										>
+											<MenuItem
+												onClick={handleCloseUserMenu}
+												sx={{
+													p: 0,
+													minWidth: "200px",
+													display: "flex",
+													alignItems: "center",
+													gap: "5px",
+													padding: "5px",
+													borderRadius: "10px",
+													borderBottomRightRadius: "0",
+													borderBottomLeftRadius: "0",
+													borderBottom: "1px solid #00000015",
+												}}
+											>
+												<div className="user_info-icon">
+													<AccountCircleOutlinedIcon
+														sx={{ color: "#6DACF9" }}
+													/>
+												</div>
+												<Typography
+													sx={{ width: "100%", textAlign: "start", p: 1 }}
+												>
+													Профиль
+												</Typography>
+											</MenuItem>
+											<MenuItem
+												onClick={handleLogout}
+												sx={{
+													p: 0,
+													minWidth: "200px",
+													display: "flex",
+													alignItems: "center",
+													gap: "5px",
+													padding: "5px",
+													borderRadius: "10px",
+													borderTopRightRadius: "0",
+													borderTopLeftRadius: "0",
+												}}
+											>
+												<div className="user_info-icon">
+													<LogoutIcon sx={{ color: "#6DACF9" }} />
+												</div>
+												<Typography
+													sx={{ width: "100%", textAlign: "start", p: 1 }}
+												>
+													Выход
+												</Typography>
+											</MenuItem>
+										</Menu>
+									</Box>
+									<p>{getUinfoQuery.data?.username}</p>
+									<KeyboardArrowDownIcon />
+								</div>
 							</div>
 						</div>
 					</div>
@@ -188,112 +291,4 @@ export const Navigation: React.FC = () => {
 			</>
 		);
 	}
-=======
-            <div className="settings">
-              <NotificationsNoneOutlinedIcon
-                sx={{
-                  fontSize: "40px",
-                  color: "#959fae",
-                  cursor: "pointer",
-                  "&:hover": {
-                    color: "#afbacb",
-                    transition: "all .2s",
-                  },
-                }}
-              />
-              <div className="user_info" onClick={handleToggleUserMenu}>
-                <Box sx={{ flexGrow: 0 }}>
-                  <Tooltip title="Open settings">
-                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                      <Avatar
-                        alt="Remy Sharp"
-                        src={
-                          getUinfoQuery.data?.photo
-                            ? getUinfoQuery.data.photo
-                            : "https://i.pravatar.cc/300"
-                        }
-                      />
-                    </IconButton>
-                  </Tooltip>
-                  <Menu
-                    sx={{
-                      mt: "100px",
-                      "& .MuiMenu-paper": {
-                        padding: "0 10px", // Измените padding здесь
-                        borderRadius: "7px", // Измените border-radius здесь
-                      },
-                    }}
-                    id="menu-appbar"
-                    anchorEl={anchorElUser}
-                    anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    open={Boolean(anchorElUser)}
-                    onClose={handleCloseUserMenu}
-                  >
-                    <MenuItem
-                      onClick={handleCloseUserMenu}
-                      sx={{
-                        p: 0,
-                        minWidth: "200px",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "5px",
-                        padding: "5px",
-                        borderRadius: "10px",
-                        borderBottomRightRadius: "0",
-                        borderBottomLeftRadius: "0",
-                        borderBottom: "1px solid #00000015",
-                      }}
-                    >
-                      <div className="user_info-icon">
-                        <AccountCircleOutlinedIcon sx={{ color: "#6DACF9" }} />
-                      </div>
-                      <Typography
-                        sx={{ width: "100%", textAlign: "start", p: 1 }}
-                      >
-                        Профиль
-                      </Typography>
-                    </MenuItem>
-                    <MenuItem
-                      onClick={handleCloseUserMenu}
-                      sx={{
-                        p: 0,
-                        minWidth: "200px",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "5px",
-                        padding: "5px",
-                        borderRadius: "10px",
-                        borderTopRightRadius: "0",
-                        borderTopLeftRadius: "0",
-                      }}
-                    >
-                      <div className="user_info-icon">
-                        <LogoutIcon sx={{ color: "#6DACF9" }} />
-                      </div>
-                      <Typography
-                        sx={{ width: "100%", textAlign: "start", p: 1 }}
-                      >
-                        Выход
-                      </Typography>
-                    </MenuItem>
-                  </Menu>
-                </Box>
-                <p>{getUinfoQuery.data?.username}</p>
-                <KeyboardArrowDownIcon />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
->>>>>>> 03f1065f62dd0e26e52cc27de15e5303f74b6e9e
 };
