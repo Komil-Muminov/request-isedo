@@ -7,8 +7,8 @@ import { Routes, Route, Link } from "react-router-dom";
 const Account: React.FC = () => {
 	return (
 		<>
-			<ZayavkiLinks />
 			<NavBottom />
+			<ZayavkiLinks />
 			<Region />
 			<Register />
 		</>
