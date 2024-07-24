@@ -2,12 +2,13 @@ import "./Register.css";
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
 import { getRqsts, GetRqsts } from "../../API/GetRqsts";
 import { Logout } from "@mui/icons-material";
 import { logout } from "../../API/Logout";
+import Auth from "../Auth/Auth/Auth";
 
 export const Register: React.FC = () => {
 	const getRqsQuery = useQuery(
@@ -67,23 +68,29 @@ export const Register: React.FC = () => {
 		},
 	];
 
+	const navigate = useNavigate();
+
 	const logoutMutate = useMutation(
 		{
 			mutationFn: () => logout(),
-			onSuccess: () =>
-				queryClient.invalidateQueries({ queryKey: ["users", "me"] }),
+			onSuccess: () => {
+				queryClient.invalidateQueries({ queryKey: ["users", "me"] });
+				console.log(`logout invalidated usersMe`);
+				navigate("/");
+			},
 		},
 		queryClient,
 	);
 
-	// Надо сделать по useEffect logOutmutate
-	useEffect(() => {});
+	const handleLogout = () => {
+		logoutMutate.mutate();
+	};
 
 	return (
 		<>
 			<section className="sections register__section">
 				<div className="container">
-					<div onClick={logout}>
+					<div onClick={handleLogout}>
 						Выход
 						<Logout />
 					</div>
