@@ -230,32 +230,34 @@ export const Navigation: React.FC = () => {
 											open={Boolean(anchorElUser)}
 											onClose={handleCloseUserMenu}
 										>
-											<MenuItem
-												onClick={handleCloseUserMenu}
-												sx={{
-													p: 0,
-													minWidth: "200px",
-													display: "flex",
-													alignItems: "center",
-													gap: "5px",
-													padding: "5px",
-													borderRadius: "10px",
-													borderBottomRightRadius: "0",
-													borderBottomLeftRadius: "0",
-													borderBottom: "1px solid #00000015",
-												}}
-											>
-												<div className="user_info-icon">
-													<AccountCircleOutlinedIcon
-														sx={{ color: "#6DACF9" }}
-													/>
-												</div>
-												<Typography
-													sx={{ width: "100%", textAlign: "start", p: 1 }}
+											<Link to="uprofile" className="nav__log-account">
+												<MenuItem
+													onClick={handleCloseUserMenu}
+													sx={{
+														p: 0,
+														minWidth: "200px",
+														display: "flex",
+														alignItems: "center",
+														gap: "5px",
+														padding: "5px",
+														borderRadius: "10px",
+														borderBottomRightRadius: "0",
+														borderBottomLeftRadius: "0",
+														borderBottom: "1px solid #00000015",
+													}}
 												>
-													Профиль
-												</Typography>
-											</MenuItem>
+													<div className="user_info-icon">
+														<AccountCircleOutlinedIcon
+															sx={{ color: "#6DACF9" }}
+														/>
+													</div>
+													<Typography
+														sx={{ width: "100%", textAlign: "start", p: 1 }}
+													>
+														Профиль
+													</Typography>
+												</MenuItem>
+											</Link>
 											<MenuItem
 												onClick={handleLogout}
 												sx={{
@@ -274,7 +276,12 @@ export const Navigation: React.FC = () => {
 													<LogoutIcon sx={{ color: "#6DACF9" }} />
 												</div>
 												<Typography
-													sx={{ width: "100%", textAlign: "start", p: 1 }}
+													sx={{
+														width: "100%",
+														textAlign: "start",
+														p: 1,
+														color: "#000",
+													}}
 												>
 													Выход
 												</Typography>

@@ -1,75 +1,76 @@
 @import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 .sections.navigation__section {
-  background-color: #fff;
+	background-color: #fff;
 }
 
 .navigation__content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 28px 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 28px 0;
 }
 
 .user_info {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  padding: 15px;
-  border-radius: 5px;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	padding: 15px;
+	border-radius: 5px;
 }
 
 .user_info:hover {
-  background-color: #f1f5f9;
-  cursor: pointer;
+	background-color: #f1f5f9;
+	cursor: pointer;
 }
 
 .user_info-icon {
-  background-color: #e2e8f0;
-  padding: 5px;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	background-color: #e2e8f0;
+	padding: 5px;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .settings {
-  display: flex;
-  gap: 10px;
-  align-items: center;
+	display: flex;
+	gap: 10px;
+	align-items: center;
 }
 
 /* User account */
 
 .nav_info-list {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
 }
 
 .info_list-item {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  font-size: 12px;
-  line-height: 16px;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	font-size: 12px;
+	line-height: 16px;
 }
 
 .mulish-info-list-item {
-  font-family: "Mulish", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+	font-family: "Mulish", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;
 }
 
 .nav__log-account {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	color: #000;
 }
 
 .account-text {
-  font-weight: 700;
-  color: #000;
-  font-size: 24px;
+	font-weight: 700;
+	color: #000;
+	font-size: 24px;
 }
