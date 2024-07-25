@@ -8,6 +8,7 @@ import { useAuth } from "../../../API/Hooks/useAuth";
 import { Loader } from "../../../UI/Loader/Loader";
 import ErrorPage from "../../ErrorPage/ErrorPage";
 import Authorization from "../Authorization/Authorization";
+import { useState } from "react";
 
 const Registration = () => {
 	// Надо доработать
@@ -15,6 +16,7 @@ const Registration = () => {
 		register,
 		handleSubmit,
 		getValues,
+		watch,
 		formState: { errors },
 	} = useForm<RegType>({
 		defaultValues: {
@@ -30,6 +32,7 @@ const Registration = () => {
 	const regMutate = useMutation(
 		{
 			mutationFn: () => regMe(data),
+			onSuccess: () => queryClient.invalidateQueries({ queryKey: ["rqsts"] }),
 			onError: () => console.log(`No`),
 		},
 		queryClient,
@@ -43,48 +46,13 @@ const Registration = () => {
 			return <Authorization />;
 	}
 
+	const uType = watch("uType");
+
 	return (
 		<>
 			<form className="form-reg" onSubmit={handleSubmit(onSubmit)}>
 				<div className="form-reg_form-content">
 					<h3>Министерство финансов</h3>
-					<input
-						{...register("username", {
-							required: {
-								value: true,
-								message: "это поле объязательно к заполенению",
-							},
-							minLength: {
-								value: 2,
-								message: "Имя пользователя должен содержать минимум 5 символов",
-							},
-						})}
-						placeholder="Логин"
-						className="reg_inp"
-						name="username"
-					/>
-
-					<span className="form_errors-text">
-						{errors?.username && errors.username.message}
-					</span>
-
-					<input
-						{...register("password", {
-							required: {
-								value: true,
-								message: "Заполните поле password",
-							},
-							minLength: {
-								value: 2,
-								message: "password должен содержать минимум 5 символов",
-							},
-						})}
-						placeholder="Пароль"
-						className="reg_inp"
-						type="password"
-						name="password"
-					/>
-
 					<select
 						{...register("uType")}
 						className="reg_inp reg_inp-select"
@@ -93,19 +61,63 @@ const Registration = () => {
 						<option className="reg_inp-option" value="">
 							Тип пользователя
 						</option>
-						<option className="reg_inp-option" value="user">
+						<option className="reg_inp-option" value="mfrt">
 							МФРТ
 						</option>
-						<option className="reg_inp-option" value="admin">
+						<option className="reg_inp-option" value="bo">
 							БО
 						</option>
-						<option className="reg_inp-option" value="admin">
+						<option className="reg_inp-option" value="ko">
 							КО
 						</option>
 					</select>
-					<span className="form_errors-text">
-						{errors?.password && errors.password.message}
-					</span>
+					{uType == "bo" ? (
+						<>
+							<input
+								{...register("username", {
+									required: {
+										value: true,
+										message: "это поле объязательно к заполенению",
+									},
+									minLength: {
+										value: 2,
+										message:
+											"Имя пользователя должен содержать минимум 5 символов",
+									},
+								})}
+								placeholder="Логин"
+								className="reg_inp"
+								name="username"
+							/>
+
+							<span className="form_errors-text">
+								{errors?.username && errors.username.message}
+							</span>
+
+							<input
+								{...register("password", {
+									required: {
+										value: true,
+										message: "Заполните поле password",
+									},
+									minLength: {
+										value: 2,
+										message: "password должен содержать минимум 5 символов",
+									},
+								})}
+								placeholder="Пароль"
+								className="reg_inp"
+								type="password"
+								name="password"
+							/>
+
+							<span className="form_errors-text">
+								{errors?.password && errors.password.message}
+							</span>
+						</>
+					) : (
+						<>НЕТ</>
+					)}
 				</div>
 				<ButtonKM
 					disabled={regMutate.isPending}
@@ -115,6 +127,7 @@ const Registration = () => {
 					Зарегистрироваться
 				</ButtonKM>
 			</form>
+			{console.log(data)}
 		</>
 	);
 };
