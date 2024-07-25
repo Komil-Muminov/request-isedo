@@ -3,7 +3,7 @@ import { z } from "zod";
 export const RegScheme = z.object({
 	username: z.string(),
 	password: z.string().min(3),
-	role: z.string().min(1),
+	uType: z.string().min(1),
 });
 
 export type RegType = z.infer<typeof RegScheme>;
@@ -67,7 +67,7 @@ export const useAuth = () => {
 	// Получение информации о текущем пользователе
 	const getMeScheme = z.object({
 		username: z.string(),
-		role: z.string(),
+		uType: z.string(),
 		photo: z.string().nullable(),
 	});
 

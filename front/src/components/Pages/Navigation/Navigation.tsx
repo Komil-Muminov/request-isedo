@@ -147,7 +147,7 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>{" "}
-										Роль: {getUinfoQuery.data?.role}
+										Роль: {getUinfoQuery.data?.uType}
 									</li>
 
 									<li className="info_list-item mulish-info-list-item">

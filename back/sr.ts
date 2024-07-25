@@ -105,9 +105,9 @@ app.post(
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.post("/register", (req: Request, res: Response) => {
-	const { username, password, role } = req.body;
+	const { username, password, uType } = req.body;
 
-	if (!username || !password || !role) {
+	if (!username || !password || !uType) {
 		return res.status(400).json({ error: "Отсутствуют обязательные поля" });
 	}
 
@@ -121,7 +121,7 @@ app.post("/register", (req: Request, res: Response) => {
 	}
 
 	const id = generateUniqueId(users);
-	const newUser = { id, username, password, role, photo: "" };
+	const newUser = { id, username, password, uType, photo: "" };
 
 	users.push(newUser);
 	writeToFile(usersFilePath, users);
@@ -168,7 +168,7 @@ app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
 
 	res.status(200).json({
 		username: user.username,
-		role: user.role,
+		uType: user.uType,
 		photo: user.photo ? `/uploads/${user.photo}` : null,
 	});
 });
@@ -179,7 +179,7 @@ app.post("/requests", authenticateJWT, (req: Request, res: Response) => {
 	const users = readFromFile(usersFilePath);
 	const user = users.find((u: any) => u.id === (req as any).userId);
 
-	if (!user || user.role !== "admin") {
+	if (!user || user.uType !== "admin") {
 		return res.status(403).json({ error: "Недостаточно прав" });
 	}
 
@@ -198,7 +198,7 @@ app.get("/requests", authenticateJWT, (req: Request, res: Response) => {
 	const users = readFromFile(usersFilePath);
 	const user = users.find((u: any) => u.id === (req as any).userId);
 
-	if (!user || user.role !== "admin") {
+	if (!user || user.uType !== "admin") {
 		return res.status(403).json({ error: "Недостаточно прав" });
 	}
 
