@@ -1,4 +1,4 @@
-.form {
+.form-reg {
   display: flex;
   flex-direction: column;
   /* align-items: start; */
@@ -7,9 +7,10 @@
   gap: 10px;
   min-height: 380px;
   min-width: 300px;
+  width: 800px;
 }
 
-.form_form-content {
+.form-reg_form-content {
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -15,7 +15,7 @@ const Auth: React.FC = () => {
 	}
 	return (
 		<section className="sections auth__section">
-			<div className="container">
+			{/* <div className="container"> */}
 				<div className="auth_box">
 					<div className="wrapper-buttons">
 						<ButtonKM
@@ -41,7 +41,7 @@ const Auth: React.FC = () => {
 						</div>
 					</div>
 				</div>
-			</div>
+			{/* </div> */}
 		</section>
 	);
 };
