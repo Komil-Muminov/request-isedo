@@ -26,6 +26,7 @@ const Registration = () => {
 		},
 	});
 
+	const uType = watch("uType");
 	const { regMe } = useAuth();
 	const data: RegType = getValues();
 	console.log(data);
@@ -45,8 +46,6 @@ const Registration = () => {
 		case "success":
 			return <Authorization />;
 	}
-
-	const uType = watch("uType");
 
 	return (
 		<>

@@ -2,7 +2,7 @@ import "./Register.css";
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
 import { getRqsts, GetRqsts } from "../../API/GetRqsts";
