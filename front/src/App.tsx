@@ -1,18 +1,8 @@
 import "./App.css";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Navigation } from "./components/Pages/Navigation/Navigation";
 import { Suspense, lazy } from "react";
 import { Loader } from "./components/UI/Loader/Loader";
-// import LoaderPoints from "./components/Pages/AddRequest/AddRequest";
-// ------------------------------------------------------
-
-// const LazyRegistrationPage = lazy(
-// 	() => import("./components/Pages/Auth/Registration.tsx/Registarion"),
-// );
-// const LazyAuthorizationPage = lazy(
-// 	() => import("./components/Pages/Auth/Authorization/Authorization"),
-// );
-
 // ------------------------------------------------------
 const LazyAuthPage = lazy(() => import("./components/Pages/Auth/Auth/Auth"));
 const LazyUserProfile = lazy(
@@ -28,10 +18,7 @@ const LazyAddRequest = lazy(
 
 const LazyMfrqst = lazy(() => import(`./components/Pages/Mfrqst/Mfrqst`));
 
-{
-	/* Надо сделать динамический запрос */
-}
-// const LazyRqst = lazy(() => import("./components/Pages/Rqsts/Rqsts"));
+/* Надо сделать динамический запрос */
 function App() {
 	return (
 		<>
@@ -45,7 +32,6 @@ function App() {
 					<Route path="uprofile" element={<LazyUserProfile />} />
 					<Route path="addrequest" element={<LazyAddRequest />} />
 					{/* Надо сделать динамический запрос */}
-					{/* <Route path="rqst/:type" element={<LazyRqst />} /> */}
 					<Route path="mfrqst" element={<LazyMfrqst />} />
 				</Routes>
 			</Suspense>
