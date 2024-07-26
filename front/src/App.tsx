@@ -22,7 +22,6 @@ const LazyMfrqst = lazy(() => import(`./components/Pages/Mfrqst/Mfrqst`));
 function App() {
 	return (
 		<>
-			ff
 			<Navigation />
 			<Suspense fallback={<div>{<Loader />}</div>}>
 				<Routes>
