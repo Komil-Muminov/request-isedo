@@ -13,20 +13,48 @@
 .uInfo_content {
 	display: flex;
 	align-items: center;
+	gap: 20px;
 }
 
 .uLeft_content {
+	display: flex;
+	flex-direction: column;
 	background: rgb(236, 236, 236);
 	border-radius: 10px;
 	padding: 20px;
-	min-height: 300px;
-	max-width: 100px;
-	width: 100%;
+	background: rgb(236, 236, 236);
+	min-height: 400px;
+}
+
+.uprofile_list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 .uCenter_info {
-	margin: 0 auto;
-	background: rgba(255, 123, 123, 0.893);
+	display: flex;
+	gap: 20px;
 	padding: 20px 20px;
 	border-radius: 10px;
+	min-height: 400px;
+}
+
+.uprofile_photo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+}
+
+.uinfo_text {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+.uphoto {
+	min-height: 250px;
+	border-radius: 10px;
+	max-width: 250px;
 }
