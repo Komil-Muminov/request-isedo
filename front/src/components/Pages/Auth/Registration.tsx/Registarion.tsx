@@ -119,7 +119,6 @@ const Registration = () => {
 					Зарегистрироваться
 				</ButtonKM>
 			</form>
-			{console.log(data)}
 		</>
 	);
 };

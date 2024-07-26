@@ -1,16 +1,11 @@
 [
-  {
-    "id": 1,
-    "username": "gg",
-    "password": "123",
-    "uType": "bo",
-    "photo": ""
-  },
-  {
-    "id": 2,
-    "username": "vvvv",
-    "password": "123",
-    "uType": "bo",
-    "photo": ""
-  }
+	{
+		"id": 1,
+		"username": "km",
+		"password": "123",
+		"uType": "bo",
+		"photo": ""
+    
+	}
 ]
+
