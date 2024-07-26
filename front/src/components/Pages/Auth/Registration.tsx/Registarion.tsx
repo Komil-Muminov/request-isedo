@@ -5,10 +5,7 @@ import { RegType } from "../../../API/Hooks/useAuth";
 import { ButtonKM } from "../../../UI/Button/ButtonKM";
 import { queryClient } from "../../../../queryClient";
 import { useAuth } from "../../../API/Hooks/useAuth";
-import { Loader } from "../../../UI/Loader/Loader";
-import ErrorPage from "../../ErrorPage/ErrorPage";
 import Authorization from "../Authorization/Authorization";
-import { useState } from "react";
 
 const Registration = () => {
 	// Надо доработать
@@ -70,53 +67,49 @@ const Registration = () => {
 							КО
 						</option>
 					</select>
-					{uType == "bo" ? (
-						<>
-							<input
-								{...register("username", {
-									required: {
-										value: true,
-										message: "это поле объязательно к заполенению",
-									},
-									minLength: {
-										value: 2,
-										message:
-											"Имя пользователя должен содержать минимум 5 символов",
-									},
-								})}
-								placeholder="Логин"
-								className="reg_inp"
-								name="username"
-							/>
+					<>
+						<input
+							{...register("username", {
+								required: {
+									value: true,
+									message: "это поле объязательно к заполенению",
+								},
+								minLength: {
+									value: 2,
+									message:
+										"Имя пользователя должен содержать минимум 5 символов",
+								},
+							})}
+							placeholder="Логин"
+							className="reg_inp"
+							name="username"
+						/>
 
-							<span className="form_errors-text">
-								{errors?.username && errors.username.message}
-							</span>
+						<span className="form_errors-text">
+							{errors?.username && errors.username.message}
+						</span>
 
-							<input
-								{...register("password", {
-									required: {
-										value: true,
-										message: "Заполните поле password",
-									},
-									minLength: {
-										value: 2,
-										message: "password должен содержать минимум 5 символов",
-									},
-								})}
-								placeholder="Пароль"
-								className="reg_inp"
-								type="password"
-								name="password"
-							/>
+						<input
+							{...register("password", {
+								required: {
+									value: true,
+									message: "Заполните поле password",
+								},
+								minLength: {
+									value: 2,
+									message: "password должен содержать минимум 5 символов",
+								},
+							})}
+							placeholder="Пароль"
+							className="reg_inp"
+							type="password"
+							name="password"
+						/>
 
-							<span className="form_errors-text">
-								{errors?.password && errors.password.message}
-							</span>
-						</>
-					) : (
-						<>НЕТ</>
-					)}
+						<span className="form_errors-text">
+							{errors?.password && errors.password.message}
+						</span>
+					</>
 				</div>
 				<ButtonKM
 					disabled={regMutate.isPending}
