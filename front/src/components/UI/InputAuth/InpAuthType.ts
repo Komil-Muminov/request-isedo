@@ -6,4 +6,6 @@ export interface TProps {
   requiredMessage: string;
   minLengthMessage: string;
   kind: string;
+  inputDefaultValue?: string;
+  inputDisabled?: any;
 }

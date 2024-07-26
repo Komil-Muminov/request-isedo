@@ -5,10 +5,7 @@ import { RegType } from "../../../API/Hooks/useAuth";
 import { ButtonKM } from "../../../UI/Button/ButtonKM";
 import { queryClient } from "../../../../queryClient";
 import { useAuth } from "../../../API/Hooks/useAuth";
-import { Loader } from "../../../UI/Loader/Loader";
-import ErrorPage from "../../ErrorPage/ErrorPage";
 import Authorization from "../Authorization/Authorization";
-import { useState } from "react";
 
 import InputAuth from "../../../UI/InputAuth/InputAuth";
 

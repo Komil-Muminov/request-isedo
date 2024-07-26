@@ -10,6 +10,8 @@ const InputAuth: React.FC<TProps> = ({
   requiredMessage,
   minLengthMessage,
   kind,
+  inputDefaultValue,
+  inputDisabled,
 }) => {
   return (
     <input
@@ -27,6 +29,8 @@ const InputAuth: React.FC<TProps> = ({
       className={kind}
       name={inputName}
       type={inputType}
+      defaultValue={inputDefaultValue}
+      disabled={inputDisabled}
     />
   );
 };

@@ -12,5 +12,12 @@
     "password": "123",
     "uType": "bo",
     "photo": ""
+  },
+  {
+    "id": 3,
+    "username": "komil",
+    "password": "123",
+    "uType": "bo",
+    "photo": ""
   }
 ]
