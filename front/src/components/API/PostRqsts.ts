@@ -1,5 +1,5 @@
 export interface PostRqstScheme {
-	boname: string;
+	orgname: string;
 	accountant: string;
 	desc: string;
 }
@@ -16,5 +16,9 @@ export const postRequest = async (data: PostRqstScheme): Promise<void> => {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(data),
-	}).then(undefined);
+	}).then((response) => {
+		if (!response.ok) {
+			throw new Error(`Error on postRqst`);
+		}
+	});
 };

@@ -25,7 +25,7 @@ export const Register: React.FC = () => {
 	const rows = rqstsData.map((e) => {
 		return {
 			id: e.id,
-			lastName: e.boname,
+			lastName: e.orgname,
 			firstName: e.accountant,
 			age: e.desc,
 		};

@@ -2,7 +2,7 @@ import z from "zod";
 
 const GetRqstsScheme = z.object({
 	id: z.number(),
-	boname: z.string(),
+	orgname: z.string(),
 	accountant: z.string(),
 	desc: z.string(),
 });

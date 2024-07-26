@@ -174,17 +174,17 @@ app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
 });
 
 app.post("/requests", authenticateJWT, (req: Request, res: Response) => {
-	const { boname, accountant, desc } = req.body;
+	const { orgname, accountant, desc } = req.body;
 
 	const users = readFromFile(usersFilePath);
 	const user = users.find((u: any) => u.id === (req as any).userId);
 
-	if (!user || user.uType !== "admin") {
+	if (!user || user.uType !== "bo") {
 		return res.status(403).json({ error: "Недостаточно прав" });
 	}
 
 	const id = generateUniqueId(readFromFile(requestsFilePath));
-	const requestData = { id, boname, accountant, desc };
+	const requestData = { id, orgname, accountant, desc };
 
 	writeToFile(requestsFilePath, [
 		...readFromFile(requestsFilePath),
@@ -198,7 +198,7 @@ app.get("/requests", authenticateJWT, (req: Request, res: Response) => {
 	const users = readFromFile(usersFilePath);
 	const user = users.find((u: any) => u.id === (req as any).userId);
 
-	if (!user || user.uType !== "admin") {
+	if (!user || user.uType !== "bo") {
 		return res.status(403).json({ error: "Недостаточно прав" });
 	}
 

@@ -14,7 +14,7 @@ const AddRequest: React.FC = () => {
 		formState: { dirtyFields },
 	} = useForm<PostRqstScheme>({
 		defaultValues: {
-			boname: "",
+			orgname: "",
 			accountant: "",
 			desc: "",
 		},
@@ -43,9 +43,9 @@ const AddRequest: React.FC = () => {
 					<div className="form_content">
 						<form className="request_form ">
 							<input
-								{...register("boname")}
+								{...register("orgname")}
 								type="text"
-								id="boname"
+								id="orgname"
 								className="inp request_inp"
 								placeholder="БО"
 							/>
@@ -55,7 +55,7 @@ const AddRequest: React.FC = () => {
 								type="text"
 								className="inp request_inp"
 								placeholder="Бухгалтер"
-								disabled={!dirtyFields.boname}
+								disabled={!dirtyFields.orgname}
 							/>
 							<input
 								{...register("desc")}
@@ -70,7 +70,7 @@ const AddRequest: React.FC = () => {
 							onClick={handleSubmit(onSubmit)}
 							disabled={
 								!dirtyFields.accountant ||
-								!dirtyFields.boname ||
+								!dirtyFields.orgname ||
 								!dirtyFields.desc
 							}
 						>

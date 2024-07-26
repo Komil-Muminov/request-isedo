@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Loader.css";
-// import Skeleton from "@mui/material/Skeleton";
-// import Stack from "@mui/material/Stack";
 
 export const Loader = () => {
 	const [visible, setVisible] = useState(true);
@@ -10,7 +8,7 @@ export const Loader = () => {
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			setVisible(false);
-		}, 3000); // Увеличил время анимации исчезновения до 3 секунд
+		}, 3000);
 
 		return () => clearTimeout(timer);
 	}, []);
