@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Loader.css";
-// import Skeleton from "@mui/material/Skeleton";
-// import Stack from "@mui/material/Stack";
 
 export const Loader = () => {
   const [visible, setVisible] = useState(true);
