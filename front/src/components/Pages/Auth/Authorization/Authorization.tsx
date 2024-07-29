@@ -10,8 +10,10 @@ import InputAuth from "../../../UI/InputAuth/InputAuth";
 
 const Authorization = () => {
   const {
+    // Функция для регистрации полей формы.
     register,
     handleSubmit,
+    // Содержит состояние формы, включая ошибки (errors) и поля, которые были изменены (dirtyFields).
     formState: { errors, dirtyFields },
   } = useForm<LogType>({
     defaultValues: {
@@ -20,19 +22,24 @@ const Authorization = () => {
     },
   });
 
+  // Используется для вызова функции logMe, которая выполняет вход пользователя.
   const { logMe } = useAuth();
   const navigate = useNavigate();
+  // Используется для управления мутацией (в данном случае, логином).
   const logMutate = useMutation({
+    // Функция для выполнения мутации.
     mutationFn: (data: LogType) => logMe(data),
   });
 
   const onSubmit = (data: LogType) => {
+    // Запускает мутацию с переданными данными, к примеру POST, PUT, DELETE запрос.
     logMutate.mutate(data);
   };
 
   if (logMutate.isSuccess) {
     // navigate("account");
     try {
+      // Инвалидация запросов для обновления данных.
       queryClient.invalidateQueries({ queryKey: ["users", "me"] });
       console.log(`logMutate's invalidate success ${logMutate.status}`);
     } catch (error) {
