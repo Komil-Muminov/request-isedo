@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Prev } from "../../UI/PrevLink/Prev";
 import { Avatar } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
@@ -43,9 +42,9 @@ const Profile: React.FC = () => {
 					<div className="container">
 						<div className="profile_content km__content">
 							<div className="profile_header">
-								<Prev className="profile prev" to={"#"}>
-									Назад
-								</Prev>
+								<div className="profile prev" to={"#"}>
+									Блок "история"
+								</div>
 								<h2 className="sections__title profile_title">
 									Салом,{" "}
 									{uQuery.data?.username ? uQuery.data?.username : defaultName}
@@ -75,7 +74,7 @@ const Profile: React.FC = () => {
 										</li>
 										<li className="list_item">
 											<Link to={"/"} className="item_link">
-												Моудль заявки
+												Модуль заявки
 											</Link>
 										</li>
 									</ul>
@@ -84,26 +83,26 @@ const Profile: React.FC = () => {
 									{" "}
 									<div className="uprofile_photo">
 										<img src={defUphoto} alt="user" className="uphoto" />
-										<ButtonKM>Добавить фото блять</ButtonKM>
+										<ButtonKM>Добавить фото</ButtonKM>
 									</div>
 									<div className="uinfo_text">
-										<span className="sections__desc info_text">
+										<span className="sections__desc uinfo_tex ">
 											ФИО:
 											<p>{uQuery.data?.username}</p>
 										</span>
-										<span className="sections__desc info_text">
+										<span className="sections__desc uinfo_tex">
 											Телефон:
 											<p>{uQuery.data?.username}</p>
 										</span>
-										<span className="sections__desc info_text">
+										<span className="sections__desc uinfo_tex ">
 											E-mail :<p>{uQuery.data?.uType}</p>
 										</span>
-										<span className="sections__desc info_text">
+										<span className="sections__desc uinfo_tex ">
 											Место работы :<p>{uQuery.data?.photo}</p>
 										</span>
-										<span className="sections__desc info_text">
-											Тип пользователя:
-											<p className="sections__desc">{uQuery.data?.uType}</p>
+
+										<span className="sections__desc uinfo_tex ">
+											Тип пользователя:<p>{uQuery.data?.uType}</p>
 										</span>
 									</div>
 								</div>
