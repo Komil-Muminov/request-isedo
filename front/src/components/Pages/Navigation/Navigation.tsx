@@ -79,8 +79,6 @@ export const Navigation: React.FC = () => {
 		return <Loader />;
 	}
 
-	console.log(getUinfoQuery.data);
-
 	// Надо свг контейнер сделать
 
 	if (getUinfoQuery?.status === "success") {

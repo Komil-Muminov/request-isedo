@@ -105,7 +105,8 @@ app.post(
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.post("/register", (req: Request, res: Response) => {
-	const { username, password, uType } = req.body;
+	const { username, password, uType, fullName, number, role, tax, email } =
+		req.body;
 
 	if (!username || !password || !uType) {
 		return res.status(400).json({ error: "Отсутствуют обязательные поля" });
@@ -170,6 +171,11 @@ app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
 		username: user.username,
 		uType: user.uType,
 		photo: user.photo ? `/uploads/${user.photo}` : null,
+		fullName: user.fullName,
+		number: user.number,
+		role: user.role,
+		tax: user.tax,
+		email: user.email,
 	});
 });
 
