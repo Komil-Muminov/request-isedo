@@ -32,7 +32,7 @@
 	gap: 10px;
 }
 
-.uCenter_info {
+.ucenter_info {
 	display: flex;
 	gap: 20px;
 	padding: 20px 20px;
@@ -52,6 +52,8 @@
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: space-between;
+	font-weight: 600;
+	color: var(--edo-zayavki-color);
 }
 
 .uphoto {
@@ -60,7 +62,16 @@
 	max-width: 250px;
 }
 
-.uinfo_text {
-	font-weight: 600;
-	color: var(--edo-zayavki-color);
+/* Информация про организацию */
+
+.uorg_content {
+	display: flex;
+	gap: 20px;
+	justify-content: space-between;
+}
+
+.uorg_info {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }

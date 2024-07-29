@@ -87,7 +87,7 @@ export const Navigation: React.FC = () => {
 				<section className="sections navigation__section">
 					<div className="container">
 						<div className="navigation__content">
-							<div className="nav_info">
+							<nav className="nav_info">
 								<ul className="nav_info-list">
 									<li className="info_list-item mulish-info-list-item">
 										<svg
@@ -168,7 +168,7 @@ export const Navigation: React.FC = () => {
 									</li>
 									{/* Другие элементы списка */}
 								</ul>
-							</div>
+							</nav>
 
 							<div className="nav__log">
 								<Link to="account" className="nav__log-account">

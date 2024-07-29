@@ -76,7 +76,7 @@ const Profile: React.FC = () => {
 										</li>
 									</ul>
 								</div>
-								<div className="uCenter_info">
+								<div className="ucenter_info">
 									{" "}
 									<div className="uprofile_photo">
 										<img src={defUphoto} alt="user" className="uphoto" />
@@ -101,6 +101,14 @@ const Profile: React.FC = () => {
 										<span className="sections__desc uinfo_tex ">
 											Тип пользователя:<p>{uQuery.data?.uType}</p>
 										</span>
+									</div>
+								</div>
+								<div className="uorg_content">
+									<div className="uorg_info">
+										<p className="uorg_text">ФИО: {uQuery.data.fullName}</p>
+										<p className="uorg_text">ФИО: {uQuery.data.fullName}</p>
+										<p className="uorg_text">ФИО: {uQuery.data.fullName}</p>
+										<p className="uorg_text">ФИО: {uQuery.data.fullName}</p>
 									</div>
 								</div>
 							</div>
