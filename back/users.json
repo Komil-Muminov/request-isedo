@@ -4,27 +4,31 @@
     "username": "km",
     "password": "123",
     "uType": "bo",
-    "photo": ""
+    "photo": "",
+    "fullName": ""
   },
   {
     "id": 2,
     "username": "amir",
     "password": "123",
     "uType": "bo",
-    "photo": ""
+    "photo": "",
+    "fullName": ""
   },
   {
     "id": 3,
     "username": "komil",
     "password": "123",
     "uType": "bo",
-    "photo": ""
+    "photo": "",
+    "fullName": ""
   },
   {
     "id": 4,
     "username": "rr",
     "password": "123",
     "uType": "bo",
-    "photo": ""
+    "photo": "",
+    "fullName": ""
   }
 ]

@@ -22,6 +22,7 @@ const Registration = () => {
       username: "",
       password: "",
       uType: "",
+      fullName: "",
     },
   });
 
@@ -74,10 +75,10 @@ const Registration = () => {
               <InputAuth
                 register={register}
                 inputName="username"
-                inputPlaceholder="Логин"
+                inputPlaceholder="Телефон"
                 requiredMessage="Это поле объязательно к заполенению"
-                minLengthMessage="Имя пользователя должен содержать минимум 5 символов"
-                inputType="text"
+                minLengthMessage="Логин должен содержать минимум 9 символов"
+                inputType="number"
                 kind="reg_inp"
               />
 
