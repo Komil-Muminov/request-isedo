@@ -10,5 +10,17 @@
     "role": "Так себе",
     "tax": "0104",
     "email": "kmuminov0104@gmail.com"
+  },
+  {
+    "id": 2,
+    "username": "amir",
+    "password": "123",
+    "uType": "bo",
+    "photo": "",
+    "fullName": "Шарипов Амир Чамшедович",
+    "number": "880008671",
+    "role": "Специалист",
+    "tax": "250006444",
+    "email": "jsharipovamir@gmail.com"
   }
 ]
