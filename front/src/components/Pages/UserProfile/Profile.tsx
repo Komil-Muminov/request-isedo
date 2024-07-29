@@ -43,9 +43,9 @@ const Profile: React.FC = () => {
 					<div className="container">
 						<div className="profile_content km__content">
 							<div className="profile_header">
-								<Prev className="profile prev" to={"#"}>
-									Назад
-								</Prev>
+								<div className="profile prev" to={"#"}>
+									Блок
+								</div>
 								<h2 className="sections__title profile_title">
 									Салом,{" "}
 									{uQuery.data?.username ? uQuery.data?.username : defaultName}
@@ -84,7 +84,7 @@ const Profile: React.FC = () => {
 									{" "}
 									<div className="uprofile_photo">
 										<img src={defUphoto} alt="user" className="uphoto" />
-										<ButtonKM>Добавить фото блять</ButtonKM>
+										<ButtonKM>Добавить фото</ButtonKM>
 									</div>
 									<div className="uinfo_text">
 										<span className="sections__desc info_text">
