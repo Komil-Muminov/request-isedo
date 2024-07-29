@@ -53,8 +53,13 @@
 	align-items: flex-start;
 	justify-content: space-between;
 }
+
 .uphoto {
 	min-height: 250px;
 	border-radius: 10px;
 	max-width: 250px;
+}
+
+.uinfo_text {
+	font-weight: 600;
 }

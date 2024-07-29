@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Prev } from "../../UI/PrevLink/Prev";
 import { Avatar } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
@@ -44,7 +43,7 @@ const Profile: React.FC = () => {
 						<div className="profile_content km__content">
 							<div className="profile_header">
 								<div className="profile prev" to={"#"}>
-									Блок
+									Блок "история"
 								</div>
 								<h2 className="sections__title profile_title">
 									Салом,{" "}
@@ -75,7 +74,7 @@ const Profile: React.FC = () => {
 										</li>
 										<li className="list_item">
 											<Link to={"/"} className="item_link">
-												Моудль заявки
+												Модуль заявки
 											</Link>
 										</li>
 									</ul>
@@ -87,23 +86,23 @@ const Profile: React.FC = () => {
 										<ButtonKM>Добавить фото</ButtonKM>
 									</div>
 									<div className="uinfo_text">
-										<span className="sections__desc info_text">
+										<span className="sections__desc">
 											ФИО:
 											<p>{uQuery.data?.username}</p>
 										</span>
-										<span className="sections__desc info_text">
+										<span className="sections__desc">
 											Телефон:
 											<p>{uQuery.data?.username}</p>
 										</span>
-										<span className="sections__desc info_text">
+										<span className="sections__desc">
 											E-mail :<p>{uQuery.data?.uType}</p>
 										</span>
-										<span className="sections__desc info_text">
+										<span className="sections__desc">
 											Место работы :<p>{uQuery.data?.photo}</p>
 										</span>
-										<span className="sections__desc info_text">
+										<span className="sections__desc ">
 											Тип пользователя:
-											<p className="sections__desc">{uQuery.data?.uType}</p>
+											<p className="sections__desc uinfo_text">КМ</p>
 										</span>
 									</div>
 								</div>
