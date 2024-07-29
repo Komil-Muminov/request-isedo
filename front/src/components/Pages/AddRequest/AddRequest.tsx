@@ -34,9 +34,9 @@ const AddRequest: React.FC = () => {
 				<div className="addRequest__content km__content">
 					<h1>Создание</h1>
 					<Stepper activeStep={activeStep} alternativeLabel>
-						{steps.map((label) => (
-							<Step key={label}>
-								<StepLabel>{label}</StepLabel>
+						{steps.map((step) => (
+							<Step key={step}>
+								<StepLabel>{step}</StepLabel>
 							</Step>
 						))}
 					</Stepper>

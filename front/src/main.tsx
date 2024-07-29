@@ -8,11 +8,11 @@ import "./components/Pages/Auth/Auth/Auth.css";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./queryClient.ts";
 ReactDOM.createRoot(document.getElementById("root")!).render(
-	<React.StrictMode>
-		<QueryClientProvider client={queryClient}>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
-		</QueryClientProvider>
-	</React.StrictMode>,
+	// React.StricMode
+	<QueryClientProvider client={queryClient}>
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
+	</QueryClientProvider>,
+	// React.StricMode
 );

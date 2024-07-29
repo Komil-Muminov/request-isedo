@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+// Определение схемы регистрации и типа
 export const RegScheme = z.object({
 	username: z.string(),
 	password: z.string().min(3),
@@ -13,6 +14,7 @@ export const RegScheme = z.object({
 
 export type RegType = z.infer<typeof RegScheme>;
 
+// Определение схемы логина и типа
 export const LogScheme = z.object({
 	username: z.string(),
 	password: z.string(),
@@ -20,6 +22,7 @@ export const LogScheme = z.object({
 
 export type LogType = z.infer<typeof LogScheme>;
 
+// Определение схемы фото и типа
 export const PhotoScheme = z.object({
 	username: z.string(),
 	photo: z.string(),
@@ -27,8 +30,22 @@ export const PhotoScheme = z.object({
 
 export type PhotoType = z.infer<typeof PhotoScheme>;
 
+// Определение схемы getMe и типа
+const getMeScheme = z.object({
+	username: z.string(),
+	uType: z.string(),
+	photo: z.string().nullable(),
+	fullName: z.string(),
+	number: z.string(),
+	role: z.string(),
+	tax: z.string(),
+	email: z.coerce.string(),
+});
+
+export type GetMeType = z.infer<typeof getMeScheme>;
+
 export const useAuth = () => {
-	// Валидация ответа от сервера
+	// Валидация ответа сервера
 	const validateResponse = async (response: Response): Promise<Response> => {
 		if (!response.ok) {
 			throw Error(await response.text());
@@ -65,19 +82,6 @@ export const useAuth = () => {
 	};
 
 	// Получение информации о текущем пользователе
-	const getMeScheme = z.object({
-		username: z.string(),
-		uType: z.string(),
-		photo: z.string().nullable(),
-		fullName: z.string(),
-		number: z.string(),
-		role: z.string(),
-		tax: z.string(),
-		email: z.coerce.string(),
-	});
-
-	type GetMeType = z.infer<typeof getMeScheme>;
-
 	const getMe = async (): Promise<GetMeType> => {
 		const token = localStorage.getItem("token");
 
