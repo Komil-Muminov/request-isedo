@@ -104,10 +104,6 @@ const Profile: React.FC = () => {
 										<span className="sections__desc uinfo_tex ">
 											Тип пользователя:<p>{uQuery.data?.uType}</p>
 										</span>
-										{/* <span className="sections__desc uinfo_tex ">
-											Тип пользователя:
-											<p className="sections__desc uinfo_text">КМ</p>
-										</span> */}
 									</div>
 								</div>
 							</div>
