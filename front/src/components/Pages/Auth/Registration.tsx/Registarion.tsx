@@ -23,9 +23,7 @@ const Registration = () => {
       password: "",
       uType: "",
       fullName: "",
-      number: "",
       role: "",
-      tax: "",
       email: "",
     },
   });
