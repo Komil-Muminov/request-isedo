@@ -67,7 +67,7 @@
 .uorg_content {
 	display: flex;
 	gap: 20px;
-	justify-content: space-between;
+	min-height: 400px;
 }
 
 .uorg_info {

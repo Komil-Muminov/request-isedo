@@ -1,6 +1,7 @@
 import { z } from "zod";
 
-// Создает схему для объекта с указанными полями и их типами.
+// Создает схему для объекта с указанными полями и их типами. Определение схемы регистрации и типа.
+
 export const RegScheme = z.object({
   username: z.string(),
   password: z.string().min(3),
@@ -16,6 +17,7 @@ export const RegScheme = z.object({
 export type RegType = z.infer<typeof RegScheme>;
 
 // Определяет схему для объекта логина, содержащего имя пользователя и пароль.
+
 export const LogScheme = z.object({
   username: z.string(),
   password: z.string(),
@@ -25,6 +27,7 @@ export const LogScheme = z.object({
 export type LogType = z.infer<typeof LogScheme>;
 
 // Определяет схему для объекта, содержащего имя пользователя и путь к фотографии.
+
 export const PhotoScheme = z.object({
   username: z.string(),
   photo: z.string(),

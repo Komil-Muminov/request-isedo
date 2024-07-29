@@ -25,11 +25,8 @@ const AddRequest: React.FC = () => {
     },
   });
 
-  /**
-   * Inputs disabled
-   */
+  // Увеличивает номер текущего шага на 1.
   const onSubmit = (data: PostRqstScheme) => {
-    // Увеличивает номер текущего шага на 1.
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     console.log(`postRequest:${postRequest} + `);
     postRequest(data);
@@ -38,13 +35,13 @@ const AddRequest: React.FC = () => {
     <section className="sections">
       <div className="container">
         <div className="addRequest__content km__content">
-          <h1>Создание</h1>
           {/* <Stepper>: Компонент для отображения шагового индикатора, который отображает прогресс.
            */}
+          <h1>Создание</h1>
           <Stepper activeStep={activeStep} alternativeLabel>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
+            {steps.map((step) => (
+              <Step key={step}>
+                <StepLabel>{step}</StepLabel>
               </Step>
             ))}
           </Stepper>
@@ -57,6 +54,7 @@ const AddRequest: React.FC = () => {
                 className="inp request_inp"
                 placeholder="БО"
               />
+
               <input
                 {...register("accountant")}
                 type="text"
