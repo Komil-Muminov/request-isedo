@@ -6,7 +6,7 @@ export const RegScheme = z.object({
   uType: z.string().min(1),
   fullName: z.string().min(3),
   number: z.number().min(9),
-  role: z.string(),
+  role: z.string().min(3),
   tax: z.number().min(7),
   email: z.coerce.string().email().min(5),
 });
@@ -74,11 +74,11 @@ export const useAuth = () => {
     username: z.string(),
     uType: z.string(),
     photo: z.string().nullable(),
-    fullName: z.string(),
-    number: z.number(),
-    role: z.string(),
-    tax: z.number(),
-    email: z.coerce.string().email(),
+    // fullName: z.string(),
+    // number: z.number(),
+    // role: z.string(),
+    // tax: z.number(),
+    // email: z.coerce.string().email(),
   });
 
   type GetMeType = z.infer<typeof getMeScheme>;

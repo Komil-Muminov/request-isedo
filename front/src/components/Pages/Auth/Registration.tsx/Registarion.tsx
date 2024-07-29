@@ -75,7 +75,7 @@ const Registration = () => {
               <InputAuth
                 register={register}
                 inputName="username"
-                inputPlaceholder="Телефон"
+                inputPlaceholder="Логин"
                 requiredMessage="Это поле объязательно к заполенению"
                 minLengthMessage="Логин должен содержать минимум 9 символов"
                 inputType="number"
@@ -98,6 +98,76 @@ const Registration = () => {
 
               <span className="form_errors-text">
                 {errors?.password && errors.password.message}
+              </span>
+
+              <InputAuth
+                register={register}
+                inputName="fullName"
+                inputPlaceholder="ФИО"
+                requiredMessage="Заполните поле ФИО"
+                minLengthMessage="ФИО должен содержать минимум 5 символов"
+                inputType="text"
+                kind="reg_inp"
+              />
+
+              <span className="form_errors-text">
+                {errors?.fullName && errors.fullName.message}
+              </span>
+
+              <InputAuth
+                register={register}
+                inputName="number"
+                inputPlaceholder="Телефон"
+                requiredMessage="Заполните поле телефон"
+                minLengthMessage="Телефон должен содержать минимум 9 символов"
+                inputType="number"
+                kind="reg_inp"
+              />
+
+              <span className="form_errors-text">
+                {errors?.number && errors.number.message}
+              </span>
+
+              <InputAuth
+                register={register}
+                inputName="role"
+                inputPlaceholder="Должность"
+                requiredMessage="Заполните поле должность"
+                minLengthMessage="Должность должна содержать минимум 3 символов"
+                inputType="text"
+                kind="reg_inp"
+              />
+
+              <span className="form_errors-text">
+                {errors?.role && errors.role.message}
+              </span>
+
+              <InputAuth
+                register={register}
+                inputName="tax"
+                inputPlaceholder="ИНН"
+                requiredMessage="Заполните поле ИНН"
+                minLengthMessage="ИНН должна содержать минимум 7 символов"
+                inputType="number"
+                kind="reg_inp"
+              />
+
+              <span className="form_errors-text">
+                {errors?.tax && errors.tax.message}
+              </span>
+
+              <InputAuth
+                register={register}
+                inputName="email"
+                inputPlaceholder="E-mail адресс"
+                requiredMessage="Заполните поле email"
+                minLengthMessage="E-mail должна содержать минимум 7 символов"
+                inputType="text"
+                kind="reg_inp"
+              />
+
+              <span className="form_errors-text">
+                {errors?.email && errors.email.message}
               </span>
             </>
           ) : (
