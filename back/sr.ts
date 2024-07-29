@@ -122,7 +122,18 @@ app.post("/register", (req: Request, res: Response) => {
 	}
 
 	const id = generateUniqueId(users);
-	const newUser = { id, username, password, uType, photo: "" };
+	const newUser = {
+		id,
+		username,
+		password,
+		uType,
+		photo: "",
+		fullName,
+		number,
+		role,
+		tax,
+		email,
+	};
 
 	users.push(newUser);
 	writeToFile(usersFilePath, users);

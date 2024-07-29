@@ -1,34 +1,14 @@
 [
   {
     "id": 1,
-    "username": "km",
+    "username": "ff",
     "password": "123",
     "uType": "bo",
     "photo": "",
-    "fullName": ""
-  },
-  {
-    "id": 2,
-    "username": "amir",
-    "password": "123",
-    "uType": "bo",
-    "photo": "",
-    "fullName": ""
-  },
-  {
-    "id": 3,
-    "username": "komil",
-    "password": "123",
-    "uType": "bo",
-    "photo": "",
-    "fullName": ""
-  },
-  {
-    "id": 4,
-    "username": "rr",
-    "password": "123",
-    "uType": "bo",
-    "photo": "",
-    "fullName": ""
+    "fullName": "ff",
+    "number": "ff",
+    "role": "ff",
+    "tax": "ff",
+    "email": "ff"
   }
 ]

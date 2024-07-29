@@ -25,7 +25,7 @@ const Profile: React.FC = () => {
 		case "pending":
 			return <Loader />;
 		case "error":
-			return <ErrorPage />;
+			console.log(uQuery.error);
 	}
 
 	//
