@@ -4,7 +4,7 @@ import Registration from "../Registration.tsx/Registarion";
 import Authorization from "../Authorization/Authorization";
 import { ButtonKM } from "../../../UI/Button/ButtonKM";
 const Auth: React.FC = () => {
-	const [authType, setAuthType] = React.useState<string>("");
+	const [authType, setAuthType] = React.useState<string>("registration");
 
 	const handleClick = (state: string) => {
 		setAuthType(state);
@@ -33,7 +33,7 @@ const Auth: React.FC = () => {
 					</div>
 				</div>
 			</div>
-		</section> 
+		</section>
 	);
 };
 
