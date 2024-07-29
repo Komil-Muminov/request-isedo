@@ -62,4 +62,5 @@
 
 .uinfo_text {
 	font-weight: 600;
+	color: var(--edo-zayavki-color);
 }

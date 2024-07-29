@@ -86,21 +86,21 @@ const Profile: React.FC = () => {
 										<ButtonKM>Добавить фото</ButtonKM>
 									</div>
 									<div className="uinfo_text">
-										<span className="sections__desc">
+										<span className="sections__desc uinfo_tex ">
 											ФИО:
 											<p>{uQuery.data?.username}</p>
 										</span>
-										<span className="sections__desc">
+										<span className="sections__desc uinfo_tex">
 											Телефон:
 											<p>{uQuery.data?.username}</p>
 										</span>
-										<span className="sections__desc">
+										<span className="sections__desc uinfo_tex ">
 											E-mail :<p>{uQuery.data?.uType}</p>
 										</span>
-										<span className="sections__desc">
+										<span className="sections__desc uinfo_tex ">
 											Место работы :<p>{uQuery.data?.photo}</p>
 										</span>
-										<span className="sections__desc ">
+										<span className="sections__desc uinfo_tex ">
 											Тип пользователя:
 											<p className="sections__desc uinfo_text">КМ</p>
 										</span>
