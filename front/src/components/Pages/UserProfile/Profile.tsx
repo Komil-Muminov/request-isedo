@@ -4,7 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
 import { useAuth } from "../../API/Hooks/useAuth";
 import { Loader } from "../../UI/Loader/Loader";
-import ErrorPage from "../ErrorPage/ErrorPage";
 import { useState } from "react";
 import defUphoto from "../../../assets/ErrorPage.jpg";
 import { ButtonKM } from "../../UI/Button/ButtonKM";
@@ -42,9 +41,7 @@ const Profile: React.FC = () => {
 					<div className="container">
 						<div className="profile_content km__content">
 							<div className="profile_header">
-								<div className="profile prev" to={"#"}>
-									Блок "история"
-								</div>
+								<div className="profile prev">Блок "история"</div>
 								<h2 className="sections__title profile_title">
 									Салом,{" "}
 									{uQuery.data?.username ? uQuery.data?.username : defaultName}
