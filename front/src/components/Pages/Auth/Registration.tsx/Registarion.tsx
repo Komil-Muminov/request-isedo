@@ -9,6 +9,8 @@ import Authorization from "../Authorization/Authorization";
 
 import InputAuth from "../../../UI/InputAuth/InputAuth";
 
+import EmailIcon from "@mui/icons-material/Email";
+
 const Registration = () => {
   // Надо доработать
   const {
@@ -83,7 +85,7 @@ const Registration = () => {
               <InputAuth
                 register={register}
                 inputName="username"
-                inputPlaceholder="username"
+                inputPlaceholder="Логин"
                 requiredMessage="Это поле объязательно к заполенению"
                 minLengthMessage="Логин должен содержать минимум 9 символов"
                 inputType="text"
@@ -177,6 +179,12 @@ const Registration = () => {
               <span className="form_errors-text">
                 {errors?.email && errors.email.message}
               </span>
+              <div className="email-message">
+                <EmailIcon />
+                <p>
+                  Перейдите на почту {} для того чтобы завершить регистрацию!
+                </p>
+              </div>
             </>
           ) : (
             <>НЕТ</>
