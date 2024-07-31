@@ -52,10 +52,12 @@ const Registration = () => {
 		regMutate.mutate();
 	};
 
-	switch (regMutate.status) {
-		case "success":
-			return <Authorization />;
-	}
+  console.log();
+
+  // switch (regMutate.status) {
+  //   case "success":
+  //     return <Authorization />;
+  // }
 
 	return (
 		<>
@@ -176,28 +178,33 @@ const Registration = () => {
 								kind="reg_inp"
 							/>
 
-							<span className="form_errors-text">
-								{errors?.email && errors.email.message}
-							</span>
-							<div className="email-message">
-								<EmailIcon />
-								<p>Перейдите на почту для того чтобы завершить регистрацию!</p>
-							</div>
-						</>
-					) : (
-						<>НЕТ</>
-					)}
-				</div>
-				<ButtonKM
-					disabled={regMutate.isPending}
-					isLoading={regMutate.isPending}
-					type="submit"
-				>
-					Зарегистрироваться
-				</ButtonKM>
-			</form>
-		</>
-	);
+              <span className="form_errors-text">
+                {errors?.email && errors.email.message}
+              </span>
+              {regMutate.isSuccess && (
+                <div className="email-message">
+                  <EmailIcon />
+                  <p>
+                    Перейдите на почту {} для того чтобы завершить регистрацию!
+                  </p>
+                </div>
+              )}
+            </>
+          ) : (
+            <>НЕТ</>
+          )}
+        </div>
+        <ButtonKM
+          disabled={regMutate.isPending}
+          isLoading={regMutate.isPending}
+          type="submit"
+        >
+          Зарегистрироваться
+        </ButtonKM>
+      </form>
+      {console.log(data)}
+    </>
+  );
 };
 
 export default Registration;
