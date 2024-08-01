@@ -154,7 +154,9 @@ const Profile: React.FC = () => {
 									</div>
 								</div>
 								<div className="uright_info">
-									<Ulink to="/identification">Идентификация</Ulink>
+									<Ulink className="btn uidentify_link" to="/identification">
+										Идентификация
+									</Ulink>
 								</div>
 
 								{/* Доп блок для чего-то интересного */}

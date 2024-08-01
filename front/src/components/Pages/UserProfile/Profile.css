@@ -94,3 +94,11 @@
 	flex-direction: column;
 	justify-content: space-between;
 }
+
+.uright_info {
+	align-self: flex-start;
+}
+
+.uidentify_link {
+	padding: 10px;
+}
