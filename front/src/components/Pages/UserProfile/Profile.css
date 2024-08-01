@@ -21,6 +21,7 @@
 	display: flex;
 	align-items: center;
 	gap: 20px;
+	padding: 20px;
 }
 .uidentify_text {
 	color: var(--red);
@@ -36,6 +37,7 @@
 	flex-direction: column;
 	border-radius: 10px;
 	min-height: 400px;
+	max-height: 400px;
 	gap: 20px;
 	outline: 1px solid var(--inp-border);
 	padding: 20px;
@@ -65,8 +67,9 @@
 	border-radius: 10px;
 	width: 100%;
 	min-height: 400px;
-	/* padding: 20px; */
-	/* border: 1px solid orange; */
+	max-height: 400px;
+	padding: 20px;
+	border: 1px solid var(--inp-border);
 }
 
 .user-info {
