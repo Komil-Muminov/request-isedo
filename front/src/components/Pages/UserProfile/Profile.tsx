@@ -80,9 +80,11 @@ const Profile: React.FC = () => {
 							<div className="profile_header">
 								<div className="profile prev">Блок "история"</div>
 								{uinfo?.map((item) => (
-									<h2 className="sections__title profile_title">
-										Салом, {item.username}
-									</h2>
+									<span className="sections__title uidentify_text">
+										Уважаемый{" "}
+										<span className="uidentify_name">{item.username}</span> вы
+										не идентифицированный
+									</span>
 								))}
 								<div className="profile_avatar">
 									{/* Надо сделать условный рендер */}

@@ -15,6 +15,14 @@
 	align-items: center;
 	gap: 20px;
 }
+.uidentify_text {
+	color: var(--red);
+}
+
+.uidentify_name {
+	color: var(--black);
+	font-weight: 600;
+}
 
 .uLeft_content {
 	display: flex;
