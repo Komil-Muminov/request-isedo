@@ -78,7 +78,7 @@ const Profile: React.FC = () => {
 					<div className="container">
 						<div className="profile_content km__content">
 							<div className="profile_header">
-								<div className="profile prev">Блок "история"</div>
+								<div className="profile ustory_content">Блок "история"</div>
 								{uinfo?.map((item) => (
 									<span className="sections__title uidentify_text">
 										Уважаемый{" "}
