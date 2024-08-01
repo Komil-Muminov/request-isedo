@@ -36,7 +36,7 @@
 	border-radius: 10px;
 	padding: 20px;
 	min-height: 400px;
-	/* background: rgb(236, 236, 236); */
+	background: rgb(236, 236, 236);
 	border: 1px solid rgba(228, 225, 219, 0.698);
 	gap: 20px;
 }
