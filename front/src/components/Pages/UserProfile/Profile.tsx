@@ -17,6 +17,8 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 // /MUI
 import "./Profile.css";
+import Identification from "../Identification/Identification";
+import { Link, Route, Routes } from "react-router-dom";
 
 const Profile: React.FC = () => {
 	const [defaultName] = useState<string | undefined>("Кимки");
@@ -150,6 +152,9 @@ const Profile: React.FC = () => {
 											Тип пользователя:<p>{uQuery.data?.uType}</p>
 										</span>
 									</div>
+								</div>
+								<div className="uright_info">
+									<Ulink to="/identification">Идентификация</Ulink>
 								</div>
 
 								{/* Доп блок для чего-то интересного */}
