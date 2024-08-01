@@ -12,7 +12,7 @@ export const NavBottom: React.FC = () => {
 						<nav className="navbottom__links">
 							{moduls.map((item, id) => {
 								return (
-									<Link key={id} to="noLink" className="navbottom_item">
+									<Link key={id} to="/mfrqst" className="navbottom_item">
 										{item}
 									</Link>
 								);
