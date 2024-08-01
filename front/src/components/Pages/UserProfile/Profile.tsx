@@ -1,7 +1,7 @@
 import { Avatar } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
-import { useAuth, GetMeType } from "../../API/Hooks/useAuth";
+import { useAuth } from "../../API/Hooks/useAuth";
 import { Loader } from "../../UI/Loader/Loader";
 import { useEffect, useState } from "react";
 import defUphoto from "../../../assets/ErrorPage.jpg";
@@ -17,8 +17,6 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 // /MUI
 import "./Profile.css";
-import Identification from "../Identification/Identification";
-import { Link, Route, Routes } from "react-router-dom";
 
 const Profile: React.FC = () => {
 	const [defaultName] = useState<string | undefined>("Кимки");
