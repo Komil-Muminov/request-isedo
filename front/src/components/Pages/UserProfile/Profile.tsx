@@ -1,7 +1,7 @@
 import { Avatar } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
-import { useAuth } from "../../API/Hooks/useAuth";
+import { useAuth, GetMeType } from "../../API/Hooks/useAuth";
 import { Loader } from "../../UI/Loader/Loader";
 import { useEffect, useState } from "react";
 import defUphoto from "../../../assets/ErrorPage.jpg";
