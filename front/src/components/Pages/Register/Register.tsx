@@ -28,41 +28,48 @@ export const Register: React.FC = () => {
   const rows = rqstsData.map((e) => {
     return {
       id: e.id,
-      lastName: e.orgname,
-      firstName: e.accountant,
-      age: e.desc,
+      type: e.orgname,
+      applicant: e.accountant,
+      organization: e.desc,
+      date: e.desc,
+      status: e.desc,
     };
   });
 
   const columns: GridColDef<(typeof rows)[number]>[] = [
     { field: "id", headerName: "№", width: 90 },
     {
-      field: "firstName",
-      headerName: "Дата",
-      width: 150,
-      editable: false,
-    },
-    {
-      field: "lastName",
+      field: "type",
       headerName: "Тип",
       width: 150,
       editable: false,
     },
     {
-      field: "age",
-      headerName: "Исполнитель",
+      field: "applicant",
+      headerName: "Заявитель",
+      width: 150,
+      editable: false,
+    },
+    {
+      field: "organization",
+      headerName: "Организация",
       type: "number",
       width: 110,
       editable: false,
     },
     {
-      field: "fullName",
-      headerName: "Регион",
+      field: "date",
+      headerName: "Дата",
+      type: "number",
+      width: 110,
+      editable: false,
+    },
+    {
+      field: "status",
+      headerName: "Статус",
       description: "This column has a value getter and is not sortable.",
       sortable: true,
-      width: 160,
-      valueGetter: (value, row) =>
-        `${row.firstName || ""} ${row.lastName || ""}`,
+      width: 110,
     },
   ];
 
