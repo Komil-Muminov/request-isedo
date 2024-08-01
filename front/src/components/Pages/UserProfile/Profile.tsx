@@ -126,35 +126,37 @@ const Profile: React.FC = () => {
 									))}
 								</div>
 								<div className="ucenter_info">
-									<div className="uprofile_photo">
-										<img src={defUphoto} alt="user" className="uphoto" />
-										<ButtonKM>Добавить фото</ButtonKM>
-									</div>
-									<div className="uinfo_text">
-										<span className="sections__desc uinfo_tex ">
-											ФИО:
-											<p>{uQuery.data?.username}</p>
-										</span>
-										<span className="sections__desc uinfo_tex">
-											Телефон:
-											<p>{uQuery.data?.number}</p>
-										</span>
-										<span className="sections__desc uinfo_tex ">
-											E-mail :<p>{uQuery.data?.email}</p>
-										</span>
-										<span className="sections__desc uinfo_tex ">
-											Место работы :<p>{uQuery.data?.tax}</p>
-										</span>
+									<div className="user-info">
+										<div className="uinfo_text">
+											<span className="sections__desc uinfo_tex ">
+												ФИО:
+												<p>{uQuery.data?.username}</p>
+											</span>
+											<span className="sections__desc uinfo_tex">
+												Телефон:
+												<p>{uQuery.data?.number}</p>
+											</span>
+											<span className="sections__desc uinfo_tex ">
+												E-mail :<p>{uQuery.data?.email}</p>
+											</span>
+											<span className="sections__desc uinfo_tex ">
+												Место работы :<p>{uQuery.data?.tax}</p>
+											</span>
 
-										<span className="sections__desc uinfo_tex ">
-											Тип пользователя:<p>{uQuery.data?.uType}</p>
-										</span>
+											<span className="sections__desc uinfo_tex ">
+												Тип пользователя:<p>{uQuery.data?.uType}</p>
+											</span>
+										</div>
+										<div className="uprofile_photo">
+											<img src={defUphoto} alt="user" className="uphoto" />
+											<ButtonKM>Добавить фото</ButtonKM>
+										</div>
 									</div>
-								</div>
-								<div className="uright_info">
-									<Ulink className="btn uidentify_link" to="/identification">
-										Идентификация
-									</Ulink>
+									<div className="uright_info">
+										<Ulink className="btn uidentify_link" to="/identification">
+											Идентификация
+										</Ulink>
+									</div>
 								</div>
 
 								{/* Доп блок для чего-то интересного */}

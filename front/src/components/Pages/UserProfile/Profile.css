@@ -53,10 +53,17 @@
 
 .ucenter_info {
 	display: flex;
+	justify-content: space-between;
 	gap: 20px;
 	padding: 20px 20px;
 	border-radius: 10px;
+	width: 100%;
 	min-height: 400px;
+}
+
+.user-info {
+	display: flex;
+	gap: 30px;
 }
 
 .uprofile_photo {
