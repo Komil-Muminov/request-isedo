@@ -19,6 +19,10 @@ const LazyAddRequest = lazy(
 
 const LazyMfrqst = lazy(() => import(`./components/Pages/Mfrqst/Mfrqst`));
 
+const LazyIdentification = lazy(
+  () => import("./components/Pages/Identification/Identification")
+);
+
 /* Надо сделать динамический запрос */
 function App() {
   return (
@@ -35,6 +39,10 @@ function App() {
           <Route path="auth" element={<LazyAuthPage />} />
           <Route path="account" element={<LazyAccount />} />
           <Route path="uprofile" element={<LazyUserProfile />} />
+          <Route
+            path="uprofile/identification"
+            element={<LazyIdentification />}
+          />
           <Route path="addrequest" element={<LazyAddRequest />} />
           {/* Надо сделать динамический запрос */}
           <Route path="mfrqst" element={<LazyMfrqst />} />
