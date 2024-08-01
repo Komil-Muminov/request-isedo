@@ -22,5 +22,17 @@
     "role": "Специалист",
     "tax": "250006444",
     "email": "jsharipovamir@gmail.com"
+  },
+  {
+    "id": 3,
+    "username": "cc",
+    "password": "cc",
+    "uType": "bo",
+    "photo": "",
+    "fullName": "cc",
+    "number": "cc",
+    "role": "cc",
+    "tax": "cc",
+    "email": "cc"
   }
 ]

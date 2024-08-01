@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 export interface TProps {
 	to: string;
-	className: string;
+	className?: string;
 	children: React.ReactNode;
 }
 export const Ulink: React.FC<TProps> = ({ to, className, children }) => {

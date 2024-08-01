@@ -15,15 +15,28 @@
 	align-items: center;
 	gap: 20px;
 }
+.uidentify_text {
+	color: var(--red);
+}
+
+.uidentify_name {
+	color: var(--black);
+	font-weight: 600;
+}
 
 .uLeft_content {
 	display: flex;
 	flex-direction: column;
-	background: rgb(236, 236, 236);
 	border-radius: 10px;
 	padding: 20px;
-	background: rgb(236, 236, 236);
 	min-height: 400px;
+	/* background: rgb(236, 236, 236); */
+	border: 1px solid rgba(228, 225, 219, 0.698);
+	gap: 20px;
+}
+
+.MuiPaper-root {
+	box-shadow: none;
 }
 
 .uprofile_list {
