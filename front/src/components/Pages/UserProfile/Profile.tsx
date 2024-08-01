@@ -8,6 +8,14 @@ import defUphoto from "../../../assets/ErrorPage.jpg";
 import { ButtonKM } from "../../UI/Button/ButtonKM";
 import { Ulink } from "../../UI/Ulinks/Ulinks";
 import { Ulinks } from "../../UI/Ulinks/ProfileLinks";
+
+// MUI
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+// /MUI
 import "./Profile.css";
 
 const Profile: React.FC = () => {
@@ -44,11 +52,24 @@ const Profile: React.FC = () => {
 			try {
 				queryClient.invalidateQueries({ queryKey: ["users", "me"] });
 			} catch (error) {
-				console.log(`error :${error}`);
+				console.log(`Ошибка: ${error}`);
 			}
 		}
 		setUinfo([uQuery.data]);
 	}, [uQuery.status]);
+
+	/**
+	 * Accordion
+	 */
+
+	const [expanded, setExpanded] = useState<{ [key: number]: boolean }>({});
+
+	const handleAccordion = (id: number) => {
+		setExpanded((prevExpanded) => ({
+			...prevExpanded,
+			[id]: !prevExpanded[id],
+		}));
+	};
 
 	if (uinfo) {
 		return (
@@ -75,12 +96,34 @@ const Profile: React.FC = () => {
 								</div>
 							</div>
 							<div className="uInfo_content">
-								<div className="uLeft_content"></div>
-								<div className="ucenter_info">
-									{" "}
-									{Ulinks.map((item) => (
-										<Ulink to={item.url}>{item.label}</Ulink>
+								<div className="uLeft_content">
+									{Ulinks.map((item, id) => (
+										/**
+										 * Это говно надо как то поправить,
+										 *  чтоб не портит TSX разметку
+										 *  */
+										<Accordion
+											key={id}
+											expanded={!!expanded[id]}
+											onChange={() => handleAccordion(id)}
+										>
+											<AccordionSummary
+												expandIcon={<ExpandMoreIcon />}
+												aria-controls={`panel${id}-content`}
+												id={`panel${id}-header`}
+											>
+												<Typography>{item.label}</Typography>
+											</AccordionSummary>
+											<AccordionDetails>
+												<Ulink to={item.url}>{item.label}</Ulink>
+											</AccordionDetails>
+										</Accordion>
+										/**
+										 * Гавно закончился
+										 */
 									))}
+								</div>
+								<div className="ucenter_info">
 									<div className="uprofile_photo">
 										<img src={defUphoto} alt="user" className="uphoto" />
 										<ButtonKM>Добавить фото</ButtonKM>
@@ -111,9 +154,9 @@ const Profile: React.FC = () => {
 								{/* <div className="uorg_content">
 									<div className="uorg_info">
 										<p className="uorg_text">ФИО: {uQuery.data.fullName}</p>
-										<p className="uorg_text">ФИО: {uQuery.data.fullName}</p>
-										<p className="uorg_text">ФИО: {uQuery.data.fullName}</p>
-										<p className="uorg_text">ФИО: {uQuery.data.fullName}</p>
+										<p className="уorg_text">ФИО: {uQuery.data.fullName}</p>
+										<p className="уorg_text">ФИО: {uQuery.data.fullName}</p>
+										<p className="уorg_text">ФИО: {uQuery.data.fullName}</p>
 									</div>
 								</div> */}
 							</div>
