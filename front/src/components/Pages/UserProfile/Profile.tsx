@@ -135,13 +135,13 @@ const Profile: React.FC = () => {
 										</span>
 										<span className="sections__desc uinfo_tex">
 											Телефон:
-											<p>{uQuery.data?.username}</p>
+											<p>{uQuery.data?.number}</p>
 										</span>
 										<span className="sections__desc uinfo_tex ">
-											E-mail :<p>{uQuery.data?.uType}</p>
+											E-mail :<p>{uQuery.data?.email}</p>
 										</span>
 										<span className="sections__desc uinfo_tex ">
-											Место работы :<p>{uQuery.data?.photo}</p>
+											Место работы :<p>{uQuery.data?.tax}</p>
 										</span>
 
 										<span className="sections__desc uinfo_tex ">
