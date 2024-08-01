@@ -127,6 +127,10 @@ const Profile: React.FC = () => {
 								</div>
 								<div className="ucenter_info">
 									<div className="user-info">
+										<div className="uprofile_photo">
+											<img src={defUphoto} alt="user" className="uphoto" />
+											<ButtonKM>Добавить фото</ButtonKM>
+										</div>
 										<div className="uinfo_text">
 											<span className="sections__desc uinfo_tex ">
 												ФИО:
@@ -146,10 +150,6 @@ const Profile: React.FC = () => {
 											<span className="sections__desc uinfo_tex ">
 												Тип пользователя:<p>{uQuery.data?.uType}</p>
 											</span>
-										</div>
-										<div className="uprofile_photo">
-											<img src={defUphoto} alt="user" className="uphoto" />
-											<ButtonKM>Добавить фото</ButtonKM>
 										</div>
 									</div>
 									<div className="uright_info">
