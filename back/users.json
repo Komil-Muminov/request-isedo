@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "username": "km",
+    "password": "123",
+    "uType": "bo",
+    "photo": "",
+    "fullName": "Муминов",
+    "number": "900019116",
+    "role": "Так себе",
+    "tax": "123456",
+    "email": "kmuminov0104@gmail.com",
+    "reqIdentity": false,
+    "uIdentity": false
+  }
+]
