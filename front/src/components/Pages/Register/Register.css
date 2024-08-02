@@ -17,7 +17,7 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
-  padding: 7px 15px;
+  padding: 8px 42px;
   border-radius: 60px;
   color: #ededed;
   color: #ffffff;
@@ -33,4 +33,29 @@
 
 .pointer-cursor {
   cursor: pointer;
+}
+
+.filter {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.panel-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-and-add {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.custom-cell {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 20px 0;
 }
