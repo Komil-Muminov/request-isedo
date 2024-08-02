@@ -92,26 +92,35 @@ export const Register: React.FC = () => {
             {/* <Search rows={rows} /> */}
             <Box
               sx={{
-                height: 400,
+                height: 250,
                 width: "100%",
                 backgroundColor: "#fff",
+                border: "2px solid red",
                 borderRadius: "40px",
+                overflow: "hidden", // Добавьте это, чтобы границы применялись к контенту внутри Box
               }}
             >
-              <DataGrid
-                columns={columns}
-                rows={rows}
-                initialState={{
-                  pagination: {
-                    paginationModel: {
-                      pageSize: 5,
-                    },
-                  },
+              <Box
+                sx={{
+                  height: "100%",
+                  width: "100%",
                 }}
-                pageSizeOptions={[5]}
-                checkboxSelection
-                disableRowSelectionOnClick
-              />
+              >
+                <DataGrid
+                  columns={columns}
+                  rows={rows}
+                  initialState={{
+                    pagination: {
+                      paginationModel: {
+                        pageSize: 5,
+                      },
+                    },
+                  }}
+                  pageSizeOptions={[5]}
+                  checkboxSelection
+                  disableRowSelectionOnClick
+                />
+              </Box>
             </Box>
           </div>
         </div>
