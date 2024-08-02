@@ -47,17 +47,6 @@ const Profile: React.FC = () => {
 		}
 	}
 
-	useEffect(() => {
-		if (uQuery.status === "success") {
-			try {
-				queryClient.invalidateQueries({ queryKey: ["users", "me"] });
-			} catch (error) {
-				console.log(`Ошибка: ${error}`);
-			}
-		}
-		setUinfo([uQuery.data]);
-	}, [uQuery.status]);
-
 	/**
 	 * Accordion
 	 */
@@ -71,6 +60,16 @@ const Profile: React.FC = () => {
 		}));
 	};
 
+	useEffect(() => {
+		if (uQuery.status === "success") {
+			try {
+				queryClient.invalidateQueries({ queryKey: ["users", "me"] });
+			} catch (error) {
+				console.log(`Ошибка: ${error}`);
+			}
+		}
+		setUinfo([uQuery.data]);
+	}, [uQuery.status]);
 	if (uinfo) {
 		return (
 			<>
