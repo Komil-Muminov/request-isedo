@@ -15,6 +15,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Settings } from "@mui/icons-material";
 // /MUI
 import "./Profile.css";
 
@@ -114,7 +115,10 @@ const Profile: React.FC = () => {
 												aria-controls={`panel${id}-content`}
 												id={`panel${id}-header`}
 											>
-												<Typography>{item.label}</Typography>
+												<div className="uaccordion_label">
+													<Settings />
+													<p>{item.label}</p>
+												</div>
 											</AccordionSummary>
 											<AccordionDetails>
 												<Ulink to={item.url}>{item.label}</Ulink>

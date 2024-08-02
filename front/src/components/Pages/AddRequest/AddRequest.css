@@ -3,11 +3,16 @@
 	flex-direction: column;
 	gap: 10px;
 }
+
+.form_content {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
 .request_form {
 	display: flex;
 	gap: 10px;
 	flex-wrap: wrap;
-	justify-content: center;
 }
 
 .request_inp {
