@@ -46,6 +46,8 @@ export const getMeScheme = z.object({
 	role: z.string(),
 	tax: z.string(),
 	email: z.coerce.string(),
+	reqIdentity: z.boolean(),
+	uIdentity: z.boolean(),
 });
 
 export type GetMeType = z.infer<typeof getMeScheme>;

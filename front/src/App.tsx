@@ -7,7 +7,7 @@ import { Loader } from "./components/UI/Loader/Loader";
 // Каждая страница приложения загружается лениво с помощью функции lazy. Это значит, что соответствующий модуль будет загружен только тогда, когда потребуется его отображение, что улучшает производительность приложения.
 const LazyAuthPage = lazy(() => import("./components/Pages/Auth/Auth/Auth"));
 const LazyUserProfile = lazy(
-	() => import("./components/Pages/UserProfile/Profile"),
+	() => import("./components/Pages/UProfile/Profile"),
 );
 const LazyAccount = lazy(() => import("./components/Pages/Account/Account"));
 const LazyErrorPage = lazy(
