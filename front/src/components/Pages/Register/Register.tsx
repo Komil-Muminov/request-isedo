@@ -1,13 +1,15 @@
 import "./Register.css";
 import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
+import { Box, TextField, Button, IconButton } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
 import { getRqsts, GetRqsts } from "../../API/GetRqsts";
 
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import TuneIcon from "@mui/icons-material/Tune";
 
 export const Register: React.FC = () => {
   const getRqsQuery = useQuery(
@@ -36,14 +38,16 @@ export const Register: React.FC = () => {
     };
   });
 
-  const columns: GridColDef<(typeof rows)[number]>[] = [
-    { field: "id", headerName: "№", width: 90 },
-    {
-      field: "type",
-      headerName: "Тип",
-      width: 150,
-      editable: false,
-    },
+  const colors: any = {
+    Pending: "blue",
+    Approved: "green",
+    Rejected: "red",
+    OnHold: "orange",
+  };
+
+  const columns: GridColDef[] = [
+    { field: "id", headerName: "ID", width: 90 },
+    { field: "type", headerName: "Тип", width: 150, editable: false },
     {
       field: "applicant",
       headerName: "Заявитель",
@@ -53,23 +57,38 @@ export const Register: React.FC = () => {
     {
       field: "organization",
       headerName: "Организация",
-      type: "number",
-      width: 110,
+      width: 150,
       editable: false,
     },
-    {
-      field: "date",
-      headerName: "Дата",
-      type: "number",
-      width: 110,
-      editable: false,
-    },
+    { field: "date", headerName: "Дата", width: 110, editable: false },
     {
       field: "status",
       headerName: "Статус",
       description: "This column has a value getter and is not sortable.",
       sortable: true,
-      width: 110,
+      flex: 1,
+      cellClassName: "custom-cell", // Примените CSS-класс к ячейкам этого столбца
+      renderCell: (params) => {
+        const color = colors[params.value] || "gray"; // Цвет по умолчанию, если статус не найден
+        return (
+          <div
+            style={{
+              backgroundColor: color,
+              color: "white",
+              padding: "0 10px",
+              borderRadius: "15px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "35px",
+              maxWidth: "100px",
+              width: "100%",
+            }}
+          >
+            {params.value}
+          </div>
+        );
+      },
     },
   ];
 
@@ -80,15 +99,31 @@ export const Register: React.FC = () => {
           <div className="register__content">
             {/* <p className="km__info-text">* Блок с фильтрами</p>
 						<p className="km__info-text">* РЕЕСТР ---</p> */}
-            <Link
-              to={"/addrequest"}
-              className="btn addrequest_btn"
-              type="btn submit_btn register_add-btn"
-              onClick={() => console.log(`Переход`)}
-            >
-              <AddCircleOutlineOutlinedIcon />
-              <p> Добавить</p>
-            </Link>
+            <div className="panel-control">
+              <div className="filter">
+                <TextField label="ИНН*" />
+                <TextField />
+                <Button>
+                  <FormatListBulletedIcon />
+                  <p>СПИСОК</p>
+                </Button>
+              </div>
+              <div className="filter-and-add">
+                <Button variant="contained" sx={{ display: "flex", gap: 1 }}>
+                  <TuneIcon />
+                  <p>Фильтр</p>
+                </Button>
+                <Link
+                  to={"/addrequest"}
+                  className="btn addrequest_btn"
+                  type="btn submit_btn register_add-btn"
+                  onClick={() => console.log(`Переход`)}
+                >
+                  <NoteAddIcon />
+                  <p> Добавить</p>
+                </Link>
+              </div>
+            </div>
             {/* <Search rows={rows} /> */}
             <Box
               sx={{
@@ -97,7 +132,7 @@ export const Register: React.FC = () => {
                 backgroundColor: "#fff",
                 border: "2px solid #ededed",
                 borderRadius: "40px",
-                overflow: "hidden", // Добавьте это, чтобы границы применялись к контенту внутри Box
+                overflow: "hidden",
               }}
             >
               <Box
@@ -120,6 +155,11 @@ export const Register: React.FC = () => {
                   checkboxSelection
                   disableRowSelectionOnClick
                   getRowClassName={() => "pointer-cursor"}
+                  sx={{
+                    "& .MuiDataGrid-columnHeaderTitle": {
+                      fontWeight: "bold",
+                    },
+                  }}
                 />
               </Box>
             </Box>
