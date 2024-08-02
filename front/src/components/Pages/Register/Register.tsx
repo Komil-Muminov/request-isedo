@@ -92,10 +92,10 @@ export const Register: React.FC = () => {
             {/* <Search rows={rows} /> */}
             <Box
               sx={{
-                height: 250,
+                // height: 250,
                 width: "100%",
                 backgroundColor: "#fff",
-                border: "2px solid red",
+                border: "2px solid #ededed",
                 borderRadius: "40px",
                 overflow: "hidden", // Добавьте это, чтобы границы применялись к контенту внутри Box
               }}
@@ -119,6 +119,7 @@ export const Register: React.FC = () => {
                   pageSizeOptions={[5]}
                   checkboxSelection
                   disableRowSelectionOnClick
+                  getRowClassName={() => "pointer-cursor"}
                 />
               </Box>
             </Box>
