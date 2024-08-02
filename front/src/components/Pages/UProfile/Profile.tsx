@@ -13,7 +13,6 @@ import { Ulinks } from "../../UI/Ulinks/ProfileLinks";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Settings } from "@mui/icons-material";
 // /MUI
@@ -153,6 +152,22 @@ const Profile: React.FC = () => {
 
 											<span className="sections__desc uinfo_tex ">
 												Тип пользователя:<p>{uQuery.data?.uType}</p>
+											</span>
+
+											<span className="sections__desc uinfo_tex ">
+												Идентификация:
+												<p className="uprofile_info-text">
+													{uQuery.data?.uIdentity === false ? "false" : "true"}
+												</p>
+											</span>
+
+											<span className="sections__desc uinfo_tex ">
+												Идентификация на рассмотрение:
+												<p className="uprofile_info-text">
+													{uQuery.data?.reqIdentity === false
+														? "false"
+														: "true"}
+												</p>
 											</span>
 										</div>
 									</div>

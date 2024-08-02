@@ -34,5 +34,19 @@
     "role": "cc",
     "tax": "cc",
     "email": "cc"
+  },
+  {
+    "id": 4,
+    "username": "asd",
+    "password": "123",
+    "uType": "bo",
+    "photo": "",
+    "fullName": "asd",
+    "number": "asd",
+    "role": "asd",
+    "tax": "asd",
+    "email": "asd",
+    "reqIdentity": false,
+    "uIdentity": false
   }
 ]
