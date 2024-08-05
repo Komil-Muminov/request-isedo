@@ -20,14 +20,21 @@ const AddRequest: React.FC = () => {
     handleSubmit,
     // Функция dirtyFields возвращает true или false в зависимости от того, было ли изменено поле "Название организации".
     // Поле для бухгалтера становится доступным только если поле "Название организации" было изменено.
+    watch,
     formState: { dirtyFields },
   } = useForm<PostRqstScheme>({
     defaultValues: {
       orgname: "",
       accountant: "",
       desc: "",
+      uType: "",
     },
   });
+
+  // Функция для отслеживания изменений значений в реальном времени.
+  const uType = watch("rType");
+
+  console.log(uType);
 
   // Увеличивает номер текущего шага на 1.
   const onSubmit = (data: PostRqstScheme) => {
@@ -72,27 +79,74 @@ const AddRequest: React.FC = () => {
           </div>
           <div className="form_content">
             <form className="request_form">
-              <TextField
-                {...register("orgname")}
-                type="text"
-                id="orgname"
-                className="request_inp"
-                placeholder="БО"
-              />
-              <TextField
-                {...register("accountant")}
-                type="text"
-                className="request_inp"
-                placeholder="Бухгалтер"
-                disabled={!dirtyFields.orgname}
-              />
-              <TextField
-                {...register("desc")}
-                type="text"
-                className="request_inp"
-                placeholder="Описание"
-                disabled={!dirtyFields.accountant}
-              />
+              <select {...register("rType")} className="req-select" id="uType">
+                <option className="reg_inp-option" value="">
+                  Выберите тип заявки
+                </option>
+                <option className="reg_inp-option" value="Смена бухгалтера">
+                  Смена бухгалтера
+                </option>
+                <option className="reg_inp-option" value="Смена руководителя">
+                  Смена руководителя
+                </option>
+              </select>
+              {uType === "Смена бухгалтера" && (
+                <>
+                  <TextField
+                    {...register("orgname")}
+                    type="text"
+                    id="orgname"
+                    className="request_inp"
+                    placeholder="ФИО бухгалтера"
+                  />
+                  <TextField
+                    {...register("accountant")}
+                    type="text"
+                    className="request_inp"
+                    placeholder="Должность бухгалтера"
+                    disabled={!dirtyFields.orgname}
+                  />
+                  <TextField
+                    {...register("desc")}
+                    type="text"
+                    className="request_inp"
+                    placeholder="Контанты бухгалтера"
+                    disabled={!dirtyFields.accountant}
+                  />
+                </>
+              )}
+              {uType === "Смена руководителя" && (
+                <>
+                  <TextField
+                    {...register("orgname")}
+                    type="text"
+                    id="orgname"
+                    className="request_inp"
+                    placeholder="ФИО руководителя"
+                  />
+                  <TextField
+                    {...register("accountant")}
+                    type="text"
+                    className="request_inp"
+                    placeholder="Должность руководителя"
+                    disabled={!dirtyFields.orgname}
+                  />
+                  <TextField
+                    {...register("desc")}
+                    type="text"
+                    className="request_inp"
+                    placeholder="Контанты руководителя"
+                    disabled={!dirtyFields.accountant}
+                  />
+                  <TextField
+                    {...register("desc")}
+                    type="text"
+                    className="request_inp"
+                    placeholder="Организация руководителя"
+                    disabled={!dirtyFields.accountant}
+                  />
+                </>
+              )}
             </form>
             <Button
               variant="contained"

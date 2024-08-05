@@ -26,6 +26,12 @@
   width: 100%;
 }
 
+.req-select {
+  padding: 10px;
+  border-radius: 20px;
+  outline: none;
+}
+
 .request_inp {
   /* max-width: calc((100% - 10px * 2) / 3); */
   width: 100%;
