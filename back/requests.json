@@ -22,23 +22,5 @@
     "orgname": "vcxv",
     "accountant": "xvc",
     "desc": "OnHold"
-  },
-  {
-    "id": 5,
-    "orgname": "1",
-    "accountant": "2",
-    "desc": "3"
-  },
-  {
-    "id": 6,
-    "orgname": "x",
-    "accountant": "x",
-    "desc": "x"
-  },
-  {
-    "id": 7,
-    "orgname": "3",
-    "accountant": "1",
-    "desc": "c"
   }
 ]
