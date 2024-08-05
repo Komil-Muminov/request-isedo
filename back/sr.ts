@@ -238,39 +238,43 @@ app.post("/logout", authenticateJWT, (req: Request, res: Response) => {
 	res.status(200).json({ message: "Выход успешный" });
 });
 
-// Udentity
+// Uidentity -  state=== !reqIdentity , !uIdentity
 app.post("/uidentity", authenticateJWT, (req: Request, res: Response) => {
-	// Извлекаем информацию из тела запроса
 	const { orgName, departmentName, post, file } = req.body;
-	// Получаем идентификатор пользователя из декодированного JWT
-	const userId = (req as any).userId;
 
-	// Проверяем, был ли идентификатор пользователя извлечен
-	if (!userId) {
-		// Если идентификатор пользователя отсутствует, возвращаем ошибку
-		return res
-			.status(400)
-			.json({ error: "Ошибка: пользователь не аутентифицирован" });
+	if (!orgName || !departmentName || !post || !file) {
+		return res.status(400).json({ error: "Отсутствуют обязательные поля" });
 	}
 
-	// Читаем данные пользователей из файла
+	const userId = (req as any).userId;
 	const users = readFromFile(usersFilePath);
-	// Находим индекс пользователя в массиве по его идентификатору
 	const userIndex = users.findIndex((user: any) => user.id === userId);
 
-	// Проверяем, найден ли пользователь
 	if (userIndex === -1) {
-		// Если пользователь не найден, возвращаем ошибку
 		return res.status(404).json({ error: "Пользователь не найден" });
 	}
 
-	// Обновляем поле reqIdentity для найденного пользователя
 	users[userIndex].reqIdentity = true;
-	// Записываем обновленные данные обратно в файл
+	users[userIndex].uIdentity = true;
+
 	writeToFile(usersFilePath, users);
 
-	// Отправляем успешный ответ клиенту
-	res.status(200).json({ message: "PostUidentity запрос успешно выполнен" });
+	res.status(200).json({ message: "Данные идентичности успешно обновлены" });
+});
+
+app.get("/uidentity", authenticateJWT, (req: Request, res: Response) => {
+	const userId = (req as any).userId;
+	const users = readFromFile(usersFilePath);
+	const user = users.find((user: any) => user.id === userId);
+
+	if (!user) {
+		return res.status(404).json({ error: "Пользователь не найден" });
+	}
+
+	res.status(200).json({
+		reqIdentity: user.reqIdentity,
+		uIdentity: user.uIdentity,
+	});
 });
 
 app.listen(port, () => {

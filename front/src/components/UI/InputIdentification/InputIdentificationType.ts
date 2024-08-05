@@ -1,4 +1,4 @@
 export interface TProps {
-  labelText?: string;
-  typeInput: string | undefined;
+	labelText?: string;
+	typeInput: string | undefined;
 }
