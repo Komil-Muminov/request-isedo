@@ -1,14 +1,18 @@
 import "./AddRequest.css";
 import React, { useState } from "react";
-import { Prev } from "../../UI/PrevLink/Prev";
-import { Stepper, StepLabel, Step, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+import { Stepper, StepLabel, Step, Button, TextField } from "@mui/material";
 // Хук из библиотеки react-hook-form для управления состоянием формы.
 import { useForm } from "react-hook-form";
 import { PostRqstScheme, postRequest } from "../../API/PostRqsts";
 import { steps } from "../../API/Data/Steps/Steps";
+
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
   const [activeStep, setActiveStep] = useState<number>(0);
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -31,47 +35,68 @@ const AddRequest: React.FC = () => {
     console.log(`postRequest:${postRequest} + `);
     postRequest(data);
   };
-  
+
   return (
     <section className="sections">
+      <div className="wrapper-prev">
+        <div className="container">
+          <Button
+            onClick={() => navigate(-1)}
+            variant="outlined"
+            sx={{ borderRadius: "50px" }}
+          >
+            Назад
+          </Button>
+        </div>
+      </div>
       <div className="container">
         <div className="addRequest__content km__content">
           {/* <Stepper>: Компонент для отображения шагового индикатора, который отображает прогресс.
            */}
           <h1>Создание</h1>
-          <Stepper activeStep={activeStep} alternativeLabel>
+          <Stepper
+            sx={{ display: "flex", justifyContent: "space-between" }}
+            activeStep={activeStep}
+            alternativeLabel
+          >
             {steps.map((step) => (
               <Step key={step}>
                 <StepLabel>{step}</StepLabel>
               </Step>
             ))}
           </Stepper>
+        </div>
+        <section className="details-request">
+          <div className="title">
+            <p>Детали заявки</p>
+          </div>
           <div className="form_content">
-            <form className="request_form ">
-              <input
+            <form className="request_form">
+              <TextField
                 {...register("orgname")}
                 type="text"
                 id="orgname"
-                className="inp request_inp"
+                className="request_inp"
                 placeholder="БО"
               />
-
-              <input
+              <TextField
                 {...register("accountant")}
                 type="text"
-                className="inp request_inp"
+                className="request_inp"
                 placeholder="Бухгалтер"
                 disabled={!dirtyFields.orgname}
               />
-              <input
+              <TextField
                 {...register("desc")}
                 type="text"
-                className="inp request_inp"
+                className="request_inp"
                 placeholder="Описание"
                 disabled={!dirtyFields.accountant}
               />
             </form>
             <Button
+              variant="contained"
+              sx={{ marginTop: "20px" }}
               type={`submit`}
               onClick={handleSubmit(onSubmit)}
               disabled={
@@ -83,10 +108,7 @@ const AddRequest: React.FC = () => {
               Отправить
             </Button>
           </div>
-        </div>
-        <Prev className="addrequest_prev" to={"#"}>
-          Назад
-        </Prev>
+        </section>
       </div>
     </section>
   );

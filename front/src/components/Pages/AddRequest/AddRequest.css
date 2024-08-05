@@ -1,20 +1,51 @@
 .addRequest__content {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  background-color: #fff;
 }
 
 .form_content {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.121);
+  justify-content: center;
+  align-items: center;
 }
+
 .request_form {
-	display: flex;
-	gap: 10px;
-	flex-wrap: wrap;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .request_inp {
-	max-width: calc((100% - 10px * 2) / 3);
+  /* max-width: calc((100% - 10px * 2) / 3); */
+  width: 100%;
+}
+
+.wrapper-prev {
+  width: 100%;
+  margin: 20px 0 20px 0;
+  padding: 15px 0;
+}
+
+.title {
+  background-color: #607d8b;
+  width: 100%;
+  padding: 15px 30px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+}
+
+.title p {
+  font-weight: bold;
+  color: #fff;
 }
