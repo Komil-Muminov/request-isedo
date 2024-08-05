@@ -100,14 +100,6 @@ export const Register: React.FC = () => {
             {/* <p className="km__info-text">* Блок с фильтрами</p>
 						<p className="km__info-text">* РЕЕСТР ---</p> */}
             <div className="panel-control">
-              <div className="filter">
-                <TextField label="ИНН*" />
-                <TextField />
-                <Button>
-                  <FormatListBulletedIcon />
-                  <p>СПИСОК</p>
-                </Button>
-              </div>
               <div className="filter-and-add">
                 <Button variant="contained" sx={{ display: "flex", gap: 1 }}>
                   <TuneIcon />
