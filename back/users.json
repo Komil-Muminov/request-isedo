@@ -10,7 +10,35 @@
     "role": "Так себе",
     "tax": "123456",
     "email": "kmuminov0104@gmail.com",
-    "reqIdentity": false,
-    "uIdentity": false
+    "reqIdentity": true,
+    "uIdentity": true
+  },
+  {
+    "id": 2,
+    "username": "ff",
+    "password": "123",
+    "uType": "bo",
+    "photo": "",
+    "fullName": "ff",
+    "number": "888",
+    "role": "ff",
+    "tax": "123",
+    "email": "fff",
+    "reqIdentity": true,
+    "uIdentity": true
+  },
+  {
+    "id": 3,
+    "username": "mm",
+    "password": "123",
+    "uType": "bo",
+    "photo": "",
+    "fullName": "mmm",
+    "number": "123",
+    "role": "mmm",
+    "tax": "123",
+    "email": "mmm",
+    "reqIdentity": true,
+    "uIdentity": true
   }
 ]
