@@ -27,24 +27,28 @@ const LazyIdentification = lazy(
 function App() {
 	return (
 		<>
-			<Navigation />
-			{/* Компонент Suspense оборачивает маршруты и показывает компонент Loader (обернутый в div), пока лениво загружаются страницы.
-			 */}
-			<Suspense fallback={<div>{<Loader />}</div>}>
-				<Routes>
-					{/* Путь "*" отображает LazyErrorPage для всех несуществующих маршрутов (страница ошибки 404).
-					 */}
-					<Route path="*" element={<LazyErrorPage />} />
-					<Route path="/" element={<LazyAuthPage />} />
-					<Route path="auth" element={<LazyAuthPage />} />
-					<Route path="account" element={<LazyAccount />} />
-					<Route path="uprofile" element={<LazyUserProfile />} />
-					<Route path="/identification" element={<LazyIdentification />} />
-					<Route path="addrequest" element={<LazyAddRequest />} />
-					{/* Надо сделать динамический запрос */}
-					<Route path="mfrqst" element={<LazyMfrqst />} />
-				</Routes>
-			</Suspense>
+			<header>
+				<Navigation />
+			</header>
+			<main className="main">
+				{/* Компонент Suspense оборачивает маршруты и показывает компонент Loader (обернутый в div), пока лениво загружаются страницы.
+				 */}
+				<Suspense fallback={<div>{<Loader />}</div>}>
+					<Routes>
+						{/* Путь "*" отображает LazyErrorPage для всех несуществующих маршрутов (страница ошибки 404).
+						 */}
+						<Route path="*" element={<LazyErrorPage />} />
+						<Route path="/" element={<LazyAuthPage />} />
+						<Route path="auth" element={<LazyAuthPage />} />
+						<Route path="account" element={<LazyAccount />} />
+						<Route path="uprofile" element={<LazyUserProfile />} />
+						<Route path="/identification" element={<LazyIdentification />} />
+						<Route path="addrequest" element={<LazyAddRequest />} />
+						{/* Надо сделать динамический запрос */}
+						<Route path="mfrqst" element={<LazyMfrqst />} />
+					</Routes>
+				</Suspense>
+			</main>
 		</>
 	);
 }
