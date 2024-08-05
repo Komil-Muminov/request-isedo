@@ -1,24 +1,34 @@
 export interface PostRqstScheme {
-	orgname: string;
-	accountant: string;
-	desc: string;
+  orgname: string;
+  accountant: string;
+  desc: string;
 }
 
 const token = localStorage.getItem("token");
 
+import { getRqsts } from "./GetRqsts";
+
 console.log(token);
 
-export const postRequest = async (data: PostRqstScheme): Promise<void> => {
-	return fetch(`http://localhost:3000/requests`, {
-		method: "POST",
-		headers: {
-			Authorization: `Bearer ${token}`,
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(data),
-	}).then((response) => {
-		if (!response.ok) {
-			throw new Error(`Error on postRqst`);
-		}
-	});
+// Нет useEffect-а, соответственно инвалидации не происходит и GetRqsts не обновляется, нужно форматировать под React Query
+export const postRequest = async (newData: PostRqstScheme): Promise<void> => {
+  try {
+    const response = await fetch(`http://localhost:3000/requests`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newData),
+    });
+    if (!response.ok) {
+      throw new Error(`Error on getRequest`);
+    }
+    const data = await response.json();
+    getRqsts();
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
 };
