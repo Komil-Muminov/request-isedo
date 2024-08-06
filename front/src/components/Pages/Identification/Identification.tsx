@@ -44,7 +44,10 @@ const Identification: React.FC = () => {
 			<div className="container">
 				<div className="wrapper-identification">
 					<h1 className="sections__title">Форма идентификации пользователя</h1>
-					<form className="form" onSubmit={handleSubmit(onSubmit)}>
+					<form
+						className="form uidentity_form"
+						onSubmit={handleSubmit(onSubmit)}
+					>
 						<InputAuth
 							register={register}
 							inputName="orgName"
