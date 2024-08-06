@@ -21,11 +21,14 @@ export const Register: React.FC = () => {
   );
 
   const [rqstsData, setRqstsData] = useState<GetRqsts[]>([]);
+
   useEffect(() => {
     if (getRqsQuery.status === "success") {
       setRqstsData(getRqsQuery.data);
     }
   }, [getRqsQuery.status === "success", rqstsData]);
+
+  console.log(getRqsts());
 
   const rows = rqstsData.map((e) => {
     return {
@@ -139,11 +142,11 @@ export const Register: React.FC = () => {
                   initialState={{
                     pagination: {
                       paginationModel: {
-                        pageSize: 5,
+                        pageSize: 10,
                       },
                     },
                   }}
-                  pageSizeOptions={[5]}
+                  pageSizeOptions={[10]}
                   checkboxSelection
                   disableRowSelectionOnClick
                   getRowClassName={() => "pointer-cursor"}

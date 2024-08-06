@@ -6,8 +6,6 @@ export interface PostRqstScheme {
 
 const token = localStorage.getItem("token");
 
-import { getRqsts } from "./GetRqsts";
-
 console.log(token);
 
 // Нет useEffect-а, соответственно инвалидации не происходит и GetRqsts не обновляется, нужно форматировать под React Query
@@ -24,9 +22,7 @@ export const postRequest = async (newData: PostRqstScheme): Promise<void> => {
     if (!response.ok) {
       throw new Error(`Error on getRequest`);
     }
-    const data = await response.json();
-    getRqsts();
-    return data;
+    return response.json();
   } catch (error) {
     console.error("Error:", error);
     throw error;

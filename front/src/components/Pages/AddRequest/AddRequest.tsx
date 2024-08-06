@@ -8,6 +8,9 @@ import { useForm } from "react-hook-form";
 import { PostRqstScheme, postRequest } from "../../API/PostRqsts";
 import { steps } from "../../API/Data/Steps/Steps";
 
+import { useMutation } from "@tanstack/react-query";
+import { queryClient } from "../../../queryClient";
+
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
   const [activeStep, setActiveStep] = useState<number>(0);
@@ -27,20 +30,29 @@ const AddRequest: React.FC = () => {
       orgname: "",
       accountant: "",
       desc: "",
-      uType: "",
+      rType: "Смена бухгалтера",
     },
   });
 
   // Функция для отслеживания изменений значений в реальном времени.
-  const uType = watch("rType");
+  const rType = watch("rType");
 
-  console.log(uType);
+  console.log(rType);
+
+  const postRqstsMutation = useMutation({
+    mutationFn: postRequest,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["requests"] });
+    },
+  });
 
   // Увеличивает номер текущего шага на 1.
   const onSubmit = (data: PostRqstScheme) => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     console.log(`postRequest:${postRequest} + `);
-    postRequest(data);
+    postRqstsMutation.mutate({
+      ...data,
+    });
   };
 
   return (
@@ -79,7 +91,7 @@ const AddRequest: React.FC = () => {
           </div>
           <div className="form_content">
             <form className="request_form">
-              <select {...register("rType")} className="req-select" id="uType">
+              <select {...register("rType")} className="req-select" id="rType">
                 <option className="reg_inp-option" value="">
                   Выберите тип заявки
                 </option>
@@ -90,7 +102,7 @@ const AddRequest: React.FC = () => {
                   Смена руководителя
                 </option>
               </select>
-              {uType === "Смена бухгалтера" && (
+              {rType === "Смена бухгалтера" && (
                 <>
                   <TextField
                     {...register("orgname")}
@@ -115,7 +127,7 @@ const AddRequest: React.FC = () => {
                   />
                 </>
               )}
-              {uType === "Смена руководителя" && (
+              {rType === "Смена руководителя" && (
                 <>
                   <TextField
                     {...register("orgname")}
