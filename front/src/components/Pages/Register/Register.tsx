@@ -28,8 +28,6 @@ export const Register: React.FC = () => {
     }
   }, [getRqsQuery.status === "success", rqstsData]);
 
-  console.log(getRqsts());
-
   const rows = rqstsData.map((e) => {
     return {
       id: e.id,

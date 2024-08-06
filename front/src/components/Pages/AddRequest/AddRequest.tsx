@@ -50,9 +50,7 @@ const AddRequest: React.FC = () => {
   const onSubmit = (data: PostRqstScheme) => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     console.log(`postRequest:${postRequest} + `);
-    postRqstsMutation.mutate({
-      ...data,
-    });
+    postRqstsMutation.mutate(data);
   };
 
   return (
