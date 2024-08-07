@@ -19,7 +19,7 @@ import { Settings } from "@mui/icons-material";
 import "./Profile.css";
 
 const Profile: React.FC = () => {
-	const [defaultName] = useState<string | undefined>("Кимки");
+	// const [defaultName] = useState<string | undefined>("Кимки");
 	const { getMe } = useAuth();
 	const uQuery = useQuery(
 		{
@@ -156,9 +156,7 @@ const Profile: React.FC = () => {
 											<span className="sections__desc uinfo_tex ">
 												Идентификация на рассмотрение:
 												<p className="uprofile_info-text">
-													{uQuery.data?.reqIdentity === false
-														? "false"
-														: "true"}
+													{uQuery.data?.uIdentity === false ? "false" : "true"}
 												</p>
 											</span>
 										</div>
