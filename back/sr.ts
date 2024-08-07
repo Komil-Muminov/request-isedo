@@ -12,9 +12,12 @@ const port = 3000;
 app.use(bodyParser.json());
 app.use(cors());
 
+// path — это встроенный модуль в Node.js, предназначенный для работы с путями файлов и директорий.
+// __dirname содержит абсолютный путь к каталогу, в котором расположен текущий исполняемый файл.
 const usersFilePath = path.join(__dirname, "users.json");
 const requestsFilePath = path.join(__dirname, "requests.json");
 
+// Модули fs (файловая система) стандартной библиотеки Node.js. Они используются для синхронного чтения и записи файлов.
 const readFromFile = (filePath: string): any[] => {
   try {
     const data = fs.readFileSync(filePath, "utf8");
@@ -33,12 +36,14 @@ const writeToFile = (filePath: string, data: any[]): void => {
   }
 };
 
+// multer.diskStorage — это функция из библиотеки multer, которая используется для управления загрузкой файлов в Node.js с использованием Express. Она позволяет вам настроить, куда и как будут сохраняться загруженные файлы на сервере. multer — это middleware для обработки multipart/form-data запросов, которые обычно используются для загрузки файлов. multer.diskStorage создает объект конфигурации хранилища для файлов, который позволяет вам указать, куда сохранять загруженные файлы и какие имена им давать.
 const storage = multer.diskStorage({
   destination: (
     req: Request,
     file: Express.Multer.File,
     cb: (error: Error | null, destination: string) => void
   ) => {
+    // Указывает директорию, куда будут сохраняться загруженные файлы
     cb(null, "uploads/");
   },
   filename: (
