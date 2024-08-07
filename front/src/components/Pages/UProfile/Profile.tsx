@@ -176,16 +176,6 @@ const Profile: React.FC = () => {
 										</Ulink>
 									</div>
 								</div>
-
-								{/* Доп блок для чего-то интересного */}
-								{/* <div className="uorg_content">
-									<div className="uorg_info">
-										<p className="uorg_text">ФИО: {uQuery.data.fullName}</p>
-										<p className="уorg_text">ФИО: {uQuery.data.fullName}</p>
-										<p className="уorg_text">ФИО: {uQuery.data.fullName}</p>
-										<p className="уorg_text">ФИО: {uQuery.data.fullName}</p>
-									</div>
-								</div> */}
 							</div>
 						</div>
 					</div>
