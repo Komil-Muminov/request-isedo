@@ -118,9 +118,6 @@ const Profile: React.FC = () => {
 												<Ulink to={item.url}>{item.label}</Ulink>
 											</AccordionDetails>
 										</Accordion>
-										/**
-										 * Гавно закончился
-										 */
 									))}
 								</div>
 								<div className="ucenter_info">
