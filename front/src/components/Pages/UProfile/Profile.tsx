@@ -82,7 +82,7 @@ const Profile: React.FC = () => {
 									<span className="sections__title uidentify_text">
 										Уважаемый{" "}
 										<span className="uidentify_name">{item.username}</span> вы
-										не идентифицированный
+										не идентифицированный.
 									</span>
 								))}
 								<div className="profile_avatar">
@@ -99,10 +99,6 @@ const Profile: React.FC = () => {
 							<div className="uInfo_content">
 								<div className="uLeft_content">
 									{Ulinks.map((item, id) => (
-										/**
-										 * Это говно надо как то поправить,
-										 *  чтоб не портит TSX разметку
-										 *  */
 										<Accordion
 											key={id}
 											expanded={!!expanded[id]}
