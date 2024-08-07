@@ -227,7 +227,7 @@ app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
 // Express ищет по всему маршруту /requests и когда находит, она понимает что это за запрос и имеет доступ к его response, то есть данным.
 app.post("/requests", authenticateJWT, (req: Request, res: Response) => {
 	// req это то что мы отправляет в параметр запроса, к примеру postRequest(data), data и есть req.
-	const { orgname, accountant, desc } = req.body;
+	const { orgname, accountant, desc, reqType } = req.body;
 
 	const users = readFromFile(usersFilePath);
 	const user = users.find((u: any) => u.id === (req as any).userId);
@@ -237,8 +237,7 @@ app.post("/requests", authenticateJWT, (req: Request, res: Response) => {
 	}
 
 	const id = generateUniqueId(readFromFile(requestsFilePath));
-	// Вы наверное спросите, почему мы получили данные, деструктузировали и обратно объединили в объект? Смысл состоит в том, что генерировать идентификатор, чтобы после добавить в объект, мы же могли сделать это более изъяшно, без деструктуризации, к примеру просто добавить id как ключ в req.body и уже этот req.body передать в аргумент writeToFile внути массива
-	const requestData = { id, orgname, accountant, desc };
+	const requestData = { id, orgname, accountant, desc, reqType };
 
 	writeToFile(requestsFilePath, [
 		...readFromFile(requestsFilePath),

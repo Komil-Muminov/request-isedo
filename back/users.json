@@ -12,5 +12,21 @@
     "department": "Отдел по разработке и внедрения информационных систем",
     "reqIdentity": false,
     "uIdentity": false
+  },
+  {
+    "id": 2,
+    "username": "ff",
+    "password": "123",
+    "uType": "bo",
+    "photo": "",
+    "fullName": "123",
+    "number": "123",
+    "role": "1231",
+    "tax": "123",
+    "email": "123",
+    "position": "",
+    "department": "",
+    "reqIdentity": false,
+    "uIdentity": false
   }
 ]
