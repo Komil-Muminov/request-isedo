@@ -2,7 +2,7 @@ export interface PostRqstScheme {
 	orgname: string;
 	accountant: string;
 	desc: string;
-	reqType;
+	reqType: string;
 }
 
 const token = localStorage.getItem("token");
