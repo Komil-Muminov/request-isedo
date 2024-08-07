@@ -26,5 +26,19 @@
     "email": "jsharipovamir@gmail.com",
     "reqIdentity": false,
     "uIdentity": false
+  },
+  {
+    "id": 3,
+    "username": "m.norov",
+    "password": "123",
+    "uType": "kvd",
+    "photo": "",
+    "fullName": "Норов Махмуд",
+    "role": "",
+    "email": "",
+    "position": "Начальник отдела",
+    "department": "Отдел по работе с клиентами",
+    "reqIdentity": false,
+    "uIdentity": false
   }
 ]
