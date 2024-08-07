@@ -48,8 +48,8 @@ export const getMeScheme = z.object({
   role: z.string(),
   tax: z.string(),
   email: z.coerce.string(),
-  position: z.string().min(1),
-  department: z.string().min(1),
+  position: z.string(),
+  department: z.string(),
   reqIdentity: z.boolean(),
   uIdentity: z.boolean(),
 });

@@ -51,7 +51,6 @@ const Registration = () => {
     regMutate.mutate();
   };
 
-  console.log();
 
   // switch (regMutate.status) {
   //   case "success":
