@@ -19,7 +19,7 @@ import { Settings } from "@mui/icons-material";
 import "./Profile.css";
 
 const Profile: React.FC = () => {
-	const [defaultName] = useState<string | undefined>("Кимки");
+	// const [defaultName] = useState<string | undefined>("Кимки");
 	const { getMe } = useAuth();
 	const uQuery = useQuery(
 		{
@@ -129,14 +129,23 @@ const Profile: React.FC = () => {
 										<div className="uinfo_text">
 											<span className="sections__desc uinfo_tex ">
 												ФИО:
-												<p>{uQuery.data?.username}</p>
+												<p>
+													{uQuery.data?.fullName
+														? uQuery.data?.fullName
+														: uQuery.data?.username}
+												</p>
 											</span>
 											<span className="sections__desc uinfo_tex">
 												Телефон:
-												<p>{uQuery.data?.number}</p>
+												<p>
+													{uQuery.data?.number ? uQuery.data?.number : "Пусто"}
+												</p>
 											</span>
 											<span className="sections__desc uinfo_tex ">
-												E-mail :<p>{uQuery.data?.email}</p>
+												E-mail :
+												<p>
+													{uQuery.data?.email ? uQuery.data?.email : "Пусто"}
+												</p>
 											</span>
 											<span className="sections__desc uinfo_tex ">
 												Место работы :<p>{uQuery.data?.tax}</p>
@@ -156,9 +165,7 @@ const Profile: React.FC = () => {
 											<span className="sections__desc uinfo_tex ">
 												Идентификация на рассмотрение:
 												<p className="uprofile_info-text">
-													{uQuery.data?.reqIdentity === false
-														? "false"
-														: "true"}
+													{uQuery.data?.uIdentity === false ? "false" : "true"}
 												</p>
 											</span>
 										</div>
@@ -169,16 +176,6 @@ const Profile: React.FC = () => {
 										</Ulink>
 									</div>
 								</div>
-
-								{/* Доп блок для чего-то интересного */}
-								{/* <div className="uorg_content">
-									<div className="uorg_info">
-										<p className="uorg_text">ФИО: {uQuery.data.fullName}</p>
-										<p className="уorg_text">ФИО: {uQuery.data.fullName}</p>
-										<p className="уorg_text">ФИО: {uQuery.data.fullName}</p>
-										<p className="уorg_text">ФИО: {uQuery.data.fullName}</p>
-									</div>
-								</div> */}
 							</div>
 						</div>
 					</div>
