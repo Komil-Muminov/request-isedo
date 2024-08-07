@@ -129,14 +129,23 @@ const Profile: React.FC = () => {
 										<div className="uinfo_text">
 											<span className="sections__desc uinfo_tex ">
 												ФИО:
-												<p>{uQuery.data?.username}</p>
+												<p>
+													{uQuery.data?.fullName
+														? uQuery.data?.fullName
+														: uQuery.data?.username}
+												</p>
 											</span>
 											<span className="sections__desc uinfo_tex">
 												Телефон:
-												<p>{uQuery.data?.number}</p>
+												<p>
+													{uQuery.data?.number ? uQuery.data?.number : "Пусто"}
+												</p>
 											</span>
 											<span className="sections__desc uinfo_tex ">
-												E-mail :<p>{uQuery.data?.email}</p>
+												E-mail :
+												<p>
+													{uQuery.data?.email ? uQuery.data?.email : "Пусто"}
+												</p>
 											</span>
 											<span className="sections__desc uinfo_tex ">
 												Место работы :<p>{uQuery.data?.tax}</p>

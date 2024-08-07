@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "username": "km",
+    "password": "123",
+    "uType": "kvd",
+    "photo": "",
+    "fullName": "Комил Муминов",
+    "role": "",
+    "email": "",
+    "position": "Так себе",
+    "department": "Отдел по разработке и внедрения информационных систем",
+    "reqIdentity": false,
+    "uIdentity": false
+  }
+]
