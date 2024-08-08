@@ -42,5 +42,21 @@
     "department": "Отдел по работе с клиентами",
     "reqIdentity": false,
     "uIdentity": false
+  },
+  {
+    "id": 4,
+    "username": "amir",
+    "password": "123",
+    "uType": "bo",
+    "photo": "",
+    "fullName": "Шарипов Амир Чамшедович",
+    "number": "880008671",
+    "role": "Специалист",
+    "tax": "250006444",
+    "email": "jsharipovamir@gmail.com",
+    "position": "",
+    "department": "",
+    "reqIdentity": false,
+    "uIdentity": false
   }
 ]
