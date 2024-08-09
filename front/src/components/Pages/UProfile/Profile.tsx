@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import defUphoto from "../../../assets/ErrorPage.jpg";
 import { ButtonKM } from "../../UI/Button/ButtonKM";
 import { Ulink } from "../../UI/Ulinks/Ulinks";
-import { UlinksProps } from "../../UI/Ulinks/ProfileLinks";
+import { UlinkScheme } from "../../UI/Ulinks/ProfileLinks";
 
 // MUI
 import Accordion from "@mui/material/Accordion";
@@ -19,7 +19,6 @@ import { Settings } from "@mui/icons-material";
 import "./Profile.css";
 
 const Profile: React.FC = () => {
-	// const [defaultName] = useState<string | undefined>("Кимки");
 	const { getMe } = useAuth();
 	const uQuery = useQuery(
 		{
@@ -29,160 +28,161 @@ const Profile: React.FC = () => {
 		queryClient,
 	);
 
-	switch (uQuery.status) {
-		case "pending":
-			return <Loader />;
-		case "error":
-			console.log(uQuery.error);
-	}
-
-	// uQuery data status==='success'
-	const [uinfo, setUinfo] = useState<GetMeType[] | undefined>([]);
-	if (uQuery.status === "success") {
-		try {
-			queryClient.invalidateQueries({ queryKey: ["users", "me"] });
-			console.log("invalidateQueries выполнена успешно");
-		} catch (error) {
-			console.error("Ошибка при выполнении invalidateQueries:", error);
-		}
-	}
-
-	/**
-	 * Accordion
-	 */
-
-	const [expanded, setExpanded] = useState<{ [key: number]: boolean }>({});
-
-	const handleAccordion = (id: number) => {
-		setExpanded((prevExpanded) => ({
-			...prevExpanded,
-			[id]: !prevExpanded[id],
-		}));
-	};
+	const [uinfo, setUinfo] = useState<GetMeType | null>(null);
+	const [expanded, setExpanded] = useState<number | false>(false);
 
 	useEffect(() => {
 		if (uQuery.status === "success") {
-			try {
-				queryClient.invalidateQueries({ queryKey: ["users", "me"] });
-			} catch (error) {
-				console.log(`Ошибка: ${error}`);
-			}
+			setUinfo(uQuery.data);
 		}
-		setUinfo([uQuery.data]);
-	}, [uQuery.status]);
-	if (uinfo) {
-		return (
-			<>
-				<section className="sections">
-					<div className="container">
-						<div className="profile_content km__content">
-							<div className="profile_header">
-								<div className="profile ustory_content">Блок "история"</div>
-								{uinfo?.map((item) => (
-									<span className="sections__title uidentify_text">
-										Уважаемый{" "}
-										<span className="uidentify_name">{item.username}</span> вы
-										не идентифицированный.
+	}, [uQuery.status, uQuery.data]);
+
+	const handleAccordion = (id: number) => {
+		setExpanded(expanded === id ? false : id);
+	};
+
+	if (uQuery.status === "pending") return <Loader />;
+	if (uQuery.status === "error") {
+		console.log(uQuery.error);
+		return null; // Optionally handle error case
+	}
+
+	const handleShowSubLinks = (subLinks: UlinkScheme[]) => {
+		return subLinks.map(({ url, label }, id) => (
+			<Ulink key={id} to={url}>
+				{label}
+			</Ulink>
+		));
+	};
+
+	return (
+		<section className="sections">
+			<div className="container">
+				<div className="profile_content km__content">
+					<div className="profile_header">
+						<div className="profile ustory_content">Блок "история"</div>
+						{uinfo && (
+							<span className="sections__title uidentify_text">
+								Уважаемый{" "}
+								<span className="uidentify_name">{uinfo.username}</span> вы не
+								идентифицированный.
+							</span>
+						)}
+						<div className="profile_avatar">
+							<Avatar className="nav_user-log" alt="user">
+								<img
+									style={{ maxWidth: "40px", minHeight: "40px" }}
+									src={uinfo?.photo ? uinfo.photo : defUphoto}
+									alt="user"
+								/>
+							</Avatar>
+						</div>
+					</div>
+					<div className="uInfo_content">
+						<div className="uLeft_content">
+							{UlinksProps.map(({ url, label, subLinks }, id) => (
+								<Accordion
+									key={id}
+									expanded={expanded === id}
+									onChange={() => handleAccordion(id)}
+								>
+									<AccordionSummary
+										expandIcon={<ExpandMoreIcon />}
+										aria-controls={`panel${id}-content`}
+										id={`panel${id}-header`}
+									>
+										<div className="uaccordion_label">
+											<Settings />
+											<p>{label}</p>
+										</div>
+									</AccordionSummary>
+									<AccordionDetails className="ulins_sublinks">
+										<Ulink to={url}>{label}</Ulink>
+										{subLinks && handleShowSubLinks(subLinks)}
+									</AccordionDetails>
+								</Accordion>
+							))}
+						</div>
+						<div className="ucenter_info">
+							<div className="user-info">
+								<div className="uprofile_photo">
+									<img src={defUphoto} alt="user" className="uphoto" />
+									<ButtonKM>Добавить фото</ButtonKM>
+								</div>
+								<div className="uinfo_text">
+									<span className="sections__desc uinfo_tex">
+										ФИО:
+										<p>{uinfo?.fullName ? uinfo.fullName : uinfo?.username}</p>
 									</span>
-								))}
-								<div className="profile_avatar">
-									{/* Надо сделать условный рендер */}
-									<Avatar className="nav_user-log" alt="user">
-										<img
-											style={{ maxWidth: "40px", minHeight: "40px" }}
-											src={uQuery.data?.photo ? uQuery.data?.photo : defUphoto}
-											alt=""
-										/>
-									</Avatar>
+									<span className="sections__desc uinfo_tex">
+										Телефон:
+										<p>{uinfo?.number ? uinfo.number : "Пусто"}</p>
+									</span>
+									<span className="sections__desc uinfo_tex">
+										E-mail:
+										<p>{uinfo?.email ? uinfo.email : "Пусто"}</p>
+									</span>
+									<span className="sections__desc uinfo_tex">
+										Место работы:
+										<p>{uinfo?.tax}</p>
+									</span>
+									<span className="sections__desc uinfo_tex">
+										Тип пользователя:
+										<p>{uinfo?.uType}</p>
+									</span>
+									<span className="sections__desc uinfo_tex">
+										Идентификация:
+										<p className="uprofile_info-text">
+											{uinfo?.uIdentity === false ? "false" : "true"}
+										</p>
+									</span>
+									<span className="sections__desc uinfo_tex">
+										Идентификация на рассмотрение:
+										<p className="uprofile_info-text">
+											{uinfo?.uIdentity === false ? "false" : "true"}
+										</p>
+									</span>
 								</div>
 							</div>
-							<div className="uInfo_content">
-								<div className="uLeft_content">
-									{UlinksProps.map((item, id) => (
-										<Accordion
-											key={id}
-											expanded={!!expanded[id]}
-											onChange={() => handleAccordion(id)}
-										>
-											<AccordionSummary
-												expandIcon={<ExpandMoreIcon />}
-												aria-controls={`panel${id}-content`}
-												id={`panel${id}-header`}
-											>
-												<div className="uaccordion_label">
-													<Settings />
-													<p>{item.label}</p>
-												</div>
-											</AccordionSummary>
-											<AccordionDetails>
-												<Ulink to={item.url}>{item.label}</Ulink>
-											</AccordionDetails>
-										</Accordion>
-									))}
-								</div>
-								<div className="ucenter_info">
-									<div className="user-info">
-										<div className="uprofile_photo">
-											<img src={defUphoto} alt="user" className="uphoto" />
-											<ButtonKM>Добавить фото</ButtonKM>
-										</div>
-										<div className="uinfo_text">
-											<span className="sections__desc uinfo_tex ">
-												ФИО:
-												<p>
-													{uQuery.data?.fullName
-														? uQuery.data?.fullName
-														: uQuery.data?.username}
-												</p>
-											</span>
-											<span className="sections__desc uinfo_tex">
-												Телефон:
-												<p>
-													{uQuery.data?.number ? uQuery.data?.number : "Пусто"}
-												</p>
-											</span>
-											<span className="sections__desc uinfo_tex ">
-												E-mail :
-												<p>
-													{uQuery.data?.email ? uQuery.data?.email : "Пусто"}
-												</p>
-											</span>
-											<span className="sections__desc uinfo_tex ">
-												Место работы :<p>{uQuery.data?.tax}</p>
-											</span>
-
-											<span className="sections__desc uinfo_tex ">
-												Тип пользователя:<p>{uQuery.data?.uType}</p>
-											</span>
-
-											<span className="sections__desc uinfo_tex ">
-												Идентификация:
-												<p className="uprofile_info-text">
-													{uQuery.data?.uIdentity === false ? "false" : "true"}
-												</p>
-											</span>
-
-											<span className="sections__desc uinfo_tex ">
-												Идентификация на рассмотрение:
-												<p className="uprofile_info-text">
-													{uQuery.data?.uIdentity === false ? "false" : "true"}
-												</p>
-											</span>
-										</div>
-									</div>
-									<div className="uright_info">
-										<Ulink className="btn uidentify_link" to="/identification">
-											Идентификация
-										</Ulink>
-									</div>
-								</div>
+							<div className="uright_info">
+								<Ulink className="btn uidentify_link" to="/identification">
+									Идентификация
+								</Ulink>
 							</div>
 						</div>
 					</div>
-				</section>
-			</>
-		);
-	}
+				</div>
+			</div>
+		</section>
+	);
 };
 
 export default Profile;
+
+export interface UlinkScheme {
+	url: string;
+	label: string;
+	subLinks?: UlinkScheme[]; // Optional property for nested links
+}
+
+export const UlinksProps: UlinkScheme[] = [
+	{
+		url: "/account",
+		label: "Главная страница",
+		subLinks: [
+			{
+				url: `/uNotify`,
+				label: `Уведомление`,
+			},
+		],
+	},
+	{
+		url: "/organization",
+		label: "Организация",
+	},
+	{
+		url: "/account",
+		label: "Модуль заявки",
+		subLinks: [{ url: "/uNotify", label: "Запросы на добавление организации" }],
+	},
+];

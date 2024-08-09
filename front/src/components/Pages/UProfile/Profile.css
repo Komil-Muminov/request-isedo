@@ -65,6 +65,11 @@
 	text-decoration: underline;
 }
 
+.ulins_sublinks {
+	display: flex;
+	flex-direction: column;
+}
+
 .MuiPaper-root {
 	box-shadow: none;
 }
