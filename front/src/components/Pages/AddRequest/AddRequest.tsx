@@ -49,7 +49,7 @@ const AddRequest: React.FC = () => {
 	const reqType = watch("reqType");
 
 	const postRqstsMutation = useMutation({
-		mutationFn: postRequest,
+		mutationFn: (data: PostRqstScheme) => postRequest(data),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["requests"] });
 		},
