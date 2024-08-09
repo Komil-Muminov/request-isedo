@@ -17,9 +17,9 @@ const Reqshower = () => {
 		<>
 			<h1 className="sections__title">Показать запросы работниками КВД</h1>
 			{/* Надо сделать верстку для данных*/}
-			{showReqQuery.data?.map((item) => (
-				<p>{item.orgname}</p>
-			))}
+			{showReqQuery.data &&
+				showReqQuery.data?.map((item) => <p>{item.orgname}</p>)}
+			{/* Надо сделать верстку для данных*/}
 		</>
 	);
 };
