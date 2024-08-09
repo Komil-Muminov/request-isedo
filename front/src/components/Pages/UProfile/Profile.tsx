@@ -161,7 +161,7 @@ export default Profile;
 export interface UlinkScheme {
 	url: string;
 	label: string;
-	subLinks?: UlinkScheme[]; // Optional property for nested links
+	subLinks?: UlinkScheme[];
 }
 
 export const UlinksProps: UlinkScheme[] = [
