@@ -1,5 +1,5 @@
 import "./AddRequest.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Stepper, StepLabel, Step, Button, TextField } from "@mui/material";
 
@@ -8,8 +8,10 @@ import { useForm } from "react-hook-form";
 import { PostRqstScheme, postRequest } from "../../API/PostRqsts";
 import { steps } from "../../API/Data/Steps/Steps";
 
-import { useMutation } from "@tanstack/react-query";
+// RTQ
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
+import { getMe, GetMeType } from "../../API/Hooks/useAuth";
 
 const AddRequest: React.FC = () => {
 	// Состояние текущего активного шага в индикаторе.
@@ -31,13 +33,11 @@ const AddRequest: React.FC = () => {
 			accountant: "",
 			desc: "",
 			reqType: "Смена бухгалтера",
+			reqStatus: steps[0],
 		},
 	});
-
 	// Функция для отслеживания изменений значений в реальном времени.
 	const reqType = watch("reqType");
-
-	console.log(reqType);
 
 	const postRqstsMutation = useMutation({
 		mutationFn: postRequest,
@@ -49,10 +49,27 @@ const AddRequest: React.FC = () => {
 	// Увеличивает номер текущего шага на 1.
 	const onSubmit = (data: PostRqstScheme) => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1);
-		console.log(`postRequest:${postRequest} + `);
-		postRqstsMutation.mutate(data);
+		const updateReqData = { ...data, reqStatus: steps[activeStep] };
+		console.log(`reqStatus: ${updateReqData.reqStatus}`);
+		postRqstsMutation.mutate(updateReqData);
 	};
 
+	// Надо получить данные про юзера и дать инпуту как дефаулт значение д
+	// const getMeQuery = useQuery(
+	// 	{
+	// 		queryFn: () => getMe(),
+	// 		queryKey: ["getU_addreq"],
+	// 	},
+	// 	queryClient,
+	// );
+
+	// const [getMe, setGetme] = useState<GetMeType[]>([]);
+	// useEffect(() => {
+	// 	if (getMeQuery.isSuccess) {
+	// 		setGetme((prev) => [...prev, getMeQuery.data.username]);
+	// 	}
+	// }, [getMeQuery.status]);
+	// console.log(getMe.map((item) => item.fullName));
 	return (
 		<section className="sections">
 			<div className="wrapper-prev">
@@ -136,6 +153,7 @@ const AddRequest: React.FC = () => {
 										type="text"
 										id="orgname"
 										className="request_inp"
+										// KM
 										placeholder="ФИО руководителя"
 									/>
 									<TextField

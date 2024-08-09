@@ -28,5 +28,21 @@
     "department": "",
     "reqIdentity": false,
     "uIdentity": false
+  },
+  {
+    "id": 3,
+    "username": "bo",
+    "password": "123",
+    "uType": "bo",
+    "photo": "",
+    "fullName": "123",
+    "number": "123",
+    "role": "123",
+    "tax": "123",
+    "email": "123",
+    "position": "",
+    "department": "",
+    "reqIdentity": false,
+    "uIdentity": false
   }
 ]

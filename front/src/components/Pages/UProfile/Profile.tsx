@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import defUphoto from "../../../assets/ErrorPage.jpg";
 import { ButtonKM } from "../../UI/Button/ButtonKM";
 import { Ulink } from "../../UI/Ulinks/Ulinks";
-import { Ulinks } from "../../UI/Ulinks/ProfileLinks";
+import { UlinksProps } from "../../UI/Ulinks/ProfileLinks";
 
 // MUI
 import Accordion from "@mui/material/Accordion";
@@ -98,7 +98,7 @@ const Profile: React.FC = () => {
 							</div>
 							<div className="uInfo_content">
 								<div className="uLeft_content">
-									{Ulinks.map((item, id) => (
+									{UlinksProps.map((item, id) => (
 										<Accordion
 											key={id}
 											expanded={!!expanded[id]}

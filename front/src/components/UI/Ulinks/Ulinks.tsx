@@ -6,12 +6,8 @@ export interface TProps {
 }
 export const Ulink: React.FC<TProps> = ({ to, className, children }) => {
 	return (
-		<ul className="links__list">
-			<li className="links_item">
-				<Link to={to} className={className}>
-					{children}
-				</Link>
-			</li>
-		</ul>
+		<Link to={to} className={className}>
+			{children ? children : `Ссылка`}
+		</Link>
 	);
 };
