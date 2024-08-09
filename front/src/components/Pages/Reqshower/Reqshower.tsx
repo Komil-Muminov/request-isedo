@@ -4,7 +4,6 @@ import { GetRqsts, getRqsts } from "../../API/GetRqsts";
 import { useEffect, useState } from "react";
 // import { useEffect } from "react";
 const Reqshower = () => {
-	const [reqshower, setReqShower] = useState<GetRqsts[]>([]);
 	const showReqQuery = useQuery(
 		{
 			queryFn: () => getRqsts(),
