@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import defUphoto from "../../../assets/ErrorPage.jpg";
 import { ButtonKM } from "../../UI/Button/ButtonKM";
 import { Ulink } from "../../UI/Ulinks/Ulinks";
-import { UlinkScheme } from "../../UI/Ulinks/ProfileLinks";
 
 // MUI
 import Accordion from "@mui/material/Accordion";
