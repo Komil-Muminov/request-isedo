@@ -233,7 +233,7 @@ app.post("/requests", authenticateJWT, (req: Request, res: Response) => {
 	const user = users.find((u: any) => u.id === (req as any).userId);
 
 	if (!user || user.uType !== "bo") {
-		return res.status(403).json({ error: "Недостаточно прав блять" });
+		return res.status(403).json({ error: "Недостаточно прав БЛЯТЬ" });
 	}
 
 	const id = generateUniqueId(readFromFile(requestsFilePath));

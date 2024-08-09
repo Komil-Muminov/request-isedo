@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "username": "km",
+    "password": "123",
+    "uType": "kvd",
+    "photo": "",
+    "fullName": "Комил Муминов",
+    "role": "",
+    "email": "",
+    "position": "Так себе",
+    "department": "Отедел по разработке и внедрения информационных систем",
+    "reqIdentity": false,
+    "uIdentity": false
+  },
+  {
+    "id": 2,
+    "username": "amir",
+    "password": "123",
+    "uType": "kvd",
+    "photo": "",
+    "fullName": "Амир Шарипов",
+    "role": "",
+    "email": "",
+    "position": "Специалист",
+    "department": "Отедел по разработке и внедрения информационных систем",
+    "reqIdentity": false,
+    "uIdentity": false
+  },
+  {
+    "id": 3,
+    "username": "bo",
+    "password": "123",
+    "uType": "bo",
+    "photo": "",
+    "fullName": "bo",
+    "number": "bo",
+    "role": "bo",
+    "tax": "bo",
+    "email": "bo",
+    "position": "",
+    "department": "",
+    "reqIdentity": false,
+    "uIdentity": false
+  }
+]
