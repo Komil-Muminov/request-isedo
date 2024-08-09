@@ -20,6 +20,9 @@ import { steps } from "../../API/Data/Steps/Steps";
 import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
 
+import TableRowAddRequest from "../../UI/TableRow/TableRowAddRequest";
+import { documentList } from "../../API/Data/Documents/DocumentList";
+
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
   const [activeStep, setActiveStep] = useState<number>(0);
@@ -61,6 +64,8 @@ const AddRequest: React.FC = () => {
     console.log(`postRequest:${postRequest} + `);
     postRqstsMutation.mutate(data);
   };
+
+  // Список документов для предоставление заявителем
 
   return (
     <section className="sections">
@@ -149,50 +154,15 @@ const AddRequest: React.FC = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td className="table-data">1</td>
-                          <td className="table-data">
-                            <input type="file" />
-                          </td>
-                          <td className="table-data">
-                            Доп.соглашение к договору
-                          </td>
-                          <td>
-                            <IconButton>
-                              <DeleteOutlineIcon sx={{ color: "red" }} />
-                            </IconButton>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="table-data">2</td>
-                          <td className="table-data">
-                            <input type="file" />
-                          </td>
-                          <td className="table-data">
-                            Дархост барои гирифтани дастраси ба низоми
-                            иттилоотии TFMIS
-                          </td>
-                          <td>
-                            <IconButton>
-                              <DeleteOutlineIcon sx={{ color: "red" }} />
-                            </IconButton>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="table-data">2</td>
-                          <td className="table-data">
-                            <input type="file" />
-                          </td>
-                          <td className="table-data">
-                            Дархост барои гирифтани дастраси ба низоми
-                            иттилоотии TFMIS
-                          </td>
-                          <td>
-                            <IconButton>
-                              <DeleteOutlineIcon sx={{ color: "red" }} />
-                            </IconButton>
-                          </td>
-                        </tr>
+                        {documentList.map((element: any, index: any) => {
+                          return (
+                            <TableRowAddRequest
+                              key={index}
+                              fileId={index + 1}
+                              typeName={element}
+                            />
+                          );
+                        })}
                       </tbody>
                     </table>
                   </div>
