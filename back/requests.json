@@ -1,17 +1,17 @@
 [
   {
     "id": 1,
-    "orgname": "ff",
-    "accountant": "ff",
-    "desc": "ff",
+    "orgname": "bo",
+    "accountant": "bo",
+    "desc": "bo",
     "reqType": "Смена бухгалтера",
     "reqStatus": "Оформление"
   },
   {
     "id": 2,
-    "orgname": "dsffsd",
-    "accountant": "fs",
-    "desc": "fsfs",
+    "orgname": "bo2",
+    "accountant": "bo2",
+    "desc": "bo2",
     "reqType": "Смена бухгалтера",
     "reqStatus": "Оформление"
   }
