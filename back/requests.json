@@ -1,17 +1,14 @@
 [
-  {
-    "id": 1,
-<<<<<<< HEAD
-    "orgname": "ff",
-    "accountant": "ff",
-    "desc": "ff",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-=======
-    "orgname": "1",
-    "accountant": "2",
-    "desc": "3",
-    "reqType": "Смена бухгалтера"
->>>>>>> d33ea301d1d7f363f61d441e7620f2b739e8e3af
-  }
+	{
+		"id": 1,
+		"orgname": "ff",
+		"accountant": "ff",
+		"desc": "ff",
+		"reqType": "Смена бухгалтера",
+		"reqStatus": "Оформление",
+		"orgname": "1",
+		"accountant": "2",
+		"desc": "3",
+		"reqType": "Смена бухгалтера"
+	}
 ]
