@@ -227,17 +227,19 @@ app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
 // Express ищет по всему маршруту /requests и когда находит, она понимает что это за запрос и имеет доступ к его response, то есть данным.
 app.post("/requests", authenticateJWT, (req: Request, res: Response) => {
 	// req это то что мы отправляет в параметр запроса, к примеру postRequest(data), data и есть req.
-	const { orgname, accountant, desc, reqType } = req.body;
+	const { orgname, accountant, desc, reqType, reqStatus } = req.body;
 
 	const users = readFromFile(usersFilePath);
 	const user = users.find((u: any) => u.id === (req as any).userId);
 
 	if (!user || user.uType !== "bo") {
-		return res.status(403).json({ error: "Недостаточно прав" });
+		return res.status(403).json({
+			error: `Вы не БО и не можете отправить заявку. Ваш тип: ${user.uType}`,
+		});
 	}
 
 	const id = generateUniqueId(readFromFile(requestsFilePath));
-	const requestData = { id, orgname, accountant, desc, reqType };
+	const requestData = { id, orgname, accountant, desc, reqType, reqStatus };
 
 	writeToFile(requestsFilePath, [
 		...readFromFile(requestsFilePath),
@@ -251,8 +253,8 @@ app.get("/requests", authenticateJWT, (req: Request, res: Response) => {
 	const users = readFromFile(usersFilePath);
 	const user = users.find((u: any) => u.id === (req as any).userId);
 
-	if (!user || user.uType !== "bo") {
-		return res.status(403).json({ error: "Недостаточно прав" });
+	if (!user || (user.uType !== "bo" && user.uType !== "kvd")) {
+		return res.status(403).json({ error: "Недостаточно прав БЛЯТЬ" });
 	}
 
 	try {

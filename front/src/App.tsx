@@ -23,6 +23,10 @@ const LazyIdentification = lazy(
 	() => import("./components/Pages/Identification/Identification"),
 );
 
+const LazyUnotify = lazy(
+	() => import("./components/Pages/Reqshower/Reqshower"),
+);
+
 /* Надо сделать динамический запрос */
 function App() {
 	return (
@@ -40,10 +44,11 @@ function App() {
 						<Route path="*" element={<LazyErrorPage />} />
 						<Route path="/" element={<LazyAuthPage />} />
 						<Route path="auth" element={<LazyAuthPage />} />
-						<Route path="account" element={<LazyAccount />} />
+						<Route path="/account" element={<LazyAccount />} />
 						<Route path="uprofile" element={<LazyUserProfile />} />
 						<Route path="/identification" element={<LazyIdentification />} />
 						<Route path="addrequest" element={<LazyAddRequest />} />
+						<Route path="/uNotify" element={<LazyUnotify />} />
 						{/* Надо сделать динамический запрос */}
 						<Route path="mfrqst" element={<LazyMfrqst />} />
 					</Routes>
