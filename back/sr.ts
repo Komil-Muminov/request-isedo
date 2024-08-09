@@ -233,7 +233,9 @@ app.post("/requests", authenticateJWT, (req: Request, res: Response) => {
 	const user = users.find((u: any) => u.id === (req as any).userId);
 
 	if (!user || user.uType !== "bo") {
-		return res.status(403).json({ error: "Недостаточно прав БЛЯТЬ" });
+		return res.status(403).json({
+			error: `Вы не БО и не можете отправить заявку. Ваш тип: ${user.uType}`,
+		});
 	}
 
 	const id = generateUniqueId(readFromFile(requestsFilePath));
