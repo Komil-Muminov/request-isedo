@@ -30,45 +30,48 @@ const Identification: React.FC = () => {
 
 	return (
 		<>
-			<form className="form uidentity_form" onSubmit={handleSubmit(onSubmit)}>
-				<InputAuth
-					register={register}
-					inputName="orgName"
-					inputPlaceholder="Наименование организации"
-					requiredMessage="Заполните поле 'Наименование организации'"
-					minLengthMessage="Наименование организации должно содержать минимум 5 символов"
-					inputType="text"
-					kind="inp uidentity_inp"
-				/>
-				<InputAuth
-					register={register}
-					inputName="departmentName"
-					inputPlaceholder="Наименование Отдела"
-					requiredMessage="Заполните поле 'Наименование Отдела'"
-					minLengthMessage="Наименование Отдела должно содержать минимум 5 символов"
-					inputType="text"
-					kind="inp uidentity_inp"
-				/>
-				<InputAuth
-					register={register}
-					inputName="post"
-					inputPlaceholder="Должность"
-					requiredMessage="Заполните поле 'Должность'"
-					minLengthMessage="Должность должна содержать минимум 5 символов"
-					inputType="text"
-					kind="inp uidentity_inp"
-				/>
-				<InputAuth
-					register={register}
-					inputName="file"
-					inputPlaceholder="Загрузите файл"
-					requiredMessage="Загрузите файл"
-					minLengthMessage="Загрузите файл"
-					inputType="file"
-					kind="inp uidentity_inp"
-				/>
+			<div className="uidentity_content">
+				<h2 className="sections__title udentity_title">Форма идентификации</h2>
+				<form className="form uidentity_form" onSubmit={handleSubmit(onSubmit)}>
+					<InputAuth
+						register={register}
+						inputName="orgName"
+						inputPlaceholder="Наименование организации"
+						requiredMessage="Заполните поле 'Наименование организации'"
+						minLengthMessage="Наименование организации должно содержать минимум 5 символов"
+						inputType="text"
+						kind="inp uidentity_inp"
+					/>
+					<InputAuth
+						register={register}
+						inputName="departmentName"
+						inputPlaceholder="Наименование Отдела"
+						requiredMessage="Заполните поле 'Наименование Отдела'"
+						minLengthMessage="Наименование Отдела должно содержать минимум 5 символов"
+						inputType="text"
+						kind="inp uidentity_inp"
+					/>
+					<InputAuth
+						register={register}
+						inputName="post"
+						inputPlaceholder="Должность"
+						requiredMessage="Заполните поле 'Должность'"
+						minLengthMessage="Должность должна содержать минимум 5 символов"
+						inputType="text"
+						kind="inp uidentity_inp"
+					/>
+					<InputAuth
+						register={register}
+						inputName="file"
+						inputPlaceholder="Загрузите файл"
+						requiredMessage="Загрузите файл"
+						minLengthMessage="Загрузите файл"
+						inputType="file"
+						kind="inp uidentity_inp"
+					/>
+				</form>
 				<Button type="submit">Отправить</Button>
-			</form>
+			</div>
 		</>
 
 		// <section className="sections">

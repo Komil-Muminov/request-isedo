@@ -1,4 +1,4 @@
-.wrapper-prev {
+/* .wrapper-prev {
 	width: 100%;
 	background-color: #fff;
 	margin: 20px 0 20px 0;
@@ -13,18 +13,24 @@
 .wrapper-identification h1 {
 	font-weight: 400;
 	text-align: center;
-}
+} */
 
-.uidentity_form {
+.uidentity_content {
 	display: flex;
 	flex-direction: column;
-	/* justify-content: center; */
-	/* align-items: center; */
+	justify-content: center;
+	align-items: center;
+}
+.uidentity_form {
+	display: flex;
+	/* flex-direction: column; */
+	justify-content: center;
+	align-items: center;
 	gap: 10px;
+	flex-wrap: wrap;
 	padding: 20px;
 }
 
 .uidentity_inp {
-	display: flex;
-	width: 100%;
+	width: calc((100% - 10px) / 2);
 }
