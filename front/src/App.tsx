@@ -52,8 +52,8 @@ function App() {
 						<Route path="/uprofile/*" element={<LazyUserProfile />}>
 							<Route path="unotify" element={<LazyUnotify />} />
 							<Route path="udetails" element={<LazyUdetails />} />
+							<Route path="uidentity" element={<LazyIdentification />} />
 						</Route>
-						<Route path="/identification" element={<LazyIdentification />} />
 						<Route path="/addrequest" element={<LazyAddRequest />} />
 						{/* <Route path="/uNotify" element={<LazyUnotify />} /> */}
 						<Route path="/mfrqst" element={<LazyMfrqst />} />

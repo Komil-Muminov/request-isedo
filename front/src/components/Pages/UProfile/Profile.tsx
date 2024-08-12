@@ -5,7 +5,6 @@ import { useAuth, GetMeType } from "../../API/Hooks/useAuth";
 import { Loader } from "../../UI/Loader/Loader";
 import { useEffect, useState } from "react";
 import defUphoto from "../../../assets/ErrorPage.jpg";
-import { ButtonKM } from "../../UI/Button/ButtonKM";
 import { Ulink } from "../../UI/Ulinks/Ulinks";
 import { Outlet } from "react-router-dom";
 
@@ -77,7 +76,6 @@ const Profile: React.FC = () => {
 									alt="user"
 								/>
 							</Avatar>
-							1111
 						</div>
 					</div>
 					<div className="uInfo_content">

@@ -86,7 +86,7 @@ const Udetails = () => {
 				</div>
 			</div>
 			<div className="uright_info">
-				<Ulink className="btn uidentify_link" to="/identification">
+				<Ulink className="btn uidentify_link" to="/uProfile/uIdentity">
 					Идентификация
 				</Ulink>
 			</div>

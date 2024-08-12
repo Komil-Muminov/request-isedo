@@ -18,8 +18,13 @@
 .uidentity_form {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	/* justify-content: center; */
+	/* align-items: center; */
 	gap: 10px;
 	padding: 20px;
+}
+
+.uidentity_inp {
+	display: flex;
+	width: 100%;
 }
