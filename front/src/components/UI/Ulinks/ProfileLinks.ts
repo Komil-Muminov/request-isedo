@@ -10,7 +10,7 @@ export const UlinksProps: UlinkScheme[] = [
 		label: "Главная страница",
 		subLinks: [
 			{
-				url: `udetails`,
+				url: `unotify`,
 				label: `Уведомление`,
 			},
 
