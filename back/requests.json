@@ -1,81 +1,9 @@
 [
   {
     "id": 1,
-    "orgname": "bo",
-    "accountant": "bo",
-    "desc": "bo",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-  },
-  {
-    "id": 2,
-    "orgname": "bo2",
-    "accountant": "bo2",
-    "desc": "bo2",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-  },
-  {
-    "id": 3,
-    "orgname": "gfd",
-    "accountant": "gfd",
-    "desc": "fgd",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-  },
-  {
-    "id": 4,
-    "orgname": "fdsfs",
-    "accountant": "fds",
-    "desc": "dfs",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-  },
-  {
-    "id": 5,
     "orgname": "123",
     "accountant": "123",
     "desc": "123",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-  },
-  {
-    "id": 6,
-    "orgname": "fdsf",
-    "accountant": "sd",
-    "desc": "dsfdsf",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-  },
-  {
-    "id": 7,
-    "orgname": "12423",
-    "accountant": "423",
-    "desc": "423432",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-  },
-  {
-    "id": 8,
-    "orgname": "dsaads",
-    "accountant": "sdadas",
-    "desc": "dsasda",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-  },
-  {
-    "id": 9,
-    "orgname": "dsaads",
-    "accountant": "sdadas",
-    "desc": "dsasda",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Регистрация"
-  },
-  {
-    "id": 10,
-    "orgname": "ff",
-    "accountant": "ff",
-    "desc": "ff",
     "reqType": "Смена бухгалтера",
     "reqStatus": "Оформление"
   }

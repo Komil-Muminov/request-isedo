@@ -18,7 +18,19 @@ const Reqshower = () => {
 				<h1 className="sections__title">Показать запросы работниками КВД</h1>
 				{/* Надо сделать верстку для данных*/}
 				{showReqQuery.data &&
-					showReqQuery.data?.map((item) => <p className="req_text"> Сведение: {item.orgname}</p>)}
+					showReqQuery.data?.map((item) => (
+						<div>
+							<p className="req_text">
+								{" "}
+								Наименование организации: {item.orgname}
+							</p>
+
+							<p className="req_text"> ФИО Бухгалтера: {item.accountant}</p>
+							<p className="req_text"> Описание заявки: {item.desc}</p>
+							<p className="req_text"> Cтатус заявки: {item.reqStatus}</p>
+							<p className="req_text"> Cтатус заявки: {item.reqType}</p>
+						</div>
+					))}
 				{/* Надо сделать верстку для данных*/}
 				<Outlet />
 			</div>

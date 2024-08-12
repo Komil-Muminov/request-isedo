@@ -26,7 +26,7 @@ export const UlinksProps: UlinkScheme[] = [
 	},
 	{
 		url: "/account",
-		label: "Модуль заявки",
+		label: "Реестр заявок",
 		subLinks: [{ url: "unotify", label: "Запросы на добавление организации" }],
 	},
 ];

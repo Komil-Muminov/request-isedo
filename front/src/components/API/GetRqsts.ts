@@ -6,6 +6,7 @@ export const GetRqstsScheme = z.object({
 	orgname: z.string(),
 	accountant: z.string(),
 	desc: z.string(),
+	reqType: z.string(),
 	reqStatus: z.string(),
 });
 
