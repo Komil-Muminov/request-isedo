@@ -228,7 +228,10 @@ export const Navigation: React.FC = () => {
 											open={Boolean(anchorElUser)}
 											onClose={handleCloseUserMenu}
 										>
-											<Link to="uprofile" className="nav__log-account">
+											<Link
+												to="/uprofile/udetails"
+												className="nav__log-account"
+											>
 												<MenuItem
 													onClick={handleCloseUserMenu}
 													sx={{
