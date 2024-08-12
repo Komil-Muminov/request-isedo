@@ -26,9 +26,9 @@ const Reqshower = () => {
 							</p>
 
 							<p className="req_text"> ФИО Бухгалтера: {item.accountant}</p>
-							<p className="req_text"> Описание заявки: {item.desc}</p>
-							<p className="req_text"> Cтатус заявки: {item.reqStatus}</p>
+							<p className="req_text"> Тип заявки: {item.reqStatus}</p>
 							<p className="req_text"> Cтатус заявки: {item.reqType}</p>
+							<p className="req_text"> Описание заявки: {item.desc}</p>
 						</div>
 					))}
 				{/* Надо сделать верстку для данных*/}
