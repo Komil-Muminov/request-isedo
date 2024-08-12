@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import defUphoto from "../../../assets/ErrorPage.jpg";
 import { ButtonKM } from "../../UI/Button/ButtonKM";
 import { Ulink } from "../../UI/Ulinks/Ulinks";
+import { Outlet } from "react-router-dom";
 
 // MUI
 import Accordion from "@mui/material/Accordion";
@@ -16,6 +17,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Settings } from "@mui/icons-material";
 // /MUI
 import "./Profile.css";
+import { UlinkScheme, UlinksProps } from "../../UI/Ulinks/ProfileLinks";
 
 const Profile: React.FC = () => {
 	const { getMe } = useAuth();
@@ -43,7 +45,7 @@ const Profile: React.FC = () => {
 	if (uQuery.status === "pending") return <Loader />;
 	if (uQuery.status === "error") {
 		console.log(uQuery.error);
-		return null; // Optionally handle error case
+		return null;
 	}
 
 	const handleShowSubLinks = (subLinks: UlinkScheme[]) => {
@@ -109,6 +111,7 @@ const Profile: React.FC = () => {
 									<ButtonKM>Добавить фото</ButtonKM>
 								</div>
 								<div className="uinfo_text">
+									<Outlet />
 									<span className="sections__desc uinfo_tex">
 										ФИО:
 										<p>{uinfo?.fullName ? uinfo.fullName : uinfo?.username}</p>
@@ -157,31 +160,3 @@ const Profile: React.FC = () => {
 };
 
 export default Profile;
-
-export interface UlinkScheme {
-	url: string;
-	label: string;
-	subLinks?: UlinkScheme[];
-}
-
-export const UlinksProps: UlinkScheme[] = [
-	{
-		url: "/account",
-		label: "Главная страница",
-		subLinks: [
-			{
-				url: `/uNotify`,
-				label: `Уведомление`,
-			},
-		],
-	},
-	{
-		url: "/organization",
-		label: "Организация",
-	},
-	{
-		url: "/account",
-		label: "Модуль заявки",
-		subLinks: [{ url: "/uNotify", label: "Запросы на добавление организации" }],
-	},
-];

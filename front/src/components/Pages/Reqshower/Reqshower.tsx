@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
 import { GetRqsts, getRqsts } from "../../API/GetRqsts";
-import { useEffect, useState } from "react";
+import { Outlet } from "react-router-dom";
+// import { useEffect, useState } from "react";
 // import { useEffect } from "react";
 const Reqshower = () => {
 	const showReqQuery = useQuery(
@@ -19,6 +20,8 @@ const Reqshower = () => {
 			{showReqQuery.data &&
 				showReqQuery.data?.map((item) => <p>{item.orgname}</p>)}
 			{/* Надо сделать верстку для данных*/}
+			<Outlet />
+			sdasadasdsadsa
 		</>
 	);
 };

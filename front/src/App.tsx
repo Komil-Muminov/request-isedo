@@ -45,12 +45,13 @@ function App() {
 						<Route path="/" element={<LazyAuthPage />} />
 						<Route path="auth" element={<LazyAuthPage />} />
 						<Route path="/account" element={<LazyAccount />} />
-						<Route path="uprofile" element={<LazyUserProfile />} />
+						<Route path="/uprofile/*" element={<LazyUserProfile />}>
+							<Route path="unotify" element={<LazyUnotify />} />
+						</Route>
 						<Route path="/identification" element={<LazyIdentification />} />
-						<Route path="addrequest" element={<LazyAddRequest />} />
-						<Route path="/uNotify" element={<LazyUnotify />} />
-						{/* Надо сделать динамический запрос */}
-						<Route path="mfrqst" element={<LazyMfrqst />} />
+						<Route path="/addrequest" element={<LazyAddRequest />} />
+						{/* <Route path="/uNotify" element={<LazyUnotify />} /> */}
+						<Route path="/mfrqst" element={<LazyMfrqst />} />
 					</Routes>
 				</Suspense>
 			</main>
