@@ -21,7 +21,6 @@ const Reqshower = () => {
 				showReqQuery.data?.map((item) => <p>{item.orgname}</p>)}
 			{/* Надо сделать верстку для данных*/}
 			<Outlet />
-			sdasadasdsadsa
 		</>
 	);
 };

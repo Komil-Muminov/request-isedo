@@ -10,8 +10,13 @@ export const UlinksProps: UlinkScheme[] = [
 		label: "Главная страница",
 		subLinks: [
 			{
-				url: `uNotify`,
+				url: `udetails`,
 				label: `Уведомление`,
+			},
+
+			{
+				url: "udetails",
+				label: "Информация о пользовател",
 			},
 		],
 	},
@@ -22,8 +27,6 @@ export const UlinksProps: UlinkScheme[] = [
 	{
 		url: "/account",
 		label: "Модуль заявки",
-		subLinks: [
-			{ url: "/uprofile/unotify", label: "Запросы на добавление организации" },
-		],
+		subLinks: [{ url: "unotify", label: "Запросы на добавление организации" }],
 	},
 ];

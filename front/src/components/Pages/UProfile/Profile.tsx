@@ -77,6 +77,57 @@ const Profile: React.FC = () => {
 									alt="user"
 								/>
 							</Avatar>
+							1111
+						</div>
+					</div>
+					<div className="uInfo_content">
+						<div className="uLeft_content">
+							{UlinksProps.map(({ url, label, subLinks }, id) => (
+								<Accordion
+									key={id}
+									expanded={expanded === id}
+									onChange={() => handleAccordion(id)}
+								>
+									<AccordionSummary
+										expandIcon={<ExpandMoreIcon />}
+										aria-controls={`panel${id}-content`}
+										id={`panel${id}-header`}
+									>
+										<div className="uaccordion_label">
+											<Settings />
+											<p>{label}</p>
+										</div>
+									</AccordionSummary>
+									<AccordionDetails className="ulins_sublinks">
+										<Ulink to={url}>{label}</Ulink>
+										{subLinks && handleShowSubLinks(subLinks)}
+									</AccordionDetails>
+								</Accordion>
+							))}
+						</div>
+						<div className="ucenter_info">
+							<Outlet />
+						</div>
+					</div>
+
+					{/* <div className="profile_content km__content">
+					<div className="profile_header">
+						<div className="profile ustory_content">Блок "история"</div>
+						{uinfo && (
+							<span className="sections__title uidentify_text">
+								Уважаемый{" "}
+								<span className="uidentify_name">{uinfo.username}</span> вы не
+								идентифицированный.
+							</span>
+						)}
+						<div className="profile_avatar">
+							<Avatar className="nav_user-log" alt="user">
+								<img
+									style={{ maxWidth: "40px", minHeight: "40px" }}
+									src={uinfo?.photo ? uinfo.photo : defUphoto}
+									alt="user"
+								/>
+							</Avatar>
 						</div>
 					</div>
 					<div className="uInfo_content">
@@ -153,6 +204,7 @@ const Profile: React.FC = () => {
 							</div>
 						</div>
 					</div>
+				</div> */}
 				</div>
 			</div>
 		</section>

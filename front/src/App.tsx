@@ -27,6 +27,10 @@ const LazyUnotify = lazy(
 	() => import("./components/Pages/Reqshower/Reqshower"),
 );
 
+const LazyUdetails = lazy(
+	() => import("./components/Pages/UProfile/Udetails/Udetails"),
+);
+
 /* Надо сделать динамический запрос */
 function App() {
 	return (
@@ -47,6 +51,7 @@ function App() {
 						<Route path="/account" element={<LazyAccount />} />
 						<Route path="/uprofile/*" element={<LazyUserProfile />}>
 							<Route path="unotify" element={<LazyUnotify />} />
+							<Route path="udetails" element={<LazyUdetails />} />
 						</Route>
 						<Route path="/identification" element={<LazyIdentification />} />
 						<Route path="/addrequest" element={<LazyAddRequest />} />
