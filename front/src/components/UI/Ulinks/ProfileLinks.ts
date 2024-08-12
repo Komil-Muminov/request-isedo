@@ -16,7 +16,7 @@ export const UlinksProps: UlinkScheme[] = [
 
 			{
 				url: "udetails",
-				label: "Информация о пользовател",
+				label: "Информация о пользователе",
 			},
 		],
 	},
