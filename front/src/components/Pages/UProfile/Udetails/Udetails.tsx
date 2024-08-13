@@ -56,7 +56,7 @@ const Udetails = () => {
 					<p className="user-details_title">
 						{uinfo?.uIdentity
 							? `Подтвержденная учетная запись`
-							: `Не подтвержденная учетнаять запись`}
+							: `Не подтвержденная учетная запись`}
 					</p>
 					<div className="user-details-content">
 						<div className="user-details_photo">
