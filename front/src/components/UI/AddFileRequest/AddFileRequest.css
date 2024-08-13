@@ -1,0 +1,64 @@
+/* INPUT FILE EFFECT */
+
+/* Скрываем стандартный input[type="file"] */
+.file-input-wrapper input[type="file"] {
+  display: none;
+}
+
+/* Стили для label */
+.custom-file-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 10px; /* Расстояние между кругом и текстом */
+}
+
+/* Стили для круглого элемента */
+.custom-file-input {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #2c3f52;
+  text-align: center;
+  transition: all 0.25s cubic-bezier(0.75, 0.01, 0.48, 2);
+}
+
+.custom-file-input:before,
+.custom-file-input:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  transition: all 0.25s ease-in-out;
+}
+
+.custom-file-input:before {
+  background-color: #2c3f52;
+  box-shadow: 0 0 0 1px #2c3f52;
+}
+
+.custom-file-input:after {
+  background-color: #15202a;
+  transform: scale(0, 0);
+}
+
+/* Стили для текста */
+.file-input-text {
+  color: #000; /* Цвет текста */
+  transition: color 0.25s ease-in-out; /* Плавный переход для текста */
+}
+
+/* Эффект при наведении на label */
+.custom-file-label:hover .custom-file-input:after {
+  transform: scale(0.75, 0.75);
+}
+
+.custom-file-label:hover .custom-file-input:before {
+  background-color: #85ff7a;
+  box-shadow: 0 0 0 1px #85ff7a;
+}

@@ -21,6 +21,7 @@ import { Outlet, Settings } from "@mui/icons-material";
 import { ButtonKM } from "../../../UI/Button/ButtonKM";
 import UserInfoList from "../../../UI/UserInfoList/UserInfoList";
 import { Link } from "react-router-dom";
+import AddFileRequest from "../../../UI/AddFileRequest/AddFileRequest";
 
 const Udetails = () => {
   const { getMe } = useAuth();
@@ -62,7 +63,7 @@ const Udetails = () => {
             <div className="user-details_photo">
               <img src={defUphoto} alt="" className="photo" />
               <div className="file-service-photo">
-                <input type="file" />
+                <AddFileRequest />
               </div>
             </div>
             <div className="user-details-text">

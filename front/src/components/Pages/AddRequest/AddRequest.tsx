@@ -21,6 +21,7 @@ import { steps } from "../../API/Data/Steps/Steps";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
 import { getMe, GetMeType } from "../../API/Hooks/useAuth";
+import AddFileRequest from "../../UI/AddFileRequest/AddFileRequest";
 
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
@@ -169,7 +170,7 @@ const AddRequest: React.FC = () => {
                         <tr>
                           <td className="table-data">1</td>
                           <td className="table-data">
-                            <input type="file" />
+                            <AddFileRequest />
                           </td>
                           <td className="table-data">
                             Доп.соглашение к договору
@@ -183,7 +184,7 @@ const AddRequest: React.FC = () => {
                         <tr>
                           <td className="table-data">2</td>
                           <td className="table-data">
-                            <input type="file" />
+                            <AddFileRequest />
                           </td>
                           <td className="table-data">
                             Дархост барои гирифтани дастраси ба низоми
@@ -198,7 +199,7 @@ const AddRequest: React.FC = () => {
                         <tr>
                           <td className="table-data">2</td>
                           <td className="table-data">
-                            <input type="file" />
+                            <AddFileRequest />
                           </td>
                           <td className="table-data">
                             Дархост барои гирифтани дастраси ба низоми
@@ -249,7 +250,20 @@ const AddRequest: React.FC = () => {
                 </>
               )}
             </form>
-            <Button
+            <button
+              className="pushable"
+              onClick={handleSubmit(onSubmit)}
+              disabled={
+                !dirtyFields.accountant ||
+                !dirtyFields.orgname ||
+                !dirtyFields.desc
+              }
+            >
+              <span className="shadow"></span>
+              <span className="edge"></span>
+              <span className="front">Отправить</span>
+            </button>
+            {/* <Button
               variant="contained"
               sx={{ marginTop: "20px" }}
               type={`submit`}
@@ -261,7 +275,7 @@ const AddRequest: React.FC = () => {
               }
             >
               Отправить
-            </Button>
+            </Button> */}
           </div>
         </section>
       </div>
