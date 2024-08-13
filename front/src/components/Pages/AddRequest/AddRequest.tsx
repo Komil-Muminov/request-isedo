@@ -128,7 +128,6 @@ const AddRequest: React.FC = () => {
                   <Select.Root
                     defaultValue={field.value}
                     onValueChange={field.onChange}
-                    id="rType"
                   >
                     <Select.Trigger color="gray" />
                     <Select.Content color="gray" variant="solid" highContrast>
