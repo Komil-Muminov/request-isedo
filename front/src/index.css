@@ -52,6 +52,14 @@ body {
   background-color: #f7f7fc;
 }
 
+a {
+  color: #000;
+}
+
+a:hover {
+  color: #000000ac;
+}
+
 @font-face {
   font-family: "Mulish";
   src: local("Muller-SemiBold"),
@@ -122,8 +130,9 @@ body {
 }
 
 .sections__title {
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 600;
+  color: #607d8b;
 }
 
 .sections__desc {
