@@ -13,7 +13,7 @@ import {
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 // Хук из библиотеки react-hook-form для управления состоянием формы.
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { PostRqstScheme, postRequest } from "../../API/PostRqsts";
 import { steps } from "../../API/Data/Steps/Steps";
 
@@ -32,6 +32,7 @@ const AddRequest: React.FC = () => {
   const navigate = useNavigate();
 
   const {
+    control,
     register,
     // Записывает все стейты в массив
     handleSubmit,
@@ -50,6 +51,8 @@ const AddRequest: React.FC = () => {
   });
   // Функция для отслеживания изменений значений в реальном времени.
   const reqType = watch("reqType");
+
+  console.log(reqType);
 
   const postRqstsMutation = useMutation({
     mutationFn: (data: PostRqstScheme) => postRequest(data),
@@ -117,26 +120,31 @@ const AddRequest: React.FC = () => {
             <p>Детали заявки</p>
           </div>
           <div className="form_content">
-            <form className="request_form">
-              {/* =============== */}
-              <Select.Root
-                defaultValue="Смена бухгалтера"
-                {...register("reqType")}
-                id="rType"
-              >
-                <Select.Trigger color="gray" />
-                <Select.Content color="gray" variant="solid" highContrast>
-                  <Select.Item value="Выберите тип заявки">
-                    Выберите тип заявки
-                  </Select.Item>
-                  <Select.Item value="Смена бухгалтера">
-                    Смена бухгалтера
-                  </Select.Item>
-                  <Select.Item value="Смена руководителя">
-                    Смена руководителя
-                  </Select.Item>
-                </Select.Content>
-              </Select.Root>
+            <form className="request_form" onSubmit={handleSubmit(onSubmit)}>
+              <Controller
+                name="reqType"
+                control={control}
+                render={({ field }) => (
+                  <Select.Root
+                    defaultValue={field.value}
+                    onValueChange={field.onChange}
+                    id="rType"
+                  >
+                    <Select.Trigger color="gray" />
+                    <Select.Content color="gray" variant="solid" highContrast>
+                      <Select.Item value="Выберите тип заявки">
+                        Выберите тип заявки
+                      </Select.Item>
+                      <Select.Item value="Смена бухгалтера">
+                        Смена бухгалтера
+                      </Select.Item>
+                      <Select.Item value="Смена руководителя">
+                        Смена руководителя
+                      </Select.Item>
+                    </Select.Content>
+                  </Select.Root>
+                )}
+              />
               {reqType === "Смена бухгалтера" && (
                 <>
                   <TextField
