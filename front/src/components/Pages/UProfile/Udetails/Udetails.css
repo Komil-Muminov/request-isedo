@@ -1,0 +1,9 @@
+.file-service-photo {
+  background-color: #fff;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #0000000f;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}

@@ -20,8 +20,10 @@ import { steps } from "../../API/Data/Steps/Steps";
 // RTQ
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
-import { getMe, GetMeType } from "../../API/Hooks/useAuth";
 import AddFileRequest from "../../UI/AddFileRequest/AddFileRequest";
+
+import "@radix-ui/themes/styles.css";
+import { Select } from "@radix-ui/themes";
 
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
@@ -116,21 +118,25 @@ const AddRequest: React.FC = () => {
           </div>
           <div className="form_content">
             <form className="request_form">
-              <select
+              {/* =============== */}
+              <Select.Root
+                defaultValue="Смена бухгалтера"
                 {...register("reqType")}
-                className="req-select"
                 id="rType"
               >
-                <option className="reg_inp-option" value="">
-                  Выберите тип заявки
-                </option>
-                <option className="reg_inp-option" value="Смена бухгалтера">
-                  Смена бухгалтера
-                </option>
-                <option className="reg_inp-option" value="Смена руководителя">
-                  Смена руководителя
-                </option>
-              </select>
+                <Select.Trigger color="gray" />
+                <Select.Content color="gray" variant="solid" highContrast>
+                  <Select.Item value="Выберите тип заявки">
+                    Выберите тип заявки
+                  </Select.Item>
+                  <Select.Item value="Смена бухгалтера">
+                    Смена бухгалтера
+                  </Select.Item>
+                  <Select.Item value="Смена руководителя">
+                    Смена руководителя
+                  </Select.Item>
+                </Select.Content>
+              </Select.Root>
               {reqType === "Смена бухгалтера" && (
                 <>
                   <TextField
@@ -216,6 +222,7 @@ const AddRequest: React.FC = () => {
                   </div>
                 </>
               )}
+
               {reqType === "Смена руководителя" && (
                 <>
                   <TextField

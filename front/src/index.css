@@ -132,7 +132,14 @@ a:hover {
 .sections__title {
   font-size: 16px;
   font-weight: 600;
-  color: #607d8b;
+  background-color: rgb(96, 125, 139);
+  width: 100%;
+  padding: 15px;
+  border-radius: 50px;
+}
+
+.sections__title h1 {
+  color: #fff;
 }
 
 .sections__desc {

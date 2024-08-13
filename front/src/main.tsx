@@ -5,17 +5,20 @@ import App from "./App.tsx";
 import "./index.css";
 import "./components/Styles/BlocksStyle.css";
 import "./components/Pages/Auth/Auth/Auth.css";
+import { Theme } from "@radix-ui/themes";
 
 // Эти импорты связаны с библиотекой @tanstack/react-query, которая используется для управления запросами к серверу и кэшированием данных.
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./queryClient.ts";
 ReactDOM.createRoot(document.getElementById("root")!).render(
-	// Предоставляет контекст для использования react-query во всем приложении. queryClient управляет состоянием кэширования запросов.
-	// React StrictMode
-	<QueryClientProvider client={queryClient}>
-		<BrowserRouter>
-			<App />
-		</BrowserRouter>
-	</QueryClientProvider>,
-	// React StrictMode
+  // Предоставляет контекст для использования react-query во всем приложении. queryClient управляет состоянием кэширования запросов.
+  // React StrictMode
+  <Theme>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </QueryClientProvider>
+  </Theme>
+  // React StrictMode
 );

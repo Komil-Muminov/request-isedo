@@ -2,6 +2,8 @@ import React from "react";
 
 import { TProps } from "./InpAuthType";
 
+import { TextField } from "@mui/material";
+
 const InputAuth: React.FC<TProps> = ({
   register,
   inputName,
@@ -14,7 +16,7 @@ const InputAuth: React.FC<TProps> = ({
   inputDisabled,
 }) => {
   return (
-    <input
+    <TextField
       {...register(inputName, {
         required: {
           value: true,
@@ -31,6 +33,11 @@ const InputAuth: React.FC<TProps> = ({
       type={inputType}
       defaultValue={inputDefaultValue}
       disabled={inputDisabled}
+      sx={{
+        "& .MuiOutlinedInput-root": {
+          borderRadius: "50px", // Устанавливаем border-radius
+        },
+      }}
     />
   );
 };
