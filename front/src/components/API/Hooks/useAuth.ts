@@ -56,15 +56,16 @@ export const getMeScheme = z.object({
 
 export type GetMeType = z.infer<typeof getMeScheme>;
 
+// Проверяет, успешен ли запрос. Если нет, выбрасывает ошибку с текстом ответа сервера.
+export const validateResponse = async (
+	response: Response,
+): Promise<Response> => {
+	if (!response.ok) {
+		throw Error(await response.text());
+	}
+	return response;
+};
 export const useAuth = () => {
-	// Проверяет, успешен ли запрос. Если нет, выбрасывает ошибку с текстом ответа сервера.
-	const validateResponse = async (response: Response): Promise<Response> => {
-		if (!response.ok) {
-			throw Error(await response.text());
-		}
-		return response;
-	};
-
 	// Отправляет POST-запрос на сервер для регистрации нового пользователя с использованием данных, валидированных схемой RegScheme.
 	const regMe = async (regData: RegType): Promise<void> => {
 		return fetch("http://localhost:3000/register", {
