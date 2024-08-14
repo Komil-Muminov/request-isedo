@@ -19,12 +19,14 @@ const Udetails = () => {
 			const file = e.target.files[0];
 			const username = uinfo?.username;
 			const token = localStorage.getItem("token");
+
 			console.log(`token uphoto:${token}`);
 			setphoto({
 				username,
 				file,
 				token,
 			});
+			console.log(`file ${file}`);
 		}
 	};
 
@@ -32,7 +34,7 @@ const Udetails = () => {
 		mutationFn: () => setUphoto(uPhoto),
 		onSuccess: () =>
 			queryClient.invalidateQueries({ queryKey: ["users", "me"] }),
-		onError: () => console.log(`KM error uPhoto ${uPhotoMutation.error}`),
+		// onError: () => console.log(`km error uPhoto ${uPhotoMutation.error}`),
 	});
 
 	useEffect(() => {
@@ -71,6 +73,7 @@ const Udetails = () => {
 		<>
 			<div className="user-content">
 				<div className="user-details">
+					{uPhotoMutation.data?.status}
 					<p className="user-details_title">
 						{uinfo?.uType === "kvd"
 							? `Подтвержденная учетная запись`
@@ -79,11 +82,12 @@ const Udetails = () => {
 					<div className="user-details-content">
 						<div className="user-details_photo">
 							{/* <img src={defUphoto} alt="" className="photo" /> */}
-							{uinfo?.photo ? (
-								<img className="photo" src={uinfo.photo} />
-							) : (
-								<img className="photo" src={defUphoto} />
-							)}
+							<img
+								src={defUphoto || defUphoto}
+								alt="uphoto"
+								className="photo"
+							/>
+
 							<div className="file-service-photo">
 								<input type="file" onChange={handleUphoto} />
 								<AddFileRequest />
