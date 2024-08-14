@@ -33,9 +33,10 @@ const InputAuth: React.FC<TProps> = ({
       type={inputType}
       defaultValue={inputDefaultValue}
       disabled={inputDisabled}
+      fullWidth
       sx={{
         "& .MuiOutlinedInput-root": {
-          borderRadius: "50px", // Устанавливаем border-radius
+          borderRadius: "50px", // Устанавливаем border-radius,
         },
       }}
     />
