@@ -11,7 +11,6 @@ import AddFileRequest from "../../../UI/AddFileRequest/AddFileRequest";
 import { CurrUserPhoto, setUphoto } from "../../../API/Hooks/setUphoto";
 import "./Udetails.css";
 import "../Profile.css";
-import { any } from "zod";
 const Udetails = () => {
 	const [uPhoto, setphoto] = useState<CurrUserPhoto | null>(null);
 
@@ -31,8 +30,9 @@ const Udetails = () => {
 
 	const uPhotoMutation = useMutation({
 		mutationFn: () => setUphoto(uPhoto),
-		onSuccess: () => console.log(`KM uPhoto`),
-		onError: () => console.log(`KM error uPhoto`),
+		onSuccess: () =>
+			queryClient.invalidateQueries({ queryKey: ["users", "me"] }),
+		onError: () => console.log(`KM error uPhoto ${uPhotoMutation.error}`),
 	});
 
 	useEffect(() => {
@@ -78,7 +78,12 @@ const Udetails = () => {
 					</p>
 					<div className="user-details-content">
 						<div className="user-details_photo">
-							<img src={defUphoto} alt="" className="photo" />
+							{/* <img src={defUphoto} alt="" className="photo" /> */}
+							{uinfo?.photo ? (
+								<img className="photo" src={uinfo.photo} />
+							) : (
+								<img className="photo" src={defUphoto} />
+							)}
 							<div className="file-service-photo">
 								<input type="file" onChange={handleUphoto} />
 								<AddFileRequest />
