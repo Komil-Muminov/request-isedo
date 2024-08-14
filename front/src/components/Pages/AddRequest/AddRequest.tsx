@@ -1,27 +1,60 @@
 import "./AddRequest.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Stepper, StepLabel, Step, Button, TextField } from "@mui/material";
 
 // Хук из библиотеки react-hook-form для управления состоянием формы.
 import { useForm, Controller } from "react-hook-form";
 import { PostRqstScheme, postRequest } from "../../API/PostRqsts";
-import { steps } from "../../API/Data/Steps/Steps";
+import { stepsOfKvd, stepsOfBo } from "../../API/Data/Steps/Steps";
 
 // RTQ
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
 import { fileInfo } from "../../API/Data/Documents/DocumentList";
 
 import "@radix-ui/themes/styles.css";
 import { Select } from "@radix-ui/themes";
 import TableRowRequest from "../../UI/TableRow/TableRowRequest";
+import { GetMeType, useAuth } from "../../API/Hooks/useAuth";
+import { Loader } from "../../UI/Loader/Loader";
 
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
   const [activeStep, setActiveStep] = useState<number>(0);
 
   const navigate = useNavigate();
+
+  const { getMe } = useAuth();
+  const uQuery = useQuery(
+    {
+      queryFn: () => getMe(),
+      queryKey: ["users", "me"],
+    },
+    queryClient
+  );
+
+  const [uinfo, setUinfo] = useState<GetMeType | null>(null);
+  // const [expanded, setExpanded] = useState<number | false>(false);
+
+  useEffect(() => {
+    if (uQuery.status === "success") {
+      setUinfo(uQuery.data);
+    }
+  }, [uQuery.status, uQuery.data]);
+
+  if (uQuery.status === "pending") return <Loader />;
+  if (uQuery.status === "error") {
+    console.log(uQuery.error);
+    return null;
+  }
+
+  const steps =
+    uinfo?.uType === "kvd"
+      ? stepsOfKvd
+      : uinfo?.uType === "bo"
+      ? stepsOfBo
+      : [];
 
   const {
     control,
@@ -84,7 +117,7 @@ const AddRequest: React.FC = () => {
     setGetFile({ number: id, file: file ? file.name : "" });
   };
 
-  console.log(file);
+  console.log(uinfo?.uType, activeStep);
 
   return (
     <section className="sections">
@@ -226,19 +259,19 @@ const AddRequest: React.FC = () => {
                 </>
               )}
             </form>
-            <button
-              className="pushable"
+            <Button
+              variant="contained"
               onClick={handleSubmit(onSubmit)}
+              sx={{ marginTop: "20px" }}
               disabled={
-                !dirtyFields.accountant ||
-                !dirtyFields.orgname ||
-                !dirtyFields.desc
+                (activeStep !== 0 && uinfo?.uType === "bo") ||
+                (activeStep === 0 && uinfo?.uType === "kvd")
               }
             >
               <span className="shadow"></span>
               <span className="edge"></span>
               <span className="front">Отправить</span>
-            </button>
+            </Button>
             {/* <Button
               variant="contained"
               sx={{ marginTop: "20px" }}
