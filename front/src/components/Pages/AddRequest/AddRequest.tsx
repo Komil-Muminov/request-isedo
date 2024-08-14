@@ -1,16 +1,7 @@
 import "./AddRequest.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Stepper,
-  StepLabel,
-  Step,
-  Button,
-  TextField,
-  IconButton,
-} from "@mui/material";
-
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { Stepper, StepLabel, Step, Button, TextField } from "@mui/material";
 
 // Хук из библиотеки react-hook-form для управления состоянием формы.
 import { useForm, Controller } from "react-hook-form";
@@ -18,12 +9,13 @@ import { PostRqstScheme, postRequest } from "../../API/PostRqsts";
 import { steps } from "../../API/Data/Steps/Steps";
 
 // RTQ
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
-import AddFileRequest from "../../UI/AddFileRequest/AddFileRequest";
+import { fileInfo } from "../../API/Data/Documents/DocumentList";
 
 import "@radix-ui/themes/styles.css";
 import { Select } from "@radix-ui/themes";
+import TableRowRequest from "../../UI/TableRow/TableRowRequest";
 
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
@@ -85,6 +77,9 @@ const AddRequest: React.FC = () => {
   // 	}
   // }, [getMeQuery.status]);
   // console.log(getMe.map((item) => item.fullName));
+
+  console.log(fileInfo);
+
   return (
     <section className="sections">
       <div className="wrapper-prev">
@@ -180,56 +175,14 @@ const AddRequest: React.FC = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td className="table-data">1</td>
-                          <td className="table-data">
-                            <AddFileRequest />
-                          </td>
-                          <td className="table-data">
-                            Доп.соглашение к договору
-                          </td>
-                          <td>
-                            <IconButton>
-                              <DeleteOutlineIcon sx={{ color: "red" }} />
-                            </IconButton>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="table-data">2</td>
-                          <td className="table-data">
-                            <AddFileRequest />
-                          </td>
-                          <td className="table-data">
-                            Дархост барои гирифтани дастраси ба низоми
-                            иттилоотии TFMIS
-                          </td>
-                          <td>
-                            <IconButton>
-                              <DeleteOutlineIcon sx={{ color: "red" }} />
-                            </IconButton>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="table-data">2</td>
-                          <td className="table-data">
-                            <AddFileRequest />
-                          </td>
-                          <td className="table-data">
-                            Дархост барои гирифтани дастраси ба низоми
-                            иттилоотии TFMIS
-                          </td>
-                          <td>
-                            <IconButton>
-                              <DeleteOutlineIcon sx={{ color: "red" }} />
-                            </IconButton>
-                          </td>
-                        </tr>
+                        {fileInfo.map((e) => {
+                          return <TableRowRequest key={e.id} item={e} />;
+                        })}
                       </tbody>
                     </table>
                   </div>
                 </>
               )}
-
               {reqType === "Смена руководителя" && (
                 <>
                   <TextField

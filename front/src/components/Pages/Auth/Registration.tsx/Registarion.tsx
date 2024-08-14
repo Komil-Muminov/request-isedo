@@ -51,7 +51,6 @@ const Registration = () => {
     regMutate.mutate();
   };
 
-
   // switch (regMutate.status) {
   //   case "success":
   //     return <Authorization />;
@@ -92,7 +91,7 @@ const Registration = () => {
                 requiredMessage="Это поле объязательно к заполенению"
                 minLengthMessage="Логин должен содержать минимум 9 символов"
                 inputType="text"
-                kind="reg_inp"
+                kind=""
               />
 
               <span className="form_errors-text">
@@ -106,7 +105,7 @@ const Registration = () => {
                 requiredMessage="Заполните поле password"
                 minLengthMessage="Пароль должен содержать минимум 5 символов"
                 inputType="password"
-                kind="reg_inp"
+                kind=""
               />
 
               <span className="form_errors-text">
@@ -120,7 +119,7 @@ const Registration = () => {
                 requiredMessage="Заполните поле ФИО"
                 minLengthMessage="ФИО должен содержать минимум 5 символов"
                 inputType="text"
-                kind="reg_inp"
+                kind=""
               />
 
               <span className="form_errors-text">
@@ -134,7 +133,7 @@ const Registration = () => {
                 requiredMessage="Заполните поле телефон"
                 minLengthMessage="Телефон должен содержать минимум 9 символов"
                 inputType="text"
-                kind="reg_inp"
+                kind=""
               />
 
               <span className="form_errors-text">
@@ -148,7 +147,7 @@ const Registration = () => {
                 requiredMessage="Заполните поле должность"
                 minLengthMessage="Должность должна содержать минимум 3 символов"
                 inputType="text"
-                kind="reg_inp"
+                kind=""
               />
 
               <span className="form_errors-text">
@@ -162,7 +161,7 @@ const Registration = () => {
                 requiredMessage="Заполните поле ИНН"
                 minLengthMessage="ИНН должна содержать минимум 7 символов"
                 inputType="text"
-                kind="reg_inp"
+                kind=""
               />
 
               <span className="form_errors-text">
@@ -176,7 +175,7 @@ const Registration = () => {
                 requiredMessage="Заполните поле email"
                 minLengthMessage="E-mail должна содержать минимум 7 символов"
                 inputType="text"
-                kind="reg_inp"
+                kind=""
               />
 
               <span className="form_errors-text">
@@ -200,7 +199,7 @@ const Registration = () => {
                 requiredMessage="Это поле объязательно к заполенению"
                 minLengthMessage="Логин должен содержать минимум 9 символов"
                 inputType="text"
-                kind="reg_inp"
+                kind=""
               />
 
               <span className="form_errors-text">
@@ -214,7 +213,7 @@ const Registration = () => {
                 requiredMessage="Заполните поле password"
                 minLengthMessage="Пароль должен содержать минимум 5 символов"
                 inputType="password"
-                kind="reg_inp"
+                kind=""
               />
 
               <span className="form_errors-text">
@@ -228,7 +227,7 @@ const Registration = () => {
                 requiredMessage="Заполните поле ФИО"
                 minLengthMessage="ФИО должен содержать минимум 5 символов"
                 inputType="text"
-                kind="reg_inp"
+                kind=""
               />
 
               <span className="form_errors-text">
@@ -242,7 +241,7 @@ const Registration = () => {
                 requiredMessage="Заполните поле должность"
                 minLengthMessage="Должность должна содержать минимум 5 символов"
                 inputType="text"
-                kind="reg_inp"
+                kind=""
               />
               <span className="form_errors-text">
                 {errors?.position && errors.position.message}
@@ -254,7 +253,7 @@ const Registration = () => {
                 requiredMessage="Заполните поле отдел"
                 minLengthMessage="Отдел должна содержать минимум 5 символов"
                 inputType="text"
-                kind="reg_inp"
+                kind=""
               />
 
               <span className="form_errors-text">
