@@ -77,6 +77,9 @@ const authenticateJWT = (req: Request, res: Response, next: () => void) => {
 	}
 };
 
+if (!fs.existsSync("uploads")) {
+	fs.mkdirSync("uploads");
+}
 app.post(
 	"/upload/:username",
 	authenticateJWT,
