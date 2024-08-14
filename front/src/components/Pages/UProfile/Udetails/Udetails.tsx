@@ -26,6 +26,11 @@ const Udetails = () => {
 				file,
 				token,
 			});
+			if (uPhoto) {
+				uPhotoMutation.mutate();
+			} else {
+				console.log(`uPhotoMutation's error is ${uPhotoMutation.status}`);
+			}
 		}
 	};
 
