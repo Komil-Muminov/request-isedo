@@ -76,3 +76,8 @@ th {
   border: 1px solid #000;
   padding: 20px;
 }
+
+.step-header {
+  font-weight: 700;
+  font-size: 16px;
+}
