@@ -11,7 +11,6 @@ import AddFileRequest from "../../../UI/AddFileRequest/AddFileRequest";
 import { CurrUserPhoto, setUphoto } from "../../../API/Hooks/setUphoto";
 import "./Udetails.css";
 import "../Profile.css";
-import { any } from "zod";
 const Udetails = () => {
 	const [uPhoto, setphoto] = useState<CurrUserPhoto | null>(null);
 
@@ -20,19 +19,22 @@ const Udetails = () => {
 			const file = e.target.files[0];
 			const username = uinfo?.username;
 			const token = localStorage.getItem("token");
+
 			console.log(`token uphoto:${token}`);
 			setphoto({
 				username,
 				file,
 				token,
 			});
+			console.log(`file ${file}`);
 		}
 	};
 
 	const uPhotoMutation = useMutation({
 		mutationFn: () => setUphoto(uPhoto),
-		onSuccess: () => console.log(`KM uPhoto`),
-		onError: () => console.log(`KM error uPhoto`),
+		onSuccess: () =>
+			queryClient.invalidateQueries({ queryKey: ["users", "me"] }),
+		// onError: () => console.log(`km error uPhoto ${uPhotoMutation.error}`),
 	});
 
 	useEffect(() => {
@@ -71,6 +73,7 @@ const Udetails = () => {
 		<>
 			<div className="user-content">
 				<div className="user-details">
+					{uPhotoMutation.data?.status}
 					<p className="user-details_title">
 						{uinfo?.uType === "kvd"
 							? `Подтвержденная учетная запись`
@@ -78,7 +81,13 @@ const Udetails = () => {
 					</p>
 					<div className="user-details-content">
 						<div className="user-details_photo">
-							<img src={defUphoto} alt="" className="photo" />
+							{/* <img src={defUphoto} alt="" className="photo" /> */}
+							<img
+								src={defUphoto || defUphoto}
+								alt="uphoto"
+								className="photo"
+							/>
+
 							<div className="file-service-photo">
 								<input type="file" onChange={handleUphoto} />
 								<AddFileRequest />
