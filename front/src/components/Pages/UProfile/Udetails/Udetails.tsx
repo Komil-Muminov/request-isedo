@@ -71,7 +71,7 @@ const Udetails = () => {
 			<div className="user-content">
 				<div className="user-details">
 					<p className="user-details_title">
-						{uinfo?.uIdentity
+						{uinfo?.uType === "kvd"
 							? `Подтвержденная учетная запись`
 							: `Не подтвержденная учетная запись`}
 					</p>

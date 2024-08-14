@@ -50,6 +50,8 @@ const Authorization = () => {
     navigate("uprofile/udetails");
   }
 
+  console.log(dirtyFields);
+
   return (
     <>
       <form className="form-auth" onSubmit={handleSubmit(onSubmit)}>
@@ -64,7 +66,7 @@ const Authorization = () => {
             inputType="text"
             kind=""
             inputDefaultValue={""}
-            inputDisabled={""}
+            inputDisabled={null}
           />
 
           <span className="form_errors-text">
