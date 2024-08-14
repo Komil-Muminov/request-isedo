@@ -26,11 +26,6 @@ const Udetails = () => {
 				file,
 				token,
 			});
-			if (uPhoto) {
-				uPhotoMutation.mutate();
-			} else {
-				console.log(`uPhotoMutation's error is ${uPhotoMutation.status}`);
-			}
 		}
 	};
 
@@ -39,6 +34,12 @@ const Udetails = () => {
 		onSuccess: () => console.log(`KM uPhoto`),
 		onError: () => console.log(`KM error uPhoto`),
 	});
+
+	useEffect(() => {
+		if (uPhoto) {
+			uPhotoMutation.mutate();
+		}
+	}, [uPhoto]);
 
 	const { getMe } = useAuth();
 	const uQuery = useQuery(
