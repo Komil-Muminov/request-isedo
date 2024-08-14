@@ -169,9 +169,6 @@ const AddRequest: React.FC = () => {
                     disabled={!dirtyFields.accountant}
                   />
                   <div className="wrapper-table">
-                    <Button variant="text" sx={{ mb: "20px" }}>
-                      Добавить документ
-                    </Button>
                     <table>
                       <thead>
                         <tr>

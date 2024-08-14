@@ -13,119 +13,119 @@ import "./Udetails.css";
 import "../Profile.css";
 import { any } from "zod";
 const Udetails = () => {
-	const [uPhoto, setphoto] = useState<CurrUserPhoto | null>(null);
+  const [uPhoto, setphoto] = useState<CurrUserPhoto | null>(null);
 
-	const handleUphoto = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (e.target.files && e.target.files[0]) {
-			const file = e.target.files[0];
-			const username = uinfo?.username;
-			const token = localStorage.getItem("token");
-			console.log(`token uphoto:${token}`);
-			setphoto({
-				username,
-				file,
-				token,
-			});
-		}
-	};
+  const handleUphoto = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const username = uinfo?.username;
+      const token = localStorage.getItem("token");
+      console.log(`token uphoto:${token}`);
+      setphoto({
+        username,
+        file,
+        token,
+      });
+    }
+  };
 
-	const uPhotoMutation = useMutation({
-		mutationFn: () => setUphoto(uPhoto),
-		onSuccess: () => console.log(`KM uPhoto`),
-		onError: () => console.log(`KM error uPhoto`),
-	});
+  const uPhotoMutation = useMutation({
+    mutationFn: () => setUphoto(uPhoto),
+    onSuccess: () => console.log(`KM uPhoto`),
+    onError: () => console.log(`KM error uPhoto`),
+  });
 
-	const { getMe } = useAuth();
-	const uQuery = useQuery(
-		{
-			queryFn: () => getMe(),
-			queryKey: ["users", "me"],
-		},
-		queryClient,
-	);
+  const { getMe } = useAuth();
+  const uQuery = useQuery(
+    {
+      queryFn: () => getMe(),
+      queryKey: ["users", "me"],
+    },
+    queryClient
+  );
 
-	const [uinfo, setUinfo] = useState<GetMeType | null>(null);
-	// const [expanded, setExpanded] = useState<number | false>(false);
+  const [uinfo, setUinfo] = useState<GetMeType | null>(null);
+  // const [expanded, setExpanded] = useState<number | false>(false);
 
-	useEffect(() => {
-		if (uQuery.status === "success") {
-			setUinfo(uQuery.data);
-		}
-	}, [uQuery.status, uQuery.data]);
+  useEffect(() => {
+    if (uQuery.status === "success") {
+      setUinfo(uQuery.data);
+    }
+  }, [uQuery.status, uQuery.data]);
 
-	if (uQuery.status === "pending") return <Loader />;
-	if (uQuery.status === "error") {
-		console.log(uQuery.error);
-		return null;
-	}
+  if (uQuery.status === "pending") return <Loader />;
+  if (uQuery.status === "error") {
+    console.log(uQuery.error);
+    return null;
+  }
 
-	console.log(uinfo);
+  console.log(uinfo);
 
-	return (
-		<>
-			<div className="user-content">
-				<div className="user-details">
-					<p className="user-details_title">
-						{uinfo?.uIdentity
-							? `Подтвержденная учетная запись`
-							: `Не подтвержденная учетная запись`}
-					</p>
-					<div className="user-details-content">
-						<div className="user-details_photo">
-							<img src={defUphoto} alt="" className="photo" />
-							<div className="file-service-photo">
-								<input type="file" onChange={handleUphoto} />
-								<AddFileRequest />
-							</div>
-						</div>
-						<div className="user-details-text">
-							<ul className="user-details_list">
-								<UserInfoList
-									title="ФИО"
-									description={
-										uinfo?.fullName ? uinfo.fullName : uinfo?.username
-									}
-								/>
-								<UserInfoList
-									title="Тип пользователя"
-									description={uinfo?.uType ? uinfo.uType : "Тип не указан"}
-								/>
-								<UserInfoList
-									title="Идентификация"
-									description={
-										uinfo?.uType === "kvd"
-											? "Идентифицирован"
-											: "Идентификация на рассмотрение"
-									}
-								/>
-								<UserInfoList
-									title={uinfo?.department ? "Отдел" : "Номер телефона"}
-									description={
-										uinfo?.department ? uinfo.department : uinfo?.number
-									}
-								/>
-								<UserInfoList
-									title={uinfo?.position ? "Должность" : "ИНН"}
-									description={uinfo?.position ? uinfo.position : uinfo?.tax}
-								/>
-								{uinfo?.email && (
-									<UserInfoList
-										title="E-mail"
-										description={
-											uinfo?.email ? uinfo.email : "E-mail адрес не указан."
-										}
-									/>
-								)}
-							</ul>
-							<Link to="/uprofile/uIdentity">
-								<Button variant="contained" fullWidth>
-									Идентификация
-								</Button>
-							</Link>
-						</div>
-					</div>
-					{/* <div className="uprofile_content"> */}
-					{/* <div className="uprofile-title">
+  return (
+    <>
+      <div className="user-content">
+        <div className="user-details">
+          <p className="user-details_title">
+            {uinfo?.uType === "kvd"
+              ? `Подтвержденная учетная запись`
+              : `Не подтвержденная учетная запись`}
+          </p>
+          <div className="user-details-content">
+            <div className="user-details_photo">
+              <img src={defUphoto} alt="" className="photo" />
+              <div className="file-service-photo">
+                <input type="file" onChange={handleUphoto} />
+                <AddFileRequest />
+              </div>
+            </div>
+            <div className="user-details-text">
+              <ul className="user-details_list">
+                <UserInfoList
+                  title="ФИО"
+                  description={
+                    uinfo?.fullName ? uinfo.fullName : uinfo?.username
+                  }
+                />
+                <UserInfoList
+                  title="Тип пользователя"
+                  description={uinfo?.uType ? uinfo.uType : "Тип не указан"}
+                />
+                <UserInfoList
+                  title="Идентификация"
+                  description={
+                    uinfo?.uType === "kvd"
+                      ? "Идентифицирован"
+                      : "Идентификация на рассмотрение"
+                  }
+                />
+                <UserInfoList
+                  title={uinfo?.department ? "Отдел" : "Номер телефона"}
+                  description={
+                    uinfo?.department ? uinfo.department : uinfo?.number
+                  }
+                />
+                <UserInfoList
+                  title={uinfo?.position ? "Должность" : "ИНН"}
+                  description={uinfo?.position ? uinfo.position : uinfo?.tax}
+                />
+                {uinfo?.email && (
+                  <UserInfoList
+                    title="E-mail"
+                    description={
+                      uinfo?.email ? uinfo.email : "E-mail адрес не указан."
+                    }
+                  />
+                )}
+              </ul>
+              <Link to="/uprofile/uIdentity">
+                <Button variant="contained" fullWidth>
+                  Идентификация
+                </Button>
+              </Link>
+            </div>
+          </div>
+          {/* <div className="uprofile_content"> */}
+          {/* <div className="uprofile-title">
               {uinfo && (
                 <span className="sections__title uidentify_text">
                   Уважаемый{" "}
@@ -138,7 +138,7 @@ const Udetails = () => {
                 <ButtonKM>Добавить фото</ButtonKM>
               </div>
             </div> */}
-					{/* <div className="uinfo_text">
+          {/* <div className="uinfo_text">
               <span className="sections__desc uinfo_tex">
                 ФИО:
                 <p>{uinfo?.fullName ? uinfo.fullName : uinfo?.username}</p>
@@ -172,16 +172,16 @@ const Udetails = () => {
                 </p>
               </span>
             </div> */}
-					{/* </div> */}
-				</div>
-			</div>
-			{/* <div className="uright_info">
+          {/* </div> */}
+        </div>
+      </div>
+      {/* <div className="uright_info">
         <Ulink className="btn uidentify_link" to="/uprofile/uIdentity">
           Идентификация
         </Ulink>
       </div> */}
-		</>
-	);
+    </>
+  );
 };
 
 export default Udetails;
