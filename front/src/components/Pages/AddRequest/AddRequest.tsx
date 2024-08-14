@@ -78,7 +78,13 @@ const AddRequest: React.FC = () => {
   // }, [getMeQuery.status]);
   // console.log(getMe.map((item) => item.fullName));
 
-  console.log(fileInfo);
+  const [file, setGetFile] = useState({ number: 0, file: "" });
+
+  const handleGetFile = (id: number, file: File | null) => {
+    setGetFile({ number: id, file: file ? file.name : "" });
+  };
+
+  console.log(file);
 
   return (
     <section className="sections">
@@ -176,7 +182,13 @@ const AddRequest: React.FC = () => {
                       </thead>
                       <tbody>
                         {fileInfo.map((e) => {
-                          return <TableRowRequest key={e.id} item={e} />;
+                          return (
+                            <TableRowRequest
+                              key={e.id}
+                              item={e}
+                              handleGetFile={handleGetFile}
+                            />
+                          );
                         })}
                       </tbody>
                     </table>
