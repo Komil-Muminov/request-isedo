@@ -4,14 +4,17 @@ import { validateResponse } from "./useAuth";
 // username: строка, содержащая имя пользователя.
 // file: объект типа File, представляющий файл изображения.
 export type CurrUserPhoto = {
-	username: string;
-	token: string;
-	file: File;
+	username: string | undefined;
+	token: string | null;
+	file: File | string;
 };
 
 export const setUphoto = async ({ username, token, file }: CurrUserPhoto) => {
+	if (!file) {
+		throw Error(`Ошибка при добавление файла`);
+	}
 	const formData = new FormData();
-	formData.append("uImage", file);
+	formData.append("image", file);
 	return fetch(`http://localhost:3000/upload/${username}`, {
 		method: "POST",
 		headers: {

@@ -1,18 +1,40 @@
 import { useState, useEffect } from "react";
 import { GetMeType, useAuth } from "../../../API/Hooks/useAuth";
 import defUphoto from "../../../../assets/ErrorPage.jpg";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../../../queryClient";
 import { Button } from "@mui/material";
-
-import "./Udetails.css";
-import "../Profile.css";
 import { Loader } from "../../../UI/Loader/Loader";
 import UserInfoList from "../../../UI/UserInfoList/UserInfoList";
 import { Link } from "react-router-dom";
 import AddFileRequest from "../../../UI/AddFileRequest/AddFileRequest";
-
+import { CurrUserPhoto, setUphoto } from "../../../API/Hooks/setUphoto";
+import "./Udetails.css";
+import "../Profile.css";
+import { any } from "zod";
 const Udetails = () => {
+	const [uPhoto, setphoto] = useState<CurrUserPhoto | null>(null);
+
+	const handleUphoto = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files && e.target.files[0]) {
+			const file = e.target.files[0];
+			const username = uinfo?.username;
+			const token = localStorage.getItem("token");
+			console.log(`token uphoto:${token}`);
+			setphoto({
+				username,
+				file,
+				token,
+			});
+		}
+	};
+
+	const uPhotoMutation = useMutation({
+		mutationFn: () => setUphoto(uPhoto),
+		onSuccess: () => console.log(`KM uPhoto`),
+		onError: () => console.log(`KM error uPhoto`),
+	});
+
 	const { getMe } = useAuth();
 	const uQuery = useQuery(
 		{
@@ -52,6 +74,7 @@ const Udetails = () => {
 						<div className="user-details_photo">
 							<img src={defUphoto} alt="" className="photo" />
 							<div className="file-service-photo">
+								<input type="file" onChange={handleUphoto} />
 								<AddFileRequest />
 							</div>
 						</div>
