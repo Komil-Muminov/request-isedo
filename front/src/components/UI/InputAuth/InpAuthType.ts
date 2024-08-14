@@ -7,5 +7,5 @@ export interface TProps {
   minLengthMessage: string;
   kind: string;
   inputDefaultValue?: string;
-  inputDisabled?: any;
+  inputDisabled?: boolean | null;
 }
