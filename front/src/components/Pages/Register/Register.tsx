@@ -9,8 +9,11 @@ import { getRqsts, GetRqstsType } from "../../API/GetRqsts";
 
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import TuneIcon from "@mui/icons-material/Tune";
+import { useNavigate } from "react-router-dom";
 
 export const Register: React.FC = () => {
+  const navigate = useNavigate();
+
   const getRqsQuery = useQuery(
     {
       queryFn: () => getRqsts(),
@@ -88,6 +91,11 @@ export const Register: React.FC = () => {
     },
   ];
 
+  // Добавляем Link в каждый лист таблицы
+  const handleRowClick = (params: any) => {
+    navigate(`/account/show/${params.row.id}`);
+  };
+
   useEffect(() => {
     if (getRqsQuery.status === "success") {
       setRqstsData(getRqsQuery.data);
@@ -107,7 +115,7 @@ export const Register: React.FC = () => {
                   <p>Фильтр</p>
                 </Button>
                 <Link
-                  to={"/addrequest"}
+                  to={"/account/create"}
                   type="btn submit_btn register_add-btn"
                   onClick={() => console.log(`Переход`)}
                 >
@@ -152,6 +160,7 @@ export const Register: React.FC = () => {
                   checkboxSelection
                   disableRowSelectionOnClick
                   getRowClassName={() => "pointer-cursor"}
+                  onRowClick={handleRowClick}
                   sx={{
                     minHeight: "180px",
                     "& .MuiDataGrid-columnHeaderTitle": {

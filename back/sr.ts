@@ -278,6 +278,31 @@ app.get("/requests", authenticateJWT, (req: Request, res: Response) => {
   }
 });
 
+app.get("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
+  const showId = parseInt(req.params.id, 10); // Получаем id из URL-параметров
+
+  if (isNaN(showId)) {
+    return res.status(400).json({ error: "Некорректный ID" });
+  }
+
+  const requests = readFromFile(requestsFilePath);
+  const show = requests.find((show: any) => show.id === showId);
+
+  if (!show) {
+    return res.status(404).json({ error: "Заявка не найдена" });
+  }
+
+  res.status(200).json({
+    id: show.id,
+    orgname: show.orgname,
+    accountant: show.accountant,
+    desc: show.desc,
+    reqType: show.reqType,
+    reqStatus: show.reqStatus,
+    dateTime: show.dateTime,
+  });
+});
+
 app.post("/logout", authenticateJWT, (req: Request, res: Response) => {
   res.status(200).json({ message: "Выход успешный" });
 });
