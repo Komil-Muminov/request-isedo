@@ -5,7 +5,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
-import { getRqsts, GetRqsts } from "../../API/GetRqsts";
+import { getRqsts, GetRqstsType } from "../../API/GetRqsts";
 
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import TuneIcon from "@mui/icons-material/Tune";
@@ -19,7 +19,9 @@ export const Register: React.FC = () => {
     queryClient
   );
 
-  const [rqstsData, setRqstsData] = useState<GetRqsts[]>([]);
+  const [rqstsData, setRqstsData] = useState<GetRqstsType[]>([]);
+
+  console.log(rqstsData);
 
   const rows = rqstsData.map((e) => {
     return {
@@ -27,7 +29,7 @@ export const Register: React.FC = () => {
       type: e.orgname,
       applicant: e.accountant,
       organization: e.desc,
-      date: e.desc,
+      date: e.dateTime,
       status: e.desc,
     };
   });

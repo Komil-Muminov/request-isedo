@@ -72,6 +72,7 @@ const AddRequest: React.FC = () => {
       desc: "",
       reqType: "Смена бухгалтера",
       reqStatus: steps[0]?.step,
+      dateTime: "",
     },
   });
   // Функция для отслеживания изменений значений в реальном времени.
@@ -90,21 +91,33 @@ const AddRequest: React.FC = () => {
     const stepFound = steps.find((e) => e.stepCode === activeStep);
     console.log(data);
 
+    const getDate = new Date();
+
+    const day = String(getDate.getDate()).padStart(2, "0");
+    const month = String(getDate.getMonth() + 1).padStart(2, "0");
+    const year = getDate.getFullYear();
+    const hours = String(getDate.getHours()).padStart(2, "0");
+    const minutes = String(getDate.getMinutes()).padStart(2, "0");
+
+    const date = `${day}.${month}.${year}.${hours}:${minutes}`;
+
     const updateReqData = {
       ...data,
       reqStatus: stepFound ? stepFound.step : "",
+      dateTime: date,
     };
+
     console.log(`reqStatus: ${updateReqData.reqStatus}`);
     postRqstsMutation.mutate(updateReqData);
   };
 
-  const [file, setGetFile] = useState({ number: 0, file: "" });
+  const [file, setGetFile] = useState({ number: 0, file: {} });
 
   const handleGetFile = (id: number, file: File | null) => {
     setGetFile({ number: id, file: file ? file.name : "" });
   };
 
-  console.log(uinfo?.uType, activeStep);
+  // console.log(file);
 
   return (
     <section className="sections">
@@ -207,6 +220,7 @@ const AddRequest: React.FC = () => {
                               key={e.id}
                               item={e}
                               handleGetFile={handleGetFile}
+                              file={file}
                             />
                           );
                         })}

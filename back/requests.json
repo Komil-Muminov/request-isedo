@@ -1,82 +1,11 @@
 [
   {
     "id": 1,
-    "orgname": "123",
-    "accountant": "123",
-    "desc": "123",
+    "orgname": "Фозилов Диловар",
+    "accountant": "Главный бухгалтер",
+    "desc": "880009846",
     "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-  },
-  {
-    "id": 2,
-    "orgname": "c4234c",
-    "accountant": "c234",
-    "desc": "c234c2",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-  },
-  {
-    "id": 3,
-    "orgname": "fds",
-    "accountant": "fds",
-    "desc": "fsdf",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-  },
-  {
-    "id": 4,
-    "orgname": "cf",
-    "accountant": "scf",
-    "desc": "cfs",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-  },
-  {
-    "id": 5,
-    "orgname": "fsd",
-    "accountant": "fs",
-    "desc": "fsd",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-  },
-  {
-    "id": 6,
-    "orgname": "fds",
-    "accountant": "fds",
-    "desc": "fsd",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-  },
-  {
-    "id": 7,
-    "orgname": "fdsf",
-    "accountant": "sdf",
-    "desc": "dsfs",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-  },
-  {
-    "id": 8,
-    "orgname": "fsd",
-    "accountant": "dsf",
-    "desc": "sdfs",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-  },
-  {
-    "id": 9,
-    "orgname": "",
-    "accountant": "",
-    "desc": "",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "Оформление"
-  },
-  {
-    "id": 10,
-    "orgname": "321",
-    "accountant": "312",
-    "desc": "3123",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": ""
+    "reqStatus": "",
+    "dateTime": "14.08.2024.15:55"
   }
 ]

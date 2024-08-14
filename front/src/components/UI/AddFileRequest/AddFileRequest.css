@@ -62,3 +62,9 @@
   background-color: #85ff7a;
   box-shadow: 0 0 0 1px #85ff7a;
 }
+
+.activeFile:before {
+  background-color: #15202a;
+  box-shadow: 0 0 0 1px #85ff7a;
+  border: 4px solid #85ff7a;
+}

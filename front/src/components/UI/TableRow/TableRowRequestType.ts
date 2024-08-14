@@ -3,5 +3,9 @@ export interface TProps {
     id: number;
     name: string;
   };
+  file: {
+    number: number;
+    file: File | null;
+  };
   handleGetFile: (id: number, file: File | null) => void;
 }
