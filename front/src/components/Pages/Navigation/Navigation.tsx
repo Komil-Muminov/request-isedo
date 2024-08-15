@@ -68,8 +68,8 @@ export const Navigation: React.FC = () => {
 
 	const getUinfoQuery = useQuery(
 		{
-			queryKey: ["users", "me"],
 			queryFn: () => getMe(),
+			queryKey: ["users", "me"],
 		},
 		queryClient,
 	);
@@ -79,7 +79,9 @@ export const Navigation: React.FC = () => {
 	}
 
 	// Надо свг контейнер сделать
-
+	const pathUrl = getUinfoQuery.data?.photo
+		? `http://localhost:3000${getUinfoQuery.data?.photo}`
+		: null;
 	if (getUinfoQuery?.status === "success") {
 		return (
 			<>
@@ -197,11 +199,7 @@ export const Navigation: React.FC = () => {
 											<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
 												<Avatar
 													alt="Remy Sharp"
-													src={
-														getUinfoQuery.data?.photo
-															? getUinfoQuery.data.photo
-															: "https://i.pravatar.cc/300"
-													}
+													src={pathUrl ? pathUrl : "https://i.pravatar.cc/300"}
 												/>
 											</IconButton>
 										</Tooltip>
