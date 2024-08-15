@@ -54,16 +54,6 @@ const Profile: React.FC = () => {
 				<div className="profile_content">
 					<div className="profile_header">
 						<Button onClick={() => navigate(-1)}>Назад</Button>
-
-						{/* <div className="profile_avatar">
-              <Avatar className="nav_user-log" alt="user">
-                <img
-                  style={{ maxWidth: "40px", minHeight: "40px" }}
-                  src={uinfo?.photo ? uinfo.photo : defUphoto}
-                  alt="user"
-                />
-              </Avatar>
-            </div> */}
 					</div>
 					<div className="wrapper-profile">
 						<aside className="profile_left">
