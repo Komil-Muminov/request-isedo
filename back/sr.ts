@@ -204,6 +204,7 @@ app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
 		res.status(200).json({
 			username: user.username,
 			uType: user.uType,
+			photo: user.photo ? `/uphoto/${user.photo}` : null,
 			fullName: user.fullName,
 			number: user.number,
 			position: user.position,

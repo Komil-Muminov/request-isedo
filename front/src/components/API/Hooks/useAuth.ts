@@ -42,7 +42,7 @@ export type PhotoType = z.infer<typeof PhotoScheme>;
 export const getMeScheme = z.object({
 	username: z.string(),
 	uType: z.string(),
-	photo: z.string().nullable().optional(),
+	photo: z.string().optional(),
 	fullName: z.string(),
 	number: z.string().optional(),
 	role: z.string().optional(),

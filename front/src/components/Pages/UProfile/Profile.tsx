@@ -1,9 +1,9 @@
 import { Button } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
-import { useAuth, GetMeType } from "../../API/Hooks/useAuth";
+import { useAuth } from "../../API/Hooks/useAuth";
 import { Loader } from "../../UI/Loader/Loader";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Ulink } from "../../UI/Ulinks/Ulinks";
 import { Outlet, useNavigate } from "react-router-dom";
 
@@ -27,14 +27,7 @@ const Profile: React.FC = () => {
 		queryClient,
 	);
 
-	const [uinfo, setUinfo] = useState<GetMeType | null>(null);
 	const [expanded, setExpanded] = useState<number | false>(false);
-
-	useEffect(() => {
-		if (uQuery.isSuccess) {
-			setUinfo(uQuery.data);
-		}
-	}, [uQuery]);
 
 	const handleAccordion = (id: number) => {
 		setExpanded(expanded === id ? false : id);

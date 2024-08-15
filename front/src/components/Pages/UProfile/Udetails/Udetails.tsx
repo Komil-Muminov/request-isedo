@@ -63,8 +63,11 @@ const Udetails = () => {
 		return null;
 	}
 
-	const pathUrl = uinfo?.photo ? `http://localhost:3000${uinfo.photo}` : null;
+	const pathUrl: string | null = uinfo?.photo
+		? `http://localhost:3000${uinfo.photo}`
+		: null;
 
+	console.log(typeof uinfo?.photo);
 	return (
 		<>
 			<div className="user-content">
