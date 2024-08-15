@@ -65,14 +65,13 @@ const Udetails = () => {
 
 	const pathUrl: string | null = uinfo?.photo
 		? `http://localhost:3000${uinfo.photo}`
-		: null;
+		: undefined;
 
 	console.log(typeof uinfo?.photo);
 	return (
 		<>
 			<div className="user-content">
 				<div className="user-details">
-					{uPhotoMutation.data?.status}
 					<p className="user-details_title">
 						{uinfo?.uType === "kvd"
 							? `Подтвержденная учетная запись`
@@ -82,7 +81,7 @@ const Udetails = () => {
 						<div className="user-details_photo">
 							{/* <img src={defUphoto} alt="" className="photo" /> */}
 							<img
-								src={pathUrl !== null ? pathUrl : defUphoto}
+								src={pathUrl ? pathUrl : defUphoto}
 								alt="uphoto"
 								className="uphoto"
 							/>
