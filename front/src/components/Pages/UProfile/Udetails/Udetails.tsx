@@ -67,8 +67,6 @@ const Udetails = () => {
 		return null;
 	}
 
-	console.log(uinfo);
-
 	const pathUrl = uinfo?.photo ? `http://localhost:3000${uinfo.photo}` : null;
 
 	return (
