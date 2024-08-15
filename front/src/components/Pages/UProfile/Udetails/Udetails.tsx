@@ -20,7 +20,6 @@ const Udetails = () => {
 			const username = uinfo?.username;
 			const token = localStorage.getItem("token");
 
-			console.log(`token uphoto:${token}`);
 			setphoto({
 				username,
 				file,
