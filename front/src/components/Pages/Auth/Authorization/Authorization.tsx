@@ -43,7 +43,6 @@ const Authorization = () => {
 		navigate("uprofile/udetails");
 	}
 
-	console.log(dirtyFields);
 
 	return (
 		<>
