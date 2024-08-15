@@ -31,10 +31,10 @@ const Profile: React.FC = () => {
 	const [expanded, setExpanded] = useState<number | false>(false);
 
 	useEffect(() => {
-		if (uQuery.status === "success") {
+		if (uQuery.isSuccess) {
 			setUinfo(uQuery.data);
 		}
-	}, [uQuery.status, uQuery.data]);
+	}, [uQuery]);
 
 	const handleAccordion = (id: number) => {
 		setExpanded(expanded === id ? false : id);
