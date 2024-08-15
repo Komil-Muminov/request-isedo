@@ -79,7 +79,6 @@ const Udetails = () => {
 					</p>
 					<div className="user-details-content">
 						<div className="user-details_photo">
-							{/* <img src={defUphoto} alt="" className="photo" /> */}
 							<img
 								src={pathUrl ? pathUrl : defUphoto}
 								alt="uphoto"
