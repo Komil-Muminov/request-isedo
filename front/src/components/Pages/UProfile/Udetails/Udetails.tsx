@@ -63,7 +63,7 @@ const Udetails = () => {
 		return null;
 	}
 
-	const pathUrl: string | null = uinfo?.photo
+	const pathUrl: string | undefined = uinfo?.photo
 		? `http://localhost:3000${uinfo.photo}`
 		: undefined;
 
