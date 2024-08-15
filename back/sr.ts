@@ -101,7 +101,7 @@ app.post(
 			return res.status(404).json({ error: "Пользователь не найден" });
 		}
 
-		users[userIndex].photo = file.filename = `${username}'s avatar`;
+		users[userIndex].photo = file.originalname;
 		writeToFile(usersFilePath, users);
 
 		res

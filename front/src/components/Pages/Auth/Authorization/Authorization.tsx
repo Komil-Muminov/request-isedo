@@ -39,10 +39,11 @@ const Authorization = () => {
 		logMutate.mutate(data);
 	};
 
-	if (logMutate.isSuccess) {
-		navigate("uprofile/udetails");
-	}
-
+	useEffect(() => {
+		if (logMutate.isSuccess) {
+			navigate("uprofile/udetails");
+		}
+	}, [logMutate.isSuccess]);
 
 	return (
 		<>
