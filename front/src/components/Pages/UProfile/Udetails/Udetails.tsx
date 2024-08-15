@@ -69,6 +69,8 @@ const Udetails = () => {
 
 	console.log(uinfo);
 
+	const pathUrl = uinfo?.photo ? `http://localhost:3000${uinfo.photo}` : null;
+
 	return (
 		<>
 			<div className="user-content">
@@ -83,9 +85,9 @@ const Udetails = () => {
 						<div className="user-details_photo">
 							{/* <img src={defUphoto} alt="" className="photo" /> */}
 							<img
-								src={defUphoto || defUphoto}
+								src={pathUrl !== null ? pathUrl : defUphoto}
 								alt="uphoto"
-								className="photo"
+								className="uphoto"
 							/>
 
 							<div className="file-service-photo">

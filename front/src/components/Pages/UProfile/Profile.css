@@ -1,140 +1,148 @@
 .profile_header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
 }
 .profile_content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 10px;
 }
 
 .ustory_content {
-  background-color: rgba(255, 224, 166, 0.843);
-  border-radius: 10px;
-  padding: 10px 10px 10px 10px;
+	background-color: rgba(255, 224, 166, 0.843);
+	border-radius: 10px;
+	padding: 10px 10px 10px 10px;
 }
 
 .wrapper-profile {
-  display: flex;
-  align-items: stretch; /* Важно для растяжения дочерних элементов */
-  justify-content: space-between;
-  gap: 20px;
+	display: flex;
+	align-items: stretch; /* Важно для растяжения дочерних элементов */
+	justify-content: space-between;
+	gap: 20px;
 }
 
 .profile_left,
 .profile_right {
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
-  gap: 20px;
-  padding: 30px;
-  background-color: #fff;
-  border: 1px solid #0000000f;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+	gap: 20px;
+	padding: 30px;
+	background-color: #fff;
+	border: 1px solid #0000000f;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+		0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .profile_left {
-  width: 25%;
+	width: 25%;
 }
 
 .profile_right {
-  width: 75%;
+	width: 75%;
 }
 
 .uaccordion_label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 
 .accordionDetails_links {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
 }
 
 .accordionDetails_links a {
-  text-decoration: none;
-  color: #333;
-  font-size: 18px;
-  text-decoration: underline;
+	text-decoration: none;
+	color: #333;
+	font-size: 18px;
+	text-decoration: underline;
 }
 
 .ulins_sublinks {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 }
 
 .MuiPaper-root {
-  box-shadow: none;
+	box-shadow: none;
 }
 
 .uprofile_list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 .user-content {
-  height: 100%;
-  width: 100%;
-  display: flex;
+	height: 100%;
+	width: 100%;
+	display: flex;
 }
 
 .user-details {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 .user-details_title {
-  color: #607d8b;
-  font-size: 22px;
-  font-weight: 500;
-  margin-bottom: 20px;
+	color: #607d8b;
+	font-size: 22px;
+	font-weight: 500;
+	margin-bottom: 20px;
 }
 
 .user-details-content {
-  display: flex;
-  align-items: start;
-  gap: 20px;
+	display: flex;
+	align-items: start;
+	gap: 20px;
 }
 
 .user-details_photo {
-  background-color: #fff;
-  border: 1px solid #0000000f;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  width: 35%;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center;
+	background-color: #fff;
+	border: 1px solid #0000000f;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+		0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	width: 35%;
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	align-items: center;
 }
 
-.user-details_photo .photo {
-  width: 100%;
+/* .user-details_photo {
+	width: 100%;
+} */
+
+.uphoto {
+	max-width: 272px;
+	width: 100%;
+	min-height: 272px;
+	max-height: 172px;
+	border-radius: 10px;
 }
 
 .user-details-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
 }
 
 .user-details_list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 20px;
 }
 
 /* .uprofile_content {
@@ -182,21 +190,21 @@
 /* Информация про организацию */
 
 .uorg_content {
-  display: flex;
-  gap: 20px;
-  min-height: 400px;
+	display: flex;
+	gap: 20px;
+	min-height: 400px;
 }
 
 .uorg_info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .uright_info {
-  align-self: flex-start;
+	align-self: flex-start;
 }
 
 .uidentify_link {
-  padding: 10px;
+	padding: 10px;
 }
