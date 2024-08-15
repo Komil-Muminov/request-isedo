@@ -33,17 +33,14 @@ const Registration = () => {
 	// Функция для отслеживания изменений значений в реальном времени.
 	const uType = watch("uType");
 
-	console.log(uType);
-
 	const { regMe } = useAuth();
 	const data: RegType = getValues();
-	console.log(data);
 	const regMutate = useMutation(
 		{
 			mutationFn: () => regMe(data),
 			//   Функция для обработки успешного завершения мутации (инвалидация запросов).
 			onSuccess: () => queryClient.invalidateQueries({ queryKey: ["rqsts"] }),
-			onError: () => console.log(`No`),
+			onError: () => console.log(`Вы не зарегистрированы`),
 		},
 		queryClient,
 	);

@@ -115,7 +115,6 @@ export const Register: React.FC = () => {
 								<Link
 									to={"/account/create"}
 									type="btn submit_btn register_add-btn"
-									onClick={() => console.log(`Переход`)}
 								>
 									<Button
 										variant="contained"

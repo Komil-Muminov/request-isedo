@@ -45,7 +45,6 @@ const AddRequest: React.FC = () => {
 
   if (uQuery.status === "pending") return <Loader />;
   if (uQuery.status === "error") {
-    console.log(uQuery.error);
     return null;
   }
 
@@ -89,7 +88,6 @@ const AddRequest: React.FC = () => {
   const onSubmit = (data: PostRqstScheme) => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     const stepFound = steps.find((e) => e.stepCode === activeStep);
-    console.log(data);
 
     const getDate = new Date();
 
@@ -107,7 +105,6 @@ const AddRequest: React.FC = () => {
       dateTime: date,
     };
 
-    console.log(`reqStatus: ${updateReqData.reqStatus}`);
     postRqstsMutation.mutate(updateReqData);
   };
 
@@ -117,7 +114,6 @@ const AddRequest: React.FC = () => {
     setGetFile({ number: id, file: file ? file.name : "" });
   };
 
-  // console.log(file);
 
   return (
     <section className="sections">

@@ -25,7 +25,6 @@ const Udetails = () => {
 				file,
 				token,
 			});
-			console.log(`file ${file}`);
 		}
 	};
 
@@ -33,7 +32,6 @@ const Udetails = () => {
 		mutationFn: () => setUphoto(uPhoto),
 		onSuccess: () =>
 			queryClient.invalidateQueries({ queryKey: ["users", "me"] }),
-		// onError: () => console.log(`km error uPhoto ${uPhotoMutation.error}`),
 	});
 
 	useEffect(() => {
