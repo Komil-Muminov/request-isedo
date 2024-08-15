@@ -67,7 +67,6 @@ const Udetails = () => {
 		? `http://localhost:3000${uinfo.photo}`
 		: undefined;
 
-	console.log(typeof uinfo?.photo);
 	return (
 		<>
 			<div className="user-content">
