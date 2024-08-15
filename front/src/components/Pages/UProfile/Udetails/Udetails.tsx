@@ -62,7 +62,6 @@ const Udetails = () => {
 
 	if (uQuery.status === "pending") return <Loader />;
 	if (uQuery.status === "error") {
-		console.log(uQuery.error);
 		return null;
 	}
 
