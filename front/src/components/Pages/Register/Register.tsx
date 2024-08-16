@@ -137,7 +137,6 @@ export const Register: React.FC = () => {
 								</Button>
 							</div>
 						</div>
-						{/* <Search rows={rows} /> */}
 						<Box
 							sx={{
 								// height: 250,
