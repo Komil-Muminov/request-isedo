@@ -10,8 +10,17 @@ import { getRqsts, GetRqstsType } from "../../API/GetRqsts";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import TuneIcon from "@mui/icons-material/Tune";
 import { useNavigate } from "react-router-dom";
+import { getMeScheme, useAuth } from "../../API/Hooks/useAuth";
 
 export const Register: React.FC = () => {
+	const { getMe } = useAuth();
+	const uTypeQuery = useQuery(
+		{
+			queryFn: () => getMe(),
+			queryKey: ["registerGetMe"],
+		},
+		queryClient,
+	);
 	const navigate = useNavigate();
 
 	const getRqsQuery = useQuery(
@@ -112,18 +121,20 @@ export const Register: React.FC = () => {
 									<TuneIcon />
 									<p>Фильтр</p>
 								</Button>
-								<Link
-									to={"/account/create"}
-									type="btn submit_btn register_add-btn"
+								<Button
+									variant="contained"
+									className={`${
+										uTypeQuery.data?.uType === "kvd" ? "utype_hidden" : ""
+									}`}
+									sx={{ display: "flex", gap: "5px" }}
 								>
-									<Button
-										variant="contained"
-										sx={{ display: "flex", gap: "5px" }}
-									>
-										<NoteAddIcon />
-										<p>Добавить</p>
-									</Button>
-								</Link>
+									<NoteAddIcon />
+									<p>Добавить</p>
+									<Link
+										to={"/account/create"}
+										type="btn submit_btn register_add-btn"
+									></Link>
+								</Button>
 							</div>
 						</div>
 						{/* <Search rows={rows} /> */}
