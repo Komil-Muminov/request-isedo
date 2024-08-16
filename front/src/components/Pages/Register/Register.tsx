@@ -139,7 +139,6 @@ export const Register: React.FC = () => {
 						</div>
 						<Box
 							sx={{
-								// height: 250,
 								width: "100%",
 								backgroundColor: "#fff",
 								border: "2px solid #ededed",
