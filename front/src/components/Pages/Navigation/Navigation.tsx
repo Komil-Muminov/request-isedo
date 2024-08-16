@@ -165,7 +165,7 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>{" "}
-										Организация: Основная организация
+										Организация: {getUinfoQuery.data.uType}
 									</li>
 									{/* Другие элементы списка */}
 								</ul>
