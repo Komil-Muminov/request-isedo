@@ -20,11 +20,13 @@ const Udetails = () => {
 			const username = uinfo?.username;
 			const token = localStorage.getItem("token");
 
+			console.log(`token uphoto:${token}`);
 			setphoto({
 				username,
 				file,
 				token,
 			});
+			console.log(`file ${file}`);
 		}
 	};
 
@@ -32,6 +34,7 @@ const Udetails = () => {
 		mutationFn: () => setUphoto(uPhoto),
 		onSuccess: () =>
 			queryClient.invalidateQueries({ queryKey: ["users", "me"] }),
+		// onError: () => console.log(`km error uPhoto ${uPhotoMutation.error}`),
 	});
 
 	useEffect(() => {
@@ -60,17 +63,17 @@ const Udetails = () => {
 
 	if (uQuery.status === "pending") return <Loader />;
 	if (uQuery.status === "error") {
+		console.log(uQuery.error);
 		return null;
 	}
 
-	const pathUrl: string | undefined = uinfo?.photo
-		? `http://localhost:3000${uinfo.photo}`
-		: undefined;
+	console.log(uinfo);
 
 	return (
 		<>
 			<div className="user-content">
 				<div className="user-details">
+					{uPhotoMutation.data?.status}
 					<p className="user-details_title">
 						{uinfo?.uType === "kvd"
 							? `Подтвержденная учетная запись`
@@ -78,10 +81,11 @@ const Udetails = () => {
 					</p>
 					<div className="user-details-content">
 						<div className="user-details_photo">
+							{/* <img src={defUphoto} alt="" className="photo" /> */}
 							<img
-								src={pathUrl ? pathUrl : defUphoto}
+								src={defUphoto || defUphoto}
 								alt="uphoto"
-								className="uphoto"
+								className="photo"
 							/>
 
 							<div className="file-service-photo">

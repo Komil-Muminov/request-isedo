@@ -35,6 +35,7 @@ const LazyUdetails = lazy(
   () => import("./components/Pages/UProfile/Udetails/Udetails")
 );
 
+/* Надо сделать динамический запрос */
 function App() {
   return (
     <>
