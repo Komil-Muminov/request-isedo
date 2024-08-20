@@ -4,7 +4,6 @@ import defUphoto from "../../../../assets/ErrorPage.jpg";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../../../queryClient";
 import { Button } from "@mui/material";
-import { Loader } from "../../../UI/Loader/Loader";
 import UserInfoList from "../../../UI/UserInfoList/UserInfoList";
 import { Link } from "react-router-dom";
 import AddFileRequest from "../../../UI/AddFileRequest/AddFileRequest";
@@ -13,7 +12,6 @@ import "./Udetails.css";
 import "../Profile.css";
 const Udetails = () => {
 	const [uPhoto, setphoto] = useState<CurrUserPhoto | null>(null);
-
 	const handleUphoto = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files && e.target.files[0]) {
 			const file = e.target.files[0];
@@ -41,9 +39,7 @@ const Udetails = () => {
 	);
 
 	useEffect(() => {
-		if (uPhoto) {
-			uPhotoMutation.mutate();
-		}
+		uPhotoMutation.mutate();
 	}, [uPhoto]);
 
 	const { getMe } = useAuth();
@@ -64,17 +60,13 @@ const Udetails = () => {
 		}
 	}, [uQuery.status, uQuery.data]);
 
-	if (uQuery.status === "pending") return <Loader />;
-	if (uQuery.status === "error") {
-		console.log(uQuery.error);
-		return null;
-	}
-
+	const photoUrl = uinfo?.photo ? `http://localhost:3000${uinfo.photo}` : null;
 	console.log(uinfo);
-
+	console.log(photoUrl);
 	return (
 		<>
 			<div className="user-content">
+				{uinfo?.photo ? uinfo.photo : typeof uinfo?.photo}
 				<div className="user-details">
 					{uPhotoMutation.data?.status}
 					<p className="user-details_title">
@@ -85,11 +77,7 @@ const Udetails = () => {
 					<div className="user-details-content">
 						<div className="user-details_photo">
 							{/* <img src={defUphoto} alt="" className="photo" /> */}
-							<img
-								src={defUphoto || defUphoto}
-								alt="uphoto"
-								className="photo"
-							/>
+							<img src={photoUrl || defUphoto} alt="uphoto" className="photo" />
 
 							<div className="file-service-photo">
 								<label htmlFor="uphoto">
