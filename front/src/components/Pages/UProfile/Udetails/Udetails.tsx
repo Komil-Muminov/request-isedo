@@ -30,12 +30,15 @@ const Udetails = () => {
 		}
 	};
 
-	const uPhotoMutation = useMutation({
-		mutationFn: () => setUphoto(uPhoto),
-		onSuccess: () =>
-			queryClient.invalidateQueries({ queryKey: ["users", "me"] }),
-		// onError: () => console.log(`km error uPhoto ${uPhotoMutation.error}`),
-	});
+	const uPhotoMutation = useMutation(
+		{
+			mutationFn: () => setUphoto(uPhoto),
+			onSuccess: () =>
+				queryClient.invalidateQueries({ queryKey: ["users", "me"] }),
+			// onError: () => console.log(`km error uPhoto ${uPhotoMutation.error}`),
+		},
+		queryClient,
+	);
 
 	useEffect(() => {
 		if (uPhoto) {
@@ -89,7 +92,15 @@ const Udetails = () => {
 							/>
 
 							<div className="file-service-photo">
-								<input type="file" onChange={handleUphoto} />
+								<label htmlFor="uphoto">
+									Выберите фото
+									<input
+										style={{ visibility: "hidden" }}
+										id="uphoto"
+										type="file"
+										onChange={handleUphoto}
+									/>
+								</label>
 								<AddFileRequest />
 							</div>
 						</div>

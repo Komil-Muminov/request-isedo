@@ -83,7 +83,7 @@ const AddRequest: React.FC = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["requests"] });
     },
-  });
+  },queryClient);
 
   // Увеличивает номер текущего шага на 1.
   const onSubmit = (data: PostRqstScheme) => {
