@@ -218,7 +218,7 @@ app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
     username: user.username,
     fullName: user.fullName,
     photo: user.photo ? `/uploads/${user.photo}` : null,
-    phone: user.number,
+    phone: user.phone,
     tax: user.tax,
     email: user.email,
     orgName: user.orgName,

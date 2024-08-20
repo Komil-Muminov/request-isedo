@@ -49,9 +49,9 @@ export const getMeScheme = z.object({
   tax: z.string().optional(),
   email: z.string().optional(),
   role: z.string(),
-  orgName: z.string(),
-  orgTax: z.string(),
-  department: z.string(),
+  orgName: z.string().optional(),
+  orgTax: z.string().optional(),
+  department: z.string().optional(),
   reqIdentity: z.boolean().optional(),
   uIdentity: z.boolean().optional(),
 });
@@ -111,7 +111,10 @@ export const useAuth = () => {
     })
       .then(validateResponse)
       .then((response) => response.json())
-      .then((data) => getMeScheme.parse(data));
+      .then((data) => {
+        console.log("Полученные данные:", data);
+        return getMeScheme.parse(data);
+      });
   };
 
   // Возвращает функции для регистрации, логина и получения информации о пользователе.
