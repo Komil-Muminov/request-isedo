@@ -190,18 +190,18 @@ const ShowRequest = () => {
                 id="orgname"
                 className="request_inp"
                 value={rqstsData?.orgname || ""}
-                label="ФИО руководителя"
+                label="ФИО"
               />
               <TextField
                 type="text"
                 className="request_inp"
-                label="Должность руководителя"
+                label="Должность"
                 value={rqstsData?.accountant || ""}
               />
               <TextField
                 type="text"
                 className="request_inp"
-                label="Контанты руководителя"
+                label="Контанты"
                 value={rqstsData?.desc || ""}
               />
             </form>
