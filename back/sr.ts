@@ -113,19 +113,19 @@ app.post(
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.post("/register", (req: Request, res: Response) => {
-  const {
-    uType,
-    username,
-    password,
-    fullName,
-    phone,
-    tax,
-    email,
-    orgName,
-    orgTax,
-    role,
-    department,
-  } = req.body;
+	const {
+		uType,
+		username,
+		password,
+		fullName,
+		phone,
+		tax,
+		email,
+		orgName,
+		orgTax,
+		role,
+		department,
+	} = req.body;
 
 	if (!username || !password || !uType) {
 		return res.status(400).json({ error: "Отсутствуют обязательные поля" });
@@ -142,23 +142,23 @@ app.post("/register", (req: Request, res: Response) => {
 
 	const id = generateUniqueId(users);
 
-  const newUser = {
-    id,
-    uType,
-    username,
-    password,
-    photo: "",
-    fullName,
-    phone,
-    tax,
-    email,
-    role,
-    orgName,
-    orgTax,
-    department,
-    reqIdentity: false,
-    uIdentity: false,
-  };
+	const newUser = {
+		id,
+		uType,
+		username,
+		password,
+		photo: "",
+		fullName,
+		phone,
+		tax,
+		email,
+		role,
+		orgName,
+		orgTax,
+		department,
+		reqIdentity: false,
+		uIdentity: false,
+	};
 
 	users.push(newUser);
 	writeToFile(usersFilePath, users);
@@ -199,35 +199,36 @@ app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
 	const users = readFromFile(usersFilePath);
 	const user = users.find((user: any) => user.id === userId);
 
-  if (!user) {
-    return res.status(404).json({ error: "Пользователь не найден" });
-  }
-  if (user.uType === "kvd") {
-    res.status(200).json({
-      username: user.username,
-      uType: user.uType,
-      fullName: user.fullName,
-      phone: user.phone,
-      role: user.role,
-      department: user.department,
-    });
-  }
+	if (!user) {
+		return res.status(404).json({ error: "Пользователь не найден" });
+	}
+	if (user.uType === "kvd") {
+		res.status(200).json({
+			username: user.username,
+			uType: user.uType,
+			photo: user.photo ? `/uploads/${user.photo}` : null,
+			fullName: user.fullName,
+			phone: user.phone,
+			role: user.role,
+			department: user.department,
+		});
+	}
 
-  res.status(200).json({
-    uType: user.uType,
-    username: user.username,
-    fullName: user.fullName,
-    photo: user.photo ? `/uploads/${user.photo}` : null,
-    phone: user.phone,
-    tax: user.tax,
-    email: user.email,
-    orgName: user.orgName,
-    orgTax: user.orgTax,
-    role: user.role,
-    department: user.department,
-    reqIdentity: user.reqIdentity,
-    uIdentity: user.uIdentity,
-  });
+	res.status(200).json({
+		uType: user.uType,
+		username: user.username,
+		fullName: user.fullName,
+		photo: user.photo ? `/uploads/${user.photo}` : null,
+		phone: user.phone,
+		tax: user.tax,
+		email: user.email,
+		orgName: user.orgName,
+		orgTax: user.orgTax,
+		role: user.role,
+		department: user.department,
+		reqIdentity: user.reqIdentity,
+		uIdentity: user.uIdentity,
+	});
 });
 
 // Express ищет по всему маршруту /requests и когда находит, она понимает что это за запрос и имеет доступ к его response, то есть данным.
