@@ -4,7 +4,6 @@ import defUphoto from "../../../../assets/ErrorPage.jpg";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../../../queryClient";
 import { Button } from "@mui/material";
-import { Loader } from "../../../UI/Loader/Loader";
 import UserInfoList from "../../../UI/UserInfoList/UserInfoList";
 import { Link } from "react-router-dom";
 import AddFileRequest from "../../../UI/AddFileRequest/AddFileRequest";
