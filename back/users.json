@@ -56,5 +56,22 @@
     "department": "Отдел по работе с клиентами",
     "reqIdentity": false,
     "uIdentity": false
+  },
+  {
+    "id": 5,
+    "uType": "bo",
+    "username": "f.jamshed",
+    "password": "123",
+    "photo": "",
+    "fullName": "Фозилов Чамшед",
+    "phone": "880003434",
+    "tax": "250008809",
+    "email": "j.fozilov@gmail.com",
+    "role": "Начальник отдела по развитию и прогресса ИИ в области Data Science",
+    "orgName": "ООО Технологический центр развития молодежи",
+    "orgTax": "040003414",
+    "department": "",
+    "reqIdentity": false,
+    "uIdentity": false
   }
 ]

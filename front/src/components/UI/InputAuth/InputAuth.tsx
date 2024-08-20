@@ -17,6 +17,7 @@ const InputAuth: React.FC<TProps> = ({
 }) => {
   return (
     <TextField
+      required
       {...register(inputName, {
         required: {
           value: true,

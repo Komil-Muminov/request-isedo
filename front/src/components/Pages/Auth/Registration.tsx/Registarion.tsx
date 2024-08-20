@@ -7,6 +7,7 @@ import { queryClient } from "../../../../queryClient";
 import { useAuth } from "../../../API/Hooks/useAuth";
 import InputAuth from "../../../UI/InputAuth/InputAuth";
 import EmailIcon from "@mui/icons-material/Email";
+import { useState } from "react";
 
 const Registration = () => {
   // Надо доработать
@@ -19,13 +20,16 @@ const Registration = () => {
     formState: { errors },
   } = useForm<RegType>({
     defaultValues: {
+      uType: "",
       username: "",
       password: "",
-      uType: "",
       fullName: "",
-      role: "",
+      phone: "",
+      tax: "",
       email: "",
-      position: "",
+      orgName: "",
+      orgTax: "",
+      role: "",
       department: "",
     },
   });
@@ -50,6 +54,8 @@ const Registration = () => {
   const onSubmit = () => {
     regMutate.mutate();
   };
+
+  const [showRegisterButton, setShowRegisterButton] = useState<boolean>(false);
 
   // switch (regMutate.status) {
   //   case "success":
@@ -84,103 +90,126 @@ const Registration = () => {
           </select>
           {uType == "bo" ? (
             <>
-              <InputAuth
-                register={register}
-                inputName="username"
-                inputPlaceholder="Логин"
-                requiredMessage="Это поле объязательно к заполенению"
-                minLengthMessage="Логин должен содержать минимум 9 символов"
-                inputType="text"
-                kind=""
-              />
+              {showRegisterButton === false && (
+                <>
+                  <p>Данные пользователя</p>
+                  <InputAuth
+                    register={register}
+                    inputName="username"
+                    inputPlaceholder="Логин"
+                    requiredMessage="Это поле объязательно к заполенению"
+                    minLengthMessage="Логин должен содержать минимум 9 символов"
+                    inputType="text"
+                    kind=""
+                  />
+                  <span className="form_errors-text">
+                    {errors?.username && errors.username.message}
+                  </span>
+                  <InputAuth
+                    register={register}
+                    inputName="password"
+                    inputPlaceholder="Пароль"
+                    requiredMessage="Заполните поле password"
+                    minLengthMessage="Пароль должен содержать минимум 5 символов"
+                    inputType="password"
+                    kind=""
+                  />
+                  <span className="form_errors-text">
+                    {errors?.password && errors.password.message}
+                  </span>
+                  <InputAuth
+                    register={register}
+                    inputName="fullName"
+                    inputPlaceholder="ФИО"
+                    requiredMessage="Заполните поле ФИО"
+                    minLengthMessage="ФИО должен содержать минимум 5 символов"
+                    inputType="text"
+                    kind=""
+                  />
+                  <span className="form_errors-text">
+                    {errors?.fullName && errors.fullName.message}
+                  </span>
+                  <InputAuth
+                    register={register}
+                    inputName="phone"
+                    inputPlaceholder="Телефон"
+                    requiredMessage="Заполните поле телефон"
+                    minLengthMessage="Телефон должен содержать минимум 9 символов"
+                    inputType="text"
+                    kind=""
+                  />
+                  <span className="form_errors-text">
+                    {errors?.phone && errors.phone.message}
+                  </span>
+                  <InputAuth
+                    register={register}
+                    inputName="tax"
+                    inputPlaceholder="ИНН"
+                    requiredMessage="Заполните поле ИНН"
+                    minLengthMessage="ИНН должна содержать минимум 7 символов"
+                    inputType="text"
+                    kind=""
+                  />
+                  <span className="form_errors-text">
+                    {errors?.tax && errors.tax.message}
+                  </span>
+                  <InputAuth
+                    register={register}
+                    inputName="email"
+                    inputPlaceholder="E-mail адресс"
+                    requiredMessage="Заполните поле email"
+                    minLengthMessage="E-mail должна содержать минимум 7 символов"
+                    inputType="text"
+                    kind=""
+                  />
+                  <span className="form_errors-text">
+                    {errors?.email && errors.email.message}
+                  </span>
+                </>
+              )}
+              {showRegisterButton === true && (
+                <>
+                  <p>Данные организации</p>
 
-              <span className="form_errors-text">
-                {errors?.username && errors.username.message}
-              </span>
+                  <InputAuth
+                    register={register}
+                    inputName="orgName"
+                    inputPlaceholder="Наименование организации"
+                    requiredMessage="Заполните поле наименование организации"
+                    minLengthMessage="Наименование организации должна содержать минимум 3 символов"
+                    inputType="text"
+                    kind=""
+                  />
+                  <span className="form_errors-text">
+                    {errors?.orgName && errors.orgName.message}
+                  </span>
+                  <InputAuth
+                    register={register}
+                    inputName="orgTax"
+                    inputPlaceholder="ИНН"
+                    requiredMessage="Заполните поле ИНН"
+                    minLengthMessage="ИНН должна содержать минимум 3 символов"
+                    inputType="text"
+                    kind=""
+                  />
+                  <span className="form_errors-text">
+                    {errors?.orgTax && errors.orgTax.message}
+                  </span>
+                  <InputAuth
+                    register={register}
+                    inputName="role"
+                    inputPlaceholder="Должность"
+                    requiredMessage="Заполните поле должность"
+                    minLengthMessage="Должность должна содержать минимум 3 символов"
+                    inputType="text"
+                    kind=""
+                  />
+                  <span className="form_errors-text">
+                    {errors?.role && errors.role.message}
+                  </span>
+                </>
+              )}
 
-              <InputAuth
-                register={register}
-                inputName="password"
-                inputPlaceholder="Пароль"
-                requiredMessage="Заполните поле password"
-                minLengthMessage="Пароль должен содержать минимум 5 символов"
-                inputType="password"
-                kind=""
-              />
-
-              <span className="form_errors-text">
-                {errors?.password && errors.password.message}
-              </span>
-
-              <InputAuth
-                register={register}
-                inputName="fullName"
-                inputPlaceholder="ФИО"
-                requiredMessage="Заполните поле ФИО"
-                minLengthMessage="ФИО должен содержать минимум 5 символов"
-                inputType="text"
-                kind=""
-              />
-
-              <span className="form_errors-text">
-                {errors?.fullName && errors.fullName.message}
-              </span>
-
-              <InputAuth
-                register={register}
-                inputName="number"
-                inputPlaceholder="Телефон"
-                requiredMessage="Заполните поле телефон"
-                minLengthMessage="Телефон должен содержать минимум 9 символов"
-                inputType="text"
-                kind=""
-              />
-
-              <span className="form_errors-text">
-                {errors?.number && errors.number.message}
-              </span>
-
-              <InputAuth
-                register={register}
-                inputName="role"
-                inputPlaceholder="Должность"
-                requiredMessage="Заполните поле должность"
-                minLengthMessage="Должность должна содержать минимум 3 символов"
-                inputType="text"
-                kind=""
-              />
-
-              <span className="form_errors-text">
-                {errors?.role && errors.role.message}
-              </span>
-
-              <InputAuth
-                register={register}
-                inputName="tax"
-                inputPlaceholder="ИНН"
-                requiredMessage="Заполните поле ИНН"
-                minLengthMessage="ИНН должна содержать минимум 7 символов"
-                inputType="text"
-                kind=""
-              />
-
-              <span className="form_errors-text">
-                {errors?.tax && errors.tax.message}
-              </span>
-
-              <InputAuth
-                register={register}
-                inputName="email"
-                inputPlaceholder="E-mail адресс"
-                requiredMessage="Заполните поле email"
-                minLengthMessage="E-mail должна содержать минимум 7 символов"
-                inputType="text"
-                kind=""
-              />
-
-              <span className="form_errors-text">
-                {errors?.email && errors.email.message}
-              </span>
               {regMutate.isSuccess && (
                 <div className="email-message">
                   <EmailIcon />
@@ -236,7 +265,7 @@ const Registration = () => {
 
               <InputAuth
                 register={register}
-                inputName="position"
+                inputName="role"
                 inputPlaceholder="Должность"
                 requiredMessage="Заполните поле должность"
                 minLengthMessage="Должность должна содержать минимум 5 символов"
@@ -244,7 +273,7 @@ const Registration = () => {
                 kind=""
               />
               <span className="form_errors-text">
-                {errors?.position && errors.position.message}
+                {errors?.role && errors.role.message}
               </span>
               <InputAuth
                 register={register}
@@ -264,13 +293,19 @@ const Registration = () => {
             <>НЕТ</>
           )}
         </div>
-        <ButtonKM
-          disabled={regMutate.isPending}
-          isLoading={regMutate.isPending}
-          type="submit"
-        >
-          Зарегистрироваться
-        </ButtonKM>
+        {showRegisterButton === false && uType !== "" && uType !== "kvd" ? (
+          <ButtonKM onClick={() => setShowRegisterButton(true)}>Далее</ButtonKM>
+        ) : (showRegisterButton === true && uType !== "") || uType === "kvd" ? (
+          <ButtonKM
+            disabled={regMutate.isPending}
+            isLoading={regMutate.isPending}
+            type="submit"
+          >
+            Зарегистрироваться
+          </ButtonKM>
+        ) : (
+          <></>
+        )}
       </form>
       {console.log(data)}
     </>

@@ -114,15 +114,16 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.post("/register", (req: Request, res: Response) => {
   const {
+    uType,
     username,
     password,
-    uType,
     fullName,
-    number,
-    role,
+    phone,
     tax,
     email,
-    position,
+    orgName,
+    orgTax,
+    role,
     department,
   } = req.body;
 
@@ -143,16 +144,17 @@ app.post("/register", (req: Request, res: Response) => {
 
   const newUser = {
     id,
+    uType,
     username,
     password,
-    uType,
     photo: "",
     fullName,
-    number,
-    role,
+    phone,
     tax,
     email,
-    position,
+    role,
+    orgName,
+    orgTax,
     department,
     reqIdentity: false,
     uIdentity: false,
@@ -205,22 +207,23 @@ app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
       username: user.username,
       uType: user.uType,
       fullName: user.fullName,
-      number: user.number,
-      position: user.position,
+      phone: user.phone,
+      role: user.role,
       department: user.department,
     });
   }
 
   res.status(200).json({
-    username: user.username,
     uType: user.uType,
-    photo: user.photo ? `/uploads/${user.photo}` : null,
+    username: user.username,
     fullName: user.fullName,
-    number: user.number,
-    role: user.role,
+    photo: user.photo ? `/uploads/${user.photo}` : null,
+    phone: user.number,
     tax: user.tax,
     email: user.email,
-    position: user.position,
+    orgName: user.orgName,
+    orgTax: user.orgTax,
+    role: user.role,
     department: user.department,
     reqIdentity: user.reqIdentity,
     uIdentity: user.uIdentity,
