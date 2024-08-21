@@ -11,6 +11,7 @@ const ButtonPanelControl = ({ icon, text, goBack }: TProps) => {
         gap: "5px",
         padding: "10px",
         borderRadius: "50px",
+        color: "#607d8b",
       }}
     >
       {icon}

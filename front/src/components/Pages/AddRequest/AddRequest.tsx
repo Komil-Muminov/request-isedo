@@ -78,12 +78,15 @@ const AddRequest: React.FC = () => {
   // Функция для отслеживания изменений значений в реальном времени.
   const reqType = watch("reqType");
 
-  const postRqstsMutation = useMutation({
-    mutationFn: (data: PostRqstScheme) => postRequest(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["requests"] });
+  const postRqstsMutation = useMutation(
+    {
+      mutationFn: (data: PostRqstScheme) => postRequest(data),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["requests"] });
+      },
     },
-  },queryClient);
+    queryClient
+  );
 
   // Увеличивает номер текущего шага на 1.
   const onSubmit = (data: PostRqstScheme) => {
@@ -126,7 +129,14 @@ const AddRequest: React.FC = () => {
           <Button
             onClick={() => navigate(-1)}
             variant="outlined"
-            sx={{ borderRadius: "50px" }}
+            sx={{
+              borderRadius: "50px",
+              color: "#607d8b",
+              borderColor: "#607d8b",
+              "&:hover": {
+                borderColor: "#607d8b",
+              },
+            }}
           >
             Назад
           </Button>
