@@ -21,9 +21,21 @@
 
 .request_form {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: start;
+  gap: 50px;
   width: 100%;
+}
+
+.inputs-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.inputs-list .MuiTextField-root {
+  flex: 1 1 calc(33.333% - 20px); /* или другой размер, в зависимости от нужного количества элементов в строке */
+  min-width: 400px; /* минимальная ширина, чтобы избежать слишком маленьких полей */
 }
 
 .req-select {

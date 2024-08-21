@@ -81,8 +81,6 @@ export const Navigation: React.FC = () => {
 
   // Надо свг контейнер сделать
 
-  console.log(getUinfoQuery?.data?.photo);
-
   if (getUinfoQuery?.status === "success") {
     return (
       <>

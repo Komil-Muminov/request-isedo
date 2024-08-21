@@ -120,7 +120,7 @@ const AddRequest: React.FC = () => {
     setGetFile({ number: id, file: file ? file.name : "" });
   };
 
-  // console.log(file);
+  console.log(uinfo);
 
   return (
     <section className="sections">
@@ -193,27 +193,60 @@ const AddRequest: React.FC = () => {
               />
               {reqType === "Смена бухгалтера" && (
                 <>
-                  <TextField
-                    {...register("orgname")}
-                    type="text"
-                    id="orgname"
-                    className="request_inp"
-                    placeholder="ФИО бухгалтера"
-                  />
-                  <TextField
-                    {...register("accountant")}
-                    type="text"
-                    className="request_inp"
-                    placeholder="Должность бухгалтера"
-                    disabled={!dirtyFields.orgname}
-                  />
-                  <TextField
-                    {...register("desc")}
-                    type="text"
-                    className="request_inp"
-                    placeholder="Контанты бухгалтера"
-                    disabled={!dirtyFields.accountant}
-                  />
+                  <div className="inputs-list">
+                    <TextField
+                      {...register("orgname")}
+                      type="text"
+                      id="orgname"
+                      className="request_inp"
+                      label="ФИО"
+                      value={uinfo?.fullName || ""}
+                    />
+                    <TextField
+                      {...register("accountant")}
+                      type="text"
+                      className="request_inp"
+                      label="Должность"
+                      value={uinfo?.role || ""}
+                    />
+                    <TextField
+                      {...register("desc")}
+                      type="text"
+                      className="request_inp"
+                      label="Номер телефона"
+                      value={uinfo?.phone || ""}
+                    />
+                    {/* =============== Добавить в базу requests =============== */}
+                    <TextField
+                      {...register("desc")}
+                      type="text"
+                      className="request_inp"
+                      label="E-mail адрес"
+                      value={uinfo?.email || ""}
+                    />
+                    <TextField
+                      {...register("desc")}
+                      type="text"
+                      className="request_inp"
+                      label="ИНН"
+                      value={uinfo?.tax || ""}
+                    />
+                    <TextField
+                      {...register("desc")}
+                      type="text"
+                      className="request_inp"
+                      label="ИНН"
+                      value={uinfo?.orgTax || ""}
+                    />
+                    <TextField
+                      {...register("desc")}
+                      type="text"
+                      className="request_inp"
+                      label="Организация"
+                      value={uinfo?.orgName || ""}
+                    />
+                  </div>
+
                   <div className="wrapper-table">
                     <table>
                       <thead>
@@ -241,35 +274,37 @@ const AddRequest: React.FC = () => {
               )}
               {reqType === "Смена руководителя" && (
                 <>
-                  <TextField
-                    {...register("orgname")}
-                    type="text"
-                    id="orgname"
-                    className="request_inp"
-                    // KM
-                    placeholder="ФИО руководителя"
-                  />
-                  <TextField
-                    {...register("accountant")}
-                    type="text"
-                    className="request_inp"
-                    placeholder="Должность руководителя"
-                    disabled={!dirtyFields.orgname}
-                  />
-                  <TextField
-                    {...register("desc")}
-                    type="text"
-                    className="request_inp"
-                    placeholder="Контанты руководителя"
-                    disabled={!dirtyFields.accountant}
-                  />
-                  <TextField
-                    {...register("desc")}
-                    type="text"
-                    className="request_inp"
-                    placeholder="Организация руководителя"
-                    disabled={!dirtyFields.accountant}
-                  />
+                  <div className="inputs-list">
+                    <TextField
+                      {...register("orgname")}
+                      type="text"
+                      id="orgname"
+                      className="request_inp"
+                      // KM
+                      placeholder="ФИО руководителя"
+                    />
+                    <TextField
+                      {...register("accountant")}
+                      type="text"
+                      className="request_inp"
+                      placeholder="Должность руководителя"
+                      disabled={!dirtyFields.orgname}
+                    />
+                    <TextField
+                      {...register("desc")}
+                      type="text"
+                      className="request_inp"
+                      placeholder="Контанты руководителя"
+                      disabled={!dirtyFields.accountant}
+                    />
+                    <TextField
+                      {...register("desc")}
+                      type="text"
+                      className="request_inp"
+                      placeholder="Организация руководителя"
+                      disabled={!dirtyFields.accountant}
+                    />
+                  </div>
                 </>
               )}
             </form>

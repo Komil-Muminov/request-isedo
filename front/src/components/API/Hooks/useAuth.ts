@@ -112,7 +112,6 @@ export const useAuth = () => {
       .then(validateResponse)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Полученные данные:", data);
         return getMeScheme.parse(data);
       });
   };
