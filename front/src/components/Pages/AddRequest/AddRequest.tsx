@@ -64,6 +64,7 @@ const AddRequest: React.FC = () => {
     // Функция dirtyFields возвращает true или false в зависимости от того, было ли изменено поле "Название организации".
     // Поле для бухгалтера становится доступным только если поле "Название организации" было изменено.
     watch,
+    setValue,
     formState: { dirtyFields },
   } = useForm<PostRqstScheme>({
     defaultValues: {
@@ -79,6 +80,19 @@ const AddRequest: React.FC = () => {
       dateTime: "",
     },
   });
+
+  useEffect(() => {
+    if (uQuery.status === "success" && uinfo) {
+      setValue("fullName", uinfo.fullName || "");
+      setValue("role", uinfo.role || "");
+      setValue("phone", uinfo.phone || "");
+      setValue("email", uinfo.email || "");
+      setValue("tax", uinfo.tax || "");
+      setValue("orgTax", uinfo.orgTax || "");
+      setValue("orgName", uinfo.orgName || "");
+    }
+  }, [uQuery.status, uinfo]);
+
   // Функция для отслеживания изменений значений в реальном времени.
   const reqType = watch("reqType");
 
@@ -98,7 +112,6 @@ const AddRequest: React.FC = () => {
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     const stepFound = steps.find((e) => e.stepCode === activeStep);
-    console.log(data);
 
     const getDate = new Date();
 
@@ -125,8 +138,6 @@ const AddRequest: React.FC = () => {
   const handleGetFile = (id: number, file: File | null) => {
     setGetFile({ number: id, file: file ? file.name : "" });
   };
-
-  console.log(uinfo);
 
   return (
     <section>
@@ -206,7 +217,6 @@ const AddRequest: React.FC = () => {
                       type="text"
                       className="request_inp"
                       label="ФИО"
-                      value={uinfo?.fullName || ""}
                     />
                     <TextField
                       {...register("role")}
@@ -214,7 +224,6 @@ const AddRequest: React.FC = () => {
                       type="text"
                       className="request_inp"
                       label="Должность"
-                      value={uinfo?.role || ""}
                     />
                     <TextField
                       {...register("phone")}
@@ -222,7 +231,6 @@ const AddRequest: React.FC = () => {
                       type="text"
                       className="request_inp"
                       label="Номер телефона"
-                      value={uinfo?.phone || ""}
                     />
                     {/* =============== Добавить в базу requests =============== */}
                     <TextField
@@ -231,7 +239,6 @@ const AddRequest: React.FC = () => {
                       type="text"
                       className="request_inp"
                       label="E-mail адрес"
-                      value={uinfo?.email || ""}
                     />
                     <TextField
                       {...register("tax")}
@@ -239,7 +246,6 @@ const AddRequest: React.FC = () => {
                       type="text"
                       className="request_inp"
                       label="ИНН"
-                      value={uinfo?.tax || ""}
                     />
                     <TextField
                       {...register("orgTax")}
@@ -247,7 +253,6 @@ const AddRequest: React.FC = () => {
                       type="text"
                       className="request_inp"
                       label="ИНН"
-                      value={uinfo?.orgTax || ""}
                     />
                     <TextField
                       {...register("orgName")}
@@ -255,7 +260,6 @@ const AddRequest: React.FC = () => {
                       type="text"
                       className="request_inp"
                       label="Организация"
-                      value={uinfo?.orgName || ""}
                     />
                   </div>
 
@@ -291,7 +295,6 @@ const AddRequest: React.FC = () => {
                       {...register("fullName")}
                       type="text"
                       id="fullName"
-                      value={uinfo?.fullName || ""}
                       className="request_inp"
                       // KM
                       placeholder="ФИО"
@@ -299,7 +302,6 @@ const AddRequest: React.FC = () => {
                     <TextField
                       {...register("role")}
                       id="role"
-                      value={uinfo?.role || ""}
                       type="text"
                       className="request_inp"
                       placeholder="Должность"
@@ -308,7 +310,6 @@ const AddRequest: React.FC = () => {
                     <TextField
                       {...register("phone")}
                       id="phone"
-                      value={uinfo?.phone || ""}
                       type="text"
                       className="request_inp"
                       placeholder="Номер телефона"
@@ -317,7 +318,6 @@ const AddRequest: React.FC = () => {
                     <TextField
                       {...register("orgName")}
                       id="orgName"
-                      value={uinfo?.orgName || ""}
                       type="text"
                       className="request_inp"
                       placeholder="Организация"
