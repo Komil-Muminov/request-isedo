@@ -52,6 +52,9 @@ body {
   background-color: #f7f7fc;
 }
 
+.radix-themes {
+  background-color: #f7f7fc !important;
+}
 a {
   color: #000;
 }

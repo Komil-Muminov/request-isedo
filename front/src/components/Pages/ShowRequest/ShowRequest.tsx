@@ -29,6 +29,8 @@ import DoneIcon from "@mui/icons-material/Done";
 import "./ShowRequest.css";
 import ButtonPanelControl from "../../UI/ButtonPanelControl/ButtonPanelControl";
 
+import "../../../index.css";
+
 const ShowRequest = () => {
   const navigate = useNavigate();
 

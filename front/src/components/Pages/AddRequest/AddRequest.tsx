@@ -123,7 +123,7 @@ const AddRequest: React.FC = () => {
   console.log(uinfo);
 
   return (
-    <section className="sections">
+    <section>
       <div className="wrapper-prev">
         <div className="container">
           <Button
