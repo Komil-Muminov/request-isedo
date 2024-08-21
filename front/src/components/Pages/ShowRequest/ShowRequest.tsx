@@ -184,7 +184,7 @@ const ShowRequest = () => {
             <p>Детали заявки</p>
           </div>
           <div className="form_content">
-            <form className="request_form">
+            <form className="inputs-list">
               <TextField
                 type="text"
                 id="orgname"
@@ -209,6 +209,7 @@ const ShowRequest = () => {
               variant="contained"
               sx={{
                 backgroundColor: "#607d8b",
+                marginTop: "20px",
                 "&:hover": {
                   backgroundColor: "#546d79",
                 },
