@@ -132,7 +132,16 @@ const Udetails = () => {
                 )}
               </ul>
               <Link to="/uprofile/uIdentity">
-                <Button variant="contained" fullWidth>
+                <Button
+                  variant="contained"
+                  fullWidth
+                  sx={{
+                    backgroundColor: "#607d8b",
+                    "&:hover": {
+                      backgroundColor: "#546d79",
+                    },
+                  }}
+                >
                   Идентификация
                 </Button>
               </Link>
