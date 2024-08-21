@@ -81,6 +81,8 @@ export const Navigation: React.FC = () => {
 
   // Надо свг контейнер сделать
 
+  console.log(getUinfoQuery?.data?.photo);
+
   if (getUinfoQuery?.status === "success") {
     return (
       <>
@@ -200,8 +202,8 @@ export const Navigation: React.FC = () => {
                           alt="Remy Sharp"
                           src={
                             getUinfoQuery.data?.photo
-                              ? getUinfoQuery.data.photo
-                              : "https://i.pravatar.cc/300"
+                              ? `http://localhost:3000${getUinfoQuery.data.photo}`
+                              : ""
                           }
                         />
                       </IconButton>
