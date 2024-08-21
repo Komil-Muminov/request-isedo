@@ -205,10 +205,16 @@ const ShowRequest = () => {
                 value={rqstsData?.desc || ""}
               />
             </form>
-            <Button variant="contained" sx={{ marginTop: "20px" }}>
-              <span className="shadow"></span>
-              <span className="edge"></span>
-              <span className="front">Отправить</span>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "#607d8b",
+                "&:hover": {
+                  backgroundColor: "#546d79",
+                },
+              }}
+            >
+              Отправить
             </Button>
           </div>
         </section>

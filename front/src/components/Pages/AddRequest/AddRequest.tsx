@@ -311,18 +311,19 @@ const AddRequest: React.FC = () => {
             <Button
               variant="contained"
               onClick={handleSubmit(onSubmit)}
-              sx={{ marginTop: "20px" }}
               disabled={
                 (activeStep !== 0 && uinfo?.uType === "bo") ||
-                (activeStep === 0 && uinfo?.uType === "kvd") ||
-                !dirtyFields.accountant ||
-                !dirtyFields.orgname ||
-                !dirtyFields.desc
+                (activeStep === 0 && uinfo?.uType === "kvd")
               }
+              sx={{
+                backgroundColor: "#607d8b",
+                marginTop: "20px",
+                "&:hover": {
+                  backgroundColor: "#546d79",
+                },
+              }}
             >
-              <span className="shadow"></span>
-              <span className="edge"></span>
-              <span className="front">Отправить</span>
+              Отправить
             </Button>
           </div>
         </section>
