@@ -67,9 +67,13 @@ const AddRequest: React.FC = () => {
     formState: { dirtyFields },
   } = useForm<PostRqstScheme>({
     defaultValues: {
-      orgname: "",
-      accountant: "",
-      desc: "",
+      fullName: "",
+      role: "",
+      phone: "",
+      email: "",
+      tax: "",
+      orgTax: "",
+      orgName: "",
       reqType: "Смена бухгалтера",
       reqStatus: steps[0]?.step,
       dateTime: "",
@@ -90,6 +94,8 @@ const AddRequest: React.FC = () => {
 
   // Увеличивает номер текущего шага на 1.
   const onSubmit = (data: PostRqstScheme) => {
+    console.log(data);
+
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     const stepFound = steps.find((e) => e.stepCode === activeStep);
     console.log(data);
@@ -195,22 +201,24 @@ const AddRequest: React.FC = () => {
                 <>
                   <div className="inputs-list">
                     <TextField
-                      {...register("orgname")}
+                      {...register("fullName")}
+                      id="fullName"
                       type="text"
-                      id="orgname"
                       className="request_inp"
                       label="ФИО"
                       value={uinfo?.fullName || ""}
                     />
                     <TextField
-                      {...register("accountant")}
+                      {...register("role")}
+                      id="role"
                       type="text"
                       className="request_inp"
                       label="Должность"
                       value={uinfo?.role || ""}
                     />
                     <TextField
-                      {...register("desc")}
+                      {...register("phone")}
+                      id="phone"
                       type="text"
                       className="request_inp"
                       label="Номер телефона"
@@ -218,28 +226,32 @@ const AddRequest: React.FC = () => {
                     />
                     {/* =============== Добавить в базу requests =============== */}
                     <TextField
-                      {...register("desc")}
+                      {...register("email")}
+                      id="email"
                       type="text"
                       className="request_inp"
                       label="E-mail адрес"
                       value={uinfo?.email || ""}
                     />
                     <TextField
-                      {...register("desc")}
+                      {...register("tax")}
+                      id="tax"
                       type="text"
                       className="request_inp"
                       label="ИНН"
                       value={uinfo?.tax || ""}
                     />
                     <TextField
-                      {...register("desc")}
+                      {...register("orgTax")}
+                      id="orgTax"
                       type="text"
                       className="request_inp"
                       label="ИНН"
                       value={uinfo?.orgTax || ""}
                     />
                     <TextField
-                      {...register("desc")}
+                      {...register("orgName")}
+                      id="orgName"
                       type="text"
                       className="request_inp"
                       label="Организация"
@@ -276,33 +288,40 @@ const AddRequest: React.FC = () => {
                 <>
                   <div className="inputs-list">
                     <TextField
-                      {...register("orgname")}
+                      {...register("fullName")}
                       type="text"
-                      id="orgname"
+                      id="fullName"
+                      value={uinfo?.fullName || ""}
                       className="request_inp"
                       // KM
-                      placeholder="ФИО руководителя"
+                      placeholder="ФИО"
                     />
                     <TextField
-                      {...register("accountant")}
+                      {...register("role")}
+                      id="role"
+                      value={uinfo?.role || ""}
                       type="text"
                       className="request_inp"
-                      placeholder="Должность руководителя"
-                      disabled={!dirtyFields.orgname}
+                      placeholder="Должность"
+                      disabled={!dirtyFields.role}
                     />
                     <TextField
-                      {...register("desc")}
+                      {...register("phone")}
+                      id="phone"
+                      value={uinfo?.phone || ""}
                       type="text"
                       className="request_inp"
-                      placeholder="Контанты руководителя"
-                      disabled={!dirtyFields.accountant}
+                      placeholder="Номер телефона"
+                      disabled={!dirtyFields.phone}
                     />
                     <TextField
-                      {...register("desc")}
+                      {...register("orgName")}
+                      id="orgName"
+                      value={uinfo?.orgName || ""}
                       type="text"
                       className="request_inp"
-                      placeholder="Организация руководителя"
-                      disabled={!dirtyFields.accountant}
+                      placeholder="Организация"
+                      disabled={!dirtyFields.orgName}
                     />
                   </div>
                 </>

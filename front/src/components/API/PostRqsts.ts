@@ -1,7 +1,11 @@
 export interface PostRqstScheme {
-  orgname: string;
-  accountant: string;
-  desc: string;
+  fullName: string;
+  role: string;
+  phone: string;
+  email: string;
+  tax: string;
+  orgTax: string;
+  orgName: string;
   reqType: string;
   reqStatus: string;
   dateTime: string;
