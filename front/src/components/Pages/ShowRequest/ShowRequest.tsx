@@ -103,7 +103,7 @@ const ShowRequest = () => {
         <section className="show-steps">
           <div className="panel-control">
             <ButtonPanelControl
-              goBack={navigate}
+              goBack={() => navigate(-1)}
               icon={
                 <ArrowBackIosIcon
                   sx={{ fontSize: "18px", fontWeight: "bold" }}
