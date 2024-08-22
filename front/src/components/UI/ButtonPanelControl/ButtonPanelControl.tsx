@@ -1,10 +1,22 @@
 import { Button, Typography } from "@mui/material";
 import { TProps } from "./ButtonPanelControlType";
 
-const ButtonPanelControl = ({ icon, text, goBack }: TProps) => {
+const ButtonPanelControl = ({
+  icon,
+  text,
+  goBack,
+  handleSubmit,
+  activeSendButton,
+}: TProps) => {
+  const handleClick = () => {
+    if (goBack) goBack();
+    if (handleSubmit) handleSubmit();
+  };
+
   return (
     <Button
-      onClick={() => goBack(-1)}
+      onClick={handleClick}
+      disabled={activeSendButton}
       sx={{
         display: "flex",
         alignItems: "center",

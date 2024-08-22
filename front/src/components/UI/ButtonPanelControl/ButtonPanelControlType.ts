@@ -5,4 +5,6 @@ export interface TProps {
   icon: ReactNode;
   text: string;
   goBack?: any;
+  handleSubmit?: any;
+  activeSendButton?: boolean;
 }

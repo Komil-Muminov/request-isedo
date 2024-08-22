@@ -161,7 +161,7 @@ const AddRequest: React.FC = () => {
            */}
           <div className="panel-control">
             <ButtonPanelControl
-              goBack={navigate}
+              goBack={() => navigate(-1)}
               icon={
                 <ArrowBackIosIcon
                   sx={{ fontSize: "18px", fontWeight: "bold" }}
@@ -175,6 +175,8 @@ const AddRequest: React.FC = () => {
                   <SaveIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
                 }
                 text="Сохранить"
+                handleSubmit={handleSubmit(onSubmit)}
+                activeSendButton={activeSendButton}
               />
               <ButtonPanelControl
                 icon={
@@ -387,20 +389,6 @@ const AddRequest: React.FC = () => {
                 </>
               )}
             </form>
-            <Button
-              variant="contained"
-              onClick={handleSubmit(onSubmit)}
-              disabled={activeSendButton}
-              sx={{
-                backgroundColor: "#607d8b",
-                marginTop: "20px",
-                "&:hover": {
-                  backgroundColor: "#546d79",
-                },
-              }}
-            >
-              Отправить
-            </Button>
           </div>
         </section>
       </div>

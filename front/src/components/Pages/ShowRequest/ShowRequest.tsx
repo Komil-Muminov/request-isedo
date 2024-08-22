@@ -235,18 +235,6 @@ const ShowRequest = () => {
                 value={rqstsData?.orgName || ""}
               />
             </form>
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#607d8b",
-                marginTop: "20px",
-                "&:hover": {
-                  backgroundColor: "#546d79",
-                },
-              }}
-            >
-              Отправить
-            </Button>
           </div>
         </section>
       </div>
