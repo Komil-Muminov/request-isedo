@@ -124,7 +124,7 @@ const AddRequest: React.FC = () => {
 
     const updateReqData = {
       ...data,
-      ...stepFound,
+      stepCode: stepFound?.stepCode || 0,
       dateTime: date,
     };
 

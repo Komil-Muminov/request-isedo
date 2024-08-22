@@ -9,8 +9,10 @@ import { getRqsts, GetRqstsType } from "../../API/GetRqsts";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import TuneIcon from "@mui/icons-material/Tune";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../API/Hooks/useAuth";
+import { GetMeType, useAuth } from "../../API/Hooks/useAuth";
 import "./Register.css";
+import { Loader } from "../../UI/Loader/Loader";
+import { stepsOfBo, stepsOfKvd } from "../../API/Data/Steps/Steps";
 
 export const Register: React.FC = () => {
   const getRqsQuery = useQuery(
@@ -25,22 +27,54 @@ export const Register: React.FC = () => {
 
   console.log(rqstsData);
 
+  const uQuery = useQuery(
+    {
+      queryFn: () => getMe(),
+      queryKey: ["users", "me"],
+    },
+    queryClient
+  );
+
+  const [uinfo, setUinfo] = useState<GetMeType | null>(null);
+  // const [expanded, setExpanded] = useState<number | false>(false);
+
+  useEffect(() => {
+    if (uQuery.status === "success") {
+      setUinfo(uQuery.data);
+    }
+  }, [uQuery.status, uQuery.data]);
+
+  if (uQuery.status === "pending") return <Loader />;
+  if (uQuery.status === "error") {
+    console.log(uQuery.error);
+    return null;
+  }
+
+  const steps =
+    uinfo?.uType === "kvd"
+      ? stepsOfKvd
+      : uinfo?.uType === "bo"
+      ? stepsOfBo
+      : [];
+
   const rows = rqstsData.map((e) => {
+    const stepFound = steps.find((step) => step.stepCode === e.stepCode);
+
     return {
       id: e.id,
       type: e.reqType,
       applicant: e.fullName,
       organization: e.orgName,
       date: e.dateTime,
-      status: e.stepName,
+      status: stepFound ? stepFound.stepName : "Неизвестный статус",
     };
   });
 
   const colors: any = {
-    Pending: "blue",
-    Approved: "green",
-    Rejected: "red",
-    OnHold: "orange",
+    ["Оформление"]: "gray",
+    ["Исполнение"]: "#e69600",
+    ["Завершено"]: "green",
+    ["Неизвестный статус"]: "red",
   };
 
   const columns: GridColDef[] = [
@@ -73,14 +107,12 @@ export const Register: React.FC = () => {
             style={{
               backgroundColor: color,
               color: "white",
-              padding: "0 10px",
+              padding: "0 15px",
               borderRadius: "15px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               height: "35px",
-              maxWidth: "100px",
-              width: "100%",
             }}
           >
             {params.value}

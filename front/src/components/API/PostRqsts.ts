@@ -7,9 +7,7 @@ export interface PostRqstScheme {
   orgTax: string;
   orgName: string;
   reqType: string;
-  stepName: string;
   stepCode: number;
-  initiators: string;
   dateTime: string;
 }
 
