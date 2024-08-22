@@ -1,10 +1,38 @@
+.add-content {
+  background-color: #f7f7fc;
+  padding: 40px 0;
+}
+
 .addRequest__content {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 50px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   margin-bottom: 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.056);
   background-color: #fff;
+}
+
+.panel-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.175);
+  padding: 20px;
+}
+
+.wrapper-buttons {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+/* ShowRequest.css */
+.MuiStepConnector-root {
+  display: none;
+}
+
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
+  color: #607d8b;
 }
 
 .form_content {

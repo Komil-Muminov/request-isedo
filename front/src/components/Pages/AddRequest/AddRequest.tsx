@@ -18,6 +18,13 @@ import { Select } from "@radix-ui/themes";
 import TableRowRequest from "../../UI/TableRow/TableRowRequest";
 import { GetMeType, useAuth } from "../../API/Hooks/useAuth";
 import { Loader } from "../../UI/Loader/Loader";
+import ButtonPanelControl from "../../UI/ButtonPanelControl/ButtonPanelControl";
+
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import SaveIcon from "@mui/icons-material/Save";
+import UnsubscribeIcon from "@mui/icons-material/Unsubscribe";
+import CancelIcon from "@mui/icons-material/Cancel";
+import DoneIcon from "@mui/icons-material/Done";
 
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
@@ -142,40 +149,91 @@ const AddRequest: React.FC = () => {
   const activeSendButton = uinfo?.uType === "bo" && postRqstsMutation.isSuccess;
 
   return (
-    <section>
-      <div className="wrapper-prev">
-        <div className="container">
-          <Button
-            onClick={() => navigate(-1)}
-            variant="outlined"
-            sx={{
-              borderRadius: "50px",
-              color: "#607d8b",
-              borderColor: "#607d8b",
-              "&:hover": {
-                borderColor: "#607d8b",
-              },
-            }}
-          >
-            Назад
-          </Button>
-        </div>
-      </div>
+    <section className="add-content">
       <div className="container">
-        <div className="addRequest__content km__content">
+        <div className="details-steps">
+          <div className="title">
+            <p>Новая заявка</p>
+          </div>
+        </div>
+        <div className="addRequest__content">
           {/* <Stepper>: Компонент для отображения шагового индикатора, который отображает прогресс.
            */}
-          <h1>Создание</h1>
+          <div className="panel-control">
+            <ButtonPanelControl
+              goBack={navigate}
+              icon={
+                <ArrowBackIosIcon
+                  sx={{ fontSize: "18px", fontWeight: "bold" }}
+                />
+              }
+              text="Назад"
+            />
+            <div className="wrapper-buttons">
+              <ButtonPanelControl
+                icon={
+                  <SaveIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+                }
+                text="Сохранить"
+              />
+              <ButtonPanelControl
+                icon={
+                  <UnsubscribeIcon
+                    sx={{ fontSize: "18px", fontWeight: "bold" }}
+                  />
+                }
+                text="Отправить на резолюцию"
+              />
+              <ButtonPanelControl
+                icon={
+                  <CancelIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+                }
+                text="Отклонить"
+              />
+              <ButtonPanelControl
+                icon={
+                  <DoneIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+                }
+                text="Завершить"
+              />
+            </div>
+          </div>
           <Stepper
-            sx={{ display: "flex", justifyContent: "space-between" }}
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              padding: "20px",
+              width: "100%",
+              // Убираем линии между шагами
+              "& .MuiStepConnector-root": {
+                display: "none",
+              },
+            }}
             activeStep={steps[0]?.stepCode}
             alternativeLabel
           >
             {steps.map((e, index) => (
-              <Step key={index}>
+              <Step
+                key={index}
+                sx={{
+                  display: "flex",
+                  flex: "1",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  position: "relative",
+                  "&:first-of-type": {
+                    flex: "0 0 auto", // первый шаг фиксированный
+                    marginLeft: 0,
+                  },
+                  "&:last-of-type": {
+                    flex: "0 0 auto", // последний шаг фиксированный
+                    marginRight: 0,
+                  },
+                }}
+              >
                 <StepLabel>
                   <p className="step-header">{e.stepName}</p>
-                  <p className="step-initiators">{e.initiators}</p>
+                  <p>{e.initiators}</p>
                 </StepLabel>
               </Step>
             ))}
