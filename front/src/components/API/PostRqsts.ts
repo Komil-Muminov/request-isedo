@@ -7,7 +7,9 @@ export interface PostRqstScheme {
   orgTax: string;
   orgName: string;
   reqType: string;
-  reqStatus: string;
+  stepName: string;
+  stepCode: number;
+  initiators: string;
   dateTime: string;
 }
 
@@ -15,7 +17,6 @@ const token = localStorage.getItem("token");
 
 // Нет useEffect-а, соответственно инвалидации не происходит и GetRqsts не обновляется, нужно форматировать под React Query
 export const postRequest = async (newData: PostRqstScheme): Promise<void> => {
-
   try {
     const response = await fetch(`http://localhost:3000/requests`, {
       method: "POST",

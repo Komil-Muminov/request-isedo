@@ -21,7 +21,6 @@ import { Loader } from "../../UI/Loader/Loader";
 
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
-  const [activeStep, setActiveStep] = useState<number>(0);
 
   const navigate = useNavigate();
 
@@ -76,7 +75,6 @@ const AddRequest: React.FC = () => {
       orgTax: "",
       orgName: "",
       reqType: "Смена бухгалтера",
-      reqStatus: steps[0]?.step,
       dateTime: "",
     },
   });
@@ -110,8 +108,9 @@ const AddRequest: React.FC = () => {
   const onSubmit = (data: PostRqstScheme) => {
     console.log(data);
 
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    const stepFound = steps.find((e) => e.stepCode === activeStep);
+    const stepFound = steps.find((e) => e.stepCode === 0);
+
+    console.log(stepFound);
 
     const getDate = new Date();
 
@@ -125,11 +124,12 @@ const AddRequest: React.FC = () => {
 
     const updateReqData = {
       ...data,
-      reqStatus: stepFound ? stepFound.step : "",
+      ...stepFound,
       dateTime: date,
     };
 
-    console.log(`reqStatus: ${updateReqData.reqStatus}`);
+    console.log(`stepCode : ${JSON.stringify(updateReqData, null, 2)}`);
+
     postRqstsMutation.mutate(updateReqData);
   };
 
@@ -138,6 +138,8 @@ const AddRequest: React.FC = () => {
   const handleGetFile = (id: number, file: File | null) => {
     setGetFile({ number: id, file: file ? file.name : "" });
   };
+
+  const activeSendButton = uinfo?.uType === "bo" && postRqstsMutation.isSuccess;
 
   return (
     <section>
@@ -166,13 +168,13 @@ const AddRequest: React.FC = () => {
           <h1>Создание</h1>
           <Stepper
             sx={{ display: "flex", justifyContent: "space-between" }}
-            activeStep={activeStep}
+            activeStep={steps[0]?.stepCode}
             alternativeLabel
           >
             {steps.map((e, index) => (
               <Step key={index}>
                 <StepLabel>
-                  <p className="step-header">{e.step}</p>
+                  <p className="step-header">{e.stepName}</p>
                   <p className="step-initiators">{e.initiators}</p>
                 </StepLabel>
               </Step>
@@ -330,10 +332,7 @@ const AddRequest: React.FC = () => {
             <Button
               variant="contained"
               onClick={handleSubmit(onSubmit)}
-              disabled={
-                (activeStep !== 0 && uinfo?.uType === "bo") ||
-                (activeStep === 0 && uinfo?.uType === "kvd")
-              }
+              disabled={activeSendButton}
               sx={{
                 backgroundColor: "#607d8b",
                 marginTop: "20px",

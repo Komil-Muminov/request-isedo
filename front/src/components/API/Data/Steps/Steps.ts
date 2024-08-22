@@ -1,52 +1,43 @@
 // Этот код представляет собой экспорт массива строк steps с четырьмя элементами. Данные статусы используются для отображения или управления последовательностью шагов в процессе обработки заявки.
 
-// export const stepsOfBo: string[] = ["Оформление", "Исполнение", "Завершено"];
-
 export const stepsOfBo = [
   {
-    step: "Оформление",
-    stepCode: 1,
+    stepName: "Оформление",
+    stepCode: 0,
     initiators: "Заявитель",
   },
   {
-    step: "Исполнение",
-    stepCode: 2,
+    stepName: "Исполнение",
+    stepCode: 1,
     initiators: "Сотрудник КВД",
   },
   {
-    step: "Завершено",
-    stepCode: 3,
+    stepName: "Завершено",
+    stepCode: 2,
     initiators: "",
   },
 ];
 
 export const stepsOfKvd = [
   {
-    step: "Оформление",
-    stepCode: 1,
+    stepName: "Оформление",
+    stepCode: 0,
     initiators: "Заявитель",
   },
   {
-    step: "Исполнение",
-    stepCode: 2,
+    stepName: "Исполнение",
+    stepCode: 1,
     initiators: "Шуъбаи кор бо муштариён",
   },
   {
-    step: "Исполнение",
-    stepCode: 2,
+    stepName: "Исполнение",
+    stepCode: 1,
     initiators:
-      "Шуъбаи амнияти иттилооти, Шуъбаи дастгирии техники, Шуъбаи кор бо муштариён, Шуъбаи мухосибот",
+      "Шуъба оид ба амнияти иттилоотӣ, Шуъба оид ба хизматрасонии техникӣ, Шуъба оид ба кор бо муштариён, Шуъбаи муҳосибот ва хоҷагӣ",
   },
   {
-    step: "Завершено",
-    stepCode: 3,
+    stepName: "Завершено",
+    stepCode: 2,
     initiators: "",
   },
 ];
-
-// export const stepsOfKvd: string[] = [
-//   `${stepsOfBo[0]}: Заявитель`,
-//   `${stepsOfBo[1]}: Шуъбаи кор бо муштариён`,
-//   `${stepsOfBo[1]}: `,
-//   stepsOfBo[2],
-// ];

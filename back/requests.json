@@ -1,41 +1,17 @@
 [
   {
     "id": 1,
-    "orgname": "Фозилов Диловар",
-    "accountant": "Главный бухгалтер",
-    "desc": "880009846",
+    "fullName": "Фозилов Чамшед",
+    "role": "Начальник отдела по развитию и прогресса ИИ в области Data Science",
+    "phone": "880003434",
+    "email": "j.fozilov@gmail.com",
+    "tax": "250008809",
+    "orgTax": "040003414",
+    "orgName": "ООО Технологический центр развития молодежи",
     "reqType": "Смена бухгалтера",
-    "reqStatus": "",
-    "dateTime": "14.08.2024.15:55"
-  },
-  {
-    "id": 2,
-    "orgname": "1",
-    "accountant": "2",
-    "desc": "3",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "",
-    "dateTime": "14.08.2024.16:22"
-  },
-  {
-    "id": 3,
-    "orgname": "",
-    "accountant": "",
-    "desc": "",
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "",
-    "dateTime": "21.08.2024.14:54"
-  },
-  {
-    "id": 4,
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "",
-    "dateTime": "21.08.2024.16:08"
-  },
-  {
-    "id": 5,
-    "reqType": "Смена бухгалтера",
-    "reqStatus": "",
-    "dateTime": "21.08.2024.16:09"
+    "stepName": "Оформление",
+    "stepCode": 0,
+    "initiators": "Заявитель",
+    "dateTime": "22.08.2024.11:23"
   }
 ]
