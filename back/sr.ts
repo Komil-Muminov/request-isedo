@@ -243,7 +243,9 @@ app.post("/requests", authenticateJWT, (req: Request, res: Response) => {
     orgTax,
     orgName,
     reqType,
-    reqStatus,
+    stepName,
+    stepCode,
+    initiators,
     dateTime,
   } = req.body;
 
@@ -267,7 +269,9 @@ app.post("/requests", authenticateJWT, (req: Request, res: Response) => {
     orgTax,
     orgName,
     reqType,
-    reqStatus,
+    stepName,
+    stepCode,
+    initiators,
     dateTime,
   };
 
@@ -321,7 +325,9 @@ app.get("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
     orgTax: show.orgTax,
     orgName: show.orgName,
     reqType: show.reqType,
-    reqStatus: show.reqStatus,
+    stepName: show.stepName,
+    stepCode: show.stepCode,
+    initiators: show.initiators,
     dateTime: show.dateTime,
   });
 });

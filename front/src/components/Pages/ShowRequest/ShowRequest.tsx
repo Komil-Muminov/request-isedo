@@ -151,7 +151,7 @@ const ShowRequest = () => {
                 display: "none",
               },
             }}
-            activeStep={0}
+            activeStep={rqstsData?.stepCode}
             alternativeLabel
           >
             {steps.map((e, index) => (
@@ -174,7 +174,7 @@ const ShowRequest = () => {
                 }}
               >
                 <StepLabel>
-                  <p className="step-header">{e.step}</p>
+                  <p className="step-header">{e.stepName}</p>
                   <p>{e.initiators}</p>
                 </StepLabel>
               </Step>
@@ -191,20 +191,48 @@ const ShowRequest = () => {
                 type="text"
                 id="orgname"
                 className="request_inp"
-                value={rqstsData?.orgname || ""}
+                value={rqstsData?.fullName || ""}
                 label="ФИО"
               />
               <TextField
                 type="text"
                 className="request_inp"
                 label="Должность"
-                value={rqstsData?.accountant || ""}
+                value={rqstsData?.role || ""}
               />
               <TextField
                 type="text"
                 className="request_inp"
                 label="Контанты"
-                value={rqstsData?.desc || ""}
+                value={rqstsData?.phone || ""}
+              />
+              <TextField
+                id="email"
+                type="text"
+                className="request_inp"
+                label="E-mail адрес"
+                value={rqstsData?.email || ""}
+              />
+              <TextField
+                id="tax"
+                type="text"
+                className="request_inp"
+                label="ИНН"
+                value={rqstsData?.tax || ""}
+              />
+              <TextField
+                id="orgTax"
+                type="text"
+                className="request_inp"
+                label="ИНН"
+                value={rqstsData?.orgTax || ""}
+              />
+              <TextField
+                id="orgName"
+                type="text"
+                className="request_inp"
+                label="Организация"
+                value={rqstsData?.orgName || ""}
               />
             </form>
             <Button

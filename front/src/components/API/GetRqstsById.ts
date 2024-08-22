@@ -8,7 +8,9 @@ export interface GetRqstsByIdType {
   orgTax: string;
   orgName: string;
   reqType: string;
-  reqStatus: string;
+  stepName: string;
+  stepCode: number;
+  initiators: string;
   dateTime: string;
 }
 

@@ -28,11 +28,11 @@ export const Register: React.FC = () => {
   const rows = rqstsData.map((e) => {
     return {
       id: e.id,
-      type: e.orgname,
-      applicant: e.accountant,
-      organization: e.desc,
+      type: e.reqType,
+      applicant: e.fullName,
+      organization: e.orgName,
       date: e.dateTime,
-      status: e.desc,
+      status: e.stepName,
     };
   });
 

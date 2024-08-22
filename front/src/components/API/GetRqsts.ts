@@ -1,14 +1,3 @@
-//  Создает схему для объекта с указанными полями и их типами.
-// export const GetRqstsScheme = z.object({
-//   id: z.number(),
-//   orgname: z.string(),
-//   accountant: z.string(),
-//   desc: z.string(),
-//   reqType: z.string(),
-//   reqStatus: z.string(),
-//   dateTime: z.string(), // Так как после добавление dateTime zod не отображал другие данные и ошибка не падала, пришлось извлечь эту либу из запроса
-// });
-
 export interface GetRqstsType {
   id: number;
   fullName: string;
@@ -19,7 +8,9 @@ export interface GetRqstsType {
   orgTax: string;
   orgName: string;
   reqType: string;
-  reqStatus: string;
+  stepName: string;
+  stepCode: number;
+  initiators: string;
   dateTime: string;
 }
 
