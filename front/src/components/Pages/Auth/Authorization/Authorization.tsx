@@ -53,7 +53,6 @@ const Authorization = () => {
 		navigate("uprofile/udetails");
 	}
 
-
 	return (
 		<>
 			<form className="form-auth" onSubmit={handleSubmit(onSubmit)}>
