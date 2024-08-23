@@ -9,6 +9,13 @@ import InputAuth from "../../../UI/InputAuth/InputAuth";
 import EmailIcon from "@mui/icons-material/Email";
 import { useState } from "react";
 
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+
+import { departments } from "../../../API/Data/Departments/Departments";
+
 const Registration = () => {
   // Надо доработать
   const {
@@ -17,6 +24,7 @@ const Registration = () => {
     // Функция для получения текущих значений формы.
     getValues,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<RegType>({
     defaultValues: {
@@ -36,8 +44,9 @@ const Registration = () => {
 
   // Функция для отслеживания изменений значений в реальном времени.
   const uType = watch("uType");
+  const departmentValue = watch("department"); // Отслеживаем значение department
 
-  console.log(uType);
+  console.log(departmentValue);
 
   const { regMe } = useAuth();
   const data: RegType = getValues();
@@ -275,15 +284,26 @@ const Registration = () => {
               <span className="form_errors-text">
                 {errors?.role && errors.role.message}
               </span>
-              <InputAuth
-                register={register}
-                inputName="department"
-                inputPlaceholder="Отдел"
-                requiredMessage="Заполните поле отдел"
-                minLengthMessage="Отдел должна содержать минимум 5 символов"
-                inputType="text"
-                kind=""
-              />
+              <FormControl fullWidth>
+                <InputLabel id="department-select-label">Отдел</InputLabel>
+                <Select
+                  sx={{ borderRadius: "50px" }}
+                  labelId="department-select-label"
+                  id="department-select"
+                  value={departmentValue} // Используем значение из watch
+                  label="Отдел"
+                  onChange={(e) =>
+                    setValue("department", e.target.value as string)
+                  } // Обновляем значение в форме
+                  error={!!errors.department} // Отображаем ошибку, если есть
+                >
+                  {departments.map((e) => (
+                    <MenuItem value={e.name} key={e.id}>
+                      {e.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
 
               <span className="form_errors-text">
                 {errors?.department && errors.department.message}

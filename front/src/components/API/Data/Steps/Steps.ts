@@ -1,6 +1,14 @@
 // Этот код представляет собой экспорт массива строк steps с четырьмя элементами. Данные статусы используются для отображения или управления последовательностью шагов в процессе обработки заявки.
 
-export const stepsOfBo = [
+import { departments } from "../Departments/Departments";
+
+interface TStep {
+  stepName: string;
+  stepCode: number;
+  initiators: string;
+}
+
+export const stepsOfBo: TStep[] = [
   {
     stepName: "Оформление",
     stepCode: 0,
@@ -18,7 +26,7 @@ export const stepsOfBo = [
   },
 ];
 
-export const stepsOfKvd = [
+export const stepsOfKvd: TStep[] = [
   {
     stepName: "Оформление",
     stepCode: 0,
@@ -27,13 +35,12 @@ export const stepsOfKvd = [
   {
     stepName: "Исполнение",
     stepCode: 1,
-    initiators: "Шуъбаи кор бо муштариён",
+    initiators: departments[0]?.name,
   },
   {
     stepName: "Исполнение",
     stepCode: 1,
-    initiators:
-      "Шуъба оид ба амнияти иттилоотӣ, Шуъба оид ба хизматрасонии техникӣ, Шуъба оид ба кор бо муштариён, Шуъбаи муҳосибот ва хоҷагӣ",
+    initiators: ` ${departments[1]?.name}, ${departments[2]?.name}, ${departments[3]?.name}, ${departments[0]?.name}, ${departments[4]?.name}`,
   },
   {
     stepName: "Завершено",

@@ -8,8 +8,8 @@
     "fullName": "Комил Муминов",
     "role": "",
     "email": "",
-    "position": "Так себе",
-    "department": "Отдел по разработке и внедрения информационных систем",
+    "position": "Мутахассис",
+    "department": "Шуъба оид ба таҳия ва татбиқи барномаҳои иттилоотӣ",
     "reqIdentity": false,
     "uIdentity": true
   },
@@ -22,8 +22,8 @@
     "fullName": "Амир Шарипов",
     "role": "",
     "email": "",
-    "position": "Специалист",
-    "department": "Отдел по разработке и внедрения информационных систем",
+    "position": "Мутахассис",
+    "department": "Шуъба оид ба таҳия ва татбиқи барномаҳои иттилоотӣ",
     "reqIdentity": false,
     "uIdentity": true
   },
@@ -57,7 +57,7 @@
     "role": "Начальник отдела",
     "orgName": "",
     "orgTax": "",
-    "department": "Отдел по работе с клиентами",
+    "department": "Шуъбаи кор бо муштариён",
     "reqIdentity": false,
     "uIdentity": false
   }
