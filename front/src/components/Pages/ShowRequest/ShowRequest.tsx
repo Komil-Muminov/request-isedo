@@ -30,6 +30,7 @@ import "./ShowRequest.css";
 import ButtonPanelControl from "../../UI/ButtonPanelControl/ButtonPanelControl";
 
 import "../../../index.css";
+import TitleDocument from "../../UI/TitleDocument/TitleDocument";
 
 const ShowRequest = () => {
   const navigate = useNavigate();
@@ -96,9 +97,7 @@ const ShowRequest = () => {
     <main className="show-content">
       <div className="container">
         <div className="details-steps">
-          <div className="title">
-            <p>Новая заявка</p>
-          </div>
+          <TitleDocument title="Новая заявка" />
         </div>
         <section className="show-steps">
           <div className="panel-control">
