@@ -84,19 +84,6 @@
   padding: 15px 0;
 }
 
-.title {
-  background-color: #607d8b;
-  width: 100%;
-  padding: 12.5px 30px;
-  border-radius: 50px;
-  margin-bottom: 20px;
-}
-
-.title p {
-  font-weight: bold;
-  color: #fff;
-}
-
 .wrapper-table {
   width: 100%;
   margin-top: 20px;

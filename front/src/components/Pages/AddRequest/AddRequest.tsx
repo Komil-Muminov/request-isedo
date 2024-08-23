@@ -25,6 +25,8 @@ import SaveIcon from "@mui/icons-material/Save";
 import UnsubscribeIcon from "@mui/icons-material/Unsubscribe";
 import CancelIcon from "@mui/icons-material/Cancel";
 import DoneIcon from "@mui/icons-material/Done";
+import WorkSpace from "../../UI/WorkSpace/WorkSpace";
+import TitleDocument from "../../UI/TitleDocument/TitleDocument";
 
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
@@ -152,9 +154,7 @@ const AddRequest: React.FC = () => {
     <section className="add-content">
       <div className="container">
         <div className="details-steps">
-          <div className="title">
-            <p>Новая заявка</p>
-          </div>
+          <TitleDocument title="Новая заявка" />
         </div>
         <div className="addRequest__content">
           {/* <Stepper>: Компонент для отображения шагового индикатора, который отображает прогресс.
@@ -241,10 +241,9 @@ const AddRequest: React.FC = () => {
             ))}
           </Stepper>
         </div>
+        {/* Детали заявки */}
         <section className="details-request">
-          <div className="title">
-            <p>Детали заявки</p>
-          </div>
+          <TitleDocument title="Детали заявки" />
           <div className="form_content">
             <form className="request_form" onSubmit={handleSubmit(onSubmit)}>
               <Controller
@@ -391,6 +390,8 @@ const AddRequest: React.FC = () => {
             </form>
           </div>
         </section>
+        {/* Рабочее пространство */}
+        <WorkSpace />
       </div>
     </section>
   );
