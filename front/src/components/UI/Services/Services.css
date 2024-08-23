@@ -1,0 +1,51 @@
+.panel-control-service {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.add-services {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: #607d8b;
+}
+
+.services-info {
+  display: flex;
+  gap: 10px;
+}
+
+.services-info p {
+  font-size: 15px;
+}
+
+.services-info p span {
+  color: #16a34a;
+}
+
+.table-service {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 20px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+td {
+  word-wrap: break-word;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+td:first-child {
+  max-width: 300px;
+}

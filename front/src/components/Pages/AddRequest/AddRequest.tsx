@@ -1,7 +1,7 @@
 import "./AddRequest.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Stepper, StepLabel, Step, Button, TextField } from "@mui/material";
+import { Stepper, StepLabel, Step, TextField } from "@mui/material";
 
 // Хук из библиотеки react-hook-form для управления состоянием формы.
 import { useForm, Controller } from "react-hook-form";
