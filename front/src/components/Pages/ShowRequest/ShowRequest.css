@@ -31,6 +31,12 @@
   display: none;
 }
 
+/* Завершенные step */
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed {
+  color: #16a34a;
+}
+
+/* В ожидании step */
 .css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
   color: #fa8c15;
 }

@@ -25,7 +25,6 @@ import SaveIcon from "@mui/icons-material/Save";
 import UnsubscribeIcon from "@mui/icons-material/Unsubscribe";
 import CancelIcon from "@mui/icons-material/Cancel";
 import DoneIcon from "@mui/icons-material/Done";
-import WorkSpace from "../../UI/WorkSpace/WorkSpace";
 import TitleDocument from "../../UI/TitleDocument/TitleDocument";
 
 const AddRequest: React.FC = () => {
@@ -390,8 +389,6 @@ const AddRequest: React.FC = () => {
             </form>
           </div>
         </section>
-        {/* Рабочее пространство */}
-        <WorkSpace />
       </div>
     </section>
   );

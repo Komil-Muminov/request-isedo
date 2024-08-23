@@ -31,6 +31,7 @@ import ButtonPanelControl from "../../UI/ButtonPanelControl/ButtonPanelControl";
 
 import "../../../index.css";
 import TitleDocument from "../../UI/TitleDocument/TitleDocument";
+import WorkSpace from "../../UI/WorkSpace/WorkSpace";
 
 const ShowRequest = () => {
   const navigate = useNavigate();
@@ -236,6 +237,8 @@ const ShowRequest = () => {
             </form>
           </div>
         </section>
+        {/* Рабочее пространство */}
+        <WorkSpace />
       </div>
     </main>
   );

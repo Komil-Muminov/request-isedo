@@ -1,3 +1,29 @@
 .work-space-content {
   padding: 20px 0;
 }
+
+.navigation-tabs {
+  border-bottom: 1px solid #00000058;
+}
+
+.wrapper-tabs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tab {
+  padding: 10px;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.1s;
+  font-weight: 600;
+}
+
+.tab:hover {
+  border-bottom: 3px solid #607d8b;
+}
+
+/* .active {
+  border-bottom: 3px solid #607d8b;
+} */
