@@ -1,9 +1,9 @@
 import { Button } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
-import { useAuth, GetMeType } from "../../API/Hooks/useAuth";
+import { useAuth } from "../../API/Hooks/useAuth";
 import { Loader } from "../../UI/Loader/Loader";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Ulink } from "../../UI/Ulinks/Ulinks";
 import { Outlet, useNavigate } from "react-router-dom";
 
@@ -42,7 +42,10 @@ const Profile: React.FC = () => {
 
 	const handleShowSubLinks = (subLinks: UlinkScheme[]) => {
 		return subLinks.map(({ url, label }, id) => (
-			<Ulink key={id} to={url}>
+			<Ulink
+				key={id}
+				to={url}
+			>
 				{label}
 			</Ulink>
 		));

@@ -3,9 +3,10 @@ import { validateResponse } from "./Hooks/useAuth";
 export type ReqfilesType = {
 	file?: File | string;
 	token?: string | null;
+	url?: string | undefined;
 };
 
-export const ReqFiles = async ({
+export const PostReqFiles = async ({
 	file,
 	token,
 }: ReqfilesType): Promise<void> => {

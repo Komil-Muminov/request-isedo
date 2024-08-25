@@ -26,7 +26,7 @@ import UnsubscribeIcon from "@mui/icons-material/Unsubscribe";
 import CancelIcon from "@mui/icons-material/Cancel";
 import DoneIcon from "@mui/icons-material/Done";
 import TitleDocument from "../../UI/TitleDocument/TitleDocument";
-import { ReqfilesType, ReqFiles, getReqfiles } from "../../API/ReqFiles";
+import { ReqfilesType, PostReqFiles, getReqfiles } from "../../API/ReqFiles";
 
 const AddRequest: React.FC = () => {
 	// Состояние текущего активного шага в индикаторе.
@@ -165,7 +165,7 @@ const AddRequest: React.FC = () => {
 	};
 	const reqfilesMutation = useMutation(
 		{
-			mutationFn: () => ReqFiles(reqFiles),
+			mutationFn: () => PostReqFiles(reqFiles),
 			onSuccess: () =>
 				queryClient.invalidateQueries({ queryKey: ["requests"] }),
 		},
@@ -177,7 +177,7 @@ const AddRequest: React.FC = () => {
 		console.log(reqFiles);
 	}, [reqFiles?.file]);
 
-	//get
+	//get ReqFiles
 	const reqFilesQuery = useQuery(
 		{
 			queryFn: () => getReqfiles({ token: localStorage.getItem("token") }),
@@ -186,9 +186,13 @@ const AddRequest: React.FC = () => {
 		queryClient,
 	);
 
-	const [getFiles, setGetFiles] = useState<any>(null);
+	const [reqFilesData, setReqfilesData] = useState<ReqfilesType[] | undefined>(
+		[],
+	);
 	useEffect(() => {
-		setGetFile(reqFilesQuery.data);
+		if (reqFilesQuery.data) {
+			setReqfilesData(reqFilesQuery.data);
+		}
 	});
 
 	return (

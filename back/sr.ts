@@ -330,14 +330,14 @@ app.get("/requests", authenticateJWT, (req: Request, res: Response) => {
 app.post(
 	"/reqfiles",
 	authenticateJWT,
-	reqFilesUpload.single("reqfiles"), // Ожидаем одно поле с именем 'reqfiles'
+	reqFilesUpload.single("reqfiles"),
 	(req: Request, res: Response) => {
 		if (!req.file) {
 			return res.status(400).json({ error: "Файл не был загружен 2222" });
 		}
 
 		const uploadedFile = {
-			url: `/reqfiles/${req.file.filename}`, // Возвращаем URL загруженного файла
+			url: `/reqfiles/${req.file.filename}`,
 		};
 
 		res
@@ -355,8 +355,12 @@ app.get("/reqfiles", authenticateJWT, (req: Request, res: Response) => {
 				.json({ error: "Ошибка сервера при чтении файлов" });
 		}
 
-		const fileUrls = files.map((file) => `/reqfiles/${file}`);
-		res.status(200).json({ files: fileUrls });
+		const fileObjects = files.map((file) => ({
+			filename: file,
+			url: `/reqfiles/${file}`,
+		}));
+
+		res.status(200).json(fileObjects);
 	});
 });
 
