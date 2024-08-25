@@ -6,7 +6,6 @@ import { queryClient } from "../../../../queryClient";
 import { Button } from "@mui/material";
 import UserInfoList from "../../../UI/UserInfoList/UserInfoList";
 import { Link } from "react-router-dom";
-import AddFileRequest from "../../../UI/AddFileRequest/AddFileRequest";
 import { CurrUserPhoto, setUphoto } from "../../../API/Hooks/setUphoto";
 import "./Udetails.css";
 import "../Profile.css";

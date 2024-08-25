@@ -330,19 +330,19 @@ app.get("/requests", authenticateJWT, (req: Request, res: Response) => {
 app.post(
 	"/reqfiles",
 	authenticateJWT,
-	reqFilesUpload.array("files"), // Используем `array` для загрузки нескольких файлов
+	reqFilesUpload.single("reqfiles"), // Ожидаем одно поле с именем 'reqfiles'
 	(req: Request, res: Response) => {
-		if (!req.files || (req.files as Express.Multer.File[]).length === 0) {
-			return res.status(400).json({ error: "Файлы не были загружены" });
+		if (!req.file) {
+			return res.status(400).json({ error: "Файл не был загружен 2222" });
 		}
 
-		const uploadedFiles = (req.files as Express.Multer.File[]).map(
-			(file) => file.originalname,
-		);
+		const uploadedFile = {
+			url: `/reqfiles/${req.file.filename}`, // Возвращаем URL загруженного файла
+		};
 
 		res
 			.status(200)
-			.json({ message: "Файлы успешно загружены", files: uploadedFiles });
+			.json({ message: "Файл успешно загружен", file: uploadedFile });
 	},
 );
 

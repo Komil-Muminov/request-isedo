@@ -26,6 +26,7 @@ import UnsubscribeIcon from "@mui/icons-material/Unsubscribe";
 import CancelIcon from "@mui/icons-material/Cancel";
 import DoneIcon from "@mui/icons-material/Done";
 import TitleDocument from "../../UI/TitleDocument/TitleDocument";
+import { ReqfilesType, ReqFiles, getReqfiles } from "../../API/ReqFiles";
 
 const AddRequest: React.FC = () => {
 	// Состояние текущего активного шага в индикаторе.
@@ -146,11 +147,49 @@ const AddRequest: React.FC = () => {
 	const handleGetFile = (id: number, file: File | null) => {
 		setGetFile({ number: id, file: file ? file.name : "" });
 	};
-	console.log(file);
 
 	const activeSendButton = uinfo?.uType === "bo" && postRqstsMutation.isSuccess;
 
 	// Создать функцию отправки файлов на сервер  и создать запрос на сервер для получение файлов
+	const [reqFiles, setReqfiles] = useState<ReqfilesType | null>(null);
+	const handleReqfiles = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files && e.target.files[0]) {
+			const token = localStorage.getItem("token");
+			console.log(token);
+			const file: File = e.target.files[0];
+			setReqfiles({ token, file });
+			console.log(`ffff ${reqFiles}`);
+		} else {
+			console.log(`Файл не выбран`);
+		}
+	};
+	const reqfilesMutation = useMutation(
+		{
+			mutationFn: () => ReqFiles(reqFiles),
+			onSuccess: () =>
+				queryClient.invalidateQueries({ queryKey: ["requests"] }),
+		},
+		queryClient,
+	);
+
+	useEffect(() => {
+		reqfilesMutation.mutate();
+		console.log(reqFiles);
+	}, [reqFiles?.file]);
+
+	//get
+	const reqFilesQuery = useQuery(
+		{
+			queryFn: () => getReqfiles({ token: localStorage.getItem("token") }),
+			queryKey: ["reqfiles"],
+		},
+		queryClient,
+	);
+
+	const [getFiles, setGetFiles] = useState<any>(null);
+	useEffect(() => {
+		setGetFile(reqFilesQuery.data);
+	});
 
 	return (
 		<section className="add-content">
@@ -247,7 +286,10 @@ const AddRequest: React.FC = () => {
 				<section className="details-request">
 					<TitleDocument title="Детали заявки" />
 					<div className="form_content">
-						<form className="request_form" onSubmit={handleSubmit(onSubmit)}>
+						<form
+							className="request_form"
+							onSubmit={handleSubmit(onSubmit)}
+						>
 							<Controller
 								name="reqType"
 								control={control}
@@ -257,7 +299,11 @@ const AddRequest: React.FC = () => {
 										onValueChange={field.onChange}
 									>
 										<Select.Trigger color="gray" />
-										<Select.Content color="gray" variant="solid" highContrast>
+										<Select.Content
+											color="gray"
+											variant="solid"
+											highContrast
+										>
 											<Select.Item value="Выберите тип заявки">
 												Выберите тип заявки
 											</Select.Item>
@@ -390,6 +436,16 @@ const AddRequest: React.FC = () => {
 								</>
 							)}
 						</form>
+
+						<h2>REQFILES</h2>
+
+						<input
+							type="file"
+							name="file"
+							id="file"
+							onChange={handleReqfiles}
+						/>
+						<h2>REQFILES</h2>
 					</div>
 				</section>
 			</div>

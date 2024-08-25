@@ -9,7 +9,11 @@ export type CurrUserPhoto = {
 	file: File | string;
 };
 
-export const setUphoto = async ({ username, token, file }: CurrUserPhoto) => {
+export const setUphoto = async ({
+	username,
+	token,
+	file,
+}: CurrUserPhoto): Promise<void> => {
 	if (!file) {
 		throw Error(`Ошибка при добавление файла`);
 	}
@@ -21,5 +25,5 @@ export const setUphoto = async ({ username, token, file }: CurrUserPhoto) => {
 			Authorization: `Bearer ${token}`,
 		},
 		body: formData,
-	}).then(validateResponse);
+	}).then(undefined);
 };
