@@ -46,6 +46,7 @@ function App() {
 			<main className="main">
 				{/* Компонент Suspense оборачивает маршруты и показывает компонент Loader (обернутый в div), пока лениво загружаются страницы.
 				 */}
+				<ReqfilesShower />
 				<Suspense fallback={<div>{<Loader />}</div>}>
 					<Routes>
 						{/* Путь "*" отображает LazyErrorPage для всех несуществующих маршрутов (страница ошибки 404).

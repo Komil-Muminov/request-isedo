@@ -45,7 +45,7 @@ export const ReqfilesShower: React.FC = () => {
 			{pdfUrl ? (
 				<div style={styles.container}>
 					<Worker
-						workerUrl={`https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`}
+						workerUrl={`https://unpkg.com/pdfjs-dist@4.4.168/build/pdf.worker.min.js`}
 					>
 						<Viewer fileUrl={pdfUrl} />
 					</Worker>
