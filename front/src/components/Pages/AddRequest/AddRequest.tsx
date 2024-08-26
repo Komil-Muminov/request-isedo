@@ -27,6 +27,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import DoneIcon from "@mui/icons-material/Done";
 import TitleDocument from "../../UI/TitleDocument/TitleDocument";
 import { ReqfilesType, PostReqFiles, getReqfiles } from "../../API/ReqFiles";
+import Reqshower from "../Reqshower/Reqshower";
 
 const AddRequest: React.FC = () => {
 	// Состояние текущего активного шага в индикаторе.
@@ -198,6 +199,8 @@ const AddRequest: React.FC = () => {
 	return (
 		<section className="add-content">
 			<div className="container">
+				<h2>ReqShower</h2>
+				<h2>ReqShower</h2>
 				<div className="details-steps">
 					<TitleDocument title="Новая заявка" />
 				</div>
@@ -290,10 +293,7 @@ const AddRequest: React.FC = () => {
 				<section className="details-request">
 					<TitleDocument title="Детали заявки" />
 					<div className="form_content">
-						<form
-							className="request_form"
-							onSubmit={handleSubmit(onSubmit)}
-						>
+						<form className="request_form" onSubmit={handleSubmit(onSubmit)}>
 							<Controller
 								name="reqType"
 								control={control}
@@ -303,11 +303,7 @@ const AddRequest: React.FC = () => {
 										onValueChange={field.onChange}
 									>
 										<Select.Trigger color="gray" />
-										<Select.Content
-											color="gray"
-											variant="solid"
-											highContrast
-										>
+										<Select.Content color="gray" variant="solid" highContrast>
 											<Select.Item value="Выберите тип заявки">
 												Выберите тип заявки
 											</Select.Item>

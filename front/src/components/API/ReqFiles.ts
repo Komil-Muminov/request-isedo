@@ -1,7 +1,7 @@
 import { validateResponse } from "./Hooks/useAuth";
 
 export type ReqfilesType = {
-	file?: File | string;
+	file?: File | string | undefined;
 	token?: string | null;
 	url?: string | undefined;
 };
