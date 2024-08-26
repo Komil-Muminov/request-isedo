@@ -199,8 +199,6 @@ const AddRequest: React.FC = () => {
 	return (
 		<section className="add-content">
 			<div className="container">
-				<h2>ReqShower</h2>
-				<h2>ReqShower</h2>
 				<div className="details-steps">
 					<TitleDocument title="Новая заявка" />
 				</div>

@@ -44,8 +44,6 @@ function App() {
 				<Navigation />
 			</header>
 			<main className="main">
-				<ReqfilesShower />
-
 				{/* Компонент Suspense оборачивает маршруты и показывает компонент Loader (обернутый в div), пока лениво загружаются страницы.
 				 */}
 				<Suspense fallback={<div>{<Loader />}</div>}>
