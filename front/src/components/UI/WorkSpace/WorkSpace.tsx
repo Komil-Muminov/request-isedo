@@ -3,6 +3,7 @@ import "./WorkSpace.css";
 import { departments } from "../../API/Data/Departments/Departments";
 import Services from "../Services/Services";
 import { useState } from "react";
+import ServicesList from "../Services/ServicesList";
 
 const WorkSpace = () => {
   const changeOfAccountant = [
@@ -19,26 +20,40 @@ const WorkSpace = () => {
     setActiveTab(id);
   };
 
+  const [showServicesList, setShowServicesList] = useState<boolean>(false);
+
+  const handleShowServicesList = (state: boolean) => {
+    setShowServicesList(state);
+  };
+
   return (
     <section className="wrapper-work-space">
       <TitleDocument title="Рабочее пространство" />
+
       <div className="workspace-content">
-        <div className="navigation-tabs">
-          <ul className="wrapper-tabs">
-            {changeOfAccountant.map((e) => {
-              return (
-                <li
-                  key={e.id}
-                  className={`tab ${activeTab === e.id ? "active" : ""}`}
-                  onClick={() => handleTabClick(e.id)}
-                >
-                  {e.name}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <Services />
+        {showServicesList && (
+          <ServicesList handleShowServicesList={handleShowServicesList} />
+        )}
+        {!showServicesList && (
+          <>
+            <div className="navigation-tabs">
+              <ul className="wrapper-tabs">
+                {changeOfAccountant.map((e) => {
+                  return (
+                    <li
+                      key={e.id}
+                      className={`tab ${activeTab === e.id ? "active" : ""}`}
+                      onClick={() => handleTabClick(e.id)}
+                    >
+                      {e.name}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <Services handleShowServicesList={handleShowServicesList} />
+          </>
+        )}
       </div>
     </section>
   );

@@ -9,7 +9,7 @@ const ButtonPanelControl = ({
   activeSendButton,
 }: TProps) => {
   const handleClick = () => {
-    if (goBack) goBack();
+    if (goBack) goBack(false);
     if (handleSubmit) handleSubmit();
   };
 

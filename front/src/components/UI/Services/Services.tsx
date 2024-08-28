@@ -2,11 +2,19 @@ import { Button } from "@mui/material";
 import "./Services.css";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
-const Services = () => {
+interface TProps {
+  handleShowServicesList: (value: boolean) => void;
+}
+
+const Services = ({ handleShowServicesList }: TProps) => {
   return (
     <div className="service-content">
       <div className="panel-control-service">
-        <Button variant="text" className="add-services">
+        <Button
+          onClick={() => handleShowServicesList(true)}
+          variant="text"
+          className="add-services"
+        >
           <AddCircleIcon />
           <p>Услуги</p>
         </Button>
