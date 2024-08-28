@@ -8,6 +8,10 @@ import SaveIcon from "@mui/icons-material/Save";
 
 import { services } from "../../API/Data/Services/Services";
 
+import { postServices, TServices } from "../../API/PostServices";
+import { queryClient } from "../../../queryClient";
+import { useMutation } from "@tanstack/react-query";
+
 interface TProps {
   handleShowServicesList: (value: boolean) => void;
 }
@@ -15,17 +19,33 @@ interface TProps {
 const ServicesList = ({ handleShowServicesList }: TProps) => {
   const [selectedRowIndexes, setSelectedRowIndexes] = useState<number[]>([]);
 
+  const postServiceMutation = useMutation(
+    {
+      mutationFn: (data: TServices) => postServices(data),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["services"] });
+      },
+    },
+    queryClient
+  );
+
   const handleRowClick = (index: number) => {
-    setSelectedRowIndexes((prevIndexes) => {
-      if (prevIndexes.includes(index)) {
-        return prevIndexes.filter((i) => i !== index);
-      } else {
-        return [...prevIndexes, index];
-      }
-    });
+    setSelectedRowIndexes((prevIndexes) =>
+      prevIndexes.includes(index)
+        ? prevIndexes.filter((i) => i !== index)
+        : [...prevIndexes, index]
+    );
   };
 
-  console.log(selectedRowIndexes);
+  const handleSave = () => {
+    const selectedServices = services.filter((_, index) =>
+      selectedRowIndexes.includes(index)
+    );
+
+    selectedServices.forEach((service) => {
+      postServiceMutation.mutate(service);
+    });
+  };
 
   return (
     <div className="wrapper-service-list">
@@ -40,6 +60,8 @@ const ServicesList = ({ handleShowServicesList }: TProps) => {
         <ButtonPanelControl
           icon={<SaveIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
           text="Сохранить"
+          handleSubmit={handleSave}
+          handleCloseAfterSave={handleShowServicesList}
         />
       </div>
       <table className="table-service-list">

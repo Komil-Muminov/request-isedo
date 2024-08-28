@@ -49,3 +49,8 @@ th {
 td:first-child {
   max-width: 300px;
 }
+
+.title-add-services {
+  text-align: center;
+  padding-top: 20px;
+}

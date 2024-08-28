@@ -1,12 +1,39 @@
 import { Button } from "@mui/material";
 import "./Services.css";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { useQuery } from "@tanstack/react-query";
+import { getServices } from "../../API/GetServices";
+import { queryClient } from "../../../queryClient";
+import { TServices } from "../../API/PostServices";
+import { useEffect, useState } from "react";
 
 interface TProps {
   handleShowServicesList: (value: boolean) => void;
 }
 
 const Services = ({ handleShowServicesList }: TProps) => {
+  const getServicesQuery = useQuery(
+    {
+      queryFn: () => getServices(),
+      queryKey: ["services"],
+    },
+    queryClient
+  );
+
+  const [services, setServices] = useState<TServices[]>([]);
+
+  useEffect(() => {
+    if (getServicesQuery.status === "success") {
+      setServices(getServicesQuery.data);
+    }
+  }, [getServicesQuery]);
+
+  const totalSumOfServices = services.reduce((accumulator, currentValue) => {
+    return accumulator + parseFloat(currentValue.total);
+  }, 0);
+
+  console.log(totalSumOfServices);
+
   return (
     <div className="service-content">
       <div className="panel-control-service">
@@ -20,10 +47,10 @@ const Services = ({ handleShowServicesList }: TProps) => {
         </Button>
         <div className="services-info">
           <p>
-            Количество: <span>2</span>
+            Количество: <span>{services.length}</span>
           </p>
           <p>
-            На сумму: <span>TJS 1 435,20</span>
+            На сумму: <span>TJS {totalSumOfServices}</span>
           </p>
         </div>
       </div>
@@ -41,21 +68,25 @@ const Services = ({ handleShowServicesList }: TProps) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              14.2. Дароз кардани бақайдгирӣ дар маркази сертификатсиякунонӣ пас
-              аз анҷоми 1 сол: Додани сертификат бе токен (1-50 воҳид)
-            </td>
-            <td>120,00</td>
-            <td>2000</td>
-            <td>Солона (1 воҳид)</td>
-            <td>Бюджетные учреждения</td>
-            <td>НДС</td>
-            <td>36,00</td>
-            <td>276,00</td>
-          </tr>
+          {services?.map((e) => {
+            return (
+              <tr key={e.id}>
+                <td>{e.serviceName}</td>
+                <td>{e.price}</td>
+                <td>{e.amount}</td>
+                <td>{e.unit}</td>
+                <td>{e.recipientType}</td>
+                <td>{e.tax}</td>
+                <td>{e.sumTax}</td>
+                <td>{e.total}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
+      {services.length === 0 && (
+        <p className="title-add-services">Добавьте услугу</p>
+      )}
     </div>
   );
 };

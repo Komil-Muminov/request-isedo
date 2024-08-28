@@ -7,4 +7,5 @@ export interface TProps {
   goBack?: any;
   handleSubmit?: any;
   activeSendButton?: boolean;
+  handleCloseAfterSave?: any;
 }
