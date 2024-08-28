@@ -78,7 +78,7 @@ const ServicesList = ({ handleShowServicesList }: TProps) => {
         </tbody>
       </table>
       <div
-      className=""
+        className=""
         style={{
           padding: "0 20px",
           paddingTop: "20px",
