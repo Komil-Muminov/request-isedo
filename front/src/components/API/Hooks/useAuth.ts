@@ -51,6 +51,7 @@ export const getMeScheme = z.object({
 	role: z.string(),
 	orgName: z.string().optional(),
 	orgTax: z.string().optional(),
+	position: z.string().optional(),
 	department: z.string().optional(),
 	reqIdentity: z.boolean().optional(),
 	uIdentity: z.boolean().optional(),

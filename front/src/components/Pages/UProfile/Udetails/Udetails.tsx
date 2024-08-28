@@ -118,8 +118,12 @@ const Udetails = () => {
 									}
 								/>
 								<UserInfoList
-									title={uinfo?.role ? "Должность" : "ИНН"}
-									description={uinfo?.role ? uinfo.role : uinfo?.tax}
+									title={uinfo?.uType === "kvd" ? "Должность" : "ИНН"}
+									description={
+										uinfo?.role !== "" || uinfo?.position !== ""
+											? uinfo?.role
+											: uinfo.tax
+									}
 								/>
 								{uinfo?.email && (
 									<UserInfoList
