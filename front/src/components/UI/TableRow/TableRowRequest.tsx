@@ -3,12 +3,12 @@ import { IconButton } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { TProps } from "./TableRowRequestType";
 
-const TableRowRequest = ({ item, handleGetFile, file }: TProps) => {
+const TableRowRequest = ({ item, handleGetFile, getFile }: TProps) => {
   return (
     <tr>
       <td className="table-data">{item.id}</td>
       <td className="table-data">
-        <AddFileRequest item={item} handleGetFile={handleGetFile} file={file} />
+        <AddFileRequest item={item} handleGetFile={handleGetFile} getFile={getFile} />
       </td>
       <td className="table-data">{item.name}</td>
       <td>

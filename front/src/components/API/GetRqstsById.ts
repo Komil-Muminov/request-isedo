@@ -1,3 +1,8 @@
+interface FileType {
+  number: number;
+  fileName: string;
+}
+
 export interface GetRqstsByIdType {
   id: number;
   fullName: string;
@@ -10,6 +15,7 @@ export interface GetRqstsByIdType {
   reqType: string;
   stepCode: number;
   dateTime: string;
+  files: FileType[];
 }
 
 export const getRqstsById = async (id: number): Promise<GetRqstsByIdType> => {

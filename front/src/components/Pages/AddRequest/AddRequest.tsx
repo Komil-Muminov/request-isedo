@@ -27,7 +27,6 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import DoneIcon from "@mui/icons-material/Done";
 import TitleDocument from "../../UI/TitleDocument/TitleDocument";
 import { ReqfilesType, PostReqFiles, getReqfiles } from "../../API/ReqFiles";
-import { ReqfilesShower } from "./ReqfilesShower/ReqfilesShower";
 
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
@@ -114,6 +113,27 @@ const AddRequest: React.FC = () => {
     queryClient
   );
 
+  interface FileType {
+    number: number;
+    fileName: string;
+  }
+
+  const [files, setFiles] = useState<FileType[]>([]);
+
+  const [getFile, setGetFile] = useState({ number: 0, fileName: "" });
+
+  const handleGetFile = (id: number, file: File | null) => {
+    const newFile = { number: id, fileName: file ? file.name : "" };
+
+    setGetFile(newFile);
+
+    if (newFile.fileName) {
+      setFiles((prevFiles) => [...prevFiles, newFile]);
+    }
+  };
+
+  console.log(files);
+
   // Увеличивает номер текущего шага на 1.
   const onSubmit = (data: PostRqstScheme) => {
     console.log(data);
@@ -136,65 +156,15 @@ const AddRequest: React.FC = () => {
       ...data,
       stepCode: stepFound?.stepCode || 0,
       dateTime: date,
+      files: files,
     };
 
-    console.log(`stepCode : ${JSON.stringify(updateReqData, null, 2)}`);
+    console.log(updateReqData);
 
     postRqstsMutation.mutate(updateReqData);
   };
 
-  const [file, setGetFile] = useState({ number: 0, file: {} });
-
-  const handleGetFile = (id: number, file: File | null) => {
-    setGetFile({ number: id, file: file ? file.name : "" });
-  };
-
   const activeSendButton = uinfo?.uType === "bo" && postRqstsMutation.isSuccess;
-
-  // Создать функцию отправки файлов на сервер  и создать запрос на сервер для получение файлов
-  const [reqFiles, setReqfiles] = useState<ReqfilesType | null>(null);
-  const handleReqfiles = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const token = localStorage.getItem("token");
-      console.log(token);
-      const file: File = e.target.files[0];
-      setReqfiles({ token, file });
-      console.log(`ffff ${reqFiles}`);
-    } else {
-      console.log(`Файл не выбран`);
-    }
-  };
-  const reqfilesMutation = useMutation(
-    {
-      mutationFn: () => PostReqFiles(reqFiles),
-      onSuccess: () =>
-        queryClient.invalidateQueries({ queryKey: ["requests"] }),
-    },
-    queryClient
-  );
-
-  useEffect(() => {
-    reqfilesMutation.mutate();
-    console.log(reqFiles);
-  }, [reqFiles?.file]);
-
-  //get ReqFiles
-  const reqFilesQuery = useQuery(
-    {
-      queryFn: () => getReqfiles({ token: localStorage.getItem("token") }),
-      queryKey: ["reqfiles"],
-    },
-    queryClient
-  );
-
-  const [reqFilesData, setReqfilesData] = useState<ReqfilesType[] | undefined>(
-    []
-  );
-  useEffect(() => {
-    if (reqFilesQuery.data) {
-      setReqfilesData(reqFilesQuery.data);
-    }
-  });
 
   return (
     <section className="add-content">
@@ -386,7 +356,7 @@ const AddRequest: React.FC = () => {
                               key={e.id}
                               item={e}
                               handleGetFile={handleGetFile}
-                              file={file}
+                              getFile={getFile}
                             />
                           );
                         })}
@@ -435,7 +405,6 @@ const AddRequest: React.FC = () => {
               )}
             </form>
           </div>
-          <input type="file" name="file" id="file" onChange={handleReqfiles} />
         </section>
       </div>
     </section>

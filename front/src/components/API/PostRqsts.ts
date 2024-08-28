@@ -1,3 +1,8 @@
+interface FileType {
+  number: number;
+  fileName: string;
+}
+
 export interface PostRqstScheme {
   fullName: string;
   role: string;
@@ -9,6 +14,7 @@ export interface PostRqstScheme {
   reqType: string;
   stepCode: number;
   dateTime: string;
+  files: FileType[];
 }
 
 const token = localStorage.getItem("token");

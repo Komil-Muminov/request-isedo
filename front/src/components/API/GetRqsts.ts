@@ -1,3 +1,8 @@
+interface FileType {
+  number: number;
+  fileName: string;
+}
+
 export interface GetRqstsType {
   id: number;
   fullName: string;
@@ -10,6 +15,7 @@ export interface GetRqstsType {
   reqType: string;
   stepCode: number;
   dateTime: string;
+  files: FileType[];
 }
 
 // Извлекает тип данных из схемы GetRqstsScheme. Это означает, что GetRqsts будет типом объекта с полями id, orgname, accountant, и desc, где значения соответствуют типам, указанным в схеме.

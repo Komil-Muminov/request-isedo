@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./AddFileRequest.css";
 import { TProps } from "../TableRow/TableRowRequestType";
 
-const AddFileRequest = ({ item, handleGetFile, file }: TProps) => {
+const AddFileRequest = ({ item, handleGetFile, getFile }: TProps) => {
   const [fileName, setFileName] = useState("Выберите файл");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -11,7 +11,7 @@ const AddFileRequest = ({ item, handleGetFile, file }: TProps) => {
     handleGetFile(item?.id, file);
   };
 
-  const choosenFileClass = file?.number === item?.id ? "activeFile" : "";
+  const choosenFileClass = getFile?.number === item?.id ? "activeFile" : "";
 
   return (
     <div className="file-input-wrapper">

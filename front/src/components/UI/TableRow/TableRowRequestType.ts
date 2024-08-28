@@ -3,7 +3,7 @@ export interface TProps {
     id: number;
     name: string;
   };
-  file: {
+  getFile: {
     number: number;
     file: File | null;
   };
