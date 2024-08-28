@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getRqstsById, GetRqstsByIdType } from "../../API/GetRqstsById";
@@ -32,6 +32,7 @@ import ButtonPanelControl from "../../UI/ButtonPanelControl/ButtonPanelControl";
 import "../../../index.css";
 import TitleDocument from "../../UI/TitleDocument/TitleDocument";
 import WorkSpace from "../../UI/WorkSpace/WorkSpace";
+import { putRqstsById, PutRqstsByIdType } from "../../API/PutRqstById";
 
 const ShowRequest = () => {
   const navigate = useNavigate();
@@ -88,6 +89,24 @@ const ShowRequest = () => {
     }
   }, [getRqstsByIdQuery]);
 
+  const putRqstsByIdMutation = useMutation(
+    {
+      mutationFn: (data: PutRqstsByIdType) => putRqstsById(data),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: [`request-${numericId}`] });
+      },
+    },
+    queryClient
+  );
+
+  const handlePutRqstById = () => {
+    const updateReqData = {
+      ...rqstsData,
+      stepCode: rqstsData && rqstsData.stepCode + 1,
+    };
+    putRqstsByIdMutation.mutate(updateReqData);
+  };
+
   if (getRqstsByIdQuery.status === "pending") {
     return <p>Loading...</p>;
   }
@@ -124,19 +143,22 @@ const ShowRequest = () => {
                     sx={{ fontSize: "18px", fontWeight: "bold" }}
                   />
                 }
-                text="Отправить на резолюцию"
+                text="Подписать"
+                handleSubmit={handlePutRqstById}
               />
               <ButtonPanelControl
                 icon={
                   <CancelIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
                 }
                 text="Отклонить"
+                activeSendButton={true}
               />
               <ButtonPanelControl
                 icon={
                   <DoneIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
                 }
                 text="Завершить"
+                activeSendButton={true}
               />
             </div>
           </div>

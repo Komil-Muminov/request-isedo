@@ -425,8 +425,28 @@ app.get("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
   });
 });
 
-app.post("/logout", authenticateJWT, (req: Request, res: Response) => {
-  res.status(200).json({ message: "Выход успешный" });
+// EDIT REQUEST BY ID
+
+app.put("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
+  const showId = parseInt(req.params.id, 10);
+  const { body: requestData } = req;
+
+  if (isNaN(showId)) {
+    return res.status(400).json({ error: "Некорректный ID" });
+  }
+
+  const requests = readFromFile(requestsFilePath);
+  const index = requests.findIndex((show: any) => show.id === showId);
+
+  if (index === -1) {
+    return res.status(404).json({ error: "Заявка не найдена" });
+  }
+
+  // Обновление данных заявки
+  requests[index] = { ...requests[index], ...requestData };
+  writeToFile(requestsFilePath, requests);
+
+  res.status(200).json({ message: "Заявка успешно обновлена", requestData });
 });
 
 // Uidentity -  state=== !reqIdentity , !uIdentity

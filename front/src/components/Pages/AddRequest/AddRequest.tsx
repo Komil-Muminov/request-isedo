@@ -26,7 +26,6 @@ import UnsubscribeIcon from "@mui/icons-material/Unsubscribe";
 import CancelIcon from "@mui/icons-material/Cancel";
 import DoneIcon from "@mui/icons-material/Done";
 import TitleDocument from "../../UI/TitleDocument/TitleDocument";
-import { ReqfilesType, PostReqFiles, getReqfiles } from "../../API/ReqFiles";
 
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
@@ -106,8 +105,10 @@ const AddRequest: React.FC = () => {
   const postRqstsMutation = useMutation(
     {
       mutationFn: (data: PostRqstScheme) => postRequest(data),
-      onSuccess: () => {
+      onSuccess: (response) => {
         queryClient.invalidateQueries({ queryKey: ["requests"] });
+        const createdRequestId = response.requestData.id;
+        navigate(`/account/show/${createdRequestId}`);
       },
     },
     queryClient
@@ -166,6 +167,8 @@ const AddRequest: React.FC = () => {
 
   const activeSendButton = uinfo?.uType === "bo" && postRqstsMutation.isSuccess;
 
+  console.log(steps);
+
   return (
     <section className="add-content">
       <div className="container">
@@ -200,19 +203,21 @@ const AddRequest: React.FC = () => {
                     sx={{ fontSize: "18px", fontWeight: "bold" }}
                   />
                 }
-                text="Отправить на резолюцию"
+                text="Подписать"
               />
               <ButtonPanelControl
                 icon={
                   <CancelIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
                 }
                 text="Отклонить"
+                activeSendButton={true}
               />
               <ButtonPanelControl
                 icon={
                   <DoneIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
                 }
                 text="Завершить"
+                activeSendButton={true}
               />
             </div>
           </div>
