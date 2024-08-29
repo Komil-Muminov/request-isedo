@@ -85,7 +85,7 @@ const CertificateContent = () => {
         onChange={handleFileChange}
       />
       {certificateData && (
-        <div>
+        <div style={{ padding: "20px" }}>
           <h3>Данные сертификата:</h3>
           <h4>Субъект:</h4>
           <pre>{JSON.stringify(certificateData.subject, null, 2)}</pre>
