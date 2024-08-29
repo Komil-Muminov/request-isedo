@@ -3,7 +3,7 @@ import "./WorkSpace.css";
 import { departments } from "../../../API/Data/Departments/Departments";
 import { useState } from "react";
 import { TDepartment } from "../../../API/Data/Departments/Departments";
-import DepartmentCustomer from "../DepartmentCustomer/DepartmentCustomer";
+import ServicesContent from "../DepartmentCustomer/Services/ServicesContent";
 
 const WorkSpace = () => {
   const changeOfAccountant = [
@@ -50,7 +50,7 @@ const WorkSpace = () => {
             })}
           </ul>
         </div>
-        {showDepartmentCustomer && <DepartmentCustomer />}
+        {showDepartmentCustomer && <ServicesContent />}
       </div>
     </section>
   );

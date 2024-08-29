@@ -1,10 +1,11 @@
 import { useState } from "react";
-import ServicesList from "../../Services/ServicesList";
-import Services from "../../Services/Services";
+import ServicesList from "../../../Services/ServicesList";
+import Services from "../../../Services/Services";
 
-import "./DepartmentCustomer.css";
+import "./ServicesContent.css";
+import CertificateContent from "../Certificate/CertificateContent";
 
-const DepartmentCustomer = () => {
+const ServicesContent = () => {
   const [showServicesList, setShowServicesList] = useState<boolean>(false);
 
   const handleShowServicesList = (state: boolean) => {
@@ -19,8 +20,9 @@ const DepartmentCustomer = () => {
       {!showServicesList && (
         <Services handleShowServicesList={handleShowServicesList} />
       )}
+      {!showServicesList && <CertificateContent />}
     </>
   );
 };
 
-export default DepartmentCustomer;
+export default ServicesContent;
