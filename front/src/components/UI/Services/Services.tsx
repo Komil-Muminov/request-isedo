@@ -39,8 +39,6 @@ const Services = ({ handleShowServicesList }: TProps) => {
     (e) => e.requestId === requestId
   );
 
-  console.log(servicesFilteredByRequestId);
-
   const totalSumOfServices = servicesFilteredByRequestId.reduce(
     (accumulator, currentValue) => {
       return accumulator + parseFloat(currentValue.total);

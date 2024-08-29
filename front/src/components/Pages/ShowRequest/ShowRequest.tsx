@@ -31,7 +31,7 @@ import ButtonPanelControl from "../../UI/ButtonPanelControl/ButtonPanelControl";
 
 import "../../../index.css";
 import TitleDocument from "../../UI/TitleDocument/TitleDocument";
-import WorkSpace from "../../UI/WorkSpace/WorkSpace";
+import WorkSpace from "../../UI/WorkSpace/WorkSpaceContent/WorkSpace";
 import { putRqstsById, PutRqstsByIdType } from "../../API/PutRqstById";
 
 const ShowRequest = () => {
