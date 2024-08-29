@@ -6,6 +6,7 @@ import { getServices } from "../../API/GetServices";
 import { queryClient } from "../../../queryClient";
 import { TServices } from "../../API/PostServices";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 interface TProps {
   handleShowServicesList: (value: boolean) => void;
@@ -28,11 +29,24 @@ const Services = ({ handleShowServicesList }: TProps) => {
     }
   }, [getServicesQuery]);
 
-  const totalSumOfServices = services.reduce((accumulator, currentValue) => {
-    return accumulator + parseFloat(currentValue.total);
-  }, 0);
+  const location = useLocation();
 
-  console.log(totalSumOfServices);
+  const requestIdTemp = location.pathname.split("/");
+
+  const requestId = parseInt(requestIdTemp[requestIdTemp.length - 1]);
+
+  const servicesFilteredByRequestId = services.filter(
+    (e) => e.requestId === requestId
+  );
+
+  console.log(servicesFilteredByRequestId);
+
+  const totalSumOfServices = servicesFilteredByRequestId.reduce(
+    (accumulator, currentValue) => {
+      return accumulator + parseFloat(currentValue.total);
+    },
+    0
+  );
 
   return (
     <div className="service-content">
@@ -47,7 +61,7 @@ const Services = ({ handleShowServicesList }: TProps) => {
         </Button>
         <div className="services-info">
           <p>
-            Количество: <span>{services.length}</span>
+            Количество: <span>{servicesFilteredByRequestId.length}</span>
           </p>
           <p>
             На сумму: <span>TJS {totalSumOfServices}</span>
@@ -68,7 +82,7 @@ const Services = ({ handleShowServicesList }: TProps) => {
           </tr>
         </thead>
         <tbody>
-          {services?.map((e) => {
+          {servicesFilteredByRequestId?.map((e) => {
             return (
               <tr key={e.id}>
                 <td>{e.serviceName}</td>

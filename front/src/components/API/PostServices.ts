@@ -1,5 +1,6 @@
 export interface TServices {
   id: number;
+  requestId?: number;
   serviceName: string;
   price: string;
   amount: string;
@@ -12,8 +13,12 @@ export interface TServices {
 
 const token = localStorage.getItem("token");
 
-export const postServices = async (newData: TServices): Promise<void> => {
+export const postServices = async (
+  newData: TServices,
+  requestId: number
+): Promise<any> => {
   try {
+    newData.requestId = requestId;
     const response = await fetch("http://localhost:3000/services", {
       method: "POST",
       headers: {

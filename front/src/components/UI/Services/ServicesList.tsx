@@ -12,6 +12,8 @@ import { postServices, TServices } from "../../API/PostServices";
 import { queryClient } from "../../../queryClient";
 import { useMutation } from "@tanstack/react-query";
 
+import { useLocation } from "react-router-dom";
+
 interface TProps {
   handleShowServicesList: (value: boolean) => void;
 }
@@ -19,9 +21,15 @@ interface TProps {
 const ServicesList = ({ handleShowServicesList }: TProps) => {
   const [selectedRowIndexes, setSelectedRowIndexes] = useState<number[]>([]);
 
+  const location = useLocation();
+
+  const requestIdTemp = location.pathname.split("/");
+
+  const requestId = parseInt(requestIdTemp[requestIdTemp.length - 1]);
+
   const postServiceMutation = useMutation(
     {
-      mutationFn: (data: TServices) => postServices(data),
+      mutationFn: (data: TServices) => postServices(data, requestId),
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["services"] });
       },
