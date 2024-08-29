@@ -38,36 +38,37 @@ const LazyUdetails = lazy(
 /* Надо сделать динамический запрос */
 function App() {
   return (
-    <>
-      <header>
-        <Navigation />
-      </header>
-      <main className="main">
-        {/* Компонент Suspense оборачивает маршруты и показывает компонент Loader (обернутый в div), пока лениво загружаются страницы.
-         */}
+		<>
+			<header>
+				<Navigation />
+			</header>
+			<main className="main">
+				{/* Компонент Suspense оборачивает маршруты и показывает компонент Loader (обернутый в div), пока лениво загружаются страницы.
+				 */}
 
-        <Suspense fallback={<div>{<Loader />}</div>}>
-          <Routes>
-            {/* Путь "*" отображает LazyErrorPage для всех несуществующих маршрутов (страница ошибки 404).
-             */}
-            <Route path="*" element={<LazyErrorPage />} />
-            <Route path="/" element={<LazyAuthPage />} />
-            <Route path="auth" element={<LazyAuthPage />} />
-            <Route path="/account" element={<LazyAccount />} />
-            <Route path="/uprofile/*" element={<LazyUserProfile />}>
-              <Route path="unotify" element={<LazyUnotify />} />
-              <Route path="udetails" element={<LazyUdetails />} />
-              <Route path="uidentity" element={<LazyIdentification />} />
-            </Route>
-            <Route path="/account/create" element={<LazyAddRequest />} />
-            <Route path="/account/show/:id" element={<LazyShowRequest />} />
-            {/* <Route path="/uNotify" element={<LazyUnotify />} /> */}
-            <Route path="/mfrqst" element={<LazyMfrqst />} />
-          </Routes>
-        </Suspense>
-      </main>
-    </>
-  );
+				<Suspense fallback={<div>{<Loader />}</div>}>
+					<Routes>
+						{/* Путь "*" отображает LazyErrorPage для всех несуществующих маршрутов (страница ошибки 404).
+						 */}
+						<Route path="*" element={<LazyErrorPage />} />
+						<Route path="/" element={<LazyAuthPage />} />
+						<Route path="auth" element={<LazyAuthPage />} />
+						{/* // сделать компонент под уведомление */}
+						<Route path="/account" element={<LazyAccount />} />
+						<Route path="/uprofile/*" element={<LazyUserProfile />}>
+							<Route path="unotify" element={<LazyUnotify />} />
+							<Route path="udetails" element={<LazyUdetails />} />
+							<Route path="uidentity" element={<LazyIdentification />} />
+						</Route>
+						<Route path="/account/create" element={<LazyAddRequest />} />
+						<Route path="/account/show/:id" element={<LazyShowRequest />} />
+						{/* <Route path="/uNotify" element={<LazyUnotify />} /> */}
+						<Route path="/mfrqst" element={<LazyMfrqst />} />
+					</Routes>
+				</Suspense>
+			</main>
+		</>
+	);
 }
 
 export default App;

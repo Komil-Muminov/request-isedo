@@ -1,5 +1,6 @@
 // import { useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
+// сделать компонент под уведомление
 const Notify: React.FC = () => {
 	return (
 		<>
