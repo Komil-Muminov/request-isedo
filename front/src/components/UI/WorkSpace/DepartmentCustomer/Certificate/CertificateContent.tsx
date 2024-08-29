@@ -78,7 +78,12 @@ const CertificateContent = () => {
           <p>Сертификат</p>
         </Button>
       </div>
-      <input type="file" accept=".pem,.crt,.cer" onChange={handleFileChange} />
+      <input
+        style={{ padding: "20px" }}
+        type="file"
+        accept=".pem,.crt,.cer"
+        onChange={handleFileChange}
+      />
       {certificateData && (
         <div>
           <h3>Данные сертификата:</h3>
