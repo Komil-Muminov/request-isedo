@@ -2,9 +2,9 @@ import { Button } from "@mui/material";
 import "./Services.css";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useQuery } from "@tanstack/react-query";
-import { getServices } from "../../API/GetServices";
-import { queryClient } from "../../../queryClient";
-import { TServices } from "../../API/PostServices";
+import { getServices } from "../../../../API/GetServices";
+import { queryClient } from "../../../../../queryClient";
+import { TServices } from "../../../../API/PostServices";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -96,9 +96,6 @@ const Services = ({ handleShowServicesList }: TProps) => {
           })}
         </tbody>
       </table>
-      {services.length === 0 && (
-        <p className="title-add-services">Добавьте услугу</p>
-      )}
     </div>
   );
 };

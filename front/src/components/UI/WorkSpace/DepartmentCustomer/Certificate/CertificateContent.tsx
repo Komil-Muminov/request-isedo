@@ -137,34 +137,36 @@ const CertificateContent = () => {
           style={{ display: "none" }}
         />
       </div>
-      <table className="table-certificate-list">
-        <thead>
-          <tr>
-            <th>Тип токена</th>
-            <th>Серийный номер</th>
-            <th>Действителен с</th>
-            <th>Действителен до</th>
-            <th>ФИО</th>
-            <th>Организация</th>
-            <th>Должность</th>
-            <th>Экспорт</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{currentCertificate?.typeToken}</td>
-            <td>{currentCertificate?.serialNumber}</td>
-            <td>{currentCertificate?.validFrom}</td>
-            <td>{currentCertificate?.validTo}</td>
-            <td>{currentCertificate?.fullName}</td>
-            <td>{currentCertificate?.organization}</td>
-            <td>{currentCertificate?.role}</td>
-            <td>
-              <FileDownloadOutlinedIcon />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      {currentCertificate && (
+        <table className="table-certificate-list">
+          <thead>
+            <tr>
+              <th>Тип токена</th>
+              <th>Серийный номер</th>
+              <th>Действителен с</th>
+              <th>Действителен до</th>
+              <th>ФИО</th>
+              <th>Организация</th>
+              <th>Должность</th>
+              <th>Экспорт</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{currentCertificate?.typeToken}</td>
+              <td>{currentCertificate?.serialNumber}</td>
+              <td>{currentCertificate?.validFrom}</td>
+              <td>{currentCertificate?.validTo}</td>
+              <td>{currentCertificate?.fullName}</td>
+              <td>{currentCertificate?.organization}</td>
+              <td>{currentCertificate?.role}</td>
+              <td>
+                <FileDownloadOutlinedIcon />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };
