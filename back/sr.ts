@@ -394,7 +394,7 @@ app.post("/certificates", authenticateJWT, (req: Request, res: Response) => {
 
 	if (!user || user.uType !== "kvd") {
 		return res.status(403).json({
-			error: `Вы не bo и не можете вложить сертификат. Ваш тип: ${
+			error: `Вы не kvd и не можете вложить сертификат. Ваш тип: ${
 				user?.uType || "неизвестен"
 			}`,
 		});
