@@ -561,7 +561,7 @@ app.post("/uidentity", authenticateJWT, (req: Request, res: Response) => {
 		return res.status(404).json({ error: "Пользователь не найден" });
 	}
 
-	const username = user.username; 
+	const username = user.username;
 
 	// ДатаВремя
 	const now = new Date();
@@ -593,16 +593,28 @@ app.post("/uidentity", authenticateJWT, (req: Request, res: Response) => {
 app.get("/uidentity", authenticateJWT, (req: Request, res: Response) => {
 	const userId = (req as any).userId;
 	const users = readFromFile(usersFilePath);
-	const user = users.find((user: any) => user.id === userId);
+	const user = users.find((u: any) => u.id === userId);
 
 	if (!user) {
 		return res.status(404).json({ error: "Пользователь не найден" });
 	}
 
-	res.status(200).json({
-		reqIdentity: user.reqIdentity,
-		uIdentity: user.uIdentity,
-	});
+	const uidentityData = readUidentityFromFile();
+	const userIdentities = uidentityData.filter(
+		(identity: any) => identity.userId === userId,
+	);
+
+	res.status(200).json(
+		userIdentities.map((identity: any) => ({
+			orgName: identity.orgName,
+			departmentName: identity.departmentName,
+			post: identity.post,
+			id: identity.id,
+			userId: identity.userId,
+			username: identity.username,
+			date: identity.date,
+		})),
+	);
 });
 
 app.listen(port, () => {
