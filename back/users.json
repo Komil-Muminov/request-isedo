@@ -13,5 +13,37 @@
     "orgName": "",
     "orgTax": "",
     "department": "Шуъба оид ба кор бо муштариён"
+  },
+  {
+    "id": 2,
+    "uType": "kvd",
+    "username": "km",
+    "password": "123",
+    "photo": "",
+    "fullName": "Коми Муминов",
+    "phone": "",
+    "tax": "",
+    "email": "",
+    "role": "Мутахасис",
+    "orgName": "",
+    "orgTax": "",
+    "department": "Шуъба оид ба таҳия ва татбиқи барномаҳои иттилоотӣ"
+  },
+  {
+    "id": 3,
+    "uType": "bo",
+    "username": "bo1",
+    "password": "123",
+    "photo": "",
+    "fullName": "bo",
+    "phone": "ds",
+    "tax": "fds",
+    "email": "fds",
+    "role": "bfdsfsd",
+    "orgName": "fdsfdsfds",
+    "orgTax": "fdsfds",
+    "department": "",
+    "reqIdentity": false,
+    "uIdentity": false
   }
 ]

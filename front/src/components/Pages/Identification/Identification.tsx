@@ -69,6 +69,7 @@ const Identification: React.FC = () => {
 					/>
 				</form>
 				<Button
+					type="submit"
 					variant="contained"
 					sx={{
 						backgroundColor: "#607d8b",
@@ -77,7 +78,7 @@ const Identification: React.FC = () => {
 						},
 					}}
 				>
-					Отправить
+					Отправить 2
 				</Button>
 			</div>
 		</>

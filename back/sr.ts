@@ -215,12 +215,10 @@ app.post("/register", (req: Request, res: Response) => {
 		users.push(newUser);
 		writeToFile(usersFilePath, users);
 
-		res
-			.status(200)
-			.json({
-				message: `Уважаемый(я) ${username} Вы прошли регистрацию`,
-				user: newUser,
-			});
+		res.status(200).json({
+			message: `Уважаемый(я) ${username} Вы прошли регистрацию`,
+			user: newUser,
+		});
 	}
 });
 
@@ -479,7 +477,7 @@ app.put("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
 app.post("/uidentity", authenticateJWT, (req: Request, res: Response) => {
 	const { orgName, departmentName, post, file } = req.body;
 
-	if (!orgName || !departmentName || !post || !file) {
+	if (!orgName || !departmentName || !post) {
 		return res.status(400).json({ error: "Отсутствуют обязательные поля" });
 	}
 
