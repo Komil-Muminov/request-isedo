@@ -35,15 +35,15 @@
     "username": "bo1",
     "password": "123",
     "photo": "",
-    "fullName": "bo",
-    "phone": "ds",
-    "tax": "fds",
-    "email": "fds",
-    "role": "bfdsfsd",
-    "orgName": "fdsfdsfds",
-    "orgTax": "fdsfds",
+    "fullName": "sdfsdf",
+    "phone": "fsdfsdsfd",
+    "tax": "fsdfsd",
+    "email": "fsd",
+    "role": "dsa",
+    "orgName": "sfdssfd",
+    "orgTax": "sda",
     "department": "",
     "reqIdentity": true,
-    "uIdentity": true
+    "uIdentity": false
   }
 ]

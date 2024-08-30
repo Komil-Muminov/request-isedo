@@ -1,20 +1,16 @@
 [
-  {
-    "id": 1,
-    "userId": 3,
-    "username": "bo1",
-    "orgName": "km",
-    "departmentName": "123",
-    "post": "123",
-    "date": "30.08.2024 15:14:20"
-  },
-  {
-    "id": 2,
-    "userId": 3,
-    "username": "bo1",
-    "orgName": "xcv",
-    "departmentName": "",
-    "post": "vcxvxc",
-    "date": "30.08.2024 15:19:43"
-  }
+	{
+		"id": 1,
+		"userId": 3, //users.json
+		"username": "bo1", //users.json
+		"orgName": "аа",
+		"departmentName": "аа",
+		"post": "аа",
+		"date": "30.08.2024 16:25:30",
+		"typeToken": "", //certificates.json
+		"organization": "", //certificates.json
+		"serialNumber": "", //certificates.json
+		"tokenId": "" //certificates.json
+	}
 ]
+

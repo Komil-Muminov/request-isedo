@@ -550,6 +550,7 @@ const writeUidentityToFile = (data: any[]): void => {
 
 app.post("/uidentity", authenticateJWT, (req: Request, res: Response) => {
 	const { orgName, departmentName, post } = req.body;
+
 	if (!orgName || !departmentName || !post) {
 		return res.status(400).json({ error: "Отсутствуют обязательные поля" });
 	}
@@ -562,31 +563,46 @@ app.post("/uidentity", authenticateJWT, (req: Request, res: Response) => {
 		return res.status(404).json({ error: "Пользователь не найден" });
 	}
 
-	const username = user.username;
-
-	// ДатаВремя
+	// Дата и время
 	const now = new Date();
 	const date =
 		now.toLocaleDateString("ru-RU") + " " + now.toLocaleTimeString("ru-RU");
 
 	const uidentityData = readFromFile(uidentityFilePath);
+	const certificatesData = readFromFile(certificatesFilePath);
 	const nextId =
 		uidentityData.length > 0
 			? Math.max(...uidentityData.map((item: any) => item.id)) + 1
 			: 1;
 
+	// Найти сертификаты для пользователя
+	const userCertificates = certificatesData.filter(
+		(cert: any) => cert.userId === userId,
+	);
+
+	// Допустим, что нам нужен только первый сертификат. Вы можете изменить логику в зависимости от требований.
+	const certificate = userCertificates.length > 0 ? userCertificates[0] : {};
+
 	const newIdentity = {
 		id: nextId,
 		userId,
-		username,
+		username: user.username,
 		orgName,
 		departmentName,
 		post,
 		date,
+		typeToken: certificate.typeToken || "",
+		organization: certificate.organization || "",
+		serialNumber: certificate.serialNumber || "",
+		tokenId: certificate.id || "",
 	};
 
 	uidentityData.push(newIdentity);
-	writeToFile(uidentityFilePath, uidentityData);
+	writeUidentityToFile(uidentityData);
+
+	// Обновление поля reqIdentity в users.json
+	user.reqIdentity = true;
+	writeToFile(usersFilePath, users);
 
 	res.status(200).json({ message: "Данные идентичности успешно обновлены" });
 });

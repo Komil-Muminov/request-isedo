@@ -67,6 +67,8 @@ const Identification: React.FC = () => {
 						inputType="file"
 						kind="uidentity_inp"
 					/> */}
+
+					{/* при нажатии на сабмит должно создаваться uidentity и request с типом идентификация */}
 					<Button
 						type="submit"
 						variant="contained"
