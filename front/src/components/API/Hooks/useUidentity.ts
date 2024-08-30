@@ -4,7 +4,7 @@ export const PostUidentityScheme = z.object({
 	orgName: z.string(),
 	departmentName: z.string(),
 	post: z.string(),
-	file: z.string(),
+	file: z.string().optional(),
 });
 
 export type PostUidentityType = z.infer<typeof PostUidentityScheme>;
