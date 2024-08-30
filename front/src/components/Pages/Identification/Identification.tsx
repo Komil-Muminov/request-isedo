@@ -58,7 +58,7 @@ const Identification: React.FC = () => {
 						inputType="text"
 						kind="uidentity_inp"
 					/>
-					<InputAuth
+					{/* <InputAuth
 						register={register}
 						inputName="file"
 						inputPlaceholder="Загрузите файл"
@@ -66,20 +66,20 @@ const Identification: React.FC = () => {
 						minLengthMessage="Загрузите файл"
 						inputType="file"
 						kind="uidentity_inp"
-					/>
+					/> */}
+					<Button
+						type="submit"
+						variant="contained"
+						sx={{
+							backgroundColor: "#607d8b",
+							"&:hover": {
+								backgroundColor: "#546d79",
+							},
+						}}
+					>
+						Отправить 2
+					</Button>
 				</form>
-				<Button
-					type="submit"
-					variant="contained"
-					sx={{
-						backgroundColor: "#607d8b",
-						"&:hover": {
-							backgroundColor: "#546d79",
-						},
-					}}
-				>
-					Отправить 2
-				</Button>
 			</div>
 		</>
 	);
