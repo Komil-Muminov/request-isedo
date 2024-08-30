@@ -5,6 +5,7 @@ import Services from "./Services/Services";
 import "./DepartmentCustomer.css";
 import CertificateContent from "./Certificate/CertificateContent";
 import Token from "./Token/Token";
+import TokenList from "../../TokenList/TokenList";
 
 const ServicesContent = () => {
   const [showServicesList, setShowServicesList] = useState<boolean>(false);
@@ -21,14 +22,25 @@ const ServicesContent = () => {
 
   return (
     <>
+      {/* Закрывается при нажатии на кнопку Сохранить */}
       {showServicesList && (
         <ServicesList handleShowServicesList={handleShowServicesList} />
       )}
-      {!showServicesList && (
+      {/* Открывает список ServicesList при нажатии на кнопку Услуги */}
+      {!showServicesList && !showTokenList && (
         <Services handleShowServicesList={handleShowServicesList} />
       )}
-      {!showServicesList && <CertificateContent />}
-      <Token handleShowTokenList={handleShowTokenList} />
+      {/* Закрывает блок CertificateContent при открытие ServicesList */}
+      {!showServicesList && !showTokenList && <CertificateContent />}
+      {/* Закрывает Token при нажатии на кнопку Токен */}
+      {!showTokenList && !showServicesList && (
+        <Token
+          setShowTokenList={setShowTokenList}
+          handleShowTokenList={handleShowTokenList}
+        />
+      )}
+      {/* Открывает TokenList при нажатии на кнопку Токен */}
+      {showTokenList && <TokenList handleShowTokenList={handleShowTokenList} />}
     </>
   );
 };
