@@ -9,11 +9,14 @@
   text-align: left;
   border: 1px solid #ddd;
   font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .table-certificate-list td {
-  word-wrap: break-word;
   padding: 5px 20px;
+  max-width: 200px;
 }
 
 .table-certificate-list th {
