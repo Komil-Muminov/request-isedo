@@ -561,8 +561,7 @@ app.post("/uidentity", authenticateJWT, (req: Request, res: Response) => {
 		return res.status(404).json({ error: "Пользователь не найден" });
 	}
 
-	const username = user.username;
-	const department = user.department;
+	const username = user.username; 
 
 	// ДатаВремя
 	const now = new Date();
