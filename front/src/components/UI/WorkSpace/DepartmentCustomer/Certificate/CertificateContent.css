@@ -1,0 +1,25 @@
+.table-certificate-list {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-certificate-list th,
+.table-certificate-list td {
+  padding: 10px 20px;
+  text-align: left;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.table-certificate-list td {
+  word-wrap: break-word;
+  padding: 5px 20px;
+}
+
+.table-certificate-list th {
+  background-color: #f2f2f2;
+}
+
+.table-certificate-list td:first-child {
+  max-width: 300px;
+}
