@@ -292,6 +292,7 @@ app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
 });
 
 // Express ищет по всему маршруту /requests и когда находит, она понимает что это за запрос и имеет доступ к его response, то есть данным.
+// Добавить новые поля и функционал
 app.post("/requests", authenticateJWT, (req: Request, res: Response) => {
 	const { body: requestData } = req;
 	const { userId } = req as any;
@@ -606,12 +607,12 @@ app.get("/uidentity", authenticateJWT, (req: Request, res: Response) => {
 
 	res.status(200).json(
 		userIdentities.map((identity: any) => ({
-			orgName: identity.orgName,
-			departmentName: identity.departmentName,
-			post: identity.post,
 			id: identity.id,
 			userId: identity.userId,
 			username: identity.username,
+			orgName: identity.orgName,
+			departmentName: identity.departmentName,
+			post: identity.post,
 			date: identity.date,
 		})),
 	);
