@@ -143,7 +143,7 @@ const Udetails = () => {
 										"&:hover": {
 											backgroundColor: "#546d79",
 										},
-										display: `${uinfo?.uType === "kvd" ? "none" : "block"}`,
+										display: `${uinfo?.uIdentity === false ? "none" : "block"}`,
 									}}
 								>
 									Идентификация
