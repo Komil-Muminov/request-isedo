@@ -4,11 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import "./Token.css";
 import { useLocation } from "react-router-dom";
 
-interface TProps {
-  handleShowTokenList: (value: boolean) => void;
-}
-
-const Token = ({ handleShowTokenList }: TProps) => {
+const Token = ({ setShowTokenList, handleShowTokenList }: any) => {
   const location = useLocation();
   const requestIdTemp = location.pathname.split("/");
   const requestId = parseInt(requestIdTemp[requestIdTemp.length - 1]);
