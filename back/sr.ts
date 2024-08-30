@@ -217,7 +217,10 @@ app.post("/register", (req: Request, res: Response) => {
 
 		res
 			.status(200)
-			.json({ message: "Регистрация прошла успешно", user: newUser });
+			.json({
+				message: `Уважаемый(я) ${username} Вы прошли регистрацию`,
+				user: newUser,
+			});
 	}
 });
 
