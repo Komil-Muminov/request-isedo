@@ -1,9 +1,9 @@
-import TitleDocument from "../../TitleDocument/TitleDocument";
+import TitleDocument from "../TitleDocument/TitleDocument";
 import "./WorkSpace.css";
-import { departments } from "../../../API/Data/Departments/Departments";
+import { departments } from "../../API/Data/Departments/Departments";
 import { useState } from "react";
-import { TDepartment } from "../../../API/Data/Departments/Departments";
-import ServicesContent from "../DepartmentCustomer/Services/ServicesContent";
+import { TDepartment } from "../../API/Data/Departments/Departments";
+import DepartmentCustomer from "./DepartmentCustomer/DepartmentCustomer";
 
 const WorkSpace = () => {
   const changeOfAccountant = [
@@ -50,7 +50,7 @@ const WorkSpace = () => {
             })}
           </ul>
         </div>
-        {showDepartmentCustomer && <ServicesContent />}
+        {showDepartmentCustomer && <DepartmentCustomer />}
       </div>
     </section>
   );
