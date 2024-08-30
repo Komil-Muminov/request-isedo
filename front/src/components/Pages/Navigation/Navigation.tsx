@@ -185,17 +185,19 @@ export const Navigation: React.FC = () => {
 							</div>
 
 							<div className="settings">
-								<NotificationsNoneOutlinedIcon
-									sx={{
-										fontSize: "40px",
-										color: "#959fae",
-										cursor: "pointer",
-										"&:hover": {
-											color: "#afbacb",
-											transition: "all .2s",
-										},
-									}}
-								/>
+								<Link className="nav__notify" to={"notify"}>
+									<NotificationsNoneOutlinedIcon
+										sx={{
+											fontSize: "40px",
+											color: "#959fae",
+											cursor: "pointer",
+											"&:hover": {
+												color: "#afbacb",
+												transition: "all .2s",
+											},
+										}}
+									/>
+								</Link>
 								<div className="user_info" onClick={handleToggleUserMenu}>
 									<Box sx={{ flexGrow: 0 }}>
 										<Tooltip title="Open settings">
