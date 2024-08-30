@@ -536,15 +536,9 @@ app.put("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
 app.post("/uidentity", authenticateJWT, (req: Request, res: Response) => {
   const { orgName, departmentName, post, file } = req.body;
 
-<<<<<<< HEAD
 	if (!orgName || !departmentName || !post) {
 		return res.status(400).json({ error: "Отсутствуют обязательные поля" });
 	}
-=======
-  if (!orgName || !departmentName || !post || !file) {
-    return res.status(400).json({ error: "Отсутствуют обязательные поля" });
-  }
->>>>>>> 407b75f1c4653debc4529cf7deb3a6d7be623dfd
 
   const userId = (req as any).userId;
   const users = readFromFile(usersFilePath);
