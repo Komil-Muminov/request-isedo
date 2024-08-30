@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "id": 1,
+    "uType": "kvd",
+    "username": "m.norov",
+    "password": "123",
+    "photo": "",
+    "fullName": "Норов Махмуд",
+    "phone": "",
+    "tax": "",
+    "email": "",
+    "role": "Начальник отдела",
+    "orgName": "",
+    "orgTax": "",
+    "department": "Шуъба оид ба кор бо муштариён"
+  }
+]
