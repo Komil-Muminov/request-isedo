@@ -216,20 +216,11 @@ app.post("/register", (req: Request, res: Response) => {
     users.push(newUser);
     writeToFile(usersFilePath, users);
 
-<<<<<<< HEAD
 		res.status(200).json({
 			message: `Уважаемый(я) ${username} Вы прошли регистрацию`,
 			user: newUser,
 		});
 	}
-=======
-    res.status(200).json({
-      message: `Уважаемый(я) ${username} Вы прошли регистрацию`,
-      user: newUser,
-    });
-  }
->>>>>>> 407b75f1c4653debc4529cf7deb3a6d7be623dfd
-});
 
 app.post("/login", (req: Request, res: Response) => {
   const { username, password } = req.body;
