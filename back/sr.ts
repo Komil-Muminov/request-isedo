@@ -378,7 +378,7 @@ app.get("/services", authenticateJWT, (req: Request, res: Response) => {
   }
 });
 
-// Certificates ==========
+// Certificates ============
 
 app.post("/certificates", authenticateJWT, (req: Request, res: Response) => {
   const { body: requestData } = req;
