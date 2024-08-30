@@ -60,5 +60,20 @@
     "department": "Шуъбаи кор бо муштариён",
     "reqIdentity": false,
     "uIdentity": false
+  },
+  {
+    "id": 5,
+    "uType": "kvd",
+    "username": "asd",
+    "password": "123",
+    "photo": "",
+    "fullName": "123",
+    "phone": "",
+    "tax": "",
+    "email": "",
+    "role": "123",
+    "orgName": "",
+    "orgTax": "",
+    "department": "Шуъба оид ба амнияти иттилоотӣ"
   }
 ]
