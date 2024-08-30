@@ -1,13 +1,33 @@
 import { Button } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import forge from "node-forge";
 import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import "./CertificateContent.css";
 
+import {
+  postCertificates,
+  TCertificates,
+} from "../../../../API/PostCertificates";
+import { getCertificates } from "../../../../API/GetCertificates";
+import { queryClient } from "../../../../../queryClient";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useLocation } from "react-router-dom";
+
 const CertificateContent = () => {
   const [certificateData, setCertificateData] = useState<any>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const postCertificateMutation = useMutation({
+    mutationFn: (data: TCertificates) => postCertificates(data, requestId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["certificates"] });
+    },
+  });
+
+  const location = useLocation();
+  const requestIdTemp = location.pathname.split("/");
+  const requestId = parseInt(requestIdTemp[requestIdTemp.length - 1]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -60,13 +80,19 @@ const CertificateContent = () => {
           const validFrom = cert.validity.notBefore.toISOString();
           const validTo = cert.validity.notAfter.toISOString();
 
-          setCertificateData({
-            subject: formattedSubject,
-            issuer: formattedIssuer,
+          const newData = {
+            requestId: requestId,
+            typeToken: "EToken",
             serialNumber: cert.serialNumber,
             validFrom,
             validTo,
-          });
+            fullName: formattedSubject.commonName,
+            organization: formattedSubject.organizationName,
+            role: formattedSubject.title,
+          };
+
+          setCertificateData(newData);
+          postCertificateMutation.mutate(newData);
         } catch (error) {
           console.error("Ошибка при обработке сертификата:", error);
         }
@@ -75,11 +101,22 @@ const CertificateContent = () => {
     }
   };
 
-  const handleButtonClick = () => {
-    fileInputRef.current?.click();
-  };
+  const getCertificateQuery = useQuery({
+    queryFn: () => getCertificates(),
+    queryKey: ["certificates"],
+  });
 
-  console.log(certificateData);
+  const [certificatesTemp, setCertificatesTemp] = useState<TCertificates[]>([]);
+
+  useEffect(() => {
+    if (getCertificateQuery.status === "success") {
+      setCertificatesTemp(getCertificateQuery.data);
+    }
+  }, [getCertificateQuery]);
+
+  const currentCertificate = certificatesTemp[certificatesTemp.length - 1];
+
+  console.log(currentCertificate);
 
   return (
     <div className="certificate-content">
@@ -87,7 +124,7 @@ const CertificateContent = () => {
         <Button
           variant="text"
           className="add-services"
-          onClick={handleButtonClick}
+          onClick={() => fileInputRef.current?.click()}
         >
           <AddCircleIcon />
           <p>Сертификат</p>
@@ -115,34 +152,19 @@ const CertificateContent = () => {
         </thead>
         <tbody>
           <tr>
-            <td>EToken</td>
-            <td>{certificateData?.serialNumber}</td>
-            <td>{certificateData?.validFrom}</td>
-            <td>{certificateData?.validTo}</td>
-            <td>{certificateData?.subject.commonName}</td>
-            <td>{certificateData?.subject.organizationName}</td>
-            <td>{certificateData?.subject.title}</td>
+            <td>{currentCertificate?.typeToken}</td>
+            <td>{currentCertificate?.serialNumber}</td>
+            <td>{currentCertificate?.validFrom}</td>
+            <td>{currentCertificate?.validTo}</td>
+            <td>{currentCertificate?.fullName}</td>
+            <td>{currentCertificate?.organization}</td>
+            <td>{currentCertificate?.role}</td>
             <td>
               <FileDownloadOutlinedIcon />
             </td>
           </tr>
         </tbody>
       </table>
-      {/* {certificateData && (
-        <div style={{ padding: "20px" }}>
-          <h3>Данные сертификата:</h3>
-          <h4>Субъект:</h4>
-          <pre>{JSON.stringify(certificateData.subject, null, 2)}</pre>
-          <h4>Выдавший:</h4>
-          <pre>{JSON.stringify(certificateData.issuer, null, 2)}</pre>
-          <h4>Серийный номер:</h4>
-          <p>{certificateData.serialNumber}</p>
-          <h4>Действителен с:</h4>
-          <p>{certificateData.validFrom}</p>
-          <h4>Действителен до:</h4>
-          <p>{certificateData.validTo}</p>
-        </div>
-      )} */}
     </div>
   );
 };
