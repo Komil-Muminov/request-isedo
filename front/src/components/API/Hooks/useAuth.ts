@@ -3,16 +3,18 @@ import { z } from "zod";
 // Создает схему для объекта с указанными полями и их типами. Определение схемы регистрации и типа.
 
 export const RegScheme = z.object({
-	uType: z.string(),
-	username: z.string(),
-	password: z.string(),
-	fullName: z.string(),
-	phone: z.string(),
-	tax: z.string(),
-	email: z.string(),
-	orgName: z.string(),
-	orgTax: z.string(),
-	role: z.string(),
+	uType: z.string().optional(),
+	username: z.string().optional(),
+	password: z.string().optional(),
+	fullName: z.string().optional(),
+	phone: z.string().optional(),
+	tax: z.string().optional(),
+	email: z.string().optional(),
+	orgName: z.string().optional(),
+	orgTax: z.string().optional(),
+	role: z.string().optional(),
+	inn: z.string().optional(),
+	organization: z.string().optional(),
 	department: z.string().optional(),
 });
 

@@ -1,10 +1,16 @@
 import z from "zod";
 
 export const PostUidentityScheme = z.object({
-	orgName: z.string(),
-	departmentName: z.string(),
+	inn: z.string(),
+	organization: z.string(),
+	fullName: z.string(),
 	post: z.string(),
 	file: z.string().optional(),
+	login: z.string(),
+	role: z.string(),
+	sku: z.string(),
+	certificatID: z.string(),
+	department: z.string().optional(),
 });
 
 export type PostUidentityType = z.infer<typeof PostUidentityScheme>;
@@ -12,6 +18,7 @@ export type GetUidentityType = z.infer<typeof PostUidentityScheme>;
 
 export const useUidentity = () => {
 	const token = localStorage.getItem("token");
+	// const;
 	const postUidentity = async (data: PostUidentityType): Promise<void> => {
 		return fetch(`http://localhost:3000/uidentity`, {
 			method: "POST",

@@ -157,12 +157,14 @@ app.post("/register", (req: Request, res: Response) => {
 		tax,
 		email,
 		orgName,
+		inn,
+		organization,
 		orgTax,
 		role,
 		department,
 	} = req.body;
 
-	if (!username || !password || !uType) {
+	if (!password || !uType) {
 		return res.status(400).json({ error: "Отсутствуют обязательные поля" });
 	}
 
@@ -188,6 +190,8 @@ app.post("/register", (req: Request, res: Response) => {
 			phone,
 			tax,
 			email,
+			organization,
+			inn,
 			role,
 			orgName,
 			orgTax,
@@ -206,13 +210,15 @@ app.post("/register", (req: Request, res: Response) => {
 			id,
 			uType,
 			username,
+			organization,
+			inn,
+			role,
 			password,
 			photo: "",
 			fullName,
 			phone,
 			tax,
 			email,
-			role,
 			orgName,
 			orgTax,
 			department,
@@ -252,6 +258,12 @@ app.post("/login", (req: Request, res: Response) => {
 	res.status(200).json({ message: "Логин успешный", token });
 });
 
+// Выход пользователя из системы (в данном случае  возвращается сообщение об успешном выходе).
+app.post("/logout", authenticateJWT, (req: Request, res: Response) => {
+	res.status(200).json({ message: "Выход успешный" });
+});
+
+// users/me
 app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
 	const userId = (req as any).userId;
 
@@ -529,6 +541,16 @@ app.put("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
 	res.status(200).json({ message: "Заявка успешно обновлена", requestData });
 });
 
+// Что общего между registration и regorganization ?
+// reg-organization- организации которые впервые заходят на сайт
+// app.post("/regorganization", authenticateJWT, (req: Request, res: Response) => {
+// 	const { inn, organization, role } = req.body;
+// 	if (!inn || !organization || !role) {
+// 		return res.status(400).json({ error: `Отсутвуют объязательные поля` });
+// 	}
+// });
+// reg-organization- организации которые впервые заходят на сайт
+
 // Uidentity -  state=== !reqIdentity , !uIdentity
 const readUidentityFromFile = (): any[] => {
 	try {
@@ -549,9 +571,27 @@ const writeUidentityToFile = (data: any[]): void => {
 };
 
 app.post("/uidentity", authenticateJWT, (req: Request, res: Response) => {
-	const { orgName, departmentName, post } = req.body;
+	const {
+		inn,
+		fullName,
+		login,
+		role,
+		sku,
+		organization,
+		certificatID,
+		department,
+	} = req.body;
 
-	if (!orgName || !departmentName || !post) {
+	if (
+		!inn ||
+		!fullName ||
+		!login ||
+		!role ||
+		!sku ||
+		!organization ||
+		!certificatID
+		// !department
+	) {
 		return res.status(400).json({ error: "Отсутствуют обязательные поля" });
 	}
 
@@ -586,15 +626,20 @@ app.post("/uidentity", authenticateJWT, (req: Request, res: Response) => {
 	const newIdentity = {
 		id: nextId,
 		userId,
-		username: user.username,
-		orgName,
-		departmentName,
-		post,
+		fullName,
+		login,
+		organization,
+		inn,
+		sku,
+		certificatID,
+		// username: user.username,
+		department,
+		role,
 		date,
 		typeToken: certificate.typeToken || "",
-		organization: certificate.organization || "",
 		serialNumber: certificate.serialNumber || "",
 		tokenId: certificate.id || "",
+		// organization: certificate.organization || "",
 	};
 
 	uidentityData.push(newIdentity);

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import log from "../../../assets/Formal/log.png";
+import log from "../../../assets/Formal/log.webp";
 import "./Navigation.css";
 import { Avatar } from "@mui/material";
 import { useQuery, useMutation } from "@tanstack/react-query";
