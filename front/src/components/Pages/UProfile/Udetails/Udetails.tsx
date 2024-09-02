@@ -146,7 +146,7 @@ const Udetails = () => {
 										display: `${uinfo?.uType === "kvd" ? "none" : "block"}`,
 									}}
 								>
-									Идентификация
+									Идентификация организации
 								</Button>
 							</Link>
 						</div>
