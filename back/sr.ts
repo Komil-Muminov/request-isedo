@@ -576,10 +576,10 @@ app.post("/uidentity", authenticateJWT, (req: Request, res: Response) => {
 		fullName,
 		login,
 		role,
-		sku,
 		organization,
-		certificatID,
-		department,
+		sku,
+		// certificatID,
+		// department,
 	} = req.body;
 
 	if (
@@ -587,10 +587,9 @@ app.post("/uidentity", authenticateJWT, (req: Request, res: Response) => {
 		!fullName ||
 		!login ||
 		!role ||
-		!sku ||
 		!organization ||
-		!certificatID
-		// !department
+		!sku
+		// !certificatID
 	) {
 		return res.status(400).json({ error: "Отсутствуют обязательные поля" });
 	}
@@ -631,15 +630,13 @@ app.post("/uidentity", authenticateJWT, (req: Request, res: Response) => {
 		organization,
 		inn,
 		sku,
-		certificatID,
-		// username: user.username,
-		department,
 		role,
 		date,
 		typeToken: certificate.typeToken || "",
 		serialNumber: certificate.serialNumber || "",
 		tokenId: certificate.id || "",
-		// organization: certificate.organization || "",
+		// certificatID,
+		// department,
 	};
 
 	uidentityData.push(newIdentity);
@@ -670,11 +667,19 @@ app.get("/uidentity", authenticateJWT, (req: Request, res: Response) => {
 		userIdentities.map((identity: any) => ({
 			id: identity.id,
 			userId: identity.userId,
-			username: identity.username,
-			orgName: identity.orgName,
-			departmentName: identity.departmentName,
-			post: identity.post,
+			fullName: identity.fullName,
+			login: identity.login,
+			organization: identity.organization,
+			inn: identity.inn,
+			sku: identity.sku,
+			certificatID: identity.certificatID,
+			role: identity.role,
 			date: identity.date,
+			serialNumber: identity.serialNumber,
+			tokenId: identity.tokenId,
+			reqIdentity: user.reqIdentity,
+			// typeToken: identity.typeToken,
+			// department: identity.department,
 		})),
 	);
 });
