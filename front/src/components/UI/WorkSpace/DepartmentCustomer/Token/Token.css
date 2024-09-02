@@ -12,3 +12,32 @@
   font-size: 16px;
   color: #607d8b;
 }
+
+.table-token-list {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-token th,
+.table-token td {
+  padding: 10px 20px;
+  text-align: left;
+  border: 1px solid #ddd;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-token td {
+  padding: 5px 20px;
+  max-width: 200px;
+}
+
+.table-token th {
+  background-color: #f2f2f2;
+}
+
+.table-token td:first-child {
+  max-width: 300px;
+}
