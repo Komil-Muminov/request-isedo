@@ -64,5 +64,43 @@
     "department": "",
     "reqIdentity": true,
     "uIdentity": false
+  },
+  {
+    "id": 5,
+    "uType": "organization",
+    "username": "org1",
+    "password": "123",
+    "photo": "",
+    "fullName": "",
+    "phone": "",
+    "tax": "",
+    "email": "",
+    "organization": "Организация",
+    "inn": "465645645645",
+    "role": "Мухосиб",
+    "orgName": "",
+    "orgTax": "",
+    "department": "",
+    "reqIdentity": false,
+    "uIdentity": false
+  },
+  {
+    "id": 6,
+    "uType": "organization",
+    "username": "sadas",
+    "password": "123",
+    "photo": "",
+    "fullName": "",
+    "phone": "",
+    "tax": "",
+    "email": "",
+    "organization": "sdadsa",
+    "inn": "sdadsa",
+    "role": "",
+    "orgName": "",
+    "orgTax": "",
+    "department": "",
+    "reqIdentity": false,
+    "uIdentity": false
   }
 ]
