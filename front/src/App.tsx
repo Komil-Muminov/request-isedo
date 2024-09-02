@@ -33,7 +33,7 @@ const LazyIdentification = lazy(
 
 // UserNotify
 const LazyUnotify = lazy(
-	() => import("./components/Pages/Reqshower/Reqshower"),
+	() => import("./components/Pages/ReqUidentity/ReqUidentity"),
 );
 
 // UserDetails
@@ -74,7 +74,6 @@ function App() {
 						</Route>
 						<Route path="/account/create" element={<LazyAddRequest />} />
 						<Route path="/account/show/:id" element={<LazyShowRequest />} />
-						{/* <Route path="/uNotify" element={<LazyUnotify />} /> */}
 						<Route path="/mfrqst" element={<LazyMfrqst />} />
 					</Routes>
 				</Suspense>

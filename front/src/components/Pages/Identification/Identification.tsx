@@ -1,29 +1,39 @@
 import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@mui/material";
-import { PostUidentityType, useUidentity } from "../../API/Hooks/useUidentity";
+import { useUidentity, UidentityType } from "../../API/Hooks/useUidentity";
 import { queryClient } from "../../../queryClient";
 import "./Identification.css";
 import InputAuth from "../../UI/InputAuth/InputAuth";
 import { LoaderPoints } from "../../UI/LoaderPoints";
 
 const Identification: React.FC = () => {
-	const { register, handleSubmit } = useForm<PostUidentityType>();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, dirtyFields },
+	} = useForm<UidentityType[]>();
 
 	const { postUidentity } = useUidentity();
 
 	const uIdentityMutation = useMutation(
 		{
-			mutationFn: (data: PostUidentityType) => postUidentity(data),
+			mutationFn: (data: UidentityType[]) => postUidentity(data),
 			onSuccess: () =>
 				queryClient.invalidateQueries({ queryKey: ["requests"] }),
 		},
 		queryClient,
 	);
 
-	const onSubmit = (data: PostUidentityType) => {
+	const onSubmit = (data: UidentityType[]) => {
 		uIdentityMutation.mutate(data);
 	};
+
+	// getDataUidentity
+	// const uIdentityQuery=useQuery({
+	// 	queryFn:()=>getUIdenti
+	// 	queryKey:['uidentity']
+	// })
 
 	return (
 		<>
@@ -40,6 +50,7 @@ const Identification: React.FC = () => {
 						minLengthMessage="Наименование организации должно содержать минимум 5 символов"
 						inputType="text"
 						kind="uidentity_inp"
+						inputDisabled={uIdentityMutation.isSuccess}
 					/>
 					<InputAuth
 						register={register}
@@ -49,6 +60,8 @@ const Identification: React.FC = () => {
 						minLengthMessage="Наименование организации должно содержать минимум 5 символов"
 						inputType="text"
 						kind="uidentity_inp"
+						// inputDefaultValue={ui}
+						inputDisabled={true}
 					/>
 
 					<InputAuth
@@ -79,6 +92,7 @@ const Identification: React.FC = () => {
 						minLengthMessage="Единица учета не должен быть пустымк"
 						inputType="text"
 						kind="uidentity_inp"
+						inputDisabled={uIdentityMutation.isSuccess}
 					/>
 					<InputAuth
 						register={register}
@@ -88,6 +102,7 @@ const Identification: React.FC = () => {
 						minLengthMessage="organization пустым не должен быть"
 						inputType="text"
 						kind="uidentity_inp"
+						inputDisabled={uIdentityMutation.isSuccess}
 					/>
 
 					<InputAuth
@@ -98,6 +113,7 @@ const Identification: React.FC = () => {
 						minLengthMessage="certificatID пустым не должен быть"
 						inputType="text"
 						kind="uidentity_inp"
+						inputDisabled={uIdentityMutation.isSuccess}
 					/>
 					<InputAuth
 						register={register}
@@ -107,6 +123,18 @@ const Identification: React.FC = () => {
 						minLengthMessage="department пустым не должен быть"
 						inputType="text"
 						kind="uidentity_inp"
+						inputDisabled={uIdentityMutation.isSuccess}
+					/>
+
+					<InputAuth
+						register={register}
+						inputName="department"
+						inputPlaceholder="department"
+						requiredMessage="Заполните поле 'department'"
+						minLengthMessage="department пустым не должен быть"
+						inputType="file"
+						kind="uidentity_inp"
+						inputDisabled={uIdentityMutation.isSuccess}
 					/>
 
 					{/* <InputAuth
@@ -128,7 +156,9 @@ const Identification: React.FC = () => {
 						type="submit"
 						variant="contained"
 						disabled={
-							uIdentityMutation.isSuccess || uIdentityMutation.isPending
+							uIdentityMutation.isSuccess ||
+							uIdentityMutation.isPending ||
+							!dirtyFields.inn
 						}
 						sx={{
 							backgroundColor: "#607d8b",

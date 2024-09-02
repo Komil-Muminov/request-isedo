@@ -1,24 +1,29 @@
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
-import { getRqsts } from "../../API/GetRqsts";
+import { useUidentity } from "../../API/Hooks/useUidentity";
 // import { Outlet } from "react-router-dom";
 import "./Reqshower.css";
-const Reqshower = () => {
-	const showReqQuery = useQuery(
+const ReqUidentity = () => {
+	const { getUidentity } = useUidentity();
+	const uIdentityQuery = useQuery(
 		{
-			queryFn: () => getRqsts(),
-			queryKey: ["getreqbo"],
+			queryFn: () => getUidentity(),
+			queryKey: ["getUidentityReqs"],
 		},
 		queryClient,
 	);
+
+	if (uIdentityQuery.status === "error") {
+		console.log(uIdentityQuery.status);
+	}
 
 	return (
 		<>
 			<div className="reqshower_conten">
 				<h1 className="sections__title">Показать запросы работниками КВД</h1>
 				{/* Надо сделать верстку для данных*/}
-				{showReqQuery.data &&
-					showReqQuery.data?.map((item) => (
+				{uIdentityQuery.data &&
+					uIdentityQuery.data?.map((item) => (
 						<div>
 							<p className="req_text">
 								{" "}
@@ -38,4 +43,4 @@ const Reqshower = () => {
 	);
 };
 
-export default Reqshower;
+export default ReqUidentity;

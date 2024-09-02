@@ -1,25 +1,24 @@
 import z from "zod";
 
-export const PostUidentityScheme = z.object({
-	inn: z.string(),
-	organization: z.string(),
-	fullName: z.string(),
-	post: z.string(),
-	file: z.string().optional(),
-	login: z.string(),
-	role: z.string(),
-	sku: z.string(),
-	certificatID: z.string(),
+export const UidentityScheme = z.object({
+	inn: z.string().optional(),
+	organization: z.string().optional(),
+	fullName: z.string().optional(),
 	department: z.string().optional(),
+	post: z.string().optional(),
+	file: z.string().optional().optional(),
+	role: z.string().optional(),
+	sku: z.string().optional(),
+	// login: z.string().optional(),
+	// certificatID: z.string().optional(),
 });
 
-export type PostUidentityType = z.infer<typeof PostUidentityScheme>;
-export type GetUidentityType = z.infer<typeof PostUidentityScheme>;
+export type UidentityType = z.infer<typeof UidentityScheme>;
 
 export const useUidentity = () => {
 	const token = localStorage.getItem("token");
 	// const;
-	const postUidentity = async (data: PostUidentityType): Promise<void> => {
+	const postUidentity = async (data: UidentityType): Promise<void> => {
 		return fetch(`http://localhost:3000/uidentity`, {
 			method: "POST",
 			headers: {
@@ -30,10 +29,8 @@ export const useUidentity = () => {
 		}).then(undefined);
 	};
 
-	const getUidentity = async (): Promise<
-		GetUidentityType | GetUidentityType[]
-	> => {
-		return fetch(`http:localhost:3000/getUdentity`, {
+	const getUidentity = async (): Promise<UidentityType[]> => {
+		return fetch(`http:localhost:3000/udentity`, {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("token")}`,
 				"Content-Type": "application/json",
@@ -45,7 +42,8 @@ export const useUidentity = () => {
 				}
 				return response.json();
 			})
-			.then((data) => PostUidentityScheme.parse(data));
+			.then((data) => UidentityScheme.parse(data))
+			.then(undefined);
 	};
 	return {
 		postUidentity,
