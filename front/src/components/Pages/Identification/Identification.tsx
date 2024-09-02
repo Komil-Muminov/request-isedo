@@ -8,7 +8,11 @@ import InputAuth from "../../UI/InputAuth/InputAuth";
 import { LoaderPoints } from "../../UI/LoaderPoints";
 
 const Identification: React.FC = () => {
-	const { register, handleSubmit } = useForm<PostUidentityType>();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors, dirtyFields },
+	} = useForm<PostUidentityType>();
 
 	const { postUidentity } = useUidentity();
 
@@ -40,6 +44,7 @@ const Identification: React.FC = () => {
 						minLengthMessage="Наименование организации должно содержать минимум 5 символов"
 						inputType="text"
 						kind="uidentity_inp"
+						inputDisabled={uIdentityMutation.isSuccess}
 					/>
 					<InputAuth
 						register={register}
@@ -49,6 +54,7 @@ const Identification: React.FC = () => {
 						minLengthMessage="Наименование организации должно содержать минимум 5 символов"
 						inputType="text"
 						kind="uidentity_inp"
+						inputDisabled={uIdentityMutation.isSuccess || !dirtyFields.inn}
 					/>
 
 					<InputAuth
@@ -79,6 +85,7 @@ const Identification: React.FC = () => {
 						minLengthMessage="Единица учета не должен быть пустымк"
 						inputType="text"
 						kind="uidentity_inp"
+						inputDisabled={uIdentityMutation.isSuccess}
 					/>
 					<InputAuth
 						register={register}
@@ -88,6 +95,7 @@ const Identification: React.FC = () => {
 						minLengthMessage="organization пустым не должен быть"
 						inputType="text"
 						kind="uidentity_inp"
+						inputDisabled={uIdentityMutation.isSuccess}
 					/>
 
 					<InputAuth
@@ -98,6 +106,7 @@ const Identification: React.FC = () => {
 						minLengthMessage="certificatID пустым не должен быть"
 						inputType="text"
 						kind="uidentity_inp"
+						inputDisabled={uIdentityMutation.isSuccess}
 					/>
 					<InputAuth
 						register={register}
@@ -107,6 +116,7 @@ const Identification: React.FC = () => {
 						minLengthMessage="department пустым не должен быть"
 						inputType="text"
 						kind="uidentity_inp"
+						inputDisabled={uIdentityMutation.isSuccess}
 					/>
 
 					{/* <InputAuth
@@ -128,7 +138,9 @@ const Identification: React.FC = () => {
 						type="submit"
 						variant="contained"
 						disabled={
-							uIdentityMutation.isSuccess || uIdentityMutation.isPending
+							uIdentityMutation.isSuccess ||
+							uIdentityMutation.isPending ||
+							!dirtyFields.inn
 						}
 						sx={{
 							backgroundColor: "#607d8b",
