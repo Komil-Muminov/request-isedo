@@ -21,6 +21,24 @@ const Token = ({ setShowTokenList, handleShowTokenList }: any) => {
           <p>Токен</p>
         </Button>
       </div>
+      <table className="table-token">
+        <thead>
+          <tr>
+            <th>Серийный номер</th>
+            <th>Модель токена</th>
+            <th>Дата создания</th>
+            <th>Создал</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>22000999056568</td>
+            <td>Рутокен ЭЦП 2.0</td>
+            <td>08.02.2021 15:31</td>
+            <td>Supervisor</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };
