@@ -95,9 +95,7 @@ const Udetails = () => {
 							<ul className="user-details_list">
 								<UserInfoList
 									title="ФИО"
-									description={
-										uinfo?.fullName ? uinfo.fullName : uinfo?.username
-									}
+									description={uinfo?.fullName ? uinfo.fullName : uinfo?.uType}
 								/>
 								<UserInfoList
 									title="Тип пользователя"
