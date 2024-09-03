@@ -90,7 +90,7 @@
   gap: 10px;
 }
 
-.active {
+.wrapper-request-list .active {
   background-color: #90caf9;
   color: #fff;
 }

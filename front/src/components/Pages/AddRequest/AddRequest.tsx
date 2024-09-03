@@ -299,7 +299,7 @@ const AddRequest: React.FC = () => {
         {/* Детали заявки */}
         {reqType === "Смена главного бухгалтера" && (
           <section className="old-accountant">
-            <TitleDocument title="Предыдущий бухгалтер" />
+            <TitleDocument title="Нынешний бухгалтер" />
             <div className="info-accountant">
               <div className="wrapper-info">
                 <div className="wrapper-image">
