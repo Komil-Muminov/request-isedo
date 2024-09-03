@@ -141,7 +141,11 @@ const Udetails = () => {
 										"&:hover": {
 											backgroundColor: "#546d79",
 										},
-										display: `${uinfo?.uType === "kvd" ? "none" : "block"}`,
+										display: `${
+											uinfo?.uType === "kvd" || uinfo?.uType == "bo"
+												? "none"
+												: "block"
+										}`,
 									}}
 								>
 									Идентификация организации

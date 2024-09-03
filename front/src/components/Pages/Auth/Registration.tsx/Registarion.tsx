@@ -314,12 +314,21 @@ const Registration = () => {
 								{errors?.department && errors.department.message}
 							</span>
 						</>
-					) : uType === "organization" ? (
+					) : uType === "ko" ? (
 						<>
 							<InputAuth
 								register={register}
+								inputName="organization"
+								inputPlaceholder="Наименование организации"
+								requiredMessage="Заполните поле Организация"
+								minLengthMessage="Организация не должен быть пустым"
+								inputType="text"
+								kind=""
+							/>
+							<InputAuth
+								register={register}
 								inputName="username"
-								inputPlaceholder="username"
+								inputPlaceholder="username/login"
 								requiredMessage="Заполните поле username"
 								minLengthMessage="username не должен быть пустым"
 								inputType="text"
@@ -334,15 +343,7 @@ const Registration = () => {
 								inputType="text"
 								kind=""
 							/>
-							<InputAuth
-								register={register}
-								inputName="organization"
-								inputPlaceholder="Организация"
-								requiredMessage="Заполните поле Организация"
-								minLengthMessage="Организация не должен быть пустым"
-								inputType="text"
-								kind=""
-							/>
+
 							<InputAuth
 								register={register}
 								inputName="role"
@@ -369,7 +370,8 @@ const Registration = () => {
 
 					{/* <p className="choose__utype_text">Выберите тип пользователя</p> */}
 				</div>
-				{showRegisterButton === false && uType !== "" && uType !== "kvd" ? (
+				{(showRegisterButton === false && uType !== "" && uType !== "kvd") ||
+				uType !== "ko" ? (
 					<ButtonKM onClick={() => setShowRegisterButton(true)}>Далее</ButtonKM>
 				) : (showRegisterButton === true && uType !== "") || uType === "kvd" ? (
 					<ButtonKM
