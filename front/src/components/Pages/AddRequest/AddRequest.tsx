@@ -1,7 +1,7 @@
 import "./AddRequest.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Stepper, StepLabel, Step, TextField } from "@mui/material";
+import { Stepper, StepLabel, Step, TextField, Button } from "@mui/material";
 
 // Хук из библиотеки react-hook-form для управления состоянием формы.
 import { useForm, Controller } from "react-hook-form";
@@ -26,6 +26,7 @@ import UnsubscribeIcon from "@mui/icons-material/Unsubscribe";
 import CancelIcon from "@mui/icons-material/Cancel";
 import DoneIcon from "@mui/icons-material/Done";
 import TitleDocument from "../../UI/TitleDocument/TitleDocument";
+import TypeRequest from "../../UI/TypeRequest/TypeRequest";
 
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
@@ -72,6 +73,7 @@ const AddRequest: React.FC = () => {
     // Поле для бухгалтера становится доступным только если поле "Название организации" было изменено.
     watch,
     setValue,
+
     formState: { dirtyFields },
   } = useForm<PostRqstScheme>({
     defaultValues: {
@@ -82,7 +84,7 @@ const AddRequest: React.FC = () => {
       tax: "",
       orgTax: "",
       orgName: "",
-      reqType: "Смена бухгалтера",
+      reqType: "Смена главного бухгалтера",
       dateTime: "",
     },
   });
@@ -141,8 +143,6 @@ const AddRequest: React.FC = () => {
 
     const stepFound = steps.find((e) => e.stepCode === 0);
 
-    console.log(stepFound);
-
     const getDate = new Date();
 
     const day = String(getDate.getDate()).padStart(2, "0");
@@ -168,6 +168,10 @@ const AddRequest: React.FC = () => {
   const activeSendButton = uinfo?.uType === "bo" && postRqstsMutation.isSuccess;
 
   console.log(steps);
+
+  console.log(reqType);
+
+  const [showTypeRequest, setShowTypeRequest] = useState<boolean>(false);
 
   return (
     <section className="add-content">
@@ -267,7 +271,22 @@ const AddRequest: React.FC = () => {
           <TitleDocument title="Детали заявки" />
           <div className="form_content">
             <form className="request_form" onSubmit={handleSubmit(onSubmit)}>
-              <Controller
+              <Button
+                sx={{
+                  borderRadius: "50px",
+                  display: "flex",
+                  gap: "5px",
+                  backgroundColor: "#607d8b",
+                  "&:hover": {
+                    backgroundColor: "#516874",
+                  },
+                }}
+                variant="contained"
+                onClick={() => setShowTypeRequest(true)}
+              >
+                Выбрать тип заявки
+              </Button>
+              {/* <Controller
                 name="reqType"
                 control={control}
                 render={({ field }) => (
@@ -280,8 +299,8 @@ const AddRequest: React.FC = () => {
                       <Select.Item value="Выберите тип заявки">
                         Выберите тип заявки
                       </Select.Item>
-                      <Select.Item value="Смена бухгалтера">
-                        Смена бухгалтера
+                      <Select.Item value="Смена главного бухгалтера">
+                        Смена главного бухгалтера
                       </Select.Item>
                       <Select.Item value="Смена руководителя">
                         Смена руководителя
@@ -289,8 +308,8 @@ const AddRequest: React.FC = () => {
                     </Select.Content>
                   </Select.Root>
                 )}
-              />
-              {reqType === "Смена бухгалтера" && (
+              /> */}
+              {reqType === "Смена главного бухгалтера" && (
                 <>
                   <div className="inputs-list">
                     <TextField
@@ -412,6 +431,13 @@ const AddRequest: React.FC = () => {
           </div>
         </section>
       </div>
+      {showTypeRequest && (
+        <TypeRequest
+          setReqType={(value: any) => setValue("reqType", value)}
+          setShowTypeRequest={setShowTypeRequest}
+          reqType={reqType}
+        />
+      )}
     </section>
   );
 };
