@@ -30,7 +30,7 @@ import TypeRequest from "../../UI/TypeRequest/TypeRequest";
 
 import AssignmentIcon from "@mui/icons-material/Assignment";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
@@ -178,6 +178,21 @@ const AddRequest: React.FC = () => {
   const [showTypeRequest, setShowTypeRequest] = useState<boolean>(false);
 
   console.log(uinfo);
+
+  const items = [
+    {
+      id: "1",
+      subtitle: "Amir",
+      title: "Sharipov",
+    },
+    {
+      id: "2",
+      subtitle: "Amir",
+      title: "Sharipov",
+    },
+  ];
+
+  const [selectedId, setSelectedId] = useState(null);
 
   return (
     <section className="add-content">
@@ -474,6 +489,7 @@ const AddRequest: React.FC = () => {
           </div>
         </section>
       </div>
+
       {showTypeRequest && (
         <TypeRequest
           setReqType={(value: any) => setValue("reqType", value)}
