@@ -286,7 +286,7 @@ const AddRequest: React.FC = () => {
               >
                 Выбрать тип заявки
               </Button>
-              <Controller
+              {/* <Controller
                 name="reqType"
                 control={control}
                 render={({ field }) => (
@@ -308,7 +308,7 @@ const AddRequest: React.FC = () => {
                     </Select.Content>
                   </Select.Root>
                 )}
-              />
+              /> */}
               {reqType === "Смена главного бухгалтера" && (
                 <>
                   <div className="inputs-list">
@@ -435,6 +435,7 @@ const AddRequest: React.FC = () => {
         <TypeRequest
           setReqType={(value: any) => setValue("reqType", value)}
           setShowTypeRequest={setShowTypeRequest}
+          reqType={reqType}
         />
       )}
     </section>

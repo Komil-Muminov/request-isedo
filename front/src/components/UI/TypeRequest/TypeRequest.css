@@ -42,7 +42,6 @@
 }
 
 .wrapper-request-list li {
-  background-color: #90caf9;
   padding: 20px;
   width: 19%;
   display: flex;
@@ -51,10 +50,19 @@
   align-items: center;
   gap: 10px;
   cursor: pointer;
+  transition: all 0.1s;
 }
 
 .wrapper-request-list li p {
   text-align: center;
+  color: #000;
+}
+
+.wrapper-request-list li:hover {
+  background-color: #90caf9;
+}
+
+.wrapper-request-list li:hover p {
   color: #fff;
 }
 
@@ -78,4 +86,8 @@
   display: flex;
   justify-content: end;
   gap: 10px;
+}
+
+.active {
+  background-color: #90caf9;
 }

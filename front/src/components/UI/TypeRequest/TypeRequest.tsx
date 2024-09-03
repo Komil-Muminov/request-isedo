@@ -4,11 +4,15 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import changeOfAccountant from "../../../assets/icons/change-of-accountant.webp";
 import { Button } from "@mui/material";
 
-const TypeRequest = ({ setReqType, setShowTypeRequest }: any) => {
+import { typeRequests } from "../../API/Data/TypeRequests/TypeRequests";
+
+const TypeRequest = ({ setReqType, setShowTypeRequest, reqType }: any) => {
   const handleClick = (value: any) => {
     setReqType(value); // Установите значение в форму
     setShowTypeRequest(false);
   };
+
+  console.log(reqType);
 
   return (
     <div className="wrapper-modal" onClick={() => setShowTypeRequest(false)}>
@@ -18,50 +22,20 @@ const TypeRequest = ({ setReqType, setShowTypeRequest }: any) => {
         </div>
         <main className="center">
           <ul className="wrapper-request-list">
-            <li onClick={() => handleClick("Смена главного бухгалтера")}>
-              {/* <AssignmentIcon sx={{ fontSize: "50px", color: "#FFEB3B" }} /> */}
-
-              <div className="icon">
-                <img src={changeOfAccountant} alt="" />
-              </div>
-              <p>Смена главного бухгалтера</p>
-            </li>
-            <li onClick={() => handleClick("Смена руководителя")}>
-              <div className="icon">
-                <img src={changeOfAccountant} alt="" />
-              </div>
-              <p>Смена руководителя</p>
-            </li>
-            <li>
-              <div className="icon">
-                <img src={changeOfAccountant} alt="" />
-              </div>
-              <p>Продление сертификата главного бухгалтера</p>
-            </li>
-            <li>
-              <div className="icon">
-                <img src={changeOfAccountant} alt="" />
-              </div>
-              <p>Продление сертификата руководителя</p>
-            </li>
-            <li>
-              <div className="icon">
-                <img src={changeOfAccountant} alt="" />
-              </div>
-              <p>Продажа токена</p>
-            </li>
-            <li>
-              <div className="icon">
-                <img src={changeOfAccountant} alt="" />
-              </div>
-              <p>Предоставление доступа к модулям</p>
-            </li>
-            <li>
-              <div className="icon">
-                <img src={changeOfAccountant} alt="" />
-              </div>
-              <p>Техническая поддержка</p>
-            </li>
+            {typeRequests.map((e) => {
+              return (
+                <li
+                  className={e.name === reqType ? "active" : ""}
+                  key={e.id}
+                  onClick={() => handleClick(e.name)}
+                >
+                  <div className="icon">
+                    <img src={e.image} alt="" />
+                  </div>
+                  <p>{e.name}</p>
+                </li>
+              );
+            })}
           </ul>
         </main>
         {/* <div className="footer">
