@@ -1,1 +1,48 @@
+<<<<<<< HEAD
 []
+=======
+[
+  {
+    "id": 1,
+    "userId": 3,
+    "fullName": "ff",
+    "login": "ffff",
+    "organization": "ffff",
+    "inn": "ff",
+    "sku": "fffff",
+    "role": "ffff",
+    "date": "02.09.2024 15:00:07",
+    "typeToken": "",
+    "serialNumber": "",
+    "tokenId": ""
+  },
+  {
+    "id": 2,
+    "userId": 3,
+    "fullName": "fdgdf",
+    "login": "gfdgd",
+    "organization": "dgdgdg",
+    "inn": "dssgsfdg",
+    "sku": "gdg",
+    "role": "gdgd",
+    "date": "02.09.2024 15:02:12",
+    "typeToken": "",
+    "serialNumber": "",
+    "tokenId": ""
+  },
+  {
+    "id": 3,
+    "userId": 3,
+    "fullName": "adad",
+    "login": "adaad",
+    "organization": "dadsada",
+    "inn": "sad",
+    "sku": "sdasda",
+    "role": "adsa",
+    "date": "02.09.2024 15:02:27",
+    "typeToken": "",
+    "serialNumber": "",
+    "tokenId": ""
+  }
+]
+>>>>>>> e5701afceb7063139b10965d49dd7fd6b6fb5b31

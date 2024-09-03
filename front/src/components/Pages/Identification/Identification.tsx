@@ -29,11 +29,13 @@ const Identification: React.FC = () => {
 		uIdentityMutation.mutate(data);
 	};
 
-	// getDataUidentity
-	// const uIdentityQuery=useQuery({
-	// 	queryFn:()=>getUIdenti
-	// 	queryKey:['uidentity']
-	// })
+	// const uIdentityQuery = useQuery(
+	// 	{
+	// 		queryFn: () => getUIdenti(),
+	// 		queryKey: ["uidentity"],
+	// 	},
+	// 	queryClient,
+	// );
 
 	return (
 		<>
@@ -60,8 +62,6 @@ const Identification: React.FC = () => {
 						minLengthMessage="Наименование организации должно содержать минимум 5 символов"
 						inputType="text"
 						kind="uidentity_inp"
-						// inputDefaultValue={ui}
-						inputDisabled={true}
 					/>
 
 					<InputAuth
@@ -105,7 +105,7 @@ const Identification: React.FC = () => {
 						inputDisabled={uIdentityMutation.isSuccess}
 					/>
 
-					<InputAuth
+					{/* <InputAuth
 						register={register}
 						inputName="certificatID"
 						inputPlaceholder="certificatID"
@@ -114,17 +114,16 @@ const Identification: React.FC = () => {
 						inputType="text"
 						kind="uidentity_inp"
 						inputDisabled={uIdentityMutation.isSuccess}
-					/>
-					<InputAuth
+					/> */}
+					{/* <InputAuth
 						register={register}
 						inputName="department"
-						inputPlaceholder="department"
+						inputPlaceholder="department2"
 						requiredMessage="Заполните поле 'department'"
 						minLengthMessage="department пустым не должен быть"
 						inputType="text"
 						kind="uidentity_inp"
-						inputDisabled={uIdentityMutation.isSuccess}
-					/>
+					/> */}
 
 					<InputAuth
 						register={register}
@@ -134,7 +133,6 @@ const Identification: React.FC = () => {
 						minLengthMessage="department пустым не должен быть"
 						inputType="file"
 						kind="uidentity_inp"
-						inputDisabled={uIdentityMutation.isSuccess}
 					/>
 
 					{/* <InputAuth
@@ -156,9 +154,7 @@ const Identification: React.FC = () => {
 						type="submit"
 						variant="contained"
 						disabled={
-							uIdentityMutation.isSuccess ||
-							uIdentityMutation.isPending ||
-							!dirtyFields.inn
+							uIdentityMutation.isSuccess || uIdentityMutation.isPending
 						}
 						sx={{
 							backgroundColor: "#607d8b",

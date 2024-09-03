@@ -3,6 +3,7 @@ export interface TProps {
 	to: string;
 	className?: string;
 	children: React.ReactNode;
+	onClick?: (e: React.SyntheticEvent<HTMLElement>) => void;
 }
 export const Ulink: React.FC<TProps> = ({ to, className, children }) => {
 	return (

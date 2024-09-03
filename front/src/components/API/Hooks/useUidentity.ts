@@ -4,11 +4,10 @@ export const UidentityScheme = z.object({
 	inn: z.string().optional(),
 	organization: z.string().optional(),
 	fullName: z.string().optional(),
-	department: z.string().optional(),
-	post: z.string().optional(),
-	file: z.string().optional().optional(),
 	role: z.string().optional(),
+	file: z.string().optional().optional(),
 	sku: z.string().optional(),
+	// department: z.string().optional(),
 	// login: z.string().optional(),
 	// certificatID: z.string().optional(),
 });
