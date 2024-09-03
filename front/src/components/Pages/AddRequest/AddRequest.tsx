@@ -28,6 +28,8 @@ import DoneIcon from "@mui/icons-material/Done";
 import TitleDocument from "../../UI/TitleDocument/TitleDocument";
 import TypeRequest from "../../UI/TypeRequest/TypeRequest";
 
+import AssignmentIcon from "@mui/icons-material/Assignment";
+
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
 
@@ -197,6 +199,15 @@ const AddRequest: React.FC = () => {
             <div className="wrapper-buttons">
               <ButtonPanelControl
                 icon={
+                  <AssignmentIcon
+                    sx={{ fontSize: "18px", fontWeight: "bold" }}
+                  />
+                }
+                text="Выбрать тип заявки"
+                setShowTypeRequest={setShowTypeRequest}
+              />
+              <ButtonPanelControl
+                icon={
                   <SaveIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
                 }
                 text="Сохранить"
@@ -269,66 +280,53 @@ const AddRequest: React.FC = () => {
           </Stepper>
         </div>
         {/* Детали заявки */}
-        <section className="old-accountant">
-          <TitleDocument title="Предыдущий бухгалтер" />
-          <div className="info-accountant">
-            <div className="wrapper-info">
-              <div className="wrapper-image">
-                <img src={`http://localhost:3000${uinfo?.photo}`} alt="" />
+        {reqType === "Смена главного бухгалтера" && (
+          <section className="old-accountant">
+            <TitleDocument title="Предыдущий бухгалтер" />
+            <div className="info-accountant">
+              <div className="wrapper-info">
+                <div className="wrapper-image">
+                  <img src={`http://localhost:3000${uinfo?.photo}`} alt="" />
+                </div>
+                <div className="wrapper-text">
+                  <h2>Шарипов Амир</h2>
+                  <p>
+                    <span>ИНН:</span> 250001455
+                  </p>
+                  <p>
+                    <span>Номер телефона:</span> 88-000-86-71
+                  </p>
+                  <p>
+                    <span>E-mail адрес:</span> jsharipovamir@gmail.com
+                  </p>
+                  <p>
+                    <span>Паспорт:</span> A0644063
+                  </p>
+                </div>
               </div>
-              <div className="wrapper-text">
-                <h2>Шарипов Амир</h2>
-                <p>
-                  <span>ИНН:</span> 250001455
-                </p>
-                <p>
-                  <span>Номер телефона:</span> 88-000-86-71
-                </p>
-                <p>
-                  <span>E-mail адрес:</span> jsharipovamir@gmail.com
-                </p>
-                <p>
-                  <span>Паспорт:</span> A0644063
-                </p>
+              <div className="info-organization">
+                <Button
+                  sx={{
+                    borderRadius: "50px",
+                    display: "flex",
+                    gap: "5px",
+                    backgroundColor: "#607d8b",
+                    "&:hover": {
+                      backgroundColor: "#516874",
+                    },
+                  }}
+                  variant="contained"
+                >
+                  Подробнее
+                </Button>
               </div>
             </div>
-            <div className="info-organization">
-              <Button
-                sx={{
-                  borderRadius: "50px",
-                  display: "flex",
-                  gap: "5px",
-                  backgroundColor: "#607d8b",
-                  "&:hover": {
-                    backgroundColor: "#516874",
-                  },
-                }}
-                variant="contained"
-              >
-                Подробнее
-              </Button>
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
         <section className="details-request">
           <TitleDocument title="Детали заявки" />
           <div className="form_content">
             <form className="request_form" onSubmit={handleSubmit(onSubmit)}>
-              <Button
-                sx={{
-                  borderRadius: "50px",
-                  display: "flex",
-                  gap: "5px",
-                  backgroundColor: "#607d8b",
-                  "&:hover": {
-                    backgroundColor: "#516874",
-                  },
-                }}
-                variant="contained"
-                onClick={() => setShowTypeRequest(true)}
-              >
-                Выбрать тип заявки
-              </Button>
               {/* <Controller
                 name="reqType"
                 control={control}

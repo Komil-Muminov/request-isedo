@@ -8,6 +8,7 @@ const ButtonPanelControl = ({
   handleSubmit,
   activeSendButton,
   handleCloseAfterSave,
+  setShowTypeRequest,
 }: TProps) => {
   const handleClick = () => {
     if (goBack) goBack(false);
@@ -15,6 +16,7 @@ const ButtonPanelControl = ({
       handleSubmit();
       handleCloseAfterSave();
     }
+    setShowTypeRequest(true);
   };
 
   return (

@@ -55,7 +55,6 @@
 
 .wrapper-request-list li p {
   text-align: center;
-  color: #000;
 }
 
 .wrapper-request-list li:hover {
@@ -90,4 +89,5 @@
 
 .active {
   background-color: #90caf9;
+  color: #fff;
 }
