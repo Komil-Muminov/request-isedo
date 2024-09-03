@@ -15,7 +15,7 @@ export const typeRequests: ItypeRequests[] = [
   {
     id: 2,
     image: changeOfAccountant,
-    name: "Cмена руководителя",
+    name: "Смена руководителя",
   },
   {
     id: 3,
