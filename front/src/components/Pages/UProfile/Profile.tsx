@@ -14,6 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
 import { Settings } from "@mui/icons-material";
 import { UbottomNavLinks } from "../../API/Data/UbottomNav/UbottomNavLink";
+import { Link } from "react-router-dom";
 import "./Profile.css";
 
 const Profile: React.FC = () => {
@@ -87,12 +88,12 @@ const Profile: React.FC = () => {
 							<Outlet />
 						</aside>
 					</div>
-					<div className="uBottomNav navbottom_item km__content">
+					<div className="ubottomnav km__content ">
 						{UbottomNavLinks.map(({ label, url }, id) => (
 							<>
-								<Ulink key={id} to={url}>
+								<Link className="ubottomnav__link" key={id} to={url}>
 									{label}
-								</Ulink>
+								</Link>
 							</>
 						))}
 					</div>
