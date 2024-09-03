@@ -1,62 +1,26 @@
 .navbottom__content {
-  overflow-x: auto;
+	overflow-x: auto;
 }
 .navbottom__links {
-  display: flex;
-  position: relative;
-  overflow-x: auto;
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 20px;
+	display: flex;
+	position: relative;
+	overflow-x: auto;
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 20px;
 }
-/* .navbottom__links::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  left: 0;
-  top: 20px;
-  min-height: 3px;
-  background-color: var(--navbottom-links-bottom-line);
-  z-index: 1;
-} */
 
 .navbottom_item {
-  position: relative;
-  color: #475569;
-  border-bottom: 4px solid #94a3b8;
-  text-align: start;
-  padding: 16px 24px;
-  white-space: nowrap; /* Предотвращает перенос текста на новую строку */
-  font-weight: 600;
+	position: relative;
+	color: #475569;
+	border-bottom: 4px solid #94a3b8;
+	text-align: start;
+	padding: 16px 24px;
+	white-space: nowrap; /* Предотвращает перенос текста на новую строку */
+	font-weight: 600;
 }
 
 .navbottom_item:hover {
-  background-color: #f1f5f9;
-  border-bottom-color: #009688;
+	background-color: #f1f5f9;
+	border-bottom-color: #009688;
 }
-
-/* .navbottom_item::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 3px;
-  left: 0;
-  top: 20px;
-  transform: scale(0);
-  transition: transform 0.2s ease-in-out;
-  z-index: 2;
-} */
-
-/* .navbottom_item:hover::after {
-  transform: scale(1);
-  background-color: #009688;
-}
-
-.navbottom_item:focus::after {
-  transform: scale(1);
-  background-color: var(--navbottom-underline);
-}
-
-.navbottom_item:active:not(:focus-visible) {
-  color: var(--blackRgba);
-} */
