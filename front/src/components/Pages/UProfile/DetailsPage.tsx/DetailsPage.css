@@ -1,0 +1,38 @@
+/* DetailsPage.css */
+.detailsPage__content {
+	background-color: rgba(255, 255, 255, 0.9);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 15px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	width: 80%;
+	max-width: 800px;
+	margin: 20px auto;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	backdrop-filter: blur(10px);
+}
+
+.details__title {
+	margin: 0;
+	font-size: 2em;
+	color: #333;
+	text-align: center;
+}
+
+.detailsPage__content p {
+	margin: 10px 0;
+	color: #666;
+	text-align: center;
+	font-size: 1.2em;
+}
+
+.detailsPage__content ul {
+	list-style-type: disc;
+	padding-left: 20px;
+	text-align: left;
+}
+.detailsPage__content .btn:hover {
+	color: #ffffff;
+}

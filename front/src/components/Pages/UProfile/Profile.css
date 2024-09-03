@@ -160,9 +160,29 @@
 }
 
 /* UbottomLink */
-.uBottomNav {
+
+.ubottomnav {
 	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
 	gap: 20px;
+	position: relative;
+	overflow-x: auto;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+
+.ubottomnav__link {
+	border-bottom: 4px solid #94a3b8;
+	width: 100%;
+	text-align: center;
+	padding: 20px;
+}
+
+.ubottomnav__link:hover:not(:focus-visible) {
+	background-color: #f3f9f1;
+	background-color: #00968743;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-color: #009688;
+	color: #fff;
 }
