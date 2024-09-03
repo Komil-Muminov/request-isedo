@@ -173,6 +173,8 @@ const AddRequest: React.FC = () => {
 
   const [showTypeRequest, setShowTypeRequest] = useState<boolean>(false);
 
+  console.log(uinfo);
+
   return (
     <section className="add-content">
       <div className="container">
@@ -267,6 +269,47 @@ const AddRequest: React.FC = () => {
           </Stepper>
         </div>
         {/* Детали заявки */}
+        <section className="old-accountant">
+          <TitleDocument title="Предыдущий бухгалтер" />
+          <div className="info-accountant">
+            <div className="wrapper-info">
+              <div className="wrapper-image">
+                <img src={`http://localhost:3000${uinfo?.photo}`} alt="" />
+              </div>
+              <div className="wrapper-text">
+                <h2>Шарипов Амир</h2>
+                <p>
+                  <span>ИНН:</span> 250001455
+                </p>
+                <p>
+                  <span>Номер телефона:</span> 88-000-86-71
+                </p>
+                <p>
+                  <span>E-mail адрес:</span> jsharipovamir@gmail.com
+                </p>
+                <p>
+                  <span>Паспорт:</span> A0644063
+                </p>
+              </div>
+            </div>
+            <div className="info-organization">
+              <Button
+                sx={{
+                  borderRadius: "50px",
+                  display: "flex",
+                  gap: "5px",
+                  backgroundColor: "#607d8b",
+                  "&:hover": {
+                    backgroundColor: "#516874",
+                  },
+                }}
+                variant="contained"
+              >
+                Подробнее
+              </Button>
+            </div>
+          </div>
+        </section>
         <section className="details-request">
           <TitleDocument title="Детали заявки" />
           <div className="form_content">
