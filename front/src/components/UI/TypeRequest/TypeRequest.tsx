@@ -6,9 +6,11 @@ import { Button } from "@mui/material";
 
 import { typeRequests } from "../../API/Data/TypeRequests/TypeRequests";
 
+import { motion, AnimatePresence } from "framer-motion";
+
 const TypeRequest = ({ setReqType, setShowTypeRequest, reqType }: any) => {
   const handleClick = (value: any) => {
-    setReqType(value); // Установите значение в форму
+    setReqType(value);
     setShowTypeRequest(false);
   };
 
@@ -16,7 +18,17 @@ const TypeRequest = ({ setReqType, setShowTypeRequest, reqType }: any) => {
 
   return (
     <div className="wrapper-modal" onClick={() => setShowTypeRequest(false)}>
-      <div className="content" onClick={(event) => event.stopPropagation()}>
+      <motion.div
+        initial={{ scale: 0, translateX: "-50%", translateY: "-50%" }}
+        animate={{ scale: 1, translateX: "-50%", translateY: "-50%" }}
+        transition={{
+          type: "spring",
+          stiffness: 260,
+          damping: 20,
+        }}
+        className="content"
+        onClick={(event) => event.stopPropagation()}
+      >
         <div className="header">
           <p>Типы заявок</p>
         </div>
@@ -38,37 +50,7 @@ const TypeRequest = ({ setReqType, setShowTypeRequest, reqType }: any) => {
             })}
           </ul>
         </main>
-        {/* <div className="footer">
-          <Button
-            sx={{
-              borderRadius: "50px",
-              display: "flex",
-              gap: "5px",
-              backgroundColor: "#607d8b",
-              "&:hover": {
-                backgroundColor: "#516874",
-              },
-            }}
-            variant="contained"
-          >
-            Сохранить
-          </Button>
-          <Button
-            sx={{
-              borderRadius: "50px",
-              display: "flex",
-              gap: "5px",
-              backgroundColor: "#607d8b",
-              "&:hover": {
-                backgroundColor: "#516874",
-              },
-            }}
-            variant="contained"
-          >
-            Закрыть
-          </Button>
-        </div> */}
-      </div>
+      </motion.div>
     </div>
   );
 };

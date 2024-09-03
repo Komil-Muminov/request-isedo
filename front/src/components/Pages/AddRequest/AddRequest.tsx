@@ -30,6 +30,8 @@ import TypeRequest from "../../UI/TypeRequest/TypeRequest";
 
 import AssignmentIcon from "@mui/icons-material/Assignment";
 
+import { motion } from "framer-motion";
+
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
 
@@ -317,7 +319,7 @@ const AddRequest: React.FC = () => {
                   }}
                   variant="contained"
                 >
-                  Подробнее
+                  Карточка организации
                 </Button>
               </div>
             </div>

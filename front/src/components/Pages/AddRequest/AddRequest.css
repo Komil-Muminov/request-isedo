@@ -157,3 +157,10 @@ th {
 .wrapper-text span {
   font-weight: 600;
 }
+
+.info-organization {
+  width: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: end;
+}
