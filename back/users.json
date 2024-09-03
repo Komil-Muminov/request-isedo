@@ -102,5 +102,24 @@
     "department": "",
     "reqIdentity": false,
     "uIdentity": false
+  },
+  {
+    "id": 7,
+    "uType": "ko",
+    "username": "ko",
+    "password": "123",
+    "photo": "",
+    "fullName": "",
+    "phone": "",
+    "tax": "",
+    "email": "",
+    "organization": "ko",
+    "inn": "ko",
+    "role": "ko",
+    "orgName": "",
+    "orgTax": "",
+    "department": "",
+    "reqIdentity": false,
+    "uIdentity": false
   }
 ]

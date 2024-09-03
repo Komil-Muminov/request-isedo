@@ -3,9 +3,11 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@mui/material";
 import { useUidentity, UidentityType } from "../../API/Hooks/useUidentity";
 import { queryClient } from "../../../queryClient";
-import "./Identification.css";
 import InputAuth from "../../UI/InputAuth/InputAuth";
 import { LoaderPoints } from "../../UI/LoaderPoints";
+import { GetMeType, useAuth } from "../../API/Hooks/useAuth";
+import "./Identification.css";
+import { useEffect, useState } from "react";
 
 const Identification: React.FC = () => {
 	const {
@@ -29,13 +31,27 @@ const Identification: React.FC = () => {
 		uIdentityMutation.mutate(data);
 	};
 
-	// const uIdentityQuery = useQuery(
-	// 	{
-	// 		queryFn: () => getUIdenti(),
-	// 		queryKey: ["uidentity"],
-	// 	},
-	// 	queryClient,
-	// );
+	// GetMe
+
+	const { getMe } = useAuth();
+	const getMeQuery = useQuery(
+		{
+			queryFn: () => getMe(),
+			queryKey: ["uidentitygetme"],
+		},
+		queryClient,
+	);
+
+	const [uidentityGetMe, setUidentityGetMe] = useState<GetMeType | undefined>(
+		undefined,
+	);
+
+	// Получить данные и привязать к инпутам
+	useEffect(() => {
+		if (getMeQuery.isSuccess) {
+			setUidentityGetMe(getMeQuery.data);
+		}
+	}, [getMeQuery]);
 
 	return (
 		<>
