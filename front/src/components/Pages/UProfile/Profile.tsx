@@ -1,24 +1,21 @@
-import { Button } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
-import { queryClient } from "../../../queryClient";
-import { useAuth } from "../../API/Hooks/useAuth";
-import { Loader } from "../../UI/Loader/Loader";
+// Profile.tsx
 import { useState } from "react";
-import { Ulink } from "../../UI/Ulinks/Ulinks";
-import { Outlet, useNavigate } from "react-router-dom";
-
-// MUI
+import { Button } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Settings } from "@mui/icons-material";
-// /MUI
-import "./Profile.css";
+import { Ulink } from "../../UI/Ulinks/Ulinks";
 import { UlinkScheme, UlinksProps } from "../../UI/Ulinks/ProfileLinks";
+import { Outlet, useNavigate } from "react-router-dom";
+import { Loader } from "../../UI/Loader/Loader";
+import { useAuth } from "../../API/Hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import { queryClient } from "../../../queryClient";
+import { Settings } from "@mui/icons-material";
+import "./Profile.css";
 
 const Profile: React.FC = () => {
-	const navigate = useNavigate();
 	const { getMe } = useAuth();
 	const uQuery = useQuery(
 		{
@@ -29,9 +26,16 @@ const Profile: React.FC = () => {
 	);
 
 	const [expanded, setExpanded] = useState<number | false>(false);
+	const [selectedItem, setSelectedItem] = useState<UlinkScheme | null>(null);
+	const navigate = useNavigate();
 
 	const handleAccordion = (id: number) => {
 		setExpanded(expanded === id ? false : id);
+	};
+
+	const handleSelectItem = (item: UlinkScheme) => {
+		setSelectedItem(item);
+		navigate(`/uprofile/details/${item.url.split("/").pop()}`); // Перенаправление на DetailsPage
 	};
 
 	if (uQuery.status === "pending") return <Loader />;
@@ -40,23 +44,12 @@ const Profile: React.FC = () => {
 		return null;
 	}
 
-	const handleShowSubLinks = (subLinks: UlinkScheme[]) => {
-		return subLinks.map(({ url, label }, id) => (
-			<Ulink
-				key={id}
-				to={url}
-			>
-				{label}
-			</Ulink>
-		));
-	};
-
 	return (
 		<section className="sections">
 			<div className="container">
 				<div className="profile_content">
 					<div className="profile_header">
-						<Button onClick={() => navigate(-1)}>Назад</Button>
+						<Button onClick={() => setSelectedItem(null)}>Назад</Button>
 					</div>
 					<div className="wrapper-profile">
 						<aside className="profile_left">
@@ -70,6 +63,7 @@ const Profile: React.FC = () => {
 										expandIcon={<ExpandMoreIcon />}
 										aria-controls={`panel${id}-content`}
 										id={`panel${id}-header`}
+										onClick={() => handleSelectItem({ url, label, subLinks })}
 									>
 										<div className="uaccordion_label">
 											<Settings />
@@ -78,7 +72,12 @@ const Profile: React.FC = () => {
 									</AccordionSummary>
 									<AccordionDetails className="ulins_sublinks">
 										<Ulink to={url}>{label}</Ulink>
-										{subLinks && handleShowSubLinks(subLinks)}
+										{subLinks &&
+											subLinks.map((subLink, id) => (
+												<Ulink key={id} to={subLink.url}>
+													{subLink.label}
+												</Ulink>
+											))}
 									</AccordionDetails>
 								</Accordion>
 							))}

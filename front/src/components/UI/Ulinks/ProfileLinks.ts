@@ -7,7 +7,7 @@ export interface UlinkScheme {
 export const UlinksProps: UlinkScheme[] = [
 	{
 		url: "/account",
-		label: "Главная страница",
+		label: "Модули",
 		subLinks: [
 			{
 				url: `unotify`,
