@@ -15,7 +15,8 @@ const DetailsPage = () => {
 		<div className="detailsPage__content">
 			<h2 className="details__title">Details Page</h2>
 			<p>Информация про: {currentItem.label}</p>
-			{currentItem.url}
+			dsa
+			{currentItem.label}
 			<span>
 				<p>
 					Добро пожаловать в модуль {currentItem.label}! Этот модуль
