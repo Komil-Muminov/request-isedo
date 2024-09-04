@@ -299,7 +299,7 @@ const AddRequest: React.FC = () => {
         {/* Детали заявки */}
         {reqType === "Смена главного бухгалтера" && (
           <section className="old-accountant">
-            <TitleDocument title="Предыдущий бухгалтер" />
+            <TitleDocument title="Нынешний бухгалтер" />
             <div className="info-accountant">
               <div className="wrapper-info">
                 <div className="wrapper-image">
@@ -341,7 +341,7 @@ const AddRequest: React.FC = () => {
           </section>
         )}
         <section className="details-request">
-          <TitleDocument title="Детали заявки" />
+          <TitleDocument title="Требуемые документы" />
           <div className="form_content">
             <form className="request_form" onSubmit={handleSubmit(onSubmit)}>
               {/* <Controller
@@ -369,59 +369,6 @@ const AddRequest: React.FC = () => {
               /> */}
               {reqType === "Смена главного бухгалтера" && (
                 <>
-                  <div className="inputs-list">
-                    <TextField
-                      {...register("fullName")}
-                      id="fullName"
-                      type="text"
-                      className="request_inp"
-                      label="ФИО"
-                    />
-                    <TextField
-                      {...register("role")}
-                      id="role"
-                      type="text"
-                      className="request_inp"
-                      label="Должность"
-                    />
-                    <TextField
-                      {...register("phone")}
-                      id="phone"
-                      type="text"
-                      className="request_inp"
-                      label="Номер телефона"
-                    />
-                    {/* =============== Добавить в базу requests =============== */}
-                    <TextField
-                      {...register("email")}
-                      id="email"
-                      type="text"
-                      className="request_inp"
-                      label="E-mail адрес"
-                    />
-                    <TextField
-                      {...register("tax")}
-                      id="tax"
-                      type="text"
-                      className="request_inp"
-                      label="ИНН"
-                    />
-                    <TextField
-                      {...register("orgTax")}
-                      id="orgTax"
-                      type="text"
-                      className="request_inp"
-                      label="ИНН"
-                    />
-                    <TextField
-                      {...register("orgName")}
-                      id="orgName"
-                      type="text"
-                      className="request_inp"
-                      label="Организация"
-                    />
-                  </div>
-
                   <div className="wrapper-table">
                     <table>
                       <thead>
@@ -432,16 +379,11 @@ const AddRequest: React.FC = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {fileInfo.map((e) => {
-                          return (
-                            <TableRowRequest
-                              key={e.id}
-                              item={e}
-                              handleGetFile={handleGetFile}
-                              getFile={getFile}
-                            />
-                          );
-                        })}
+                        <TableRowRequest
+                          item={fileInfo[0]}
+                          handleGetFile={handleGetFile}
+                          getFile={getFile}
+                        />
                       </tbody>
                     </table>
                   </div>
