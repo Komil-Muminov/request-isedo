@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import log from "../../../assets/Formal/log.webp";
-import "./Navigation.css";
 import { Avatar } from "@mui/material";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
@@ -20,6 +19,7 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import "./Navigation.css";
 
 export const Navigation: React.FC = () => {
 	const navigate = useNavigate();
