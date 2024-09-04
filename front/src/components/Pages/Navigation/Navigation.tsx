@@ -115,7 +115,7 @@ export const Navigation: React.FC = () => {
 											className="nav__fullname"
 										>
 											ФИО:{" "}
-											<span className="nav__text">
+											<span className="">
 												{nav
 													? getUinfoQuery.data.uIdentity || "Комил Муминов"
 													: ""}
@@ -140,7 +140,7 @@ export const Navigation: React.FC = () => {
 										</svg>{" "}
 										<div className="nav__inn">
 											ИНН:
-											<span className="nav__text"> 123456789</span>
+											<span className=""> 123456789</span>
 										</div>
 									</li>
 									<li className="info_list-item mulish-info-list-item">
@@ -163,7 +163,7 @@ export const Navigation: React.FC = () => {
 										</svg>{" "}
 										<div className="nav__role">
 											Роль:
-											<span className="nav__text ">
+											<span className="">
 												{getUinfoQuery.data?.role
 													? getUinfoQuery.data.role
 													: ``}
@@ -189,7 +189,7 @@ export const Navigation: React.FC = () => {
 										</svg>{" "}
 										<div className="nav__orgname">
 											Организация:
-											<span className="nav__orgname nav__text">
+											<span className="nav__orgname">
 												{getUinfoQuery.data?.orgName
 													? getUinfoQuery.data.orgName
 													: `${getUinfoQuery.data.uType}`}
