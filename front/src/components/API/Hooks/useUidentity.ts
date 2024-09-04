@@ -10,6 +10,7 @@ export const UidentityScheme = z.object({
 	// department: z.string().optional(),
 	// login: z.string().optional(),
 	// certificatID: z.string().optional(),
+	// Определить типы
 });
 
 export type UidentityType = z.infer<typeof UidentityScheme>;
