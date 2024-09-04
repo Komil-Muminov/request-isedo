@@ -80,6 +80,7 @@ export const Navigation: React.FC = () => {
 	}
 
 	// Надо свг контейнер сделать
+	// Надо доработать
 
 	if (getUinfoQuery?.status === "success") {
 		return (
