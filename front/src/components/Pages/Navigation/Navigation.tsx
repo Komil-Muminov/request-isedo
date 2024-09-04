@@ -110,16 +110,18 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>
-										<span
+										<div
 											onMouseEnter={() => setnav(true)}
 											onMouseLeave={() => setnav(false)}
-											className="nav__text nav__fullname"
+											className="nav__fullname"
 										>
 											ФИО:{" "}
-											{nav
-												? getUinfoQuery.data.uIdentity || "Комил Муминов"
-												: ""}
-										</span>
+											<span className="nav__text">
+												{nav
+													? getUinfoQuery.data.uIdentity || "Комил Муминов"
+													: ""}
+											</span>
+										</div>
 									</li>
 									<li className="info_list-item mulish-info-list-item">
 										<svg
@@ -137,7 +139,10 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>{" "}
-										<span className="nav__text nav__inn">ИНН: 123456789</span>
+										<div className="nav__text ">
+											ИНН:
+											<span className="nav__inn"> 123456789</span>
+										</div>
 									</li>
 									<li className="info_list-item mulish-info-list-item">
 										<svg
@@ -157,10 +162,14 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>{" "}
-										<span className="nav__text nav__role">
+										<div className="nav__text nav__role">
 											Роль:
-											{getUinfoQuery.data?.role ? getUinfoQuery.data.role : ``}
-										</span>
+											<span className="nav__text ">
+												{getUinfoQuery.data?.role
+													? getUinfoQuery.data.role
+													: ``}
+											</span>
+										</div>
 									</li>
 
 									<li className="info_list-item mulish-info-list-item">
