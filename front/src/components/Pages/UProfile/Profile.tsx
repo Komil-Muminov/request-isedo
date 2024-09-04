@@ -88,7 +88,13 @@ const Profile: React.FC = () => {
 							<Outlet />
 						</aside>
 					</div>
-					<div className="ubottomnav km__content ">
+					<div
+						className={`ubottomnav km__content ${
+							uQuery.data.username === "km"
+								? "ubottomnav__km"
+								: "ubottomnav__hidden"
+						}`}
+					>
 						{UbottomNavLinks.map(({ label, url }, id) => (
 							<>
 								<Link className="ubottomnav__link" key={id} to={url}>
