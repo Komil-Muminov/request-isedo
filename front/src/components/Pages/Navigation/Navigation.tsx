@@ -139,9 +139,9 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>{" "}
-										<div className="nav__text ">
+										<div className="nav__inn">
 											ИНН:
-											<span className="nav__inn"> 123456789</span>
+											<span className="nav__text"> 123456789</span>
 										</div>
 									</li>
 									<li className="info_list-item mulish-info-list-item">
@@ -162,7 +162,7 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>{" "}
-										<div className="nav__text nav__role">
+										<div className="nav__role">
 											Роль:
 											<span className="nav__text ">
 												{getUinfoQuery.data?.role
@@ -188,12 +188,14 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>{" "}
-										<span className="nav__text nav__orgname">
-											Организация:{" "}
-											{getUinfoQuery.data?.orgName
-												? getUinfoQuery.data.orgName
-												: `${getUinfoQuery.data.uType}`}
-										</span>
+										<div className="nav__orgname">
+											Организация:
+											<span className="nav__orgname nav__text">
+												{getUinfoQuery.data?.orgName
+													? getUinfoQuery.data.orgName
+													: `${getUinfoQuery.data.uType}`}
+											</span>
+										</div>
 									</li>
 									{/* Другие элементы списка */}
 								</ul>
