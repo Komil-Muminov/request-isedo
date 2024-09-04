@@ -56,7 +56,6 @@ export const Navigation: React.FC = () => {
 		if (anchorElUser) {
 			setAnchorElUser(null);
 		} else {
-			// Otherwise, open it with the event target as the anchor
 			setAnchorElUser(event.currentTarget);
 		}
 	};
