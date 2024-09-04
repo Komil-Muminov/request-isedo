@@ -157,7 +157,7 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>{" "}
-										<span className="nav__role">
+										<span className="nav__text nav__role">
 											Роль:
 											{getUinfoQuery.data?.role ? getUinfoQuery.data.role : ``}
 										</span>
