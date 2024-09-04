@@ -95,7 +95,7 @@ const Profile: React.FC = () => {
 						className={`ubottomnav km__content ${
 							uQuery.data.username === "km"
 								? "ubottomnav__km"
-								: "ubottomnav__hidden"
+								: "ubottomnav__--"
 						}`}
 					>
 						{UbottomNavLinks.map(({ label, url }, id) => (
