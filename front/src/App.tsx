@@ -27,7 +27,7 @@ const LazyUdetails = lazy(
 	() => import("./components/Pages/UProfile/Udetails/Udetails"),
 );
 const LazyDetailsPage = lazy(
-	() => import("./components/Pages/UProfile/DetailsPage.tsx/DetailsPage"),
+	() => import("./components/Pages/UProfile/DetailsPage.tsx/ModulsDetails"),
 );
 const LazyErrorPage = lazy(
 	() => import("./components/Pages/ErrorPage/ErrorPage"),

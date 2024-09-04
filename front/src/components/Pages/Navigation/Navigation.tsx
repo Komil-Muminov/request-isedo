@@ -108,7 +108,7 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>
-										ФИО: {getUinfoQuery.data?.username}
+										ФИО: Комил Муминов
 									</li>
 									<li className="info_list-item mulish-info-list-item">
 										<svg

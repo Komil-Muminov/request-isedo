@@ -1,7 +1,7 @@
 // DetailsPage.tsx
 import { useParams } from "react-router-dom";
 import { UlinksProps } from "../../../UI/Ulinks/ProfileLinks";
-import "./DetailsPage.css";
+import "./ModulsDetails.css";
 
 const DetailsPage = () => {
 	const { page } = useParams();
