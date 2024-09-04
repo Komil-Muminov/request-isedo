@@ -22,7 +22,6 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
 export const Navigation: React.FC = () => {
-	// Logout logic
 	const navigate = useNavigate();
 
 	const logoutMutate = useMutation(
