@@ -13,7 +13,7 @@ const DetailsPage = () => {
 
 	return (
 		<div className="detailsPage__content">
-			<h2 className="details__title">Details Page</h2>
+			<h2 className="details__title">Moduls details page</h2>
 			<p>Информация про: {currentItem.label}</p>
 			dsa
 			{currentItem.label}
