@@ -47,7 +47,6 @@ const Profile: React.FC = () => {
 	}
 
 	// Надо сделать красивый дизайн
-	
 
 	return (
 		<section className="sections">
@@ -58,6 +57,7 @@ const Profile: React.FC = () => {
 					</div>
 					<div className="wrapper-profile">
 						<aside className="profile_left">
+							{/* Дароботать  */}
 							{UlinksProps.map(({ url, label, subLinks }, id) => (
 								<Accordion
 									key={id}
