@@ -50,6 +50,8 @@ export const Navigation: React.FC = () => {
 		);
 	};
 
+	const [nav, setnav] = useState<boolean>(false);
+
 	const handleToggleUserMenu = (event: React.MouseEvent<HTMLElement>) => {
 		// If the menu is open, close it
 		if (anchorElUser) {
@@ -108,8 +110,15 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>
-										<span className="nav__fullname">
-											ФИО:{getUinfoQuery.data.uIdentity || "Комил Муминов"}
+										<span
+											onMouseEnter={() => setnav(true)}
+											onMouseLeave={() => setnav(false)}
+											className="nav__fullname"
+										>
+											ФИО:{" "}
+											{nav
+												? getUinfoQuery.data.uIdentity || "Комил Муминов"
+												: ""}
 										</span>
 									</li>
 									<li className="info_list-item mulish-info-list-item">
@@ -128,7 +137,7 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>{" "}
-										ИНН: 123456789
+										<span className="nav__inn">ИНН: 123456789</span>
 									</li>
 									<li className="info_list-item mulish-info-list-item">
 										<svg
@@ -148,7 +157,7 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>{" "}
-										<span>
+										<span className="nav__role">
 											Роль:
 											{getUinfoQuery.data?.role ? getUinfoQuery.data.role : ``}
 										</span>
@@ -170,10 +179,12 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>{" "}
-										Организация:{" "}
-										{getUinfoQuery.data?.orgName
-											? getUinfoQuery.data.orgName
-											: `${getUinfoQuery.data.uType}`}
+										<span className="nav__orgname">
+											Организация:{" "}
+											{getUinfoQuery.data?.orgName
+												? getUinfoQuery.data.orgName
+												: `${getUinfoQuery.data.uType}`}
+										</span>
 									</li>
 									{/* Другие элементы списка */}
 								</ul>
