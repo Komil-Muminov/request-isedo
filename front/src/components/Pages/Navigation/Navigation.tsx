@@ -113,7 +113,7 @@ export const Navigation: React.FC = () => {
 										<span
 											onMouseEnter={() => setnav(true)}
 											onMouseLeave={() => setnav(false)}
-											className="nav__fullname"
+											className="nav__text nav__fullname"
 										>
 											ФИО:{" "}
 											{nav
@@ -137,7 +137,7 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>{" "}
-										<span className="nav__inn">ИНН: 123456789</span>
+										<span className="nav__text nav__inn">ИНН: 123456789</span>
 									</li>
 									<li className="info_list-item mulish-info-list-item">
 										<svg
@@ -179,7 +179,7 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>{" "}
-										<span className="nav__orgname">
+										<span className="nav__text nav__orgname">
 											Организация:{" "}
 											{getUinfoQuery.data?.orgName
 												? getUinfoQuery.data.orgName
