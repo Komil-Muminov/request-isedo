@@ -131,6 +131,7 @@ const Identification: React.FC = () => {
 						kind="uidentity_inp"
 						inputDisabled={uIdentityMutation.isSuccess}
 					/> */}
+
 					{/* <InputAuth
 						register={register}
 						inputName="department"
@@ -181,5 +182,4 @@ const Identification: React.FC = () => {
 		</>
 	);
 };
-
 export default Identification;
