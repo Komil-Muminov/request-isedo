@@ -161,11 +161,6 @@ const Identification: React.FC = () => {
 						kind="uidentity_inp"
 					/> */}
 
-					{/* при нажатии на сабмит должно создаваться uidentity и request с типом идентификация
-					пока он не пройдет идентификацию он не сможет отправлять запрос 
-					также надо добавить поля (массив с объектом )
-					
-					*/}
 					<Button
 						type="submit"
 						variant="contained"
