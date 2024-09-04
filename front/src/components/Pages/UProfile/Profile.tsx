@@ -46,7 +46,7 @@ const Profile: React.FC = () => {
 		return null;
 	}
 
-	// Надо сделать красивый дизайн
+	// Надо сделать красивый дизайн...
 
 	return (
 		<section className="sections">
