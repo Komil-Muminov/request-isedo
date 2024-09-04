@@ -1,4 +1,7 @@
 // import "./Footer.css";
+/**
+ * Надо узнать нужен ли футер или нет...
+ */
 // export const Navigation: React.FC = () => {
 // 	return (
 // 		<>
