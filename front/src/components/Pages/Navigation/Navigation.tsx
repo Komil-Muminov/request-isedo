@@ -108,7 +108,9 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>
-										ФИО: Комил Муминов
+										<span className="nav__fullname">
+											ФИО:{getUinfoQuery.data.uIdentity || "Комил Муминов"}
+										</span>
 									</li>
 									<li className="info_list-item mulish-info-list-item">
 										<svg
@@ -146,8 +148,10 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>{" "}
-										Роль:{" "}
-										{getUinfoQuery.data?.role ? getUinfoQuery.data.role : ``}
+										<span>
+											Роль:
+											{getUinfoQuery.data?.role ? getUinfoQuery.data.role : ``}
+										</span>
 									</li>
 
 									<li className="info_list-item mulish-info-list-item">
