@@ -46,7 +46,7 @@ const Identification: React.FC = () => {
 		undefined,
 	);
 
-	// Получить данные и привязать к инпутам
+	// Получить данные и привязать к инпутам...
 	useEffect(() => {
 		if (getMeQuery.isSuccess) {
 			setUidentityGetMe(getMeQuery.data);
