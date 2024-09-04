@@ -52,7 +52,6 @@ export const Navigation: React.FC = () => {
 	const [nav, setnav] = useState<boolean>(false);
 
 	const handleToggleUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-		// If the menu is open, close it
 		if (anchorElUser) {
 			setAnchorElUser(null);
 		} else {
