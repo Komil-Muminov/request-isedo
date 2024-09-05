@@ -1,10 +1,10 @@
 import "./AddRequest.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Stepper, StepLabel, Step, TextField, Button } from "@mui/material";
+import { Stepper, StepLabel, Step, TextField } from "@mui/material";
 
 // Хук из библиотеки react-hook-form для управления состоянием формы.
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { PostRqstScheme, postRequest } from "../../API/PostRqsts";
 import { stepsOfKvd, stepsOfBo } from "../../API/Data/Steps/Steps";
 
@@ -14,7 +14,6 @@ import { queryClient } from "../../../queryClient";
 import { fileInfo } from "../../API/Data/Documents/DocumentList";
 
 import "@radix-ui/themes/styles.css";
-import { Select } from "@radix-ui/themes";
 import TableRowRequest from "../../UI/TableRow/TableRowRequest";
 import { GetMeType, useAuth } from "../../API/Hooks/useAuth";
 import { Loader } from "../../UI/Loader/Loader";
@@ -30,7 +29,9 @@ import TypeRequest from "../../UI/TypeRequest/TypeRequest";
 
 import AssignmentIcon from "@mui/icons-material/Assignment";
 
-import { AnimatePresence, motion } from "framer-motion";
+import UserOrOrganizationCard from "../../UI/UserOrOrganizationCard/UserOrOrganizationCard";
+
+import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
@@ -69,7 +70,6 @@ const AddRequest: React.FC = () => {
       : [];
 
   const {
-    control,
     register,
     // Записывает все стейты в массив
     handleSubmit,
@@ -179,21 +179,6 @@ const AddRequest: React.FC = () => {
 
   console.log(uinfo);
 
-  const items = [
-    {
-      id: "1",
-      subtitle: "Amir",
-      title: "Sharipov",
-    },
-    {
-      id: "2",
-      subtitle: "Amir",
-      title: "Sharipov",
-    },
-  ];
-
-  const [selectedId, setSelectedId] = useState(null);
-
   return (
     <section className="add-content">
       <div className="container">
@@ -300,43 +285,9 @@ const AddRequest: React.FC = () => {
         {reqType === "Смена главного бухгалтера" && (
           <section className="old-accountant">
             <TitleDocument title="Нынешний бухгалтер" />
-            <div className="info-accountant">
-              <div className="wrapper-info">
-                <div className="wrapper-image">
-                  <img src={`http://localhost:3000${uinfo?.photo}`} alt="" />
-                </div>
-                <div className="wrapper-text">
-                  <h2>Шарипов Амир</h2>
-                  <p>
-                    <span>ИНН:</span> 250001455
-                  </p>
-                  <p>
-                    <span>Номер телефона:</span> 88-000-86-71
-                  </p>
-                  <p>
-                    <span>E-mail адрес:</span> jsharipovamir@gmail.com
-                  </p>
-                  <p>
-                    <span>Паспорт:</span> A0644063
-                  </p>
-                </div>
-              </div>
-              <div className="info-organization">
-                <Button
-                  sx={{
-                    borderRadius: "50px",
-                    display: "flex",
-                    gap: "5px",
-                    backgroundColor: "#607d8b",
-                    "&:hover": {
-                      backgroundColor: "#516874",
-                    },
-                  }}
-                  variant="contained"
-                >
-                  Карточка организации
-                </Button>
-              </div>
+            <div className="wrapper-cards">
+              <UserOrOrganizationCard uinfo={uinfo} />
+              <UserOrOrganizationCard CorporateFareIcon={CorporateFareIcon} />
             </div>
           </section>
         )}
