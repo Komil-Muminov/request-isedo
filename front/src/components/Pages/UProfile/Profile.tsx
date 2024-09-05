@@ -86,9 +86,9 @@ const Profile: React.FC = () => {
 								</Accordion>
 							))}
 						</aside>
-						<aside className="profile_right">
+						<div className="profile_right">
 							<Outlet />
-						</aside>
+						</div>
 						<aside className="profile_right">
 							<h2 className="profile_right-title">PROFILE RIGHT</h2>
 							<h2 className="profile_right-title">PROFILE RIGHT</h2>
