@@ -57,7 +57,6 @@ const Profile: React.FC = () => {
 					</div>
 					<div className="wrapper-profile">
 						<aside className="profile_left">
-							{/* Дароботать  */}
 							{UlinksProps.map(({ url, label, subLinks }, id) => (
 								<Accordion
 									key={id}
@@ -89,6 +88,12 @@ const Profile: React.FC = () => {
 						</aside>
 						<aside className="profile_right">
 							<Outlet />
+						</aside>
+						<aside className="profile_right">
+							<h2 className="profile_right-title">PROFILE RIGHT</h2>
+							<h2 className="profile_right-title">PROFILE RIGHT</h2>
+							<h2 className="profile_right-title">PROFILE RIGHT</h2>
+							<h2 className="profile_right-title">PROFILE RIGHT</h2>
 						</aside>
 					</div>
 					<div

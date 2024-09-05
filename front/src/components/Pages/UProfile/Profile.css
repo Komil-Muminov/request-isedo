@@ -16,6 +16,7 @@
 	align-items: stretch; /* Важно для растяжения дочерних элементов */
 	justify-content: space-between;
 	gap: 20px;
+	width: calc((100% - 20px * 2) / 3);
 }
 
 .profile_left,
@@ -32,13 +33,13 @@
 	max-height: max-content;
 }
 
-.profile_left {
-	width: 25%;
+/* .profile_left {
+	width: 50%;
 }
 
 .profile_right {
 	width: 75%;
-}
+} */
 
 .uaccordion_label {
 	display: flex;
