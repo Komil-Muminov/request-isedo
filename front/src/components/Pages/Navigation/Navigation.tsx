@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import log from "../../../assets/Formal/log.webp";
-import "./Navigation.css";
 import { Avatar } from "@mui/material";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
@@ -20,9 +19,9 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import "./Navigation.css";
 
 export const Navigation: React.FC = () => {
-	// Logout logic
 	const navigate = useNavigate();
 
 	const logoutMutate = useMutation(
@@ -51,11 +50,9 @@ export const Navigation: React.FC = () => {
 	};
 
 	const handleToggleUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-		// If the menu is open, close it
 		if (anchorElUser) {
 			setAnchorElUser(null);
 		} else {
-			// Otherwise, open it with the event target as the anchor
 			setAnchorElUser(event.currentTarget);
 		}
 	};
@@ -80,6 +77,7 @@ export const Navigation: React.FC = () => {
 	}
 
 	// Надо свг контейнер сделать
+	// Надо доработать
 
 	if (getUinfoQuery?.status === "success") {
 		return (
@@ -107,7 +105,10 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>
-										ФИО: {getUinfoQuery.data?.username}
+										<div className="nav__fullname">
+											ФИО:{" "}
+											<span className="">{getUinfoQuery?.data.uIdentity}</span>
+										</div>
 									</li>
 									<li className="info_list-item mulish-info-list-item">
 										<svg
@@ -125,7 +126,10 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>{" "}
-										ИНН: 123456789
+										<div className="nav__inn">
+											ИНН:
+											<span className=""> 123456789</span>
+										</div>
 									</li>
 									<li className="info_list-item mulish-info-list-item">
 										<svg
@@ -145,8 +149,14 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>{" "}
-										Роль:{" "}
-										{getUinfoQuery.data?.role ? getUinfoQuery.data.role : ``}
+										<div className="nav__role">
+											Роль:
+											<span className="">
+												{getUinfoQuery.data?.role
+													? getUinfoQuery.data.role
+													: ``}
+											</span>
+										</div>
 									</li>
 
 									<li className="info_list-item mulish-info-list-item">
@@ -165,10 +175,14 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>{" "}
-										Организация:{" "}
-										{getUinfoQuery.data?.orgName
-											? getUinfoQuery.data.orgName
-											: `${getUinfoQuery.data.uType}`}
+										<div className="nav__orgname">
+											Организация:
+											<span className="nav__orgname">
+												{getUinfoQuery.data?.orgName
+													? getUinfoQuery.data.orgName
+													: `${getUinfoQuery.data.uType}`}
+											</span>
+										</div>
 									</li>
 									{/* Другие элементы списка */}
 								</ul>

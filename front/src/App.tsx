@@ -1,4 +1,3 @@
-// App.tsx
 import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import { Loader } from "./components/UI/Loader/Loader";
@@ -27,7 +26,7 @@ const LazyUdetails = lazy(
 	() => import("./components/Pages/UProfile/Udetails/Udetails"),
 );
 const LazyDetailsPage = lazy(
-	() => import("./components/Pages/UProfile/DetailsPage.tsx/DetailsPage"),
+	() => import("./components/Pages/UProfile/ModulsDetails/ModulsDetails"),
 );
 const LazyErrorPage = lazy(
 	() => import("./components/Pages/ErrorPage/ErrorPage"),

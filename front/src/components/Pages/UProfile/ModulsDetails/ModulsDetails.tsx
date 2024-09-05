@@ -1,7 +1,7 @@
 // DetailsPage.tsx
 import { useParams } from "react-router-dom";
 import { UlinksProps } from "../../../UI/Ulinks/ProfileLinks";
-import "./DetailsPage.css";
+import "./ModulsDetails.css";
 
 const DetailsPage = () => {
 	const { page } = useParams();
@@ -13,7 +13,7 @@ const DetailsPage = () => {
 
 	return (
 		<div className="detailsPage__content">
-			<h2 className="details__title">Details Page</h2>
+			<h2 className="details__title">Moduls details page</h2>
 			<p>Информация про: {currentItem.label}</p>
 			dsa
 			{currentItem.label}

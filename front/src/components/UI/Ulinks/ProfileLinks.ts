@@ -6,18 +6,28 @@ export interface UlinkScheme {
 
 export const UlinksProps: UlinkScheme[] = [
 	{
-		url: "/account",
-		label: "Модули",
+		url: "udetails",
+		label: "Информация про пользователя",
+		subLinks: [
+			{
+				url: "/udetails",
+				label: "КМ ПРИМЕР",
+			},
+		],
+	},
+	{
+		url: "/account/create",
+		label: "Модуль заявки",
 		subLinks: [
 			{
 				url: `unotify`,
-				label: `Уведомление`,
+				label: `Заявки`,
 			},
 
-			{
-				url: "udetails",
-				label: "Информация о пользователе",
-			},
+			// {
+			// 	url: "udetails",
+			// 	label: "Информация о пользователе",
+			// },
 		],
 	},
 	{

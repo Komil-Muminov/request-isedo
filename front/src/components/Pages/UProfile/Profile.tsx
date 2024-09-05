@@ -46,6 +46,8 @@ const Profile: React.FC = () => {
 		return null;
 	}
 
+	// Надо сделать красивый дизайн
+
 	return (
 		<section className="sections">
 			<div className="container">
@@ -87,8 +89,20 @@ const Profile: React.FC = () => {
 						<aside className="profile_right">
 							<Outlet />
 						</aside>
+						<aside className="profile_right">
+							<h2 className="profile_right-title">PROFILE RIGHT</h2>
+							<h2 className="profile_right-title">PROFILE RIGHT</h2>
+							<h2 className="profile_right-title">PROFILE RIGHT</h2>
+							<h2 className="profile_right-title">PROFILE RIGHT</h2>
+						</aside>
 					</div>
-					<div className="ubottomnav km__content ">
+					<div
+						className={`ubottomnav km__content ${
+							uQuery.data.username === "km"
+								? "ubottomnav__km"
+								: "ubottomnav__--"
+						}`}
+					>
 						{UbottomNavLinks.map(({ label, url }, id) => (
 							<>
 								<Link className="ubottomnav__link" key={id} to={url}>

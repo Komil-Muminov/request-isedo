@@ -11,17 +11,12 @@
 	gap: 10px;
 }
 
-.ustory_content {
-	background-color: rgba(255, 224, 166, 0.843);
-	border-radius: 10px;
-	padding: 10px 10px 10px 10px;
-}
-
 .wrapper-profile {
 	display: flex;
 	align-items: stretch; /* Важно для растяжения дочерних элементов */
 	justify-content: space-between;
 	gap: 20px;
+	width: calc((100% - 20px * 2) / 3);
 }
 
 .profile_left,
@@ -38,13 +33,13 @@
 	max-height: max-content;
 }
 
-.profile_left {
-	width: 25%;
+/* .profile_left {
+	width: 50%;
 }
 
 .profile_right {
 	width: 75%;
-}
+} */
 
 .uaccordion_label {
 	display: flex;
@@ -131,6 +126,38 @@
 	height: 100%;
 }
 
+/* UbottomLink */
+
+.ubottomnav {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	position: relative;
+	overflow-x: auto;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+
+.ubottomnav__link {
+	border-bottom: 4px solid #94a3b8;
+	width: 100%;
+	text-align: center;
+	padding: 20px;
+}
+
+.ubottomnav__link:hover:not(:focus-visible) {
+	background-color: #f3f9f1;
+	background-color: #00968743;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-color: #009688;
+	color: #fff;
+}
+
+.ubottomnav__-- {
+	display: none;
+}
+
 .user-details_list {
 	display: flex;
 	flex-wrap: wrap;
@@ -158,32 +185,4 @@
 
 .uidentify_link {
 	padding: 10px;
-}
-
-/* UbottomLink */
-
-.ubottomnav {
-	display: flex;
-	justify-content: center;
-	gap: 20px;
-	position: relative;
-	overflow-x: auto;
-	padding-bottom: 20px;
-	padding-top: 20px;
-}
-
-.ubottomnav__link {
-	border-bottom: 4px solid #94a3b8;
-	width: 100%;
-	text-align: center;
-	padding: 20px;
-}
-
-.ubottomnav__link:hover:not(:focus-visible) {
-	background-color: #f3f9f1;
-	background-color: #00968743;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-	border-bottom-color: #009688;
-	color: #fff;
 }
