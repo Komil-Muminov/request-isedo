@@ -49,8 +49,6 @@ export const Navigation: React.FC = () => {
 		);
 	};
 
-	const [nav, setnav] = useState<boolean>(false);
-
 	const handleToggleUserMenu = (event: React.MouseEvent<HTMLElement>) => {
 		if (anchorElUser) {
 			setAnchorElUser(null);
@@ -107,17 +105,9 @@ export const Navigation: React.FC = () => {
 												></path>
 											</g>
 										</svg>
-										<div
-											onMouseEnter={() => setnav(true)}
-											onMouseLeave={() => setnav(false)}
-											className="nav__fullname"
-										>
+										<div className="nav__fullname">
 											ФИО:{" "}
-											<span className="">
-												{nav
-													? getUinfoQuery.data.uIdentity || "Комил Муминов"
-													: ""}
-											</span>
+											<span className="">{getUinfoQuery?.data.uIdentity}</span>
 										</div>
 									</li>
 									<li className="info_list-item mulish-info-list-item">
