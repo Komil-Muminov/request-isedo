@@ -35,11 +35,17 @@
 
 .udetails__content {
 	display: flex;
-	align-items: start;
+	flex-direction: column;
+	/* padding: 20px 20px 20px 20px; */
+}
+
+.udetails__card {
+	display: flex;
 	gap: 20px;
 	background: rgba(95, 111, 254, 0.337);
-	/* padding: 20px 20px 20px 20px; */
 	border-radius: 10px;
+	padding: 20px 20px 20px 20px;
+	width: 100%;
 }
 
 .user-details_photo {

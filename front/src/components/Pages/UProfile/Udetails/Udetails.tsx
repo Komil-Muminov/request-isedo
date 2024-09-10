@@ -77,99 +77,92 @@ const Udetails = () => {
 								: `Не подтвержденная учетная запись`}
 						</p> */}
 						<div className="udetails__content">
-							<ul className="udetails__list">
-								{/* <li className="udetails__item"></li> */}
-								<li className="udetails__item">
-									<div className="user-details_photo">
-										{/* <img src={defUphoto} alt="" className="photo" /> */}
-										<img
-											src={photoUrl || defUphoto}
-											alt="uphoto"
-											className="photo"
-										/>
+							<div className="udetails__card">
+								<div className="user-details_photo">
+									<img
+										src={photoUrl || defUphoto}
+										alt="uphoto"
+										className="photo"
+									/>
 
-										<div className="file-service-photo">
-											<label className="uphoto__label" htmlFor="uphoto">
-												Выберите фото
-												<input
-													style={{ visibility: "hidden" }}
-													id="uphoto"
-													type="file"
-													onChange={handleUphoto}
-												/>
-											</label>
-											{/* <AddFileRequest /> */}
-										</div>
+									<div className="file-service-photo">
+										<label className="uphoto__label" htmlFor="uphoto">
+											Выберите фото
+											<input
+												style={{ visibility: "hidden" }}
+												id="uphoto"
+												type="file"
+												onChange={handleUphoto}
+											/>
+										</label>
+										{/* <AddFileRequest /> */}
 									</div>
-									<div className="user-details-text">
-										<ul className="udetails__info-list">
+								</div>
+
+								<div className="user-details-text">
+									<ul className="udetails__info-list">
+										<UserInfoList
+											title="ФИО"
+											description={
+												uinfo?.fullName ? uinfo.fullName : uinfo?.uType
+											}
+										/>
+										<UserInfoList
+											title="Тип пользователя"
+											description={uinfo?.uType ? uinfo.uType : "Тип не указан"}
+										/>
+										<UserInfoList
+											title="Идентификация"
+											description={
+												uinfo?.uType === "kvd"
+													? "Идентифицирован"
+													: "Идентификация на рассмотрение"
+											}
+										/>
+										<UserInfoList
+											title={uinfo?.department ? "Отдел" : "Номер телефона"}
+											description={
+												uinfo?.department ? uinfo.department : uinfo?.phone
+											}
+										/>
+										<UserInfoList
+											title={uinfo?.uType === "kvd" ? "Должность" : "ИНН"}
+											description={
+												uinfo?.role !== "" || uinfo?.position !== ""
+													? uinfo?.role
+													: uinfo.tax
+											}
+										/>
+										{uinfo?.email && (
 											<UserInfoList
-												title="ФИО"
+												title="E-mail"
 												description={
-													uinfo?.fullName ? uinfo.fullName : uinfo?.uType
+													uinfo?.email ? uinfo.email : "E-mail адрес не указан."
 												}
 											/>
-											<UserInfoList
-												title="Тип пользователя"
-												description={
-													uinfo?.uType ? uinfo.uType : "Тип не указан"
-												}
-											/>
-											<UserInfoList
-												title="Идентификация"
-												description={
-													uinfo?.uType === "kvd"
-														? "Идентифицирован"
-														: "Идентификация на рассмотрение"
-												}
-											/>
-											<UserInfoList
-												title={uinfo?.department ? "Отдел" : "Номер телефона"}
-												description={
-													uinfo?.department ? uinfo.department : uinfo?.phone
-												}
-											/>
-											<UserInfoList
-												title={uinfo?.uType === "kvd" ? "Должность" : "ИНН"}
-												description={
-													uinfo?.role !== "" || uinfo?.position !== ""
-														? uinfo?.role
-														: uinfo.tax
-												}
-											/>
-											{uinfo?.email && (
-												<UserInfoList
-													title="E-mail"
-													description={
-														uinfo?.email
-															? uinfo.email
-															: "E-mail адрес не указан."
-													}
-												/>
-											)}
-										</ul>
-										<Link to="/uprofile/uIdentity">
-											<Button
-												variant="contained"
-												fullWidth
-												sx={{
-													backgroundColor: "#607d8b",
-													"&:hover": {
-														backgroundColor: "#546d79",
-													},
-													display: `${
-														uinfo?.uType === "kvd" || uinfo?.uType == "bo"
-															? "none"
-															: "block"
-													}`,
-												}}
-											>
-												Идентификация организации
-											</Button>
-										</Link>
-									</div>
-								</li>
-							</ul>
+										)}
+									</ul>
+									<Link to="/uprofile/uIdentity">
+										<Button
+											variant="contained"
+											fullWidth
+											sx={{
+												backgroundColor: "#607d8b",
+												"&:hover": {
+													backgroundColor: "#546d79",
+												},
+												display: `${
+													uinfo?.uType === "kvd" || uinfo?.uType == "bo"
+														? "none"
+														: "block"
+												}`,
+											}}
+										>
+											Идентификация организации
+										</Button>
+									</Link>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

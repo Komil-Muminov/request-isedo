@@ -60,10 +60,6 @@
 	grid-row: 1/5;
 }
 
-.profile_center-content {
-	/* border: 1px solid orange; */
-}
-
 .profile_right {
 	grid-area: profileRight;
 	grid-column: 9/13;
