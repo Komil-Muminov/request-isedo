@@ -15,7 +15,9 @@ import { queryClient } from "../../../queryClient";
 import { Settings } from "@mui/icons-material";
 import { UbottomNavLinks } from "../../API/Data/UbottomNav/UbottomNavLink";
 import { Link } from "react-router-dom";
+import { Ucalendar } from "../UProfile/Ucalendar/Ucalendar";
 import "./Profile.css";
+import { Uevents } from "./Uevents/Uevents";
 
 const Profile: React.FC = () => {
 	const { getMe } = useAuth();
@@ -37,7 +39,7 @@ const Profile: React.FC = () => {
 
 	const handleSelectItem = (item: UlinkScheme) => {
 		setSelectedItem(item);
-		navigate(`/uprofile/details/${item.url.split("/").pop()}`); // Перенаправление на DetailsPage
+		navigate(`/uprofile/details/${item.url.split("/").pop()}`);
 	};
 
 	if (uQuery.status === "pending") return <Loader />;
@@ -86,18 +88,30 @@ const Profile: React.FC = () => {
 								</Accordion>
 							))}
 						</aside>
-						<div className="profile_right">
-							<Outlet />
+						<div className="profile_style profile_center">
+							<div className="profile_center-content">
+								<Outlet />
+							</div>
+							<div className="profile_center-widgets">
+								<div className="widget_1">WIDGET</div>
+								<div className="widget_1">WIDGET</div>
+								<div className="widget_1">WIDGET</div>
+							</div>
 						</div>
-						<aside className="profile_right">
-							<h2 className="profile_right-title">PROFILE RIGHT</h2>
-							<h2 className="profile_right-title">PROFILE RIGHT</h2>
-							<h2 className="profile_right-title">PROFILE RIGHT</h2>
-							<h2 className="profile_right-title">PROFILE RIGHT</h2>
+						<aside className="profile_style profile_right">
+							{/* <h2 className="profile_right-title">PROFILE Календарь</h2> */}
+							<div className="profile_ucalendar">
+								<Ucalendar />
+							</div>
+							<div className="profile_events">
+								<Uevents children="Задачи" desc={`Описание`} />
+								<Uevents children="Задачи" desc={`Описание`} />
+								<Uevents children="Задачи" desc={`Описание`} />
+							</div>
 						</aside>
 					</div>
 					<div
-						className={`ubottomnav km__content ${
+						className={`profileBottomNav km__content ${
 							uQuery.data.username === "km"
 								? "ubottomnav__km"
 								: "ubottomnav__--"
@@ -105,7 +119,7 @@ const Profile: React.FC = () => {
 					>
 						{UbottomNavLinks.map(({ label, url }, id) => (
 							<>
-								<Link className="ubottomnav__link" key={id} to={url}>
+								<Link className="profileBottomNav__link" key={id} to={url}>
 									{label}
 								</Link>
 							</>

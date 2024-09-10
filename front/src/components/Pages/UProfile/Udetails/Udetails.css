@@ -1,9 +1,79 @@
 .file-service-photo {
-  background-color: #fff;
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #0000000f;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	/* background-color: #fff; */
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #0000000f;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+		0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.uphoto__label {
+	font-weight: 600;
+	max-width: 700px;
+	font-size: 12px;
+}
+
+.uprofile_list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.user-details {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.user-details_title {
+	color: #607d8b;
+	font-size: 22px;
+	font-weight: 500;
+	margin-bottom: 20px;
+}
+
+.udetails__content {
+	display: flex;
+	align-items: start;
+	gap: 20px;
+	background: rgba(95, 111, 254, 0.337);
+	/* padding: 20px 20px 20px 20px; */
+	border-radius: 10px;
+}
+
+.user-details_photo {
+	/* background-color: #e2e9d9; */
+	border: 1px solid #0000000f;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+		0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	width: 35%;
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	align-items: center;
+}
+
+.user-details_photo .photo {
+	width: 100%;
+}
+
+.user-details-text {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+}
+
+.udetails__info-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 20px;
+}
+
+.udetails__item {
+	border-radius: 20px;
 }

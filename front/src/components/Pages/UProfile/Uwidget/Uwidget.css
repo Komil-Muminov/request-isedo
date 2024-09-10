@@ -1,0 +1,21 @@
+.uwidget__content {
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px;
+}
+.uwidget__list {
+	display: flex;
+	justify-content: center;
+	align-items: stretch;
+	gap: 10px;
+}
+
+.uwidget__item {
+	display: flex;
+	flex-direction: column;
+	background: red;
+	padding: 30px 30px 30px 30px;
+	min-width: 145px;
+	max-width: 146px;
+	border-radius: 10px;
+}
