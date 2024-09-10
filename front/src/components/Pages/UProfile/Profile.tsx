@@ -16,8 +16,8 @@ import { Settings } from "@mui/icons-material";
 import { UbottomNavLinks } from "../../API/Data/UbottomNav/UbottomNavLink";
 import { Link } from "react-router-dom";
 import { Ucalendar } from "../UProfile/Ucalendar/Ucalendar";
-import "./Profile.css";
 import { Uevents } from "./Uevents/Uevents";
+import "./Profile.css";
 
 const Profile: React.FC = () => {
 	const { getMe } = useAuth();
@@ -52,7 +52,7 @@ const Profile: React.FC = () => {
 
 	return (
 		<section className="sections">
-			<div className="container">
+			<div className="profile__container">
 				<div className="profile_content">
 					<div className="profile_header">
 						<Button onClick={() => setSelectedItem(null)}>Назад</Button>
