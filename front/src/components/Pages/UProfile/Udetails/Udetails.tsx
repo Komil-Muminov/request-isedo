@@ -64,11 +64,11 @@ const Udetails = () => {
 		<>
 			<div className="user__content">
 				<div className="user__uwidget">
-					<Uwidget />
-					<Uwidget />
-					<Uwidget />
-					<Uwidget />
-					<Uwidget />
+					<Uwidget disabled={uPhotoMutation.isPending} desc={`KM`} />
+					<Uwidget disabled={uPhotoMutation.isPending} desc={`KM`} />
+					<Uwidget disabled={uPhotoMutation.isPending} desc={`KM`} />
+					<Uwidget disabled={uPhotoMutation.isPending} desc={`KM`} />
+					<Uwidget disabled={uPhotoMutation.isPending} desc={`KM`} />
 				</div>
 				<div className="user-content">
 					{/* {uinfo?.photo ? uinfo.photo : typeof uinfo?.photo} */}
