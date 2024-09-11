@@ -23,13 +23,6 @@
 	grid-auto-rows: minmax(200px, 1fr);
 	grid-template-rows: repeat(6, fr);
 	gap: 30px;
-	/* grid-template-areas:
-		". . . . . profileCenter profileRight profileRight profileRight profileRight profileRight profileRight"
-		". . . . . profileCenter profileRight profileRight profileRight profileRight profileRight profileRight"
-		". . . . . profileCenter profileRight profileRight profileRight profileRight profileRight profileRight"
-		". . . . . profileCenter profileRight profileRight profileRight profileRight profileRight profileRight"; */
-
-	/* border: 1px solid orange; */
 }
 
 .profile_style {
@@ -37,7 +30,7 @@
 	flex-direction: column;
 	border-radius: 20px;
 	gap: 20px;
-	padding: 30px;
+	padding: 5px;
 	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
 		0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
@@ -52,16 +45,15 @@
 	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
 		0 2px 4px -1px rgba(0, 0, 0, 0.06);
 	max-height: max-content;
-	/* grid-area: profileLeft; */
 	position: fixed;
-	min-height: 520px;
+	/* min-height: 520px; */
+	min-height: 723px;
 	max-width: 300px;
-	/* width: 100%; */
 }
 
 .profile_center {
 	grid-area: profileCenter;
-	grid-column: 4/9;
+	grid-column: 3/9;
 	grid-row: 1/5;
 }
 
@@ -99,14 +91,6 @@
 	border-bottom-color: #009688;
 	color: #fff;
 }
-
-/* .profile_left {
-	width: 50%;
-}
-
-.profile_right {
-	width: 75%;
-} */
 
 .uaccordion_label {
 	display: flex;

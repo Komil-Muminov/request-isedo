@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 import { CurrUserPhoto, setUphoto } from "../../../API/Hooks/setUphoto";
 import { Uwidget } from "../Uwidget/Uwidget";
 import "./Udetails.css";
-import "../Profile.css";
 const Udetails = () => {
 	const [uPhoto, setphoto] = useState<CurrUserPhoto | null>(null);
 	const handleUphoto = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,6 +64,10 @@ const Udetails = () => {
 		<>
 			<div className="user__content">
 				<div className="user__uwidget">
+					<Uwidget />
+					<Uwidget />
+					<Uwidget />
+					<Uwidget />
 					<Uwidget />
 				</div>
 				<div className="user-content">

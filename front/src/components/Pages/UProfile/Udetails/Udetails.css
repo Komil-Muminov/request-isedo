@@ -83,3 +83,12 @@
 .udetails__item {
 	border-radius: 20px;
 }
+
+/* Uwidgets */
+.user__uwidget {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	margin-bottom: 20px;
+}

@@ -1,15 +1,34 @@
+import { Link } from "react-router-dom";
+import { LoaderPoints } from "../../../UI/LoaderPoints";
 import "./Uwidget.css";
-export const Uwidget = () => {
+
+export interface UwidgetProps {
+	children?: React.ReactNode;
+	title?: string | number;
+	desc: string | number;
+	kind: string | undefined;
+	isLoading?: boolean;
+	disabled?: boolean;
+}
+
+export const Uwidget: React.FC = ({
+	children,
+	title,
+	desc,
+	isLoading,
+	kind,
+	disabled,
+}: UwidgetProps) => {
 	return (
 		<>
-			<div className="uwidget__content">
-				{/* <h2 className="uwidget__title">uwidget__title</h2> */}
-				<li className="uwidget__list">
-					<li className="sections__text uwidget__item">Виджет 1</li>
-					<li className="sections__text uwidget__item">Виджет 2</li>
-					<li className="sections__text uwidget__item">Виджет 3</li>
-				</li>
-			</div>
+			<Link
+				className={`uwidget__item ${kind}`}
+				disabled={disabled || isLoading}
+			>
+				<h3 className={`${kind}`}>{title || `Загаловок виджета`}</h3>
+				<p className={`${kind}`}>{desc || `Описание виджета`}</p>
+				{children || <LoaderPoints />}
+			</Link>
 		</>
 	);
 };
