@@ -39,6 +39,9 @@
 	/* padding: 20px 20px 20px 20px; */
 }
 
+.udetails__uwidget {
+	padding: 16px;
+}
 .udetails__card {
 	display: flex;
 	gap: 20px;
@@ -46,6 +49,7 @@
 	border-radius: 10px;
 	padding: 20px 20px 20px 20px;
 	width: 100%;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .user-details_photo {
@@ -85,7 +89,7 @@
 }
 
 /* Uwidgets */
-.user__uwidget {
+.udetails__uwidget {
 	display: flex;
 	align-items: center;
 	justify-content: center;

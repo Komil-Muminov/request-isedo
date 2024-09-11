@@ -65,7 +65,13 @@
 
 /* UbottomLink */
 
-.profileBottomNav {
+.profilebottomnav__content {
+	display: grid;
+	grid-template-columns: repeat(12, minmax(0, 1fr));
+	grid-template-rows: repeat(6, minmax(200px, 1fr));
+}
+
+.profilebottom__items {
 	display: flex;
 	justify-content: center;
 	gap: 20px;
@@ -73,17 +79,18 @@
 	overflow-x: auto;
 	padding-bottom: 20px;
 	padding-top: 20px;
-	grid-area: profileBottomNav;
+	grid-column: 3 / 12;
+	grid-row: span 1 / 1;
 }
 
-.profileBottomNav__link {
+.profilebottomnav__link {
 	border-bottom: 4px solid #94a3b8;
 	width: 100%;
 	text-align: center;
 	padding: 20px;
 }
 
-.profileBottomNav__link:hover:not(:focus-visible) {
+.profilebottomnav__link:hover:not(:focus-visible) {
 	background-color: #f3f9f1;
 	background-color: #00968743;
 	border-top-left-radius: 5px;

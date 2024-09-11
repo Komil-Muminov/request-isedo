@@ -62,15 +62,15 @@ const Udetails = () => {
 	const photoUrl = uinfo?.photo ? `http://localhost:3000${uinfo.photo}` : null;
 	return (
 		<>
-			<div className="user__content">
-				<div className="user__uwidget">
+			<div className="udetails__container">
+				<div className="udetails__uwidget">
 					<Uwidget disabled={uPhotoMutation.isPending} desc={`KM`} />
 					<Uwidget disabled={uPhotoMutation.isPending} desc={`KM`} />
 					<Uwidget disabled={uPhotoMutation.isPending} desc={`KM`} />
 					<Uwidget disabled={uPhotoMutation.isPending} desc={`KM`} />
 					<Uwidget disabled={uPhotoMutation.isPending} desc={`KM`} />
 				</div>
-				<div className="user-content">
+				<div className="udetails__content">
 					{/* {uinfo?.photo ? uinfo.photo : typeof uinfo?.photo} */}
 					<div className="user-details">
 						{uPhotoMutation.data?.status}

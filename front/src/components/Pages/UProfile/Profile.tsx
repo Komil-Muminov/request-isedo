@@ -111,19 +111,21 @@ const Profile: React.FC = () => {
 						</aside>
 					</div>
 					<div
-						className={`profileBottomNav km__content ${
+						className={`profilebottomnav__content km__content ${
 							uQuery.data.username === "km"
 								? "ubottomnav__km"
 								: "ubottomnav__--"
 						}`}
 					>
-						{UbottomNavLinks.map(({ label, url }, id) => (
-							<>
-								<Link className="profileBottomNav__link" key={id} to={url}>
-									{label}
-								</Link>
-							</>
-						))}
+						<div className="profilebottom__items">
+							{UbottomNavLinks.map(({ label, url }, id) => (
+								<>
+									<Link className="profilebottomnav__link" key={id} to={url}>
+										{label}
+									</Link>
+								</>
+							))}
+						</div>
 					</div>
 				</div>
 			</div>
