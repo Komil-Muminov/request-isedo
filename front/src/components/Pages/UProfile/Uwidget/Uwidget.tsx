@@ -11,7 +11,7 @@ export interface UwidgetProps {
 	disabled?: boolean;
 }
 
-export const Uwidget: React.FC = ({
+export const Uwidget: React.FC<UwidgetProps> = ({
 	children,
 	title,
 	desc,
@@ -22,7 +22,7 @@ export const Uwidget: React.FC = ({
 	return (
 		<>
 			<Link
-				className={`uwidget__item ${kind}`}
+				className={`uwidget__style ${kind}`}
 				disabled={disabled || isLoading}
 			>
 				<h3 className={`${kind}`}>{title || `Загаловок виджета`}</h3>

@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import { Ucalendar } from "../UProfile/Ucalendar/Ucalendar";
 import { Uevents } from "./Uevents/Uevents";
 import "./Profile.css";
+import { Uwidget } from "./Uwidget/Uwidget";
 
 const Profile: React.FC = () => {
 	const { getMe } = useAuth();
@@ -93,13 +94,12 @@ const Profile: React.FC = () => {
 								<Outlet />
 							</div>
 							<div className="profile_center-widgets">
-								<div className="widget_1">WIDGET</div>
-								<div className="widget_1">WIDGET</div>
-								<div className="widget_1">WIDGET</div>
+								<Uwidget />
+								<Uwidget />
+								<Uwidget />
 							</div>
 						</div>
 						<aside className="profile_style profile_right">
-							{/* <h2 className="profile_right-title">PROFILE Календарь</h2> */}
 							<div className="profile_ucalendar">
 								<Ucalendar />
 							</div>

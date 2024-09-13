@@ -57,6 +57,12 @@
 	grid-row: 1/5;
 }
 
+.profile_center-widgets {
+	display: flex;
+	gap: 20px;
+	
+}
+
 .profile_right {
 	grid-area: profileRight;
 	grid-column: 9/13;

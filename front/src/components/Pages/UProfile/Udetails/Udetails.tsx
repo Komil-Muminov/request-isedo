@@ -51,7 +51,6 @@ const Udetails = () => {
 	);
 
 	const [uinfo, setUinfo] = useState<GetMeType | null>(null);
-	// const [expanded, setExpanded] = useState<number | false>(false);
 
 	useEffect(() => {
 		if (uQuery.status === "success") {
@@ -71,14 +70,9 @@ const Udetails = () => {
 					<Uwidget disabled={uPhotoMutation.isPending} desc={`KM`} />
 				</div>
 				<div className="udetails__content">
-					{/* {uinfo?.photo ? uinfo.photo : typeof uinfo?.photo} */}
 					<div className="user-details">
 						{uPhotoMutation.data?.status}
-						{/* <p className="user-details_title">
-							{uinfo?.uType === "kvd"
-								? `Подтвержденная учетная запись`
-								: `Не подтвержденная учетная запись`}
-						</p> */}
+
 						<div className="udetails__content">
 							<div className="udetails__card">
 								<div className="user-details_photo">
