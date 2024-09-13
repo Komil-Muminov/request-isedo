@@ -98,7 +98,6 @@ const Udetails = () => {
 												onChange={handleUphoto}
 											/>
 										</label>
-										{/* <AddFileRequest /> */}
 									</div>
 								</div>
 
