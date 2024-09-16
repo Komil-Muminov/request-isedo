@@ -93,10 +93,10 @@ const Profile: React.FC = () => {
 							<div className="profile_center-content">
 								<Outlet />
 							</div>
-							<div className="profile_center-widgets">
-								<Uwidget />
-								<Uwidget />
-								<Uwidget />
+							<div className="profile__center_widgets">
+								<Uwidget kind={`profile__center_widget1`} />
+								<Uwidget kind={`profile__center_widget2`} />
+								<Uwidget kind={`profile__center_widget3`} />
 							</div>
 						</div>
 						<aside className="profile_style profile_right">
