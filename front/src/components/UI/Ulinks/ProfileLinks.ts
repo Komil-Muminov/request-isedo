@@ -7,36 +7,59 @@ export interface UlinkScheme {
 export const UlinksProps: UlinkScheme[] = [
 	{
 		url: "udetails",
-		label: "Информация про пользователя",
+		label: "Профиль",
 		subLinks: [
 			{
-				url: "/udetails",
-				label: "КМ ПРИМЕР",
+				url: "udetails",
+				label: "Другая страница",
 			},
 		],
-	},
-	{
-		url: "/account/create",
-		label: "Модуль заявки",
-		subLinks: [
-			{
-				url: `unotify`,
-				label: `Заявки`,
-			},
-
-			// {
-			// 	url: "udetails",
-			// 	label: "Информация о пользователе",
-			// },
-		],
-	},
-	{
-		url: "/organization",
-		label: "Организация",
 	},
 	{
 		url: "/account",
-		label: "Заявки",
-		subLinks: [{ url: "unotify", label: "Запросы на добавления организаций" }],
+		label: "Модуль заявки",
+		subLinks: [
+			{ url: "unotify", label: "Запросы на добавления организаций" },
+			{
+				url: "/account/create",
+				label: "Создать заявку",
+			},
+		],
+	},
+
+	{
+		url: "/account",
+		label: "Модуль модулей",
+		subLinks: [
+			{ url: "unotify", label: "Запросы на добавления организаций" },
+			{
+				url: "/account/create",
+				label: "Создать заявку",
+			},
+		],
+	},
+
+	{
+		url: "/account",
+		label: "Модуль доступа",
+		subLinks: [
+			{ url: "unotify", label: "Запросы на добавления организаций" },
+			{
+				url: "/account/create",
+				label: "Создать заявку",
+			},
+		],
+	},
+
+	{
+		url: "/account",
+		label: "Модуль Хаб",
+		subLinks: [
+			{ url: "unotify", label: "Запросы на добавления организаций" },
+			{
+				url: "/account/create",
+				label: "Создать заявку",
+			},
+		],
 	},
 ];

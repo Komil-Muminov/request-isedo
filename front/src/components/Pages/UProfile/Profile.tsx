@@ -17,8 +17,9 @@ import { UbottomNavLinks } from "../../API/Data/UbottomNav/UbottomNavLink";
 import { Link } from "react-router-dom";
 import { Ucalendar } from "../UProfile/Ucalendar/Ucalendar";
 import { Uevents } from "./Uevents/Uevents";
+// import { Uwidget } from "./Uwidget/Uwidget";
+import WebToolBox from "../../UI/WebTool/WebToolBox";
 import "./Profile.css";
-import { Uwidget } from "./Uwidget/Uwidget";
 
 const Profile: React.FC = () => {
 	const { getMe } = useAuth();
@@ -53,6 +54,7 @@ const Profile: React.FC = () => {
 
 	return (
 		<section className="sections">
+			<WebToolBox />
 			<div className="profile__container">
 				<div className="profile_content">
 					<div className="profile_header">
@@ -93,11 +95,12 @@ const Profile: React.FC = () => {
 							<div className="profile_center-content">
 								<Outlet />
 							</div>
-							<div className="profile__center_widgets">
+							{/* Доработать логику */}
+							{/* <div className="profile__center_widgets">
 								<Uwidget kind={`profile__center_widget1`} />
 								<Uwidget kind={`profile__center_widget2`} />
 								<Uwidget kind={`profile__center_widget3`} />
-							</div>
+							</div> */}
 						</div>
 						<aside className="profile_style profile_right">
 							<div className="profile_ucalendar">
@@ -110,13 +113,7 @@ const Profile: React.FC = () => {
 							</div>
 						</aside>
 					</div>
-					<div
-						className={`profilebottomnav__content km__content ${
-							uQuery.data.username === "km"
-								? "ubottomnav__km"
-								: "ubottomnav__--"
-						}`}
-					>
+					<div className={`profilebottomnav__content km__content `}>
 						<div className="profilebottom__items">
 							{UbottomNavLinks.map(({ label, url }, id) => (
 								<>
