@@ -1,13 +1,16 @@
+button {
+	border-radius: 8px !important;
+}
 /* Основной контейнер */
 .ucalendar__content {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 	padding: 20px;
-	background: rgba(255, 255, 255, 0.7);
+	background: rgba(255, 255, 255, 0.397);
 	border-radius: 16px;
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-	backdrop-filter: blur(10px);
+	backdrop-filter: blur(3px);
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	transition: all 0.3s ease-in-out;
 }
@@ -36,11 +39,12 @@
 	font-size: 16px;
 	transition: background-color 0.3s ease, color 0.3s ease;
 	backdrop-filter: blur(10px);
+	text-align: center !important;
 }
 
 .ucalendar__content button:hover {
 	background-color: rgba(255, 255, 255, 0.7);
-	color: #939191 !important;
+	color: #4643ffd2 !important;
 }
 
 /* Подсвеченные даты с событиями */
@@ -50,43 +54,100 @@
 	border-radius: 8px;
 	backdrop-filter: blur(5px);
 }
+.react-calendar__tile--active {
+	background-color: rgba(191, 244, 118, 0.715) !important;
+	color: red !important;
+}
+
+.react-calendar__tile--now {
+	color: red !important;
+	text-decoration: underline;
+}
 
 /* Секция для добавления и просмотра события */
 
 /* Группировка инпутов горизонтально */
 
-.calendar__event {
+.calendar__event_card {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* flex-direction: column; */
+	flex-wrap: wrap;
+	gap: 20px;
+	background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+	border-radius: 16px;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+	color: #fff;
+	font-size: 16px;
+	font-weight: 500;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	padding: 30px 30px 30px 50px;
+	font-size: 20px;
+	width: 100%;
+}
+
+.calendar__event_card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.calendar__event_title {
+	font-size: 24px;
+	font-weight: 600;
+	color: #fff;
+	margin-bottom: 15px;
+	text-align: center;
+	background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+	padding: 10px;
+	border-radius: 8px;
+}
+
+.btn__add_event {
+	display: flex;
+	padding: 20px;
+	outline: 1px solid rgba(188, 188, 188, 0.274);
+}
+
+.calendar__event_form {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
 	gap: 10px;
+	background: transparent !important;
+}
+.calendar__event_content {
+	display: flex;
+	gap: 10px;
+	align-self: stretch;
+	flex-wrap: wrap;
 }
 
-.calendar__inp {
+.event__inp {
 	align-self: stretch;
-	width: calc((100% - 20px * 2) / 2);
+	width: calc((100% - 20px) / 2);
 	border: none;
 	padding: 15px 15px 15px 15px;
 	resize: none !important;
 	transition: background-color 0.2s ease-in-out;
 	border-radius: 10px;
+	align-self: stretch;
+	background: transparent !important;
 }
 
-.calendar__inp:hover:not(:focus-visible) {
-	background: rgba(160, 160, 160, 0.161);
+.event__inp:hover:not(:focus-visible) {
+	background: rgba(160, 160, 160, 0.161) !important;
 }
 
-.calendar__inp:focus {
+.event__inp:focus {
 	background: rgba(160, 160, 160, 0.161);
 	outline: none;
 }
 
-.add__event {
-	padding: 20px;
+.event__null {
+	background: #000;
 }
-.add__event:focus {
-	outline: none;
-	color: rgba(101, 108, 157, 0.715);
-	font-weight: 600;
-	font-size: 14px;
+
+.live-event-preview {
+	width: 100%;
 }
