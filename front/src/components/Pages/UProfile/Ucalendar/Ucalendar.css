@@ -66,10 +66,7 @@ button {
 	text-decoration: underline;
 }
 
-/* Секция для добавления и просмотра события */
-
 /* Группировка инпутов горизонтально */
-
 .calendar__event_card {
 	display: flex;
 	/* justify-content: center; */

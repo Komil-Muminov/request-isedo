@@ -63,13 +63,6 @@ const Udetails = () => {
 	return (
 		<>
 			<div className="udetails__container">
-				<div className="udetails__uwidget">
-					<Uwidget disabled={uPhotoMutation.isPending} desc={`KM`} />
-					<Uwidget disabled={uPhotoMutation.isPending} desc={`KM`} />
-					<Uwidget disabled={uPhotoMutation.isPending} desc={`KM`} />
-					<Uwidget disabled={uPhotoMutation.isPending} desc={`KM`} />
-					<Uwidget disabled={uPhotoMutation.isPending} desc={`KM`} />
-				</div>
 				<div className="udetails__content">
 					<div className="user-details">
 						{uPhotoMutation.data?.status}
@@ -159,6 +152,36 @@ const Udetails = () => {
 										</Button>
 									</Link>
 								</div>
+							</div>
+							<div className="udetails__uwidget">
+								<Uwidget
+									disabled={uPhotoMutation.isPending}
+									title={`Показать график модуля`}
+									desc={`KM`}
+								/>
+								<Uwidget
+									disabled={uPhotoMutation.isPending}
+									title={`Показать график модуля`}
+									desc={`KM`}
+								/>
+								<Uwidget
+									disabled={uPhotoMutation.isPending}
+									title={`Показать график модуля`}
+									desc={`KM`}
+								/>
+								<Uwidget
+									disabled={uPhotoMutation.isPending}
+									title={`Показать график модуля`}
+									desc={`KM`}
+								/>
+								<Uwidget
+									disabled={uPhotoMutation.isPending}
+									title={`Показать график модуля`}
+									desc={`KM`}
+								/>
+							</div>
+							<div className="udetails__chart">
+								<Uchart />
 							</div>
 						</div>
 					</div>
