@@ -49,18 +49,20 @@ button {
 
 /* Подсвеченные даты с событиями */
 .highlighted-date {
-	background-color: rgba(255, 193, 7, 0.8) !important;
+	background-color: rgba(191, 244, 118, 0.715) !important;
+
 	color: rgb(0, 0, 0) !important;
 	border-radius: 8px;
 	backdrop-filter: blur(5px);
 }
 .react-calendar__tile--active {
-	background-color: rgba(191, 244, 118, 0.715) !important;
+	background-color: rgba(255, 193, 7, 0.8) !important;
 	color: red !important;
 }
 
 .react-calendar__tile--now {
-	color: red !important;
+	background-color: rgba(250, 93, 49, 0.715) !important;
+	color: #fff !important;
 	text-decoration: underline;
 }
 
