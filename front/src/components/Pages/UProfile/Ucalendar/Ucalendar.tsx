@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import "./Ucalendar.css";
+import { Button } from "@mui/material";
 
 interface Event {
 	id: number;
@@ -15,116 +16,179 @@ interface Event {
 export const Ucalendar = () => {
 	const [date, setDate] = useState<Date | null>(null);
 	const [events, setEvents] = useState<Event[]>([]);
-	const [title, setTitle] = useState("");
-	const [description, setDescription] = useState("");
-	const [startTime, setStartTime] = useState("");
-	const [endTime, setEndTime] = useState("");
-	const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+	const [formData, setFormData] = useState({
+		title: "",
+		description: "",
+		startTime: "",
+		endTime: "",
+	});
+	const [showForm, setShowForm] = useState(false);
+
+	const handleInputChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+	) => {
+		const { name, value } = e.target;
+		setFormData((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+	};
 
 	const handleAddEvent = () => {
-		if (date && title && startTime && endTime) {
+		if (date && formData.title && formData.startTime && formData.endTime) {
 			const newEvent = {
 				id: events.length + 1,
 				date: date.toDateString(),
-				title,
-				description,
-				startTime,
-				endTime,
+				...formData,
 			};
 			setEvents((prev) => [...prev, newEvent]);
-			setTitle("");
-			setDescription("");
-			setStartTime("");
-			setEndTime("");
+			setFormData({ title: "", description: "", startTime: "", endTime: "" });
+			setShowForm(false);
 		}
 	};
 
-	// Функция для определения, есть ли событие на определенную дату
 	const hasEvent = (date: Date) => {
 		return events.some((event) => event.date === date.toDateString());
 	};
 
-	// Функция для выбора события при клике на дату с событием
 	const handleDayClick = (value: Date) => {
-		const eventForDate = events.find(
-			(event) => event.date === value.toDateString(),
-		);
-		if (eventForDate) {
-			setSelectedEvent(eventForDate);
-		} else {
-			setSelectedEvent(null);
-		}
 		setDate(value);
 	};
 
+	useEffect(() => {
+		const localStorageEvents = localStorage.getItem("ucalendarEvents");
+		if (localStorageEvents) {
+			setEvents(JSON.parse(localStorageEvents));
+		}
+	}, []);
+
+	useEffect(() => {
+		localStorage.setItem("ucalendarEvents", JSON.stringify(events));
+	}, [events]);
+
+	const filteredEvents = events.filter(
+		(event) => event.date === date?.toDateString(),
+	);
+
+	const showAddEventForm = date && !hasEvent(date) && !showForm;
+
+	const eventCardClassName =
+		filteredEvents.length === 0 && !showForm
+			? "calendar__event_card calendar__event_card-empty"
+			: "calendar__event_card";
+
 	return (
-		<>
-			<div className="ucalendar__content">
-				<Calendar
-					onChange={handleDayClick}
-					value={date}
-					// Кастомизация отображения даты с напоминанием
-					tileClassName={({ date, view }) => {
-						if (view === "month" && hasEvent(date)) {
-							return "highlighted-date"; // класс для выделения даты
-						}
-						return null;
-					}}
-				/>
-				<p>Выбранная дата: {date?.toDateString()}</p>
+		<div className="ucalendar__content">
+			<Calendar
+				onChange={handleDayClick}
+				value={date}
+				tileClassName={({ date, view }) => {
+					if (view === "month" && hasEvent(date)) {
+						return "highlighted-date";
+					}
+					return null;
+				}}
+			/>
+			<p>Выбранная дата: {date?.toDateString()}</p>
 
-				{date && !selectedEvent && (
-					<>
-						<h3>Добавить событие:</h3>
-						<div className="calendar__event">
-							<input
-								className="calendar__inp"
-								type="text"
-								placeholder="Заголовок"
-								value={title}
-								onChange={(e) => setTitle(e.target.value)}
-							/>
-							<textarea
-								className="calendar__inp calendar__textarea"
-								placeholder="Описание"
-								value={description}
-								onChange={(e) => setDescription(e.target.value)}
-							/>
-							<input
-								className="calendar__inp"
-								type="time"
-								value={startTime}
-								onChange={(e) => setStartTime(e.target.value)}
-							/>
-							<input
-								className="calendar__inp"
-								type="time"
-								value={endTime}
-								onChange={(e) => setEndTime(e.target.value)}
-							/>
-							<button className="add__event" onClick={handleAddEvent}>
-								Добавить
-							</button>
-						</div>
-					</>
-				)}
-
-				{selectedEvent && (
-					<div className="calendar__event">
-						<h3>Информация о событии:</h3>
-						<p>
-							<strong>Заголовок:</strong> {selectedEvent.title}
-						</p>
-						<p>
-							<strong>Описание:</strong> {selectedEvent.description}
-						</p>
-						<p>
-							<strong>Время:</strong> {selectedEvent.startTime} -{" "}
-							{selectedEvent.endTime}
-						</p>
+			{date && (
+				<>
+					<div className={eventCardClassName}>
+						<h3 className="calendar__event_title">Информация о событиях:</h3>
+						{filteredEvents.length > 0 || showForm ? (
+							<>
+								{filteredEvents.map((event) => (
+									<div key={event.id}>
+										<p>
+											<strong>Заголовок:</strong> {event.title}
+										</p>
+										<p>
+											<strong>Описание:</strong> {event.description}
+										</p>
+										<p>
+											<strong>Время:</strong> {event.startTime} -{" "}
+											{event.endTime}
+										</p>
+									</div>
+								))}
+								{showForm && (
+									<div className="live-event-preview">
+										<p>
+											<strong>Заголовок:</strong>{" "}
+											{formData.title || "Не указано"}
+										</p>
+										<p>
+											<strong>Описание:</strong>{" "}
+											{formData.description || "Не указано"}
+										</p>
+										<p>
+											<strong>Время:</strong>{" "}
+											{formData.startTime || "Не указано"} -{" "}
+											{formData.endTime || "Не указано"}
+										</p>
+									</div>
+								)}
+							</>
+						) : (
+							<p>Событий на эту дату нет.</p>
+						)}
 					</div>
-				)}
-			</div>
-		</>
+
+					{showAddEventForm && (
+						<Button
+							variant="outlined"
+							className="show-form-button"
+							onClick={() => setShowForm(true)}
+						>
+							Добавить событие
+						</Button>
+					)}
+
+					{showForm && (
+						<div className="calendar__event_form">
+							<h3>Добавить событие:</h3>
+							<div className="calendar__event_content">
+								<input
+									className="event__inp"
+									type="text"
+									name="title"
+									placeholder="Заголовок"
+									value={formData.title}
+									onChange={handleInputChange}
+								/>
+								<input
+									className="event__inp"
+									name="description"
+									placeholder="Описание"
+									value={formData.description}
+									onChange={handleInputChange}
+								/>
+								<input
+									className="event__inp"
+									type="time"
+									name="startTime"
+									value={formData.startTime}
+									onChange={handleInputChange}
+								/>
+								<input
+									className="event__inp"
+									type="time"
+									name="endTime"
+									value={formData.endTime}
+									onChange={handleInputChange}
+								/>
+							</div>
+							<Button
+								type="submit"
+								className="btn__add_event"
+								onClick={handleAddEvent}
+							>
+								Добавить
+							</Button>
+						</div>
+					)}
+				</>
+			)}
+		</div>
 	);
 };
