@@ -20,6 +20,7 @@ import { Uevents } from "./Uevents/Uevents";
 // import { Uwidget } from "./Uwidget/Uwidget";
 import WebToolBox from "../../UI/WebTool/WebToolBox";
 import "./Profile.css";
+import "./Udetails/Udetails.css";
 
 const Profile: React.FC = () => {
 	const { getMe } = useAuth();
