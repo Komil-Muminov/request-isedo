@@ -14,7 +14,6 @@ import { queryClient } from "../../../queryClient";
 import { fileInfo } from "../../API/Data/Documents/DocumentList";
 
 import "@radix-ui/themes/styles.css";
-import TableRowRequest from "../../UI/TableRow/TableRowRequest";
 import { GetMeType, useAuth } from "../../API/Hooks/useAuth";
 import { Loader } from "../../UI/Loader/Loader";
 import ButtonPanelControl from "../../UI/ButtonPanelControl/ButtonPanelControl";
@@ -32,6 +31,13 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import UserOrOrganizationCard from "../../UI/UserOrOrganizationCard/UserOrOrganizationCard";
 
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
+import CardFileService from "../../UI/CardFileService/CardFileService";
+
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
@@ -77,19 +83,20 @@ const AddRequest: React.FC = () => {
     // Поле для бухгалтера становится доступным только если поле "Название организации" было изменено.
     watch,
     setValue,
-
+    getValues,
     formState: { dirtyFields },
   } = useForm<PostRqstScheme>({
     defaultValues: {
       fullName: "",
-      role: "",
+      tax: "",
       phone: "",
       email: "",
-      tax: "",
-      orgTax: "",
-      orgName: "",
+      passport: "",
+      role: "",
+      token: "",
       reqType: "Смена главного бухгалтера",
       dateTime: "",
+      password: "123",
     },
   });
 
@@ -100,8 +107,6 @@ const AddRequest: React.FC = () => {
       setValue("phone", uinfo.phone || "");
       setValue("email", uinfo.email || "");
       setValue("tax", uinfo.tax || "");
-      setValue("orgTax", uinfo.orgTax || "");
-      setValue("orgName", uinfo.orgName || "");
     }
   }, [uQuery.status, uinfo]);
 
@@ -113,8 +118,8 @@ const AddRequest: React.FC = () => {
       mutationFn: (data: PostRqstScheme) => postRequest(data),
       onSuccess: (response) => {
         queryClient.invalidateQueries({ queryKey: ["requests"] });
-        const createdRequestId = response.requestData.id;
-        navigate(`/account/show/${createdRequestId}`);
+        // const createdRequestId = response.requestData.id;
+        // navigate(`/account/show/${createdRequestId}`);
       },
     },
     queryClient
@@ -139,7 +144,7 @@ const AddRequest: React.FC = () => {
     }
   };
 
-  console.log(files);
+  console.log(getValues());
 
   // Увеличивает номер текущего шага на 1.
   const onSubmit = (data: PostRqstScheme) => {
@@ -283,104 +288,130 @@ const AddRequest: React.FC = () => {
         </div>
         {/* Детали заявки */}
         {reqType === "Смена главного бухгалтера" && (
-          <section className="old-accountant">
-            <TitleDocument title="Нынешний бухгалтер" />
-            <div className="wrapper-cards">
-              <UserOrOrganizationCard uinfo={uinfo} />
-              <UserOrOrganizationCard CorporateFareIcon={CorporateFareIcon} />
+          <>
+            <section className="old-accountant">
+              <TitleDocument title="Нынешний главный бухгалтер" />
+              <div className="wrapper-cards">
+                <UserOrOrganizationCard
+                  uinfo={uinfo}
+                  title="Карточка пользователя"
+                  fileService={
+                    <CardFileService
+                      item={fileInfo[0]}
+                      handleGetFile={handleGetFile}
+                      getFile={getFile}
+                    />
+                  }
+                />
+                <UserOrOrganizationCard
+                  CorporateFareIcon={CorporateFareIcon}
+                  title="Карточка организации"
+                />
+              </div>
+            </section>
+            <section className="new-accountant">
+              <TitleDocument title="Новый главный бухгалтер" />
+              <div className="new-accountant-content">
+                <div className="inputs-list">
+                  <TextField
+                    {...register("fullName")}
+                    type="text"
+                    id="fullName"
+                    className="request_inp"
+                    // KM
+                    label="ФИО"
+                  />
+                  <TextField
+                    {...register("tax")}
+                    id="tax"
+                    type="text"
+                    className="request_inp"
+                    label="ИНН"
+                  />
+                  <TextField
+                    {...register("phone")}
+                    id="phone"
+                    type="text"
+                    className="request_inp"
+                    label="Номер телефона"
+                  />
+                  <TextField
+                    {...register("email")}
+                    id="email"
+                    type="text"
+                    className="request_inp"
+                    label="E-mail адрес"
+                  />
+                  <TextField
+                    {...register("passport")}
+                    id="passport"
+                    type="text"
+                    className="request_inp"
+                    label="Серия и номер паспорта"
+                  />
+                  <TextField
+                    {...register("role")}
+                    id="role"
+                    type="text"
+                    className="request_inp"
+                    label="Должность"
+                  />
+                  <Box className="request_inp" sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        Наличие токена
+                      </InputLabel>
+                      <Select
+                        {...register("token")}
+                        labelId="demo-simple-select-label"
+                        id="token"
+                        label="token"
+                      >
+                        <MenuItem value="Есть">Есть</MenuItem>
+                        <MenuItem value="Нет">Нет</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </div>
+              </div>
+            </section>
+          </>
+        )}
+        {reqType === "Смена руководителя" && (
+          <section className="details-request">
+            <TitleDocument title="Требуемые документы" />
+            <div className="form_content">
+              <form className="request_form" onSubmit={handleSubmit(onSubmit)}>
+                <div className="inputs-list">
+                  <TextField
+                    {...register("fullName")}
+                    type="text"
+                    id="fullName"
+                    className="request_inp"
+                    // KM
+                    placeholder="ФИО"
+                  />
+                  <TextField
+                    {...register("role")}
+                    id="role"
+                    type="text"
+                    className="request_inp"
+                    placeholder="Должность"
+                    disabled={!dirtyFields.role}
+                  />
+                  <TextField
+                    {...register("phone")}
+                    id="phone"
+                    type="text"
+                    className="request_inp"
+                    placeholder="Номер телефона"
+                    disabled={!dirtyFields.phone}
+                  />
+                </div>
+              </form>
             </div>
           </section>
         )}
-        <section className="details-request">
-          <TitleDocument title="Требуемые документы" />
-          <div className="form_content">
-            <form className="request_form" onSubmit={handleSubmit(onSubmit)}>
-              {/* <Controller
-                name="reqType"
-                control={control}
-                render={({ field }) => (
-                  <Select.Root
-                    defaultValue={field.value}
-                    onValueChange={field.onChange}
-                  >
-                    <Select.Trigger color="gray" />
-                    <Select.Content color="gray" variant="solid" highContrast>
-                      <Select.Item value="Выберите тип заявки">
-                        Выберите тип заявки
-                      </Select.Item>
-                      <Select.Item value="Смена главного бухгалтера">
-                        Смена главного бухгалтера
-                      </Select.Item>
-                      <Select.Item value="Смена руководителя">
-                        Смена руководителя
-                      </Select.Item>
-                    </Select.Content>
-                  </Select.Root>
-                )}
-              /> */}
-              {reqType === "Смена главного бухгалтера" && (
-                <>
-                  <div className="wrapper-table">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th>Файл</th>
-                          <th>Тип документа</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <TableRowRequest
-                          item={fileInfo[0]}
-                          handleGetFile={handleGetFile}
-                          getFile={getFile}
-                        />
-                      </tbody>
-                    </table>
-                  </div>
-                </>
-              )}
-              {reqType === "Смена руководителя" && (
-                <>
-                  <div className="inputs-list">
-                    <TextField
-                      {...register("fullName")}
-                      type="text"
-                      id="fullName"
-                      className="request_inp"
-                      // KM
-                      placeholder="ФИО"
-                    />
-                    <TextField
-                      {...register("role")}
-                      id="role"
-                      type="text"
-                      className="request_inp"
-                      placeholder="Должность"
-                      disabled={!dirtyFields.role}
-                    />
-                    <TextField
-                      {...register("phone")}
-                      id="phone"
-                      type="text"
-                      className="request_inp"
-                      placeholder="Номер телефона"
-                      disabled={!dirtyFields.phone}
-                    />
-                    <TextField
-                      {...register("orgName")}
-                      id="orgName"
-                      type="text"
-                      className="request_inp"
-                      placeholder="Организация"
-                      disabled={!dirtyFields.orgName}
-                    />
-                  </div>
-                </>
-              )}
-            </form>
-          </div>
-        </section>
       </div>
 
       {showTypeRequest && (
