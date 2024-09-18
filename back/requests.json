@@ -1,44 +1,21 @@
 [
   {
-    "id": 1,
-    "fullName": "Фозилов Чамшед",
-    "role": "Начальник отдела по развитию и прогресса ИИ в области Data Science",
-    "phone": "880003434",
-    "email": "j.fozilov@gmail.com",
-    "tax": "250008809",
-    "orgTax": "040003414",
-    "orgName": "ООО Технологический центр развития молодежи",
-    "reqType": "Смена бухгалтера",
+    "fullName": "Бюджетник Организаторов",
+    "role": "Главный бухгалтер",
+    "phone": "880008671",
+    "email": "budjetorganization@gmail.com",
+    "tax": "250002433",
+    "orgTax": "040001802",
+    "orgName": "Бюджетное организация",
+    "reqType": "Смена главного бухгалтера",
+    "dateTime": "18.09.2024.14:30",
     "stepCode": 0,
-    "dateTime": "22.08.2024.11:23"
-  },
-  {
-    "id": 2,
-    "fullName": "Рачабов Фируз",
-    "role": "Начальник отдела государственного управления по хозяственному процессу",
-    "phone": "880001804",
-    "email": "f.rajabov@gmail.com",
-    "tax": "040001825",
-    "orgTax": "020003418",
-    "orgName": "ООО Молодежный центр Bootcamp championship",
-    "reqType": "Смена бухгалтера",
-    "stepCode": 0,
-    "dateTime": "22.08.2024.11:44"
-  },
-  {
-    "fullName": "bo1",
-    "role": "bfdsfsd",
-    "phone": "ds",
-    "email": "fds",
-    "tax": "fds",
-    "orgTax": "fdsfds",
-    "orgName": "fdsfdsfds",
-    "reqType": "Смена бухгалтера",
-    "dateTime": "30.08.2024.15:39",
-    "stepCode": 0,
-    "files": [],
-    "id": 3,
-    "userName": "bo1",
-    "userId": 3
+    "files": [
+      {
+        "number": 1,
+        "fileName": "PDF.pdf"
+      }
+    ],
+    "id": 1
   }
 ]

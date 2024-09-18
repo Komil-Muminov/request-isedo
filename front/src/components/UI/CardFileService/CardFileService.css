@@ -1,0 +1,18 @@
+.wrapper-file {
+  border: 1px solid #00000021;
+  width: 48%;
+  min-height: 125px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.title-file {
+  padding: 5px 20px;
+  border-bottom: 1px solid #00000021;
+  background-color: #607d8bee;
+  color: #fff;
+}
+
+.file-service {
+  padding: 20px;
+}
