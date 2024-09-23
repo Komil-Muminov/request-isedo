@@ -1,27 +1,26 @@
-interface FileType {
-  number: number;
-  fileName: string;
-}
-
-export interface GetRqstsByIdType {
+export interface TGetUsers {
   id: number;
+  uType: string;
+  username: string;
+  password: string;
+  photo: string;
   fullName: string;
-  role: string;
   phone: string;
-  email: string;
   tax: string;
-  orgTax: string;
+  email: string;
+  organization: string;
+  inn: string;
+  role: string;
   orgName: string;
-  reqType: string;
-  stepCode: number;
-  dateTime: string;
-  files: FileType[];
-  userId: number;
+  orgTax: string;
+  department: string;
+  reqIdentity: boolean;
+  uIdentity: boolean;
 }
 
-export const getRqstsById = async (id: number): Promise<GetRqstsByIdType> => {
+export const getUsers = async (): Promise<TGetUsers[]> => {
   const token = localStorage.getItem("token");
-  return fetch(`http://localhost:3000/account/show/${id}`, {
+  return fetch("http://localhost:3000/users", {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",

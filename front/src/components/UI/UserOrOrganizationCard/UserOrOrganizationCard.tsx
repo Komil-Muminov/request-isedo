@@ -6,8 +6,6 @@ const UserOrOrganizationCard = ({
   title,
   fileService,
 }: any) => {
-  console.log(uinfo);
-
   return (
     <div
       className={`wrapper-accountant ${
