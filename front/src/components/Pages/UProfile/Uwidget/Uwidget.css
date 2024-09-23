@@ -19,6 +19,7 @@
 }
 
 .uwidget__style {
+	/* background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); */
 	background-color: #c7f4c2;
 	color: #000000e4;
 	font-weight: 600;
