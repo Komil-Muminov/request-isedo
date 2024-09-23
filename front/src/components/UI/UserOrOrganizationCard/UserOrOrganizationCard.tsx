@@ -36,7 +36,7 @@ const UserOrOrganizationCard = ({
             </p>
             {title === "Карточка пользователя" && (
               <p>
-                <span>Паспорт:</span> A0644063
+                <span>Паспорт:</span> {uinfo ? uinfo?.passport : ""}
               </p>
             )}
           </div>

@@ -33,6 +33,11 @@ import "../../../index.css";
 import TitleDocument from "../../UI/TitleDocument/TitleDocument";
 import WorkSpace from "../../UI/WorkSpace/WorkSpace";
 import { putRqstsById, PutRqstsByIdType } from "../../API/PutRqstById";
+import UserOrOrganizationCard from "../../UI/UserOrOrganizationCard/UserOrOrganizationCard";
+import CardFileService from "../../UI/CardFileService/CardFileService";
+import { fileInfo } from "../../API/Data/Documents/DocumentList";
+
+import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 
 const ShowRequest = () => {
   const navigate = useNavigate();
@@ -48,7 +53,7 @@ const ShowRequest = () => {
     queryClient
   );
 
-  const [rqstsData, setRqstsData] = useState<GetRqstsByIdType | null>(null);
+  const [rqstsData, setRqstsData] = useState<GetRqstsByIdType[] | null>(null);
 
   const { getMe } = useAuth();
   const uQuery = useQuery(
@@ -81,8 +86,12 @@ const ShowRequest = () => {
       ? stepsOfBo
       : [];
 
+  console.log(getRqstsByIdQuery.data, "===============");
+
   useEffect(() => {
     if (getRqstsByIdQuery.status === "success") {
+      console.log(getRqstsByIdQuery.data); // Проверьте, массив это или объект
+
       setRqstsData(getRqstsByIdQuery.data);
     } else if (getRqstsByIdQuery.status === "error") {
       console.error(getRqstsByIdQuery.error);
@@ -99,10 +108,14 @@ const ShowRequest = () => {
     queryClient
   );
 
+  const rqstsDataById = rqstsData && rqstsData[0];
+
+  console.log(rqstsDataById);
+
   const handlePutRqstById = () => {
     const updateReqData = {
-      ...rqstsData,
-      stepCode: rqstsData && rqstsData.stepCode + 1,
+      ...rqstsDataById,
+      stepCode: rqstsDataById && rqstsDataById.stepCode + 1,
     };
     putRqstsByIdMutation.mutate(updateReqData);
   };
@@ -111,13 +124,11 @@ const ShowRequest = () => {
     return <p>Loading...</p>;
   }
 
-  console.log(rqstsData);
-
   return (
     <main className="show-content">
       <div className="container">
         <div className="details-steps">
-          <TitleDocument title="Новая заявка" />
+          <TitleDocument title={`Заявка №${rqstsDataById?.id}`} />
         </div>
         <section className="show-steps">
           <div className="panel-control">
@@ -173,7 +184,7 @@ const ShowRequest = () => {
                 display: "none",
               },
             }}
-            activeStep={rqstsData?.stepCode}
+            activeStep={rqstsDataById?.stepCode}
             alternativeLabel
           >
             {steps.map((e, index) => (
@@ -204,48 +215,36 @@ const ShowRequest = () => {
           </Stepper>
         </section>
         <section className="old-accountant">
-          <TitleDocument title="Нынешний бухгалтер" />
-          <div className="info-accountant">
-            <div className="wrapper-info">
-              <div className="wrapper-image">
-                <img src={`http://localhost:3000${uinfo?.photo}`} alt="" />
-              </div>
-              <div className="wrapper-text">
-                <h2>Шарипов Амир</h2>
-                <p>
-                  <span>ИНН:</span> 250001455
-                </p>
-                <p>
-                  <span>Номер телефона:</span> 88-000-86-71
-                </p>
-                <p>
-                  <span>E-mail адрес:</span> jsharipovamir@gmail.com
-                </p>
-                <p>
-                  <span>Паспорт:</span> A0644063
-                </p>
-              </div>
-            </div>
-            <div className="info-organization">
-              <Button
-                sx={{
-                  borderRadius: "50px",
-                  display: "flex",
-                  gap: "5px",
-                  backgroundColor: "#607d8b",
-                  "&:hover": {
-                    backgroundColor: "#516874",
-                  },
-                }}
-                variant="contained"
-              >
-                Карточка организации
-              </Button>
-            </div>
+          <TitleDocument title="Нынешний главный бухгалтер" />
+          <div className="wrapper-cards">
+            <UserOrOrganizationCard
+              uinfo={uinfo}
+              title="Карточка пользователя"
+              fileService={<CardFileService item={fileInfo[0]} />}
+            />
+            <UserOrOrganizationCard
+              CorporateFareIcon={CorporateFareIcon}
+              title="Карточка организации"
+            />
           </div>
         </section>
+        <section className="new-accountant">
+          <TitleDocument title="Новый главный бухгалтер" />
+          <div className="wrapper-cards">
+            <UserOrOrganizationCard
+              uinfo={rqstsDataById}
+              title="Карточка пользователя"
+              fileService={<CardFileService item={fileInfo[0]} />}
+            />
+            <UserOrOrganizationCard
+              CorporateFareIcon={CorporateFareIcon}
+              title="Карточка организации"
+            />
+          </div>
+        </section>
+
         {/* Рабочее пространство */}
-        <WorkSpace />
+        {uinfo?.uType !== "bo" && <WorkSpace />}
       </div>
     </main>
   );

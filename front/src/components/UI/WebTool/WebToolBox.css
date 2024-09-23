@@ -1,104 +1,107 @@
 .wrapper-webtoolbox {
-	position: absolute;
-	bottom: 10px;
-	right: 10px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 
 .icon-button {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-height: 65px;
-	width: 65px;
-	border-radius: 50%;
-	background-color: rgba(0, 0, 0, 0.73);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-	cursor: pointer;
-	transition: box-shadow 0.3s ease, transform 0.3s ease;
-	z-index: 9999999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 65px;
+  width: 65px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.73);
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  z-index: 9999999999;
 }
 
 .icon-button:hover {
-	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-	transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transform: scale(1.1);
+  color: #000;
+  transition: all 0.3s;
 }
 
 .web-toolbox-container {
-	position: absolute;
-	background-color: rgba(0, 0, 0, 0.73);
-	color: rgba(255, 255, 255, 0.22);
-	z-index: 1400;
-	border-radius: 50px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	max-width: 300px;
-	width: 100%;
-	min-height: 300px;
-	bottom: 30px;
-	right: 30px;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.73);
+  color: rgba(255, 255, 255, 0.22);
+  z-index: 1400;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  max-width: 300px;
+  width: 100%;
+  min-height: 300px;
+  bottom: 30px;
+  right: 30px;
 }
 
 .icon-circle {
-	position: relative;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 250px;
-	height: 250px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 250px;
 }
 
 .icon-item {
-	position: absolute;
-	top: 40%;
-	left: 42%;
+  position: absolute;
+  top: 40%;
+  left: 42%;
 }
 
 .icon-item.facebook {
-	transform: rotate(0deg) translate(90px) rotate(-0deg);
+  transform: rotate(0deg) translate(90px) rotate(-0deg);
 }
 
 .icon-item.twitter {
-	transform: rotate(90deg) translate(90px) rotate(-90deg);
+  transform: rotate(90deg) translate(90px) rotate(-90deg);
 }
 
 .icon-item.instagram {
-	transform: rotate(180deg) translate(90px) rotate(-180deg);
+  transform: rotate(180deg) translate(90px) rotate(-180deg);
 }
 
 .icon-item.linkedin {
-	transform: rotate(270deg) translate(90px) rotate(-270deg);
+  transform: rotate(270deg) translate(90px) rotate(-270deg);
 }
 
 .center-icon {
-	position: absolute;
-	width: 65px;
-	height: 65px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .hidden {
-	display: none;
+  display: none;
 }
 
 .icon-button-custom {
-	border: 1px solid rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.22);
 }
 
 .icon-button-custom .icon {
-	fill: rgba(93, 255, 158, 0.556);
+  fill: rgba(93, 255, 158, 0.556);
 }
 
 .icon-button-custom:hover {
-	background-color: rgba(255, 255, 255, 0.22);
+  background-color: rgba(255, 255, 255, 0.22);
 }
 
 .icon-button-custom svg:hover {
-	fill: rgba(93, 255, 158, 0.834);
+  fill: rgba(93, 255, 158, 0.834);
 }

@@ -7,6 +7,7 @@ export interface TProps {
     number: number;
     file: File | null;
   };
+  rqstsDataById: any;
 
   handleGetFile: (id: number, file: File | null, executorFile: number) => void;
 }

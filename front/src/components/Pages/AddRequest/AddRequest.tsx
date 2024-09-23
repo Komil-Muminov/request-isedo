@@ -320,7 +320,7 @@ const AddRequest: React.FC = () => {
             </section>
             <section className="new-accountant">
               <TitleDocument title="Новый главный бухгалтер" />
-              <div className="new-accountant-content">
+              <div className="wrapper-cards wrapper-cards-padding">
                 <div className="inputs-list">
                   <TextField
                     {...register("fullName")}

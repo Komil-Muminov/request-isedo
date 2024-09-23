@@ -19,7 +19,7 @@ export interface GetRqstsByIdType {
   userId: number;
 }
 
-export const getRqstsById = async (id: number): Promise<GetRqstsByIdType> => {
+export const getRqstsById = async (id: number): Promise<GetRqstsByIdType[]> => {
   const token = localStorage.getItem("token");
   return fetch(`http://localhost:3000/account/show/${id}`, {
     headers: {
@@ -30,6 +30,7 @@ export const getRqstsById = async (id: number): Promise<GetRqstsByIdType> => {
     if (!response.ok) {
       throw new Error("Недостаточно прав");
     }
+
     return response.json();
   });
 };
