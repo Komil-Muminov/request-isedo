@@ -7,5 +7,6 @@ export interface TProps {
     number: number;
     file: File | null;
   };
-  handleGetFile: (id: number, file: File | null) => void;
+
+  handleGetFile: (id: number, file: File | null, executorFile: number) => void;
 }

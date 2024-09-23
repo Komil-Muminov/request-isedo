@@ -100,15 +100,15 @@ const AddRequest: React.FC = () => {
     },
   });
 
-  useEffect(() => {
-    if (uQuery.status === "success" && uinfo) {
-      setValue("fullName", uinfo.fullName || "");
-      setValue("role", uinfo.role || "");
-      setValue("phone", uinfo.phone || "");
-      setValue("email", uinfo.email || "");
-      setValue("tax", uinfo.tax || "");
-    }
-  }, [uQuery.status, uinfo]);
+  // useEffect(() => {
+  //   if (uQuery.status === "success" && uinfo) {
+  //     setValue("fullName", uinfo.fullName || "");
+  //     setValue("role", uinfo.role || "");
+  //     setValue("phone", uinfo.phone || "");
+  //     setValue("email", uinfo.email || "");
+  //     setValue("tax", uinfo.tax || "");
+  //   }
+  // }, [uQuery.status, uinfo]);
 
   // Функция для отслеживания изменений значений в реальном времени.
   const reqType = watch("reqType");
@@ -134,8 +134,16 @@ const AddRequest: React.FC = () => {
 
   const [getFile, setGetFile] = useState({ number: 0, fileName: "" });
 
-  const handleGetFile = (id: number, file: File | null) => {
-    const newFile = { number: id, fileName: file ? file.name : "" };
+  const handleGetFile = (
+    id: number,
+    file: File | null,
+    executorFile: number
+  ) => {
+    const newFile = {
+      number: id,
+      fileName: file ? file.name : "",
+      userId: executorFile,
+    };
 
     setGetFile(newFile);
 
@@ -167,6 +175,7 @@ const AddRequest: React.FC = () => {
       stepCode: stepFound?.stepCode || 0,
       dateTime: date,
       files: files,
+      userId: uinfo?.userId,
     };
 
     console.log(updateReqData);
@@ -373,6 +382,12 @@ const AddRequest: React.FC = () => {
                       </Select>
                     </FormControl>
                   </Box>
+                  <CardFileService
+                    item={fileInfo[1]}
+                    handleGetFile={handleGetFile}
+                    getFile={getFile}
+                    size="wrapper-file-width"
+                  />
                 </div>
               </div>
             </section>

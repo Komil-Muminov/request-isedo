@@ -13,6 +13,7 @@ import { GetMeType, useAuth } from "../../API/Hooks/useAuth";
 import "./Register.css";
 import { Loader } from "../../UI/Loader/Loader";
 import { stepsOfBo, stepsOfKvd } from "../../API/Data/Steps/Steps";
+import { getUsers, TGetUsers } from "../../API/GetUsers";
 
 export const Register: React.FC = () => {
   const getRqsQuery = useQuery(
@@ -27,6 +28,25 @@ export const Register: React.FC = () => {
 
   console.log(rqstsData);
 
+  // GET USERS
+
+  const [users, setUsers] = useState<TGetUsers[] | null>(null);
+
+  const usersQuery = useQuery(
+    {
+      queryFn: () => getUsers(),
+      queryKey: ["users"],
+    },
+    queryClient
+  );
+
+  useEffect(() => {
+    if (usersQuery.status === "success") {
+      setUsers(usersQuery.data);
+    }
+  }, [usersQuery]);
+
+  // GET User By Id
   const uQuery = useQuery(
     {
       queryFn: () => getMe(),
@@ -46,7 +66,7 @@ export const Register: React.FC = () => {
 
   if (uQuery.status === "pending") return <Loader />;
   if (uQuery.status === "error") {
-    console.log(uQuery.error);
+    console.log(uQuery.error, usersQuery.error);
     return null;
   }
 
@@ -60,11 +80,16 @@ export const Register: React.FC = () => {
   const rows = rqstsData.map((e) => {
     const stepFound = steps.find((step) => step.stepCode === e.stepCode);
 
+    // Необходимо создать запрос на массив пользователей чтобы сделать запрос
+    const organizationRequest = users?.find((user) => user.id === e.userId);
+
+    console.log(organizationRequest);
+
     return {
       id: e.id,
       type: e.reqType,
-      applicant: e.fullName,
-      organization: e.orgName,
+      applicant: organizationRequest?.fullName,
+      organization: organizationRequest?.orgName,
       date: e.dateTime,
       status: stepFound ? stepFound.stepName : "Неизвестный статус",
     };

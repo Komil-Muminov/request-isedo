@@ -8,7 +8,13 @@ const AddFileRequest = ({ item, handleGetFile, getFile }: TProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
     setFileName(file ? file.name : "Выберите файл");
-    handleGetFile(item?.id, file);
+
+    const executorFile =
+      item?.name === "Карор дар бораи аз вазифа озод намудани сармухосиб."
+        ? 1
+        : 2;
+
+    handleGetFile(item?.id, file, executorFile);
   };
 
   const choosenFileClass = getFile?.number === item?.id ? "activeFile" : "";
