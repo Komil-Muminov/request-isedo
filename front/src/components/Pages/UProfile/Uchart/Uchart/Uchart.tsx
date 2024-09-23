@@ -2,22 +2,22 @@ import { RadialBarChart, RadialBar, Legend, Tooltip, Cell } from "recharts";
 
 const data = [
 	{
-		name: "Entertainments",
+		name: "KM",
 		value: 46,
 		color: "#28A745", // зеленый
 	},
 	{
-		name: "Platform",
+		name: "KM",
 		value: 56,
 		color: "#007BFF", // синий
 	},
 	{
-		name: "Shopping",
+		name: "KM",
 		value: 48,
 		color: "#DC3545", // красный
 	},
 	{
-		name: "Food & health",
+		name: "KM",
 		value: 63,
 		color: "#FFC107", // оранжевый
 	},
