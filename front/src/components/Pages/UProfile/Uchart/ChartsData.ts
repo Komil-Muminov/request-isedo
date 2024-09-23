@@ -1,29 +1,28 @@
 interface TProps {
 	name: string;
-	uv: number; // Измените тип на number
-	pv: number; // Измените тип на number
-	amt: number; // Измените тип на number
+	ExistingCustomers: number;
+	NewCustomers: number;
 }
 
-export const UchartData: TProps[] = [
-	{
-		name: "test data",
-		uv: 2000,
-		pv: 3000,
-		amt: 1000,
-	},
+// BAR__CHART
+export const BarchartData: TProps[] = [
+	{ name: "Jan", ExistingCustomers: 3000, NewCustomers: 1000 },
+	{ name: "Feb", ExistingCustomers: 4000, NewCustomers: 2000 },
+	{ name: "Mar", ExistingCustomers: 5000, NewCustomers: 4000 },
+	{ name: "Apr", ExistingCustomers: 3000, NewCustomers: 2000 },
+	{ name: "May", ExistingCustomers: 7000, NewCustomers: 5000 },
+];
 
-	{
-		name: "test data",
-		uv: 400,
-		pv: 400,
-		amt: 700,
-	},
+// DONATE__CHART
 
-	{
-		name: "test data",
-		uv: 2000,
-		pv: 3000,
-		amt: 9000,
-	},
+interface ChartData {
+	name: string;
+	value: number;
+	color: string;
+}
+
+export const DashboardchartData: ChartData[] = [
+	{ name: "Нормально", value: 1650, color: "#FFBB28" },
+	{ name: "Отлично", value: 350, color: "#FF8042" },
+	{ name: "Вообши молодец", value: 458, color: "#0088FE" },
 ];

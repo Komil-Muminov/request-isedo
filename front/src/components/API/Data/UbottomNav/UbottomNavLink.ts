@@ -7,17 +7,17 @@ export interface UbottomNavLinksScheme {
 export const UbottomNavLinks: UbottomNavLinksScheme[] = [
 	{
 		id: 1,
-		label: "KM LINK",
+		label: "LINK",
 		url: "/account",
 	},
 	{
 		id: 1,
-		label: "KM LINK2",
+		label: "LINK",
 		url: "/account2",
 	},
 	{
 		id: 1,
-		label: "KM LINK3",
+		label: "LINK",
 		url: "/account",
 	},
 ];

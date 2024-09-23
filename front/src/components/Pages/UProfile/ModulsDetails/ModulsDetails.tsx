@@ -2,11 +2,12 @@
 import { useParams } from "react-router-dom";
 import { UlinksProps } from "../../../UI/Ulinks/ProfileLinks";
 import "./ModulsDetails.css";
-import Uchart from "../Uchart/Uchart";
 
 const DetailsPage = () => {
 	const { page } = useParams();
-	const currentItem = UlinksProps.find((item) => item.url.includes(page || ""));
+	const currentItem = UlinksProps.find((item) =>
+		item.url.includes(page?.trim() || ""),
+	);
 
 	if (!currentItem) {
 		return <div>Элемент не найден</div>;
@@ -14,8 +15,6 @@ const DetailsPage = () => {
 
 	return (
 		<>
-			<Uchart />
-
 			<div className="detailsPage__content">
 				<h2 className="details__title">Moduls details page</h2>
 				<p>Информация про: {currentItem.label}</p>

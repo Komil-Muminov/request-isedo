@@ -1,11 +1,11 @@
 .list {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  width: 40%;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	/* width: 40%; */
 }
 
 .list-title {
-  color: #607d8b;
-  font-weight: 500;
+	color: #607d8b;
+	font-weight: 500;
 }

@@ -30,7 +30,6 @@ const item = {
 };
 
 const MotionDiv = motion.div;
-// const MotionIconButton = motion(IconButton);
 
 const WebToolBox = () => {
 	const [showTool, setShowTool] = useState(false);
@@ -62,8 +61,8 @@ const WebToolBox = () => {
 						dragConstraints={{
 							top: 0,
 							left: 0,
-							right: window.innerWidth - 100, // Уменьшите значение, чтобы соответствовать размерам контейнера
-							bottom: window.innerHeight - 100, // Уменьшите значение, чтобы соответствовать размерам контейнера
+							right: window.innerWidth - 100,
+							bottom: window.innerHeight - 100,
 						}}
 						onDragEnd={(event, info) => {
 							setPosition({
@@ -73,36 +72,38 @@ const WebToolBox = () => {
 						}}
 						style={{ x: position.x, y: position.y }}
 					>
-						<div className="wrapper-main">
-							<motion.div variants={item}>
+						<div className="icon-circle">
+							{/* Иконки по кругу */}
+							<div className="icon-item facebook">
 								<IconButton className="icon-button-custom">
 									<FacebookOutlinedIcon className="icon" />
 								</IconButton>
-							</motion.div>
-							<motion.div variants={item}>
+							</div>
+							<div className="icon-item twitter">
 								<IconButton className="icon-button-custom">
 									<TwitterIcon className="icon" />
 								</IconButton>
-							</motion.div>
-							<motion.div variants={item}>
+							</div>
+							<div className="icon-item instagram">
 								<IconButton className="icon-button-custom">
 									<InstagramIcon className="icon" />
 								</IconButton>
-							</motion.div>
-							<motion.div variants={item}>
+							</div>
+							<div className="icon-item linkedin">
 								<IconButton className="icon-button-custom">
 									<LinkedInIcon className="icon" />
 								</IconButton>
-							</motion.div>
+							</div>
+							{/* Кнопка в центре */}
+							<div className="center-icon">
+								<IconButton
+									onClick={handleShowTool}
+									className="icon-button-custom"
+								>
+									<RemoveOutlinedIcon className="icon" />
+								</IconButton>
+							</div>
 						</div>
-						<motion.div variants={item}>
-							<IconButton
-								onClick={handleShowTool}
-								className="icon-button-custom"
-							>
-								<RemoveOutlinedIcon className="icon" />
-							</IconButton>
-						</motion.div>
 					</MotionDiv>
 				)}
 			</AnimatePresence>

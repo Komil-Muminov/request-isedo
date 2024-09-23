@@ -13,14 +13,14 @@ import { useAuth } from "../../API/Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
 import { Settings } from "@mui/icons-material";
-import { UbottomNavLinks } from "../../API/Data/UbottomNav/UbottomNavLink";
-import { Link } from "react-router-dom";
+// import { UbottomNavLinks } from "../../API/Data/UbottomNav/UbottomNavLink";
 import { Ucalendar } from "../UProfile/Ucalendar/Ucalendar";
 import { Uevents } from "./Uevents/Uevents";
-// import { Uwidget } from "./Uwidget/Uwidget";
 import WebToolBox from "../../UI/WebTool/WebToolBox";
 import "./Profile.css";
 import "./Udetails/Udetails.css";
+import Dashboardchart from "./Uchart/Dashboard/Dashboardchart";
+// import { Uwidget } from "./Uwidget/Uwidget";
 
 const Profile: React.FC = () => {
 	const { getMe } = useAuth();
@@ -93,15 +93,9 @@ const Profile: React.FC = () => {
 							))}
 						</aside>
 						<div className="profile_style profile_center">
-							<div className="profile_center-content">
+							<div className="profile__center_content">
 								<Outlet />
 							</div>
-							{/* Доработать логику */}
-							{/* <div className="profile__center_widgets">
-								<Uwidget kind={`profile__center_widget1`} />
-								<Uwidget kind={`profile__center_widget2`} />
-								<Uwidget kind={`profile__center_widget3`} />
-							</div> */}
 						</div>
 						<aside className="profile_style profile_right">
 							<div className="profile_ucalendar">
@@ -114,7 +108,7 @@ const Profile: React.FC = () => {
 							</div>
 						</aside>
 					</div>
-					<div className={`profilebottomnav__content km__content `}>
+					{/* <div className={`profilebottomnav__content km__content `}>
 						<div className="profilebottom__items">
 							{UbottomNavLinks.map(({ label, url }, id) => (
 								<>
@@ -124,7 +118,7 @@ const Profile: React.FC = () => {
 								</>
 							))}
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</section>

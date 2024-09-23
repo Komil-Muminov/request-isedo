@@ -19,7 +19,10 @@
 }
 
 .uwidget__style {
-	background-color: rgba(255, 205, 130, 0.8);
+	background-color: #c7f4c2;
+	color: #000000e4;
+	font-weight: 600;
+	font-size: 16px;
 	border-radius: 16px;
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(255, 255, 255, 0.2);
 	transition: transform 0.3s ease, box-shadow 0.3s ease;

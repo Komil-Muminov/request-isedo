@@ -2,6 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import { Loader } from "./components/UI/Loader/Loader";
 import { Navigation } from "./components/Pages/Navigation/Navigation";
+import Barchart from "./components/Pages/UProfile/Uchart/Barchart/Barchart";
+import DashboardChart from "./components/Pages/UProfile/Uchart/Dashboard/Dashboardchart";
 
 // Ленивые загрузки компонентов
 const LazyAuthPage = lazy(() => import("./components/Pages/Auth/Auth/Auth"));
@@ -28,6 +30,15 @@ const LazyUdetails = lazy(
 const LazyDetailsPage = lazy(
 	() => import("./components/Pages/UProfile/ModulsDetails/ModulsDetails"),
 );
+
+const LazyChartPage = lazy(
+	() =>
+		import("./components/Pages/UProfile/Uchart/UchartDetails/UchartDetails"),
+);
+
+const LazyDashboard = lazy(
+	() => import("./components/Pages/UProfile/Uchart/Dashboard/Dashboardchart"),
+);
 const LazyErrorPage = lazy(
 	() => import("./components/Pages/ErrorPage/ErrorPage"),
 );
@@ -50,7 +61,8 @@ function App() {
 							<Route path="udetails" element={<LazyUdetails />} />
 							<Route path="uidentity" element={<LazyIdentification />} />
 							<Route path="details/:page" element={<LazyDetailsPage />} />
-							{/* Добавьте маршруты для саблинков, если они у вас есть */}
+							<Route path="dashboard" element={<DashboardChart />} />
+							<Route path="barchart" element={<Barchart />} />
 						</Route>
 						<Route path="/account/create" element={<LazyAddRequest />} />
 						<Route path="/account/show/:id" element={<LazyShowRequest />} />

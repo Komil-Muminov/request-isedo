@@ -5,11 +5,17 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../../../queryClient";
 import { Button } from "@mui/material";
 import UserInfoList from "../../../UI/UserInfoList/UserInfoList";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { CurrUserPhoto, setUphoto } from "../../../API/Hooks/setUphoto";
 import { Uwidget } from "../Uwidget/Uwidget";
 import "./Udetails.css";
-import Uchart from "../Uchart/Uchart";
+import Barchart from "../Uchart/Barchart/Barchart";
+import { Dashboard } from "@mui/icons-material";
+import DashboardChart from "../Uchart/Dashboard/Dashboardchart";
+import SalesTargetChart from "../Uchart/Saleschart/Saleschart";
+import Saleschart from "../Uchart/Saleschart/Saleschart";
+import Dashboardchart from "../Uchart/Dashboard/Dashboardchart";
+import Cartoonchart from "../Uchart/Uchart/Uchart";
 const Udetails = () => {
 	const [uPhoto, setphoto] = useState<CurrUserPhoto | null>(null);
 	const handleUphoto = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,32 +66,43 @@ const Udetails = () => {
 	}, [uQuery.status, uQuery.data]);
 
 	const photoUrl = uinfo?.photo ? `http://localhost:3000${uinfo.photo}` : null;
+
+	const [chart, setSchart] = useState<string>("dashboard");
+
+	const handleChart = (state: string) => {
+		setSchart(state);
+		console.log(chart);
+	};
+
 	return (
 		<>
 			<div className="udetails__container">
 				<div className="udetails__content">
 					<div className="user-details">
-						{uPhotoMutation.data?.status}
-
 						<div className="udetails__content">
 							<div className="udetails__card">
 								<div className="user-details_photo">
-									<img
-										src={photoUrl || defUphoto}
-										alt="uphoto"
-										className="photo"
-									/>
+									<div className="user_photo">
+										<img
+											src={photoUrl || defUphoto}
+											alt="uphoto"
+											className="photo"
+										/>
+										<div className="file-service-photo">
+											<label className="uphoto__label" htmlFor="uphoto">
+												Выберите фото
+												<input
+													style={{ visibility: "hidden" }}
+													id="uphoto"
+													type="file"
+													onChange={handleUphoto}
+												/>
+											</label>
+										</div>
+									</div>
 
-									<div className="file-service-photo">
-										<label className="uphoto__label" htmlFor="uphoto">
-											Выберите фото
-											<input
-												style={{ visibility: "hidden" }}
-												id="uphoto"
-												type="file"
-												onChange={handleUphoto}
-											/>
-										</label>
+									<div className="user-details_photo_right">
+										<Cartoonchart />
 									</div>
 								</div>
 
@@ -115,6 +132,15 @@ const Udetails = () => {
 												uinfo?.department ? uinfo.department : uinfo?.phone
 											}
 										/>
+										<UserInfoList
+											title={uinfo?.uType === "kvd" ? "Должность" : "ИНН"}
+											description={
+												uinfo?.role !== "" || uinfo?.position !== ""
+													? uinfo?.role
+													: uinfo.tax
+											}
+										/>
+
 										<UserInfoList
 											title={uinfo?.uType === "kvd" ? "Должность" : "ИНН"}
 											description={
@@ -156,32 +182,29 @@ const Udetails = () => {
 							<div className="udetails__uwidget">
 								<Uwidget
 									disabled={uPhotoMutation.isPending}
-									title={`Показать график модуля`}
+									title={`Показать график посещаемости`}
+									onClick={() => handleChart("dashboard")}
 									desc={`KM`}
 								/>
 								<Uwidget
 									disabled={uPhotoMutation.isPending}
-									title={`Показать график модуля`}
+									title={`Показать график чего-то`}
+									onClick={() => handleChart("barchart")}
 									desc={`KM`}
 								/>
 								<Uwidget
-									disabled={uPhotoMutation.isPending}
-									title={`Показать график модуля`}
+									title={`Показать график чего-то`}
 									desc={`KM`}
-								/>
-								<Uwidget
-									disabled={uPhotoMutation.isPending}
-									title={`Показать график модуля`}
-									desc={`KM`}
-								/>
-								<Uwidget
-									disabled={uPhotoMutation.isPending}
-									title={`Показать график модуля`}
-									desc={`KM`}
+									onClick={() => handleChart("saleschart")}
+									kind="f"
 								/>
 							</div>
 							<div className="udetails__chart">
-								<Uchart />
+								{/* <Barchart /> */}
+
+								{chart === "dashboard" && <DashboardChart />}
+								{chart === "barchart" && <Barchart />}
+								{chart === "saleschart" && <Saleschart />}
 							</div>
 						</div>
 					</div>

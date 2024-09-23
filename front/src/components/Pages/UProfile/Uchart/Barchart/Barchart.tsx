@@ -1,36 +1,37 @@
-import { UchartData } from "./ChartsData";
+import { BarchartData } from "../ChartsData";
 import React from "react";
 import { Paper, Typography } from "@mui/material";
 import {
-	LineChart,
-	Line,
+	BarChart,
+	Bar,
 	XAxis,
 	YAxis,
 	CartesianGrid,
 	Tooltip,
-	Legend,
 	ResponsiveContainer,
 } from "recharts";
 
-export const Uchart: React.FC = () => {
+export const Barchart: React.FC = () => {
 	return (
 		<Paper style={{ padding: 16 }}>
 			<Typography variant="h6" gutterBottom>
 				График
 			</Typography>
-			<ResponsiveContainer width="100%" height={400}>
-				<LineChart data={UchartData}>
+			<ResponsiveContainer width="100%" height={300}>
+				<BarChart
+					data={BarchartData}
+					margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+				>
 					<CartesianGrid strokeDasharray="3 3" />
 					<XAxis dataKey="name" />
 					<YAxis />
 					<Tooltip />
-					<Legend />
-					<Line type="monotone" dataKey="uv" stroke="#8884d8" />
-					<Line type="monotone" dataKey="pv" stroke="#82ca9d" />
-				</LineChart>
+					<Bar dataKey="ExistingCustomers" stackId="a" fill="#8884d8" />
+					<Bar dataKey="NewCustomers" stackId="a" fill="#82ca9d" />
+				</BarChart>
 			</ResponsiveContainer>
 		</Paper>
 	);
 };
 
-export default Uchart;
+export default Barchart;
