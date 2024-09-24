@@ -139,6 +139,7 @@ const ShowRequest = () => {
                   <SaveIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
                 }
                 text="Сохранить"
+                activeSendButton={true}
               />
               <ButtonPanelControl
                 icon={
