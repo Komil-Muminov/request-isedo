@@ -372,6 +372,23 @@ app.get("/requests", authenticateJWT, (req: Request, res: Response) => {
   }
 });
 
+// Request BY ID GET
+app.get("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
+  const showId = parseInt(req.params.id, 10); // Получаем id из URL-параметров
+
+  if (isNaN(showId)) {
+    return res.status(400).json({ error: "Некорректный ID" });
+  }
+
+  const requests = readFromFile(requestsFilePath);
+  const show = requests.find((request: any) => request.id === showId);
+
+  if (!show) {
+    return res.status(404).json({ error: "Заявка не найдена" });
+  }
+  res.status(200).json(show); // Возвращаем только найденную заявку
+});
+
 // Services ==========
 
 app.post("/services", authenticateJWT, (req: Request, res: Response) => {
@@ -508,39 +525,7 @@ app.get("/certificates", authenticateJWT, (req: Request, res: Response) => {
 
 // app.use("/reqfiles", express.static(path.join(__dirname, "reqfiles")));
 
-// reqfiles
-
-app.get("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
-  const showId = parseInt(req.params.id, 10); // Получаем id из URL-параметров
-
-  if (isNaN(showId)) {
-    return res.status(400).json({ error: "Некорректный ID" });
-  }
-
-  const requests = readFromFile(requestsFilePath);
-  const show = requests.find((show: any) => show.id === showId);
-
-  if (!show) {
-    return res.status(404).json({ error: "Заявка не найдена" });
-  }
-
-  res.status(200).json({
-    id: show.id,
-    fullName: show.fullName,
-    role: show.role,
-    phone: show.phone,
-    email: show.email,
-    tax: show.tax,
-    orgTax: show.orgTax,
-    orgName: show.orgName,
-    reqType: show.reqType,
-    stepCode: show.stepCode,
-    dateTime: show.dateTime,
-    files: show.files,
-  });
-});
-
-// EDIT REQUEST BY ID
+// EDIT REQUEST BY ID - PUT
 
 app.put("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
   const showId = parseInt(req.params.id, 10);
