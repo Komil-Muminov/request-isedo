@@ -222,14 +222,14 @@ const AddRequest: React.FC = () => {
                 text="Выбрать тип заявки"
                 setShowTypeRequest={setShowTypeRequest}
               />
-              <ButtonPanelControl
+              {/* <ButtonPanelControl
                 icon={
                   <SaveIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
                 }
                 text="Сохранить"
                 handleSubmit={handleSubmit(onSubmit)}
                 activeSendButton={activeSendButton}
-              />
+              /> */}
               <ButtonPanelControl
                 icon={
                   <UnsubscribeIcon
@@ -237,6 +237,8 @@ const AddRequest: React.FC = () => {
                   />
                 }
                 text="Подписать"
+                handleSubmit={handleSubmit(onSubmit)}
+                activeSendButton={activeSendButton}
               />
               <ButtonPanelControl
                 icon={
@@ -386,7 +388,13 @@ const AddRequest: React.FC = () => {
                     item={fileInfo[1]}
                     handleGetFile={handleGetFile}
                     getFile={getFile}
-                    size="wrapper-file-width"
+                    // size="wrapper-file-width"
+                  />
+                  <CardFileService
+                    item={fileInfo[2]}
+                    handleGetFile={handleGetFile}
+                    getFile={getFile}
+                    // size="wrapper-file-width"
                   />
                 </div>
               </div>

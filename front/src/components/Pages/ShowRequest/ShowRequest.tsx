@@ -141,7 +141,7 @@ const ShowRequest = () => {
                 text="Сохранить"
                 activeSendButton={true}
               />
-              <ButtonPanelControl
+              {/* <ButtonPanelControl
                 icon={
                   <UnsubscribeIcon
                     sx={{ fontSize: "18px", fontWeight: "bold" }}
@@ -149,13 +149,13 @@ const ShowRequest = () => {
                 }
                 text="Подписать"
                 handleSubmit={handlePutRqstById}
-              />
+              /> */}
               <ButtonPanelControl
                 icon={
                   <CancelIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
                 }
                 text="Отклонить"
-                activeSendButton={true}
+                activeSendButton={false}
               />
               <ButtonPanelControl
                 icon={
@@ -233,10 +233,16 @@ const ShowRequest = () => {
               uinfo={rqstsDataById}
               title="Карточка пользователя"
               fileService={
-                <CardFileService
-                  item={fileInfo[1]}
-                  rqstsDataById={rqstsDataById}
-                />
+                <>
+                  <CardFileService
+                    item={fileInfo[1]}
+                    rqstsDataById={rqstsDataById}
+                  />
+                  <CardFileService
+                    item={fileInfo[2]}
+                    rqstsDataById={rqstsDataById}
+                  />
+                </>
               }
             />
             <UserOrOrganizationCard

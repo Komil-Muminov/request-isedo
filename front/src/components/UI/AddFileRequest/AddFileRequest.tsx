@@ -10,16 +10,16 @@ const AddFileRequest = ({
 }: TProps) => {
   const [fileName, setFileName] = useState("Выберите файл");
 
-  const executorFile =
-    item?.name === "Карор дар бораи аз вазифа озод намудани сармухосиб."
-      ? 1
-      : 2;
+  // const executorFile =
+  //   item?.name === "Карор дар бораи аз вазифа озод намудани сармухосиб."
+  //     ? 1
+  //     : 2;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
     setFileName(file ? file.name : "Выберите файл");
 
-    handleGetFile(item?.id, file, executorFile);
+    handleGetFile(item?.id, file, rqstsDataById?.userId);
   };
 
   const choosenFileClass = getFile?.number === item?.id ? "activeFile" : "";
@@ -27,6 +27,8 @@ const AddFileRequest = ({
   const currentFile = rqstsDataById?.files.find(
     (e: any) => e.userId === item?.id
   );
+
+  console.log();
 
   return (
     <div className="file-input-wrapper">
