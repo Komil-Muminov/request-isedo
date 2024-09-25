@@ -1,15 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./CertificateRevocationModal.css";
 
 import CloseIcon from "@mui/icons-material/Close";
 import { Button, IconButton } from "@mui/material";
 
+import { statusOfCertificates } from "../../../../../../API/Data/Certificates/Certificates";
+
 interface TProps {
   handleShow?: any;
+  handleChangeStatus?: any;
 }
 
-const CertificateRevocationModal = ({ handleShow }: TProps) => {
+const CertificateRevocationModal = ({
+  handleShow,
+  handleChangeStatus,
+}: TProps) => {
+  const [selectedReason, setSelectedReason] = useState(""); // состояние для выбранного значения
+
+  const handleSelectChange = (event: any) => {
+    setSelectedReason(event.target.value); // сохраняем выбранное значение в состояние
+  };
+
+  const handleConfirm = () => {
+    const gotStatusCode = statusOfCertificates.find(
+      (e) => e.name === selectedReason
+    );
+    if (gotStatusCode) {
+      handleChangeStatus(gotStatusCode?.code); // вызываем функцию изменения статуса
+    }
+    handleShow(false); // закрываем модальное окно
+  };
+
   return (
     <div
       onClick={() => handleShow(false)}
@@ -26,22 +48,28 @@ const CertificateRevocationModal = ({ handleShow }: TProps) => {
           <p>Вы действительно хотите отозвать выделенный сертификат?</p>
           <div className="reason-code">
             <p>Код причины:</p>
-            <select name="" id="">
+            <select
+              name="revocationReason"
+              id="revocationReason"
+              onChange={handleSelectChange}
+            >
               <option value="">Не определен</option>
-              <option value="">Компрометация ключа</option>
-              <option value="">Компрометация ЦС</option>
-              <option value="">Изменение принадлежности</option>
-              <option value="">Сертификат заменен</option>
-              <option value="">Прекращение работы</option>
-              <option value="">Приостановка действия</option>
+              {statusOfCertificates.map((e) => {
+                return (
+                  <option key={e.id} value={e.name}>
+                    {e.name}
+                  </option>
+                );
+              })}
             </select>
           </div>
           <div className="panel-control-buttons">
             <div className="wrapper-buttons">
               <Button
+                onClick={handleConfirm}
                 variant="contained"
                 sx={{
-                  backgroundColor: "#d8d8d8",
+                  backgroundColor: "#e8e8e8",
                   boxShadow: "none",
                   borderRadius: "0",
                   border: "1px solid #bdbdbd",
@@ -49,7 +77,7 @@ const CertificateRevocationModal = ({ handleShow }: TProps) => {
                   textTransform: "none",
                   padding: "0px 40px",
                   ":hover": {
-                    backgroundColor: "#cdcccc",
+                    backgroundColor: "#dfdede",
                     boxShadow: "none",
                     color: "#000",
                   },
@@ -61,7 +89,7 @@ const CertificateRevocationModal = ({ handleShow }: TProps) => {
                 onClick={() => handleShow(false)}
                 variant="contained"
                 sx={{
-                  backgroundColor: "#d8d8d8",
+                  backgroundColor: "#e8e8e8",
                   boxShadow: "none",
                   borderRadius: "0",
                   border: "1px solid #bdbdbd",
@@ -69,7 +97,7 @@ const CertificateRevocationModal = ({ handleShow }: TProps) => {
                   textTransform: "none",
                   padding: "0px 40px",
                   ":hover": {
-                    backgroundColor: "#cdcccc",
+                    backgroundColor: "#dfdede",
                     boxShadow: "none",
                     color: "#000",
                   },

@@ -1,23 +1,13 @@
-export interface TCertificates {
-  id?: number;
-  requestId?: number;
-  typeToken: string;
-  serialNumber: string;
-  validFrom: string;
-  validTo: string;
-  fullName: string;
-  organization: string;
-  role: string;
-}
+import { statusOfCertificates } from "./Data/Certificates/Certificates";
+
+import { TCertificates } from "./GetCertificates";
 
 const token = localStorage.getItem("token");
 
 export const postCertificates = async (
-  newData: TCertificates,
-  requestId: number
+  newData: TCertificates
 ): Promise<any> => {
   try {
-    newData.requestId = requestId;
     const response = await fetch("http://localhost:3000/certificates", {
       method: "POST",
       headers: {

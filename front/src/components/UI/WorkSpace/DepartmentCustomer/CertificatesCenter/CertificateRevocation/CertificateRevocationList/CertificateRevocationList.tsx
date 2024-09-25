@@ -1,6 +1,6 @@
 import "./CertificateRevocationList.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import GppBadIcon from "@mui/icons-material/GppBad";
 
@@ -14,6 +14,18 @@ import pointingHand from "../../../../../../../assets/pointinghand.svg";
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import CertificateRevocationModal from "../CertificateRevocationModal/CertificateRevocationModal";
 import ButtonPanelControl from "../../../../../ButtonPanelControl/ButtonPanelControl";
+
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+
+import { getCertificates } from "../../../../../../API/GetCertificates";
+import { TCertificates } from "../../../../../../API/PostCertificates";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useAuth } from "../../../../../../API/Hooks/useAuth";
+import { queryClient } from "../../../../../../../queryClient";
+import { getUsers, TGetUsers } from "../../../../../../API/GetUsers";
+
+import { statusOfCertificates } from "../../../../../../API/Data/Certificates/Certificates";
+import { putCertificates } from "../../../../../../API/PutCertificates";
 
 const CertificateRevocationList = () => {
   const [isMouseDown, setIsMouseDown] = useState(false);
@@ -32,7 +44,68 @@ const CertificateRevocationList = () => {
     setShow(state);
   };
 
-  console.log(show);
+  const [users, setUsers] = useState<TGetUsers[] | null>(null);
+
+  const usersQuery = useQuery(
+    {
+      queryFn: () => getUsers(),
+      queryKey: ["users"],
+    },
+    queryClient
+  );
+
+  useEffect(() => {
+    if (usersQuery.status === "success") {
+      setUsers(usersQuery.data);
+    }
+  }, [usersQuery]);
+
+  const getCertificateQuery = useQuery({
+    queryFn: () => getCertificates(),
+    queryKey: ["certificates"],
+  });
+
+  const [certificates, setCertificates] = useState<TCertificates[]>([]);
+
+  useEffect(() => {
+    if (getCertificateQuery.status === "success") {
+      setCertificates(getCertificateQuery.data);
+    }
+  }, [getCertificateQuery]);
+
+  // Получаем сертификат пользвателя по идентификатору пользователя
+  const getCertificateUser = certificates.find((cert) => {
+    return users?.some((user) => cert.userId === user.id);
+  });
+
+  const statusCertificate = statusOfCertificates.find(
+    (e) => e.code === getCertificateUser?.statusCode
+  );
+
+  // Мутация для обновления сертификата
+  const mutation = useMutation({
+    mutationFn: (updatedCertificate: TCertificates) =>
+      putCertificates(updatedCertificate), // Функция PUT запроса
+    onSuccess: () => {
+      // Обновляем сертификаты в кэше после изменения
+      queryClient.invalidateQueries({ queryKey: ["certificates"] });
+    },
+    onError: (error) => {
+      console.error("Ошибка при обновлении сертификата:", error);
+    },
+  });
+
+  // Функция для изменения статуса сертификата
+  const handleChangeStatus = (code: number) => {
+    if (getCertificateUser) {
+      mutation.mutate({
+        ...getCertificateUser,
+        statusCode: code, // Изменение statusCode с 0 на 5
+      });
+    }
+  };
+
+  console.log(getCertificateUser);
 
   return (
     <>
@@ -58,44 +131,65 @@ const CertificateRevocationList = () => {
                 <th>Общее имя запроса</th>
                 <th>Город запроса</th>
                 <th>Область/республика запроса</th>
+                <th>Должность</th>
+                <th>Серийный номер</th>
                 <th>Действителен с</th>
                 <th>Действителен до</th>
+                <th>Статус</th>
                 <th>Экспорт</th>
               </tr>
             </thead>
             <tbody>
-              <tr
-                style={{
-                  cursor: isMouseDown
-                    ? `url(${closedHand}), auto`
-                    : `url(${pointingHand}), auto`,
-                }}
-                onMouseDown={handleMouseDown}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseUp} // Для сброса состояния при выходе мыши
-              >
-                <td>
-                  <div className="content">
-                    <img src={certificateIcon} alt="" />
-                    <p>57378</p>
-                  </div>
-                </td>
-                <td>МТМУ №78 н Фирдавси</td>
-                <td>030014613</td>
-                <td>Бывшиев Бухгалтеров</td>
-                <td>077152671/906360603</td>
-                <td>Душанбе</td>
-                <td>23.09.2023</td>
-                <td>24.09.2024</td>
-                <td>
-                  <FileDownloadOutlinedIcon />
-                </td>
-              </tr>
+              {getCertificateUser && (
+                <tr
+                  className={
+                    getCertificateUser?.statusCode === 5 ? "change-status" : ""
+                  }
+                  style={{
+                    cursor: isMouseDown
+                      ? `url(${closedHand}), auto`
+                      : `url(${pointingHand}), auto`,
+                  }}
+                  onMouseDown={handleMouseDown}
+                  onMouseUp={handleMouseUp}
+                  onMouseLeave={handleMouseUp} // Для сброса состояния при выходе мыши
+                >
+                  <td>
+                    <div className="content">
+                      {getCertificateUser?.statusCode === 5 ? (
+                        <CheckCircleIcon sx={{ color: "green" }} />
+                      ) : (
+                        <img src={certificateIcon} alt="" />
+                      )}
+
+                      <p>{getCertificateUser?.id}</p>
+                    </div>
+                  </td>
+                  <td>{getCertificateUser?.organization}</td>
+                  <td>{getCertificateUser?.subdivision}</td>
+                  <td>{getCertificateUser?.nameRequest}</td>
+                  <td>{getCertificateUser?.cityRequest}</td>
+                  <td>{getCertificateUser?.regionRequest}</td>
+                  <td>{getCertificateUser?.role}</td>
+                  <td>{getCertificateUser?.serialNumber}</td>
+                  <td>{getCertificateUser?.validFrom}</td>
+                  <td>{getCertificateUser?.validTo}</td>
+                  <td>{statusCertificate?.name}</td>
+                  <td>
+                    <FileDownloadOutlinedIcon />
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
       </div>
-      {show && <CertificateRevocationModal handleShow={handleShow} />}
+      {show && (
+        <CertificateRevocationModal
+          handleShow={handleShow}
+          handleChangeStatus={handleChangeStatus}
+        />
+      )}
     </>
   );
 };

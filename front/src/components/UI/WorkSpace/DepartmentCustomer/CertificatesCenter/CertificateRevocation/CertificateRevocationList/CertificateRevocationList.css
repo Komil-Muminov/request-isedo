@@ -39,6 +39,7 @@
 td .content {
   display: flex;
   align-items: center;
+  gap: 5px;
 }
 
 .table-certificate-list td {
@@ -54,6 +55,6 @@ td .content {
   max-width: 300px;
 }
 
-.table-certificate-list tbody tr:hover {
-  background-color: #f9f9f9;
+.change-status {
+  background-color: rgba(0, 153, 255, 0.119);
 }
