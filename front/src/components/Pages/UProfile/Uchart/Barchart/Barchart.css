@@ -1,0 +1,12 @@
+.barchart__content {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	background: linear-gradient(
+		112.1deg,
+		rgb(32, 38, 57) 11.4%,
+		rgb(63, 76, 119) 70.2%
+	);
+
+	border-radius: 20px;
+}

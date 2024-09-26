@@ -1,8 +1,9 @@
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import { DashboardchartData } from "../ChartsData";
+import "./Dashboard.css";
 const Dashboardchart: React.FC = () => {
 	return (
-		<PieChart width={400} height={400}>
+		<PieChart width={1000} height={400} className="dashboard__content">
 			<Pie
 				data={DashboardchartData}
 				dataKey="value"

@@ -11,14 +11,16 @@ import { Theme } from "@radix-ui/themes";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./queryClient.ts";
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  // Предоставляет контекст для использования react-query во всем приложении. queryClient управляет состоянием кэширования запросов.
-  // React StrictMode
-  <Theme>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </QueryClientProvider>
-  </Theme>
-  // React StrictMode
+	// Предоставляет контекст для использования react-query во всем приложении. queryClient управляет состоянием кэширования запросов.
+	// React StrictMode
+	<React.StrictMode>
+		<Theme>
+			<QueryClientProvider client={queryClient}>
+				<BrowserRouter>
+					<App />
+				</BrowserRouter>
+			</QueryClientProvider>
+		</Theme>
+	</React.StrictMode>,
+	// React StrictMode
 );

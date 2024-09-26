@@ -11,7 +11,7 @@ import { Uwidget } from "../Uwidget/Uwidget";
 import Barchart from "../Uchart/Barchart/Barchart";
 import DashboardChart from "../Uchart/Dashboard/Dashboardchart";
 import Saleschart from "../Uchart/Saleschart/Saleschart";
-import Uchart from "../Uchart/Uchart/Uchart";
+import { Settings } from "@mui/icons-material";
 import "./Udetails.css";
 
 const Udetails: React.FC = () => {
@@ -79,6 +79,9 @@ const Udetails: React.FC = () => {
 					<div className="user-details">
 						<div className="udetails__content">
 							<div className="udetails__card">
+								<div className="udetails__setting">
+									<Settings sx={{ fill: "#464531" }} />
+								</div>
 								<div className="user-details_photo">
 									<div className="user_photo">
 										<img
@@ -86,22 +89,37 @@ const Udetails: React.FC = () => {
 											alt="uphoto"
 											className="photo"
 										/>
-										<div className="file-service-photo">
-											<label className="uphoto__label" htmlFor="uphoto">
-												Выберите фото
-												<input
-													style={{ visibility: "hidden" }}
-													id="uphoto"
-													type="file"
-													onChange={handleUphoto}
-												/>
-											</label>
-										</div>
+										<label className="uphoto__label" htmlFor="uphoto">
+											<input
+												style={{ visibility: "hidden" }}
+												id="uphoto"
+												type="file"
+												onChange={handleUphoto}
+											/>
+										</label>
 									</div>
+									{/* /* 25,09,2024 Cделать uphoto__setting_widget (для смены
+										фотограафии и тд и добавить галочку как инст ) */}
+									{/* <div className="uphoto__setting">
+										<p className="uphoto__setting_text">Место настрои</p>
+										<label
+											className="uphoto__label uphoto__setting_widget"
+											htmlFor="uphoto"
+										>
+											<input
+												style={{ visibility: "hidden" }}
+												id="uphoto"
+												type="file"
+												onChange={handleUphoto}
+											/>
+										</label>
+									</div> */}
+									{/* /* 25,09,2024 Cделать uphoto__setting_widget (для смены
+										фотограафии и тд ) */}
 
-									<div className="user__details_right">
+									{/* <div className="user__details_right">
 										<Uchart />
-									</div>
+									</div> */}
 								</div>
 								<div className="user-details-text">
 									<ul className="udetails__info-list">
@@ -197,8 +215,6 @@ const Udetails: React.FC = () => {
 								/>
 							</div>
 							<div className="udetails__chart">
-								{/* <Barchart /> */}
-
 								{chart === "dashboard" && <DashboardChart />}
 								{chart === "barchart" && <Barchart />}
 								{chart === "saleschart" && <Saleschart />}
