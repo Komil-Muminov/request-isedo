@@ -1,0 +1,26 @@
+.saleschart__content {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	background: linear-gradient(
+		112.1deg,
+		rgb(32, 38, 57) 11.4%,
+		rgb(63, 76, 119) 70.2%
+	);
+
+	border-radius: 20px;
+}
+
+/* .saleschart__content {
+	background-color: rgba(0, 0, 0, 0.284);
+} */
+
+.saleschart__info_text {
+	text-align: center;
+	font-weight: 600;
+	font-size: 20px;
+	padding: 20px;
+}
+.saleschart__desc {
+	color: #fff;
+}

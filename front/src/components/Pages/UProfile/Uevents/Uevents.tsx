@@ -4,15 +4,13 @@ interface TProps {
 	loading?: boolean;
 	type?: string;
 	desc: string | null | undefined;
-	// dnone?: boolean;
 }
 export const Uevents: React.FC<TProps> = ({
 	children,
 	loading,
 	desc,
 	type,
-}: // dnone,
-TProps) => {
+}: TProps) => {
 	return (
 		<>
 			<div className="uevents__content">

@@ -11,9 +11,11 @@ import {
 	ResponsiveContainer,
 } from "recharts";
 
+import "./Barchart.css";
+
 export const Barchart: React.FC = () => {
 	return (
-		<Paper style={{ padding: 16 }}>
+		<Paper style={{ padding: 16 }} className="barchart__content">
 			<Typography variant="h6" gutterBottom>
 				График
 			</Typography>
