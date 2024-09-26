@@ -10,7 +10,7 @@
     "reqType": "Смена главного бухгалтера",
     "dateTime": "24.09.2024.13:38",
     "password": "123",
-    "stepCode": 0,
+    "stepCode": 1,
     "files": [
       {
         "number": 1,
@@ -42,7 +42,7 @@
     "reqType": "Смена главного бухгалтера",
     "dateTime": "24.09.2024.13:39",
     "password": "123",
-    "stepCode": 0,
+    "stepCode": 1,
     "files": [
       {
         "number": 1,

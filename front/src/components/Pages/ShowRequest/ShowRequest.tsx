@@ -114,8 +114,6 @@ const ShowRequest = () => {
     return <p>Loading...</p>;
   }
 
-  console.log(rqstsDataById, "НЕ ПУСТОЙ");
-
   return (
     <main className="show-content">
       <div className="container">
@@ -141,15 +139,18 @@ const ShowRequest = () => {
                 text="Сохранить"
                 activeSendButton={true}
               />
-              {/* <ButtonPanelControl
-                icon={
-                  <UnsubscribeIcon
-                    sx={{ fontSize: "18px", fontWeight: "bold" }}
-                  />
-                }
-                text="Подписать"
-                handleSubmit={handlePutRqstById}
-              /> */}
+              {uinfo?.uType !== "kvd" && (
+                <ButtonPanelControl
+                  icon={
+                    <UnsubscribeIcon
+                      sx={{ fontSize: "18px", fontWeight: "bold" }}
+                    />
+                  }
+                  text="Подписать"
+                  handleSubmit={handlePutRqstById}
+                />
+              )}
+
               <ButtonPanelControl
                 icon={
                   <CancelIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />

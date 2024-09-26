@@ -18,7 +18,7 @@ import ButtonPanelControl from "../../../../../ButtonPanelControl/ButtonPanelCon
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 import { getCertificates } from "../../../../../../API/GetCertificates";
-import { TCertificates } from "../../../../../../API/PostCertificates";
+import { TCertificates } from "../../../../../../API/GetCertificates";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useAuth } from "../../../../../../API/Hooks/useAuth";
 import { queryClient } from "../../../../../../../queryClient";
