@@ -6,6 +6,7 @@ import "./DepartmentCustomer.css";
 import CertificateContent from "./Certificate/CertificateContent";
 import Token from "./Token/Token";
 import TokenList from "../../TokenList/TokenList";
+import CertificateRevocation from "./CertificatesCenter/CertificateRevocation/CertificateRevocationList/CertificateRevocationList";
 
 const ServicesContent = () => {
   const [showServicesList, setShowServicesList] = useState<boolean>(false);
@@ -22,25 +23,27 @@ const ServicesContent = () => {
 
   return (
     <>
+      <CertificateRevocation />
+
       {/* Закрывается при нажатии на кнопку Сохранить */}
-      {showServicesList && (
+      {/* {showServicesList && (
         <ServicesList handleShowServicesList={handleShowServicesList} />
-      )}
+      )} */}
       {/* Открывает список ServicesList при нажатии на кнопку Услуги */}
-      {!showServicesList && !showTokenList && (
+      {/* {!showServicesList && !showTokenList && (
         <Services handleShowServicesList={handleShowServicesList} />
-      )}
+      )} */}
       {/* Закрывает блок CertificateContent при открытие ServicesList */}
-      {!showServicesList && !showTokenList && <CertificateContent />}
+      {/* {!showServicesList && !showTokenList && <CertificateContent />} */}
       {/* Закрывает Token при нажатии на кнопку Токен */}
-      {!showTokenList && !showServicesList && (
+      {/* {!showTokenList && !showServicesList && (
         <Token
           setShowTokenList={setShowTokenList}
           handleShowTokenList={handleShowTokenList}
         />
-      )}
+      )} */}
       {/* Открывает TokenList при нажатии на кнопку Токен */}
-      {showTokenList && <TokenList handleShowTokenList={handleShowTokenList} />}
+      {/* {showTokenList && <TokenList handleShowTokenList={handleShowTokenList} />} */}
     </>
   );
 };

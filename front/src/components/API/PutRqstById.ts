@@ -16,6 +16,10 @@ export interface PutRqstsByIdType {
   stepCode: number;
   dateTime: string;
   files: FileType[];
+  passport: string;
+  token: "";
+  password: string;
+  userId: number;
 }
 
 export const putRqstsById = async (newData: PutRqstsByIdType): Promise<any> => {

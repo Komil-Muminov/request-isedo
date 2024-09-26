@@ -3,19 +3,9 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getRqstsById, GetRqstsByIdType } from "../../API/GetRqstsById";
 import { queryClient } from "../../../queryClient";
-import {
-  Button,
-  TextField,
-  Stepper,
-  StepLabel,
-  Step,
-  Typography,
-  IconButton,
-} from "@mui/material";
-import { Select } from "@radix-ui/themes";
+import { Stepper, StepLabel, Step } from "@mui/material";
 import "../AddRequest/AddRequest.css";
 import "@radix-ui/themes/styles.css";
-import TableRowRequest from "../../UI/TableRow/TableRowRequest";
 import { GetMeType, useAuth } from "../../API/Hooks/useAuth";
 import { Loader } from "../../UI/Loader/Loader";
 import { stepsOfKvd, stepsOfBo } from "../../API/Data/Steps/Steps";
@@ -53,7 +43,11 @@ const ShowRequest = () => {
     queryClient
   );
 
-  const [rqstsData, setRqstsData] = useState<GetRqstsByIdType[] | null>(null);
+  console.log(getRqstsByIdQuery.data, "Check");
+
+  const [rqstsDataById, setRqstsDataById] = useState<GetRqstsByIdType | null>(
+    null
+  );
 
   const { getMe } = useAuth();
   const uQuery = useQuery(
@@ -86,13 +80,11 @@ const ShowRequest = () => {
       ? stepsOfBo
       : [];
 
-  console.log(getRqstsByIdQuery.data, "===============");
-
   useEffect(() => {
     if (getRqstsByIdQuery.status === "success") {
       console.log(getRqstsByIdQuery.data); // Проверьте, массив это или объект
 
-      setRqstsData(getRqstsByIdQuery.data);
+      setRqstsDataById(getRqstsByIdQuery.data);
     } else if (getRqstsByIdQuery.status === "error") {
       console.error(getRqstsByIdQuery.error);
     }
@@ -108,9 +100,7 @@ const ShowRequest = () => {
     queryClient
   );
 
-  const rqstsDataById = rqstsData && rqstsData[0];
-
-  console.log(rqstsDataById);
+  console.log(getRqstsByIdQuery.data, "===============");
 
   const handlePutRqstById = () => {
     const updateReqData = {
@@ -147,22 +137,26 @@ const ShowRequest = () => {
                   <SaveIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
                 }
                 text="Сохранить"
+                activeSendButton={true}
               />
-              <ButtonPanelControl
-                icon={
-                  <UnsubscribeIcon
-                    sx={{ fontSize: "18px", fontWeight: "bold" }}
-                  />
-                }
-                text="Подписать"
-                handleSubmit={handlePutRqstById}
-              />
+              {uinfo?.uType !== "kvd" && (
+                <ButtonPanelControl
+                  icon={
+                    <UnsubscribeIcon
+                      sx={{ fontSize: "18px", fontWeight: "bold" }}
+                    />
+                  }
+                  text="Подписать"
+                  handleSubmit={handlePutRqstById}
+                />
+              )}
+
               <ButtonPanelControl
                 icon={
                   <CancelIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
                 }
                 text="Отклонить"
-                activeSendButton={true}
+                activeSendButton={false}
               />
               <ButtonPanelControl
                 icon={
@@ -220,7 +214,12 @@ const ShowRequest = () => {
             <UserOrOrganizationCard
               uinfo={uinfo}
               title="Карточка пользователя"
-              fileService={<CardFileService item={fileInfo[0]} />}
+              fileService={
+                <CardFileService
+                  item={fileInfo[0]}
+                  rqstsDataById={rqstsDataById}
+                />
+              }
             />
             <UserOrOrganizationCard
               CorporateFareIcon={CorporateFareIcon}
@@ -234,7 +233,18 @@ const ShowRequest = () => {
             <UserOrOrganizationCard
               uinfo={rqstsDataById}
               title="Карточка пользователя"
-              fileService={<CardFileService item={fileInfo[0]} />}
+              fileService={
+                <>
+                  <CardFileService
+                    item={fileInfo[1]}
+                    rqstsDataById={rqstsDataById}
+                  />
+                  <CardFileService
+                    item={fileInfo[2]}
+                    rqstsDataById={rqstsDataById}
+                  />
+                </>
+              }
             />
             <UserOrOrganizationCard
               CorporateFareIcon={CorporateFareIcon}

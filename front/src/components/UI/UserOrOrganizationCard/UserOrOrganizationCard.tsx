@@ -1,4 +1,5 @@
 import "./UserOrOrganizationCard.css";
+import sampleImage from "../../../../../back/uploads/929493.png";
 
 const UserOrOrganizationCard = ({
   uinfo,
@@ -6,6 +7,8 @@ const UserOrOrganizationCard = ({
   title,
   fileService,
 }: any) => {
+  console.log(sampleImage);
+
   return (
     <div
       className={`wrapper-accountant ${
@@ -19,7 +22,14 @@ const UserOrOrganizationCard = ({
             {CorporateFareIcon ? (
               <CorporateFareIcon sx={{ fontSize: "100px" }} />
             ) : (
-              <img src={`http://localhost:3000${uinfo?.photo}`} alt="" />
+              <img
+                src={
+                  uinfo?.photo
+                    ? `http://localhost:3000${uinfo?.photo}`
+                    : sampleImage
+                }
+                alt=""
+              />
             )}
           </div>
           <div className="wrapper-text">

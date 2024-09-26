@@ -1,4 +1,17 @@
-import { TCertificates } from "./PostCertificates";
+export interface TCertificates {
+  id?: number;
+  userId: number | null;
+  organization: string;
+  subdivision: string;
+  nameRequest: string;
+  role: string;
+  cityRequest: string;
+  regionRequest: string;
+  serialNumber: string;
+  validFrom: string;
+  validTo: string;
+  statusCode: number;
+}
 
 const token = localStorage.getItem("token");
 

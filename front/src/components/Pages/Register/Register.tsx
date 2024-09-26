@@ -26,8 +26,6 @@ export const Register: React.FC = () => {
 
   const [rqstsData, setRqstsData] = useState<GetRqstsType[]>([]);
 
-  console.log(rqstsData);
-
   // GET USERS
 
   const [users, setUsers] = useState<TGetUsers[] | null>(null);
@@ -77,13 +75,14 @@ export const Register: React.FC = () => {
       ? stepsOfBo
       : [];
 
-  const rows = rqstsData.map((e) => {
+  // Фильтруем заявки только для пользователей с типом 'kvd' и статусом 'Исполнение'
+  const filteredRqsts = rqstsData.filter(
+    (e) => uinfo?.uType !== "kvd" || e.stepCode === 1
+  );
+
+  const rows = filteredRqsts.map((e) => {
     const stepFound = steps.find((step) => step.stepCode === e.stepCode);
-
-    // Необходимо создать запрос на массив пользователей чтобы сделать запрос
     const organizationRequest = users?.find((user) => user.id === e.userId);
-
-    console.log(organizationRequest);
 
     return {
       id: e.id,

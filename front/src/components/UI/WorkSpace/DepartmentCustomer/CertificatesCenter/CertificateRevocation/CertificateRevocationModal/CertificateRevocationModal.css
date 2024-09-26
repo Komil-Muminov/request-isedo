@@ -1,0 +1,63 @@
+.certificate-revocation-modal {
+  width: 100%;
+  height: 100%;
+  background-color: #00000030;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.certificate-revocation-modal .content {
+  background-color: #fff;
+  width: 30%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid rgb(0, 149, 255);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 5px 15px;
+}
+
+.modal-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  gap: 10px;
+  height: 100%;
+  padding: 10px 15px;
+  background-color: #e8e8e8;
+}
+
+.reason-code {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.reason-code select {
+  font-size: 16px;
+  outline: none;
+}
+
+.wrapper-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.panel-control-buttons {
+  display: flex;
+  justify-content: end;
+  flex-direction: row;
+  width: 100%;
+  border-bottom: 0px;
+  padding: 0px;
+}

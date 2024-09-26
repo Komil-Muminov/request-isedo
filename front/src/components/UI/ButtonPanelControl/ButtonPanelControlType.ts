@@ -9,4 +9,5 @@ export interface TProps {
   activeSendButton?: boolean;
   handleCloseAfterSave?: any;
   setShowTypeRequest?: any;
+  handleShow?: any;
 }

@@ -17,6 +17,9 @@ export interface GetRqstsType {
   dateTime: string;
   files: FileType[];
   userId: number;
+  passport: string;
+  password: string;
+  token: "";
 }
 
 // Извлекает тип данных из схемы GetRqstsScheme. Это означает, что GetRqsts будет типом объекта с полями id, orgname, accountant, и desc, где значения соответствуют типам, указанным в схеме.

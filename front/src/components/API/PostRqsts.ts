@@ -16,6 +16,9 @@ export interface PostRqstScheme {
   dateTime: string;
   files: FileType[];
   password: string;
+  orgTax: string;
+  orgName: string;
+  userId: number;
 }
 
 const token = localStorage.getItem("token");

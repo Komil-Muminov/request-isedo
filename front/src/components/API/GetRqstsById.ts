@@ -10,16 +10,19 @@ export interface GetRqstsByIdType {
   phone: string;
   email: string;
   tax: string;
-  orgTax: string;
-  orgName: string;
   reqType: string;
   stepCode: number;
   dateTime: string;
   files: FileType[];
+  orgTax: string;
+  orgName: string;
   userId: number;
+  passport: string;
+  password: string;
+  token: "";
 }
 
-export const getRqstsById = async (id: number): Promise<GetRqstsByIdType[]> => {
+export const getRqstsById = async (id: number): Promise<GetRqstsByIdType> => {
   const token = localStorage.getItem("token");
   return fetch(`http://localhost:3000/account/show/${id}`, {
     headers: {

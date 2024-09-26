@@ -44,10 +44,11 @@
 }
 
 .wrapper-image {
-  border-radius: 10px;
+  border-radius: 20px;
   overflow: hidden;
   display: flex;
   align-items: center;
+  max-width: 150px;
 }
 
 .wrapper-image img {

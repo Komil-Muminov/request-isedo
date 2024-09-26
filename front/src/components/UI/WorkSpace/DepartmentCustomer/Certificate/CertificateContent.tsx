@@ -19,7 +19,7 @@ const CertificateContent = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const postCertificateMutation = useMutation({
-    mutationFn: (data: TCertificates) => postCertificates(data, requestId),
+    mutationFn: (data: TCertificates) => postCertificates(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["certificates"] });
     },

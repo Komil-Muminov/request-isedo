@@ -372,6 +372,23 @@ app.get("/requests", authenticateJWT, (req: Request, res: Response) => {
   }
 });
 
+// Request BY ID GET
+app.get("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
+  const showId = parseInt(req.params.id, 10); // Получаем id из URL-параметров
+
+  if (isNaN(showId)) {
+    return res.status(400).json({ error: "Некорректный ID" });
+  }
+
+  const requests = readFromFile(requestsFilePath);
+  const show = requests.find((request: any) => request.id === showId);
+
+  if (!show) {
+    return res.status(404).json({ error: "Заявка не найдена" });
+  }
+  res.status(200).json(show); // Возвращаем только найденную заявку
+});
+
 // Services ==========
 
 app.post("/services", authenticateJWT, (req: Request, res: Response) => {
@@ -420,6 +437,8 @@ app.get("/services", authenticateJWT, (req: Request, res: Response) => {
 
 // Certificates ============
 
+// POST Certificates
+
 app.post("/certificates", authenticateJWT, (req: Request, res: Response) => {
   const { body: requestData } = req;
   const { userId } = req as any;
@@ -447,6 +466,8 @@ app.post("/certificates", authenticateJWT, (req: Request, res: Response) => {
     .json({ message: "Сертификат успешна добавлена", requestData });
 });
 
+// GET Certificates
+
 app.get("/certificates", authenticateJWT, (req: Request, res: Response) => {
   const { userId } = req as any;
 
@@ -458,13 +479,71 @@ app.get("/certificates", authenticateJWT, (req: Request, res: Response) => {
   }
 
   try {
-    const requestData = JSON.parse(
+    const certificateData = JSON.parse(
       fs.readFileSync(certificatesFilePath, "utf8")
     );
-    res.status(200).json(requestData);
+    res.status(200).json(certificateData);
   } catch (err) {
     console.error("Ошибка при чтении файла certificates.json:", err);
     res.status(500).json({ error: "Ошибка сервера при чтении данных" });
+  }
+});
+
+// PUT Certificates
+
+app.put("/certificates/:id", authenticateJWT, (req: Request, res: Response) => {
+  const { userId } = req as any; // Получаем ID пользователя из токена
+  const certificateId = parseInt(req.params.id); // Получаем ID сертификата из параметров
+  const { statusCode } = req.body; // Ожидаем, что в body будет передан новый statusCode
+
+  // Чтение пользователей из файла
+  const users = readFromFile(usersFilePath);
+  const user = users.find((u: any) => u.id === userId);
+
+  // Проверяем, имеет ли пользователь права для внесения изменений
+  if (!user || user.uType !== "kvd") {
+    return res.status(403).json({
+      error: `Вы не имеете прав для изменения сертификатов. Ваш тип: ${
+        user?.uType || "неизвестен"
+      }`,
+    });
+  }
+
+  try {
+    // Чтение данных сертификатов из файла
+    const certificateData = JSON.parse(
+      fs.readFileSync(certificatesFilePath, "utf8")
+    );
+
+    // Поиск сертификата по ID
+    const certificate = certificateData.find(
+      (cert: any) => cert.id === certificateId
+    );
+
+    // Если сертификат не найден
+    if (!certificate) {
+      return res.status(404).json({ error: "Сертификат не найден" });
+    }
+
+    // Проверяем, был ли передан корректный статус
+    if (typeof statusCode !== "number") {
+      return res.status(400).json({ error: "Неверный формат statusCode" });
+    }
+
+    // Обновление statusCode сертификата
+    certificate.statusCode = statusCode;
+
+    // Запись изменений обратно в файл
+    fs.writeFileSync(
+      certificatesFilePath,
+      JSON.stringify(certificateData, null, 2)
+    );
+
+    // Возвращаем обновлённый сертификат
+    res.status(200).json(certificate);
+  } catch (err) {
+    console.error("Ошибка при обновлении сертификата:", err);
+    res.status(500).json({ error: "Ошибка сервера при обновлении данных" });
   }
 });
 
@@ -508,39 +587,7 @@ app.get("/certificates", authenticateJWT, (req: Request, res: Response) => {
 
 // app.use("/reqfiles", express.static(path.join(__dirname, "reqfiles")));
 
-// reqfiles
-
-app.get("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
-  const showId = parseInt(req.params.id, 10); // Получаем id из URL-параметров
-
-  if (isNaN(showId)) {
-    return res.status(400).json({ error: "Некорректный ID" });
-  }
-
-  const requests = readFromFile(requestsFilePath);
-  const show = requests.find((show: any) => show.id === showId);
-
-  if (!show) {
-    return res.status(404).json({ error: "Заявка не найдена" });
-  }
-
-  res.status(200).json({
-    id: show.id,
-    fullName: show.fullName,
-    role: show.role,
-    phone: show.phone,
-    email: show.email,
-    tax: show.tax,
-    orgTax: show.orgTax,
-    orgName: show.orgName,
-    reqType: show.reqType,
-    stepCode: show.stepCode,
-    dateTime: show.dateTime,
-    files: show.files,
-  });
-});
-
-// EDIT REQUEST BY ID
+// EDIT REQUEST BY ID - PUT
 
 app.put("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
   const showId = parseInt(req.params.id, 10);

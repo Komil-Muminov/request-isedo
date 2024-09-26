@@ -1,0 +1,60 @@
+.panel-control-certificate-revocation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 0px 20px;
+}
+
+.certificates-revocation-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: #607d8b;
+  font-weight: 600;
+}
+
+.table-container {
+  overflow-x: auto; /* Включает горизонтальный скролл */
+  margin-top: 20px; /* Добавьте отступ для лучшего визуального восприятия */
+}
+
+.table-certificate-list {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-certificate-list th,
+.table-certificate-list td {
+  padding: 10px 20px;
+  text-align: left;
+  border: 1px solid #ddd;
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+
+td .content {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.table-certificate-list td {
+  padding: 5px 20px;
+  max-width: 200px;
+}
+
+.table-certificate-list th {
+  background-color: #f2f2f2;
+}
+
+.table-certificate-list td:first-child {
+  max-width: 300px;
+}
+
+.change-status {
+  background-color: rgba(0, 153, 255, 0.119);
+}
