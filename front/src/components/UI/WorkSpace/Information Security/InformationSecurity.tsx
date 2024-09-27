@@ -21,6 +21,8 @@ import { getRqstsById, GetRqstsByIdType } from "../../../API/GetRqstsById";
 import { queryClient } from "../../../../queryClient";
 import { getUsers, TGetUsers } from "../../../API/GetUsers";
 
+import InformationSecurityModal from "../../InformationSecurityModal/InformationSecurityModal";
+
 const InformationSecurity = () => {
   const [isMouseDown, setIsMouseDown] = useState(false);
 
@@ -76,7 +78,11 @@ const InformationSecurity = () => {
 
   const currentUser = users?.find((e) => e?.id === rqstsDataById?.userId);
 
-  console.log(currentUser, "НЕ ПУСТОЙ");
+  const [show, setShow] = useState<boolean>(false);
+
+  const handleShow = (state: boolean) => {
+    setShow(state);
+  };
 
   return (
     <>
@@ -91,6 +97,7 @@ const InformationSecurity = () => {
               <PersonOffIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
             }
             text="Отправить в пассив"
+            handleShow={handleShow}
           />
         </div>
         <div className="table-container-security ">
@@ -136,6 +143,7 @@ const InformationSecurity = () => {
           </table>
         </div>
       </div>
+      {show && <InformationSecurityModal handleShow={handleShow} />}
     </>
   );
 };
