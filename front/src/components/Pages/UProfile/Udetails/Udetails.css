@@ -61,6 +61,21 @@
 	/* background: linear-gradient(to right, #f3e7e9, #e3eeff); */
 }
 
+.uphoto__label::before {
+	content: "";
+	position: absolute;
+	background-image: url("../../../../assets/icons/twitter-verification.svg");
+	max-width: 20px;
+	width: 100%;
+	min-height: 20px;
+	background-repeat: no-repeat;
+	background-position: top right;
+	background-size: cover;
+	border-radius: 100%;
+	right: 12%;
+	background-color: rgba(8, 255, 173, 0.712);
+}
+
 .photo {
 	max-width: 350px;
 	width: 100%;
