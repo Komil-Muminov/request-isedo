@@ -27,7 +27,7 @@ const salesData: SalesData[] = [
 const SalesTargetChart: React.FC = () => {
 	return (
 		<>
-			<div className="saleschart__content">
+			<div className="saleschart__content charts__bg">
 				<div className="saleschart__info_text">
 					<p className="saleschart__desc">График</p>
 				</div>

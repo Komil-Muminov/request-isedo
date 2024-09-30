@@ -32,8 +32,7 @@ const LazyDetailsPage = lazy(
 );
 
 const LazyChartPage = lazy(
-	() =>
-		import("./components/Pages/UProfile/Uchart/UchartDetails/UchartDetails"),
+	() => import("./components/Pages/UProfile/Uchart/Uchartshort/Uchartshort"),
 );
 
 const LazyDashboard = lazy(

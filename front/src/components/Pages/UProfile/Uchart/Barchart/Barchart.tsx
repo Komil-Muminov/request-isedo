@@ -15,7 +15,7 @@ import "./Barchart.css";
 
 export const Barchart: React.FC = () => {
 	return (
-		<Paper style={{ padding: 16 }} className="barchart__content">
+		<Paper style={{ padding: 16 }} className="charts__bg">
 			<Typography variant="h6" gutterBottom>
 				График
 			</Typography>

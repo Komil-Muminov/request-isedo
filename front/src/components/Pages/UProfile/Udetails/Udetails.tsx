@@ -13,6 +13,7 @@ import DashboardChart from "../Uchart/Dashboard/Dashboardchart";
 import Saleschart from "../Uchart/Saleschart/Saleschart";
 import { Settings } from "@mui/icons-material";
 import "./Udetails.css";
+import UchartInfo from "../Uchart/Uchartshort/Uchartshort";
 
 const Udetails: React.FC = () => {
 	const [uPhoto, setphoto] = useState<CurrUserPhoto | null>(null);

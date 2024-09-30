@@ -78,9 +78,11 @@
 
 .photo {
 	max-width: 350px;
-	width: 100%;
-	min-height: 250px;
-	max-height: 400px;
+	/* width: 100%; */
+	width: 400px;
+	height: 350px;
+	/* max-height: 400px; */
+	border-radius: 50%;
 }
 
 /* .file-service-photo {
