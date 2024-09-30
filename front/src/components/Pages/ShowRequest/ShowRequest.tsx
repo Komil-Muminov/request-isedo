@@ -28,6 +28,10 @@ import CardFileService from "../../UI/CardFileService/CardFileService";
 import { fileInfo } from "../../API/Data/Documents/DocumentList";
 
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
+import {
+  getOrganizations,
+  TGetOrganizations,
+} from "../../API/GetOrganizations";
 
 const ShowRequest = () => {
   const navigate = useNavigate();
@@ -109,6 +113,26 @@ const ShowRequest = () => {
     };
     putRqstsByIdMutation.mutate(updateReqData);
   };
+
+  const [organizations, setOrganizations] = useState<
+    TGetOrganizations[] | null
+  >(null);
+
+  const getOrganizationsQuery = useQuery(
+    {
+      queryFn: () => getOrganizations(),
+      queryKey: ["organizations"],
+    },
+    queryClient
+  );
+
+  useEffect(() => {
+    if (getOrganizationsQuery.status === "success") {
+      setOrganizations(getOrganizationsQuery.data);
+    }
+  }, [getOrganizationsQuery]);
+
+  console.log(organizations);
 
   if (getRqstsByIdQuery.status === "pending") {
     return <p>Loading...</p>;

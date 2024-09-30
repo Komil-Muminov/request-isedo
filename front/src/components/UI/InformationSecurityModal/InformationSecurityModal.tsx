@@ -4,18 +4,17 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Button, IconButton } from "@mui/material";
 
 interface TProps {
-  handleShow?: any;
-  handleChangeStatus?: any;
+  handleShow: (state: boolean) => void;
+  handleChangeStatus: () => void;
 }
 
-const InformationSecurityModal = ({
+const InformationSecurityModal: React.FC<TProps> = ({
   handleShow,
   handleChangeStatus,
-}): TProps => {
+}) => {
   const handleConfirm = () => {
-    handleChangeStatus("Актив"); // вызываем функцию изменения статуса
-
-    handleShow(false); // закрываем модальное окно
+    handleChangeStatus();
+    handleShow(false);
   };
 
   return (
