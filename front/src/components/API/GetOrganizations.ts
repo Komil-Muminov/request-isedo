@@ -9,6 +9,7 @@ export interface TGetOrganizations {
   website: string;
   description: string;
   status: boolean;
+  userIds: number[];
 }
 
 export const getOrganizations = async (): Promise<TGetOrganizations[]> => {

@@ -38,6 +38,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import {
+  getOrganizations,
+  TGetOrganizations,
+} from "../../API/GetOrganizations";
+import { getUsers, TGetUsers } from "../../API/GetUsers";
 
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
@@ -152,12 +157,8 @@ const AddRequest: React.FC = () => {
     }
   };
 
-  console.log(getValues());
-
   // Увеличивает номер текущего шага на 1.
   const onSubmit = (data: PostRqstScheme) => {
-    console.log(data);
-
     const stepFound = steps.find((e) => e.stepCode === 0);
 
     const getDate = new Date();
@@ -178,20 +179,55 @@ const AddRequest: React.FC = () => {
       userId: uinfo?.userId,
     };
 
-    console.log(updateReqData);
-
     postRqstsMutation.mutate(updateReqData);
   };
 
   const activeSendButton = uinfo?.uType === "bo" && postRqstsMutation.isSuccess;
 
-  console.log(steps);
-
-  console.log(reqType);
-
   const [showTypeRequest, setShowTypeRequest] = useState<boolean>(false);
 
-  console.log(uinfo);
+  const [users, setUsers] = useState<TGetUsers[] | null>(null);
+
+  const usersQuery = useQuery(
+    {
+      queryFn: () => getUsers(),
+      queryKey: ["users"],
+    },
+    queryClient
+  );
+
+  useEffect(() => {
+    if (usersQuery.status === "success") {
+      setUsers(usersQuery.data);
+    }
+  }, [usersQuery]);
+
+  const [organizations, setOrganizations] = useState<
+    TGetOrganizations[] | null
+  >(null);
+
+  const getOrganizationsQuery = useQuery(
+    {
+      queryFn: () => getOrganizations(),
+      queryKey: ["organizations"],
+    },
+    queryClient
+  );
+
+  useEffect(() => {
+    if (getOrganizationsQuery.status === "success") {
+      setOrganizations(getOrganizationsQuery.data);
+    }
+  }, [getOrganizationsQuery]);
+
+  // Обработать еще раз
+  const accountantOrganization = users?.find((user) => {
+    return organizations?.find((org) => {
+      return org.userIds.find((userId) => userId === user.id);
+    });
+  });
+
+  console.log(accountantOrganization);
 
   return (
     <section className="add-content">
@@ -304,7 +340,7 @@ const AddRequest: React.FC = () => {
               <TitleDocument title="Нынешний главный бухгалтер" />
               <div className="wrapper-cards">
                 <UserOrOrganizationCard
-                  uinfo={uinfo}
+                  uinfo={accountantOrganization}
                   title="Карточка пользователя"
                   fileService={
                     <CardFileService
