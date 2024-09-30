@@ -27,7 +27,6 @@
   border-collapse: collapse;
 }
 
-
 .table-security-list th,
 .table-security-list td {
   padding: 10px 20px;
@@ -57,4 +56,8 @@ td .content {
 
 .table-security-list td:first-child {
   max-width: 300px;
+}
+
+.passive-user {
+  background-color: #ff000030;
 }

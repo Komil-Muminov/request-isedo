@@ -105,7 +105,7 @@ const CertificateRevocationList = () => {
     }
   };
 
-  console.log(getCertificateUser);
+  console.log(certificates, "USERID", users, "ID");
 
   return (
     <>

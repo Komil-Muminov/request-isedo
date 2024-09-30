@@ -14,6 +14,7 @@ app.use(cors());
 
 // path — это встроенный модуль в Node.js, предназначенный для работы с путями файлов и директорий.
 // __dirname содержит абсолютный путь к каталогу, в котором расположен текущий исполняемый файл.
+const organizationsFilePath = path.join(__dirname, "organizations.json");
 const usersFilePath = path.join(__dirname, "users.json");
 const requestsFilePath = path.join(__dirname, "requests.json");
 const servicesFilePath = path.join(__dirname, "services.json");
@@ -198,6 +199,7 @@ app.post("/register", (req: Request, res: Response) => {
       department,
       reqIdentity: false,
       uIdentity: false,
+      status: true,
     };
     users.push(newUser);
     writeToFile(usersFilePath, users);
@@ -222,6 +224,7 @@ app.post("/register", (req: Request, res: Response) => {
       orgName,
       orgTax,
       department,
+      status: true,
     };
     users.push(newUser);
     writeToFile(usersFilePath, users);
@@ -284,6 +287,7 @@ app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
       role: user.role,
       position: user.position,
       department: user.department,
+      status: user.status,
     });
   }
 
@@ -302,7 +306,22 @@ app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
     department: user.department,
     reqIdentity: user.reqIdentity,
     uIdentity: user.uIdentity,
+    status: user.status,
   });
+});
+
+// Get Organizations
+
+app.get("/organizations", authenticateJWT, (req: Request, res: Response) => {
+  try {
+    const organizationsData = JSON.parse(
+      fs.readFileSync(organizationsFilePath, "utf8")
+    );
+    res.status(200).json(organizationsData);
+  } catch (err) {
+    console.error("Ошибка при чтении файла organizations.json:", err);
+    res.status(500).json({ error: "Ошибка сервера при чтении данных" });
+  }
 });
 
 // All Users
@@ -543,6 +562,56 @@ app.put("/certificates/:id", authenticateJWT, (req: Request, res: Response) => {
     res.status(200).json(certificate);
   } catch (err) {
     console.error("Ошибка при обновлении сертификата:", err);
+    res.status(500).json({ error: "Ошибка сервера при обновлении данных" });
+  }
+});
+
+// PUT User Status
+
+app.put("/users/:id", authenticateJWT, (req: Request, res: Response) => {
+  const { userId } = req as any; // Получаем ID пользователя из токена
+  const changeUserId = parseInt(req.params.id); // Получаем ID измененного пользователя из параметров
+
+  // Чтение пользователей из файла
+  const users = readFromFile(usersFilePath);
+  const user = users.find((u: any) => u.id === userId);
+
+  // Проверяем, имеет ли пользователь права для внесения изменений
+  if (!user || user.uType !== "kvd") {
+    return res.status(403).json({
+      error: `Вы не имеете прав для изменения сертификатов. Ваш тип: ${
+        user?.uType || "неизвестен"
+      }`,
+    });
+  }
+
+  try {
+    // Чтение данных пользователя
+    const usersData = JSON.parse(fs.readFileSync(usersFilePath, "utf8"));
+
+    // Поиск измененного пользователя по ID
+    const getChangedUser = usersData.find(
+      (user: any) => user.id === changeUserId
+    );
+
+    // Если пользователь не найден
+    if (!getChangedUser) {
+      return res.status(404).json({ error: "Пользователь не найден" });
+    }
+
+    // Обновляем данные пользователя
+    Object.assign(getChangedUser, req.body); // Обновляем поля измененного пользователя на основе тела запроса
+
+    // Изменяем status на false
+    getChangedUser.status = false;
+
+    // Запись изменений обратно в файл
+    fs.writeFileSync(usersFilePath, JSON.stringify(usersData, null, 2));
+
+    // Возвращаем обновлённого пользователя
+    res.status(200).json(getChangedUser);
+  } catch (err) {
+    console.error("Ошибка при обновлении пользователя:", err);
     res.status(500).json({ error: "Ошибка сервера при обновлении данных" });
   }
 });

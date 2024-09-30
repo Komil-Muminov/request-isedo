@@ -12,7 +12,8 @@
     "role": "Начальник отдела",
     "orgName": "",
     "orgTax": "",
-    "department": "Шуъба оид ба кор бо муштариён"
+    "department": "Шуъба оид ба кор бо муштариён",
+    "status": true
   },
   {
     "id": 2,
@@ -27,7 +28,8 @@
     "role": "Мутахассис",
     "orgName": "",
     "orgTax": "",
-    "department": "Шуъба оид ба таҳия ва татбиқи барномаҳои иттилоотӣ"
+    "department": "Шуъба оид ба таҳия ва татбиқи барномаҳои иттилоотӣ",
+    "status": true
   },
   {
     "id": 3,
@@ -44,7 +46,8 @@
     "orgTax": "040001802",
     "department": "",
     "reqIdentity": true,
-    "uIdentity": false
+    "uIdentity": false,
+    "status": true
   },
   {
     "id": 4,
@@ -63,23 +66,43 @@
     "orgTax": "",
     "department": "",
     "reqIdentity": false,
-    "uIdentity": false
+    "uIdentity": false,
+    "status": true
   },
   {
     "id": 5,
     "uType": "bo",
-    "username": "bo2",
+    "username": "user1",
     "password": "123",
-    "photo": "Avatar Image.svg",
-    "fullName": "Шарифзода Далер",
+    "photo": "IMG_20240930_160646_286.jpg",
+    "fullName": "Шоайдаров Парпишо",
     "phone": "880006458",
-    "tax": "020003417",
-    "email": "sharifzoda8702@gmail.com",
+    "tax": "040003417",
+    "email": "parpisho@gmail.com",
     "role": "Главный бухгалтер",
-    "orgName": "Бюджетная организация",
+    "orgName": "Muhsiddin and Parpisho Corporation",
     "orgTax": "050002899",
     "department": "",
     "reqIdentity": true,
-    "uIdentity": false
+    "uIdentity": false,
+    "status": true
+  },
+  {
+    "id": 6,
+    "uType": "bo",
+    "username": "user2",
+    "password": "123",
+    "photo": "IMG_20240930_160659_248.jpg",
+    "fullName": "Мухсиддин Махмадалиев",
+    "phone": "880001304",
+    "tax": "080005504",
+    "email": "muhsiddin@gmail.com",
+    "role": "Руководитель",
+    "orgName": "Muhsiddin and Parpisho Corporation",
+    "orgTax": "050002899",
+    "department": "",
+    "reqIdentity": true,
+    "uIdentity": false,
+    "status": true
   }
 ]

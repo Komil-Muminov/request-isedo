@@ -14,14 +14,17 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 import NoAccountsIcon from "@mui/icons-material/NoAccounts";
 
+import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
+
 import PersonOffIcon from "@mui/icons-material/PersonOff";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { getRqstsById, GetRqstsByIdType } from "../../../API/GetRqstsById";
 import { queryClient } from "../../../../queryClient";
 import { getUsers, TGetUsers } from "../../../API/GetUsers";
 
 import InformationSecurityModal from "../../InformationSecurityModal/InformationSecurityModal";
+import { putUserById } from "../../../API/PutUserById";
 
 const InformationSecurity = () => {
   const [isMouseDown, setIsMouseDown] = useState(false);
@@ -84,6 +87,25 @@ const InformationSecurity = () => {
     setShow(state);
   };
 
+  // Мутация для обновления сертификата
+  const mutation = useMutation({
+    mutationFn: (updatedUser: TGetUsers) => putUserById(updatedUser), // Функция PUT запроса
+    onSuccess: () => {
+      // Обновляем сертификаты в кэше после изменения
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+    },
+    onError: (error) => {
+      console.error("Ошибка при обновлении сертификата:", error);
+    },
+  });
+
+  // Функция для изменения статуса сертификата
+  const handleChangeStatus = () => {
+    if (currentUser) mutation.mutate(currentUser);
+  };
+
+  console.log(currentUser, "EDIT USER STATUS");
+
   return (
     <>
       <div className="security-content">
@@ -124,10 +146,16 @@ const InformationSecurity = () => {
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
                 onMouseLeave={handleMouseUp} // Для сброса состояния при выходе мыши
+                className={currentUser?.status === false ? "passive-user" : ""}
               >
                 <td>
                   <div className="content">
-                    <CheckCircleIcon sx={{ color: "green" }} />
+                    {currentUser?.status ? (
+                      <CheckCircleIcon sx={{ color: "green" }} />
+                    ) : (
+                      <DoNotDisturbOnIcon sx={{ color: "red" }} />
+                    )}
+
                     <p>{currentUser?.fullName}</p>
                   </div>
                 </td>
@@ -136,14 +164,19 @@ const InformationSecurity = () => {
                 <td>{currentUser?.role}</td>
                 <td>{currentUser?.phone}</td>
                 <td>{currentUser?.email}</td>
-                <td>Недавно</td>
+                <td>{currentUser?.status ? "Актив" : "Пассив"}</td>
                 <td>26.09.2024</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      {show && <InformationSecurityModal handleShow={handleShow} />}
+      {show && (
+        <InformationSecurityModal
+          handleShow={handleShow}
+          handleChangeStatus={handleChangeStatus}
+        />
+      )}
     </>
   );
 };

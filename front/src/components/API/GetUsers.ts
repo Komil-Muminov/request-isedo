@@ -16,6 +16,7 @@ export interface TGetUsers {
   department: string;
   reqIdentity: boolean;
   uIdentity: boolean;
+  status: boolean;
 }
 
 export const getUsers = async (): Promise<TGetUsers[]> => {
