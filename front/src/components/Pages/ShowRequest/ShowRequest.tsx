@@ -211,13 +211,15 @@ const ShowRequest = () => {
                   // activeSendButton={rqstsDataById?.stepCode === 1}
                 />
               )}
-              <ButtonPanelControl
-                icon={
-                  <DoneIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
-                }
-                text="Завершить"
-                activeSendButton={true}
-              />
+              {uinfo?.uType === "kvd" && (
+                <ButtonPanelControl
+                  icon={
+                    <DoneIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+                  }
+                  text="Завершить"
+                  activeSendButton={true}
+                />
+              )}
             </div>
           </div>
           <Stepper
@@ -307,7 +309,7 @@ const ShowRequest = () => {
         </section>
 
         {/* Рабочее пространство */}
-        {uinfo?.uType !== "bo" && <WorkSpace />}
+        {uinfo?.uType !== "bo" && <WorkSpace currentUser={currentUser}/>}
       </div>
     </main>
   );

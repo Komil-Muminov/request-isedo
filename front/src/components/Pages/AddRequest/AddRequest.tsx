@@ -281,20 +281,24 @@ const AddRequest: React.FC = () => {
                 handleSubmit={handleSubmit(onSubmit)}
                 activeSendButton={activeSendButton}
               />
-              <ButtonPanelControl
-                icon={
-                  <CancelIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
-                }
-                text="Отклонить"
-                activeSendButton={true}
-              />
-              <ButtonPanelControl
-                icon={
-                  <DoneIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
-                }
-                text="Завершить"
-                activeSendButton={true}
-              />
+              {uinfo?.uType === "kvd" && (
+                <ButtonPanelControl
+                  icon={
+                    <CancelIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+                  }
+                  text="Отклонить"
+                  activeSendButton={true}
+                />
+              )}
+              {uinfo?.uType === "kvd" && (
+                <ButtonPanelControl
+                  icon={
+                    <DoneIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+                  }
+                  text="Завершить"
+                  activeSendButton={true}
+                />
+              )}
             </div>
           </div>
           <Stepper
