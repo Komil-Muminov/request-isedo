@@ -17,6 +17,7 @@ export const RegScheme = z.object({
   organization: z.string().optional(),
   department: z.string().optional(),
   status: z.boolean().optional(),
+  passport: z.string().optional(),
 });
 
 // Извлекает тип данных, соответствующий схеме RegScheme. Это означает, что RegType будет объектом с теми же полями и типами, что и в схеме.
@@ -60,6 +61,7 @@ export const getMeScheme = z.object({
   reqIdentity: z.boolean().optional(),
   uIdentity: z.boolean().optional(),
   status: z.boolean().optional(),
+  passport: z.string().optional(),
 });
 
 export type GetMeType = z.infer<typeof getMeScheme>;

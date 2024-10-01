@@ -13,7 +13,8 @@
     "orgName": "",
     "orgTax": "",
     "department": "Шуъба оид ба кор бо муштариён",
-    "status": true
+    "status": true,
+    "passport": "KVD341356"
   },
   {
     "id": 2,
@@ -29,7 +30,8 @@
     "orgName": "",
     "orgTax": "",
     "department": "Шуъба оид ба таҳия ва татбиқи барномаҳои иттилоотӣ",
-    "status": true
+    "status": true,
+    "passport": "KVD764784"
   },
   {
     "id": 3,
@@ -47,30 +49,11 @@
     "department": "",
     "reqIdentity": true,
     "uIdentity": false,
-    "status": true
+    "status": true,
+    "passport": "A5200692"
   },
   {
     "id": 4,
-    "uType": "ko",
-    "username": "ko",
-    "password": "123",
-    "photo": "",
-    "fullName": "",
-    "phone": "",
-    "tax": "",
-    "email": "",
-    "organization": "ko",
-    "inn": "ko",
-    "role": "ko",
-    "orgName": "",
-    "orgTax": "",
-    "department": "",
-    "reqIdentity": false,
-    "uIdentity": false,
-    "status": true
-  },
-  {
-    "id": 5,
     "uType": "bo",
     "username": "user1",
     "password": "123",
@@ -85,10 +68,11 @@
     "department": "",
     "reqIdentity": true,
     "uIdentity": false,
-    "status": true
+    "status": true,
+    "passport": "A0438026"
   },
   {
-    "id": 6,
+    "id": 5,
     "uType": "bo",
     "username": "user2",
     "password": "123",
@@ -103,6 +87,7 @@
     "department": "",
     "reqIdentity": true,
     "uIdentity": false,
-    "status": true
+    "status": true,
+    "passport": "A0825871"
   }
 ]

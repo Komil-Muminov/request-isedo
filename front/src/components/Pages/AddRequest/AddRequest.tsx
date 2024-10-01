@@ -30,7 +30,6 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 
 import UserOrOrganizationCard from "../../UI/UserOrOrganizationCard/UserOrOrganizationCard";
 
-import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import CardFileService from "../../UI/CardFileService/CardFileService";
 
 import Box from "@mui/material/Box";
@@ -157,31 +156,6 @@ const AddRequest: React.FC = () => {
     }
   };
 
-  // Увеличивает номер текущего шага на 1.
-  const onSubmit = (data: PostRqstScheme) => {
-    const stepFound = steps.find((e) => e.stepCode === 0);
-
-    const getDate = new Date();
-
-    const day = String(getDate.getDate()).padStart(2, "0");
-    const month = String(getDate.getMonth() + 1).padStart(2, "0");
-    const year = getDate.getFullYear();
-    const hours = String(getDate.getHours()).padStart(2, "0");
-    const minutes = String(getDate.getMinutes()).padStart(2, "0");
-
-    const date = `${day}.${month}.${year}.${hours}:${minutes}`;
-
-    const updateReqData = {
-      ...data,
-      stepCode: stepFound?.stepCode || 0,
-      dateTime: date,
-      files: files,
-      userId: uinfo?.userId,
-    };
-
-    postRqstsMutation.mutate(updateReqData);
-  };
-
   const activeSendButton = uinfo?.uType === "bo" && postRqstsMutation.isSuccess;
 
   const [showTypeRequest, setShowTypeRequest] = useState<boolean>(false);
@@ -220,14 +194,45 @@ const AddRequest: React.FC = () => {
     }
   }, [getOrganizationsQuery]);
 
-  // Обработать еще раз
-  const accountantOrganization = users?.find((user) => {
+  // Данные карточки пользователя
+  const currentUser = users?.find((user) => {
     return organizations?.find((org) => {
       return org.userIds.find((userId) => userId === user.id);
     });
   });
 
-  console.log(accountantOrganization);
+  // Данные карточки организации
+  const currentOrganization = organizations?.find((org) => {
+    return org.userIds.find((userId) => userId === uinfo?.userId);
+  });
+
+  // Увеличивает номер текущего шага на 1.
+  const onSubmit = (data: PostRqstScheme) => {
+    const stepFound = steps.find((e) => e.stepCode === 0);
+
+    const getDate = new Date();
+
+    const day = String(getDate.getDate()).padStart(2, "0");
+    const month = String(getDate.getMonth() + 1).padStart(2, "0");
+    const year = getDate.getFullYear();
+    const hours = String(getDate.getHours()).padStart(2, "0");
+    const minutes = String(getDate.getMinutes()).padStart(2, "0");
+
+    const date = `${day}.${month}.${year}.${hours}:${minutes}`;
+
+    const updateReqData = {
+      ...data,
+      stepCode: stepFound?.stepCode || 0,
+      dateTime: date,
+      files: files,
+      userId: uinfo?.userId,
+      organizationId: currentOrganization?.id,
+    };
+
+    postRqstsMutation.mutate(updateReqData);
+  };
+
+  console.log(currentUser);
 
   return (
     <section className="add-content">
@@ -340,7 +345,7 @@ const AddRequest: React.FC = () => {
               <TitleDocument title="Нынешний главный бухгалтер" />
               <div className="wrapper-cards">
                 <UserOrOrganizationCard
-                  uinfo={accountantOrganization}
+                  currentUser={currentUser}
                   title="Карточка пользователя"
                   fileService={
                     <CardFileService
@@ -351,7 +356,7 @@ const AddRequest: React.FC = () => {
                   }
                 />
                 <UserOrOrganizationCard
-                  CorporateFareIcon={CorporateFareIcon}
+                  currentOrganization={currentOrganization}
                   title="Карточка организации"
                 />
               </div>

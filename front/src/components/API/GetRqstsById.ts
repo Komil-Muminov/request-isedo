@@ -20,6 +20,7 @@ export interface GetRqstsByIdType {
   passport: string;
   password: string;
   token: "";
+  organizationId: number;
 }
 
 export const getRqstsById = async (id: number): Promise<GetRqstsByIdType> => {

@@ -41,6 +41,7 @@ const Registration = () => {
       department: "",
       inn: "",
       organization: "",
+      passport: "",
     },
   });
 
@@ -179,6 +180,18 @@ const Registration = () => {
                   <span className="form_errors-text">
                     {errors?.email && errors.email.message}
                   </span>
+                  <InputAuth
+                    register={register}
+                    inputName="passport"
+                    inputPlaceholder="Паспорт"
+                    requiredMessage="Заполните поле паспорт"
+                    minLengthMessage="Паспорт не должен быть пустым"
+                    inputType="text"
+                    kind=""
+                  />
+                  <span className="form_errors-text">
+                    {errors?.passport && errors.passport.message}
+                  </span>
                 </>
               )}
               {showRegisterButton === true && (
@@ -272,17 +285,24 @@ const Registration = () => {
                 inputType="text"
                 kind=""
               />
-
               <span className="form_errors-text">
                 {errors?.fullName && errors.fullName.message}
               </span>
-
               <InputAuth
                 register={register}
                 inputName="role"
                 inputPlaceholder="Должность"
                 requiredMessage="Заполните поле должность"
                 minLengthMessage="Должность должна содержать минимум 5 символов"
+                inputType="text"
+                kind=""
+              />
+              <InputAuth
+                register={register}
+                inputName="passport"
+                inputPlaceholder="Паспорт"
+                requiredMessage="Заполните поле паспорт"
+                minLengthMessage="Паспорт не должен быть пустым"
                 inputType="text"
                 kind=""
               />
@@ -343,7 +363,6 @@ const Registration = () => {
                 inputType="text"
                 kind=""
               />
-
               <InputAuth
                 register={register}
                 inputName="role"
@@ -353,7 +372,6 @@ const Registration = () => {
                 inputType="text"
                 kind=""
               />
-
               <InputAuth
                 register={register}
                 inputName="password"
