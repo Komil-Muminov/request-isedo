@@ -1,31 +1,60 @@
 import { useQuery } from "@tanstack/react-query";
-import "./Uchartinfo.css";
-interface Uchartshort {
-	children: React.ReactNode;
-	procent: string | null;
-	desc: string;
-}
+import { useAuth } from "../../../../API/Hooks/useAuth";
+import { queryClient } from "../../../../../queryClient";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import "./Uchartshort.css";
 
-interface UchartinfoScheme {
-	onClick?: (e: React.SyntheticEvent<HTMLElement>) => void;
-	children: React.ReactNode;
-	kind?: string | undefined;
-}
+const Uchartshort: React.FC = () => {
+	interface Uchartshort {
+		children?: React.ReactNode;
+		procent: string | null;
+		desc: string;
+		uname: string;
+	}
+	const { getMe } = useAuth();
+	const uchartshortQuery = useQuery(
+		{
+			queryFn: () => getMe(),
+			queryKey: ["uchartshort"],
+		},
+		queryClient,
+	);
 
-export const UchartshortData: UchartinfoScheme[] = [
-    {
-        
-    }
-];
+	if (uchartshortQuery?.data) {
+		queryClient.invalidateQueries({ queryKey: ["users", "me"] });
+	} else {
+		console.log(`NO`);
+	}
+	const UchartshortType: Uchartshort[] = [
+		{
+			procent: "93%",
+			desc: "Красавчик",
+			uname: `${uchartshortQuery.data?.fullName}`,
+		},
+	];
 
-const Uchartshort: React.FC<Uchartinfo> = ({ procent, desc, children }) => {
 	return (
-		<div className="uchartinfo__content">
-			<span className="uchartinfo__procent">
-				{procent ? procent : children}
-			</span>
-			<p className="uchartinfo__desc"> {desc ? desc : children}</p>
-		</div>
+		<>
+			{UchartshortType.map((item) => (
+				<>
+					<div className="uchartshort__content">
+						<div className="uchartshort__left">
+							<AccountBalanceIcon className="acountBalanceIcon" />
+							<p>Наименование статистики</p>
+							{/* <p className="gift__text">{item.uname}</p> */}
+							<p className="ucharshort__procent">{item.procent}</p>
+						</div>
+
+						<div className="uchartshort__right">
+							<TrendingUpIcon className="trendingUpIcon" />
+							{/* <EmojiEventsIcon /> */}
+							SHORTRIGHT
+						</div>
+					</div>
+				</>
+			))}
+		</>
 	);
 };
 
