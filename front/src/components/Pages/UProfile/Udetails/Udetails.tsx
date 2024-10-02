@@ -13,7 +13,6 @@ import DashboardChart from "../Uchart/Dashboard/Dashboardchart";
 import Saleschart from "../Uchart/Saleschart/Saleschart";
 import { Settings } from "@mui/icons-material";
 import "./Udetails.css";
-import UchartInfo from "../Uchart/Uchartshort/Uchartshort";
 
 const Udetails: React.FC = () => {
 	const [uPhoto, setphoto] = useState<CurrUserPhoto | null>(null);
@@ -66,7 +65,7 @@ const Udetails: React.FC = () => {
 
 	const photoUrl = uinfo?.photo ? `http://localhost:3000${uinfo.photo}` : null;
 
-	const [chart, setSchart] = useState<string>("dashboard");
+	const [chart, setSchart] = useState<string>("");
 
 	const handleChart = (state: string) => {
 		setSchart(state);
@@ -99,28 +98,6 @@ const Udetails: React.FC = () => {
 											/>
 										</label>
 									</div>
-									{/* /* 25,09,2024 Cделать uphoto__setting_widget (для смены
-										фотограафии и тд и добавить галочку как инст ) */}
-									{/* <div className="uphoto__setting">
-										<p className="uphoto__setting_text">Место настрои</p>
-										<label
-											className="uphoto__label uphoto__setting_widget"
-											htmlFor="uphoto"
-										>
-											<input
-												style={{ visibility: "hidden" }}
-												id="uphoto"
-												type="file"
-												onChange={handleUphoto}
-											/>
-										</label>
-									</div> */}
-									{/* /* 25,09,2024 Cделать uphoto__setting_widget (для смены
-										фотограафии и тд ) */}
-
-									{/* <div className="user__details_right">
-										<Uchart />
-									</div> */}
 								</div>
 								<div className="user-details-text">
 									<ul className="udetails__info-list">
