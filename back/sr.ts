@@ -19,6 +19,7 @@ const usersFilePath = path.join(__dirname, "users.json");
 const requestsFilePath = path.join(__dirname, "requests.json");
 const servicesFilePath = path.join(__dirname, "services.json");
 const certificatesFilePath = path.join(__dirname, "certificates.json");
+const vpnFilePath = path.join(__dirname, "vpn.json");
 const uidentityFilePath = path.join(__dirname, "uidentity.json");
 if (!fs.existsSync(uidentityFilePath)) {
   fs.writeFileSync(uidentityFilePath, JSON.stringify([]), "utf8");
@@ -567,6 +568,75 @@ app.put("/certificates/:id", authenticateJWT, (req: Request, res: Response) => {
     res.status(200).json(certificate);
   } catch (err) {
     console.error("Ошибка при обновлении сертификата:", err);
+    res.status(500).json({ error: "Ошибка сервера при обновлении данных" });
+  }
+});
+
+// GET VPN
+
+app.get("/vpn", authenticateJWT, (req: Request, res: Response) => {
+  const { userId } = req as any;
+
+  const users = readFromFile(usersFilePath);
+  const user = users.find((u: any) => u.id === userId);
+
+  if (!user || !["bo", "kvd"].includes(user.uType)) {
+    return res.status(403).json({ error: "Недостаточно прав" });
+  }
+
+  try {
+    const vpnData = JSON.parse(fs.readFileSync(vpnFilePath, "utf8"));
+    res.status(200).json(vpnData);
+  } catch (err) {
+    console.error("Ошибка при чтении файла vpn.json:", err);
+    res.status(500).json({ error: "Ошибка сервера при чтении данных" });
+  }
+});
+
+// PUT VPN BY ID
+
+app.put("/vpn/:id", authenticateJWT, (req: Request, res: Response) => {
+  const { userId } = req as any; // Получаем ID пользователя из токена
+  const changeVpnId = parseInt(req.params.id); // Получаем ID измененного VPN из параметров
+
+  // Чтение пользователей из файла
+  const users = readFromFile(usersFilePath);
+  const user = users.find((u: any) => u.id === userId);
+
+  // Проверяем, имеет ли пользователь права для внесения изменений
+  if (!user || user.uType !== "kvd") {
+    return res.status(403).json({
+      error: `Вы не имеете прав для изменения сертификатов. Ваш тип: ${
+        user?.uType || "неизвестен"
+      }`,
+    });
+  }
+
+  try {
+    // Чтение данных пользователя
+    const vpnData = JSON.parse(fs.readFileSync(vpnFilePath, "utf8"));
+
+    // Поиск измененного пользователя по ID
+    const getChangedVpn = vpnData.find((user: any) => user.id === changeVpnId);
+
+    // Если VPN не найден
+    if (!getChangedVpn) {
+      return res.status(404).json({ error: "VPN не найден" });
+    }
+
+    // Обновляем данные пользователя
+    Object.assign(getChangedVpn, req.body); // Обновляем поля измененного VPN на основе тела запроса
+
+    // Изменяем status на false
+    getChangedVpn.status = false;
+
+    // Запись изменений обратно в файл
+    fs.writeFileSync(vpnFilePath, JSON.stringify(vpnData, null, 2));
+
+    // Возвращаем обновлённого пользователя
+    res.status(200).json(getChangedVpn);
+  } catch (err) {
+    console.error("Ошибка при обновлении VPN:", err);
     res.status(500).json({ error: "Ошибка сервера при обновлении данных" });
   }
 });

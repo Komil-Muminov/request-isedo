@@ -1,32 +1,25 @@
-import "./InformationSecurity.css";
+import "./TechnicalServices.css";
 
 import { useEffect, useState } from "react";
-
-import GppBadIcon from "@mui/icons-material/GppBad";
 
 import closedHand from "../../../../assets/closedhand.svg";
 import pointingHand from "../../../../assets/pointinghand.svg";
 
-import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import ButtonPanelControl from "../../ButtonPanelControl/ButtonPanelControl";
-
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import NoAccountsIcon from "@mui/icons-material/NoAccounts";
 
-import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
-
 import PersonOffIcon from "@mui/icons-material/PersonOff";
-import { useParams } from "react-router-dom";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getRqstsById, GetRqstsByIdType } from "../../../API/GetRqstsById";
-import { queryClient } from "../../../../queryClient";
+import { getVPN, TVPN } from "../../../API/GetVPN";
 import { getUsers, TGetUsers } from "../../../API/GetUsers";
+import { queryClient } from "../../../../queryClient";
+import TechnicalServicesModal from "../../TechnicalServicesModal/TechnicalServicesModal";
+import { putVpnById } from "../../../API/PutVpnById";
 
-import InformationSecurityModal from "../../InformationSecurityModal/InformationSecurityModal";
-import { putUserById } from "../../../API/PutUserById";
-
-const InformationSecurity = ({ currentUser }: any) => {
+const TechnicalServices = () => {
   const [isMouseDown, setIsMouseDown] = useState(false);
 
   const handleMouseDown = () => {
@@ -36,32 +29,6 @@ const InformationSecurity = ({ currentUser }: any) => {
   const handleMouseUp = () => {
     setIsMouseDown(false);
   };
-  const { id } = useParams();
-  const numericId = parseInt(id || "", 10);
-
-  const getRqstsByIdQuery = useQuery(
-    {
-      queryFn: () => getRqstsById(numericId),
-      queryKey: [`request-${numericId}`],
-    },
-    queryClient
-  );
-
-  const [rqstsDataById, setRqstsDataById] = useState<GetRqstsByIdType | null>(
-    null
-  );
-
-  useEffect(() => {
-    if (getRqstsByIdQuery.status === "success") {
-      console.log(getRqstsByIdQuery.data); // Проверьте, массив это или объект
-
-      setRqstsDataById(getRqstsByIdQuery.data);
-    } else if (getRqstsByIdQuery.status === "error") {
-      console.error(getRqstsByIdQuery.error);
-    }
-  }, [getRqstsByIdQuery]);
-
-  // GET USERS
 
   const [users, setUsers] = useState<TGetUsers[] | null>(null);
 
@@ -79,7 +46,25 @@ const InformationSecurity = ({ currentUser }: any) => {
     }
   }, [usersQuery]);
 
-  // const currentUser = users?.find((e) => e?.id === rqstsDataById?.userId);
+  const getVpnQuery = useQuery(
+    {
+      queryFn: () => getVPN(),
+      queryKey: ["vpn"],
+    },
+    queryClient
+  );
+
+  const [vpn, setVpn] = useState<TVPN[]>([]);
+
+  useEffect(() => {
+    if (getVpnQuery.status === "success") {
+      setVpn(getVpnQuery.data);
+    }
+  }, [getVpnQuery]);
+
+  const getVpn = vpn.find((v) => {
+    return users?.some((user) => v.userId === user.id);
+  });
 
   const [show, setShow] = useState<boolean>(false);
 
@@ -89,30 +74,30 @@ const InformationSecurity = ({ currentUser }: any) => {
 
   // Мутация для обновления сертификата
   const mutation = useMutation({
-    mutationFn: (updatedUser: TGetUsers) => putUserById(updatedUser), // Функция PUT запроса
+    mutationFn: (updatedVpn: TVPN) => putVpnById(updatedVpn), // Функция PUT запроса
     onSuccess: () => {
       // Обновляем сертификаты в кэше после изменения
-      queryClient.invalidateQueries({ queryKey: ["users"] });
+      queryClient.invalidateQueries({ queryKey: ["vpn"] });
     },
     onError: (error) => {
-      console.error("Ошибка при обновлении сертификата:", error);
+      console.error("Ошибка при обновлении VPN:", error);
     },
   });
 
   // Функция для изменения статуса сертификата
   const handleChangeStatus = () => {
-    if (currentUser) mutation.mutate(currentUser);
+    if (getVpn) mutation.mutate(getVpn);
   };
 
-  console.log(currentUser, "EDIT USER STATUS");
+  console.log(getVpn);
 
   return (
     <>
-      <div className="security-content">
-        <div className="panel-control-security">
-          <div className="security-title">
+      <div className="technical-content">
+        <div className="panel-control-technical">
+          <div className="technical-title">
             <NoAccountsIcon />
-            <p>Пассив логина</p>
+            <p>Пассив VPN</p>
           </div>
           <ButtonPanelControl
             icon={
@@ -122,18 +107,17 @@ const InformationSecurity = ({ currentUser }: any) => {
             handleShow={handleShow}
           />
         </div>
-        <div className="table-container-security ">
-          <table className="table-security-list">
+        <div className="table-container-technical ">
+          <table className="table-technical-list">
             <thead>
               <tr>
-                <th>Имя и фамилия</th>
+                <th>ФИО</th>
                 <th>Логин</th>
-                <th>Наименование</th>
-                <th>Отдел</th>
+                <th>БЗ</th>
+                <th>Организация</th>
                 <th>Телефон</th>
-                <th>e-mail</th>
+                <th>Должность</th>
                 <th>Статус</th>
-                <th>Дата последнего посещение</th>
               </tr>
             </thead>
             <tbody>
@@ -146,33 +130,34 @@ const InformationSecurity = ({ currentUser }: any) => {
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
                 onMouseLeave={handleMouseUp} // Для сброса состояния при выходе мыши
-                className={currentUser?.status === false ? "passive-user" : ""}
+                className={
+                  getVpn?.status === false ? "technical-passive-user" : ""
+                }
               >
                 <td>
                   <div className="content">
-                    {currentUser?.status ? (
+                    {getVpn?.status ? (
                       <AccountCircleIcon sx={{ color: "#607d8b" }} />
                     ) : (
                       <DoNotDisturbOnIcon sx={{ color: "red" }} />
                     )}
 
-                    <p>{currentUser?.fullName}</p>
+                    <p>{getVpn?.fullName}</p>
                   </div>
                 </td>
-                <td>{currentUser?.username}</td>
-                <td>{currentUser?.orgName}</td>
-                <td>{currentUser?.role}</td>
-                <td>{currentUser?.phone}</td>
-                <td>{currentUser?.email}</td>
-                <td>{currentUser?.status ? "Актив" : "Пассив"}</td>
-                <td>26.09.2024</td>
+                <td>{getVpn?.login}</td>
+                <td>{getVpn?.bz}</td>
+                <td>{getVpn?.organization}</td>
+                <td>{getVpn?.phone}</td>
+                <td>{getVpn?.role}</td>
+                <td>{getVpn?.status ? "Актив" : "Пассив"}</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
       {show && (
-        <InformationSecurityModal
+        <TechnicalServicesModal
           handleShow={handleShow}
           handleChangeStatus={handleChangeStatus}
         />
@@ -181,4 +166,4 @@ const InformationSecurity = ({ currentUser }: any) => {
   );
 };
 
-export default InformationSecurity;
+export default TechnicalServices;

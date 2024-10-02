@@ -5,6 +5,7 @@ import { useState } from "react";
 import { TDepartment } from "../../API/Data/Departments/Departments";
 import DepartmentCustomer from "./DepartmentCustomer/DepartmentCustomer";
 import InformationSecurity from "./Information Security/InformationSecurity";
+import TechnicalServices from "./Department for technical services/TechnicalServices";
 
 const WorkSpace = ({ currentUser }: any) => {
   const changeOfAccountant = [
@@ -34,6 +35,10 @@ const WorkSpace = ({ currentUser }: any) => {
     (e) => e.id === 2 && e.state === true
   );
 
+  const showTechnicalServices = currentDepartment.some(
+    (e) => e.id === 3 && e.state === true
+  );
+
   return (
     <section className="wrapper-work-space">
       <TitleDocument title="Рабочее пространство" />
@@ -54,7 +59,10 @@ const WorkSpace = ({ currentUser }: any) => {
           </ul>
         </div>
         {showDepartmentCustomer && <DepartmentCustomer />}
-        {showInformationSecurity && <InformationSecurity currentUser={currentUser}/>}
+        {showInformationSecurity && (
+          <InformationSecurity currentUser={currentUser} />
+        )}
+        {showTechnicalServices && <TechnicalServices />}
       </div>
     </section>
   );
