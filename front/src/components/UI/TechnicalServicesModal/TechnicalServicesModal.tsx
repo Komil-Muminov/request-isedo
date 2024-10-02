@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
 import { Button, IconButton } from "@mui/material";
+import { putRqstsById, PutRqstsByIdType } from "../../API/PutRqstById";
+import { queryClient } from "../../../queryClient";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { getRqstsById, GetRqstsByIdType } from "../../API/GetRqstsById";
+import { useParams } from "react-router-dom";
 
 interface TProps {
   handleShow: (state: boolean) => void;
@@ -12,7 +17,47 @@ const TechnicalServicesModal: React.FC<TProps> = ({
   handleShow,
   handleChangeStatus,
 }) => {
+  const [rqstsDataById, setRqstsDataById] = useState<GetRqstsByIdType | null>(
+    null
+  );
+
+  const { id } = useParams();
+  const numericId = parseInt(id || "", 10);
+
+  const getRqstsByIdQuery = useQuery(
+    {
+      queryFn: () => getRqstsById(numericId),
+      queryKey: [`request-${numericId}`],
+    },
+    queryClient
+  );
+
+  useEffect(() => {
+    if (getRqstsByIdQuery.status === "success") {
+      console.log(getRqstsByIdQuery.data); // Проверьте, массив это или объект
+
+      setRqstsDataById(getRqstsByIdQuery.data);
+    } else if (getRqstsByIdQuery.status === "error") {
+      console.error(getRqstsByIdQuery.error);
+    }
+  }, [getRqstsByIdQuery]);
+
+  const putRqstsByIdMutation = useMutation(
+    {
+      mutationFn: (data: PutRqstsByIdType) => putRqstsById(data),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: [`request-${numericId}`] });
+      },
+    },
+    queryClient
+  );
+
   const handleConfirm = () => {
+    if (rqstsDataById)
+      putRqstsByIdMutation.mutate({
+        ...rqstsDataById,
+        stepTask: rqstsDataById && rqstsDataById.stepTask + 1,
+      });
     handleChangeStatus();
     handleShow(false);
   };
