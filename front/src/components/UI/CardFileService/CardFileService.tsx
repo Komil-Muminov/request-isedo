@@ -7,6 +7,7 @@ const CardFileService = ({
   getFile,
   size,
   rqstsDataById,
+
 }: any) => {
   return (
     <div className={`${size ? size : "wrapper-file"}`}>

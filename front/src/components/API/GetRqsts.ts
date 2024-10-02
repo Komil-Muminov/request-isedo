@@ -20,6 +20,7 @@ export interface GetRqstsType {
   passport: string;
   password: string;
   token: "";
+  organizationId: number;
 }
 
 // Извлекает тип данных из схемы GetRqstsScheme. Это означает, что GetRqsts будет типом объекта с полями id, orgname, accountant, и desc, где значения соответствуют типам, указанным в схеме.

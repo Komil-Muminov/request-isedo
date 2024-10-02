@@ -20,6 +20,7 @@ export interface PutRqstsByIdType {
   token: "";
   password: string;
   userId: number;
+  organizationId: number;
 }
 
 export const putRqstsById = async (newData: PutRqstsByIdType): Promise<any> => {

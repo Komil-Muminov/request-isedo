@@ -163,6 +163,7 @@ app.post("/register", (req: Request, res: Response) => {
     orgTax,
     role,
     department,
+    passport,
   } = req.body;
 
   if (!password || !uType) {
@@ -200,6 +201,7 @@ app.post("/register", (req: Request, res: Response) => {
       reqIdentity: false,
       uIdentity: false,
       status: true,
+      passport,
     };
     users.push(newUser);
     writeToFile(usersFilePath, users);
@@ -225,6 +227,7 @@ app.post("/register", (req: Request, res: Response) => {
       orgTax,
       department,
       status: true,
+      passport,
     };
     users.push(newUser);
     writeToFile(usersFilePath, users);
@@ -288,6 +291,7 @@ app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
       position: user.position,
       department: user.department,
       status: user.status,
+      passport: user.passport,
     });
   }
 
@@ -307,6 +311,7 @@ app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
     reqIdentity: user.reqIdentity,
     uIdentity: user.uIdentity,
     status: user.status,
+    passport: user.passport,
   });
 });
 

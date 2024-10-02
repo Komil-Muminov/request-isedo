@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getRqstsById, GetRqstsByIdType } from "../../API/GetRqstsById";
 import { queryClient } from "../../../queryClient";
 import { Stepper, StepLabel, Step } from "@mui/material";
@@ -32,6 +32,7 @@ import {
   getOrganizations,
   TGetOrganizations,
 } from "../../API/GetOrganizations";
+import { getUsers, TGetUsers } from "../../API/GetUsers";
 
 const ShowRequest = () => {
   const navigate = useNavigate();
@@ -114,6 +115,22 @@ const ShowRequest = () => {
     putRqstsByIdMutation.mutate(updateReqData);
   };
 
+  const [users, setUsers] = useState<TGetUsers[] | null>(null);
+
+  const usersQuery = useQuery(
+    {
+      queryFn: () => getUsers(),
+      queryKey: ["users"],
+    },
+    queryClient
+  );
+
+  useEffect(() => {
+    if (usersQuery.status === "success") {
+      setUsers(usersQuery.data);
+    }
+  }, [usersQuery]);
+
   const [organizations, setOrganizations] = useState<
     TGetOrganizations[] | null
   >(null);
@@ -132,7 +149,17 @@ const ShowRequest = () => {
     }
   }, [getOrganizationsQuery]);
 
-  console.log(organizations);
+  // Данные карточки пользователя
+  const currentUser = users?.find((user) => {
+    return organizations?.find((org) => {
+      return org.userIds.find((userId) => userId === user.id);
+    });
+  });
+
+  // Данные карточки организации
+  const currentOrganization = organizations?.find(
+    (e) => e.id === rqstsDataById?.organizationId
+  );
 
   if (getRqstsByIdQuery.status === "pending") {
     return <p>Loading...</p>;
@@ -172,23 +199,27 @@ const ShowRequest = () => {
                   }
                   text="Подписать"
                   handleSubmit={handlePutRqstById}
+                  activeSendButton={rqstsDataById?.stepCode === 1}
                 />
               )}
-
-              <ButtonPanelControl
-                icon={
-                  <CancelIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
-                }
-                text="Отклонить"
-                activeSendButton={false}
-              />
-              <ButtonPanelControl
-                icon={
-                  <DoneIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
-                }
-                text="Завершить"
-                activeSendButton={true}
-              />
+              {uinfo?.uType === "kvd" && (
+                <ButtonPanelControl
+                  icon={
+                    <CancelIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+                  }
+                  text="Отклонить"
+                  // activeSendButton={rqstsDataById?.stepCode === 1}
+                />
+              )}
+              {uinfo?.uType === "kvd" && (
+                <ButtonPanelControl
+                  icon={
+                    <DoneIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+                  }
+                  text="Завершить"
+                  activeSendButton={true}
+                />
+              )}
             </div>
           </div>
           <Stepper
@@ -236,7 +267,7 @@ const ShowRequest = () => {
           <TitleDocument title="Нынешний главный бухгалтер" />
           <div className="wrapper-cards">
             <UserOrOrganizationCard
-              uinfo={uinfo}
+              currentUser={currentUser}
               title="Карточка пользователя"
               fileService={
                 <CardFileService
@@ -246,7 +277,7 @@ const ShowRequest = () => {
               }
             />
             <UserOrOrganizationCard
-              CorporateFareIcon={CorporateFareIcon}
+              currentOrganization={currentOrganization}
               title="Карточка организации"
             />
           </div>
@@ -255,7 +286,7 @@ const ShowRequest = () => {
           <TitleDocument title="Новый главный бухгалтер" />
           <div className="wrapper-cards">
             <UserOrOrganizationCard
-              uinfo={rqstsDataById}
+              currentUser={rqstsDataById}
               title="Карточка пользователя"
               fileService={
                 <>
@@ -271,14 +302,14 @@ const ShowRequest = () => {
               }
             />
             <UserOrOrganizationCard
-              CorporateFareIcon={CorporateFareIcon}
+              currentOrganization={currentOrganization}
               title="Карточка организации"
             />
           </div>
         </section>
 
         {/* Рабочее пространство */}
-        {uinfo?.uType !== "bo" && <WorkSpace />}
+        {uinfo?.uType !== "bo" && <WorkSpace currentUser={currentUser}/>}
       </div>
     </main>
   );

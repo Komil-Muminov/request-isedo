@@ -76,9 +76,13 @@ export const Register: React.FC = () => {
       : [];
 
   // Фильтруем заявки только для пользователей с типом 'kvd' и статусом 'Исполнение'
+
   const filteredRqsts = rqstsData.filter(
-    (e) => uinfo?.uType !== "kvd" || e.stepCode === 1
+    (e) =>
+      (uinfo?.uType !== "kvd" && uinfo?.userId === e.userId) || e.stepCode === 1
   );
+
+  console.log(filteredRqsts);
 
   const rows = filteredRqsts.map((e) => {
     const stepFound = steps.find((step) => step.stepCode === e.stepCode);

@@ -6,7 +6,7 @@ import { TDepartment } from "../../API/Data/Departments/Departments";
 import DepartmentCustomer from "./DepartmentCustomer/DepartmentCustomer";
 import InformationSecurity from "./Information Security/InformationSecurity";
 
-const WorkSpace = () => {
+const WorkSpace = ({ currentUser }: any) => {
   const changeOfAccountant = [
     departments[0],
     departments[1],
@@ -54,7 +54,7 @@ const WorkSpace = () => {
           </ul>
         </div>
         {showDepartmentCustomer && <DepartmentCustomer />}
-        {showInformationSecurity && <InformationSecurity />}
+        {showInformationSecurity && <InformationSecurity currentUser={currentUser}/>}
       </div>
     </section>
   );

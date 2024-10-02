@@ -30,7 +30,6 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 
 import UserOrOrganizationCard from "../../UI/UserOrOrganizationCard/UserOrOrganizationCard";
 
-import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import CardFileService from "../../UI/CardFileService/CardFileService";
 
 import Box from "@mui/material/Box";
@@ -38,6 +37,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import {
+  getOrganizations,
+  TGetOrganizations,
+} from "../../API/GetOrganizations";
+import { getUsers, TGetUsers } from "../../API/GetUsers";
 
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
@@ -152,12 +156,58 @@ const AddRequest: React.FC = () => {
     }
   };
 
-  console.log(getValues());
+  const activeSendButton = uinfo?.uType === "bo" && postRqstsMutation.isSuccess;
+
+  const [showTypeRequest, setShowTypeRequest] = useState<boolean>(false);
+
+  const [users, setUsers] = useState<TGetUsers[] | null>(null);
+
+  const usersQuery = useQuery(
+    {
+      queryFn: () => getUsers(),
+      queryKey: ["users"],
+    },
+    queryClient
+  );
+
+  useEffect(() => {
+    if (usersQuery.status === "success") {
+      setUsers(usersQuery.data);
+    }
+  }, [usersQuery]);
+
+  const [organizations, setOrganizations] = useState<
+    TGetOrganizations[] | null
+  >(null);
+
+  const getOrganizationsQuery = useQuery(
+    {
+      queryFn: () => getOrganizations(),
+      queryKey: ["organizations"],
+    },
+    queryClient
+  );
+
+  useEffect(() => {
+    if (getOrganizationsQuery.status === "success") {
+      setOrganizations(getOrganizationsQuery.data);
+    }
+  }, [getOrganizationsQuery]);
+
+  // Данные карточки пользователя
+  const currentUser = users?.find((user) => {
+    return organizations?.find((org) => {
+      return org.userIds.find((userId) => userId === user.id);
+    });
+  });
+
+  // Данные карточки организации
+  const currentOrganization = organizations?.find((org) => {
+    return org.userIds.find((userId) => userId === uinfo?.userId);
+  });
 
   // Увеличивает номер текущего шага на 1.
   const onSubmit = (data: PostRqstScheme) => {
-    console.log(data);
-
     const stepFound = steps.find((e) => e.stepCode === 0);
 
     const getDate = new Date();
@@ -176,22 +226,13 @@ const AddRequest: React.FC = () => {
       dateTime: date,
       files: files,
       userId: uinfo?.userId,
+      organizationId: currentOrganization?.id,
     };
-
-    console.log(updateReqData);
 
     postRqstsMutation.mutate(updateReqData);
   };
 
-  const activeSendButton = uinfo?.uType === "bo" && postRqstsMutation.isSuccess;
-
-  console.log(steps);
-
-  console.log(reqType);
-
-  const [showTypeRequest, setShowTypeRequest] = useState<boolean>(false);
-
-  console.log(uinfo);
+  console.log(currentUser);
 
   return (
     <section className="add-content">
@@ -240,20 +281,24 @@ const AddRequest: React.FC = () => {
                 handleSubmit={handleSubmit(onSubmit)}
                 activeSendButton={activeSendButton}
               />
-              <ButtonPanelControl
-                icon={
-                  <CancelIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
-                }
-                text="Отклонить"
-                activeSendButton={true}
-              />
-              <ButtonPanelControl
-                icon={
-                  <DoneIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
-                }
-                text="Завершить"
-                activeSendButton={true}
-              />
+              {uinfo?.uType === "kvd" && (
+                <ButtonPanelControl
+                  icon={
+                    <CancelIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+                  }
+                  text="Отклонить"
+                  activeSendButton={true}
+                />
+              )}
+              {uinfo?.uType === "kvd" && (
+                <ButtonPanelControl
+                  icon={
+                    <DoneIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+                  }
+                  text="Завершить"
+                  activeSendButton={true}
+                />
+              )}
             </div>
           </div>
           <Stepper
@@ -304,7 +349,7 @@ const AddRequest: React.FC = () => {
               <TitleDocument title="Нынешний главный бухгалтер" />
               <div className="wrapper-cards">
                 <UserOrOrganizationCard
-                  uinfo={uinfo}
+                  currentUser={currentUser}
                   title="Карточка пользователя"
                   fileService={
                     <CardFileService
@@ -315,7 +360,7 @@ const AddRequest: React.FC = () => {
                   }
                 />
                 <UserOrOrganizationCard
-                  CorporateFareIcon={CorporateFareIcon}
+                  currentOrganization={currentOrganization}
                   title="Карточка организации"
                 />
               </div>

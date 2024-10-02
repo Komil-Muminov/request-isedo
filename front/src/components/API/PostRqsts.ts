@@ -19,6 +19,7 @@ export interface PostRqstScheme {
   orgTax: string;
   orgName: string;
   userId: number;
+  organizationId: number;
 }
 
 const token = localStorage.getItem("token");

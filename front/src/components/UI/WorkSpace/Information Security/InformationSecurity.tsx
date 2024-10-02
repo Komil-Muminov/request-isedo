@@ -26,7 +26,7 @@ import { getUsers, TGetUsers } from "../../../API/GetUsers";
 import InformationSecurityModal from "../../InformationSecurityModal/InformationSecurityModal";
 import { putUserById } from "../../../API/PutUserById";
 
-const InformationSecurity = () => {
+const InformationSecurity = ({ currentUser }: any) => {
   const [isMouseDown, setIsMouseDown] = useState(false);
 
   const handleMouseDown = () => {
@@ -79,7 +79,7 @@ const InformationSecurity = () => {
     }
   }, [usersQuery]);
 
-  const currentUser = users?.find((e) => e?.id === rqstsDataById?.userId);
+  // const currentUser = users?.find((e) => e?.id === rqstsDataById?.userId);
 
   const [show, setShow] = useState<boolean>(false);
 
