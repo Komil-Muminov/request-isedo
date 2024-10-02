@@ -111,6 +111,7 @@ const ShowRequest = () => {
     const updateReqData = {
       ...rqstsDataById,
       stepCode: rqstsDataById && rqstsDataById.stepCode + 1,
+      stepTask: rqstsDataById && rqstsDataById.stepTask,
     };
     putRqstsByIdMutation.mutate(updateReqData);
   };
@@ -309,7 +310,7 @@ const ShowRequest = () => {
         </section>
 
         {/* Рабочее пространство */}
-        {uinfo?.uType !== "bo" && <WorkSpace currentUser={currentUser}/>}
+        {uinfo?.uType !== "bo" && <WorkSpace currentUser={currentUser} />}
       </div>
     </main>
   );
