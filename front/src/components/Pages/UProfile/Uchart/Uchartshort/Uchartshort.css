@@ -1,5 +1,28 @@
-/* .uchartinfo__content {
+.uchartshort__content {
 	display: flex;
+	justify-content: space-between;
+}
+
+.uchartshort__left {
+	display: flex;
+	flex-direction: column;
 	gap: 20px;
-	background: red;
-} */
+}
+
+.acountBalanceIcon {
+	fill: orange;
+}
+
+.gift__text {
+	max-width: max-content;
+}
+.uchartshort__right {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.trendingUpIcon {
+	fill: red;
+	align-self: flex-end;
+}

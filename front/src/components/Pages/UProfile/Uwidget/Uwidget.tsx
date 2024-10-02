@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import { LoaderPoints } from "../../../UI/LoaderPoints";
-import "./Uwidget.css";
 import { Button } from "@mui/material";
+import "./Uwidget.css";
+import Uchartshort from "../Uchart/Uchartshort/Uchartshort";
 
 export interface UwidgetProps {
 	children?: React.ReactNode;
@@ -10,7 +10,7 @@ export interface UwidgetProps {
 	kind: string | undefined;
 	isLoading?: boolean;
 	disabled?: boolean;
-	onClick?: (e: React.SyntheticEvent<HTMLInputElement>) => void;
+	onClick?: (e: React.SyntheticEvent<HTMLElement>) => void;
 }
 
 export const Uwidget: React.FC<UwidgetProps> = ({
@@ -22,11 +22,17 @@ export const Uwidget: React.FC<UwidgetProps> = ({
 }: UwidgetProps) => {
 	return (
 		<>
-			<Button onClick={onClick} className={`uwidget__style ${kind}`}>
-				<h3 className={`${kind}`}>{title || `Загаловок виджета`}</h3>
-				<p className={`${kind}`}>{desc || `Описание виджета`}</p>
-				{children || <LoaderPoints />}
-			</Button>
+			<div className="uwidget__content uwidget__style">
+				{/* <h3 className={`uwidget__title ${kind}`}>
+						{title || `Загаловок виджета`}
+					</h3> */}
+				<Uchartshort />
+				{/* <span className="uwidget__numinfo">{}</span> */}
+				{/* {children || <LoaderPoints />} */}
+				<Button onClick={onClick} className={`uwidget__btn ${kind}`}>
+					Показать полную информацию{" "}
+				</Button>
+			</div>
 		</>
 	);
 };
