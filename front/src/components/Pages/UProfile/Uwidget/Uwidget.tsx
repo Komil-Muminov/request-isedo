@@ -1,7 +1,7 @@
-import { LoaderPoints } from "../../../UI/LoaderPoints";
+// import { LoaderPoints } from "../../../UI/LoaderPoints";
 import { Button } from "@mui/material";
-import "./Uwidget.css";
 import Uchartshort from "../Uchart/Uchartshort/Uchartshort";
+import "./Uwidget.css";
 
 export interface UwidgetProps {
 	children?: React.ReactNode;
