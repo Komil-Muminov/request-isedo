@@ -310,7 +310,12 @@ const ShowRequest = () => {
         </section>
 
         {/* Рабочее пространство */}
-        {uinfo?.uType !== "bo" && <WorkSpace currentUser={currentUser} />}
+        {uinfo?.uType !== "bo" && (
+          <WorkSpace
+            currentUser={currentUser}
+            rqstsDataById={rqstsDataById}
+          />
+        )}
       </div>
     </main>
   );
