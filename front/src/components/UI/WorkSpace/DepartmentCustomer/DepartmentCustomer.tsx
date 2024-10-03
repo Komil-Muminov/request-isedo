@@ -10,7 +10,7 @@ import CertificateRevocation from "./CertificatesCenter/CertificateRevocation/Ce
 
 import InstallCertificate from "./Installing a certificate/InstallCertificate";
 
-const ServicesContent = ({ rqstsDataById }: any) => {
+const DepartmentCustomer = ({ rqstsDataById, stageOne, stageTwo }: any) => {
   const [showServicesList, setShowServicesList] = useState<boolean>(false);
 
   const [showTokenList, setShowTokenList] = useState<boolean>(false);
@@ -27,8 +27,18 @@ const ServicesContent = ({ rqstsDataById }: any) => {
 
   return (
     <>
-      <CertificateRevocation />
-      {rqstsDataById?.stepTask === 3 && <InstallCertificate />}
+      <div className="column-stage">
+        {stageOne}
+        <CertificateRevocation />
+      </div>
+      {rqstsDataById?.stepTask === 3 && (
+        <>
+          <div className="column-stage">
+            {stageTwo}
+            <InstallCertificate />
+          </div>
+        </>
+      )}
 
       {/* Закрывается при нажатии на кнопку Сохранить */}
       {/* {showServicesList && (
@@ -53,4 +63,4 @@ const ServicesContent = ({ rqstsDataById }: any) => {
   );
 };
 
-export default ServicesContent;
+export default DepartmentCustomer;

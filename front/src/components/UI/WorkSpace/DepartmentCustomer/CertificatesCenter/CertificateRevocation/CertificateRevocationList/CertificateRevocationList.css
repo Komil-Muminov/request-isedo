@@ -3,6 +3,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 20px 0px 20px;
+  border-top: 1px solid #00000040;
+}
+
+.certificate-content {
+  flex-grow: 1;
 }
 
 .certificates-revocation-title {
@@ -11,7 +16,7 @@
   gap: 10px;
   font-size: 16px;
   color: #607d8b;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .table-container {
@@ -57,4 +62,11 @@ td .content {
 
 .change-status {
   background-color: rgba(0, 153, 255, 0.119);
+}
+
+.panel-executor {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  padding: 20px 20px;
 }

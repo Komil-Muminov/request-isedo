@@ -59,14 +59,9 @@ const InstallCertificate = () => {
     <div className="certificate-content">
       <div className="panel-control-certificate-revocation">
         <div className="certificates-revocation-title">
-          <CardMembershipIcon />
+          {/* <CardMembershipIcon /> */}
           <p>Выдача сертификата </p>
         </div>
-        <ButtonPanelControl
-          icon={<GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
-          text="Выдать"
-          handleSubmit={handleSubmit(onSubmit)}
-        />
       </div>
       <div className="inputs-list install-certificate-inputs-list">
         <TextField
@@ -131,6 +126,13 @@ const InstallCertificate = () => {
           type="text"
           className="request_inp"
           label="Адрес"
+        />
+      </div>
+      <div className="panel-executor">
+        <ButtonPanelControl
+          icon={<GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
+          text="Выдать"
+          handleSubmit={handleSubmit(onSubmit)}
         />
       </div>
     </div>

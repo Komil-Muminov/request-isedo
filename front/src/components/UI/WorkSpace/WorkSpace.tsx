@@ -8,12 +8,7 @@ import InformationSecurity from "./Information Security/InformationSecurity";
 import TechnicalServices from "./Department for technical services/TechnicalServices";
 
 const WorkSpace = ({ currentUser, rqstsDataById }: any) => {
-  const changeOfAccountant = [
-    departments[0],
-    departments[1],
-    departments[2],
-    departments[3],
-  ];
+  const changeOfAccountant = [departments[0], departments[1], departments[2]];
 
   const [currentDepartment, setCurrentDepartment] =
     useState<TDepartment[]>(changeOfAccountant);
@@ -41,7 +36,7 @@ const WorkSpace = ({ currentUser, rqstsDataById }: any) => {
 
   return (
     <section className="wrapper-work-space">
-      <TitleDocument title="Рабочее пространство" />
+      <TitleDocument title="Обработка заявки" />
       <div className="workspace-content">
         <div className="navigation-tabs">
           <ul className="wrapper-tabs">
@@ -58,13 +53,38 @@ const WorkSpace = ({ currentUser, rqstsDataById }: any) => {
             })}
           </ul>
         </div>
+
         {showDepartmentCustomer && (
-          <DepartmentCustomer rqstsDataById={rqstsDataById} />
+          <DepartmentCustomer
+            rqstsDataById={rqstsDataById}
+            stageOne={
+              <div className="stage-title">
+                <p>Этап 1</p>
+              </div>
+            }
+            stageTwo={
+              <div className="stage-title second-stage">
+                <p>Этап 2</p>
+              </div>
+            }
+          />
         )}
         {showInformationSecurity && (
-          <InformationSecurity currentUser={currentUser} />
+          <div className="column-stage">
+            <div className="stage-title">
+              <p>Этап 1</p>
+            </div>
+            <InformationSecurity currentUser={currentUser} />
+          </div>
         )}
-        {showTechnicalServices && <TechnicalServices />}
+        {showTechnicalServices && (
+          <div className="column-stage">
+            <div className="stage-title">
+              <p>Этап 1</p>
+            </div>
+            <TechnicalServices />
+          </div>
+        )}
       </div>
     </section>
   );

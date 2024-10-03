@@ -5,33 +5,62 @@
 .workspace-content {
   background-color: #fff;
   border-radius: 20px;
-  padding: 20px 0;
+  /* padding: 20px 0; */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.121);
+  width: 100%;
+  overflow: hidden;
 }
 
-.navigation-tabs {
+/* .navigation-tabs {
   border-bottom: 1px solid #00000040;
   padding: 0 20px;
-}
+} */
 
 .wrapper-tabs {
   display: flex;
-  justify-content: space-between;
+
   align-items: center;
 }
 
 .tab {
-  padding: 10px 0px;
+  padding: 10px;
   border-bottom: 3px solid transparent;
   cursor: pointer;
   transition: all 0.1s;
   font-weight: 600;
+  transition: all 0.2s;
+  width: 100%;
+  text-align: center;
 }
 
 .tab:hover {
-  border-bottom: 3px solid #607d8b;
+  background-color: #607d8b2d;
+  color: #000;
 }
 
 .active {
-  border-bottom: 3px solid #607d8b;
+  background-color: #607d8b;
+  color: #fff;
+}
+
+.active:hover {
+  background-color: #607d8b; /* Оставляем фон как у активного элемента */
+  color: #fff; /* Оставляем цвет текста */
+}
+.stage-title {
+  background: linear-gradient(135deg, #e5624b, #607d8b);
+
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  max-width: 50px;
+  justify-content: center;
+  text-align: center;
+  writing-mode: vertical-rl; /* Текст вертикально, справа налево */
+  transform: rotate(180deg); /* Повернуть текст, чтобы читать сверху вниз */
+}
+
+.column-stage {
+  display: flex;
 }
