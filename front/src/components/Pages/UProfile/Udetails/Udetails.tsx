@@ -177,6 +177,7 @@ const Udetails: React.FC = () => {
 							</div>
 							<div className="udetails__uwidget">
 								<Uwidget
+									kind="primary"
 									disabled={uPhotoMutation.isPending}
 									title={`Показать график посещаемости`}
 									onClick={() => handleChart("dashboard")}
@@ -184,15 +185,16 @@ const Udetails: React.FC = () => {
 								/>
 								<Uwidget
 									disabled={uPhotoMutation.isPending}
+									kind="secondary"
 									title={`Показать график чего-то`}
 									onClick={() => handleChart("barchart")}
 									desc={`KM`}
 								/>
 								<Uwidget
+									kind="tertiary"
 									title={`Показать график чего-то`}
 									desc={`KM`}
 									onClick={() => handleChart("saleschart")}
-									kind="f"
 								/>
 							</div>
 							<div className="udetails__chart">
