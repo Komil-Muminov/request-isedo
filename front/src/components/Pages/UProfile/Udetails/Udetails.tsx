@@ -68,8 +68,11 @@ const Udetails: React.FC = () => {
 	const [chart, setSchart] = useState<string>("");
 
 	const handleChart = (state: string) => {
-		setSchart(state);
-		console.log(chart);
+		if (chart === state) {
+			setSchart("");
+		} else {
+			setSchart(state);
+		}
 	};
 
 	return (
