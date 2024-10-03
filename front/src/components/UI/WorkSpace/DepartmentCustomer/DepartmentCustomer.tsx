@@ -8,7 +8,9 @@ import Token from "./Token/Token";
 import TokenList from "../../TokenList/TokenList";
 import CertificateRevocation from "./CertificatesCenter/CertificateRevocation/CertificateRevocationList/CertificateRevocationList";
 
-const ServicesContent = () => {
+import InstallCertificate from "./Installing a certificate/InstallCertificate";
+
+const ServicesContent = ({ rqstsDataById }: any) => {
   const [showServicesList, setShowServicesList] = useState<boolean>(false);
 
   const [showTokenList, setShowTokenList] = useState<boolean>(false);
@@ -21,9 +23,12 @@ const ServicesContent = () => {
     setShowTokenList(state);
   };
 
+  console.log(rqstsDataById);
+
   return (
     <>
       <CertificateRevocation />
+      {rqstsDataById?.stepTask === 3 && <InstallCertificate />}
 
       {/* Закрывается при нажатии на кнопку Сохранить */}
       {/* {showServicesList && (

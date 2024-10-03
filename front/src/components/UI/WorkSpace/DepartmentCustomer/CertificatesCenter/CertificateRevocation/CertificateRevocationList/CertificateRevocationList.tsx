@@ -126,12 +126,15 @@ const CertificateRevocationList = () => {
             <thead>
               <tr>
                 <th>Код запроса</th>
-                <th>Организация запроса</th>
-                <th>Подразделение запроса</th>
-                <th>Общее имя запроса</th>
-                <th>Город запроса</th>
-                <th>Область/республика запроса</th>
+                <th>ФИО</th>
+                <th>ИНН пользователя</th>
+                <th>Номер телефон пользователя</th>
                 <th>Должность</th>
+                <th>Организация</th>
+                <th>ИНН организации</th>
+                <th>Номер телефон организации</th>
+                <th>Регион</th>
+                <th>Адрес</th>
                 <th>Серийный номер</th>
                 <th>Действителен с</th>
                 <th>Действителен до</th>
@@ -165,12 +168,15 @@ const CertificateRevocationList = () => {
                       <p>{getCertificateUser?.id}</p>
                     </div>
                   </td>
-                  <td>{getCertificateUser?.organization}</td>
-                  <td>{getCertificateUser?.subdivision}</td>
-                  <td>{getCertificateUser?.nameRequest}</td>
-                  <td>{getCertificateUser?.cityRequest}</td>
-                  <td>{getCertificateUser?.regionRequest}</td>
+                  <td>{getCertificateUser?.userName}</td>
+                  <td>{getCertificateUser?.userTax}</td>
+                  <td>{getCertificateUser?.userPhone}</td>
                   <td>{getCertificateUser?.role}</td>
+                  <td>{getCertificateUser?.orgName}</td>
+                  <td>{getCertificateUser?.orgTax}</td>
+                  <td>{getCertificateUser?.orgPhone}</td>
+                  <td>{getCertificateUser?.region}</td>
+                  <td>{getCertificateUser?.address}</td>
                   <td>{getCertificateUser?.serialNumber}</td>
                   <td>{getCertificateUser?.validFrom}</td>
                   <td>{getCertificateUser?.validTo}</td>

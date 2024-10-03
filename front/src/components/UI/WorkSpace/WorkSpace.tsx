@@ -7,7 +7,7 @@ import DepartmentCustomer from "./DepartmentCustomer/DepartmentCustomer";
 import InformationSecurity from "./Information Security/InformationSecurity";
 import TechnicalServices from "./Department for technical services/TechnicalServices";
 
-const WorkSpace = ({ currentUser }: any) => {
+const WorkSpace = ({ currentUser, rqstsDataById }: any) => {
   const changeOfAccountant = [
     departments[0],
     departments[1],
@@ -58,7 +58,9 @@ const WorkSpace = ({ currentUser }: any) => {
             })}
           </ul>
         </div>
-        {showDepartmentCustomer && <DepartmentCustomer />}
+        {showDepartmentCustomer && (
+          <DepartmentCustomer rqstsDataById={rqstsDataById} />
+        )}
         {showInformationSecurity && (
           <InformationSecurity currentUser={currentUser} />
         )}

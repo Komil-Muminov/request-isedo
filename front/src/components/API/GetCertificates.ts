@@ -1,12 +1,15 @@
 export interface TCertificates {
   id?: number;
   userId: number | null;
-  organization: string;
-  subdivision: string;
-  nameRequest: string;
+  userName: string;
+  userTax: string;
+  userPhone: string;
   role: string;
-  cityRequest: string;
-  regionRequest: string;
+  orgName: string;
+  orgTax: string;
+  orgPhone: string;
+  region: string;
+  address: string;
   serialNumber: string;
   validFrom: string;
   validTo: string;
