@@ -13,6 +13,7 @@ export interface PostRqstScheme {
   token: "";
   reqType: string;
   stepCode: number;
+  stepTask: number;
   dateTime: string;
   files: FileType[];
   password: string;

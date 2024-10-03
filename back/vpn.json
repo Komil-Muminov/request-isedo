@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "userId": 4,
+    "bz": 93469,
+    "password": "123",
+    "fullName": "Шоайдаров Парпишо",
+    "login": "sh.parpisho",
+    "organization": "Muhsiddin and Parpisho Corporation",
+    "phone": "880006458",
+    "role": "Сармухосиб",
+    "status": false
+  }
+]

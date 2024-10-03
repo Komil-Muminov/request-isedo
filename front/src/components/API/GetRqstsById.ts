@@ -12,6 +12,7 @@ export interface GetRqstsByIdType {
   tax: string;
   reqType: string;
   stepCode: number;
+  stepTask: number;
   dateTime: string;
   files: FileType[];
   orgTax: string;

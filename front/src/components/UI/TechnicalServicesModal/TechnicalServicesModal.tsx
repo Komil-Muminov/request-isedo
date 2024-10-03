@@ -1,38 +1,22 @@
 import React, { useEffect, useState } from "react";
 
-import "./CertificateRevocationModal.css";
-
 import CloseIcon from "@mui/icons-material/Close";
 import { Button, IconButton } from "@mui/material";
-
-import { statusOfCertificates } from "../../../../../../API/Data/Certificates/Certificates";
-import {
-  putRqstsById,
-  PutRqstsByIdType,
-} from "../../../../../../API/PutRqstById";
+import { putRqstsById, PutRqstsByIdType } from "../../API/PutRqstById";
+import { queryClient } from "../../../queryClient";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { queryClient } from "../../../../../../../queryClient";
+import { getRqstsById, GetRqstsByIdType } from "../../API/GetRqstsById";
 import { useParams } from "react-router-dom";
-import {
-  getRqstsById,
-  GetRqstsByIdType,
-} from "../../../../../../API/GetRqstsById";
 
 interface TProps {
-  handleShow?: any;
-  handleChangeStatus?: any;
+  handleShow: (state: boolean) => void;
+  handleChangeStatus: () => void;
 }
 
-const CertificateRevocationModal = ({
+const TechnicalServicesModal: React.FC<TProps> = ({
   handleShow,
   handleChangeStatus,
-}: TProps) => {
-  const [selectedReason, setSelectedReason] = useState(""); // состояние для выбранного значения
-
-  const handleSelectChange = (event: any) => {
-    setSelectedReason(event.target.value); // сохраняем выбранное значение в состояние
-  };
-
+}) => {
   const [rqstsDataById, setRqstsDataById] = useState<GetRqstsByIdType | null>(
     null
   );
@@ -69,21 +53,14 @@ const CertificateRevocationModal = ({
   );
 
   const handleConfirm = () => {
-    const gotStatusCode = statusOfCertificates.find(
-      (e) => e.name === selectedReason
-    );
-    if (gotStatusCode) {
-      handleChangeStatus(gotStatusCode?.code); // вызываем функцию изменения статуса
-    }
-    handleShow(false); // закрываем модальное окно
-
     if (rqstsDataById)
       putRqstsByIdMutation.mutate({
         ...rqstsDataById,
         stepTask: rqstsDataById && rqstsDataById.stepTask + 1,
       });
+    handleChangeStatus();
+    handleShow(false);
   };
-
   return (
     <div
       onClick={() => handleShow(false)}
@@ -91,30 +68,17 @@ const CertificateRevocationModal = ({
     >
       <div onClick={(event) => event.stopPropagation()} className="content">
         <div className="modal-title">
-          <p>Отзыв сертификата</p>
+          <p>Пассив логина</p>
           <IconButton onClick={() => handleShow(false)}>
             <CloseIcon />
           </IconButton>
         </div>
         <main className="modal-info">
-          <p>Вы действительно хотите отозвать выделенный сертификат?</p>
-          <div className="reason-code">
-            <p>Код причины:</p>
-            <select
-              name="revocationReason"
-              id="revocationReason"
-              onChange={handleSelectChange}
-            >
-              <option value="">Не определен</option>
-              {statusOfCertificates.map((e) => {
-                return (
-                  <option key={e.id} value={e.name}>
-                    {e.name}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
+          <p>Вы действительно хотите отправить логин в пассив?</p>
+          {/* <div className="reason-code">
+            <p>Отправить в пассив до:</p>
+            <input type="date" />
+          </div> */}
           <div className="panel-control-buttons">
             <div className="wrapper-buttons">
               <Button
@@ -165,4 +129,4 @@ const CertificateRevocationModal = ({
   );
 };
 
-export default CertificateRevocationModal;
+export default TechnicalServicesModal;

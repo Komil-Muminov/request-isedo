@@ -223,6 +223,7 @@ const AddRequest: React.FC = () => {
     const updateReqData = {
       ...data,
       stepCode: stepFound?.stepCode || 0,
+      stepTask: 0,
       dateTime: date,
       files: files,
       userId: uinfo?.userId,

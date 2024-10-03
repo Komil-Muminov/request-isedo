@@ -1,11 +1,11 @@
-.panel-control-security {
+.panel-control-technical {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 20px 0px 20px;
 }
 
-.security-title {
+.technical-title {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -14,18 +14,18 @@
   font-weight: 600;
 }
 
-.table-container-security {
+.table-container-technical {
   overflow-x: auto; /* Включает горизонтальный скролл */
   margin-top: 20px; /* Добавьте отступ для лучшего визуального восприятия */
 }
 
-.table-security-list {
+.table-technical-list {
   width: 100%;
   border-collapse: collapse;
 }
 
-.table-security-list th,
-.table-security-list td {
+.table-technical-list th,
+.table-technical-list td {
   padding: 10px 20px;
   text-align: left;
   border: 1px solid #ddd;
@@ -42,19 +42,19 @@ td .content {
   gap: 5px;
 }
 
-.table-security-list td {
+.table-technical-list td {
   padding: 5px 20px;
   max-width: 200px;
 }
 
-.table-security-list th {
+.table-technical-list th {
   background-color: #f2f2f2;
 }
 
-.table-security-list td:first-child {
+.table-technical-list td:first-child {
   max-width: 300px;
 }
 
-.passive-user {
+.technical-passive-user {
   background-color: #ff000030;
 }
