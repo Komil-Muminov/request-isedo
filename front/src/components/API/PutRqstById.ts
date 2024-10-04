@@ -27,7 +27,6 @@ export interface PutRqstsByIdType {
 export const putRqstsById = async (newData: PutRqstsByIdType): Promise<any> => {
   const token = localStorage.getItem("token");
   try {
-    console.log(newData.id);
 
     const response = await fetch(
       `http://localhost:3000/account/show/${newData.id}`,

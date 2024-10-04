@@ -4,6 +4,7 @@ import "./CertificateCard.css";
 
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import GppBadIcon from "@mui/icons-material/GppBad";
+import GppGoodIcon from "@mui/icons-material/GppGood";
 
 const CertificateList = ({ title, desc }: any) => {
   return (
@@ -16,16 +17,34 @@ const CertificateList = ({ title, desc }: any) => {
   );
 };
 
-const CertificateCard = ({ getCertificateUser, statusCertificate }: any) => {
+const CertificateCard = ({
+  getCertificateUser,
+  statusCertificate,
+  rqstsDataById,
+}: any) => {
+
+  const oldAndNewCertificateStatus =
+    getCertificateUser?.userId === rqstsDataById?.userId;
+
   return (
     <div
       className={`info-certificate ${
-        getCertificateUser?.statusCode === 5 ? "passive-certificate" : ""
+        getCertificateUser?.statusCode === 5 &&
+        oldAndNewCertificateStatus === false
+          ? "passive-certificate"
+          : getCertificateUser?.statusCode === 5 &&
+            oldAndNewCertificateStatus === true
+          ? "active-certificate"
+          : ""
       }`}
     >
       <div className="wrapper-info-certificate">
         <div className="wrapper-image-certificate">
-          <GppBadIcon sx={{ fontSize: "100px", color: "#f9f611d8" }} />
+          {oldAndNewCertificateStatus === false ? (
+            <GppBadIcon sx={{ fontSize: "100px", color: "#fcdb62" }} />
+          ) : (
+            <GppGoodIcon sx={{ fontSize: "100px", color: "#42ff73" }} />
+          )}
         </div>
         <ul className="certificate-info-list">
           <CertificateList title="Код запроса" desc={getCertificateUser?.id} />

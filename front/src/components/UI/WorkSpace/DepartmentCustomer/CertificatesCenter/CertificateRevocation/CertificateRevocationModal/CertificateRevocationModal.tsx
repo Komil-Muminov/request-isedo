@@ -50,7 +50,6 @@ const CertificateRevocationModal = ({
 
   useEffect(() => {
     if (getRqstsByIdQuery.status === "success") {
-      console.log(getRqstsByIdQuery.data); // Проверьте, массив это или объект
 
       setRqstsDataById(getRqstsByIdQuery.data);
     } else if (getRqstsByIdQuery.status === "error") {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ServicesList from "../../ServicesList/ServicesList";
 import Services from "./Services/Services";
 
@@ -10,8 +10,15 @@ import CertificateRevocation from "./CertificatesCenter/CertificateRevocation/Ce
 
 import InstallCertificate from "./Installing a certificate/InstallCertificate";
 import CreateOrganizationCard from "./Create organization card/CreateOrganizationCard";
+import { useQuery } from "@tanstack/react-query";
+import { getCertificates, TCertificates } from "../../../API/GetCertificates";
 
-const DepartmentCustomer = ({ rqstsDataById, currentOrganization, stageOne, stageTwo }: any) => {
+const DepartmentCustomer = ({
+  rqstsDataById,
+  currentOrganization,
+  stageOne,
+  stageTwo,
+}: any) => {
   const [showServicesList, setShowServicesList] = useState<boolean>(false);
 
   const [showTokenList, setShowTokenList] = useState<boolean>(false);
@@ -24,13 +31,32 @@ const DepartmentCustomer = ({ rqstsDataById, currentOrganization, stageOne, stag
     setShowTokenList(state);
   };
 
-  console.log(rqstsDataById);
+  const getCertificateQuery = useQuery({
+    queryFn: () => getCertificates(),
+    queryKey: ["certificates"],
+  });
+
+  const [certificates, setCertificates] = useState<TCertificates[]>([]);
+
+  useEffect(() => {
+    if (getCertificateQuery.status === "success") {
+      setCertificates(getCertificateQuery.data);
+    }
+  }, [getCertificateQuery]);
+
+  const getCertificateUser = certificates.find(
+    (cert) => cert.userId === rqstsDataById?.userId
+  );
+
 
   return (
     <>
       <div className="column-stage">
         {stageOne}
-        <CertificateRevocation />
+        <CertificateRevocation
+          getCertificateQuery={getCertificateQuery}
+          certificates={certificates}
+        />
       </div>
       {/* Данный компонент нужен для другого запроса "Создание карточки организации и идентификации в системе ISEDO" */}
       {/* {rqstsDataById?.stepTask === 3 && (
@@ -45,7 +71,11 @@ const DepartmentCustomer = ({ rqstsDataById, currentOrganization, stageOne, stag
         <>
           <div className="column-stage">
             {stageTwo}
-            <InstallCertificate rqstsDataById={rqstsDataById} currentOrganization={currentOrganization}/>
+            <InstallCertificate
+              rqstsDataById={rqstsDataById}
+              currentOrganization={currentOrganization}
+              getCertificateUser={getCertificateUser}
+            />
           </div>
         </>
       )}

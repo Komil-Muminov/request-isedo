@@ -4,10 +4,15 @@ import { departments } from "../../API/Data/Departments/Departments";
 import { useState } from "react";
 import { TDepartment } from "../../API/Data/Departments/Departments";
 import DepartmentCustomer from "./DepartmentCustomer/DepartmentCustomer";
-import InformationSecurity from "./Information Security/InformationSecurity";
-import TechnicalServices from "./Department for technical services/TechnicalServices";
 
-const WorkSpace = ({ currentUser, rqstsDataById, currentOrganization }: any) => {
+import TechnicalServices from "./Department for technical services/TechnicalServices";
+import InformationSecurity from "./Information Security/InformationSecurity";
+
+const WorkSpace = ({
+  currentUser,
+  rqstsDataById,
+  currentOrganization,
+}: any) => {
   const changeOfAccountant = [departments[0], departments[1], departments[2]];
 
   const [currentDepartment, setCurrentDepartment] =
@@ -71,12 +76,21 @@ const WorkSpace = ({ currentUser, rqstsDataById, currentOrganization }: any) => 
           />
         )}
         {showInformationSecurity && (
-          <div className="column-stage">
-            <div className="stage-title">
-              <p>Этап 1</p>
-            </div>
-            <InformationSecurity currentUser={currentUser} />
-          </div>
+          <InformationSecurity
+            currentUser={currentUser}
+            rqstsDataById={rqstsDataById}
+            currentOrganization={currentOrganization}
+            stageOne={
+              <div className="stage-title">
+                <p>Этап 1</p>
+              </div>
+            }
+            stageTwo={
+              <div className="stage-title second-stage">
+                <p>Этап 2</p>
+              </div>
+            }
+          />
         )}
         {showTechnicalServices && (
           <div className="column-stage">

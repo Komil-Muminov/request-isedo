@@ -19,8 +19,6 @@ const LoginTfmisList = ({ title, desc }: any) => {
 };
 
 const LoginTfmisCard = ({ currentUser }: any) => {
-  console.log(currentUser);
-
   return (
     <div
       className={`info-login-tfmis ${

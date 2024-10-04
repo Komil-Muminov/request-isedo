@@ -55,7 +55,7 @@ const ShowRequest = () => {
     queryClient
   );
 
-  console.log(getRqstsByIdQuery.data, "Check");
+
 
   const [rqstsDataById, setRqstsDataById] = useState<GetRqstsByIdType | null>(
     null
@@ -94,7 +94,6 @@ const ShowRequest = () => {
 
   useEffect(() => {
     if (getRqstsByIdQuery.status === "success") {
-      console.log(getRqstsByIdQuery.data); // Проверьте, массив это или объект
 
       setRqstsDataById(getRqstsByIdQuery.data);
     } else if (getRqstsByIdQuery.status === "error") {
@@ -112,7 +111,6 @@ const ShowRequest = () => {
     queryClient
   );
 
-  console.log(getRqstsByIdQuery.data, "===============");
 
   const handlePutRqstById = () => {
     const updateReqData = {
@@ -169,20 +167,7 @@ const ShowRequest = () => {
     (e) => e.id === rqstsDataById?.organizationId
   );
 
-  const putOrganizationUserMutation = useMutation({
-    mutationFn: (data: addUserOrganization) => putOrganizationUser(data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["organizations"] });
-    },
-  });
 
-  const addNewUserToOrganization = () => {
-    if (currentOrganization && rqstsDataById)
-      putOrganizationUserMutation.mutate({
-        updatedOrganization: currentOrganization,
-        userId: rqstsDataById?.userId,
-      });
-  };
 
   const disabledAddUserButton = currentOrganization?.userIds.includes(
     rqstsDataById?.userId
@@ -192,7 +177,6 @@ const ShowRequest = () => {
     return <p>Loading...</p>;
   }
 
-  console.log(disabledAddUserButton);
 
   return (
     <main className="show-content">
@@ -340,7 +324,7 @@ const ShowRequest = () => {
                     text="Проверить в системе"
                     activeSendButton={disabledAddUserButton}
                   />
-                  <ButtonPanelControl
+                  {/* <ButtonPanelControl
                     icon={
                       <DomainAddIcon
                         sx={{ fontSize: "18px", fontWeight: "bold" }}
@@ -349,7 +333,7 @@ const ShowRequest = () => {
                     text="Добавить в организацию"
                     handleSubmit={addNewUserToOrganization}
                     activeSendButton={disabledAddUserButton}
-                  />
+                  /> */}
                 </div>
               }
             />

@@ -233,7 +233,7 @@ const AddRequest: React.FC = () => {
     postRqstsMutation.mutate(updateReqData);
   };
 
-  console.log(currentUser);
+
 
   return (
     <section className="add-content">

@@ -90,7 +90,6 @@ const TechnicalServices = () => {
     if (getVpn) mutation.mutate(getVpn);
   };
 
-  console.log(getVpn);
 
   return (
     <>

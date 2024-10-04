@@ -10,8 +10,14 @@ import { postCertificates } from "../../../../API/PostCertificates";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../../../queryClient";
 import { useEffect, useState } from "react";
+import { statusOfCertificates } from "../../../../API/Data/Certificates/Certificates";
+import CertificateCard from "../CertificatesCenter/CertificateCard/CertificateCard";
 
-const InstallCertificate = ({ rqstsDataById, currentOrganization }: any) => {
+const InstallCertificate = ({
+  rqstsDataById,
+  currentOrganization,
+  getCertificateUser,
+}: any) => {
   const {
     register,
     // Записывает все стейты в массив
@@ -65,7 +71,10 @@ const InstallCertificate = ({ rqstsDataById, currentOrganization }: any) => {
     postCertificateMutation.mutate(updateReqData);
   };
 
-  console.log(rqstsDataById);
+  const statusCertificate = statusOfCertificates.find(
+    (e) => e.code === getCertificateUser?.statusCode
+  );
+
 
   return (
     <div className="certificate-content">
@@ -75,69 +84,80 @@ const InstallCertificate = ({ rqstsDataById, currentOrganization }: any) => {
           <p>Выдача сертификата </p>
         </div>
       </div>
-      <div className="inputs-list install-certificate-inputs-list">
-        <TextField
-          {...register("userName")}
-          type="text"
-          id="userName"
-          className="request_inp"
-          label="ФИО"
+      {!getCertificateUser && (
+        <div className="inputs-list install-certificate-inputs-list">
+          <TextField
+            {...register("userName")}
+            type="text"
+            id="userName"
+            className="request_inp"
+            label="ФИО"
+          />
+          <TextField
+            {...register("userTax")}
+            id="userTax"
+            type="text"
+            className="request_inp"
+            label="ИНН пользователя"
+          />
+          <TextField
+            {...register("userPhone")}
+            id="userPhone"
+            type="text"
+            className="request_inp"
+            label="Номер телефон пользователя"
+          />
+          <TextField
+            {...register("role")}
+            id="role"
+            type="text"
+            className="request_inp"
+            label="Должность"
+          />
+          <TextField
+            {...register("orgName")}
+            id="orgName"
+            type="text"
+            className="request_inp"
+            label="Организация"
+          />
+          <TextField
+            {...register("orgTax")}
+            id="orgTax"
+            type="text"
+            className="request_inp"
+            label="ИНН Организации"
+          />
+          <TextField
+            {...register("orgPhone")}
+            id="orgPhone"
+            type="text"
+            className="request_inp"
+            label="Номер телефон организации"
+          />
+          <TextField
+            {...register("address")}
+            id="address"
+            type="text"
+            className="request_inp"
+            label="Адрес"
+          />
+        </div>
+      )}
+      {getCertificateUser && (
+        <CertificateCard
+          getCertificateUser={getCertificateUser}
+          statusCertificate={statusCertificate?.name}
+          rqstsDataById={rqstsDataById}
         />
-        <TextField
-          {...register("userTax")}
-          id="userTax"
-          type="text"
-          className="request_inp"
-          label="ИНН пользователя"
-        />
-        <TextField
-          {...register("userPhone")}
-          id="userPhone"
-          type="text"
-          className="request_inp"
-          label="Номер телефон пользователя"
-        />
-        <TextField
-          {...register("role")}
-          id="role"
-          type="text"
-          className="request_inp"
-          label="Должность"
-        />
-        <TextField
-          {...register("orgName")}
-          id="orgName"
-          type="text"
-          className="request_inp"
-          label="Организация"
-        />
-        <TextField
-          {...register("orgTax")}
-          id="orgTax"
-          type="text"
-          className="request_inp"
-          label="ИНН Организации"
-        />
-        <TextField
-          {...register("orgPhone")}
-          id="orgPhone"
-          type="text"
-          className="request_inp"
-          label="Номер телефон организации"
-        />
-        <TextField
-          {...register("address")}
-          id="address"
-          type="text"
-          className="request_inp"
-          label="Адрес"
-        />
-      </div>
+      )}
+
       <div className="panel-executor">
         <ButtonPanelControl
           icon={<GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
           text="Выдать"
           handleSubmit={handleSubmit(onSubmit)}
+          activeSendButton={getCertificateUser ? true : false}
         />
       </div>
     </div>

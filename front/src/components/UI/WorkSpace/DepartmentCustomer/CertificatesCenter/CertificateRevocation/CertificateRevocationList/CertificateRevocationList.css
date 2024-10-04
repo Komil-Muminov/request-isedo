@@ -69,4 +69,5 @@ td .content {
   display: flex;
   justify-content: end;
   padding: 20px 20px;
+  gap: 10px;
 }

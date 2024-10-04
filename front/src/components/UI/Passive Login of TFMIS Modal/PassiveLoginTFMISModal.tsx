@@ -1,4 +1,4 @@
-import "./InformationSecurityModal.css";
+import "./PassiveLoginTFMISModal.css";
 
 import CloseIcon from "@mui/icons-material/Close";
 import { Button, IconButton } from "@mui/material";
@@ -14,7 +14,7 @@ interface TProps {
   handleChangeStatus: () => void;
 }
 
-const InformationSecurityModal: React.FC<TProps> = ({
+const PassiveLoginTFMISModal: React.FC<TProps> = ({
   handleShow,
   handleChangeStatus,
 }) => {
@@ -35,8 +35,6 @@ const InformationSecurityModal: React.FC<TProps> = ({
 
   useEffect(() => {
     if (getRqstsByIdQuery.status === "success") {
-      console.log(getRqstsByIdQuery.data); // Проверьте, массив это или объект
-
       setRqstsDataById(getRqstsByIdQuery.data);
     } else if (getRqstsByIdQuery.status === "error") {
       console.error(getRqstsByIdQuery.error);
@@ -132,4 +130,4 @@ const InformationSecurityModal: React.FC<TProps> = ({
   );
 };
 
-export default InformationSecurityModal;
+export default PassiveLoginTFMISModal;

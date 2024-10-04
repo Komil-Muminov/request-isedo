@@ -29,7 +29,7 @@ export interface GetRqstsType {
 
 export const getRqsts = async (): Promise<GetRqstsType[]> => {
   const token = localStorage.getItem("token");
-  console.log(`getRqtst Token :${token}`);
+
   return fetch(`http://localhost:3000/requests`, {
     headers: {
       Authorization: `Bearer ${token}`,

@@ -4,7 +4,7 @@
     "uType": "kvd",
     "username": "m.norov",
     "password": "123",
-    "photo": "",
+    "photo": "ÐÐ°ÑÐ¼ÑÐ´ ÐÐ±Ð´ÑÑÐ°ÑÐ¼Ð¾Ð½Ð¾Ð²Ð¸Ñ.jpg",
     "fullName": "Норов Махмуд",
     "phone": "",
     "tax": "",
@@ -89,5 +89,23 @@
     "uIdentity": false,
     "status": true,
     "passport": "A0825871"
+  },
+  {
+    "id": 6,
+    "uType": "bo",
+    "username": "bo_123_sharipov",
+    "password": "123",
+    "photo": "",
+    "fullName": "Шарипов Амир Чамшедович",
+    "phone": "880008671",
+    "tax": "040003418",
+    "email": "jsharipovamir@gmail.com",
+    "role": "Главный бухгалтер",
+    "orgName": "Muhsiddin and Parpisho Corporation",
+    "orgTax": "020003455",
+    "reqIdentity": false,
+    "uIdentity": false,
+    "status": true,
+    "passport": "A04513403"
   }
 ]

@@ -19,7 +19,6 @@ const TypeRequest = ({ setReqType, setShowTypeRequest, reqType }: any) => {
     setShowTypeRequest(false);
   };
 
-  console.log(reqType);
 
   return (
     <AnimatePresence>

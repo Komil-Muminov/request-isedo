@@ -116,7 +116,6 @@ const CertificateContent = () => {
 
   const currentCertificate = certificatesTemp[certificatesTemp.length - 1];
 
-  console.log(currentCertificate);
 
   return (
     <div className="certificate-content">
