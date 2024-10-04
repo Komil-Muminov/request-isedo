@@ -48,7 +48,6 @@ const DepartmentCustomer = ({
     (cert) => cert.userId === rqstsDataById?.userId
   );
 
-
   return (
     <>
       <div className="column-stage">
@@ -67,7 +66,7 @@ const DepartmentCustomer = ({
           </div>
         </>
       )} */}
-      {rqstsDataById?.stepTask === 3 && (
+      {rqstsDataById?.stepTask >= 3 && (
         <>
           <div className="column-stage">
             {stageTwo}

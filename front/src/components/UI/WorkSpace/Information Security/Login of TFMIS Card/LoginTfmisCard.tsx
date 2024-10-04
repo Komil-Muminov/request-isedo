@@ -22,7 +22,11 @@ const LoginTfmisCard = ({ currentUser }: any) => {
   return (
     <div
       className={`info-login-tfmis ${
-        currentUser?.status === false ? "passive-login-tfmis" : ""
+        currentUser?.status === false
+          ? "passive-login-tfmis"
+          : currentUser
+          ? "active-login-tfmis"
+          : ""
       }`}
     >
       <div className="wrapper-info-login-tfmis">

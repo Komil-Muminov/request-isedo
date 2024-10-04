@@ -20,6 +20,7 @@ import {
 } from "../../../../API/PutOrganizationUser";
 import { getUsers, TGetUsers } from "../../../../API/GetUsers";
 import { useEffect, useState } from "react";
+import LoginTfmisCard from "../Login of TFMIS Card/LoginTfmisCard";
 
 const CreateLoginTFMIS = ({
   rqstsDataById,
@@ -110,7 +111,7 @@ const CreateLoginTFMIS = ({
           <p>Создание логина</p>
         </div>
       </div>
-      {!getCertificateUser && (
+      {!disabledAddUserInOrganizationButton && (
         <div className="inputs-list install-certificate-inputs-list">
           <TextField
             {...register("tax")}
@@ -177,13 +178,9 @@ const CreateLoginTFMIS = ({
           />
         </div>
       )}
-      {/* {getCertificateUser && (
-        <PassiveLoginTFMIS
-          getCertificateUser={getCertificateUser}
-          statusCertificate={statusCertificate?.name}
-          rqstsDataById={rqstsDataById}
-        />
-      )} */}
+      {disabledAddUserInOrganizationButton && (
+        <LoginTfmisCard currentUser={newLoginUserId} />
+      )}
 
       <div className="panel-executor">
         <ButtonPanelControl

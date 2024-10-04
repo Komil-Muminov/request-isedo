@@ -15,16 +15,18 @@ const InformationSecurity = ({
         {stageOne}
         <PassiveLoginTFMIS currentUser={currentUser} />
       </div>
-      <div className="column-stage">
-        {stageTwo}
-        <CreateLoginTFMIS
-          rqstsDataById={rqstsDataById}
-          currentUser={currentUser}
-          currentOrganization={currentOrganization}
-          //   currentOrganization={currentOrganization}
-          //   getCertificateUser={getCertificateUser}
-        />
-      </div>
+      {rqstsDataById?.stepTask >= 3 && (
+        <div className="column-stage">
+          {stageTwo}
+          <CreateLoginTFMIS
+            rqstsDataById={rqstsDataById}
+            currentUser={currentUser}
+            currentOrganization={currentOrganization}
+            //   currentOrganization={currentOrganization}
+            //   getCertificateUser={getCertificateUser}
+          />
+        </div>
+      )}
     </>
   );
 };
