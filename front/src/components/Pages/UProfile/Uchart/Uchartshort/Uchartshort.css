@@ -10,7 +10,7 @@
 }
 
 .acountBalanceIcon {
-	fill: orange;
+	fill: #fff;
 }
 
 .gift__text {
@@ -23,6 +23,6 @@
 }
 
 .trendingUpIcon {
-	fill: red;
+	fill: #fff;
 	align-self: flex-end;
 }

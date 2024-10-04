@@ -89,5 +89,26 @@
     "uIdentity": false,
     "status": true,
     "passport": "A0825871"
+  },
+  {
+    "id": 6,
+    "uType": "bo",
+    "username": "asd",
+    "password": "123",
+    "photo": "",
+    "fullName": "123",
+    "phone": "ff",
+    "tax": "ff",
+    "email": "ff",
+    "organization": "",
+    "inn": "",
+    "role": "ff",
+    "orgName": "ff",
+    "orgTax": "ff",
+    "department": "",
+    "reqIdentity": false,
+    "uIdentity": false,
+    "status": true,
+    "passport": "ff"
   }
 ]

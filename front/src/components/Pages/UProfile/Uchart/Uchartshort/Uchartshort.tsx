@@ -23,8 +23,6 @@ const Uchartshort: React.FC = () => {
 
 	if (uchartshortQuery?.data) {
 		queryClient.invalidateQueries({ queryKey: ["users", "me"] });
-	} else {
-		console.log(`NO`);
 	}
 	const UchartshortType: Uchartshort[] = [
 		{
@@ -42,7 +40,7 @@ const Uchartshort: React.FC = () => {
 						<div className="uchartshort__left">
 							<AccountBalanceIcon className="acountBalanceIcon" />
 							<p>Наименование статистики</p>
-							{/* <p className="gift__text">{item.uname}</p> */}
+							<p className="gift__text">{item.uname}</p>
 							<p className="ucharshort__procent">{item.procent}</p>
 						</div>
 
