@@ -16,8 +16,10 @@ import UnsubscribeIcon from "@mui/icons-material/Unsubscribe";
 import CancelIcon from "@mui/icons-material/Cancel";
 import DoneIcon from "@mui/icons-material/Done";
 
+import PersonSearchIcon from "@mui/icons-material/PersonSearch";
+import DomainAddIcon from "@mui/icons-material/DomainAdd";
+
 import "./ShowRequest.css";
-import ButtonPanelControl from "../../UI/ButtonPanelControl/ButtonPanelControl";
 
 import "../../../index.css";
 import TitleDocument from "../../UI/TitleDocument/TitleDocument";
@@ -33,6 +35,11 @@ import {
   TGetOrganizations,
 } from "../../API/GetOrganizations";
 import { getUsers, TGetUsers } from "../../API/GetUsers";
+import ButtonPanelControl from "../../UI/ButtonPanelControl/ButtonPanelControl";
+import {
+  addUserOrganization,
+  putOrganizationUser,
+} from "../../API/PutOrganizationUser";
 
 const ShowRequest = () => {
   const navigate = useNavigate();
@@ -162,9 +169,30 @@ const ShowRequest = () => {
     (e) => e.id === rqstsDataById?.organizationId
   );
 
+  const putOrganizationUserMutation = useMutation({
+    mutationFn: (data: addUserOrganization) => putOrganizationUser(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["organizations"] });
+    },
+  });
+
+  const addNewUserToOrganization = () => {
+    if (currentOrganization && rqstsDataById)
+      putOrganizationUserMutation.mutate({
+        updatedOrganization: currentOrganization,
+        userId: rqstsDataById?.userId,
+      });
+  };
+
+  const disabledAddUserButton = currentOrganization?.userIds.includes(
+    rqstsDataById?.userId
+  );
+
   if (getRqstsByIdQuery.status === "pending") {
     return <p>Loading...</p>;
   }
+
+  console.log(disabledAddUserButton);
 
   return (
     <main className="show-content">
@@ -301,6 +329,29 @@ const ShowRequest = () => {
                   />
                 </>
               }
+              checkUser={
+                <div className="panel-check-user">
+                  <ButtonPanelControl
+                    icon={
+                      <PersonSearchIcon
+                        sx={{ fontSize: "18px", fontWeight: "bold" }}
+                      />
+                    }
+                    text="Проверить в системе"
+                    activeSendButton={disabledAddUserButton}
+                  />
+                  <ButtonPanelControl
+                    icon={
+                      <DomainAddIcon
+                        sx={{ fontSize: "18px", fontWeight: "bold" }}
+                      />
+                    }
+                    text="Добавить в организацию"
+                    handleSubmit={addNewUserToOrganization}
+                    activeSendButton={disabledAddUserButton}
+                  />
+                </div>
+              }
             />
             <UserOrOrganizationCard
               currentOrganization={currentOrganization}
@@ -314,6 +365,7 @@ const ShowRequest = () => {
           <WorkSpace
             currentUser={currentUser}
             rqstsDataById={rqstsDataById}
+            currentOrganization={currentOrganization}
           />
         )}
       </div>

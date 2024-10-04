@@ -7,7 +7,7 @@ import DepartmentCustomer from "./DepartmentCustomer/DepartmentCustomer";
 import InformationSecurity from "./Information Security/InformationSecurity";
 import TechnicalServices from "./Department for technical services/TechnicalServices";
 
-const WorkSpace = ({ currentUser, rqstsDataById }: any) => {
+const WorkSpace = ({ currentUser, rqstsDataById, currentOrganization }: any) => {
   const changeOfAccountant = [departments[0], departments[1], departments[2]];
 
   const [currentDepartment, setCurrentDepartment] =
@@ -57,6 +57,7 @@ const WorkSpace = ({ currentUser, rqstsDataById }: any) => {
         {showDepartmentCustomer && (
           <DepartmentCustomer
             rqstsDataById={rqstsDataById}
+            currentOrganization={currentOrganization}
             stageOne={
               <div className="stage-title">
                 <p>Этап 1</p>

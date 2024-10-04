@@ -7,8 +7,11 @@ import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { TCertificates } from "../../../../API/GetCertificates";
 import { postCertificates } from "../../../../API/PostCertificates";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { queryClient } from "../../../../../queryClient";
+import { useEffect, useState } from "react";
 
-const InstallCertificate = () => {
+const InstallCertificate = ({ rqstsDataById, currentOrganization }: any) => {
   const {
     register,
     // Записывает все стейты в массив
@@ -21,15 +24,21 @@ const InstallCertificate = () => {
     formState: { dirtyFields },
   } = useForm<TCertificates>({
     defaultValues: {
-      userName: "",
-      userTax: "",
-      userPhone: "",
-      role: "",
-      orgName: "",
-      orgTax: "",
-      orgPhone: "",
-      region: "",
-      address: "",
+      userName: rqstsDataById?.fullName,
+      userTax: rqstsDataById?.tax,
+      userPhone: rqstsDataById?.phone,
+      role: rqstsDataById?.role,
+      orgName: currentOrganization?.name,
+      orgTax: currentOrganization?.tax,
+      orgPhone: currentOrganization?.phone,
+      address: currentOrganization?.address,
+    },
+  });
+
+  const postCertificateMutation = useMutation({
+    mutationFn: (data: TCertificates) => postCertificates(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["certificates"] });
     },
   });
 
@@ -41,19 +50,22 @@ const InstallCertificate = () => {
     const year = getDate.getFullYear();
 
     const dateFrom = `${day}.${month}.${year}`;
-    const dateTo = `${day + 1}.${month}.${year + 1}`;
+    const dateTo = `${day}.${month}.${year + 1}`;
 
     const updateReqData = {
       ...data,
-      userId: "",
+      userId: rqstsDataById?.userId,
+      organizationId: currentOrganization?.id,
       serialNumber: "200000dd1f63274b121773decc00000000dd1f",
       validFrom: dateFrom,
       validTo: dateTo,
       statusCode: 5,
     };
 
-    // postCertificates.mutate(updateReqData);
+    postCertificateMutation.mutate(updateReqData);
   };
+
+  console.log(rqstsDataById);
 
   return (
     <div className="certificate-content">
@@ -112,13 +124,6 @@ const InstallCertificate = () => {
           type="text"
           className="request_inp"
           label="Номер телефон организации"
-        />
-        <TextField
-          {...register("region")}
-          id="region"
-          type="text"
-          className="request_inp"
-          label="Регион"
         />
         <TextField
           {...register("address")}

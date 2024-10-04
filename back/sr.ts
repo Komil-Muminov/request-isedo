@@ -330,6 +330,56 @@ app.get("/organizations", authenticateJWT, (req: Request, res: Response) => {
   }
 });
 
+// PUT Add User to Organization
+
+app.put(
+  "/organizations/:id",
+  authenticateJWT,
+  (req: Request, res: Response) => {
+    const { userId } = req.body; // Получаем userId из тела запроса
+    const organizationId = parseInt(req.params.id); // Получаем ID организации из параметров
+
+    // Чтение пользователей из файла
+    const users = readFromFile(usersFilePath);
+    const user = users.find((u: any) => u.id === userId);
+
+    try {
+      // Чтение данных организаций из файла
+      const organizationData = JSON.parse(
+        fs.readFileSync(organizationsFilePath, "utf8")
+      );
+
+      // Поиск организации по ID
+      const organization = organizationData.find(
+        (org: any) => org.id === organizationId
+      );
+
+      // Если организация не найдена
+      if (!organization) {
+        return res.status(404).json({ error: "Организация не найдена" });
+      }
+
+      // Проверяем, есть ли уже такой userId в userIds
+      if (!organization.userIds.includes(userId)) {
+        // Если нет, добавляем
+        organization.userIds.push(userId);
+      }
+
+      // Запись изменений обратно в файл
+      fs.writeFileSync(
+        organizationsFilePath,
+        JSON.stringify(organizationData, null, 2)
+      );
+
+      // Возвращаем обновлённую организацию
+      res.status(200).json(organization);
+    } catch (err) {
+      console.error("Ошибка при обновлении организации:", err);
+      res.status(500).json({ error: "Ошибка сервера при обновлении данных" });
+    }
+  }
+);
+
 // All Users
 
 app.get("/users", authenticateJWT, (req: Request, res: Response) => {

@@ -9,8 +9,9 @@ import TokenList from "../../TokenList/TokenList";
 import CertificateRevocation from "./CertificatesCenter/CertificateRevocation/CertificateRevocationList/CertificateRevocationList";
 
 import InstallCertificate from "./Installing a certificate/InstallCertificate";
+import CreateOrganizationCard from "./Create organization card/CreateOrganizationCard";
 
-const DepartmentCustomer = ({ rqstsDataById, stageOne, stageTwo }: any) => {
+const DepartmentCustomer = ({ rqstsDataById, currentOrganization, stageOne, stageTwo }: any) => {
   const [showServicesList, setShowServicesList] = useState<boolean>(false);
 
   const [showTokenList, setShowTokenList] = useState<boolean>(false);
@@ -31,11 +32,20 @@ const DepartmentCustomer = ({ rqstsDataById, stageOne, stageTwo }: any) => {
         {stageOne}
         <CertificateRevocation />
       </div>
+      {/* Данный компонент нужен для другого запроса "Создание карточки организации и идентификации в системе ISEDO" */}
+      {/* {rqstsDataById?.stepTask === 3 && (
+        <>
+          <div className="column-stage">
+            {stageTwo}
+            <CreateOrganizationCard />
+          </div>
+        </>
+      )} */}
       {rqstsDataById?.stepTask === 3 && (
         <>
           <div className="column-stage">
             {stageTwo}
-            <InstallCertificate />
+            <InstallCertificate rqstsDataById={rqstsDataById} currentOrganization={currentOrganization}/>
           </div>
         </>
       )}
