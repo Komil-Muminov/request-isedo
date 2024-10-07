@@ -82,7 +82,7 @@ export const Register: React.FC = () => {
       (uinfo?.uType !== "kvd" && uinfo?.userId === e.userId) || e.stepCode === 1
   );
 
-  console.log(filteredRqsts);
+
 
   const rows = filteredRqsts.map((e) => {
     const stepFound = steps.find((step) => step.stepCode === e.stepCode);
@@ -196,7 +196,6 @@ export const Register: React.FC = () => {
                 <Link
                   to={"/account/create"}
                   type="btn submit_btn register_add-btn"
-                  onClick={() => console.log(`Переход`)}
                 >
                   <Button
                     variant="contained"

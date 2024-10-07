@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import { useState } from "react";
 export const Search: React.FC<{ [key: string]: any }> = ({ rows }: any) => {
 	const [search, setSearch] = useState<string>("");
-	console.log(`ROWS SEARCH: ${rows}`);
+
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearch(e.target.value);
 	};

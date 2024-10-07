@@ -12,6 +12,10 @@
   background: linear-gradient(135deg, #cb2222, #5ea1c2);
 }
 
+.active-certificate {
+  background: linear-gradient(135deg, #5ea1c2, #2fb450);
+}
+
 .wrapper-info-certificate {
   display: flex;
   flex-direction: column;
@@ -19,7 +23,7 @@
   align-items: center;
   gap: 20px;
   width: 100%;
-  color: #f9f611d8;
+  color: #fcdb62;
 }
 
 .wrapper-image-certificate {

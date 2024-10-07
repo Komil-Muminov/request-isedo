@@ -49,8 +49,6 @@ const Registration = () => {
   const uType = watch("uType");
   const departmentValue = watch("department"); // Отслеживаем значение department
 
-  console.log(departmentValue);
-
   const { regMe } = useAuth();
   const data: RegType = getValues();
 
@@ -59,7 +57,6 @@ const Registration = () => {
       mutationFn: () => regMe(data),
       //   Функция для обработки успешного завершения мутации (инвалидация запросов).
       onSuccess: () => queryClient.invalidateQueries({ queryKey: ["rqsts"] }),
-      onError: () => console.log(`No`),
     },
     queryClient
   );
@@ -403,7 +400,6 @@ const Registration = () => {
           <></>
         )}
       </form>
-      {console.log(data)}
     </>
   );
 };

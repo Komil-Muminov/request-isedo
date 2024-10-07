@@ -10,7 +10,6 @@ const UserOrOrganizationCard = ({
   fileService,
   checkUser,
 }: any) => {
-  console.log(currentUser);
 
   return (
     <div

@@ -12,6 +12,10 @@
   background: linear-gradient(135deg, #cb2222, #5ea1c2);
 }
 
+.active-login-tfmis {
+  background: linear-gradient(135deg, #5ea1c2, #2fb450);
+}
+
 .wrapper-info-login-tfmis {
   display: flex;
   flex-direction: column;

@@ -193,8 +193,6 @@ app.post("/register", (req: Request, res: Response) => {
       phone,
       tax,
       email,
-      organization,
-      inn,
       role,
       orgName,
       orgTax,
@@ -215,8 +213,6 @@ app.post("/register", (req: Request, res: Response) => {
       id,
       uType,
       username,
-      organization,
-      inn,
       role,
       password,
       photo: "",
@@ -521,6 +517,7 @@ app.post("/certificates", authenticateJWT, (req: Request, res: Response) => {
   const users = readFromFile(usersFilePath);
   const user = users.find((u: any) => u.id === userId);
 
+  // Проверка, что пользователь существует и является "kvd"
   if (!user || user.uType !== "kvd") {
     return res.status(403).json({
       error: `Вы не kvd и не можете вложить сертификат. Ваш тип: ${
@@ -529,16 +526,31 @@ app.post("/certificates", authenticateJWT, (req: Request, res: Response) => {
     });
   }
 
-  requestData.id = generateUniqueId(readFromFile(certificatesFilePath));
+  const certificates = readFromFile(certificatesFilePath);
 
-  writeToFile(certificatesFilePath, [
-    ...readFromFile(certificatesFilePath),
-    requestData,
-  ]);
 
-  res
+
+  // Проверка, если userId уже существует в массиве сертификатов
+  const existingCertificate = certificates.find(
+    (cert: any) => cert.userId === Number(requestData.userId) // Преобразуем userId в число
+  );
+
+
+
+  if (existingCertificate) {
+    return res.status(409).json({
+      error: "Сертификат для данного пользователя уже существует.",
+    });
+  }
+
+  // Генерация уникального ID и добавление сертификата
+  requestData.id = generateUniqueId(certificates);
+
+  writeToFile(certificatesFilePath, [...certificates, requestData]);
+
+  return res
     .status(201)
-    .json({ message: "Сертификат успешна добавлена", requestData });
+    .json({ message: "Сертификат успешно добавлен", requestData });
 });
 
 // GET Certificates

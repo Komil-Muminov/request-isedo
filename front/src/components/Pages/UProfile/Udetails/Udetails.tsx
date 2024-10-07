@@ -22,13 +22,11 @@ const Udetails: React.FC = () => {
 			const username = uinfo?.username;
 			const token = localStorage.getItem("token");
 
-			console.log(`token uphoto:${token}`);
 			setphoto({
 				username,
 				file,
 				token,
 			});
-			console.log(`file ${file}`);
 		}
 	};
 
@@ -37,7 +35,6 @@ const Udetails: React.FC = () => {
 			mutationFn: () => setUphoto(uPhoto),
 			onSuccess: () =>
 				queryClient.invalidateQueries({ queryKey: ["users", "me"] }),
-			// onError: () => console.log(`km error uPhoto ${uPhotoMutation.error}`),
 		},
 		queryClient,
 	);
