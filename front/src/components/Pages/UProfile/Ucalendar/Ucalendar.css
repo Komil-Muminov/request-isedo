@@ -29,7 +29,8 @@ button {
 }
 
 /* Кнопки */
-.ucalendar__content button {
+
+.ucalendar__btn {
 	padding: 10px 20px;
 	background-color: rgba(255, 255, 255, 0.5);
 	color: #000;
@@ -39,10 +40,10 @@ button {
 	font-size: 16px;
 	transition: background-color 0.3s ease, color 0.3s ease;
 	backdrop-filter: blur(10px);
-	text-align: center !important;
+	text-align: center;
 }
 
-.ucalendar__content button:hover {
+.ucalendar__btn:hover {
 	background-color: rgba(255, 255, 255, 0.7);
 	color: #4643ffd2 !important;
 }
@@ -145,6 +146,26 @@ button {
 
 .event__null {
 	background: #000;
+}
+
+.show__events-content {
+	position: relative;
+}
+
+.calendar__show--delete {
+	content: "";
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+.calendar__show--delete svg path {
+	transition: fill 0.2s ease-in-out;
+	fill: rgb(255, 255, 255);
+}
+
+.calendar__show--delete svg:hover path {
+	fill: rgba(200, 200, 200, 0.666);
 }
 
 /* .live-event-preview {

@@ -1,8 +1,10 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import "./Ucalendar.css";
 import { Button } from "@mui/material";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import "./Ucalendar.css";
 
 interface Task {
 	id: number;
@@ -93,6 +95,29 @@ export const Ucalendar = () => {
 		}
 	};
 
+	const handleDeleteTask = (eventId: number, taskId: number) => {
+		setEvents((prev) =>
+			prev.map((event) =>
+				event.id === eventId
+					? {
+							...event,
+							tasks: event.tasks.filter((task) => task.id !== taskId),
+					  }
+					: event,
+			),
+		);
+	};
+
+	const handleDeleteEvent = (eventId: number) => {
+		setEvents((prev) => prev.filter((event) => event.id !== eventId));
+		localStorage.removeItem('')
+	};
+
+	const handleDeleteAllEvents = () => {
+		setEvents([]);
+		localStorage.removeItem("ucalendarEvents");
+	};
+
 	const hasEvent = (date: Date) => {
 		return events.some((event) => event.date === date.toDateString());
 	};
@@ -117,11 +142,13 @@ export const Ucalendar = () => {
 	// Загружаем события и данные формы из localStorage
 	useEffect(() => {
 		const localStorageEvents = localStorage.getItem("ucalendarEvents");
-		console.log("LocalStorage Events:", localStorageEvents); // Проверка
 		if (localStorageEvents) {
-			const parsedEvents = JSON.parse(localStorageEvents);
-			console.log("Parsed Events:", parsedEvents); // Проверка загруженных данных
-			setEvents(parsedEvents);
+			try {
+				const parsedEvents = JSON.parse(localStorageEvents);
+				setEvents(parsedEvents);
+			} catch (error) {
+				console.error("Ошибка парсинга данных из localStorage:", error);
+			}
 		}
 
 		const savedFormData = localStorage.getItem("formData");
@@ -133,8 +160,10 @@ export const Ucalendar = () => {
 
 	// Сохраняем события в localStorage
 	useEffect(() => {
-		localStorage.setItem("ucalendarEvents", JSON.stringify(events));
-		console.log(localStorage.getItem("ucalendarEvents")); // Проверка сохранённых данных
+		if (events.length > 0) {
+			localStorage.setItem("ucalendarEvents", JSON.stringify(events));
+			console.log(localStorage.getItem("ucalendarEvents")); // Проверка сохранённых данных
+		}
 	}, [events]);
 
 	// Сохраняем данные формы в localStorage
@@ -155,19 +184,27 @@ export const Ucalendar = () => {
 					return null;
 				}}
 			/>
-			<p>Выбранная дата: {date?.toDateString()}</p>
+			<div className="calendar__events">
+				{/* <p>Выбранная дата: {date?.toDateString()}</p> */}
+				<Button
+					variant="outlined"
+					disabled={events.length === 0}
+					className="ucalendar__btn delete-all-events-button "
+					onClick={handleDeleteAllEvents}
+				>
+					Удалить все события
+				</Button>
+			</div>
 
 			{date && (
 				<>
-					<div className={eventCardClassName}>
+					<div className={`${eventCardClassName} show__events-content`}>
 						<h3 className="calendar__event_title">Информация о событиях:</h3>
 						{filteredEvents.length > 0 ? (
 							<>
 								{filteredEvents.map((event) => (
-									<div key={event.id}>
-										<p>
-											<strong>Дата:</strong> {event.date}
-										</p>
+									<div key={event.id} className="calendar__show">
+										{/* <p><strong>Дата:</strong> {event.date}</p> */}
 										{event.tasks.map((task) => (
 											<div key={task.id}>
 												<p>
@@ -180,8 +217,21 @@ export const Ucalendar = () => {
 													<strong>Время:</strong> {task.startTime} -{" "}
 													{task.endTime}
 												</p>
+
+												<Button
+													className="calendar__show--delete"
+													onClick={() => handleDeleteEvent(event.id, task.id)}
+												>
+													<DeleteForeverIcon />
+												</Button>
 											</div>
 										))}
+										<Button
+											variant="outlined"
+											onClick={() => handleDeleteEvent(event.id)}
+										>
+											Удалить задачу
+										</Button>
 									</div>
 								))}
 							</>
@@ -211,7 +261,7 @@ export const Ucalendar = () => {
 					{!showForm && (
 						<Button
 							variant="outlined"
-							className="show-form-button"
+							className="show-form-button ucalendar__btn"
 							onClick={handleAddEvent}
 						>
 							Добавить событие
@@ -251,17 +301,16 @@ export const Ucalendar = () => {
 									value={formData.endTime}
 									onChange={handleInputChange}
 								/>
+								<Button
+									variant="outlined"
+									className="ucalendar__btn"
+									onClick={handleAddTask}
+								>
+									Добавить задачу
+								</Button>
 							</div>
-							<Button
-								type="submit"
-								className="btn__add_event"
-								onClick={handleAddTask}
-							>
-								Добавить задачу
-							</Button>
 						</div>
 					)}
-					{console.log(events)}
 				</>
 			)}
 		</div>
