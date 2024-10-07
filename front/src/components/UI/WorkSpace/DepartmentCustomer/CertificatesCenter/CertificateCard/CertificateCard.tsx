@@ -1,0 +1,76 @@
+import React from "react";
+
+import "./CertificateCard.css";
+
+import CardMembershipIcon from "@mui/icons-material/CardMembership";
+import GppBadIcon from "@mui/icons-material/GppBad";
+
+const CertificateList = ({ title, desc }: any) => {
+  return (
+    <li className="certificate-list">
+      <p className="certificate-list-title">{title}</p>
+      <p className="certificate-list-description">
+        {desc ? desc : `${desc} не заполнен`}
+      </p>
+    </li>
+  );
+};
+
+const CertificateCard = ({ getCertificateUser, statusCertificate }: any) => {
+  return (
+    <div
+      className={`info-certificate ${
+        getCertificateUser?.statusCode === 5 ? "passive-certificate" : ""
+      }`}
+    >
+      <div className="wrapper-info-certificate">
+        <div className="wrapper-image-certificate">
+          <GppBadIcon sx={{ fontSize: "100px", color: "#f9f611d8" }} />
+        </div>
+        <ul className="certificate-info-list">
+          <CertificateList title="Код запроса" desc={getCertificateUser?.id} />
+          <CertificateList title="ФИО" desc={getCertificateUser?.userName} />
+          <CertificateList
+            title="ИНН пользователя"
+            desc={getCertificateUser?.userTax}
+          />
+          <CertificateList
+            title="Номер телефон пользователя"
+            desc={getCertificateUser?.userPhone}
+          />
+          <CertificateList title="Должность" desc={getCertificateUser?.role} />
+          <CertificateList
+            title="Организация"
+            desc={getCertificateUser?.orgName}
+          />
+          <CertificateList
+            title="ИНН организации"
+            desc={getCertificateUser?.orgTax}
+          />
+          <CertificateList
+            title="Номер телефон организации"
+            desc={getCertificateUser?.orgPhone}
+          />
+          <CertificateList title="Регион" desc={getCertificateUser?.region} />
+          <CertificateList title="Адрес" desc={getCertificateUser?.address} />
+          <CertificateList
+            title="Серийный номер"
+            desc={getCertificateUser?.serialNumber}
+          />
+          <CertificateList
+            title="Действителен с"
+            desc={getCertificateUser?.validFrom}
+          />
+          <CertificateList
+            title="Действителен до"
+            desc={getCertificateUser?.validTo}
+          />
+          <CertificateList title="Статус" desc={statusCertificate} />
+          <CertificateList title="Экспорт" />
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+export default CertificateCard;

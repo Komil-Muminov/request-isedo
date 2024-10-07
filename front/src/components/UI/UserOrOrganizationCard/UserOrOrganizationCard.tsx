@@ -8,7 +8,10 @@ const UserOrOrganizationCard = ({
   currentOrganization,
   title,
   fileService,
+  checkUser,
 }: any) => {
+  console.log(currentUser);
+
   return (
     <div
       className={`wrapper-accountant ${
@@ -24,6 +27,7 @@ const UserOrOrganizationCard = ({
         <p className="card-documents">Необходимые документы</p>
       )}
       <div className="wrapper-card-file-service">{fileService}</div>
+      {currentUser && checkUser}
     </div>
   );
 };

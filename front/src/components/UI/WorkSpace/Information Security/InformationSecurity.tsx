@@ -25,6 +25,7 @@ import { getUsers, TGetUsers } from "../../../API/GetUsers";
 
 import InformationSecurityModal from "../../InformationSecurityModal/InformationSecurityModal";
 import { putUserById } from "../../../API/PutUserById";
+import LoginTfmisCard from "./Login of TFMIS Card/LoginTfmisCard";
 
 const InformationSecurity = ({ currentUser }: any) => {
   const [isMouseDown, setIsMouseDown] = useState(false);
@@ -111,18 +112,13 @@ const InformationSecurity = ({ currentUser }: any) => {
       <div className="security-content">
         <div className="panel-control-security">
           <div className="security-title">
-            <NoAccountsIcon />
+            {/* <NoAccountsIcon /> */}
             <p>Пассив логина</p>
           </div>
-          <ButtonPanelControl
-            icon={
-              <PersonOffIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
-            }
-            text="Отправить в пассив"
-            handleShow={handleShow}
-          />
         </div>
-        <div className="table-container-security ">
+        {/* ДОБАВИТЬ ЗДЕСЬ КОМПОНЕНТ loginTfmisCard */}
+        <LoginTfmisCard currentUser={currentUser} />
+        {/* <div className="table-container-security ">
           <table className="table-security-list">
             <thead>
               <tr>
@@ -169,6 +165,15 @@ const InformationSecurity = ({ currentUser }: any) => {
               </tr>
             </tbody>
           </table>
+        </div> */}
+        <div className="panel-executor">
+          <ButtonPanelControl
+            icon={
+              <NoAccountsIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+            }
+            text="Отправить в пассив"
+            handleShow={handleShow}
+          />
         </div>
       </div>
       {show && (

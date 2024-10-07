@@ -18,6 +18,7 @@ import { getUsers, TGetUsers } from "../../../API/GetUsers";
 import { queryClient } from "../../../../queryClient";
 import TechnicalServicesModal from "../../TechnicalServicesModal/TechnicalServicesModal";
 import { putVpnById } from "../../../API/PutVpnById";
+import VPNCard from "./VPN Card/VPNCard";
 
 const TechnicalServices = () => {
   const [isMouseDown, setIsMouseDown] = useState(false);
@@ -96,18 +97,12 @@ const TechnicalServices = () => {
       <div className="technical-content">
         <div className="panel-control-technical">
           <div className="technical-title">
-            <NoAccountsIcon />
+            {/* <NoAccountsIcon /> */}
             <p>Пассив VPN</p>
           </div>
-          <ButtonPanelControl
-            icon={
-              <PersonOffIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
-            }
-            text="Отправить в пассив"
-            handleShow={handleShow}
-          />
         </div>
-        <div className="table-container-technical ">
+        <VPNCard getVpn={getVpn}/>
+        {/* <div className="table-container-technical ">
           <table className="table-technical-list">
             <thead>
               <tr>
@@ -154,6 +149,15 @@ const TechnicalServices = () => {
               </tr>
             </tbody>
           </table>
+        </div> */}
+        <div className="panel-executor">
+          <ButtonPanelControl
+            icon={
+              <NoAccountsIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+            }
+            text="Отправить в пассив"
+            handleShow={handleShow}
+          />
         </div>
       </div>
       {show && (

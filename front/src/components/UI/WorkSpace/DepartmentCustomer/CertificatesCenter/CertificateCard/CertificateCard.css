@@ -1,0 +1,62 @@
+.info-certificate {
+  background: linear-gradient(135deg, #607d8b, #5ea1c2);
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 30px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.passive-certificate {
+  background: linear-gradient(135deg, #cb2222, #5ea1c2);
+}
+
+.wrapper-info-certificate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  color: #f9f611d8;
+}
+
+.wrapper-image-certificate {
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  max-width: 150px;
+}
+
+.certificate-info-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.certificate-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 15%;
+}
+
+.certificate-list-title {
+  color: #fff;
+  font-weight: 800;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Тень для заголовка */
+}
+
+.certificate-list-description {
+  color: #fff;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-transform: none;
+  text-decoration: none;
+  font-family: "Mulish";
+}

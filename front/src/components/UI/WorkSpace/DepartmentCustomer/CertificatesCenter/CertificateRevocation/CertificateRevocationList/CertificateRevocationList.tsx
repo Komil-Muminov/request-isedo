@@ -26,6 +26,8 @@ import { getUsers, TGetUsers } from "../../../../../../API/GetUsers";
 
 import { statusOfCertificates } from "../../../../../../API/Data/Certificates/Certificates";
 import { putCertificates } from "../../../../../../API/PutCertificates";
+import OrganizationCard from "../../../../../UserOrOrganizationCard/OrganizationCard/OrganizationCard";
+import CertificateCard from "../../CertificateCard/CertificateCard";
 
 const CertificateRevocationList = () => {
   const [isMouseDown, setIsMouseDown] = useState(false);
@@ -112,16 +114,15 @@ const CertificateRevocationList = () => {
       <div className="certificate-content">
         <div className="panel-control-certificate-revocation">
           <div className="certificates-revocation-title">
-            <CardMembershipIcon />
+            {/* <CardMembershipIcon /> */}
             <p>Отзыв сертификата</p>
           </div>
-          <ButtonPanelControl
-            icon={<GppBadIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
-            text="Отозвать"
-            handleShow={handleShow}
-          />
         </div>
-        <div className="table-container">
+        <CertificateCard
+          getCertificateUser={getCertificateUser}
+          statusCertificate={statusCertificate?.name}
+        />
+        {/* <div className="table-container">
           <table className="table-certificate-list">
             <thead>
               <tr>
@@ -188,6 +189,13 @@ const CertificateRevocationList = () => {
               )}
             </tbody>
           </table>
+        </div> */}
+        <div className="panel-executor">
+          <ButtonPanelControl
+            icon={<GppBadIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
+            text="Отозвать"
+            handleShow={handleShow}
+          />
         </div>
       </div>
       {show && (
