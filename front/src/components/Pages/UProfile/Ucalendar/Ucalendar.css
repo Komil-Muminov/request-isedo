@@ -143,6 +143,7 @@ button {
 
 .show__events-deletealltasks {
 	align-self: flex-end;
+	background-color: #ffffff5a;
 }
 .show__events-deletealltasks--hidden {
 	visibility: hidden;
