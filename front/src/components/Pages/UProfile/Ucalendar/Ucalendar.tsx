@@ -4,6 +4,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { Button } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import "./Ucalendar.css";
 
 interface Task {
@@ -95,27 +96,50 @@ export const Ucalendar = () => {
 		}
 	};
 
-	const handleDeleteTask = (eventId: number, taskId: number) => {
-		setEvents((prev) =>
-			prev.map((event) =>
-				event.id === eventId
-					? {
-							...event,
-							tasks: event.tasks.filter((task) => task.id !== taskId),
-					  }
-					: event,
-			),
-		);
-	};
+	// const handleDeleteTask = (eventId: number, taskId: number) => {
+	// 	setEvents((prev) =>
+	// 		prev.map((event) =>
+	// 			event.id === eventId
+	// 				? {
+	// 						...event,
+	// 						tasks: event.tasks.filter((task) => task.id !== taskId),
+	// 				  }
+	// 				: event,
+	// 		),
+	// 	);
+	// };
 
 	const handleDeleteEvent = (eventId: number) => {
-		setEvents((prev) => prev.filter((event) => event.id !== eventId));
-		localStorage.removeItem('')
+		setEvents((prev) => {
+			const updatedEvents = prev.filter((event) => event.id !== eventId);
+			// Сохраняем обновленный список событий в localStorage
+			localStorage.setItem("ucalendarEvents", JSON.stringify(updatedEvents));
+			return updatedEvents;
+		});
 	};
 
 	const handleDeleteAllEvents = () => {
 		setEvents([]);
 		localStorage.removeItem("ucalendarEvents");
+	};
+
+	const handleDeleteAllTasks = () => {
+		if (date) {
+			const dateString = date.toDateString();
+			setEvents((prev) => {
+				const updatedEvents = prev
+					.map((event) => {
+						if (event.date === dateString) {
+							return { ...event, tasks: [] };
+						}
+						return event;
+					})
+					.filter((event) => event.tasks.length > 0);
+
+				localStorage.setItem("ucalendarEvents", JSON.stringify(updatedEvents));
+				return updatedEvents;
+			});
+		}
 	};
 
 	const hasEvent = (date: Date) => {
@@ -162,14 +186,13 @@ export const Ucalendar = () => {
 	useEffect(() => {
 		if (events.length > 0) {
 			localStorage.setItem("ucalendarEvents", JSON.stringify(events));
-			console.log(localStorage.getItem("ucalendarEvents")); // Проверка сохранённых данных
+			console.log(localStorage.getItem("ucalendarEvents"));
 		}
 	}, [events]);
 
-	// Сохраняем данные формы в localStorage
 	useEffect(() => {
 		localStorage.setItem("formData", JSON.stringify(formData));
-		console.log(localStorage.getItem("formData")); // Проверка сохранённых данных формы
+		console.log(localStorage.getItem("formData"));
 	}, [formData]);
 
 	return (
@@ -185,7 +208,6 @@ export const Ucalendar = () => {
 				}}
 			/>
 			<div className="calendar__events">
-				{/* <p>Выбранная дата: {date?.toDateString()}</p> */}
 				<Button
 					variant="outlined"
 					disabled={events.length === 0}
@@ -199,39 +221,51 @@ export const Ucalendar = () => {
 			{date && (
 				<>
 					<div className={`${eventCardClassName} show__events-content`}>
+						<Button className="deleteAllTasks" onClick={handleDeleteAllTasks}>
+							<DeleteOutlineIcon />
+						</Button>
 						<h3 className="calendar__event_title">Информация о событиях:</h3>
 						{filteredEvents.length > 0 ? (
 							<>
 								{filteredEvents.map((event) => (
-									<div key={event.id} className="calendar__show">
-										{/* <p><strong>Дата:</strong> {event.date}</p> */}
+									<div key={event.id} className="calendar__tasks">
 										{event.tasks.map((task) => (
-											<div key={task.id}>
-												<p>
-													<strong>Заголовок:</strong> {task.title}
-												</p>
-												<p>
-													<strong>Описание:</strong> {task.description}
-												</p>
-												<p>
-													<strong>Время:</strong> {task.startTime} -{" "}
-													{task.endTime}
-												</p>
-
+											<>
+												<div className="calendar__tasks-content" key={task.id}>
+													<span className="calendar__tasks-info">
+														Заголовок
+														<p className="calendar__tasks-value">
+															{task.title}
+														</p>
+													</span>{" "}
+													<span className="calendar__tasks-info">
+														Описание
+														<p className="calendar__tasks-value">
+															{task.description}
+														</p>
+													</span>{" "}
+													<span className="calendar__tasks-info">
+														Время
+														<p className="calendar__tasks-value">
+															{task.startTime} - {task.endTime}
+														</p>
+													</span>{" "}
+												</div>
 												<Button
 													className="calendar__show--delete"
-													onClick={() => handleDeleteEvent(event.id, task.id)}
+													onClick={() => handleDeleteEvent(event.id)}
 												>
 													<DeleteForeverIcon />
 												</Button>
-											</div>
+											</>
 										))}
-										<Button
+
+										{/* <Button
 											variant="outlined"
 											onClick={() => handleDeleteEvent(event.id)}
 										>
 											Удалить задачу
-										</Button>
+										</Button> */}
 									</div>
 								))}
 							</>

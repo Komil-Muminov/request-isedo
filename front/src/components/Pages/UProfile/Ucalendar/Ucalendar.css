@@ -37,7 +37,6 @@ button {
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	border-radius: 6px;
 	cursor: pointer;
-	font-size: 16px;
 	transition: background-color 0.3s ease, color 0.3s ease;
 	backdrop-filter: blur(10px);
 	text-align: center;
@@ -67,23 +66,18 @@ button {
 	text-decoration: underline;
 }
 
-/* Группировка инпутов горизонтально */
 .calendar__event_card {
 	display: flex;
-	/* justify-content: center; */
-	/* align-items: center; */
-	/* flex-direction: column; */
-	flex-wrap: wrap;
-	gap: 20px;
+	flex-direction: column;
+	gap: 5px;
+
 	background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
 	border-radius: 16px;
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 	color: #fff;
-	font-size: 16px;
 	font-weight: 500;
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
 	padding: 30px 30px 30px 50px;
-	font-size: 20px;
 	width: 100%;
 }
 
@@ -93,14 +87,13 @@ button {
 }
 
 .calendar__event_title {
-	font-size: 24px;
-	font-weight: 600;
-	color: #fff;
-	margin-bottom: 15px;
+	font-size: 20px;
+	font-weight: 700;
 	text-align: center;
-	background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
-	padding: 10px;
-	border-radius: 8px;
+	padding-bottom: 2px;
+	width: 100%;
+	border-bottom: 1px solid #ffffff78;
+	/* background: linear-gradient(135deg, #ff6b6b, #ff8e8e); */
 }
 
 .btn__add_event {
@@ -148,24 +141,50 @@ button {
 	background: #000;
 }
 
-.show__events-content {
-	position: relative;
+.deleteAllTasks {
+	align-self: flex-end;
+}
+
+.deleteAllTasks svg path {
+	fill: #fff;
+}
+
+.deleteAllTasks svg:hover path {
+	fill: #ffffffb1;
+}
+
+.calendar__tasks {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	font-size: 15px;
+}
+
+.calendar__tasks-content {
+	display: flex;
+	gap: 10px;
+	overflow: auto;
+	border-bottom: 1px solid #ffffff78;
+}
+
+.calendar__tasks-value {
+	max-width: 200px;
+	width: 100%;
+	overflow: auto;
 }
 
 .calendar__show--delete {
-	content: "";
-	position: absolute;
-	top: 5px;
-	right: 5px;
+	align-self: flex-end;
+	background-color: #ffffff5a;
+	transition: all 0.2s ease-in-out;
 }
 
 .calendar__show--delete svg path {
-	transition: fill 0.2s ease-in-out;
-	fill: rgb(255, 255, 255);
+	fill: #fff;
 }
 
-.calendar__show--delete svg:hover path {
-	fill: rgba(200, 200, 200, 0.666);
+.calendar__show--delete:hover path {
+	fill: rgba(200, 200, 200, 0.823);
 }
 
 /* .live-event-preview {
