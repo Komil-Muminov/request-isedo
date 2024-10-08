@@ -41,6 +41,9 @@
 	background: rgba(255, 255, 255, 0.8);
 	background: linear-gradient(to right, #f5e1e4, #e3eeff);
 }
+.unidentified--bg {
+	background: linear-gradient(135deg, #df125aa2, #7b4eb35b);
+}
 
 .user-details_photo {
 	display: flex;
@@ -59,21 +62,6 @@
 	border-radius: 50%;
 	position: relative;
 	/* background: linear-gradient(to right, #f3e7e9, #e3eeff); */
-}
-
-.uphoto__label::before {
-	content: "";
-	position: absolute;
-	background-image: url("../../../../assets/icons/twitter-verification.svg");
-	max-width: 20px;
-	width: 100%;
-	min-height: 20px;
-	background-repeat: no-repeat;
-	background-position: top right;
-	background-size: cover;
-	border-radius: 100%;
-	right: 12%;
-	background-color: rgba(8, 255, 173, 0.712);
 }
 
 .photo {
@@ -187,4 +175,10 @@
 	gap: 20px;
 	margin-bottom: 20px;
 	padding: 16px;
+}
+
+.recharts-wrapper dashboard__content charts__bg .recharts-wrapper,
+.dashboard__content,
+.charts__bg {
+	width: 100% !important;
 }

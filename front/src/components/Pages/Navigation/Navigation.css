@@ -17,7 +17,37 @@
 	align-items: center;
 	padding: 15px;
 	border-radius: 5px;
+	position: relative;
 }
+
+/* .user_info::before {
+	content: "";
+	position: absolute;
+	background-image: url("../../../assets/icons/twitter-verification.svg");
+	max-width: 13px;
+	width: 100%;
+	min-height: 13px;
+	background-repeat: no-repeat;
+	background-position: top right;
+	background-size: cover;
+	border-radius: 100%;
+	top: 0;
+	right: 52%;
+	background-color: rgb(14, 253, 173);
+} */
+
+.nav__verification--icon {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: rgb(14, 253, 173);
+	border-radius: 100%;
+	right: 52%;
+}
+
+/* .nav__verification--icon path {
+} */
 
 .user_info:hover {
 	background-color: #f1f5f9;

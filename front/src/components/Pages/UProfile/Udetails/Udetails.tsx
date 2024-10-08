@@ -78,7 +78,13 @@ const Udetails: React.FC = () => {
 				<div className="udetails__content">
 					<div className="user-details">
 						<div className="udetails__content">
-							<div className="udetails__card">
+							<div
+								className={`${
+									uinfo?.uType !== "kvd"
+										? "udetails__card unidentified--bg "
+										: "udetails__card"
+								}`}
+							>
 								<div className="udetails__setting">
 									<Settings sx={{ fill: "#464531" }} />
 								</div>
