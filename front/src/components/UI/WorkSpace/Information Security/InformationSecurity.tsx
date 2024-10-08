@@ -22,8 +22,6 @@ const InformationSecurity = ({
             rqstsDataById={rqstsDataById}
             currentUser={currentUser}
             currentOrganization={currentOrganization}
-            //   currentOrganization={currentOrganization}
-            //   getCertificateUser={getCertificateUser}
           />
         </div>
       )}

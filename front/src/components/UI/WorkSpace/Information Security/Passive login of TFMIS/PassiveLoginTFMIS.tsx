@@ -59,6 +59,7 @@ const PassiveLoginTFMIS = ({ currentUser }: any) => {
             }
             text="Отправить в пассив"
             handleShow={handleShow}
+            activeSendButton={!currentUser?.status}
           />
         </div>
       </div>
