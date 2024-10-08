@@ -70,8 +70,8 @@ button {
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
-
 	background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+	/* background: linear-gradient(135deg, #29d8a6a3, #ff6b6ba1); */
 	border-radius: 16px;
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 	color: #fff;
@@ -141,15 +141,19 @@ button {
 	background: #000;
 }
 
-.deleteAllTasks {
+.show__events-deletealltasks {
 	align-self: flex-end;
+	background-color: #ffffff5a;
+}
+.show__events-deletealltasks--hidden {
+	visibility: hidden;
 }
 
-.deleteAllTasks svg path {
+.show__events-deletealltasks svg path {
 	fill: #fff;
 }
 
-.deleteAllTasks svg:hover path {
+.show__events-deletealltasks svg:hover path {
 	fill: #ffffffb1;
 }
 
