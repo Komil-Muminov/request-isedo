@@ -148,11 +148,11 @@ button {
 	visibility: hidden;
 }
 
-.deleteAllTasks svg path {
+.show__events-deletealltasks svg path {
 	fill: #fff;
 }
 
-.deleteAllTasks svg:hover path {
+.show__events-deletealltasks svg:hover path {
 	fill: #ffffffb1;
 }
 
