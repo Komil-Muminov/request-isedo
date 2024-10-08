@@ -18,6 +18,7 @@ const DepartmentCustomer = ({
   currentOrganization,
   stageOne,
   stageTwo,
+  stageThree,
 }: any) => {
   const [showServicesList, setShowServicesList] = useState<boolean>(false);
 
@@ -78,7 +79,10 @@ const DepartmentCustomer = ({
           </div>
         </>
       )}
-
+      <div className="column-stage">
+        {stageThree}
+        <Services handleShowServicesList={handleShowServicesList} />
+      </div>
       {/* Закрывается при нажатии на кнопку Сохранить */}
       {/* {showServicesList && (
         <ServicesList handleShowServicesList={handleShowServicesList} />

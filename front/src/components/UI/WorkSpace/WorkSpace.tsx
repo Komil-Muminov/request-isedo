@@ -73,6 +73,11 @@ const WorkSpace = ({
                 <p>Этап 2</p>
               </div>
             }
+            stageThree={
+              <div className="stage-title third-stage">
+                <p>Этап 3</p>
+              </div>
+            }
           />
         )}
         {showInformationSecurity && (

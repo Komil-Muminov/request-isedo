@@ -7,6 +7,7 @@ import { queryClient } from "../../../../../queryClient";
 import { TServices } from "../../../../API/PostServices";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import ServiceCard from "./ServiceCard/ServiceCard";
 
 interface TProps {
   handleShowServicesList: (value: boolean) => void;
@@ -46,56 +47,21 @@ const Services = ({ handleShowServicesList }: TProps) => {
     0
   );
 
+  console.log(services);
+
   return (
     <div className="service-content">
-      <div className="panel-control-service">
-        <Button
-          onClick={() => handleShowServicesList(true)}
-          variant="text"
-          className="add-services"
-        >
-          <AddCircleIcon />
-          <p>Услуги</p>
-        </Button>
-        <div className="services-info">
-          <p>
-            Количество: <span>{servicesFilteredByRequestId.length}</span>
-          </p>
-          <p>
-            На сумму: <span>TJS {totalSumOfServices}</span>
-          </p>
+      <div className="panel-control-certificate-revocation">
+        <div className="certificates-revocation-title">
+          {/* <CardMembershipIcon /> */}
+          <p>Выдача сертификата </p>
         </div>
       </div>
-      <table className="table-service">
-        <thead>
-          <tr>
-            <th>Услуга</th>
-            <th>Цена</th>
-            <th>Количество</th>
-            <th>Единица измерения</th>
-            <th>Тип получателя</th>
-            <th>Налог</th>
-            <th>Сумма налога</th>
-            <th>Итого</th>
-          </tr>
-        </thead>
-        <tbody>
-          {servicesFilteredByRequestId?.map((e) => {
-            return (
-              <tr key={e.id}>
-                <td>{e.serviceName}</td>
-                <td>{e.price}</td>
-                <td>{e.amount}</td>
-                <td>{e.unit}</td>
-                <td>{e.recipientType}</td>
-                <td>{e.tax}</td>
-                <td>{e.sumTax}</td>
-                <td>{e.total}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <ul className="wrapper-service">
+        {services.map((e) => {
+          return <ServiceCard services={e} />;
+        })}
+      </ul>
     </div>
   );
 };

@@ -1,3 +1,14 @@
+.service-content {
+  width: 100%;
+}
+
+.wrapper-service {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
 .panel-control-service {
   display: flex;
   justify-content: space-between;

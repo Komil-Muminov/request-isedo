@@ -1,0 +1,19 @@
+.service-list {
+  background: linear-gradient(135deg, #5ca1be, #607d8b);
+  padding: 20px;
+  border-radius: 20px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 32.3%;
+}
+
+.wrapper-image-service-list {
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  max-width: 150px;
+}
