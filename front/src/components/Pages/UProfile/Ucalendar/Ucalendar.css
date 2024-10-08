@@ -141,8 +141,11 @@ button {
 	background: #000;
 }
 
-.deleteAllTasks {
+.show__events-deletealltasks {
 	align-self: flex-end;
+}
+.show__events-deletealltasks--hidden {
+	visibility: hidden;
 }
 
 .deleteAllTasks svg path {

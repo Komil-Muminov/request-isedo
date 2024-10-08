@@ -221,7 +221,14 @@ export const Ucalendar = () => {
 			{date && (
 				<>
 					<div className={`${eventCardClassName} show__events-content`}>
-						<Button className="deleteAllTasks" onClick={handleDeleteAllTasks}>
+						<Button
+							className={`show__events-deletealltasks ${
+								events.length <= 1
+									? "show__events-deletealltasks--hidden "
+									: "show__events-deletalltasks"
+							}`}
+							onClick={handleDeleteAllTasks}
+						>
 							<DeleteOutlineIcon />
 						</Button>
 						<h3 className="calendar__event_title">Информация о событиях:</h3>
