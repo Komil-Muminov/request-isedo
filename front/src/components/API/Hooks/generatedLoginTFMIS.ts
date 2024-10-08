@@ -7,7 +7,7 @@ interface TypeRequest {
   name?: string;
 }
 
-export function generateUsername(
+export function generatedLoginTFMIS(
   rqstsDataById: RqstsData,
   typeRequests: TypeRequest[]
 ): string | null {

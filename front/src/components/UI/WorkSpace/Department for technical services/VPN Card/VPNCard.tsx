@@ -15,26 +15,37 @@ const VPNCardList = ({ title, desc }: any) => {
   );
 };
 
-const VPNCard = ({ getVpn }: any) => {
+const VPNCard = ({ currentVPN }: any) => {
+  console.log(currentVPN);
 
   return (
     <div
-      className={`info-vpn ${getVpn?.status === false ? "passive-vpn" : ""}`}
+      className={`info-vpn ${
+        currentVPN?.status === false
+          ? "passive-vpn"
+          : currentVPN
+          ? "active-vpn"
+          : ""
+      }`}
     >
       <div className="wrapper-info-vpn">
         <div className="wrapper-image-vpn">
-          <VpnLockIcon sx={{ fontSize: "100px" }} />
+          {currentVPN?.status === false ? (
+            <VpnLockIcon sx={{ fontSize: "100px", color: "#fcdb62" }} />
+          ) : (
+            <VpnLockIcon sx={{ fontSize: "100px", color: "#42ff73" }} />
+          )}
         </div>
         <ul className="vpn-info-list">
-          <VPNCardList title="ФИО" desc={getVpn?.fullName} />
-          <VPNCardList title="Логин" desc={getVpn?.login} />
-          <VPNCardList title="БЗ" desc={getVpn?.bz} />
-          <VPNCardList title="Организация" desc={getVpn?.organization} />
-          <VPNCardList title="Телефон" desc={getVpn?.phone} />
-          <VPNCardList title="Должность" desc={getVpn?.role} />
+          <VPNCardList title="ФИО" desc={currentVPN?.fullName} />
+          <VPNCardList title="Логин" desc={currentVPN?.login} />
+          <VPNCardList title="БЗ" desc={currentVPN?.bz} />
+          <VPNCardList title="Организация" desc={currentVPN?.organization} />
+          <VPNCardList title="Телефон" desc={currentVPN?.phone} />
+          <VPNCardList title="Должность" desc={currentVPN?.role} />
           <VPNCardList
             title="Статус"
-            desc={getVpn?.status ? "Актив" : "Пассив"}
+            desc={currentVPN?.status ? "Актив" : "Пассив"}
           />
         </ul>
       </div>

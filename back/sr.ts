@@ -528,14 +528,10 @@ app.post("/certificates", authenticateJWT, (req: Request, res: Response) => {
 
   const certificates = readFromFile(certificatesFilePath);
 
-
-
   // Проверка, если userId уже существует в массиве сертификатов
   const existingCertificate = certificates.find(
     (cert: any) => cert.userId === Number(requestData.userId) // Преобразуем userId в число
   );
-
-
 
   if (existingCertificate) {
     return res.status(409).json({
@@ -655,6 +651,45 @@ app.get("/vpn", authenticateJWT, (req: Request, res: Response) => {
   }
 });
 
+// POST VPN
+
+app.post("/vpn", authenticateJWT, (req: Request, res: Response) => {
+  const { body: vpnData } = req;
+  const { userId } = req as any;
+
+  const users = readFromFile(usersFilePath);
+  const user = users.find((u: any) => u.id === userId);
+
+  // Проверка, что пользователь существует и является "kvd"
+  if (!user || user.uType !== "kvd") {
+    return res.status(403).json({
+      error: `Вы не kvd и не можете вложить сертификат. Ваш тип: ${
+        user?.uType || "неизвестен"
+      }`,
+    });
+  }
+
+  const vpn = readFromFile(vpnFilePath);
+
+  // Проверка, если userId уже существует в массиве vpn-ов
+  const existingVPN = vpn.find(
+    (vpn: any) => vpn.userId === Number(vpnData.userId) // Преобразуем userId в число
+  );
+
+  if (existingVPN) {
+    return res.status(409).json({
+      error: "VPN для данного пользователя уже существует.",
+    });
+  }
+
+  // Генерация уникального ID и добавление сертификата
+  vpnData.id = generateUniqueId(vpn);
+
+  writeToFile(vpnFilePath, [...vpn, vpnData]);
+
+  return res.status(201).json({ message: "VPN успешно добавлен", vpnData });
+});
+
 // PUT VPN BY ID
 
 app.put("/vpn/:id", authenticateJWT, (req: Request, res: Response) => {
@@ -668,7 +703,7 @@ app.put("/vpn/:id", authenticateJWT, (req: Request, res: Response) => {
   // Проверяем, имеет ли пользователь права для внесения изменений
   if (!user || user.uType !== "kvd") {
     return res.status(403).json({
-      error: `Вы не имеете прав для изменения сертификатов. Ваш тип: ${
+      error: `Вы не имеете прав для изменения vpn. Ваш тип: ${
         user?.uType || "неизвестен"
       }`,
     });

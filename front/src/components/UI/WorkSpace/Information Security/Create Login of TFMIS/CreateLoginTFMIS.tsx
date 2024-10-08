@@ -13,7 +13,7 @@ import { typeRequests } from "../../../../API/Data/TypeRequests/TypeRequests";
 
 import DomainAddIcon from "@mui/icons-material/DomainAdd";
 
-import { generateUsername } from "../../../../API/Hooks/generateUsername";
+import { generatedLoginTFMIS } from "../../../../API/Hooks/generatedLoginTFMIS";
 import {
   addUserOrganization,
   putOrganizationUser,
@@ -30,7 +30,7 @@ const CreateLoginTFMIS = ({
   const generatedUserName =
     rqstsDataById &&
     typeRequests &&
-    generateUsername(rqstsDataById, typeRequests);
+    generatedLoginTFMIS(rqstsDataById, typeRequests);
 
   const { register, handleSubmit } = useForm<RegType>({
     defaultValues: {
@@ -102,6 +102,9 @@ const CreateLoginTFMIS = ({
 
   const disabledAddUserInOrganizationButton =
     currentOrganization.userIds.includes(newLoginUserId?.id);
+
+    console.log(disabledAddUserInOrganizationButton);
+    
 
   return (
     <div className="certificate-content">

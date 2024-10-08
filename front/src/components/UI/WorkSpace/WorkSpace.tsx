@@ -93,12 +93,21 @@ const WorkSpace = ({
           />
         )}
         {showTechnicalServices && (
-          <div className="column-stage">
-            <div className="stage-title">
-              <p>Этап 1</p>
-            </div>
-            <TechnicalServices />
-          </div>
+          <TechnicalServices
+            currentUser={currentUser}
+            rqstsDataById={rqstsDataById}
+            currentOrganization={currentOrganization}
+            stageOne={
+              <div className="stage-title">
+                <p>Этап 1</p>
+              </div>
+            }
+            stageTwo={
+              <div className="stage-title second-stage">
+                <p>Этап 2</p>
+              </div>
+            }
+          />
         )}
       </div>
     </section>
