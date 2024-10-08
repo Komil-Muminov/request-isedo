@@ -103,6 +103,9 @@ const CreateLoginTFMIS = ({
   const disabledAddUserInOrganizationButton =
     currentOrganization.userIds.includes(newLoginUserId?.id);
 
+    console.log(disabledAddUserInOrganizationButton);
+    
+
   return (
     <div className="certificate-content">
       <div className="panel-control-certificate-revocation">
