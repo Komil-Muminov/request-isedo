@@ -1,19 +1,20 @@
 import { Button } from "@mui/material";
 import "./Services.css";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { getServices } from "../../../../API/GetServices";
 import { queryClient } from "../../../../../queryClient";
-import { TServices } from "../../../../API/PostServices";
+import { TServices } from "../../../../API/GetServices";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import ServiceCard from "./ServiceCard/ServiceCard";
 
-interface TProps {
-  handleShowServicesList: (value: boolean) => void;
-}
+import GppGoodIcon from "@mui/icons-material/GppGood";
+import ButtonPanelControl from "../../../ButtonPanelControl/ButtonPanelControl";
+import { PutRequestServices } from "../../../../API/PutRequestServices";
+import { GetRqstsByIdType } from "../../../../API/GetRqstsById";
 
-const Services = ({ handleShowServicesList }: TProps) => {
+const Services = ({ handleShowServicesList, rqstsDataById }: any) => {
   const getServicesQuery = useQuery(
     {
       queryFn: () => getServices(),
@@ -30,38 +31,87 @@ const Services = ({ handleShowServicesList }: TProps) => {
     }
   }, [getServicesQuery]);
 
-  const location = useLocation();
-
-  const requestIdTemp = location.pathname.split("/");
-
-  const requestId = parseInt(requestIdTemp[requestIdTemp.length - 1]);
-
   const servicesFilteredByRequestId = services.filter(
-    (e) => e.requestId === requestId
+    (e) => e.reqType === rqstsDataById?.reqType
   );
 
-  const totalSumOfServices = servicesFilteredByRequestId.reduce(
+  const totalSum = servicesFilteredByRequestId.reduce(
     (accumulator, currentValue) => {
-      return accumulator + parseFloat(currentValue.total);
+      return accumulator + currentValue.total;
     },
     0
   );
 
-  console.log(services);
+  const putOrganizationUserMutation = useMutation({
+    mutationFn: (data: GetRqstsByIdType) => PutRequestServices(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [`request-${rqstsDataById?.id}`],
+      });
+    },
+  });
+
+  const handleSubmit = () => {
+    if (rqstsDataById) {
+      // Собираем массив ids из объектов servicesFilteredByRequestId
+      const serviceIds = servicesFilteredByRequestId.map(
+        (service) => service.id
+      );
+
+      // Отправляем запрос с обновлёнными данными
+      putOrganizationUserMutation.mutate({
+        ...rqstsDataById,
+        services: [...rqstsDataById.services, ...serviceIds], // Добавляем новые id в массив services
+      });
+    }
+  };
+
+  const disabledButton = servicesFilteredByRequestId.every((service) => {
+    return rqstsDataById?.services.includes(service.id);
+  });
+
+  const servicesList = services.filter((e) => {
+    return rqstsDataById?.services.some((service: any) => service === e.id);
+  });
+
+  const renderCurrentServiceList = () => {
+    // Проверяем, есть ли объекты в servicesList
+    if (servicesList.length > 0) {
+      return servicesList.map((e) => {
+        return <ServiceCard key={e.id} service={e} />;
+      });
+    } else if (servicesFilteredByRequestId.length > 0) {
+      // Если servicesList пуст, рендерим servicesFilteredByRequestId
+      return servicesFilteredByRequestId.map((e) => {
+        return <ServiceCard key={e.id} service={e} />;
+      });
+    } else {
+      return null;
+    }
+  };
+
+  console.log(servicesList, servicesFilteredByRequestId);
 
   return (
     <div className="service-content">
       <div className="panel-control-certificate-revocation">
         <div className="certificates-revocation-title">
           {/* <CardMembershipIcon /> */}
-          <p>Выдача сертификата </p>
+          <p>Выставление услуги</p>
         </div>
+        <p style={{ fontWeight: "bold" }}>
+          Общая сумма: <span style={{ fontWeight: "normal" }}>{totalSum}c</span>
+        </p>
       </div>
-      <ul className="wrapper-service">
-        {services.map((e) => {
-          return <ServiceCard services={e} />;
-        })}
-      </ul>
+      <ul className="wrapper-service">{renderCurrentServiceList()}</ul>
+      <div className="panel-executor">
+        <ButtonPanelControl
+          icon={<GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
+          text="Выставить"
+          handleSubmit={handleSubmit}
+          activeSendButton={disabledButton}
+        />
+      </div>
     </div>
   );
 };

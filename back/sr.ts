@@ -443,6 +443,38 @@ app.get("/requests", authenticateJWT, (req: Request, res: Response) => {
   }
 });
 
+// PUT Request Add Services
+
+app.put("/requests/:id", authenticateJWT, (req: Request, res: Response) => {
+  const { services } = req.body; // Получаем массив ids услуг
+  const requestId = parseInt(req.params.id); // Получаем ID заявки из параметров
+
+  try {
+    // Чтение данных заявки из файла
+    const requestData = JSON.parse(fs.readFileSync(requestsFilePath, "utf8"));
+
+    // Поиск заявки по ID
+    const request = requestData.find((rqst: any) => rqst.id === requestId);
+
+    // Если заявка не найдена
+    if (!request) {
+      return res.status(404).json({ error: "Заявка не найдена" });
+    }
+
+    // Добавляем только те id, которых ещё нет в массиве services
+    request.services = [...new Set([...request.services, ...services])];
+
+    // Запись изменений обратно в файл
+    fs.writeFileSync(requestsFilePath, JSON.stringify(requestData, null, 2));
+
+    // Возвращаем обновлённую организацию
+    res.status(200).json(request);
+  } catch (err) {
+    console.error("Ошибка при обновлении заявки:", err);
+    res.status(500).json({ error: "Ошибка сервера при обновлении данных" });
+  }
+});
+
 // Request BY ID GET
 app.get("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
   const showId = parseInt(req.params.id, 10); // Получаем id из URL-параметров
@@ -462,31 +494,6 @@ app.get("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
 
 // Services ==========
 
-app.post("/services", authenticateJWT, (req: Request, res: Response) => {
-  const { body: requestData } = req;
-  const { userId } = req as any;
-
-  const users = readFromFile(usersFilePath);
-  const user = users.find((u: any) => u.id === userId);
-
-  if (!user || user.uType !== "kvd") {
-    return res.status(403).json({
-      error: `Вы не bo и не можете выбрать услугу. Ваш тип: ${
-        user?.uType || "неизвестен"
-      }`,
-    });
-  }
-
-  requestData.id = generateUniqueId(readFromFile(servicesFilePath));
-
-  writeToFile(servicesFilePath, [
-    ...readFromFile(servicesFilePath),
-    requestData,
-  ]);
-
-  res.status(201).json({ message: "Услуга успешна добавлена", requestData });
-});
-
 app.get("/services", authenticateJWT, (req: Request, res: Response) => {
   const { userId } = req as any;
 
@@ -498,8 +505,8 @@ app.get("/services", authenticateJWT, (req: Request, res: Response) => {
   }
 
   try {
-    const requestData = JSON.parse(fs.readFileSync(servicesFilePath, "utf8"));
-    res.status(200).json(requestData);
+    const servicesData = JSON.parse(fs.readFileSync(servicesFilePath, "utf8"));
+    res.status(200).json(servicesData);
   } catch (err) {
     console.error("Ошибка при чтении файла services.json:", err);
     res.status(500).json({ error: "Ошибка сервера при чтении данных" });

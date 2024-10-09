@@ -81,7 +81,10 @@ const DepartmentCustomer = ({
       )}
       <div className="column-stage">
         {stageThree}
-        <Services handleShowServicesList={handleShowServicesList} />
+        <Services
+          handleShowServicesList={handleShowServicesList}
+          rqstsDataById={rqstsDataById}
+        />
       </div>
       {/* Закрывается при нажатии на кнопку Сохранить */}
       {/* {showServicesList && (

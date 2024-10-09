@@ -13,7 +13,7 @@ const TechnicalServices = ({
     <>
       <div className="column-stage">
         {stageOne}
-        <PassiveVPNTFMIS currentOrganization={currentOrganization}/>
+        <PassiveVPNTFMIS currentOrganization={currentOrganization} />
       </div>
       {rqstsDataById?.stepTask >= 3 && (
         <div className="column-stage">

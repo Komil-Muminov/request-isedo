@@ -1,4 +1,15 @@
-import { TServices } from "./PostServices";
+export interface TServices {
+  id: number;
+  serviceName: string;
+  price: number;
+  amount: number;
+  unit: string;
+  recipientType: string;
+  tax: string;
+  sumTax: number;
+  total: number;
+  reqType: string;
+}
 
 const token = localStorage.getItem("token");
 

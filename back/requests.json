@@ -28,6 +28,12 @@
     ],
     "userId": 5,
     "organizationId": 1,
-    "id": 1
+    "id": 1,
+    "services": [
+      1,
+      2,
+      3,
+      4
+    ]
   }
 ]
