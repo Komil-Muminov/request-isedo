@@ -141,9 +141,20 @@ button {
 	background: #000;
 }
 
+.show__events-content {
+	position: relative;
+}
+
 .show__events-deletealltasks {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
 	align-self: flex-end;
-	background-color: #ffffff5a;
+	padding: 10px 10px 10px 10px;
+	max-width: 4px;
+	width: 100%;
+	/* background-color: #ffffff5a; */
 }
 .show__events-deletealltasks--hidden {
 	visibility: hidden;

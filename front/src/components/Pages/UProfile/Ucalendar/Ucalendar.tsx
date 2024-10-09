@@ -222,10 +222,10 @@ export const Ucalendar = () => {
 				<>
 					<div className={`${eventCardClassName} show__events-content`}>
 						<Button
-							className={`show__events-deletealltasks ${
-								events.length <= 1
-									? "show__events-deletealltasks--hidden "
-									: "show__events-deletalltasks"
+							className={`${
+								filteredEvents.length > 1
+									? "show__events-deletealltasks"
+									: "show__events-deletealltasks--hidden"
 							}`}
 							onClick={handleDeleteAllTasks}
 						>

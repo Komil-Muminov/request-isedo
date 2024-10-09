@@ -6,7 +6,7 @@
 .uchartshort__left {
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
+	gap: 5px;
 }
 
 .acountBalanceIcon {
@@ -19,7 +19,7 @@
 .uchartshort__right {
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
+	gap: 5px;
 }
 
 .trendingUpIcon {
