@@ -1,0 +1,58 @@
+.info-invoice {
+  background: linear-gradient(135deg, #607d8b, #5ea1c2);
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 30px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.passive-invoice {
+  background: linear-gradient(135deg, #cb2222, #5ea1c2);
+}
+
+.active-invoice {
+  background: linear-gradient(135deg, #5ea1c2, #2fb450);
+}
+
+.wrapper-info-invoice {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.invoice-info-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: start;
+  padding-left: 100px;
+}
+
+.invoice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 22.5%;
+}
+
+.invoice-list-title {
+  color: #fff;
+  font-weight: 800;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Тень для заголовка */
+}
+
+.invoice-list-description {
+  color: #fff;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-transform: none;
+  text-decoration: none;
+  font-family: "Mulish";
+}

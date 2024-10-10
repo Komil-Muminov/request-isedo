@@ -11,6 +11,8 @@ import { useForm } from "react-hook-form";
 
 import BackupIcon from "@mui/icons-material/Backup";
 import { getInvoices, TInvoices } from "../../../../API/GetInvoices";
+import { postInvoices } from "../../../../API/PostInvoices";
+import InvoiceCard from "../Invoice Card/InvoiceCard";
 
 const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
   // Используем useMutation для вызова postPdfData
@@ -82,6 +84,26 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
     }
   };
 
+  // POST INVOICE MUTATION
+
+  const posInvoicesMutation = useMutation({
+    mutationFn: (data: TInvoices) => postInvoices(data),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["invoices"] }),
+  });
+
+  const onSubmit = (data: TInvoices) => {
+    const updateReqData = {
+      ...data,
+      requestId: rqstsDataById?.id,
+    };
+
+    posInvoicesMutation.mutate(updateReqData);
+  };
+
+  // GET INVOICE QUERY
+
+  const [invoices, setInvoices] = useState<TInvoices[]>([]);
+
   const getInvoicesQuery = useQuery(
     {
       queryFn: () => getInvoices(),
@@ -89,8 +111,6 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
     },
     queryClient
   );
-
-  const [invoices, setInvoices] = useState<TInvoices[]>([]);
 
   useEffect(() => {
     if (getInvoicesQuery.status === "success") {
@@ -121,7 +141,15 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
     }
   }, [totalSum, reset]);
 
-  console.log(invoices);
+  const currentInvoice = invoices.find(
+    (inv) => inv.requestId === rqstsDataById?.id
+  );
+
+  const disabledCreateInvoiceButton = invoices.some(
+    (inv) => inv.requestId === rqstsDataById?.id
+  );
+
+  console.log(disabledCreateInvoiceButton);
 
   return (
     <div className="certificate-content">
@@ -137,79 +165,88 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
           <p>Налоговый счет</p>
         </div>
       </div>
-      <div className="inputs-list install-certificate-inputs-list">
-        <TextField
-          {...register("invoiceNumber")}
-          id="invoiceNumber"
-          type="text"
-          className="request_inp"
-          label="Номер счета"
-        />
-        <TextField
-          {...register("indexNumber")}
-          type="text"
-          id="indexNumber"
-          className="request_inp"
-          label="Индексный номер"
-        />
-        <TextField
-          {...register("invoiceSender")}
-          id="invoiceSender"
-          type="text"
-          className="request_inp"
-          label="Отправитель"
-        />
-        <TextField
-          {...register("invoiceSenderTax")}
-          id="invoiceSenderTax"
-          type="text"
-          className="request_inp"
-          label="ИНН отправителя"
-        />
-        <TextField
-          {...register("invoiceReceiver")}
-          id="invoiceReceiver"
-          type="text"
-          className="request_inp"
-          label="Получатель"
-        />
-        <TextField
-          {...register("invoiceReceiverTax")}
-          id="invoiceReceiverTax"
-          type="text"
-          className="request_inp"
-          label="ИНН получателя"
-        />
-        <TextField
-          {...register("totalAmount")}
-          id="totalAmount"
-          type="text"
-          className="request_inp"
-          label="Общая сумма"
-        />
-        <TextField
-          {...register("date")}
-          id="date"
-          type="date"
-          className="request_inp"
-          label="Дата выставления"
-        />
-        <TextField
-          {...register("comments")}
-          id="comments"
-          type="text"
-          className="request_inp"
-          label="Комментарии"
-        />
-      </div>
+      {!disabledCreateInvoiceButton && (
+        <div className="inputs-list install-certificate-inputs-list">
+          <TextField
+            {...register("invoiceNumber")}
+            id="invoiceNumber"
+            type="text"
+            className="request_inp"
+            label="Номер счета"
+          />
+          <TextField
+            {...register("indexNumber")}
+            type="text"
+            id="indexNumber"
+            className="request_inp"
+            label="Индексный номер"
+          />
+          <TextField
+            {...register("invoiceSender")}
+            id="invoiceSender"
+            type="text"
+            className="request_inp"
+            label="Отправитель"
+          />
+          <TextField
+            {...register("invoiceSenderTax")}
+            id="invoiceSenderTax"
+            type="text"
+            className="request_inp"
+            label="ИНН отправителя"
+          />
+          <TextField
+            {...register("invoiceReceiver")}
+            id="invoiceReceiver"
+            type="text"
+            className="request_inp"
+            label="Получатель"
+          />
+          <TextField
+            {...register("invoiceReceiverTax")}
+            id="invoiceReceiverTax"
+            type="text"
+            className="request_inp"
+            label="ИНН получателя"
+          />
+          <TextField
+            {...register("totalAmount")}
+            id="totalAmount"
+            type="text"
+            className="request_inp"
+            label="Общая сумма"
+          />
+          <TextField
+            {...register("date")}
+            id="date"
+            type="date"
+            className="request_inp"
+            label="Дата выставления"
+          />
+          <TextField
+            {...register("comments")}
+            id="comments"
+            type="text"
+            className="request_inp"
+            label="Комментарии"
+          />
+        </div>
+      )}
+      {disabledCreateInvoiceButton && (
+        <InvoiceCard currentInvoice={currentInvoice} />
+      )}
+
       <div className="panel-executor">
         <ButtonPanelControl
           icon={<BackupIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
           text="Импортировать СФ"
+          activeSendButton={disabledCreateInvoiceButton}
         />
         <ButtonPanelControl
           icon={<ReceiptIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
           text="Выписать"
+          handleSubmit={handleSubmit(onSubmit)}
+          activeSendButton={disabledCreateInvoiceButton}
         />
       </div>
     </div>

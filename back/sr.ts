@@ -917,6 +917,47 @@ app.get("/invoices", authenticateJWT, (req: Request, res: Response) => {
   }
 });
 
+// POST INVOICE
+
+app.post("/invoices", authenticateJWT, (req: Request, res: Response) => {
+  const { body: invoiceData } = req;
+  const { userId } = req as any;
+
+  const users = readFromFile(usersFilePath);
+  const user = users.find((u: any) => u.id === userId);
+
+  // Проверка, что пользователь существует и является "kvd"
+  if (!user || user.uType !== "kvd") {
+    return res.status(403).json({
+      error: `Вы не kvd и не можете выписать счет. Ваш тип: ${
+        user?.uType || "неизвестен"
+      }`,
+    });
+  }
+
+  const invoice = readFromFile(invoicesFilePath);
+
+  // Проверяем счет на уникальность для определенной заявки
+  const existingInvoice = invoice.find(
+    (i: any) => i.requestId === Number(invoiceData.requestId)
+  );
+
+  if (existingInvoice) {
+    return res.status(409).json({
+      error: "Счет для данной заявки уже выписан.",
+    });
+  }
+
+  console.log("Request body:", req.body);
+
+  // Генерация уникального ID и добавление счета
+  invoiceData.id = generateUniqueId(invoice);
+
+  writeToFile(invoicesFilePath, [...invoice, invoiceData]);
+
+  return res.status(201).json({ message: "Счет успешно выписан", invoiceData });
+});
+
 // reqfiles
 // app.post(
 // 	"/reqfiles",
