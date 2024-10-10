@@ -21,6 +21,7 @@ import {
 import { getUsers, TGetUsers } from "../../../../API/GetUsers";
 import { useEffect, useState } from "react";
 import LoginTfmisCard from "../Login of TFMIS Card/LoginTfmisCard";
+import { putRqstsById, PutRqstsByIdType } from "../../../../API/PutRqstById";
 
 const CreateLoginTFMIS = ({
   rqstsDataById,
@@ -55,6 +56,18 @@ const CreateLoginTFMIS = ({
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
   });
 
+  const putRqstsByIdMutation = useMutation(
+    {
+      mutationFn: (data: PutRqstsByIdType) => putRqstsById(data),
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [`request-${rqstsDataById?.id}`],
+        });
+      },
+    },
+    queryClient
+  );
+
   const onSubmit = (data: RegType) => {
     const updateReqData = {
       ...data,
@@ -64,6 +77,13 @@ const CreateLoginTFMIS = ({
     };
     console.log(updateReqData);
     regMeMutation.mutate(updateReqData);
+
+    if (rqstsDataById)
+      putRqstsByIdMutation.mutate({
+        ...rqstsDataById,
+        stepTask: rqstsDataById && rqstsDataById.stepTask + 1,
+      });
+
     addNewUserToOrganization();
   };
 
@@ -92,6 +112,9 @@ const CreateLoginTFMIS = ({
 
   const newLoginUserId = users?.find((e) => e.username === generatedUserName);
 
+  const disabledAddUserInOrganizationButton =
+    currentOrganization.userIds.includes(newLoginUserId?.id);
+
   const addNewUserToOrganization = () => {
     if (currentOrganization && newLoginUserId)
       putOrganizationUserMutation.mutate({
@@ -100,11 +123,7 @@ const CreateLoginTFMIS = ({
       });
   };
 
-  const disabledAddUserInOrganizationButton =
-    currentOrganization.userIds.includes(newLoginUserId?.id);
-
-    console.log(disabledAddUserInOrganizationButton);
-    
+  console.log(disabledAddUserInOrganizationButton);
 
   return (
     <div className="certificate-content">

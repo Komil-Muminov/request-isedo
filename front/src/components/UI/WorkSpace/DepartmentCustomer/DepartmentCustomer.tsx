@@ -79,7 +79,7 @@ const DepartmentCustomer = ({
           </div>
         </>
       )}
-      {rqstsDataById?.stepTask >= 7 && (
+      {rqstsDataById?.stepTask >= 6 && (
         <div className="column-stage">
           {stageThree}
           <Services

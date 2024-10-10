@@ -12,6 +12,7 @@ import { queryClient } from "../../../../../queryClient";
 import { useEffect, useState } from "react";
 import { statusOfCertificates } from "../../../../API/Data/Certificates/Certificates";
 import CertificateCard from "../CertificatesCenter/CertificateCard/CertificateCard";
+import { putRqstsById, PutRqstsByIdType } from "../../../../API/PutRqstById";
 
 const InstallCertificate = ({
   rqstsDataById,
@@ -48,6 +49,18 @@ const InstallCertificate = ({
     },
   });
 
+  const putRqstsByIdMutation = useMutation(
+    {
+      mutationFn: (data: PutRqstsByIdType) => putRqstsById(data),
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [`request-${rqstsDataById?.id}`],
+        });
+      },
+    },
+    queryClient
+  );
+
   const onSubmit = (data: TCertificates) => {
     const getDate = new Date();
 
@@ -69,12 +82,17 @@ const InstallCertificate = ({
     };
 
     postCertificateMutation.mutate(updateReqData);
+
+    if (rqstsDataById)
+      putRqstsByIdMutation.mutate({
+        ...rqstsDataById,
+        stepTask: rqstsDataById && rqstsDataById.stepTask + 1,
+      });
   };
 
   const statusCertificate = statusOfCertificates.find(
     (e) => e.code === getCertificateUser?.statusCode
   );
-
 
   return (
     <div className="certificate-content">

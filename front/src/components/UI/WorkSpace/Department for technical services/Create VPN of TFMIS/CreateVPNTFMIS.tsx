@@ -24,6 +24,7 @@ import VPNCard from "../VPN Card/VPNCard";
 import { generatedVPNTFMIS } from "../../../../API/Hooks/generatedVPNTFMIS";
 import { getVPN, TVPN } from "../../../../API/GetVPN";
 import { postVPN } from "../../../../API/PostVPN";
+import { putRqstsById, PutRqstsByIdType } from "../../../../API/PutRqstById";
 
 const CreateVPNTFMIS = ({ rqstsDataById, currentOrganization }: any) => {
   const generatedUserName =
@@ -47,6 +48,18 @@ const CreateVPNTFMIS = ({ rqstsDataById, currentOrganization }: any) => {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["vpn"] }),
   });
 
+  const putRqstsByIdMutation = useMutation(
+    {
+      mutationFn: (data: PutRqstsByIdType) => putRqstsById(data),
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [`request-${rqstsDataById?.id}`],
+        });
+      },
+    },
+    queryClient
+  );
+
   const onSubmit = (data: TVPN) => {
     const updateReqData = {
       ...data,
@@ -54,8 +67,16 @@ const CreateVPNTFMIS = ({ rqstsDataById, currentOrganization }: any) => {
       status: true,
       userId: rqstsDataById?.userId,
     };
+
     console.log(updateReqData);
+
     postVPNMutation.mutate(updateReqData);
+
+    if (rqstsDataById)
+      putRqstsByIdMutation.mutate({
+        ...rqstsDataById,
+        stepTask: rqstsDataById && rqstsDataById.stepTask + 1,
+      });
   };
 
   const getVpnQuery = useQuery(
@@ -86,7 +107,7 @@ const CreateVPNTFMIS = ({ rqstsDataById, currentOrganization }: any) => {
       <div className="panel-control-certificate-revocation">
         <div className="certificates-revocation-title">
           {/* <CardMembershipIcon /> */}
-          <p>Создание логина</p>
+          <p>Создание VPN</p>
         </div>
       </div>
       {!disabledAddUserInOrganizationButton && (

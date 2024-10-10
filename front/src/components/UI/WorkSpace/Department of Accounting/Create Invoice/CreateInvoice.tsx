@@ -13,6 +13,7 @@ import BackupIcon from "@mui/icons-material/Backup";
 import { getInvoices, TInvoices } from "../../../../API/GetInvoices";
 import { postInvoices } from "../../../../API/PostInvoices";
 import InvoiceCard from "../Invoice Card/InvoiceCard";
+import { putRqstsById, PutRqstsByIdType } from "../../../../API/PutRqstById";
 
 const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
   // Используем useMutation для вызова postPdfData
@@ -91,6 +92,18 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["invoices"] }),
   });
 
+  const putRqstsByIdMutation = useMutation(
+    {
+      mutationFn: (data: PutRqstsByIdType) => putRqstsById(data),
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [`request-${rqstsDataById?.id}`],
+        });
+      },
+    },
+    queryClient
+  );
+
   const onSubmit = (data: TInvoices) => {
     const updateReqData = {
       ...data,
@@ -98,6 +111,12 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
     };
 
     posInvoicesMutation.mutate(updateReqData);
+
+    if (rqstsDataById)
+      putRqstsByIdMutation.mutate({
+        ...rqstsDataById,
+        stepCode: rqstsDataById && rqstsDataById.stepCode + 1,
+      });
   };
 
   // GET INVOICE QUERY

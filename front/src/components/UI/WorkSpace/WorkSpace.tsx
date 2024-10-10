@@ -20,14 +20,22 @@ const WorkSpace = ({
     useState<TDepartment[]>(changeOfAccountant);
 
   useEffect(() => {
-    if (rqstsDataById?.stepTask === 1) {
-      setCurrentDepartment([
-        ...currentDepartment,
-        departments[1],
-        departments[2],
-      ]);
+    if (rqstsDataById?.stepTask > 0) {
+      setCurrentDepartment((prevDepartments) => {
+        const newDepartments = [departments[1], departments[2]];
+        const combinedDepartments = [...prevDepartments, ...newDepartments];
+
+        // Удаляем дубликаты, оставляя уникальные элементы
+        const uniqueDepartments = Array.from(
+          new Set(combinedDepartments.map((dept) => dept.id))
+        ).map((id) => combinedDepartments.find((dept) => dept.id === id));
+
+        return uniqueDepartments;
+      });
     }
   }, [rqstsDataById?.stepTask]);
+
+  console.log(currentDepartment);
 
   const handleTabClick = (item: any) => {
     const updatedArray = currentDepartment.map((department) => ({
@@ -40,7 +48,16 @@ const WorkSpace = ({
 
   useEffect(() => {
     if (rqstsDataById?.services.length > 0) {
-      setCurrentDepartment([...currentDepartment, departments[3]]);
+      setCurrentDepartment((prevDepartments) => {
+        // Проверяем, уже добавлен ли департамент
+        const isDepartmentAdded = prevDepartments.some(
+          (dept) => dept.id === departments[3].id
+        );
+        if (!isDepartmentAdded) {
+          return [...prevDepartments, departments[3]];
+        }
+        return prevDepartments; // Возвращаем предыдущее состояние, если департамент уже есть
+      });
     }
   }, [rqstsDataById?.services]);
 

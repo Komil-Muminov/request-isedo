@@ -82,6 +82,9 @@ export const Register: React.FC = () => {
       (uinfo?.uType !== "kvd" && uinfo?.userId === e.userId) || e.stepCode > 0
   );
 
+  console.log(filteredRqsts);
+  
+
   const rows = filteredRqsts.map((e) => {
     const stepFound = steps.find((step) => step.stepCode === e.stepCode);
     const organizationRequest = users?.find((user) => user.id === e.userId);

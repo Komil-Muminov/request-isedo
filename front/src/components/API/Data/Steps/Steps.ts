@@ -21,7 +21,7 @@ export const stepsOfBo: TStep[] = [
   },
   {
     stepName: "Завершено",
-    stepCode: 2,
+    stepCode: 3,
     initiators: "",
   },
 ];
@@ -39,12 +39,12 @@ export const stepsOfKvd: TStep[] = [
   },
   {
     stepName: "Исполнение",
-    stepCode: 1,
+    stepCode: 2,
     initiators: ` ${departments[1]?.name}, ${departments[2]?.name}, ${departments[3]?.name}, ${departments[0]?.name}, ${departments[4]?.name}`,
   },
   {
     stepName: "Завершено",
-    stepCode: 2,
+    stepCode: 3,
     initiators: "",
   },
 ];

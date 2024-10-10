@@ -215,7 +215,7 @@ const ShowRequest = () => {
                     <CancelIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
                   }
                   text="Отклонить"
-                  // activeSendButton={rqstsDataById?.stepCode === 1}
+                  activeSendButton={rqstsDataById?.stepCode === 3}
                 />
               )}
               {uinfo?.uType === "kvd" && (
@@ -240,7 +240,11 @@ const ShowRequest = () => {
                 display: "none",
               },
             }}
-            activeStep={rqstsDataById?.stepCode}
+            activeStep={
+              rqstsDataById?.stepCode === 3
+                ? rqstsDataById?.stepCode + 1
+                : rqstsDataById?.stepCode
+            }
             alternativeLabel
           >
             {steps.map((e, index) => (
