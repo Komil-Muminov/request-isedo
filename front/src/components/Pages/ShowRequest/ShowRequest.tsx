@@ -55,8 +55,6 @@ const ShowRequest = () => {
     queryClient
   );
 
-
-
   const [rqstsDataById, setRqstsDataById] = useState<GetRqstsByIdType | null>(
     null
   );
@@ -94,7 +92,6 @@ const ShowRequest = () => {
 
   useEffect(() => {
     if (getRqstsByIdQuery.status === "success") {
-
       setRqstsDataById(getRqstsByIdQuery.data);
     } else if (getRqstsByIdQuery.status === "error") {
       console.error(getRqstsByIdQuery.error);
@@ -110,7 +107,6 @@ const ShowRequest = () => {
     },
     queryClient
   );
-
 
   const handlePutRqstById = () => {
     const updateReqData = {
@@ -167,8 +163,7 @@ const ShowRequest = () => {
     (e) => e.id === rqstsDataById?.organizationId
   );
 
-
-
+  // Это условие не корректная, необходимо убедится что userIds существует новый бухгалтер, а не заявитель
   const disabledAddUserButton = currentOrganization?.userIds.includes(
     rqstsDataById?.userId
   );
@@ -176,7 +171,6 @@ const ShowRequest = () => {
   if (getRqstsByIdQuery.status === "pending") {
     return <p>Loading...</p>;
   }
-
 
   return (
     <main className="show-content">

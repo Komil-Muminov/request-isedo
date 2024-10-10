@@ -34,7 +34,6 @@ const TechnicalServicesModal: React.FC<TProps> = ({
 
   useEffect(() => {
     if (getRqstsByIdQuery.status === "success") {
-
       setRqstsDataById(getRqstsByIdQuery.data);
     } else if (getRqstsByIdQuery.status === "error") {
       console.error(getRqstsByIdQuery.error);
@@ -74,10 +73,6 @@ const TechnicalServicesModal: React.FC<TProps> = ({
         </div>
         <main className="modal-info">
           <p>Вы действительно хотите отправить логин в пассив?</p>
-          {/* <div className="reason-code">
-            <p>Отправить в пассив до:</p>
-            <input type="date" />
-          </div> */}
           <div className="panel-control-buttons">
             <div className="wrapper-buttons">
               <Button

@@ -79,13 +79,15 @@ const DepartmentCustomer = ({
           </div>
         </>
       )}
-      <div className="column-stage">
-        {stageThree}
-        <Services
-          handleShowServicesList={handleShowServicesList}
-          rqstsDataById={rqstsDataById}
-        />
-      </div>
+      {rqstsDataById?.stepTask >= 7 && (
+        <div className="column-stage">
+          {stageThree}
+          <Services
+            handleShowServicesList={handleShowServicesList}
+            rqstsDataById={rqstsDataById}
+          />
+        </div>
+      )}
       {/* Закрывается при нажатии на кнопку Сохранить */}
       {/* {showServicesList && (
         <ServicesList handleShowServicesList={handleShowServicesList} />

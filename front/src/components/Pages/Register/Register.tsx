@@ -79,10 +79,8 @@ export const Register: React.FC = () => {
 
   const filteredRqsts = rqstsData.filter(
     (e) =>
-      (uinfo?.uType !== "kvd" && uinfo?.userId === e.userId) || e.stepCode === 1
+      (uinfo?.uType !== "kvd" && uinfo?.userId === e.userId) || e.stepCode > 0
   );
-
-
 
   const rows = filteredRqsts.map((e) => {
     const stepFound = steps.find((step) => step.stepCode === e.stepCode);

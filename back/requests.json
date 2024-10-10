@@ -10,8 +10,8 @@
     "reqType": "Смена главного бухгалтера",
     "dateTime": "02.10.2024.16:12",
     "password": "123",
-    "stepCode": 1,
-    "stepTask": 3,
+    "stepCode": 3,
+    "stepTask": 2,
     "files": [
       {
         "number": 2,
@@ -29,11 +29,6 @@
     "userId": 5,
     "organizationId": 1,
     "id": 1,
-    "services": [
-      1,
-      2,
-      3,
-      4
-    ]
+    "services": []
   }
 ]

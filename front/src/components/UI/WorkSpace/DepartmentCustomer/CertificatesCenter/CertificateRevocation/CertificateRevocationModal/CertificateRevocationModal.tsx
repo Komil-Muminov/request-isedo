@@ -50,7 +50,6 @@ const CertificateRevocationModal = ({
 
   useEffect(() => {
     if (getRqstsByIdQuery.status === "success") {
-
       setRqstsDataById(getRqstsByIdQuery.data);
     } else if (getRqstsByIdQuery.status === "error") {
       console.error(getRqstsByIdQuery.error);
@@ -79,6 +78,7 @@ const CertificateRevocationModal = ({
     if (rqstsDataById)
       putRqstsByIdMutation.mutate({
         ...rqstsDataById,
+        stepCode: rqstsDataById && rqstsDataById.stepCode + 1,
         stepTask: rqstsDataById && rqstsDataById.stepTask + 1,
       });
   };

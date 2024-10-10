@@ -14,10 +14,20 @@ const WorkSpace = ({
   rqstsDataById,
   currentOrganization,
 }: any) => {
-  const changeOfAccountant = [departments[0], departments[1], departments[2]];
+  const changeOfAccountant = [departments[0]];
 
   const [currentDepartment, setCurrentDepartment] =
     useState<TDepartment[]>(changeOfAccountant);
+
+  useEffect(() => {
+    if (rqstsDataById?.stepTask === 1) {
+      setCurrentDepartment([
+        ...currentDepartment,
+        departments[1],
+        departments[2],
+      ]);
+    }
+  }, [rqstsDataById?.stepTask]);
 
   const handleTabClick = (item: any) => {
     const updatedArray = currentDepartment.map((department) => ({
@@ -127,8 +137,8 @@ const WorkSpace = ({
         )}
         {showDepartmentOfAccounting && (
           <DepartmentAccounting
-          rqstsDataById={rqstsDataById}
-          currentOrganization={currentOrganization}
+            rqstsDataById={rqstsDataById}
+            currentOrganization={currentOrganization}
             stageOne={
               <div className="stage-title">
                 <p>Этап 1</p>
