@@ -3,8 +3,8 @@ import "./DepartmentAccounting.css";
 
 const DepartmentAccounting = ({
   //   currentUser,
-  //   rqstsDataById,
-  //   currentOrganization,
+  rqstsDataById,
+  currentOrganization,
   stageOne,
   stageTwo,
 }: any) => {
@@ -12,7 +12,7 @@ const DepartmentAccounting = ({
     <>
       <div className="column-stage">
         {stageOne}
-        <CreateInvoice />
+        <CreateInvoice rqstsDataById={rqstsDataById} currentOrganization={currentOrganization}/>
       </div>
     </>
   );

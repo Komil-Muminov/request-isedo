@@ -22,6 +22,7 @@ const servicesFilePath = path.join(__dirname, "services.json");
 const certificatesFilePath = path.join(__dirname, "certificates.json");
 const vpnFilePath = path.join(__dirname, "vpn.json");
 const uidentityFilePath = path.join(__dirname, "uidentity.json");
+const invoicesFilePath = path.join(__dirname, "invoices.json");
 if (!fs.existsSync(uidentityFilePath)) {
   fs.writeFileSync(uidentityFilePath, JSON.stringify([]), "utf8");
 }
@@ -892,6 +893,27 @@ app.put("/users/:id", authenticateJWT, (req: Request, res: Response) => {
   } catch (err) {
     console.error("Ошибка при обновлении пользователя:", err);
     res.status(500).json({ error: "Ошибка сервера при обновлении данных" });
+  }
+});
+
+// GET INVOICES
+
+app.get("/invoices", authenticateJWT, (req: Request, res: Response) => {
+  const { userId } = req as any;
+
+  const users = readFromFile(usersFilePath);
+  const user = users.find((u: any) => u.id === userId);
+
+  if (!user || !["bo", "kvd"].includes(user.uType)) {
+    return res.status(403).json({ error: "Недостаточно прав" });
+  }
+
+  try {
+    const invoicesData = JSON.parse(fs.readFileSync(invoicesFilePath, "utf8"));
+    res.status(200).json(invoicesData);
+  } catch (err) {
+    console.error("Ошибка при чтении файла invoices.json:", err);
+    res.status(500).json({ error: "Ошибка сервера при чтении данных" });
   }
 });
 

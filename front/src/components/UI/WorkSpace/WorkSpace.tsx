@@ -127,6 +127,8 @@ const WorkSpace = ({
         )}
         {showDepartmentOfAccounting && (
           <DepartmentAccounting
+          rqstsDataById={rqstsDataById}
+          currentOrganization={currentOrganization}
             stageOne={
               <div className="stage-title">
                 <p>Этап 1</p>

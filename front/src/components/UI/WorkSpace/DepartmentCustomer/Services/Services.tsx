@@ -90,8 +90,6 @@ const Services = ({ handleShowServicesList, rqstsDataById }: any) => {
     }
   };
 
-  console.log(servicesList, servicesFilteredByRequestId);
-
   return (
     <div className="service-content">
       <div className="panel-control-certificate-revocation">
