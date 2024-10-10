@@ -4,6 +4,9 @@ export const PutRequestServices = async (
   newData: GetRqstsByIdType
 ): Promise<GetRqstsByIdType> => {
   const token = localStorage.getItem("token");
+
+  console.log(newData);
+
   try {
     const response = await fetch(
       `http://localhost:3000/requests/${newData.id}`,

@@ -228,12 +228,11 @@ const AddRequest: React.FC = () => {
       files: files,
       userId: uinfo?.userId,
       organizationId: currentOrganization?.id,
+      services: [],
     };
 
     postRqstsMutation.mutate(updateReqData);
   };
-
-
 
   return (
     <section className="add-content">
@@ -278,7 +277,7 @@ const AddRequest: React.FC = () => {
                     sx={{ fontSize: "18px", fontWeight: "bold" }}
                   />
                 }
-                text="Подписать"
+                text="Сохранить"
                 handleSubmit={handleSubmit(onSubmit)}
                 activeSendButton={activeSendButton}
               />
