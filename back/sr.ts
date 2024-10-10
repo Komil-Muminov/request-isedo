@@ -5,6 +5,7 @@ import fs from "fs";
 import path from "path";
 import multer from "multer";
 import jwt from "jsonwebtoken";
+import pdf from "pdf-parse";
 
 const app = express();
 const port = 3000;
@@ -21,6 +22,7 @@ const servicesFilePath = path.join(__dirname, "services.json");
 const certificatesFilePath = path.join(__dirname, "certificates.json");
 const vpnFilePath = path.join(__dirname, "vpn.json");
 const uidentityFilePath = path.join(__dirname, "uidentity.json");
+const invoicesFilePath = path.join(__dirname, "invoices.json");
 if (!fs.existsSync(uidentityFilePath)) {
   fs.writeFileSync(uidentityFilePath, JSON.stringify([]), "utf8");
 }
@@ -43,6 +45,105 @@ const writeToFile = (filePath: string, data: any[]): void => {
     console.error(`Ошибка при записи файла ${filePath}:`, err);
   }
 };
+
+// PDF Extract
+
+// Конфигурация для загрузки файлов
+const storage = multer.diskStorage({
+  destination: (
+    req: Request,
+    file: Express.Multer.File,
+    cb: (error: Error | null, destination: string) => void
+  ) => {
+    cb(null, "uploads/");
+  },
+  filename: (
+    req: Request,
+    file: Express.Multer.File,
+    cb: (error: Error | null, filename: string) => void
+  ) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const upload = multer({ storage });
+
+// Маршрут для загрузки PDF
+app.post(
+  "/upload-pdf",
+  upload.single("file"),
+  (req: Request, res: Response) => {
+    const filePath = req.file?.path;
+
+    if (!filePath) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+
+    const dataBuffer = fs.readFileSync(filePath);
+
+    pdf(dataBuffer)
+      .then((data) => {
+        const text: string = data.text;
+        console.log("Extracted text:", text); // Логируем весь текст PDF,
+
+        const cleanedText = text.replace(/\s+/g, " ").trim(); // Убираем лишние пробелы и переводы строк
+
+        // Извлечение данных
+        const identificatorInvoice = extractData(
+          cleanedText,
+          /Ҳисобнома-фактураи андоз аз арзиши иловашуда ва аксизҳо №\s*(\d+)/
+        );
+        const invoiceNumber = extractData(
+          cleanedText,
+          /Силсилаи\s*BI\s*№\s*(\d+)/
+        );
+        const formattedInvoiceNumber = `BI${invoiceNumber}`;
+        const date = extractData(
+          cleanedText,
+          /Санаи навишт\s*([\d]+\s*\w+\s*\d+)/
+        );
+        const supplier = extractData(cleanedText, /Ном\s+([^\d]+)\s+суроға/);
+        const supplierTaxId = extractData(
+          cleanedText,
+          /Рақами\s+мушаххаси\s+андозсупоранда\s*(\d+)/
+        );
+        const buyer = extractData(cleanedText, /Ном\s+СМАБХ н. Рудаки/);
+        const buyerTaxId = extractData(
+          cleanedText,
+          /мушаххаси\s+андозсупоранда\s+(\d+)/
+        );
+        const service = extractData(cleanedText, /Хизматрасонии\s+[^\n]+/);
+
+        const totalAmount = extractData(
+          cleanedText,
+          /Арзиши умумӣ\s+([\d,]+)\s+/
+        );
+
+        // Отправляем результат в ответ
+        res.json({
+          identificatorInvoice,
+          invoiceNumber: formattedInvoiceNumber,
+          date,
+          supplier,
+          supplierTaxId,
+          buyer,
+          buyerTaxId,
+          service,
+          totalAmount,
+        });
+      })
+      .catch((err: Error) => {
+        res
+          .status(500)
+          .json({ error: "Error extracting PDF data", details: err });
+      });
+  }
+);
+
+function extractData(cleanedText: string, regex: RegExp) {
+  const match = cleanedText.match(regex);
+  return match ? match[1] : null;
+}
 
 // Reqfiles
 
@@ -74,25 +175,25 @@ if (!fs.existsSync("reqfiles")) {
 // ReqFiles
 
 // multer.diskStorage — это функция из библиотеки multer, которая используется для управления загрузкой файлов в Node.js с использованием Express. Она позволяет вам настроить, куда и как будут сохраняться загруженные файлы на сервере. multer — это middleware для обработки multipart/form-data запросов, которые обычно используются для загрузки файлов. multer.diskStorage создает объект конфигурации хранилища для файлов, который позволяет вам указать, куда сохранять загруженные файлы и какие имена им давать.
-const storage = multer.diskStorage({
-  destination: (
-    req: Request,
-    file: Express.Multer.File,
-    cb: (error: Error | null, destination: string) => void
-  ) => {
-    // Указывает директорию, куда будут сохраняться загруженные файлы
-    cb(null, "uploads/");
-  },
-  filename: (
-    req: Request,
-    file: Express.Multer.File,
-    cb: (error: Error | null, filename: string) => void
-  ) => {
-    cb(null, file.originalname);
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: (
+//     req: Request,
+//     file: Express.Multer.File,
+//     cb: (error: Error | null, destination: string) => void
+//   ) => {
+//     // Указывает директорию, куда будут сохраняться загруженные файлы
+//     cb(null, "uploads/");
+//   },
+//   filename: (
+//     req: Request,
+//     file: Express.Multer.File,
+//     cb: (error: Error | null, filename: string) => void
+//   ) => {
+//     cb(null, file.originalname);
+//   },
+// });
 
-const upload = multer({ storage });
+// const upload = multer({ storage });
 
 const jwtSecret = "km"; //your_jwt_secret;
 
@@ -443,6 +544,38 @@ app.get("/requests", authenticateJWT, (req: Request, res: Response) => {
   }
 });
 
+// PUT Request Add Services
+
+app.put("/requests/:id", authenticateJWT, (req: Request, res: Response) => {
+  const { services } = req.body; // Получаем массив ids услуг
+  const requestId = parseInt(req.params.id); // Получаем ID заявки из параметров
+
+  try {
+    // Чтение данных заявки из файла
+    const requestData = JSON.parse(fs.readFileSync(requestsFilePath, "utf8"));
+
+    // Поиск заявки по ID
+    const request = requestData.find((rqst: any) => rqst.id === requestId);
+
+    // Если заявка не найдена
+    if (!request) {
+      return res.status(404).json({ error: "Заявка не найдена" });
+    }
+
+    // Добавляем только те id, которых ещё нет в массиве services
+    request.services = [...new Set([...request.services, ...services])];
+
+    // Запись изменений обратно в файл
+    fs.writeFileSync(requestsFilePath, JSON.stringify(requestData, null, 2));
+
+    // Возвращаем обновлённую организацию
+    res.status(200).json(request);
+  } catch (err) {
+    console.error("Ошибка при обновлении заявки:", err);
+    res.status(500).json({ error: "Ошибка сервера при обновлении данных" });
+  }
+});
+
 // Request BY ID GET
 app.get("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
   const showId = parseInt(req.params.id, 10); // Получаем id из URL-параметров
@@ -462,31 +595,6 @@ app.get("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
 
 // Services ==========
 
-app.post("/services", authenticateJWT, (req: Request, res: Response) => {
-  const { body: requestData } = req;
-  const { userId } = req as any;
-
-  const users = readFromFile(usersFilePath);
-  const user = users.find((u: any) => u.id === userId);
-
-  if (!user || user.uType !== "kvd") {
-    return res.status(403).json({
-      error: `Вы не bo и не можете выбрать услугу. Ваш тип: ${
-        user?.uType || "неизвестен"
-      }`,
-    });
-  }
-
-  requestData.id = generateUniqueId(readFromFile(servicesFilePath));
-
-  writeToFile(servicesFilePath, [
-    ...readFromFile(servicesFilePath),
-    requestData,
-  ]);
-
-  res.status(201).json({ message: "Услуга успешна добавлена", requestData });
-});
-
 app.get("/services", authenticateJWT, (req: Request, res: Response) => {
   const { userId } = req as any;
 
@@ -498,8 +606,8 @@ app.get("/services", authenticateJWT, (req: Request, res: Response) => {
   }
 
   try {
-    const requestData = JSON.parse(fs.readFileSync(servicesFilePath, "utf8"));
-    res.status(200).json(requestData);
+    const servicesData = JSON.parse(fs.readFileSync(servicesFilePath, "utf8"));
+    res.status(200).json(servicesData);
   } catch (err) {
     console.error("Ошибка при чтении файла services.json:", err);
     res.status(500).json({ error: "Ошибка сервера при чтении данных" });
@@ -785,6 +893,27 @@ app.put("/users/:id", authenticateJWT, (req: Request, res: Response) => {
   } catch (err) {
     console.error("Ошибка при обновлении пользователя:", err);
     res.status(500).json({ error: "Ошибка сервера при обновлении данных" });
+  }
+});
+
+// GET INVOICES
+
+app.get("/invoices", authenticateJWT, (req: Request, res: Response) => {
+  const { userId } = req as any;
+
+  const users = readFromFile(usersFilePath);
+  const user = users.find((u: any) => u.id === userId);
+
+  if (!user || !["bo", "kvd"].includes(user.uType)) {
+    return res.status(403).json({ error: "Недостаточно прав" });
+  }
+
+  try {
+    const invoicesData = JSON.parse(fs.readFileSync(invoicesFilePath, "utf8"));
+    res.status(200).json(invoicesData);
+  } catch (err) {
+    console.error("Ошибка при чтении файла invoices.json:", err);
+    res.status(500).json({ error: "Ошибка сервера при чтении данных" });
   }
 });
 

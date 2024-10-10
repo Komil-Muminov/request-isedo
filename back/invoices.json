@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "requestId": 1,
+    "invoiceNumber": "BI624770",
+    "indexNumber": 5967,
+    "invoiceSender": "КОРХОНАИ ВОҲИДИ ДАВЛАТИИ \"МАРКАЗИ ТЕХНОЛОГИЯҲОИ ИТТИЛООТИИ МОЛИЯВӢ\"",
+    "invoiceSenderTax": "010088992",
+    "invoiceReceiver": "Muhsiddin and Parpisho Corporation",
+    "invoiceReceiverTax": "020003455",
+    "comments": "",
+    "totalAmount": 3040,
+    "date": "2024-10-08"
+  }
+]

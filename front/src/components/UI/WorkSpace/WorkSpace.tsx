@@ -1,12 +1,13 @@
 import TitleDocument from "../TitleDocument/TitleDocument";
 import "./WorkSpace.css";
 import { departments } from "../../API/Data/Departments/Departments";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TDepartment } from "../../API/Data/Departments/Departments";
 import DepartmentCustomer from "./DepartmentCustomer/DepartmentCustomer";
 
 import TechnicalServices from "./Department for technical services/TechnicalServices";
 import InformationSecurity from "./Information Security/InformationSecurity";
+import DepartmentAccounting from "./Department of Accounting/DepartmentAccounting";
 
 const WorkSpace = ({
   currentUser,
@@ -27,6 +28,12 @@ const WorkSpace = ({
     setCurrentDepartment(updatedArray);
   };
 
+  useEffect(() => {
+    if (rqstsDataById?.services.length > 0) {
+      setCurrentDepartment([...currentDepartment, departments[3]]);
+    }
+  }, [rqstsDataById?.services]);
+
   const showDepartmentCustomer = currentDepartment.some(
     (e) => e.id === 1 && e.state === true
   );
@@ -37,6 +44,10 @@ const WorkSpace = ({
 
   const showTechnicalServices = currentDepartment.some(
     (e) => e.id === 3 && e.state === true
+  );
+
+  const showDepartmentOfAccounting = currentDepartment.some(
+    (e) => e.id === 4 && e.state === true
   );
 
   return (
@@ -110,6 +121,17 @@ const WorkSpace = ({
             stageTwo={
               <div className="stage-title second-stage">
                 <p>Этап 2</p>
+              </div>
+            }
+          />
+        )}
+        {showDepartmentOfAccounting && (
+          <DepartmentAccounting
+          rqstsDataById={rqstsDataById}
+          currentOrganization={currentOrganization}
+            stageOne={
+              <div className="stage-title">
+                <p>Этап 1</p>
               </div>
             }
           />
