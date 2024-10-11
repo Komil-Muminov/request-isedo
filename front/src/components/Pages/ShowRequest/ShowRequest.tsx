@@ -40,6 +40,7 @@ import {
   addUserOrganization,
   putOrganizationUser,
 } from "../../API/PutOrganizationUser";
+import FileService from "../../UI/File Services/FileService";
 
 const ShowRequest = () => {
   const navigate = useNavigate();
@@ -280,6 +281,7 @@ const ShowRequest = () => {
             <UserOrOrganizationCard
               currentUser={currentUser}
               title="Карточка пользователя"
+              newFileService={<FileService />}
               fileService={
                 <CardFileService
                   item={fileInfo[0]}

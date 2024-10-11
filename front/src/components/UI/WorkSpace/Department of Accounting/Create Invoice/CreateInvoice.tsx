@@ -1,3 +1,4 @@
+import "./CreateInvoice.css";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import ButtonPanelControl from "../../../ButtonPanelControl/ButtonPanelControl";
 import ReceiptIcon from "@mui/icons-material/Receipt";
@@ -15,6 +16,7 @@ import { postInvoices } from "../../../../API/PostInvoices";
 import InvoiceCard from "../Invoice Card/InvoiceCard";
 import { putRqstsById, PutRqstsByIdType } from "../../../../API/PutRqstById";
 import FileService from "../../../File Services/FileService";
+import PDFViewerService from "../../../PDF Viewer Service/PDFViewerService";
 
 const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
   // Используем useMutation для вызова postPdfData
@@ -251,6 +253,9 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
             label="Комментарии"
           />
           <FileService />
+          <div className="file-list">
+            <PDFViewerService />
+          </div>
         </div>
       )}
       {disabledCreateInvoiceButton && (
