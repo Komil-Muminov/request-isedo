@@ -9,6 +9,7 @@ const UserOrOrganizationCard = ({
   title,
   fileService,
   newFileService,
+  PDFViewerService,
   checkUser,
 }: any) => {
   return (
@@ -25,8 +26,9 @@ const UserOrOrganizationCard = ({
       {currentUser && currentOrganization && (
         <p className="card-documents">Необходимые документы</p>
       )}
-      {/* <div className="new-card-service-content">{newFileService}</div> */}
-      <div className="wrapper-card-file-service">{fileService}</div>
+      <div className="new-card-service-content">{newFileService}</div>
+      <div className="wrapper-pdf-viewer-service">{PDFViewerService}</div>
+      {/* <div className="wrapper-card-file-service">{fileService}</div> */}
       {currentUser && checkUser}
     </div>
   );

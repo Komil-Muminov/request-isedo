@@ -41,6 +41,14 @@
   padding: 20px;
 }
 
+.wrapper-pdf-viewer-service {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  padding: 20px;
+}
+
 .wrapper-info {
   display: flex;
   gap: 20px;

@@ -41,6 +41,8 @@ import {
   putOrganizationUser,
 } from "../../API/PutOrganizationUser";
 import FileService from "../../UI/File Services/FileService";
+import PDFViewerService from "../../UI/PDF Viewer Service/PDFViewerService";
+import { postRequestFile } from "../../API/postRequestFile";
 
 const ShowRequest = () => {
   const navigate = useNavigate();
@@ -151,6 +153,27 @@ const ShowRequest = () => {
       setOrganizations(getOrganizationsQuery.data);
     }
   }, [getOrganizationsQuery]);
+
+  // FILES SERVICE
+
+  const postFileMutation = useMutation(
+    {
+      mutationFn: (data: PutRqstsByIdType) => postRequestFile(data),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["request", requestId] });
+      },
+    },
+    queryClient
+  );
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+      postFileMutation.mutate(formData);
+    }
+  };
 
   // Данные карточки пользователя
   const currentUser = users?.find((user) => {
@@ -282,12 +305,13 @@ const ShowRequest = () => {
               currentUser={currentUser}
               title="Карточка пользователя"
               newFileService={<FileService />}
-              fileService={
-                <CardFileService
-                  item={fileInfo[0]}
-                  rqstsDataById={rqstsDataById}
-                />
-              }
+              PDFViewerService={<PDFViewerService item={fileInfo[0]} />}
+              // fileService={
+              //   <CardFileService
+              //     item={fileInfo[0]}
+              //     rqstsDataById={rqstsDataById}
+              //   />
+              // }
             />
             <UserOrOrganizationCard
               currentOrganization={currentOrganization}
