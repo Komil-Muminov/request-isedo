@@ -1,1 +1,33 @@
-[]
+[
+  {
+    "fullName": "test",
+    "tax": "123",
+    "phone": "test",
+    "email": "test",
+    "passport": "test",
+    "role": "test",
+    "token": "Есть",
+    "reqType": "Смена главного бухгалтера",
+    "dateTime": "10.10.2024.17:01",
+    "password": "123",
+    "stepCode": 2,
+    "stepTask": 3,
+    "files": [
+      {
+        "number": 1,
+        "fileName": "Карор дар бораи аз вазифа озод намудани сармухосиб.pdf"
+      },
+      {
+        "number": 2,
+        "fileName": "Карор дар бораи ба вазифа таъин намудани сармухосиб.pdf"
+      },
+      {
+        "number": 3,
+        "fileName": "Нусхаи шиноснома (аз харду тараф).pdf"
+      }
+    ],
+    "userId": 5,
+    "organizationId": 1,
+    "id": 1
+  }
+]
