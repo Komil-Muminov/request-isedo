@@ -68,7 +68,7 @@
     "department": "",
     "reqIdentity": true,
     "uIdentity": false,
-    "status": false,
+    "status": true,
     "passport": "A0438026"
   },
   {
@@ -89,41 +89,5 @@
     "uIdentity": false,
     "status": true,
     "passport": "A0825871"
-  },
-  {
-    "id": 6,
-    "uType": "bo",
-    "username": "bo_123_nazarov",
-    "password": "123",
-    "photo": "",
-    "fullName": "Далер Назаров",
-    "phone": "880008671",
-    "tax": "12345678",
-    "email": "ff",
-    "role": "fff",
-    "orgName": "Muhsiddin and Parpisho Corporation",
-    "orgTax": "020003455",
-    "reqIdentity": false,
-    "uIdentity": false,
-    "status": true,
-    "passport": "fff"
-  },
-  {
-    "id": 7,
-    "uType": "bo",
-    "username": "bo_123_daler",
-    "password": "123",
-    "photo": "",
-    "fullName": "Далер Назаров",
-    "phone": "880008671",
-    "tax": "12345678",
-    "email": "ff",
-    "role": "fff",
-    "orgName": "Muhsiddin and Parpisho Corporation",
-    "orgTax": "020003455",
-    "reqIdentity": false,
-    "uIdentity": false,
-    "status": true,
-    "passport": "fff"
   }
 ]

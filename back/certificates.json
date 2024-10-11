@@ -14,23 +14,6 @@
     "serialNumber": "200000dd1f63274b121773decc00000000dd1f",
     "validFrom": "23.09.2023",
     "validTo": "24.09.2024",
-    "statusCode": 5
-  },
-  {
-    "userName": "ff",
-    "userTax": "ff",
-    "userPhone": "ff",
-    "role": "fff",
-    "orgName": "",
-    "orgTax": "",
-    "orgPhone": "",
-    "address": "",
-    "userId": 5,
-    "organizationId": 1,
-    "serialNumber": "200000dd1f63274b121773decc00000000dd1f",
-    "validFrom": "11.10.2024",
-    "validTo": "11.10.2025",
-    "statusCode": 5,
-    "id": 57379
+    "statusCode": 0
   }
 ]

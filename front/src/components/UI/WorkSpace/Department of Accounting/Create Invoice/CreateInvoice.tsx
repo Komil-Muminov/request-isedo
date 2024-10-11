@@ -14,6 +14,7 @@ import { getInvoices, TInvoices } from "../../../../API/GetInvoices";
 import { postInvoices } from "../../../../API/PostInvoices";
 import InvoiceCard from "../Invoice Card/InvoiceCard";
 import { putRqstsById, PutRqstsByIdType } from "../../../../API/PutRqstById";
+import FileService from "../../../File Services/FileService";
 
 const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
   // Используем useMutation для вызова postPdfData
@@ -249,6 +250,7 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
             className="request_inp"
             label="Комментарии"
           />
+          <FileService />
         </div>
       )}
       {disabledCreateInvoiceButton && (
