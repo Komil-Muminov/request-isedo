@@ -30,6 +30,7 @@
   flex-wrap: wrap;
   gap: 30px;
   justify-content: start;
+  width: 75%;
 }
 
 .vpn-list {
