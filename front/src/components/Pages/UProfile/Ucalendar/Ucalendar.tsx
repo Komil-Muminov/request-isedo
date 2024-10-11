@@ -176,7 +176,6 @@ export const Ucalendar = () => {
 		}
 
 		const savedFormData = localStorage.getItem("formData");
-		console.log("Saved Form Data:", savedFormData); // Проверка
 		if (savedFormData) {
 			setFormData(JSON.parse(savedFormData));
 		}
@@ -186,13 +185,11 @@ export const Ucalendar = () => {
 	useEffect(() => {
 		if (events.length > 0) {
 			localStorage.setItem("ucalendarEvents", JSON.stringify(events));
-			console.log(localStorage.getItem("ucalendarEvents"));
 		}
 	}, [events]);
 
 	useEffect(() => {
 		localStorage.setItem("formData", JSON.stringify(formData));
-		console.log(localStorage.getItem("formData"));
 	}, [formData]);
 
 	return (

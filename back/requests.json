@@ -1,1 +1,39 @@
-[]
+[
+  {
+    "fullName": "Шарипов Амир Чамшедович",
+    "tax": "250006444",
+    "phone": "880008671",
+    "email": "jsharipovamir@gmail.com",
+    "passport": "A04513403",
+    "role": "Главный бухгалтер",
+    "token": "Есть",
+    "reqType": "Смена главного бухгалтера",
+    "dateTime": "10.10.2024.17:19",
+    "password": "123",
+    "stepCode": 3,
+    "stepTask": 6,
+    "files": [
+      {
+        "number": 1,
+        "fileName": "Карор дар бораи аз вазифа озод намудани сармухосиб.pdf"
+      },
+      {
+        "number": 2,
+        "fileName": "Карор дар бораи ба вазифа таъин намудани сармухосиб.pdf"
+      },
+      {
+        "number": 3,
+        "fileName": "Нусхаи шиноснома (аз харду тараф).pdf"
+      }
+    ],
+    "userId": 5,
+    "organizationId": 1,
+    "services": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "id": 1
+  }
+]
