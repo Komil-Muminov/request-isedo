@@ -15,7 +15,7 @@ const InformationSecurity = ({
         {stageOne}
         <PassiveLoginTFMIS currentUser={currentUser} />
       </div>
-      {rqstsDataById?.stepTask >= 3 && (
+      {rqstsDataById?.stepTask > 3 && (
         <div className="column-stage">
           {stageTwo}
           <CreateLoginTFMIS

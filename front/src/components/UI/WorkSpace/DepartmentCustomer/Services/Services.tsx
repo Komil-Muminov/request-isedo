@@ -53,25 +53,23 @@ const Services = ({ handleShowServicesList, rqstsDataById }: any) => {
 
   const handleSubmit = () => {
     if (rqstsDataById) {
-      // Собираем массив ids из объектов servicesFilteredByRequestId
       const serviceIds = servicesFilteredByRequestId.map(
         (service) => service.id
       );
 
-      // Отправляем запрос с обновлёнными данными
       putOrganizationUserMutation.mutate({
         ...rqstsDataById,
-        services: [...rqstsDataById.services, ...serviceIds], // Добавляем новые id в массив services
+        services: [...(rqstsDataById.services || []), ...serviceIds], // Используйте || [] для предотвращения ошибки
       });
     }
   };
 
   const disabledButton = servicesFilteredByRequestId.every((service) => {
-    return rqstsDataById?.services.includes(service.id);
+    return rqstsDataById?.services?.includes(service.id);
   });
 
   const servicesList = services.filter((e) => {
-    return rqstsDataById?.services.some((service: any) => service === e.id);
+    return rqstsDataById?.services?.some((service: any) => service === e.id);
   });
 
   const renderCurrentServiceList = () => {

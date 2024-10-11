@@ -1,5 +1,6 @@
 [
   {
+<<<<<<< HEAD
     "fullName": "test",
     "tax": "123",
     "phone": "test",
@@ -12,6 +13,20 @@
     "password": "123",
     "stepCode": 2,
     "stepTask": 3,
+=======
+    "fullName": "Шарипов Амир Чамшедович",
+    "tax": "250006444",
+    "phone": "880008671",
+    "email": "jsharipovamir@gmail.com",
+    "passport": "A04513403",
+    "role": "Главный бухгалтер",
+    "token": "Есть",
+    "reqType": "Смена главного бухгалтера",
+    "dateTime": "10.10.2024.17:19",
+    "password": "123",
+    "stepCode": 3,
+    "stepTask": 6,
+>>>>>>> 7fab662a5bf1f64bf1f39bf269d94abed59d01c9
     "files": [
       {
         "number": 1,
@@ -28,6 +43,15 @@
     ],
     "userId": 5,
     "organizationId": 1,
+<<<<<<< HEAD
+=======
+    "services": [
+      1,
+      2,
+      3,
+      4
+    ],
+>>>>>>> 7fab662a5bf1f64bf1f39bf269d94abed59d01c9
     "id": 1
   }
 ]

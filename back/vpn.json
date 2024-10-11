@@ -10,5 +10,20 @@
     "phone": "880006458",
     "role": "Сармухосиб",
     "status": false
+<<<<<<< HEAD
+=======
+  },
+  {
+    "fullName": "Шарипов Амир Чамшедович",
+    "login": "sharipov.a",
+    "bz": 123,
+    "organization": "Muhsiddin and Parpisho Corporation",
+    "phone": "880008671",
+    "role": "Главный бухгалтер",
+    "password": "123",
+    "status": true,
+    "userId": 5,
+    "id": 2
+>>>>>>> 7fab662a5bf1f64bf1f39bf269d94abed59d01c9
   }
 ]
