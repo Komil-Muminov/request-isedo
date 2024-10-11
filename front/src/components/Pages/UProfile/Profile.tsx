@@ -42,7 +42,7 @@ const Profile: React.FC = () => {
 
 	const handleSelectItem = (item: UlinkScheme) => {
 		setSelectedItem(item);
-		navigate(`/uprofile/details/${item.url.split("/").pop()}`);
+		navigate(`/uprofile/details/${item.url?.split("/").pop()}`);
 	};
 
 	if (uQuery.status === "pending") return <Loader />;

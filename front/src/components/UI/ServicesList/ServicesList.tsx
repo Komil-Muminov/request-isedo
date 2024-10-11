@@ -23,7 +23,7 @@ const ServicesList = ({ handleShowServicesList }: TProps) => {
 
   const location = useLocation();
 
-  const requestIdTemp = location.pathname.split("/");
+  const requestIdTemp = location.pathname?.split("/");
 
   const requestId = parseInt(requestIdTemp[requestIdTemp.length - 1]);
 

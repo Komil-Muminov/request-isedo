@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 
 const Token = ({ setShowTokenList, handleShowTokenList }: any) => {
   const location = useLocation();
-  const requestIdTemp = location.pathname.split("/");
+  const requestIdTemp = location.pathname?.split("/");
   const requestId = parseInt(requestIdTemp[requestIdTemp.length - 1]);
 
   return (

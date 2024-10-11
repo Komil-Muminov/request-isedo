@@ -1,1 +1,39 @@
-[]
+[
+  {
+    "fullName": "Далер Назаров",
+    "tax": "12345678",
+    "phone": "880008671",
+    "email": "ff",
+    "passport": "fff",
+    "role": "fff",
+    "token": "Есть",
+    "reqType": "Смена главного бухгалтера",
+    "dateTime": "11.10.2024.09:00",
+    "password": "123",
+    "stepCode": 3,
+    "stepTask": 7,
+    "files": [
+      {
+        "number": 1,
+        "fileName": "Карор дар бораи аз вазифа озод намудани сармухосиб.pdf"
+      },
+      {
+        "number": 2,
+        "fileName": "Карор дар бораи ба вазифа таъин намудани сармухосиб.pdf"
+      },
+      {
+        "number": 3,
+        "fileName": "Нусхаи шиноснома (аз харду тараф).pdf"
+      }
+    ],
+    "userId": 5,
+    "organizationId": 1,
+    "services": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "id": 1
+  }
+]
