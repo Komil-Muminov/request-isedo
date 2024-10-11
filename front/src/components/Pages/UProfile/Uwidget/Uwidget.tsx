@@ -1,4 +1,3 @@
-// import { LoaderPoints } from "../../../UI/LoaderPoints";
 import { Button } from "@mui/material";
 import Uchartshort from "../Uchart/Uchartshort/Uchartshort";
 import "./Uwidget.css";
