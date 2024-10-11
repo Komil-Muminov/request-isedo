@@ -107,5 +107,22 @@
     "uIdentity": false,
     "status": true,
     "passport": "A04513403"
+  },
+  {
+    "id": 7,
+    "uType": "kvd",
+    "username": "kmff",
+    "role": "Помощник",
+    "password": "123",
+    "photo": "",
+    "fullName": "kmff",
+    "phone": "",
+    "tax": "",
+    "email": "",
+    "orgName": "",
+    "orgTax": "",
+    "department": "Шуъба оид ба таҳия ва татбиқи барномаҳои иттилоотӣ",
+    "status": true,
+    "passport": "kmff"
   }
 ]
