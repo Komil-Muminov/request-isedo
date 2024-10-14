@@ -47,12 +47,6 @@ const LogViewer: React.FC = () => {
 				log?.timestamp?.includes(filter),
 		) || [];
 
-	useEffect(() => {
-		if (logViewerQuery.status === "success") {
-			console.log(filteredLogs.length); // Это количество отфильтрованных логов
-		}
-	}, [logViewerQuery, filteredLogs.length]); // Добавляем filteredLogs.length как зависимость
-
 	return (
 		<div className="log-viewer">
 			<h1>Логи пользователей</h1>
