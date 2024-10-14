@@ -17,8 +17,11 @@ import InvoiceCard from "../Invoice Card/InvoiceCard";
 import { putRqstsById, PutRqstsByIdType } from "../../../../API/PutRqstById";
 import FileService from "../../../File Services/FileService";
 import PDFViewerService from "../../../PDF Viewer Service/PDFViewerService";
-
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+
+import { invoiceDocuments } from "../../../../API/Data/Invoices Documents/InvoicesDocuments";
+
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
 const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
   // Используем useMutation для вызова postPdfData
@@ -205,7 +208,15 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
     (inv) => inv.requestId === rqstsDataById?.id
   );
 
-  console.log(disabledCreateInvoiceButton);
+  const firstFileStatus = files.some(
+    (e) => e.fileName === invoiceDocuments[0]?.name
+  );
+  const secondFileStatus = files.some(
+    (e) => e.fileName === invoiceDocuments[1]?.name
+  );
+  const thirdFileStatus = files.some(
+    (e) => e.fileName === invoiceDocuments[2]?.name
+  );
 
   return (
     <div className="certificate-content">
@@ -290,16 +301,28 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
           <ul className="required-documents">
             <p>Необходимые документы:</p>
             <li>
-              <HighlightOffIcon sx={{ color: "red" }} />
-              <p>Хисобнома-фактура</p>
+              {firstFileStatus ? (
+                <CheckCircleOutlineIcon sx={{ color: "green" }} />
+              ) : (
+                <HighlightOffIcon sx={{ color: "red" }} />
+              )}
+              <p>{invoiceDocuments[0]?.name}</p>
             </li>
             <li>
-              <HighlightOffIcon sx={{ color: "red" }} />
-              <p>Санади муковисави</p>
+              {secondFileStatus ? (
+                <CheckCircleOutlineIcon sx={{ color: "green" }} />
+              ) : (
+                <HighlightOffIcon sx={{ color: "red" }} />
+              )}
+              <p>{invoiceDocuments[1]?.name}</p>
             </li>
             <li>
-              <HighlightOffIcon sx={{ color: "red" }} />
-              <p>Боваринома</p>
+              {thirdFileStatus ? (
+                <CheckCircleOutlineIcon sx={{ color: "green" }} />
+              ) : (
+                <HighlightOffIcon sx={{ color: "red" }} />
+              )}
+              <p>{invoiceDocuments[2]?.name}</p>
             </li>
           </ul>
         </div>
