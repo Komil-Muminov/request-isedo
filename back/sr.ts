@@ -22,6 +22,7 @@ const requestsFilePath = path.join(__dirname, "requests.json");
 const servicesFilePath = path.join(__dirname, "services.json");
 const certificatesFilePath = path.join(__dirname, "certificates.json");
 const vpnFilePath = path.join(__dirname, "vpn.json");
+const logsFilePath = path.join(__dirname, "logs.json");
 const uidentityFilePath = path.join(__dirname, "uidentity.json");
 const invoicesFilePath = path.join(__dirname, "invoices.json");
 if (!fs.existsSync(uidentityFilePath)) {
@@ -338,19 +339,67 @@ app.post("/register", (req: Request, res: Response) => {
 	}
 });
 
+// Тип для записи лога
+type LogEntry = {
+	event: string;
+	username: string;
+	timestamp: string;
+};
+
+// Функция для форматирования времени
+const formatTimestamp = (date: Date): string => {
+	const day = String(date.getDate()).padStart(2, "0");
+	const month = String(date.getMonth() + 1).padStart(2, "0"); // Месяцы начинаются с 0
+	const year = date.getFullYear();
+	const hours = String(date.getHours()).padStart(2, "0");
+	const minutes = String(date.getMinutes()).padStart(2, "0");
+	const seconds = String(date.getSeconds()).padStart(2, "0"); // Добавлено, если нужно
+
+	return `${day}.${month}.${year} ${hours}:${minutes}`; // Формат с секундами: ${hours}:${minutes}:${seconds}
+};
+
+// Чтение логов из файла или создание пустого массива
+const readLogs = (): LogEntry[] => {
+	if (fs.existsSync(logsFilePath)) {
+		const logsData = fs.readFileSync(logsFilePath, "utf-8");
+		return JSON.parse(logsData);
+	}
+	return [];
+};
+
+// Запись логов в файл
+const writeLogs = (logs: LogEntry[]) => {
+	fs.writeFileSync(logsFilePath, JSON.stringify(logs, null, 2));
+};
+
+// Эндпоинт для входа в систему
 app.post("/login", (req: Request, res: Response) => {
 	const { username, password } = req.body;
+	const logs = readLogs();
 
 	if (!username || !password) {
+		logs.push({
+			event: "Неудачная попытка входа: отсутствуют обязательные поля",
+			username: "unknown",
+			timestamp: formatTimestamp(new Date()), // Форматируем время
+		});
+		writeLogs(logs);
 		return res.status(400).json({ error: "Отсутствуют обязательные поля" });
 	}
 
-	const users = readFromFile(usersFilePath);
+	const users = readFromFile(usersFilePath); // Предполагается, что эта функция возвращает массив пользователей
 
 	const user = users.find(
 		(user: any) => user.username === username && user.password === password,
 	);
+
 	if (!user) {
+		logs.push({
+			event: "Неудачная попытка входа",
+			username,
+			timestamp: formatTimestamp(new Date()), // Форматируем время
+		});
+		writeLogs(logs);
 		return res
 			.status(401)
 			.json({ error: "Неверное имя пользователя или пароль" });
@@ -360,7 +409,35 @@ app.post("/login", (req: Request, res: Response) => {
 		expiresIn: "1h",
 	});
 
+	logs.push({
+		event: "Успешный вход",
+		username,
+		timestamp: formatTimestamp(new Date()), // Форматируем время
+	});
+	writeLogs(logs);
+
 	res.status(200).json({ message: "Логин успешный", token });
+});
+
+// Эндпоинт для выхода из системы
+app.post("/logout", authenticateJWT, (req: Request, res: Response) => {
+	const username = req.body.username; // Или вы можете взять имя пользователя из токена
+	const logs = readLogs();
+
+	logs.push({
+		event: "Успешный выход",
+		username,
+		timestamp: formatTimestamp(new Date()), // Форматируем время
+	});
+	writeLogs(logs);
+
+	res.status(200).json({ message: "Выход успешный" });
+});
+
+// Эндпоинт для получения логов на фронте
+app.get("/ulogviewer", (req: Request, res: Response) => {
+	const logs = readLogs();
+	res.status(200).json(logs);
 });
 
 // Выход пользователя из системы (в данном случае  возвращается сообщение об успешном выходе).
