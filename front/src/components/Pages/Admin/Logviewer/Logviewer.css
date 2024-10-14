@@ -1,0 +1,47 @@
+/* LogViewer.css */
+
+.log-viewer {
+	font-family: Arial, sans-serif;
+	max-width: 800px;
+	margin: auto;
+	padding: 20px;
+}
+
+.log-viewer h1 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.log-viewer input {
+	margin-bottom: 20px;
+	padding: 10px;
+	width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.log-viewer table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+.log-viewer th,
+.log-viewer td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+}
+
+.log-viewer th {
+	background-color: #f2f2f2;
+}
+
+.log-viewer tr:nth-child(even) {
+	background-color: #f9f9f9;
+}
+
+.log-viewer tr:hover {
+	background-color: #f1f1f1;
+}

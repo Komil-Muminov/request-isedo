@@ -31,16 +31,22 @@ const LazyDetailsPage = lazy(
 	() => import("./components/Pages/UProfile/ModulsDetails/ModulsDetails"),
 );
 
-const LazyChartPage = lazy(
-	() => import("./components/Pages/UProfile/Uchart/Uchartshort/Uchartshort"),
-);
-
-const LazyDashboard = lazy(
-	() => import("./components/Pages/UProfile/Uchart/Dashboard/Dashboardchart"),
-);
 const LazyErrorPage = lazy(
 	() => import("./components/Pages/ErrorPage/ErrorPage"),
 );
+
+const LazyLogViewer = lazy(
+	() => import("./components/Pages/Admin/Logviewer/Logviewer"),
+);
+
+
+
+// const LazyChartPage = lazy(
+// 	() => import("./components/Pages/UProfile/Uchart/Uchartshort/Uchartshort"),
+// );
+// const LazyDashboard = lazy(
+// 	() => import("./components/Pages/UProfile/Uchart/Dashboard/Dashboardchart"),
+// );
 
 function App() {
 	return (
@@ -62,6 +68,7 @@ function App() {
 							<Route path="details/:page" element={<LazyDetailsPage />} />
 							<Route path="dashboard" element={<DashboardChart />} />
 							<Route path="barchart" element={<Barchart />} />
+							<Route path="ulogviewer" element={<LazyLogViewer />} />
 						</Route>
 						<Route path="/account/create" element={<LazyAddRequest />} />
 						<Route path="/account/show/:id" element={<LazyShowRequest />} />
