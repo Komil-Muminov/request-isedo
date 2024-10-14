@@ -38,7 +38,10 @@ const UserOrOrganizationCard = ({
       {currentUser && currentOrganization && (
         <p className="card-documents">Необходимые документы</p>
       )}
-      <div className="new-card-service-content">{newFileService}</div>
+      {newFileService && (
+        <div className="new-card-service-content">{newFileService}</div>
+      )}
+
       {requiredDocuments}
       <div className="wrapper-pdf-viewer-service">{PDFViewerService}</div>
       {/* <div className="wrapper-card-file-service">{fileService}</div> */}
