@@ -1,3 +1,8 @@
+interface FileType {
+  number: number;
+  fileName: string;
+}
+
 export interface TInvoices {
   id: number;
   requestId?: number;
@@ -10,6 +15,7 @@ export interface TInvoices {
   comments: string;
   totalAmount: number;
   date: string;
+  files: FileType[];
 }
 
 const token = localStorage.getItem("token");

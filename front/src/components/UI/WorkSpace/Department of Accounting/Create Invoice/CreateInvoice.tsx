@@ -18,6 +18,8 @@ import { putRqstsById, PutRqstsByIdType } from "../../../../API/PutRqstById";
 import FileService from "../../../File Services/FileService";
 import PDFViewerService from "../../../PDF Viewer Service/PDFViewerService";
 
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+
 const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
   // Используем useMutation для вызова postPdfData
   const uploadPdfMutation = useMutation({
@@ -88,6 +90,37 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
     }
   };
 
+  interface FileType {
+    fileName: string;
+  }
+
+  const [files, setFiles] = useState<FileType[]>([]);
+
+  const handleGetFile = (file: File) => {
+    const sizeInBytes = file.size; // Размер в байтах
+    const sizeInKB = (sizeInBytes / 1024).toFixed(2); // Преобразуем в КБ (строка)
+    const sizeInMB = (sizeInBytes / (1024 * 1024)).toFixed(2); // Преобразуем в МБ (строка)
+
+    // Преобразуем строки с числами в числа для сравнения
+    const fileSize =
+      parseFloat(sizeInKB) < 1000 ? `${sizeInKB} КБ` : `${sizeInMB} МБ`;
+
+    const fileName = file.name.split(".")[0];
+
+    const fileType = file.type.split("/")[1]; // Например, "pdf" из "application/pdf"
+
+    const newFile = {
+      id: new Date().getTime(),
+      fileName: `${fileName}.`,
+      size: fileSize,
+      type: fileType,
+    };
+
+    if (newFile.fileName) {
+      setFiles((prevFiles) => [...prevFiles, newFile]);
+    }
+  };
+
   // POST INVOICE MUTATION
 
   const posInvoicesMutation = useMutation({
@@ -111,6 +144,7 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
     const updateReqData = {
       ...data,
       requestId: rqstsDataById?.id,
+      files: files,
     };
 
     posInvoicesMutation.mutate(updateReqData);
@@ -252,16 +286,32 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
             className="request_inp"
             label="Комментарии"
           />
-          <FileService />
-          <div className="file-list">
-            <PDFViewerService />
-          </div>
+          <FileService handleGetFile={handleGetFile} />
+          <ul className="required-documents">
+            <p>Необходимые документы:</p>
+            <li>
+              <HighlightOffIcon sx={{ color: "red" }} />
+              <p>Хисобнома-фактура</p>
+            </li>
+            <li>
+              <HighlightOffIcon sx={{ color: "red" }} />
+              <p>Санади муковисави</p>
+            </li>
+            <li>
+              <HighlightOffIcon sx={{ color: "red" }} />
+              <p>Боваринома</p>
+            </li>
+          </ul>
         </div>
       )}
       {disabledCreateInvoiceButton && (
         <InvoiceCard currentInvoice={currentInvoice} />
       )}
-
+      {currentInvoice && currentInvoice?.files.length > 0 && (
+        <div className="file-list">
+          <PDFViewerService currentFiles={currentInvoice?.files} />
+        </div>
+      )}
       <div className="panel-executor">
         <ButtonPanelControl
           icon={<BackupIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}

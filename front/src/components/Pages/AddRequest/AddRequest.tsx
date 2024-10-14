@@ -154,7 +154,7 @@ const AddRequest: React.FC = () => {
     const fileType = file.type.split("/")[1]; // Например, "pdf" из "application/pdf"
 
     const newFile = {
-      id: file?.lastModified,
+      id: new Date().getTime(),
       fileName: `${fileName}.`,
       size: fileSize,
       type: fileType,

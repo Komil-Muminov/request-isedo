@@ -49,3 +49,15 @@
   font-weight: 500;
   font-size: 15px;
 }
+
+.unknown-file-type {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.unknown-file-type p {
+  font-size: 15px;
+}
