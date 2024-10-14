@@ -14,7 +14,7 @@ const AddFileRequest = ({
     const file = event.target.files?.[0] || null;
     setFileName(file ? file.name : "Выберите файл");
 
-    handleGetFile(item?.id, file, rqstsDataById?.userId);
+    handleGetFile(item?.id, file);
   };
 
   const choosenFileClass = getFile?.number === item?.id ? "activeFile" : "";

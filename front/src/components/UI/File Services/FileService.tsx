@@ -2,7 +2,7 @@ import "./FileService.css";
 
 import fileserviceIcon from "../../../assets/fileservice.svg";
 
-const FileService = () => {
+const FileService = ({ handleGetFile }: any) => {
   const handleFileUploadClick = () => {
     const fileInput = document.getElementById(
       "fileservice-input"
@@ -12,10 +12,18 @@ const FileService = () => {
     }
   };
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] || null;
+    handleGetFile(file);
+
+    console.log(file);
+  };
+
   return (
     <>
       <div className="fileservice-content" onClick={handleFileUploadClick}>
         <input
+          onChange={handleChange}
           type="file"
           id="fileservice-input"
           className="fileservice-input"

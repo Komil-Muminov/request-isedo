@@ -304,7 +304,6 @@ const ShowRequest = () => {
             <UserOrOrganizationCard
               currentUser={currentUser}
               title="Карточка пользователя"
-              newFileService={<FileService />}
               PDFViewerService={<PDFViewerService item={fileInfo[0]} />}
               // fileService={
               //   <CardFileService
@@ -325,18 +324,26 @@ const ShowRequest = () => {
             <UserOrOrganizationCard
               currentUser={rqstsDataById}
               title="Карточка пользователя"
-              fileService={
-                <>
-                  <CardFileService
-                    item={fileInfo[1]}
-                    rqstsDataById={rqstsDataById}
+              PDFViewerService={
+                <div className="wrapper-new-user-files">
+                  <PDFViewerService
+                    currentFiles={rqstsDataById?.files}
+                    hideFirstItem={true}
                   />
-                  <CardFileService
-                    item={fileInfo[2]}
-                    rqstsDataById={rqstsDataById}
-                  />
-                </>
+                </div>
               }
+              // fileService={
+              //   <>
+              //     <CardFileService
+              //       item={fileInfo[1]}
+              //       rqstsDataById={rqstsDataById}
+              //     />
+              //     <CardFileService
+              //       item={fileInfo[2]}
+              //       rqstsDataById={rqstsDataById}
+              //     />
+              //   </>
+              // }
               checkUser={
                 <div className="panel-check-user">
                   <ButtonPanelControl

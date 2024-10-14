@@ -26,11 +26,15 @@ import DoneIcon from "@mui/icons-material/Done";
 import TitleDocument from "../../UI/TitleDocument/TitleDocument";
 import TypeRequest from "../../UI/TypeRequest/TypeRequest";
 
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+
 import AssignmentIcon from "@mui/icons-material/Assignment";
 
 import UserOrOrganizationCard from "../../UI/UserOrOrganizationCard/UserOrOrganizationCard";
 
 import CardFileService from "../../UI/CardFileService/CardFileService";
+
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -42,6 +46,7 @@ import {
   TGetOrganizations,
 } from "../../API/GetOrganizations";
 import { getUsers, TGetUsers } from "../../API/GetUsers";
+import FileService from "../../UI/File Services/FileService";
 
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
@@ -130,26 +135,30 @@ const AddRequest: React.FC = () => {
   );
 
   interface FileType {
-    number: number;
     fileName: string;
   }
 
   const [files, setFiles] = useState<FileType[]>([]);
 
-  const [getFile, setGetFile] = useState({ number: 0, fileName: "" });
+  const handleGetFile = (file: File) => {
+    const sizeInBytes = file.size; // Размер в байтах
+    const sizeInKB = (sizeInBytes / 1024).toFixed(2); // Преобразуем в КБ (строка)
+    const sizeInMB = (sizeInBytes / (1024 * 1024)).toFixed(2); // Преобразуем в МБ (строка)
 
-  const handleGetFile = (
-    id: number,
-    file: File | null,
-    executorFile: number
-  ) => {
+    // Преобразуем строки с числами в числа для сравнения
+    const fileSize =
+      parseFloat(sizeInKB) < 1000 ? `${sizeInKB} КБ` : `${sizeInMB} МБ`;
+
+    const fileName = file.name.split(".")[0];
+
+    const fileType = file.type.split("/")[1]; // Например, "pdf" из "application/pdf"
+
     const newFile = {
-      number: id,
-      fileName: file ? file.name : "",
-      userId: executorFile,
+      id: file?.lastModified,
+      fileName: `${fileName}.`,
+      size: fileSize,
+      type: fileType,
     };
-
-    setGetFile(newFile);
 
     if (newFile.fileName) {
       setFiles((prevFiles) => [...prevFiles, newFile]);
@@ -206,6 +215,8 @@ const AddRequest: React.FC = () => {
     return org.userIds.find((userId) => userId === uinfo?.userId);
   });
 
+  console.log(files);
+
   // Увеличивает номер текущего шага на 1.
   const onSubmit = (data: PostRqstScheme) => {
     const stepFound = steps.find((e) => e.stepCode === 0);
@@ -233,6 +244,15 @@ const AddRequest: React.FC = () => {
 
     postRqstsMutation.mutate(updateReqData);
   };
+
+  const [fileUploadedStatus, setFileUploadedStatus] = useState<boolean>(false);
+
+  const handleFileUploadedStatus = (state: boolean) => {
+    setFileUploadedStatus(state);
+  };
+
+  const secondFileStatus = files.some((e) => e.fileName === fileInfo[1]?.name);
+  const thirdFileStatus = files.some((e) => e.fileName === fileInfo[2]?.name);
 
   return (
     <section className="add-content">
@@ -351,13 +371,30 @@ const AddRequest: React.FC = () => {
                 <UserOrOrganizationCard
                   currentUser={currentUser}
                   title="Карточка пользователя"
-                  fileService={
-                    <CardFileService
-                      item={fileInfo[0]}
-                      handleGetFile={handleGetFile}
-                      getFile={getFile}
-                    />
+                  newFileService={<FileService handleGetFile={handleGetFile} />}
+                  requiredFile={fileInfo[0]?.name}
+                  handleFileUploadedStatus={handleFileUploadedStatus}
+                  uploadedFile={files}
+                  requiredDocuments={
+                    <ul className="required-documents">
+                      <p>Необходимые документы:</p>
+                      <li>
+                        {fileUploadedStatus ? (
+                          <CheckCircleOutlineIcon sx={{ color: "green" }} />
+                        ) : (
+                          <HighlightOffIcon sx={{ color: "red" }} />
+                        )}
+                        <p>{fileInfo[0]?.name}</p>
+                      </li>
+                    </ul>
                   }
+                  // fileService={
+                  //   <CardFileService
+                  //     item={fileInfo[0]}
+                  //     handleGetFile={handleGetFile}
+                  //     getFile={getFile}
+                  //   />
+                  // }
                 />
                 <UserOrOrganizationCard
                   currentOrganization={currentOrganization}
@@ -429,7 +466,28 @@ const AddRequest: React.FC = () => {
                       </Select>
                     </FormControl>
                   </Box>
-                  <CardFileService
+                  <FileService />
+                  <ul className="required-documents">
+                    <p>Необходимые документы:</p>
+                    <li>
+                      {secondFileStatus ? (
+                        <CheckCircleOutlineIcon sx={{ color: "green" }} />
+                      ) : (
+                        <HighlightOffIcon sx={{ color: "red" }} />
+                      )}
+                      <p>{fileInfo[1]?.name}</p>
+                    </li>
+                    <li>
+                      {thirdFileStatus ? (
+                        <CheckCircleOutlineIcon sx={{ color: "green" }} />
+                      ) : (
+                        <HighlightOffIcon sx={{ color: "red" }} />
+                      )}
+                      <p>{fileInfo[2]?.name}</p>
+                    </li>
+                  </ul>
+
+                  {/* <CardFileService
                     item={fileInfo[1]}
                     handleGetFile={handleGetFile}
                     getFile={getFile}
@@ -440,7 +498,7 @@ const AddRequest: React.FC = () => {
                     handleGetFile={handleGetFile}
                     getFile={getFile}
                     // size="wrapper-file-width"
-                  />
+                  /> */}
                 </div>
               </div>
             </section>

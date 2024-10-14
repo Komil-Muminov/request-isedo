@@ -11,7 +11,19 @@ const UserOrOrganizationCard = ({
   newFileService,
   PDFViewerService,
   checkUser,
+  requiredDocuments,
+  requiredFile,
+  handleFileUploadedStatus,
+  uploadedFile,
 }: any) => {
+  const currentFile = uploadedFile?.some(
+    (e: any) => e.fileName === requiredFile
+  );
+
+  console.log(uploadedFile, requiredFile);
+
+  if (currentFile) handleFileUploadedStatus(currentFile);
+
   return (
     <div
       className={`wrapper-accountant ${
@@ -27,6 +39,7 @@ const UserOrOrganizationCard = ({
         <p className="card-documents">Необходимые документы</p>
       )}
       <div className="new-card-service-content">{newFileService}</div>
+      {requiredDocuments}
       <div className="wrapper-pdf-viewer-service">{PDFViewerService}</div>
       {/* <div className="wrapper-card-file-service">{fileService}</div> */}
       {currentUser && checkUser}

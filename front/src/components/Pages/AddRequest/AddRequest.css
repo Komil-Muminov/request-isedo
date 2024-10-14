@@ -126,3 +126,24 @@ th {
 .wrapper-cards-padding {
   padding: 20px;
 }
+
+.required-documents {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.required-documents p {
+  font-weight: 700;
+}
+
+.required-documents li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.required-documents li p {
+  font-weight: normal;
+}
