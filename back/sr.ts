@@ -353,7 +353,7 @@ const formatTimestamp = (date: Date): string => {
 	const year = date.getFullYear();
 	const hours = String(date.getHours()).padStart(2, "0");
 	const minutes = String(date.getMinutes()).padStart(2, "0");
-	const seconds = String(date.getSeconds()).padStart(2, "0"); // Добавлено, если нужно
+	const seconds = String(date.getSeconds()).padStart(2, "0"); 
 
 	return `${day}.${month}.${year} ${hours}:${minutes}`; // Формат с секундами: ${hours}:${minutes}:${seconds}
 };
@@ -381,13 +381,13 @@ app.post("/login", (req: Request, res: Response) => {
 		logs.push({
 			event: "Неудачная попытка входа: отсутствуют обязательные поля",
 			username: "unknown",
-			timestamp: formatTimestamp(new Date()), // Форматируем время
+			timestamp: formatTimestamp(new Date()), 
 		});
 		writeLogs(logs);
 		return res.status(400).json({ error: "Отсутствуют обязательные поля" });
 	}
 
-	const users = readFromFile(usersFilePath); // Предполагается, что эта функция возвращает массив пользователей
+	const users = readFromFile(usersFilePath); 
 
 	const user = users.find(
 		(user: any) => user.username === username && user.password === password,
@@ -397,7 +397,7 @@ app.post("/login", (req: Request, res: Response) => {
 		logs.push({
 			event: "Неудачная попытка входа",
 			username,
-			timestamp: formatTimestamp(new Date()), // Форматируем время
+			timestamp: formatTimestamp(new Date()), 
 		});
 		writeLogs(logs);
 		return res
@@ -412,7 +412,7 @@ app.post("/login", (req: Request, res: Response) => {
 	logs.push({
 		event: "Успешный вход",
 		username,
-		timestamp: formatTimestamp(new Date()), // Форматируем время
+		timestamp: formatTimestamp(new Date()), 
 	});
 	writeLogs(logs);
 
@@ -421,13 +421,13 @@ app.post("/login", (req: Request, res: Response) => {
 
 // Эндпоинт для выхода из системы
 app.post("/logout", authenticateJWT, (req: Request, res: Response) => {
-	const username = req.body.username; // Или вы можете взять имя пользователя из токена
+	const username = req.body.username;
 	const logs = readLogs();
 
 	logs.push({
 		event: "Успешный выход",
 		username,
-		timestamp: formatTimestamp(new Date()), // Форматируем время
+		timestamp: formatTimestamp(new Date()),
 	});
 	writeLogs(logs);
 
