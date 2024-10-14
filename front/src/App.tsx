@@ -39,10 +39,11 @@ const LazyLogViewer = lazy(
 	() => import("./components/Pages/Admin/Logviewer/Logviewer"),
 );
 
+
+
 // const LazyChartPage = lazy(
 // 	() => import("./components/Pages/UProfile/Uchart/Uchartshort/Uchartshort"),
 // );
-
 // const LazyDashboard = lazy(
 // 	() => import("./components/Pages/UProfile/Uchart/Dashboard/Dashboardchart"),
 // );
