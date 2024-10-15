@@ -9,6 +9,18 @@
     "organization": "Muhsiddin and Parpisho Corporation",
     "phone": "880006458",
     "role": "Сармухосиб",
-    "status": true
+    "status": false
+  },
+  {
+    "fullName": "Sharipov",
+    "login": "sharipov.undefined",
+    "bz": 123,
+    "organization": "Muhsiddin and Parpisho Corporation",
+    "phone": "8888888888",
+    "role": "Бухгалтер",
+    "password": "123",
+    "status": true,
+    "userId": 5,
+    "id": 2
   }
 ]

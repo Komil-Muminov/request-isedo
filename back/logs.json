@@ -95,5 +95,24 @@
     "event": "Успешный вход",
     "username": "km",
     "timestamp": "14.10.2024 11:11"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "user2",
+    "timestamp": "14.10.2024 16:49"
+  },
+  {
+    "event": "Успешный выход",
+    "timestamp": "14.10.2024 16:51"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "14.10.2024 16:52"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "km",
+    "timestamp": "15.10.2024 08:44"
   }
 ]
