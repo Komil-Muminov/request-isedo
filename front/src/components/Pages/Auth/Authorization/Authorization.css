@@ -37,3 +37,30 @@
 .form_errors-text {
   color: var(--red);
 }
+
+.Toastify__toast {
+  background: linear-gradient(to right, #c6792f, #b81b23) !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  /* padding: 20px !important; */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+.Toastify__progress-bar {
+  background-color: rgb(255, 242, 0) !important;
+}
+
+.Toastify__close-button {
+  color: white !important;
+  font-size: 16px !important;
+  transition: color 0.3s !important;
+}
+
+.Toastify__close-button--dark {
+  font-size: 30px !important;
+  top: 0 !important;
+}
+
+.Toastify__close-button:hover {
+  color: #ffc107 !important;
+}
