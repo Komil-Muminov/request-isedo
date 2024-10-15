@@ -114,5 +114,15 @@
     "event": "Успешный вход",
     "username": "km",
     "timestamp": "15.10.2024 08:44"
+  },
+  {
+    "event": "Неудачная попытка входа",
+    "username": "gfd",
+    "timestamp": "15.10.2024 16:20"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "15.10.2024 16:20"
   }
 ]

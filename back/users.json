@@ -68,7 +68,7 @@
     "department": "",
     "reqIdentity": true,
     "uIdentity": false,
-    "status": false,
+    "status": true,
     "passport": "A0438026"
   },
   {
@@ -89,23 +89,5 @@
     "uIdentity": false,
     "status": true,
     "passport": "A0825871"
-  },
-  {
-    "id": 6,
-    "uType": "bo",
-    "username": "bo_123_sharipov",
-    "password": "123",
-    "photo": "",
-    "fullName": "Sharipov",
-    "phone": "8888888888",
-    "tax": "1234",
-    "email": "sharipov@gmail.com",
-    "role": "Бухгалтер",
-    "orgName": "Muhsiddin and Parpisho Corporation",
-    "orgTax": "020003455",
-    "reqIdentity": false,
-    "uIdentity": false,
-    "status": true,
-    "passport": "A2222"
   }
 ]
