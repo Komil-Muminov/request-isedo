@@ -352,7 +352,7 @@ const ShowRequest = () => {
                         sx={{ fontSize: "18px", fontWeight: "bold" }}
                       />
                     }
-                    text="Проверить в системе"
+                    text="Проверить заявку"
                     activeSendButton={disabledAddUserButton}
                   />
                   {/* <ButtonPanelControl

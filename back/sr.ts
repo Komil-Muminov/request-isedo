@@ -699,14 +699,14 @@ app.post("/certificates", authenticateJWT, (req: Request, res: Response) => {
   const users = readFromFile(usersFilePath);
   const user = users.find((u: any) => u.id === userId);
 
-  // Проверка, что пользователь существует и является "kvd"
-  if (!user || user.uType !== "kvd") {
-    return res.status(403).json({
-      error: `Вы не kvd и не можете вложить сертификат. Ваш тип: ${
-        user?.uType || "неизвестен"
-      }`,
-    });
-  }
+  // // Проверка, что пользователь существует и является "kvd"
+  // if (!user || user.uType !== "kvd") {
+  //   return res.status(403).json({
+  //     error: `Вы не kvd и не можете вложить сертификат. Ваш тип: ${
+  //       user?.uType || "неизвестен"
+  //     }`,
+  //   });
+  // }
 
   const certificates = readFromFile(certificatesFilePath);
 

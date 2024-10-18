@@ -78,7 +78,7 @@ const InstallCertificate = ({
       serialNumber: "200000dd1f63274b121773decc00000000dd1f",
       validFrom: dateFrom,
       validTo: dateTo,
-      statusCode: 5,
+      statusCode: 0,
     };
 
     postCertificateMutation.mutate(updateReqData);
@@ -93,6 +93,8 @@ const InstallCertificate = ({
   const statusCertificate = statusOfCertificates.find(
     (e) => e.code === getCertificateUser?.statusCode
   );
+
+  console.log(statusCertificate);
 
   return (
     <div className="certificate-content">

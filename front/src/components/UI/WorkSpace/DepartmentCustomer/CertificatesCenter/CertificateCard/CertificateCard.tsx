@@ -22,7 +22,6 @@ const CertificateCard = ({
   statusCertificate,
   rqstsDataById,
 }: any) => {
-
   const oldAndNewCertificateStatus =
     getCertificateUser?.userId === rqstsDataById?.userId;
 
@@ -46,47 +45,51 @@ const CertificateCard = ({
             <GppGoodIcon sx={{ fontSize: "100px", color: "#42ff73" }} />
           )}
         </div>
-        <ul className="certificate-info-list">
-          <CertificateList title="Код запроса" desc={getCertificateUser?.id} />
-          <CertificateList title="ФИО" desc={getCertificateUser?.userName} />
-          <CertificateList
-            title="ИНН пользователя"
-            desc={getCertificateUser?.userTax}
-          />
-          <CertificateList
-            title="Номер телефон пользователя"
-            desc={getCertificateUser?.userPhone}
-          />
-          <CertificateList title="Должность" desc={getCertificateUser?.role} />
-          <CertificateList
-            title="Организация"
-            desc={getCertificateUser?.orgName}
-          />
-          <CertificateList
-            title="ИНН организации"
-            desc={getCertificateUser?.orgTax}
-          />
-          <CertificateList
-            title="Номер телефон организации"
-            desc={getCertificateUser?.orgPhone}
-          />
-          <CertificateList title="Регион" desc={getCertificateUser?.region} />
-          <CertificateList title="Адрес" desc={getCertificateUser?.address} />
-          <CertificateList
-            title="Серийный номер"
-            desc={getCertificateUser?.serialNumber}
-          />
-          <CertificateList
-            title="Действителен с"
-            desc={getCertificateUser?.validFrom}
-          />
-          <CertificateList
-            title="Действителен до"
-            desc={getCertificateUser?.validTo}
-          />
-          <CertificateList title="Статус" desc={statusCertificate} />
-          <CertificateList title="Экспорт" />
-        </ul>
+        <div className="wrapper-info-list">
+          <ul className="certificate-info-list">
+            <CertificateList
+              title="Код запроса"
+              desc={getCertificateUser?.id}
+            />
+            <CertificateList title="ФИО" desc={getCertificateUser?.userName} />
+            <CertificateList
+              title="ИНН пользователя"
+              desc={getCertificateUser?.userTax}
+            />
+            <CertificateList
+              title="Номер телефон пользователя"
+              desc={getCertificateUser?.userPhone}
+            />
+            <CertificateList
+              title="Должность"
+              desc={getCertificateUser?.role}
+            />
+            <CertificateList
+              title="Организация"
+              desc={getCertificateUser?.orgName}
+            />
+            <CertificateList
+              title="ИНН организации"
+              desc={getCertificateUser?.orgTax}
+            />
+            <CertificateList
+              title="Номер телефон организации"
+              desc={getCertificateUser?.orgPhone}
+            />
+            <CertificateList title="Регион" desc={getCertificateUser?.region} />
+            <CertificateList title="Адрес" desc={getCertificateUser?.address} />
+            <CertificateList
+              title="Действителен с"
+              desc={getCertificateUser?.validFrom}
+            />
+            <CertificateList
+              title="Действителен до"
+              desc={getCertificateUser?.validTo}
+            />
+            <CertificateList title="Статус" desc={statusCertificate} />
+            <CertificateList title="Экспорт" />
+          </ul>
+        </div>
       </div>
     </div>
   );

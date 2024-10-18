@@ -22,6 +22,7 @@ export interface PostRqstScheme {
   userId: number;
   organizationId: number;
   services: number[];
+  loginImof: string;
 }
 
 const token = localStorage.getItem("token");

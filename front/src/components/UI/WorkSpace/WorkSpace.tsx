@@ -14,26 +14,26 @@ const WorkSpace = ({
   rqstsDataById,
   currentOrganization,
 }: any) => {
-  const changeOfAccountant = [departments[0]];
+  const changeOfAccountant = [departments[0], departments[1], departments[2]];
 
   const [currentDepartment, setCurrentDepartment] =
     useState<TDepartment[]>(changeOfAccountant);
 
-  useEffect(() => {
-    if (rqstsDataById?.stepTask > 0) {
-      setCurrentDepartment((prevDepartments) => {
-        const newDepartments = [departments[1], departments[2]];
-        const combinedDepartments = [...prevDepartments, ...newDepartments];
+  // useEffect(() => {
+  //   if (rqstsDataById?.stepTask > 0) {
+  //     setCurrentDepartment((prevDepartments) => {
+  //       const newDepartments = [departments[1], departments[2]];
+  //       const combinedDepartments = [...prevDepartments, ...newDepartments];
 
-        // Удаляем дубликаты, оставляя уникальные элементы
-        const uniqueDepartments = Array.from(
-          new Set(combinedDepartments.map((dept) => dept.id))
-        ).map((id) => combinedDepartments.find((dept) => dept.id === id));
+  //       // Удаляем дубликаты, оставляя уникальные элементы
+  //       const uniqueDepartments = Array.from(
+  //         new Set(combinedDepartments.map((dept) => dept.id))
+  //       ).map((id) => combinedDepartments.find((dept) => dept.id === id));
 
-        return uniqueDepartments;
-      });
-    }
-  }, [rqstsDataById?.stepTask]);
+  //       return uniqueDepartments;
+  //     });
+  //   }
+  // }, [rqstsDataById?.stepTask]);
 
   console.log(currentDepartment);
 
@@ -158,7 +158,7 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             stageOne={
               <div className="stage-title">
-                <p>Этап 1</p>
+                <p>Этап 3</p>
               </div>
             }
           />

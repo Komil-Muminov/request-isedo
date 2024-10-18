@@ -124,5 +124,140 @@
     "event": "Успешный вход",
     "username": "m.norov",
     "timestamp": "15.10.2024 16:20"
+  },
+  {
+    "event": "Неудачная попытка входа",
+    "username": "crcacra32",
+    "timestamp": "16.10.2024 08:30"
+  },
+  {
+    "event": "Неудачная попытка входа",
+    "username": "crcacra32",
+    "timestamp": "16.10.2024 08:31"
+  },
+  {
+    "event": "Неудачная попытка входа",
+    "username": "crcacra32",
+    "timestamp": "16.10.2024 08:31"
+  },
+  {
+    "event": "Неудачная попытка входа",
+    "username": "crcacra32",
+    "timestamp": "16.10.2024 08:31"
+  },
+  {
+    "event": "Неудачная попытка входа",
+    "username": "crcacra32",
+    "timestamp": "16.10.2024 08:31"
+  },
+  {
+    "event": "Неудачная попытка входа",
+    "username": "crcacra32",
+    "timestamp": "16.10.2024 08:31"
+  },
+  {
+    "event": "Неудачная попытка входа",
+    "username": "crcacra32",
+    "timestamp": "16.10.2024 08:31"
+  },
+  {
+    "event": "Неудачная попытка входа",
+    "username": "crcacra32",
+    "timestamp": "16.10.2024 08:31"
+  },
+  {
+    "event": "Неудачная попытка входа",
+    "username": "crcacra32",
+    "timestamp": "16.10.2024 08:31"
+  },
+  {
+    "event": "Неудачная попытка входа",
+    "username": "crcacra32",
+    "timestamp": "16.10.2024 08:31"
+  },
+  {
+    "event": "Неудачная попытка входа",
+    "username": "crcacra32",
+    "timestamp": "16.10.2024 08:31"
+  },
+  {
+    "event": "Неудачная попытка входа",
+    "username": "crcacra32",
+    "timestamp": "16.10.2024 08:31"
+  },
+  {
+    "event": "Неудачная попытка входа",
+    "username": "crcacra32",
+    "timestamp": "16.10.2024 08:32"
+  },
+  {
+    "event": "Неудачная попытка входа",
+    "username": "crcacra32",
+    "timestamp": "16.10.2024 08:33"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "18.10.2024 10:46"
+  },
+  {
+    "event": "Успешный выход",
+    "timestamp": "18.10.2024 10:46"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "user2",
+    "timestamp": "18.10.2024 10:51"
+  },
+  {
+    "event": "Успешный выход",
+    "timestamp": "18.10.2024 11:00"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "18.10.2024 11:00"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "18.10.2024 11:06"
+  },
+  {
+    "event": "Успешный выход",
+    "timestamp": "18.10.2024 11:59"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "user2",
+    "timestamp": "18.10.2024 11:59"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "18.10.2024 13:48"
+  },
+  {
+    "event": "Успешный выход",
+    "timestamp": "18.10.2024 14:23"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "user2",
+    "timestamp": "18.10.2024 14:25"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "user2",
+    "timestamp": "18.10.2024 15:25"
+  },
+  {
+    "event": "Успешный выход",
+    "timestamp": "18.10.2024 16:16"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "18.10.2024 16:16"
   }
 ]

@@ -34,11 +34,18 @@
   max-width: 150px;
 }
 
+.wrapper-info-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 175px;
+}
+
 .certificate-info-list {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-  justify-content: center;
+  justify-content: start;
 }
 
 .certificate-list {

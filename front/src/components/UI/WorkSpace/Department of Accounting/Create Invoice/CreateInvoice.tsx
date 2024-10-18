@@ -211,12 +211,12 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
   const firstFileStatus = files.some(
     (e) => e.fileName === invoiceDocuments[0]?.name
   );
-  const secondFileStatus = files.some(
-    (e) => e.fileName === invoiceDocuments[1]?.name
-  );
-  const thirdFileStatus = files.some(
-    (e) => e.fileName === invoiceDocuments[2]?.name
-  );
+  // const secondFileStatus = files.some(
+  //   (e) => e.fileName === invoiceDocuments[1]?.name
+  // );
+  // const thirdFileStatus = files.some(
+  //   (e) => e.fileName === invoiceDocuments[2]?.name
+  // );
 
   return (
     <div className="certificate-content">
@@ -308,22 +308,22 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
               )}
               <p>{invoiceDocuments[0]?.name}</p>
             </li>
-            <li>
+            {/* <li>
               {secondFileStatus ? (
                 <CheckCircleOutlineIcon sx={{ color: "green" }} />
               ) : (
                 <HighlightOffIcon sx={{ color: "red" }} />
               )}
               <p>{invoiceDocuments[1]?.name}</p>
-            </li>
-            <li>
-              {thirdFileStatus ? (
-                <CheckCircleOutlineIcon sx={{ color: "green" }} />
-              ) : (
-                <HighlightOffIcon sx={{ color: "red" }} />
-              )}
-              <p>{invoiceDocuments[2]?.name}</p>
-            </li>
+            </li> */}
+            {/* <li>
+                {thirdFileStatus ? (
+                  <CheckCircleOutlineIcon sx={{ color: "green" }} />
+                ) : (
+                  <HighlightOffIcon sx={{ color: "red" }} />
+                )}
+                <p>{invoiceDocuments[2]?.name}</p>
+              </li> */}
           </ul>
         </div>
       )}

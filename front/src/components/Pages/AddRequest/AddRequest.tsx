@@ -47,6 +47,7 @@ import {
 } from "../../API/GetOrganizations";
 import { getUsers, TGetUsers } from "../../API/GetUsers";
 import FileService from "../../UI/File Services/FileService";
+import { toast, ToastContainer } from "react-toastify";
 
 const AddRequest: React.FC = () => {
   // Состояние текущего активного шага в индикаторе.
@@ -106,6 +107,7 @@ const AddRequest: React.FC = () => {
       reqType: "Смена главного бухгалтера",
       dateTime: "",
       password: "123",
+      loginImof: "",
     },
   });
 
@@ -243,6 +245,12 @@ const AddRequest: React.FC = () => {
     };
 
     postRqstsMutation.mutate(updateReqData);
+
+    alert(
+      `Новый главных бухгалтер ${data?.fullName} не найден в системе, можете продолжить заявку.`
+    );
+
+    navigate(`/account`);
   };
 
   const [fileUploadedStatus, setFileUploadedStatus] = useState<boolean>(false);
@@ -466,6 +474,22 @@ const AddRequest: React.FC = () => {
                       </Select>
                     </FormControl>
                   </Box>
+                  <Box className="request_inp" sx={{ minWidth: 120 }}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        Наличие логина iMoF
+                      </InputLabel>
+                      <Select
+                        {...register("loginImof")}
+                        labelId="demo-simple-select-label"
+                        id="loginImof"
+                        label="loginImof"
+                      >
+                        <MenuItem value="Есть">Есть</MenuItem>
+                        <MenuItem value="Нет">Нет</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
                   <FileService />
                   <ul className="required-documents">
                     <p>Необходимые документы:</p>
@@ -486,19 +510,6 @@ const AddRequest: React.FC = () => {
                       <p>{fileInfo[2]?.name}</p>
                     </li>
                   </ul>
-
-                  {/* <CardFileService
-                    item={fileInfo[1]}
-                    handleGetFile={handleGetFile}
-                    getFile={getFile}
-                    // size="wrapper-file-width"
-                  />
-                  <CardFileService
-                    item={fileInfo[2]}
-                    handleGetFile={handleGetFile}
-                    getFile={getFile}
-                    // size="wrapper-file-width"
-                  /> */}
                 </div>
               </div>
             </section>

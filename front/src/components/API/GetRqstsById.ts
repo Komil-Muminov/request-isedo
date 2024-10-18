@@ -23,6 +23,7 @@ export interface GetRqstsByIdType {
   token: "";
   organizationId: number;
   services: number[];
+  loginImof: string;
 }
 
 export const getRqstsById = async (id: number): Promise<GetRqstsByIdType> => {
