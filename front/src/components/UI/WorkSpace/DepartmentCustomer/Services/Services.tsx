@@ -13,8 +13,15 @@ import GppGoodIcon from "@mui/icons-material/GppGood";
 import ButtonPanelControl from "../../../ButtonPanelControl/ButtonPanelControl";
 import { PutRequestServices } from "../../../../API/PutRequestServices";
 import { GetRqstsByIdType } from "../../../../API/GetRqstsById";
+import ServicesModal from "../../../ServicesModal/ServicesModal";
 
 const Services = ({ handleShowServicesList, rqstsDataById }: any) => {
+  const [show, setShow] = useState<boolean>(false);
+
+  const handleShow = (state: boolean) => {
+    setShow(state);
+  };
+
   const getServicesQuery = useQuery(
     {
       queryFn: () => getServices(),
@@ -24,6 +31,7 @@ const Services = ({ handleShowServicesList, rqstsDataById }: any) => {
   );
 
   const [services, setServices] = useState<TServices[]>([]);
+  const [selectedRowIndexes, setSelectedRowIndexes] = useState<number[]>([]);
 
   useEffect(() => {
     if (getServicesQuery.status === "success") {
@@ -35,12 +43,20 @@ const Services = ({ handleShowServicesList, rqstsDataById }: any) => {
     (e) => e.reqType === rqstsDataById?.reqType
   );
 
-  const totalSum = servicesFilteredByRequestId.reduce(
+  const selectedServicesTotal = selectedRowIndexes.map(
+    (index) => services[index]
+  );
+
+  const defaultTotalSum = servicesFilteredByRequestId.reduce(
     (accumulator, currentValue) => {
       return accumulator + currentValue.total;
     },
     0
   );
+
+  const totalSum = selectedServicesTotal.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue.total;
+  }, 0);
 
   const putOrganizationUserMutation = useMutation({
     mutationFn: (data: GetRqstsByIdType) => PutRequestServices(data),
@@ -53,15 +69,21 @@ const Services = ({ handleShowServicesList, rqstsDataById }: any) => {
 
   const handleSubmit = () => {
     if (rqstsDataById) {
-      const serviceIds = servicesFilteredByRequestId.map(
-        (service) => service.id
+      // Отбираем услуги по индексам, выбранным пользователем
+      const selectedServices = selectedRowIndexes.map(
+        (index) => services[index]
       );
+
+      // Получаем их ID для отправки на сервер
+      const serviceIds = selectedServices.map((service) => service.id);
 
       putOrganizationUserMutation.mutate({
         ...rqstsDataById,
         services: [...(rqstsDataById.services || []), ...serviceIds], // Используйте || [] для предотвращения ошибки
       });
     }
+
+    handleShow(false);
   };
 
   const disabledButton = servicesFilteredByRequestId.every((service) => {
@@ -89,26 +111,46 @@ const Services = ({ handleShowServicesList, rqstsDataById }: any) => {
   };
 
   return (
-    <div className="service-content">
-      <div className="panel-control-certificate-revocation">
-        <div className="certificates-revocation-title">
-          {/* <CardMembershipIcon /> */}
-          <p>Выставление услуги</p>
+    <>
+      <div className="service-content">
+        <div className="panel-control-certificate-revocation">
+          <div className="certificates-revocation-title">
+            {/* <CardMembershipIcon /> */}
+            <p>Выставление услуги</p>
+          </div>
+          <p style={{ fontWeight: "bold" }}>
+            Общая сумма:{" "}
+            <span style={{ fontWeight: "normal" }}>
+              {!totalSum ? defaultTotalSum : totalSum}c
+            </span>
+          </p>
         </div>
-        <p style={{ fontWeight: "bold" }}>
-          Общая сумма: <span style={{ fontWeight: "normal" }}>{totalSum}c</span>
-        </p>
+        <ul className="wrapper-service">{renderCurrentServiceList()}</ul>
+        <div className="panel-executor">
+          <ButtonPanelControl
+            icon={<GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
+            text="Выбрать услугу"
+            handleShow={handleShow}
+            activeSendButton={disabledButton}
+          />
+          <ButtonPanelControl
+            icon={<GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
+            text="Выставить"
+            activeSendButton={disabledButton}
+          />
+        </div>
       </div>
-      <ul className="wrapper-service">{renderCurrentServiceList()}</ul>
-      <div className="panel-executor">
-        <ButtonPanelControl
-          icon={<GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
-          text="Выставить"
+      {show && (
+        <ServicesModal
+          handleShow={handleShow}
+          services={services}
+          rqstsDataById={rqstsDataById}
           handleSubmit={handleSubmit}
-          activeSendButton={disabledButton}
+          setSelectedRowIndexes={setSelectedRowIndexes}
+          selectedRowIndexes={selectedRowIndexes}
         />
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
