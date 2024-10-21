@@ -35,7 +35,9 @@
     ],
     "userId": 5,
     "organizationId": 1,
-    "services": [],
+    "services": [
+      1
+    ],
     "id": 1
   }
 ]

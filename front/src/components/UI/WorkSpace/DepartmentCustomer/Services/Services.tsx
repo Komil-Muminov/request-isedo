@@ -43,6 +43,8 @@ const Services = ({ handleShowServicesList, rqstsDataById }: any) => {
     (e) => e.reqType === rqstsDataById?.reqType
   );
 
+  console.log(servicesFilteredByRequestId);
+
   const selectedServicesTotal = selectedRowIndexes.map(
     (index) => services[index]
   );
@@ -58,6 +60,10 @@ const Services = ({ handleShowServicesList, rqstsDataById }: any) => {
     return accumulator + currentValue.total;
   }, 0);
 
+  const [serviceIds, setServiceIds] = useState<number[]>([]);
+
+  console.log(servicesFilteredByRequestId, selectedServicesTotal);
+
   const putOrganizationUserMutation = useMutation({
     mutationFn: (data: GetRqstsByIdType) => PutRequestServices(data),
     onSuccess: () => {
@@ -67,7 +73,7 @@ const Services = ({ handleShowServicesList, rqstsDataById }: any) => {
     },
   });
 
-  const handleSubmit = () => {
+  const handleChoose = () => {
     if (rqstsDataById) {
       // Отбираем услуги по индексам, выбранным пользователем
       const selectedServices = selectedRowIndexes.map(
@@ -75,28 +81,36 @@ const Services = ({ handleShowServicesList, rqstsDataById }: any) => {
       );
 
       // Получаем их ID для отправки на сервер
-      const serviceIds = selectedServices.map((service) => service.id);
-
-      putOrganizationUserMutation.mutate({
-        ...rqstsDataById,
-        services: [...(rqstsDataById.services || []), ...serviceIds], // Используйте || [] для предотвращения ошибки
-      });
+      // const serviceIds = selectedServices.map((service) => service.id);
+      setServiceIds(selectedServices.map((service) => service.id));
     }
 
     handleShow(false);
   };
 
-  const disabledButton = servicesFilteredByRequestId.every((service) => {
-    return rqstsDataById?.services?.includes(service.id);
-  });
+  console.log(serviceIds);
+
+  const handleSubmit = () => {
+    putOrganizationUserMutation.mutate({
+      ...rqstsDataById,
+      services: [...(rqstsDataById.services || []), ...serviceIds], // Используйте || [] для предотвращения ошибки
+    });
+  };
 
   const servicesList = services.filter((e) => {
     return rqstsDataById?.services?.some((service: any) => service === e.id);
   });
 
+  const disabledButton = servicesList.length > 0 ? true : false;
+
   const renderCurrentServiceList = () => {
-    // Проверяем, есть ли объекты в servicesList
-    if (servicesList.length > 0) {
+    if (serviceIds.length > 0) {
+      // Если есть выбранные услуги, отображаем их
+      return services
+        .filter((service) => serviceIds.includes(service.id))
+        .map((service) => <ServiceCard key={service.id} service={service} />);
+    } else if (servicesList.length > 0) {
+      // Если выбранных услуг нет, но есть услуги из servicesList
       return servicesList.map((e) => {
         return <ServiceCard key={e.id} service={e} />;
       });
@@ -137,15 +151,16 @@ const Services = ({ handleShowServicesList, rqstsDataById }: any) => {
             icon={<GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
             text="Выставить"
             activeSendButton={disabledButton}
+            handleSubmit={handleSubmit}
           />
         </div>
       </div>
       {show && (
         <ServicesModal
-          handleShow={handleShow}
+          handleShow={handleChoose}
           services={services}
           rqstsDataById={rqstsDataById}
-          handleSubmit={handleSubmit}
+          handleSubmit={handleChoose}
           setSelectedRowIndexes={setSelectedRowIndexes}
           selectedRowIndexes={selectedRowIndexes}
         />

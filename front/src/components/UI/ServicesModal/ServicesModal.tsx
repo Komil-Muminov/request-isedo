@@ -23,9 +23,9 @@ const ServicesModal = ({
   }, [services, rqstsDataById]);
 
   const handleRowClick = (index: number) => {
-    setSelectedRowIndexes((prevIndexes) =>
+    setSelectedRowIndexes((prevIndexes: any) =>
       prevIndexes.includes(index)
-        ? prevIndexes.filter((i) => i !== index)
+        ? prevIndexes.filter((i: any) => i !== index)
         : [...prevIndexes, index]
     );
   };
