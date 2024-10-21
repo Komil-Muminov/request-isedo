@@ -1,19 +1,8 @@
-export interface TServices {
-  id: number;
-  serviceName: string;
-  price: number;
-  amount: number;
-  unit: string;
-  recipientType: string;
-  tax: string;
-  sumTax: number;
-  total: number;
-  reqType: string;
-}
+import { TServices } from "./GetServices";
 
 const token = localStorage.getItem("token");
 
-export const getServices = async (): Promise<TServices[]> => {
+export const postServices = async (newObj: TServices): Promise<any> => {
   try {
     const response = await fetch("http://localhost:3000/services", {
       headers: {
@@ -22,7 +11,7 @@ export const getServices = async (): Promise<TServices[]> => {
       },
     });
     if (!response.ok) {
-      throw new Error(`Error on getServices`);
+      throw new Error(`Error on postServices`);
     }
     return response.json();
   } catch (error) {
@@ -30,4 +19,3 @@ export const getServices = async (): Promise<TServices[]> => {
     throw error;
   }
 };
-// ff

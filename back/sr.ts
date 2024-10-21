@@ -667,7 +667,7 @@ app.get("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
   res.status(200).json(show); // Возвращаем только найденную заявку
 });
 
-// Services ==========
+// GET Services
 
 app.get("/services", authenticateJWT, (req: Request, res: Response) => {
   const { userId } = req as any;
@@ -686,6 +686,47 @@ app.get("/services", authenticateJWT, (req: Request, res: Response) => {
     console.error("Ошибка при чтении файла services.json:", err);
     res.status(500).json({ error: "Ошибка сервера при чтении данных" });
   }
+});
+
+// POST Services
+
+app.post("/services", authenticateJWT, (req: Request, res: Response) => {
+  const { body: servicesData } = req;
+  const { userId } = req as any;
+
+  const users = readFromFile(usersFilePath);
+  const user = users.find((u: any) => u.id === userId);
+
+  // Проверка, что пользователь существует и является "kvd"
+  if (!user || user.uType !== "kvd") {
+    return res.status(403).json({
+      error: `Вы не kvd и не можете вложить сертификат. Ваш тип: ${
+        user?.uType || "неизвестен"
+      }`,
+    });
+  }
+
+  const services = readFromFile(servicesFilePath);
+
+  // Проверка, если userId уже существует в массиве vpn-ов
+  // const existingVPN = services.find(
+  //   (vpn: any) => vpn.userId === Number(servicesData.userId) // Преобразуем userId в число
+  // );
+
+  // if (servicesData) {
+  //   return res.status(409).json({
+  //     error: "VPN для данного пользователя уже существует.",
+  //   });
+  // }
+
+  // Генерация уникального ID и добавление сертификата
+  servicesData.id = generateUniqueId(services);
+
+  writeToFile(servicesFilePath, [...services, servicesData]);
+
+  return res
+    .status(201)
+    .json({ message: "VPN успешно добавлен", servicesData });
 });
 
 // Certificates ============
