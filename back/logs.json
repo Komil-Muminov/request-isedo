@@ -267,7 +267,27 @@
   },
   {
     "event": "Успешный вход",
+<<<<<<< HEAD
     "username": "km",
     "timestamp": "22.10.2024 09:18"
+=======
+    "username": "m.norov",
+    "timestamp": "21.10.2024 11:36"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "21.10.2024 13:58"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "21.10.2024 15:42"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "21.10.2024 16:43"
+>>>>>>> 6faeee6290a66c8a86b9a7e9b1ef7ff375619423
   }
 ]

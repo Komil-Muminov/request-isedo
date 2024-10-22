@@ -700,24 +700,13 @@ app.post("/services", authenticateJWT, (req: Request, res: Response) => {
   // Проверка, что пользователь существует и является "kvd"
   if (!user || user.uType !== "kvd") {
     return res.status(403).json({
-      error: `Вы не kvd и не можете вложить сертификат. Ваш тип: ${
+      error: `Вы не kvd и не можете добавить услугу. Ваш тип: ${
         user?.uType || "неизвестен"
       }`,
     });
   }
 
   const services = readFromFile(servicesFilePath);
-
-  // Проверка, если userId уже существует в массиве vpn-ов
-  // const existingVPN = services.find(
-  //   (vpn: any) => vpn.userId === Number(servicesData.userId) // Преобразуем userId в число
-  // );
-
-  // if (servicesData) {
-  //   return res.status(409).json({
-  //     error: "VPN для данного пользователя уже существует.",
-  //   });
-  // }
 
   // Генерация уникального ID и добавление сертификата
   servicesData.id = generateUniqueId(services);

@@ -1,9 +1,43 @@
-/* .panel-control-service-list {
+.services-modal {
+  width: 100%;
+  height: 100%;
+  background-color: #00000030;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.modal-info-services {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  margin: 15px 0;
+  align-items: start;
+  gap: 10px;
+  height: 100%;
+  /* padding: 10px 15px; */
+  background-color: #fff;
+}
+
+.services-modal .content {
+  background-color: #fff;
+  width: 60%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 20px !important;
+  overflow: hidden;
+}
+
+.panel-control-buttons-services {
+  display: flex;
+  justify-content: end;
+  flex-direction: row;
+  width: 100%;
+  border-bottom: 0px;
+  padding-bottom: 10px;
+  padding-right: 15px;
 }
 
 .table-service-list {
@@ -46,4 +80,4 @@
 .table-service-list tr.selected:hover {
   background-color: rgba(0, 168, 73, 0.839);
   cursor: pointer;
-} */
+}
