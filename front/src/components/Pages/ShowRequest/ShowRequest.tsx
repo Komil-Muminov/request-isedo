@@ -196,6 +196,8 @@ const ShowRequest = () => {
     return <p>Loading...</p>;
   }
 
+  console.log(steps);
+
   return (
     <main className="show-content">
       <div className="container">
@@ -292,7 +294,43 @@ const ShowRequest = () => {
               >
                 <StepLabel>
                   <p className="step-header">{e.stepName}</p>
-                  <p>{e.initiators}</p>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    {e.stages?.map((stage, idx) => {
+                      let color = ""; // по умолчанию цвет не задан
+
+                      if (rqstsDataById?.stepCode === 3) {
+                        color = "green"; // если stepCode равен 3, все этапы зелёные
+                      } else if (
+                        rqstsDataById &&
+                        rqstsDataById?.stepTask <= 3
+                      ) {
+                        color = idx <= 0 ? "green" : "orange"; // если stepTask от 0 до 3 — завершенные зелёные, остальное оранжевое
+                      } else if (
+                        rqstsDataById &&
+                        rqstsDataById?.stepTask >= 4 &&
+                        rqstsDataById &&
+                        rqstsDataById?.stepTask <= 6
+                      ) {
+                        color = idx <= 1 ? "green" : "orange"; // stepTask от 4 до 6 — 2 этап
+                      } else if (rqstsDataById?.services?.length) {
+                        color = "green"; // если services заполнен — все зелёные
+                      }
+
+                      return (
+                        <p
+                          key={idx}
+                          style={{
+                            color: color,
+                            whiteSpace: "pre", // Сохраняем пробелы
+                          }}
+                        >
+                          {stage}
+                          {idx !== e.stages.length - 1 && " | "}
+                          {/* Убираем | для последнего этапа */}
+                        </p>
+                      );
+                    })}
+                  </div>
                 </StepLabel>
               </Step>
             ))}
