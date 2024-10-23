@@ -169,7 +169,7 @@ const AddRequest: React.FC = () => {
 
   const activeSendButton = uinfo?.uType === "bo" && postRqstsMutation.isSuccess;
 
-  const [showTypeRequest, setShowTypeRequest] = useState<boolean>(false);
+  const [showTypeRequest, setShowTypeRequest] = useState<boolean>(true);
 
   const [users, setUsers] = useState<TGetUsers[] | null>(null);
 

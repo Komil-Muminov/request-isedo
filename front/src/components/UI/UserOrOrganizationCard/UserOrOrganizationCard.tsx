@@ -15,6 +15,7 @@ const UserOrOrganizationCard = ({
   requiredFile,
   handleFileUploadedStatus,
   uploadedFile,
+  userType,
 }: any) => {
   const currentFile = uploadedFile?.some(
     (e: any) => e.fileName === requiredFile
@@ -45,7 +46,7 @@ const UserOrOrganizationCard = ({
       {requiredDocuments}
       <div className="wrapper-pdf-viewer-service">{PDFViewerService}</div>
       {/* <div className="wrapper-card-file-service">{fileService}</div> */}
-      {currentUser && checkUser}
+      {userType !== "bo" && checkUser}
     </div>
   );
 };

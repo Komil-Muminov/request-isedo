@@ -62,9 +62,11 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
     }
   }, [getServicesQuery]);
 
-  const servicesFilteredByRequestId = services.filter(
-    (e) => e.reqType === rqstsDataById?.reqType
-  );
+  const servicesFilteredByRequestId = services.filter((currentService) => {
+    return rqstsDataById?.services.includes(currentService.id);
+  });
+
+  console.log(servicesFilteredByRequestId);
 
   const servicesList = services.filter((e) => {
     return rqstsDataById?.services.some((service: any) => service === e.id);
@@ -224,6 +226,9 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
         <div className="certificates-revocation-title">
           <p>Выписывание счета</p>
         </div>
+        <p style={{ fontWeight: "bold" }}>
+          Общая сумма: <span style={{ fontWeight: "normal" }}>{totalSum}c</span>
+        </p>
       </div>
       {/* <input type="file" accept=".pdf" onChange={handleFileUpload} /> */}
       <ul className="wrapper-service">{renderCurrentServiceList()}</ul>
@@ -336,11 +341,6 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
         </div>
       )}
       <div className="panel-executor">
-        <ButtonPanelControl
-          icon={<BackupIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
-          text="Импортировать СФ"
-          activeSendButton={disabledCreateInvoiceButton}
-        />
         <ButtonPanelControl
           icon={<ReceiptIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
           text="Выписать"

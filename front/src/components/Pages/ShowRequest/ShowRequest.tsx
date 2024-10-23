@@ -232,7 +232,7 @@ const ShowRequest = () => {
                   }
                   text="Подписать"
                   handleSubmit={handlePutRqstById}
-                  activeSendButton={rqstsDataById?.stepCode === 1}
+                  activeSendButton={rqstsDataById?.stepCode >= 1}
                 />
               )}
               {uinfo?.uType === "kvd" && (
@@ -361,6 +361,7 @@ const ShowRequest = () => {
           <div className="wrapper-cards">
             <UserOrOrganizationCard
               currentUser={rqstsDataById}
+              userType={uinfo?.uType}
               title="Карточка пользователя"
               PDFViewerService={
                 <div className="wrapper-new-user-files">
@@ -370,18 +371,6 @@ const ShowRequest = () => {
                   />
                 </div>
               }
-              // fileService={
-              //   <>
-              //     <CardFileService
-              //       item={fileInfo[1]}
-              //       rqstsDataById={rqstsDataById}
-              //     />
-              //     <CardFileService
-              //       item={fileInfo[2]}
-              //       rqstsDataById={rqstsDataById}
-              //     />
-              //   </>
-              // }
               checkUser={
                 <div className="panel-check-user">
                   <ButtonPanelControl
@@ -393,16 +382,6 @@ const ShowRequest = () => {
                     text="Проверить заявку"
                     activeSendButton={disabledAddUserButton}
                   />
-                  {/* <ButtonPanelControl
-                    icon={
-                      <DomainAddIcon
-                        sx={{ fontSize: "18px", fontWeight: "bold" }}
-                      />
-                    }
-                    text="Добавить в организацию"
-                    handleSubmit={addNewUserToOrganization}
-                    activeSendButton={disabledAddUserButton}
-                  /> */}
                 </div>
               }
             />
@@ -412,6 +391,16 @@ const ShowRequest = () => {
             />
           </div>
         </section>
+        {rqstsDataById?.stepCode === 3 && uinfo?.uType === "bo" && (
+          <section className="access-system">
+            <TitleDocument title="Доступ в систему" />
+            <div className="wrapper-cards">
+              <div className="file-list">
+                <PDFViewerService />
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Рабочее пространство */}
         {uinfo?.uType !== "bo" && (
