@@ -80,5 +80,19 @@
     "event": "Успешный вход",
     "username": "user2",
     "timestamp": "23.10.2024 14:04"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "23.10.2024 16:52"
+  },
+  {
+    "event": "Успешный выход",
+    "timestamp": "23.10.2024 16:52"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "user2",
+    "timestamp": "23.10.2024 16:52"
   }
 ]

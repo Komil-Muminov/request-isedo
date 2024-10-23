@@ -196,7 +196,12 @@ const ShowRequest = () => {
     return <p>Loading...</p>;
   }
 
-  console.log(steps);
+  const newLoginTfmis = users?.find((e) => {
+    if (e.status === true && e.role === "Главный бухгалтер")
+      return currentOrganization?.userIds.includes(e.id);
+  });
+
+  console.log(newLoginTfmis);
 
   return (
     <main className="show-content">
@@ -396,7 +401,9 @@ const ShowRequest = () => {
             <TitleDocument title="Доступ в систему" />
             <div className="wrapper-cards">
               <div className="file-list">
-                <PDFViewerService />
+                <PDFViewerService title="Логин TFMIS" />
+                <PDFViewerService title="Логин VPN" />
+                <PDFViewerService title="Счет-фактура" />
               </div>
             </div>
           </section>

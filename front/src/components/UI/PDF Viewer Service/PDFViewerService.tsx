@@ -3,7 +3,12 @@ import "./PDFViewerService.css";
 import pdfFileService from "../../../assets/pdf-fileservice.png";
 import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 
-const PDFViewerService = ({ item, currentFiles, hideFirstItem }: any) => {
+const PDFViewerService = ({
+  item,
+  currentFiles,
+  hideFirstItem,
+  title,
+}: any) => {
   const CurrentFiles = () => {
     return (
       <>
@@ -40,7 +45,7 @@ const PDFViewerService = ({ item, currentFiles, hideFirstItem }: any) => {
       </div>
       <div className="pdf-viewer-info">
         <p className="pdf-viewer-title">
-          {item ? item?.name : "Rework by Excerpts.pdf"}
+          {item ? item?.name : title ? title : "Rework by Excerpts.pdf"}
         </p>
         <p className="pdf-viewer-description">1.8 MB</p>
       </div>
