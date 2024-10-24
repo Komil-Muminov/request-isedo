@@ -43,7 +43,7 @@ const Authorization = () => {
   };
 
   if (logMutate.isSuccess) {
-    // navigate("account");
+    // navigate("requests");
     try {
       // Инвалидация запросов для обновления данных.
       queryClient.invalidateQueries({ queryKey: ["users", "me"] });

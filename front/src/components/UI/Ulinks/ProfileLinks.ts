@@ -1,65 +1,72 @@
 export interface UlinkScheme {
-	url: string;
-	label: string;
-	subLinks?: UlinkScheme[];
+  url: string;
+  label: string;
+  subLinks?: UlinkScheme[];
 }
 
 export const UlinksProps: UlinkScheme[] = [
-	{
-		url: "udetails",
-		label: "Профиль",
-		subLinks: [
-			{
-				url: "udetails",
-				label: "Другая страница",
-			},
-		],
-	},
-	{
-		url: "/account",
-		label: "Модуль заявки",
-		subLinks: [
-			{ url: "unotify", label: "Запросы на добавления организаций" },
-			{
-				url: "/account/create",
-				label: "Создать заявку",
-			},
-		],
-	},
-
-	{
-		url: "/account",
-		label: "Модуль модулей",
-		subLinks: [
-			{ url: "unotify", label: "Запросы на добавления организаций" },
-			{
-				url: "/account/create",
-				label: "Создать заявку",
-			},
-		],
-	},
-
-	{
-		url: "/account",
-		label: "Модуль доступа",
-		subLinks: [
-			{ url: "unotify", label: "Запросы на добавления организаций" },
-			{
-				url: "/account/create",
-				label: "Создать заявку",
-			},
-		],
-	},
-
-	{
-		url: "/account",
-		label: "Модуль Хаб",
-		subLinks: [
-			{ url: "unotify", label: "Запросы на добавления организаций" },
-			{
-				url: "/account/create",
-				label: "Создать заявку",
-			},
-		],
-	},
+  {
+    url: "udetails",
+    label: "Профиль",
+    subLinks: [
+      {
+        url: "udetails",
+        label: "Другая страница",
+      },
+    ],
+  },
+  {
+    url: "/requests",
+    label: "Модуль заявки",
+    subLinks: [
+      { url: "unotify", label: "Запросы на добавления организаций" },
+      {
+        url: "/requests/create",
+        label: "Создать заявку",
+      },
+    ],
+  },
+  {
+    url: "/crm",
+    label: "Модуль СРМ",
+    subLinks: [
+      {
+        url: "/crm/create",
+        label: "Создать карточку организации",
+      },
+    ],
+  },
+  // {
+  // 	url: "/requests",
+  // 	label: "Модуль модулей",
+  // 	subLinks: [
+  // 		{ url: "unotify", label: "Запросы на добавления организаций" },
+  // 		{
+  // 			url: "/requests/create",
+  // 			label: "Создать заявку",
+  // 		},
+  // 	],
+  // },
+  // {
+  // 	url: "/requests",
+  // 	label: "Модуль доступа",
+  // 	subLinks: [
+  // 		{ url: "unotify", label: "Запросы на добавления организаций" },
+  // 		{
+  // 			url: "/requests/create",
+  // 			label: "Создать заявку",
+  // 		},
+  // 	],
+  // },
+  // {
+  // 	url: "/requests",
+  // 	label: "Модуль Хаб",
+  // 	subLinks: [
+  // 		{ url: "unotify", label: "Запросы на добавления организаций" },
+  // 		{
+  // 			url: "/requests/create",
+  // 			label: "Создать заявку",
+  // 		},
+  // 	],
+  // },
 ];

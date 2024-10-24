@@ -14,7 +14,7 @@ const ErrorPage = () => {
 						<p className="km__info-text errorpage_info-text">
 							What are you doing man ?!
 						</p>
-						<Link to={"/account"}>Главная страница</Link>
+						<Link to={"/requests"}>Главная страница</Link>
 					</div>
 				</div>
 			</section>

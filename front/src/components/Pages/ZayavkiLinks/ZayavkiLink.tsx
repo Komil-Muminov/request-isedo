@@ -12,7 +12,7 @@ export const ZayavkiLinks: React.FC = () => {
             {/* <p className="url_location">{location.pathname}</p> */}
             {/* <Link to={location.pathname}>{location.pathname}</Link> */}
             <nav className="zayavkilinks__nav">
-              <Link to="/account/mfrqst" className="zayavki_nav-links">
+              <Link to="/requests/mfrqst" className="zayavki_nav-links">
                 МФРТ
               </Link>
               <Link to="/mfrqst" className="zayavki_nav-links">

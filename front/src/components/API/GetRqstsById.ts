@@ -28,7 +28,7 @@ export interface GetRqstsByIdType {
 
 export const getRqstsById = async (id: number): Promise<GetRqstsByIdType> => {
   const token = localStorage.getItem("token");
-  return fetch(`http://localhost:3000/account/show/${id}`, {
+  return fetch(`http://localhost:3000/requests/show/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",

@@ -29,7 +29,7 @@ export const putRqstsById = async (newData: PutRqstsByIdType): Promise<any> => {
   try {
 
     const response = await fetch(
-      `http://localhost:3000/account/show/${newData.id}`,
+      `http://localhost:3000/requests/show/${newData.id}`,
       {
         method: "PUT",
         headers: {

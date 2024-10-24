@@ -8,16 +8,16 @@ export const UbottomNavLinks: UbottomNavLinksScheme[] = [
 	{
 		id: 1,
 		label: "LINK",
-		url: "/account",
+		url: "/requests",
 	},
 	{
 		id: 1,
 		label: "LINK",
-		url: "/account2",
+		url: "/requests",
 	},
 	{
 		id: 1,
 		label: "LINK",
-		url: "/account",
+		url: "/requests",
 	},
 ];

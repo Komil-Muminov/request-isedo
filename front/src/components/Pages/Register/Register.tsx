@@ -153,7 +153,7 @@ export const Register: React.FC = () => {
 
   // Добавляем Link в каждый лист таблицы
   const handleRowClick = (params: any) => {
-    navigate(`/account/show/${params.row.id}`);
+    navigate(`/requests/show/${params.row.id}`);
   };
 
   useEffect(() => {
@@ -195,7 +195,7 @@ export const Register: React.FC = () => {
                   <p>Фильтр</p>
                 </Button>
                 <Link
-                  to={"/account/create"}
+                  to={"/requests/create"}
                   type="btn submit_btn register_add-btn"
                 >
                   <Button

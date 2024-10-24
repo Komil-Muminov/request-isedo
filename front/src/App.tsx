@@ -58,7 +58,7 @@ function App() {
             <Route path="*" element={<LazyErrorPage />} />
             <Route path="/" element={<LazyAuthPage />} />
             <Route path="auth" element={<LazyAuthPage />} />
-            <Route path="/account/*" element={<LazyAccount />} />
+            <Route path="/requests/*" element={<LazyAccount />} />
             <Route path="/uprofile/*" element={<LazyUserProfile />}>
               <Route path="unotify" element={<LazyUnotify />} />
               <Route path="udetails" element={<LazyUdetails />} />
@@ -68,8 +68,8 @@ function App() {
               <Route path="barchart" element={<Barchart />} />
               <Route path="ulogviewer" element={<LazyLogViewer />} />
             </Route>
-            <Route path="/account/create" element={<LazyAddRequest />} />
-            <Route path="/account/show/:id" element={<LazyShowRequest />} />
+            <Route path="/requests/create" element={<LazyAddRequest />} />
+            <Route path="/requests/show/:id" element={<LazyShowRequest />} />
             <Route path="/mfrqst" element={<LazyMfrqst />} />
           </Routes>
         </Suspense>

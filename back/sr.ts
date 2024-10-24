@@ -651,7 +651,7 @@ app.put("/requests/:id", authenticateJWT, (req: Request, res: Response) => {
 });
 
 // Request BY ID GET
-app.get("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
+app.get("/requests/show/:id", authenticateJWT, (req: Request, res: Response) => {
   const showId = parseInt(req.params.id, 10); // Получаем id из URL-параметров
 
   if (isNaN(showId)) {
@@ -1104,7 +1104,7 @@ app.post("/invoices", authenticateJWT, (req: Request, res: Response) => {
 
 // EDIT REQUEST BY ID - PUT
 
-app.put("/account/show/:id", authenticateJWT, (req: Request, res: Response) => {
+app.put("/requests/show/:id", authenticateJWT, (req: Request, res: Response) => {
   const showId = parseInt(req.params.id, 10);
   const { body: requestData } = req;
 

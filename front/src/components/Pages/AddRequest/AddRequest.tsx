@@ -130,7 +130,7 @@ const AddRequest: React.FC = () => {
       onSuccess: (response) => {
         queryClient.invalidateQueries({ queryKey: ["requests"] });
         // const createdRequestId = response.requestData.id;
-        // navigate(`/account/show/${createdRequestId}`);
+        // navigate(`/requests/show/${createdRequestId}`);
       },
     },
     queryClient
@@ -250,7 +250,7 @@ const AddRequest: React.FC = () => {
       `Новый главных бухгалтер ${data?.fullName} не найден в системе, можете продолжить заявку.`
     );
 
-    navigate(`/account`);
+    navigate(`/requests`);
   };
 
   const [fileUploadedStatus, setFileUploadedStatus] = useState<boolean>(false);
