@@ -161,7 +161,11 @@ const CRM = () => {
   return (
     <>
       <NavBottom />
-      <Register rows={rows} columnsOfModules={requestHeaderName} />
+      <Register
+        rows={rows}
+        columnsOfModules={requestHeaderName}
+        possibilityCreate={false}
+      />
       <Outlet />
     </>
   );

@@ -15,7 +15,11 @@ import { Loader } from "../../UI/Loader/Loader";
 import { stepsOfBo, stepsOfKvd } from "../../API/Data/Steps/Steps";
 import { getUsers, TGetUsers } from "../../API/GetUsers";
 
-export const Register = ({ rows, columnsOfModules }: any) => {
+export const Register = ({
+  rows,
+  columnsOfModules,
+  possibilityCreate,
+}: any) => {
   console.log(columnsOfModules);
 
   const columns: any = columnsOfModules;
@@ -37,6 +41,7 @@ export const Register = ({ rows, columnsOfModules }: any) => {
     },
     queryClient
   );
+
   const navigate = useNavigate();
 
   return (
@@ -69,7 +74,10 @@ export const Register = ({ rows, columnsOfModules }: any) => {
                   <Button
                     variant="contained"
                     className={
-                      uTypeQuery.data?.uType === "kvd" ? "utype_hidden" : ""
+                      (uTypeQuery.data?.uType === "kvd" && possibilityCreate) ||
+                      (uTypeQuery.data?.uType === "bo" && !possibilityCreate)
+                        ? "utype_hidden"
+                        : ""
                     }
                     sx={{
                       display: "flex",

@@ -161,7 +161,11 @@ const Account: React.FC = () => {
   return (
     <>
       <NavBottom />
-      <Register rows={rows} columnsOfModules={requestHeaderName} />
+      <Register
+        rows={rows}
+        columnsOfModules={requestHeaderName}
+        possibilityCreate={true}
+      />
       <Outlet />
     </>
   );

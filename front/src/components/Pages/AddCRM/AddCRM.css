@@ -1,0 +1,62 @@
+.add-content {
+  background-color: #f7f7fc;
+  padding: 40px 0;
+}
+
+.crm-indicator {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin-bottom: 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.056);
+  background-color: #fff;
+}
+
+.panel-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.175);
+  padding: 20px;
+}
+
+.css-1u4zpwo-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
+  color: #fa8c15;
+}
+
+.step-header {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.wrapper-buttons {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.wrapper-cards {
+  display: flex;
+  align-items: start;
+  background-color: #fff;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.121);
+}
+
+.wrapper-cards-padding {
+  padding: 20px;
+}
+
+.inputs-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+}
+
+.crm_inp {
+  width: 100%;
+  flex: 1 1 30%;
+  min-width: 200px;
+}
