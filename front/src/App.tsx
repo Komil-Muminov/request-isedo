@@ -39,6 +39,8 @@ const LazyLogViewer = lazy(
   () => import("./components/Pages/Admin/Logviewer/Logviewer")
 );
 
+const LazyRequests = lazy(() => import("./components/Pages/CRM/CRM"));
+
 // const LazyChartPage = lazy(
 // 	() => import("./components/Pages/UProfile/Uchart/Uchartshort/Uchartshort"),
 // );
@@ -59,6 +61,7 @@ function App() {
             <Route path="/" element={<LazyAuthPage />} />
             <Route path="auth" element={<LazyAuthPage />} />
             <Route path="/requests/*" element={<LazyAccount />} />
+            <Route path="/crm/*" element={<LazyRequests />} />
             <Route path="/uprofile/*" element={<LazyUserProfile />}>
               <Route path="unotify" element={<LazyUnotify />} />
               <Route path="udetails" element={<LazyUdetails />} />
