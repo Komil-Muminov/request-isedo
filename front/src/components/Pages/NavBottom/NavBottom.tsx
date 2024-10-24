@@ -10,10 +10,14 @@ export const NavBottom: React.FC = () => {
         <div className="container">
           <div className="navbottom__content">
             <nav className="navbottom__links">
-              {moduls.map((item, id) => {
+              {moduls.map((item) => {
                 return (
-                  <Link key={id} to="/crm" className="navbottom_item">
-                    {item}
+                  <Link
+                    key={item.id}
+                    to={item.route}
+                    className="navbottom_item"
+                  >
+                    {item.name}
                   </Link>
                 );
               })}

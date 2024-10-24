@@ -153,5 +153,10 @@
     "event": "Успешный вход",
     "username": "user2",
     "timestamp": "24.10.2024 09:03"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "24.10.2024 10:06"
   }
 ]
