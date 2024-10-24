@@ -14,10 +14,11 @@ const LazyAccount = lazy(() => import("./components/Pages/Account/Account"));
 const LazyAddRequest = lazy(
   () => import("./components/Pages/AddRequest/AddRequest")
 );
+const LazyAddCRM = lazy(() => import("./components/Pages/AddCRM/AddCRM"));
 const LazyShowRequest = lazy(
   () => import("./components/Pages/ShowRequest/ShowRequest")
 );
-const LazyMfrqst = lazy(() => import("./components/Pages/Mfrqst/Mfrqst"));
+const LazyShowCRM = lazy(() => import("./components/Pages/ShowCRM/ShowCRM"));
 const LazyIdentification = lazy(
   () => import("./components/Pages/Identification/Identification")
 );
@@ -73,7 +74,8 @@ function App() {
             </Route>
             <Route path="/requests/create" element={<LazyAddRequest />} />
             <Route path="/requests/show/:id" element={<LazyShowRequest />} />
-            <Route path="/mfrqst" element={<LazyMfrqst />} />
+            <Route path="/crm/create" element={<LazyAddCRM />} />
+            <Route path="/crm/show/:id" element={<LazyShowCRM />} />
           </Routes>
         </Suspense>
       </main>

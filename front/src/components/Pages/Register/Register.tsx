@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
 import { getRqsts, GetRqstsType } from "../../API/GetRqsts";
@@ -15,152 +15,19 @@ import { Loader } from "../../UI/Loader/Loader";
 import { stepsOfBo, stepsOfKvd } from "../../API/Data/Steps/Steps";
 import { getUsers, TGetUsers } from "../../API/GetUsers";
 
-export const Register: React.FC = () => {
-  const getRqsQuery = useQuery(
-    {
-      queryFn: () => getRqsts(),
-      queryKey: ["requests"],
-    },
-    queryClient
-  );
+export const Register = ({ rows, columnsOfModules }: any) => {
+  console.log(columnsOfModules);
 
-  const [rqstsData, setRqstsData] = useState<GetRqstsType[]>([]);
+  const columns: any = columnsOfModules;
 
-  // GET USERS
+  const location = useLocation();
 
-  const [users, setUsers] = useState<TGetUsers[] | null>(null);
-
-  const usersQuery = useQuery(
-    {
-      queryFn: () => getUsers(),
-      queryKey: ["users"],
-    },
-    queryClient
-  );
-
-  useEffect(() => {
-    if (usersQuery.status === "success") {
-      setUsers(usersQuery.data);
-    }
-  }, [usersQuery]);
-
-  // GET User By Id
-  const uQuery = useQuery(
-    {
-      queryFn: () => getMe(),
-      queryKey: ["users", "me"],
-    },
-    queryClient
-  );
-
-  const [uinfo, setUinfo] = useState<GetMeType | null>(null);
-  // const [expanded, setExpanded] = useState<number | false>(false);
-
-  useEffect(() => {
-    if (uQuery.status === "success") {
-      setUinfo(uQuery.data);
-    }
-  }, [uQuery.status, uQuery.data]);
-
-  if (uQuery.status === "pending") return <Loader />;
-  if (uQuery.status === "error") {
-    console.log(uQuery.error, usersQuery.error);
-    return null;
-  }
-
-  const steps =
-    uinfo?.uType === "kvd"
-      ? stepsOfKvd
-      : uinfo?.uType === "bo"
-      ? stepsOfBo
-      : [];
-
-  // Фильтруем заявки только для пользователей с типом 'kvd' и статусом 'Исполнение'
-
-  const filteredRqsts = rqstsData.filter(
-    (e) =>
-      (uinfo?.uType !== "kvd" && uinfo?.userId === e.userId) || e.stepCode > 0
-  );
-
-  console.log(filteredRqsts);
-  
-
-  const rows = filteredRqsts.map((e) => {
-    const stepFound = steps.find((step) => step.stepCode === e.stepCode);
-    const organizationRequest = users?.find((user) => user.id === e.userId);
-
-    return {
-      id: e.id,
-      type: e.reqType,
-      applicant: organizationRequest?.fullName,
-      organization: organizationRequest?.orgName,
-      date: e.dateTime,
-      status: stepFound ? stepFound.stepName : "Неизвестный статус",
-    };
-  });
-
-  const colors: any = {
-    ["Оформление"]: "gray",
-    ["Исполнение"]: "#e69600",
-    ["Завершено"]: "green",
-    ["Неизвестный статус"]: "red",
-  };
-
-  const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 90 },
-    { field: "type", headerName: "Тип", width: 150, editable: false },
-    {
-      field: "applicant",
-      headerName: "Заявитель",
-      width: 150,
-      editable: false,
-    },
-    {
-      field: "organization",
-      headerName: "Организация",
-      width: 150,
-      editable: false,
-    },
-    { field: "date", headerName: "Дата", width: 110, editable: false },
-    {
-      field: "status",
-      headerName: "Статус",
-      description: "This column has a value getter and is not sortable.",
-      sortable: true,
-      flex: 1,
-      cellClassName: "custom-cell", // Примените CSS-класс к ячейкам этого столбца
-      renderCell: (params) => {
-        const color = colors[params.value] || "gray"; // Цвет по умолчанию, если статус не найден
-        return (
-          <div
-            style={{
-              backgroundColor: color,
-              color: "white",
-              padding: "0 15px",
-              borderRadius: "15px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "35px",
-            }}
-          >
-            {params.value}
-          </div>
-        );
-      },
-    },
-  ];
+  console.log(location);
 
   // Добавляем Link в каждый лист таблицы
   const handleRowClick = (params: any) => {
-    navigate(`/requests/show/${params.row.id}`);
+    navigate(`${location.pathname}/show/${params.row.id}`);
   };
-
-  useEffect(() => {
-    if (getRqsQuery.status === "success") {
-      setRqstsData(getRqsQuery.data);
-    }
-  }, [getRqsQuery]);
 
   const { getMe } = useAuth();
   const uTypeQuery = useQuery(
@@ -171,6 +38,7 @@ export const Register: React.FC = () => {
     queryClient
   );
   const navigate = useNavigate();
+
   return (
     <>
       <section className="sections register__section">
@@ -195,7 +63,7 @@ export const Register: React.FC = () => {
                   <p>Фильтр</p>
                 </Button>
                 <Link
-                  to={"/requests/create"}
+                  to={`${location.pathname}/create`}
                   type="btn submit_btn register_add-btn"
                 >
                   <Button

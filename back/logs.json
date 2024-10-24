@@ -158,5 +158,34 @@
     "event": "Успешный вход",
     "username": "m.norov",
     "timestamp": "24.10.2024 10:06"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "24.10.2024 10:36"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "24.10.2024 10:38"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "24.10.2024 11:06"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "24.10.2024 11:19"
+  },
+  {
+    "event": "Успешный выход",
+    "timestamp": "24.10.2024 11:34"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "user2",
+    "timestamp": "24.10.2024 11:34"
   }
 ]
