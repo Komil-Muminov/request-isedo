@@ -20,7 +20,7 @@
 	align-items: stretch;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: repeat(auto-fit, minmax(100, 1fr));
+	grid-template-rows: auto;
 	gap: 10px;
 }
 
@@ -46,7 +46,7 @@
 		0 2px 4px -1px rgba(0, 0, 0, 0.06);
 	top: 13%;
 	width: 100%;
-	/* min-height: 125px; */
+	/* max-height: 200px; */
 	/* max-width: 300px; */
 	/* left: 18%; */
 	/* position: fixed; */ /* justify-content: center; */
