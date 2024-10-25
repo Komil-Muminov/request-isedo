@@ -19,8 +19,8 @@
 .wrapper-profile {
 	align-items: stretch;
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: minmax(0, auto);
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(auto-fit, minmax(100, 1fr));
 	gap: 10px;
 }
 
