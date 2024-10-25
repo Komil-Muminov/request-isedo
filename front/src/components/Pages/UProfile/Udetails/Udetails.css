@@ -36,10 +36,11 @@
 	flex-direction: column;
 	gap: 20px;
 	border-radius: 10px;
-	padding: 20px 10px;
+	padding: 10px 20px;
 	box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.2);
 	background: rgba(255, 255, 255, 0.8);
 	background: linear-gradient(to right, #f5e1e4, #e3eeff);
+	/* padding: 20px 10px; */
 }
 .unidentified--bg {
 	background: linear-gradient(135deg, #386c99d4, #7b4eb35b);
@@ -52,7 +53,7 @@
 	align-items: center;
 	/* box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
 		0 2px 4px -1px rgba(0, 0, 0, 0.06); */
-	padding: 24px;
+	/* padding: 24px; */
 }
 
 .user_photo {
@@ -172,7 +173,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 16px;
+	padding: 20px;
+	margin-bottom: 15px;
 	background: linear-gradient(to right, #f5e1e4, #e3eeff);
 }
 
@@ -180,4 +182,13 @@
 .dashboard__content,
 .charts__bg {
 	width: 100% !important;
+}
+.udetails__chart {
+	padding: 0 10px;
+	min-height: 200px;
+	/* background: linear-gradient(to right, #f5e1e4, #e3eeff); */
+}
+.MuiPaper-root {
+	border-radius: 20px;
+	min-height: 300px;
 }

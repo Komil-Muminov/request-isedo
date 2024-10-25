@@ -1,6 +1,6 @@
 .profile__container {
 	max-width: 1920px;
-	padding: 0 20px;
+	padding: 0 30px;
 	margin: 0 auto;
 }
 /* .profile_header {
@@ -37,21 +37,20 @@
 .profile_left {
 	display: flex;
 	justify-content: space-between;
-	/* justify-content: center; */
-	/* flex-direction: column; */
+
 	border-radius: 10px;
-	gap: 20px;
 	padding: 30px;
 	border: 1px solid #0000000f;
 	background: #fff;
 	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
 		0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	top: 13%;
+	width: 100%;
 	/* min-height: 125px; */
 	/* max-width: 300px; */
 	/* left: 18%; */
-	/* position: fixed; */
-	top: 13%;
-	width: 100%;
+	/* position: fixed; */ /* justify-content: center; */
+	/* flex-direction: column; */
 }
 
 .profile_center {
