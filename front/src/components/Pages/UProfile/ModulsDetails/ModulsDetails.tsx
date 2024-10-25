@@ -13,7 +13,6 @@ const DetailsPage = () => {
 		return <div>Элемент не найден</div>;
 	}
 
-	// Если это профиль, рендерим компонент Профиля
 	if (currentItem.label === "Профиль") {
 		return <Profile />;
 	}
