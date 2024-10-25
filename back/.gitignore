@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-back/logs.json  # Исключаем logs.json из директории back
+back/logs.json  
 
 # Build directories
 node_modules/
