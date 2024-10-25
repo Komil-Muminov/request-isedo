@@ -33,33 +33,43 @@ const CertificateCard = ({
   return (
     <div
       className={`info-certificate ${
-        getCertificateUser?.statusCode === 5 &&
-        oldAndNewCertificateStatus === false
+        getCertificateUser?.statusCode === 5
           ? "passive-certificate"
-          : getCertificateUser?.statusCode === 5 &&
-            oldAndNewCertificateStatus === true
+          : getCertificateUser?.statusCode === 0
           ? "active-certificate"
           : ""
       }`}
     >
       <div className="wrapper-info-certificate">
         <div className="wrapper-image-certificate">
-          {oldAndNewCertificateStatus === false ? (
+          {getCertificateUser?.statusCode === 5 ? (
             <div className="passive-certificate-icon">
-              <ShieldIcon
-                sx={{
-                  fontSize: "100px",
-                  color: "#fcdb62",
-                }}
+              <motion.div
+                initial={{ x: 0 }} // Начальная позиция
+                animate={{ x: -10 }} // Позиция после анимации
+                transition={{ type: "spring", stiffness: 100, duration: 0.3 }} // Настройки анимации
               >
-                <motion.div
-                  className="box"
-                  animate={{ x: 20, y: 20, rotate: 2 }}
-                  transition={{ type: "spring" }}
+                <ShieldIcon
+                  sx={{
+                    fontSize: "100px",
+                    color: "#fcdb62",
+                  }}
                 />
-              </ShieldIcon>
-              <div className="line"></div>
-              <>
+              </motion.div>
+
+              {/* Анимация для линии */}
+              <motion.div
+                initial={{ opacity: 0 }} // Начальная непрозрачность
+                animate={{ opacity: 1 }} // Непрозрачность после анимации
+                transition={{ duration: 0.3, delay: 0.5 }} // Задержка перед анимацией
+                className="line"
+              ></motion.div>
+              {/* Анимация для HighlightOffIcon */}
+              <motion.div
+                initial={{ scale: 0 }} // Начальный масштаб
+                animate={{ scale: 1 }} // Масштаб после анимации
+                transition={{ duration: 0.3, delay: 1 }} // Задержка перед анимацией
+              >
                 <svg height={0} width={0}>
                   <linearGradient id="linearColors" x1={0} y1={0} x2={1} y2={0}>
                     <stop offset={0} stopColor="#ff4141" />
@@ -69,7 +79,7 @@ const CertificateCard = ({
                 <HighlightOffIcon
                   sx={{ fill: "url(#linearColors)", fontSize: "50px" }}
                 />
-              </>
+              </motion.div>
             </div>
           ) : (
             <ShieldIcon sx={{ fontSize: "100px", color: "#aeff4e" }} />
