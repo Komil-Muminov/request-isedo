@@ -3,12 +3,12 @@
 	padding: 0 20px;
 	margin: 0 auto;
 }
-.profile_header {
+/* .profile_header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 20px;
-}
+} */
 .profile_content {
 	display: flex;
 	flex-direction: column;
@@ -36,7 +36,8 @@
 
 .profile_left {
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
+	/* justify-content: center; */
 	/* flex-direction: column; */
 	border-radius: 10px;
 	gap: 20px;

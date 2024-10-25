@@ -29,7 +29,7 @@ const Profile: React.FC = () => {
 	);
 
 	// Устанавливаем по умолчанию открытый элемент "Профиль" (ID = 0)
-	const [expanded, setExpanded] = useState<number | false>(0);
+	const [expanded, setExpanded] = useState<number | false>(null);
 	const [selectedItem, setSelectedItem] = useState<UlinkScheme | null>(null);
 	const navigate = useNavigate();
 
@@ -69,10 +69,10 @@ const Profile: React.FC = () => {
 			<WebToolBox />
 			<div className="profile__container">
 				<div className="profile_content">
-					<div className="profile_header">
-						<Button onClick={() => setSelectedItem(null)}>Назад</Button>
-					</div>
 					<aside className="profile_left">
+						{/* <div className="profile_header"> */}
+						<Button onClick={() => setSelectedItem(null)}>Назад</Button>
+						{/* </div> */}
 						{UlinksProps.map(({ url, label, subLinks }, id) => (
 							<Accordion
 								key={id}
