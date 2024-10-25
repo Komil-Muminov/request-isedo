@@ -172,8 +172,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	background: rgba(242, 243, 237, 0.815);
 	padding: 16px;
+	background: linear-gradient(to right, #f5e1e4, #e3eeff);
 }
 
 .recharts-wrapper dashboard__content charts__bg .recharts-wrapper,
