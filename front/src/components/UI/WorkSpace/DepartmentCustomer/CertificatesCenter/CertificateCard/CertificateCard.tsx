@@ -28,7 +28,7 @@ const CertificateCard = ({
   const oldAndNewCertificateStatus =
     getCertificateUser?.userId === rqstsDataById?.userId;
 
-  console.log(oldAndNewCertificateStatus);
+  console.log(getCertificateUser, oldAndNewCertificateStatus);
 
   return (
     <div
@@ -54,7 +54,7 @@ const CertificateCard = ({
               >
                 <motion.div
                   className="box"
-                  // animate={{ "11" "12", "13" }}
+                  animate={{ x: 20, y: 20, rotate: 2 }}
                   transition={{ type: "spring" }}
                 />
               </ShieldIcon>
