@@ -1,5 +1,5 @@
 .info-certificate {
-  background: linear-gradient(135deg, #607d8b, #5ea1c2);
+  background: linear-gradient(135deg, #5ea1c2, #2fb450);
   display: flex;
   justify-content: space-between;
   padding: 20px;
@@ -23,7 +23,6 @@
   align-items: center;
   gap: 20px;
   width: 100%;
-  color: #fcdb62;
 }
 
 .wrapper-image-certificate {
@@ -31,7 +30,7 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  max-width: 150px;
+  max-width: 350px;
 }
 
 .wrapper-info-list {
@@ -70,4 +69,32 @@
   text-transform: none;
   text-decoration: none;
   font-family: "Mulish";
+}
+
+.passive-certificate-icon {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.line {
+  /* background-color: #fcdb62; */
+  background: linear-gradient(135deg, #fcdb62, #ff4141);
+  width: 150px;
+  height: 5px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.line::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 10px solid #ff4141;
 }

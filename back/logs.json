@@ -260,6 +260,10 @@
   },
   {
     "event": "Успешный вход",
+<<<<<<< HEAD
+    "username": "m.norov",
+    "timestamp": "25.10.2024 14:50"
+=======
     "username": "km",
     "timestamp": "25.10.2024 14:55"
   },
@@ -303,5 +307,6 @@
     "event": "Успешный вход",
     "username": "km",
     "timestamp": "25.10.2024 14:58"
+>>>>>>> b257fec8375a1c1f4727cb4a6918c54f4f55e1b4
   }
 ]
