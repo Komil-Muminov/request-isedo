@@ -185,10 +185,10 @@
 }
 .udetails__chart {
 	padding: 0 10px;
-	min-height: 200px;
+	/* min-height: 200px; */
 	/* background: linear-gradient(to right, #f5e1e4, #e3eeff); */
 }
-.MuiPaper-root {
+.dashboard__content,
+.charts__bg {
 	border-radius: 20px;
-	min-height: 300px;
 }

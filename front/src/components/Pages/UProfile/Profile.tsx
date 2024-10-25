@@ -29,7 +29,7 @@ const Profile: React.FC = () => {
 	);
 
 	// Устанавливаем по умолчанию открытый элемент "Профиль" (ID = 0)
-	const [expanded, setExpanded] = useState<number | false>(null);
+	const [expanded, setExpanded] = useState<number | false>(undefined);
 	const [selectedItem, setSelectedItem] = useState<UlinkScheme | null>(null);
 	const navigate = useNavigate();
 
