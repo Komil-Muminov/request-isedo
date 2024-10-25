@@ -189,7 +189,7 @@ export const Navigation: React.FC = () => {
               </nav>
 
               <div className="nav__log">
-                <Link to="crm" className="nav__log-account">
+                <Link to="requests" className="nav__log-account">
                   <img src={log} alt="log" className="nav__gerb" />
                   <div className="account-text">
                     <p>Вазорати молияи</p>

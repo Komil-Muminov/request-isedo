@@ -5,6 +5,9 @@ import "./CertificateCard.css";
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import GppBadIcon from "@mui/icons-material/GppBad";
 import GppGoodIcon from "@mui/icons-material/GppGood";
+import ShieldIcon from "@mui/icons-material/Shield";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import { motion } from "framer-motion";
 
 const CertificateList = ({ title, desc }: any) => {
   return (
@@ -25,6 +28,8 @@ const CertificateCard = ({
   const oldAndNewCertificateStatus =
     getCertificateUser?.userId === rqstsDataById?.userId;
 
+  console.log(oldAndNewCertificateStatus);
+
   return (
     <div
       className={`info-certificate ${
@@ -40,9 +45,34 @@ const CertificateCard = ({
       <div className="wrapper-info-certificate">
         <div className="wrapper-image-certificate">
           {oldAndNewCertificateStatus === false ? (
-            <GppBadIcon sx={{ fontSize: "100px", color: "#fcdb62" }} />
+            <div className="passive-certificate-icon">
+              <ShieldIcon
+                sx={{
+                  fontSize: "100px",
+                  color: "#fcdb62",
+                }}
+              >
+                <motion.div
+                  className="box"
+                  // animate={{ "11" "12", "13" }}
+                  transition={{ type: "spring" }}
+                />
+              </ShieldIcon>
+              <div className="line"></div>
+              <>
+                <svg height={0} width={0}>
+                  <linearGradient id="linearColors" x1={0} y1={0} x2={1} y2={0}>
+                    <stop offset={0} stopColor="#ff4141" />
+                    <stop offset={1} stopColor="#fcdb62" />
+                  </linearGradient>
+                </svg>
+                <HighlightOffIcon
+                  sx={{ fill: "url(#linearColors)", fontSize: "50px" }}
+                />
+              </>
+            </div>
           ) : (
-            <GppGoodIcon sx={{ fontSize: "100px", color: "#42ff73" }} />
+            <ShieldIcon sx={{ fontSize: "100px", color: "#aeff4e" }} />
           )}
         </div>
         <div className="wrapper-info-list">

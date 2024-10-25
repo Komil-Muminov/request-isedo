@@ -68,7 +68,7 @@
     "department": "",
     "reqIdentity": true,
     "uIdentity": false,
-    "status": false,
+    "status": true,
     "passport": "A0438026"
   },
   {
@@ -89,23 +89,5 @@
     "uIdentity": false,
     "status": true,
     "passport": "A0825871"
-  },
-  {
-    "id": 6,
-    "uType": "bo",
-    "username": "bo_123_sharipov",
-    "password": "123",
-    "photo": "",
-    "fullName": "Шарипов Амир Чамшедович",
-    "phone": "880008671",
-    "tax": "250008809",
-    "email": "jsharipovamir@gmail.com",
-    "role": "Главный бухгалтер",
-    "orgName": "Muhsiddin and Parpisho Corporation",
-    "orgTax": "020003455",
-    "reqIdentity": false,
-    "uIdentity": false,
-    "status": true,
-    "passport": "A04513403"
   }
 ]

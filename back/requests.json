@@ -11,8 +11,8 @@
     "dateTime": "24.10.2024.09:01",
     "password": "123",
     "loginImof": "Есть",
-    "stepCode": 3,
-    "stepTask": 6,
+    "stepCode": 2,
+    "stepTask": 1,
     "files": [
       {
         "id": 1729742481517,
@@ -35,11 +35,7 @@
     ],
     "userId": 5,
     "organizationId": 1,
-    "services": [
-      1,
-      2,
-      3
-    ],
+    "services": [],
     "id": 1
   }
 ]

@@ -330,7 +330,7 @@ const ShowRequest = () => {
                           }}
                         >
                           {stage}
-                          {idx !== e.stages.length - 1 && " | "}
+                          {idx !== e.stages.length - 1 && ", "}
                           {/* Убираем | для последнего этапа */}
                         </p>
                       );
