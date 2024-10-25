@@ -1,6 +1,6 @@
-// DetailsPage.tsx
 import { useParams } from "react-router-dom";
 import { UlinksProps } from "../../../UI/Ulinks/ProfileLinks";
+import Profile from "../Udetails/Udetails";
 import "./ModulsDetails.css";
 
 const DetailsPage = () => {
@@ -11,6 +11,11 @@ const DetailsPage = () => {
 
 	if (!currentItem) {
 		return <div>Элемент не найден</div>;
+	}
+
+	// Если это профиль, рендерим компонент Профиля
+	if (currentItem.label === "Профиль") {
+		return <Profile />;
 	}
 
 	return (
@@ -59,7 +64,6 @@ const DetailsPage = () => {
 					Если у вас возникли вопросы или нужна помощь, не стесняйтесь
 					обращаться в службу поддержки.
 				</p>
-				{/* Кнопка или ссылка для дополнительной информации */}
 				<a href="/support" className="btn">
 					Связаться с поддержкой
 				</a>

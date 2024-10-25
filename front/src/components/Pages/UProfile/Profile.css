@@ -36,7 +36,8 @@
 
 .profile_left {
 	display: flex;
-	flex-direction: column;
+	justify-content: center;
+	/* flex-direction: column; */
 	border-radius: 10px;
 	gap: 20px;
 	padding: 30px;
@@ -44,10 +45,12 @@
 	background: #fff;
 	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
 		0 2px 4px -1px rgba(0, 0, 0, 0.06);
-	position: fixed;
-	min-height: 723px;
-	max-width: 300px;
-	position: fixed;
+	/* min-height: 125px; */
+	/* max-width: 300px; */
+	/* left: 18%; */
+	/* position: fixed; */
+	top: 13%;
+	width: 100%;
 }
 
 .profile_center {

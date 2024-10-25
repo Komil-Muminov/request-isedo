@@ -1,5 +1,4 @@
-// Profile.tsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -13,14 +12,11 @@ import { useAuth } from "../../API/Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
 import { Settings } from "@mui/icons-material";
-// import { UbottomNavLinks } from "../../API/Data/UbottomNav/UbottomNavLink";
 import { Ucalendar } from "../UProfile/Ucalendar/Ucalendar";
 import { Uevents } from "./Uevents/Uevents";
 import WebToolBox from "../../UI/WebTool/WebToolBox";
 import "./Profile.css";
 import "./Udetails/Udetails.css";
-import Dashboardchart from "./Uchart/Dashboard/Dashboardchart";
-// import { Uwidget } from "./Uwidget/Uwidget";
 
 const Profile: React.FC = () => {
 	const { getMe } = useAuth();
@@ -32,7 +28,8 @@ const Profile: React.FC = () => {
 		queryClient,
 	);
 
-	const [expanded, setExpanded] = useState<number | false>(false);
+	// Устанавливаем по умолчанию открытый элемент "Профиль" (ID = 0)
+	const [expanded, setExpanded] = useState<number | false>(0);
 	const [selectedItem, setSelectedItem] = useState<UlinkScheme | null>(null);
 	const navigate = useNavigate();
 
@@ -45,13 +42,27 @@ const Profile: React.FC = () => {
 		navigate(`/uprofile/details/${item.url?.split("/").pop()}`);
 	};
 
+	// Закрытие аккордеона при клике вне
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			const target = event.target as HTMLElement;
+			if (!target.closest(".profile_left")) {
+				setExpanded(false);
+			}
+		};
+
+		document.addEventListener("click", handleClickOutside);
+
+		return () => {
+			document.removeEventListener("click", handleClickOutside);
+		};
+	}, []);
+
 	if (uQuery.status === "pending") return <Loader />;
 	if (uQuery.status === "error") {
 		console.log(uQuery.error);
 		return null;
 	}
-
-	// Надо сделать красивый дизайн
 
 	return (
 		<section className="sections">
@@ -61,37 +72,37 @@ const Profile: React.FC = () => {
 					<div className="profile_header">
 						<Button onClick={() => setSelectedItem(null)}>Назад</Button>
 					</div>
-					<div className="wrapper-profile">
-						<aside className="profile_left">
-							{UlinksProps.map(({ url, label, subLinks }, id) => (
-								<Accordion
-									key={id}
-									expanded={expanded === id}
-									onChange={() => handleAccordion(id)}
+					<aside className="profile_left">
+						{UlinksProps.map(({ url, label, subLinks }, id) => (
+							<Accordion
+								key={id}
+								expanded={expanded === id}
+								onChange={() => handleAccordion(id)}
+							>
+								<AccordionSummary
+									expandIcon={<ExpandMoreIcon />}
+									aria-controls={`panel${id}-content`}
+									id={`panel${id}-header`}
+									onClick={() => handleSelectItem({ url, label, subLinks })}
 								>
-									<AccordionSummary
-										expandIcon={<ExpandMoreIcon />}
-										aria-controls={`panel${id}-content`}
-										id={`panel${id}-header`}
-										onClick={() => handleSelectItem({ url, label, subLinks })}
-									>
-										<div className="uaccordion_label">
-											<Settings />
-											<p>{label}</p>
-										</div>
-									</AccordionSummary>
-									<AccordionDetails className="ulins_sublinks">
-										<Ulink to={url}>{label}</Ulink>
-										{subLinks &&
-											subLinks.map((subLink, id) => (
-												<Ulink key={id} to={subLink.url}>
-													{subLink.label}
-												</Ulink>
-											))}
-									</AccordionDetails>
-								</Accordion>
-							))}
-						</aside>
+									<div className="uaccordion_label">
+										<Settings />
+										<p>{label}</p>
+									</div>
+								</AccordionSummary>
+								<AccordionDetails className="ulins_sublinks">
+									<Ulink to={url}>{label}</Ulink>
+									{subLinks &&
+										subLinks.map((subLink, id) => (
+											<Ulink key={id} to={subLink.url}>
+												{subLink.label}
+											</Ulink>
+										))}
+								</AccordionDetails>
+							</Accordion>
+						))}
+					</aside>
+					<div className="wrapper-profile">
 						<div className="profile_style profile_center">
 							<div className="profile__center_content">
 								<Outlet />
@@ -108,17 +119,6 @@ const Profile: React.FC = () => {
 							</div>
 						</aside>
 					</div>
-					{/* <div className={`profilebottomnav__content km__content `}>
-						<div className="profilebottom__items">
-							{UbottomNavLinks.map(({ label, url }, id) => (
-								<>
-									<Link className="profilebottomnav__link" key={id} to={url}>
-										{label}
-									</Link>
-								</>
-							))}
-						</div>
-					</div> */}
 				</div>
 			</div>
 		</section>
