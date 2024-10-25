@@ -24,3 +24,9 @@
 	background-color: #f1f5f9;
 	border-bottom-color: #009688;
 }
+
+.navbottom__moduls-icons {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}

@@ -242,5 +242,10 @@
     "event": "Успешный вход",
     "username": "m.norov",
     "timestamp": "24.10.2024 16:27"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "km",
+    "timestamp": "25.10.2024 08:17"
   }
 ]
