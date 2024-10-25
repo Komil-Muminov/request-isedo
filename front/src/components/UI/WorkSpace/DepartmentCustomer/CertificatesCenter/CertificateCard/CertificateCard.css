@@ -27,7 +27,6 @@
 
 .wrapper-image-certificate {
   border-radius: 20px;
-  overflow: hidden;
   display: flex;
   align-items: center;
   max-width: 350px;
