@@ -233,6 +233,13 @@ const AddRequest: React.FC = () => {
 
     const date = `${day}.${month}.${year}.${hours}:${minutes}`;
 
+    const now = new Date();
+    const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
+      now.getMonth() + 1
+    ).padStart(2, "0")}.${now.getFullYear()} в ${String(
+      now.getHours()
+    ).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+
     const updateReqData = {
       ...data,
       stepCode: stepFound?.stepCode || 0,
@@ -242,6 +249,7 @@ const AddRequest: React.FC = () => {
       userId: uinfo?.userId,
       organizationId: currentOrganization?.id,
       services: [],
+      dataChange: formattedDate,
     };
 
     postRqstsMutation.mutate(updateReqData);
@@ -374,7 +382,7 @@ const AddRequest: React.FC = () => {
         {reqType === "Смена главного бухгалтера" && (
           <>
             <section className="old-accountant">
-              <TitleDocument title="Нынешний главный бухгалтер" />
+              <TitleDocument title="Прошлый главный бухгалтер" />
               <div className="wrapper-cards">
                 <UserOrOrganizationCard
                   currentUser={currentUser}

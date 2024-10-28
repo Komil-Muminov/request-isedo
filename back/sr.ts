@@ -269,6 +269,7 @@ app.post("/register", (req: Request, res: Response) => {
     role,
     department,
     passport,
+    dateChange,
   } = req.body;
 
   if (!password || !uType) {
@@ -305,6 +306,7 @@ app.post("/register", (req: Request, res: Response) => {
       uIdentity: false,
       status: true,
       passport,
+      dateChange,
     };
     users.push(newUser);
     writeToFile(usersFilePath, users);
@@ -329,6 +331,7 @@ app.post("/register", (req: Request, res: Response) => {
       department,
       status: true,
       passport,
+      dateChange,
     };
     users.push(newUser);
     writeToFile(usersFilePath, users);
@@ -623,7 +626,7 @@ app.get("/requests", authenticateJWT, (req: Request, res: Response) => {
 // PUT Request Add Services
 
 app.put("/requests/:id", authenticateJWT, (req: Request, res: Response) => {
-  const { services } = req.body; // Получаем массив ids услуг
+  const { services, dateChange } = req.body; // Получаем массив ids услуг
   const requestId = parseInt(req.params.id); // Получаем ID заявки из параметров
 
   try {
@@ -640,6 +643,7 @@ app.put("/requests/:id", authenticateJWT, (req: Request, res: Response) => {
 
     // Добавляем только те id, которых ещё нет в массиве services
     request.services = [...new Set([...request.services, ...services])];
+    request.dateChange = dateChange;
 
     // Запись изменений обратно в файл
     fs.writeFileSync(requestsFilePath, JSON.stringify(requestData, null, 2));

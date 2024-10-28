@@ -26,6 +26,7 @@ const TechnicalServices = ({
             rqstsDataById={rqstsDataById}
             currentUser={currentUser}
             currentOrganization={currentOrganization}
+            executor={executor}
           />
         </div>
       )}

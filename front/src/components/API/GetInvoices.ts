@@ -16,6 +16,7 @@ export interface TInvoices {
   totalAmount: number;
   date: string;
   files: FileType[];
+  dateChange: string;
 }
 
 const token = localStorage.getItem("token");

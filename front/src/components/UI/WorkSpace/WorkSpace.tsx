@@ -180,6 +180,7 @@ const WorkSpace = ({
           <DepartmentAccounting
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
+            executor={uinfo}
             stageOne={
               <div className="stage-title">
                 <p>Этап 3</p>

@@ -18,6 +18,7 @@ const InstallCertificate = ({
   rqstsDataById,
   currentOrganization,
   getCertificateUser,
+  executor
 }: any) => {
   const {
     register,
@@ -179,14 +180,25 @@ const InstallCertificate = ({
           rqstsDataById={rqstsDataById}
         />
       )}
-
-      <div className="panel-executor">
-        <ButtonPanelControl
-          icon={<GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
-          text="Выдать"
-          handleSubmit={handleSubmit(onSubmit)}
-          activeSendButton={getCertificateUser ? true : false}
-        />
+      <div className="panel-buttons">
+        {getCertificateUser && (
+          <div className="wrapper-show-executor">
+            <p className="show-executor-title">
+              Исполнитель: <span>{executor?.fullName}</span>
+            </p>
+            <p className="show-executor-title">
+              Время: <span>{getCertificateUser?.dateChange}</span>
+            </p>
+          </div>
+        )}
+        <div className="panel-executor">
+          <ButtonPanelControl
+            icon={<GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
+            text="Выдать"
+            handleSubmit={handleSubmit(onSubmit)}
+            activeSendButton={getCertificateUser ? true : false}
+          />
+        </div>
       </div>
     </div>
   );

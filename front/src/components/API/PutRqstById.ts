@@ -22,12 +22,12 @@ export interface PutRqstsByIdType {
   password: string;
   userId: number;
   organizationId: number;
+  dateChange: string;
 }
 
 export const putRqstsById = async (newData: PutRqstsByIdType): Promise<any> => {
   const token = localStorage.getItem("token");
   try {
-
     const response = await fetch(
       `http://localhost:3000/requests/show/${newData.id}`,
       {

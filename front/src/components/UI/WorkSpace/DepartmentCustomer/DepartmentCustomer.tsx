@@ -77,6 +77,7 @@ const DepartmentCustomer = ({
               rqstsDataById={rqstsDataById}
               currentOrganization={currentOrganization}
               getCertificateUser={getCertificateUser}
+              executor={executor}
             />
           </div>
         </>
@@ -87,6 +88,7 @@ const DepartmentCustomer = ({
           <Services
             handleShowServicesList={handleShowServicesList}
             rqstsDataById={rqstsDataById}
+            executor={executor}
           />
         </div>
       )}

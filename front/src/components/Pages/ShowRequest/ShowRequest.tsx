@@ -342,7 +342,7 @@ const ShowRequest = () => {
           </Stepper>
         </section>
         <section className="old-accountant">
-          <TitleDocument title="Нынешний главный бухгалтер" />
+          <TitleDocument title="Прошлый главный бухгалтер" />
           <div className="wrapper-cards">
             <UserOrOrganizationCard
               currentUser={currentUser}
@@ -398,7 +398,7 @@ const ShowRequest = () => {
         </section>
         {rqstsDataById?.stepCode === 3 && uinfo?.uType === "bo" && (
           <section className="access-system">
-            <TitleDocument title="Доступ в систему" />
+            <TitleDocument title="Документы услуг" />
             <div className="wrapper-cards">
               <div className="file-list">
                 <PDFViewerService title="Логин TFMIS" />

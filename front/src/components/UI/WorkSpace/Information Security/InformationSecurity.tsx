@@ -23,6 +23,7 @@ const InformationSecurity = ({
             rqstsDataById={rqstsDataById}
             currentUser={currentUser}
             currentOrganization={currentOrganization}
+            executor={executor}
           />
         </div>
       )}
