@@ -23,20 +23,18 @@
   align-items: center;
   gap: 20px;
   width: 100%;
-  color: #f9f611d8;
 }
 
 .wrapper-image-login-tfmis {
-  border-radius: 100%;
-  overflow: hidden;
+  border-radius: 20px;
   display: flex;
   align-items: center;
-  max-width: 150px;
-  max-height: 150px;
+  max-width: 350px;
 }
 
-.wrapper-image-login-tfmis img {
-  width: 100%;
+.passive-login-tfmis-image {
+  width: 125px;
+  border-radius: 50%;
 }
 
 .login-tfmis-info-list {
@@ -68,4 +66,32 @@
   text-transform: none;
   text-decoration: none;
   font-family: "Mulish";
+}
+
+.passive-login-tfmis-icon {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.line {
+  /* background-color: #fcdb62; */
+  background: linear-gradient(135deg, #fcdb62, #ff4141);
+  width: 150px;
+  height: 5px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.line::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 10px solid #ff4141;
 }

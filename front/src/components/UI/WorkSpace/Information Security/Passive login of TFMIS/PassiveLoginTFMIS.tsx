@@ -14,7 +14,7 @@ import { putUserById } from "../../../../API/PutUserById";
 import LoginTfmisCard from "../Login of TFMIS Card/LoginTfmisCard";
 import PassiveLoginTFMISModal from "../../../Passive Login of TFMIS Modal/PassiveLoginTFMISModal";
 
-const PassiveLoginTFMIS = ({ currentUser }: any) => {
+const PassiveLoginTFMIS = ({ currentUser, executor }: any) => {
   // GET USERS
 
   const [show, setShow] = useState<boolean>(false);
@@ -51,16 +51,27 @@ const PassiveLoginTFMIS = ({ currentUser }: any) => {
         </div>
 
         <LoginTfmisCard currentUser={currentUser} />
-
-        <div className="panel-executor">
-          <ButtonPanelControl
-            icon={
-              <NoAccountsIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
-            }
-            text="Отправить в пассив"
-            handleShow={handleShow}
-            activeSendButton={!currentUser?.status}
-          />
+        <div className="panel-buttons">
+          {currentUser?.status === false && (
+            <div className="wrapper-show-executor">
+              <p className="show-executor-title">
+                Исполнитель: <span>{executor?.fullName}</span>
+              </p>
+              <p className="show-executor-title">
+                Время: <span>{currentUser?.dateChange}</span>
+              </p>
+            </div>
+          )}
+          <div className="panel-executor">
+            <ButtonPanelControl
+              icon={
+                <NoAccountsIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+              }
+              text="Отправить в пассив"
+              handleShow={handleShow}
+              activeSendButton={!currentUser?.status}
+            />
+          </div>
         </div>
       </div>
       {show && (

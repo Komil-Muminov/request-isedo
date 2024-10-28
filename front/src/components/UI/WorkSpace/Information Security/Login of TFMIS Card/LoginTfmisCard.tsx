@@ -4,8 +4,12 @@ import "./LoginTfmisCard.css";
 
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import GppBadIcon from "@mui/icons-material/GppBad";
+import GppGoodIcon from "@mui/icons-material/GppGood";
+import ShieldIcon from "@mui/icons-material/Shield";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 import sampleImage from "../../../../../../../back/uploads/929493.png";
+import { motion } from "framer-motion";
 
 const LoginTfmisList = ({ title, desc }: any) => {
   return (
@@ -31,14 +35,59 @@ const LoginTfmisCard = ({ currentUser }: any) => {
     >
       <div className="wrapper-info-login-tfmis">
         <div className="wrapper-image-login-tfmis">
-          <img
-            src={
-              currentUser?.photo
-                ? `http://localhost:3000/uploads/${currentUser?.photo}`
-                : sampleImage
-            }
-            alt=""
-          />
+          {currentUser?.status === false ? (
+            <div className="passive-login-tfmis-icon">
+              <motion.div
+                initial={{ x: 0 }} // Начальная позиция
+                animate={{ x: -10 }} // Позиция после анимации
+                transition={{ type: "spring", stiffness: 100, duration: 0.3 }} // Настройки анимации
+              >
+                <img
+                  className="passive-login-tfmis-image"
+                  src={
+                    currentUser?.photo
+                      ? `http://localhost:3000/uploads/${currentUser?.photo}`
+                      : sampleImage
+                  }
+                  alt=""
+                />
+              </motion.div>
+
+              {/* Анимация для линии */}
+              <motion.div
+                initial={{ opacity: 0 }} // Начальная непрозрачность
+                animate={{ opacity: 1 }} // Непрозрачность после анимации
+                transition={{ duration: 0.3, delay: 0.5 }} // Задержка перед анимацией
+                className="line"
+              ></motion.div>
+              {/* Анимация для HighlightOffIcon */}
+              <motion.div
+                initial={{ scale: 0 }} // Начальный масштаб
+                animate={{ scale: 1 }} // Масштаб после анимации
+                transition={{ duration: 0.3, delay: 1 }} // Задержка перед анимацией
+              >
+                <svg height={0} width={0}>
+                  <linearGradient id="linearColors" x1={0} y1={0} x2={1} y2={0}>
+                    <stop offset={0} stopColor="#ff4141" />
+                    <stop offset={1} stopColor="#fcdb62" />
+                  </linearGradient>
+                </svg>
+                <HighlightOffIcon
+                  sx={{ fill: "url(#linearColors)", fontSize: "50px" }}
+                />
+              </motion.div>
+            </div>
+          ) : (
+            <img
+              className="passive-login-tfmis-image"
+              src={
+                currentUser?.photo
+                  ? `http://localhost:3000/uploads/${currentUser?.photo}`
+                  : sampleImage
+              }
+              alt=""
+            />
+          )}
         </div>
         <ul className="login-tfmis-info-list">
           <LoginTfmisList title="Имя и фамилия" desc={currentUser?.fullName} />

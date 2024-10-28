@@ -8,6 +8,9 @@ import DepartmentCustomer from "./DepartmentCustomer/DepartmentCustomer";
 import TechnicalServices from "./Department for technical services/TechnicalServices";
 import InformationSecurity from "./Information Security/InformationSecurity";
 import DepartmentAccounting from "./Department of Accounting/DepartmentAccounting";
+import { GetMeType, useAuth } from "../../API/Hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import { queryClient } from "../../../queryClient";
 
 const WorkSpace = ({
   currentUser,
@@ -34,6 +37,24 @@ const WorkSpace = ({
   //     });
   //   }
   // }, [rqstsDataById?.stepTask]);
+
+  const { getMe } = useAuth();
+  const uQuery = useQuery(
+    {
+      queryFn: () => getMe(),
+      queryKey: ["users", "me"],
+    },
+    queryClient
+  );
+
+  const [uinfo, setUinfo] = useState<GetMeType | null>(null);
+  // const [expanded, setExpanded] = useState<number | false>(false);
+
+  useEffect(() => {
+    if (uQuery.status === "success") {
+      setUinfo(uQuery.data);
+    }
+  }, [uQuery.status, uQuery.data]);
 
   console.log(currentDepartment);
 
@@ -101,6 +122,7 @@ const WorkSpace = ({
           <DepartmentCustomer
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
+            executor={uinfo}
             stageOne={
               <div className="stage-title">
                 <p>Этап 1</p>
@@ -123,6 +145,7 @@ const WorkSpace = ({
             currentUser={currentUser}
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
+            executor={uinfo}
             stageOne={
               <div className="stage-title">
                 <p>Этап 1</p>
@@ -140,6 +163,7 @@ const WorkSpace = ({
             currentUser={currentUser}
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
+            executor={uinfo}
             stageOne={
               <div className="stage-title">
                 <p>Этап 1</p>

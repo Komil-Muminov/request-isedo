@@ -18,6 +18,7 @@ export interface TGetUsers {
   uIdentity: boolean;
   status: boolean;
   passport: string;
+  dateChange: string;
 }
 
 export const getUsers = async (): Promise<TGetUsers[]> => {

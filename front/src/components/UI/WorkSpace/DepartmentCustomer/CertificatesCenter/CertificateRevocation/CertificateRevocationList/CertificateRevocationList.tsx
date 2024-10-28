@@ -32,11 +32,13 @@ import CertificateCard from "../../CertificateCard/CertificateCard";
 interface TProps {
   getCertificateQuery: any;
   certificates: TCertificates[];
+  executor: any;
 }
 
 const CertificateRevocationList = ({
   getCertificateQuery,
   certificates,
+  executor,
 }: TProps) => {
   const [isMouseDown, setIsMouseDown] = useState(false);
 
@@ -80,7 +82,7 @@ const CertificateRevocationList = ({
   );
 
   // Мутация для обновления сертификата
-  const mutation = useMutation({
+  const certificateMutation = useMutation({
     mutationFn: (updatedCertificate: TCertificates) =>
       putCertificates(updatedCertificate), // Функция PUT запроса
     onSuccess: () => {
@@ -94,14 +96,23 @@ const CertificateRevocationList = ({
 
   // Функция для изменения статуса сертификата
   const handleChangeStatus = (code: number) => {
+    const now = new Date();
+    const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
+      now.getMonth() + 1
+    ).padStart(2, "0")}.${now.getFullYear()} в ${String(
+      now.getHours()
+    ).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+
     if (getCertificateUser) {
-      mutation.mutate({
+      certificateMutation.mutate({
         ...getCertificateUser,
         statusCode: code, // Изменение statusCode с 0 на 5
+        dateChange: formattedDate,
       });
     }
   };
 
+  console.log(getCertificateUser);
 
   return (
     <>
@@ -116,16 +127,29 @@ const CertificateRevocationList = ({
           getCertificateUser={getCertificateUser}
           statusCertificate={statusCertificate?.name}
         />
-
-        <div className="panel-executor">
-          <ButtonPanelControl
-            icon={<GppBadIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
-            text="Отозвать"
-            handleShow={handleShow}
-            activeSendButton={
-              getCertificateUser?.statusCode === 5 ? true : false
-            }
-          />
+        <div className="panel-buttons">
+          {getCertificateUser?.statusCode === 5 && (
+            <div className="wrapper-show-executor">
+              <p className="show-executor-title">
+                Исполнитель: <span>{executor?.fullName}</span>
+              </p>
+              <p className="show-executor-title">
+                Время: <span>{getCertificateUser?.dateChange}</span>
+              </p>
+            </div>
+          )}
+          <div className="panel-executor">
+            <ButtonPanelControl
+              icon={
+                <GppBadIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+              }
+              text="Отозвать"
+              handleShow={handleShow}
+              activeSendButton={
+                getCertificateUser?.statusCode === 5 ? true : false
+              }
+            />
+          </div>
         </div>
       </div>
       {show && (

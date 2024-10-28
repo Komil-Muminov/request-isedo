@@ -8,12 +8,16 @@ const TechnicalServices = ({
   currentOrganization,
   stageOne,
   stageTwo,
+  executor,
 }: any) => {
   return (
     <>
       <div className="column-stage">
         {stageOne}
-        <PassiveVPNTFMIS currentOrganization={currentOrganization} />
+        <PassiveVPNTFMIS
+          currentOrganization={currentOrganization}
+          executor={executor}
+        />
       </div>
       {rqstsDataById?.stepTask > 3 && (
         <div className="column-stage">

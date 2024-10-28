@@ -14,6 +14,7 @@ export interface TCertificates {
   validFrom: string;
   validTo: string;
   statusCode: number;
+  dateChange: string;
 }
 
 const token = localStorage.getItem("token");

@@ -8,12 +8,13 @@ const InformationSecurity = ({
   currentOrganization,
   stageOne,
   stageTwo,
+  executor,
 }: any) => {
   return (
     <>
       <div className="column-stage">
         {stageOne}
-        <PassiveLoginTFMIS currentUser={currentUser} />
+        <PassiveLoginTFMIS currentUser={currentUser} executor={executor} />
       </div>
       {rqstsDataById?.stepTask > 3 && (
         <div className="column-stage">

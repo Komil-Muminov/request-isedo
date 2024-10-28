@@ -9,6 +9,7 @@ export interface TVPN {
   phone: string;
   role: string;
   status: boolean;
+  dateChange: string;
 }
 
 const token = localStorage.getItem("token");

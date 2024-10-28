@@ -71,6 +71,13 @@ const InstallCertificate = ({
     const dateFrom = `${day}.${month}.${year}`;
     const dateTo = `${day}.${month}.${year + 1}`;
 
+    const now = new Date();
+    const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
+      now.getMonth() + 1
+    ).padStart(2, "0")}.${now.getFullYear()} в ${String(
+      now.getHours()
+    ).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+
     const updateReqData = {
       ...data,
       userId: rqstsDataById?.userId,
@@ -79,6 +86,7 @@ const InstallCertificate = ({
       validFrom: dateFrom,
       validTo: dateTo,
       statusCode: 0,
+      dateChange: formattedDate,
     };
 
     postCertificateMutation.mutate(updateReqData);
