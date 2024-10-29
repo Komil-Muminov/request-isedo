@@ -13,6 +13,7 @@ import DashboardChart from "../Uchart/Dashboard/Dashboardchart";
 import Saleschart from "../Uchart/Saleschart/Saleschart";
 import { Settings } from "@mui/icons-material";
 import "./Udetails.css";
+import DashboardMinify from "../Uchart/DashboardMinify/DashboardMinify";
 
 const Udetails: React.FC = () => {
 	const [uPhoto, setphoto] = useState<CurrUserPhoto | null>(null);
@@ -179,26 +180,36 @@ const Udetails: React.FC = () => {
 								</div>
 							</div>
 							<div className="udetails__uwidget">
-								<Uwidget
-									kind="primary"
-									disabled={uPhotoMutation.isPending}
-									title={`Показать график посещаемости`}
-									onClick={() => handleChart("dashboard")}
-									desc={`KM`}
-								/>
-								<Uwidget
-									disabled={uPhotoMutation.isPending}
-									kind="secondary"
-									title={`Показать график чего-то`}
-									onClick={() => handleChart("barchart")}
-									desc={`KM`}
-								/>
-								<Uwidget
-									kind="tertiary"
-									title={`Показать график чего-то`}
-									desc={`KM`}
-									onClick={() => handleChart("saleschart")}
-								/>
+								<ul className="udetails__uwidget-list">
+									<Uwidget
+										kind="black-gradient uwidget__standart"
+										disabled={uPhotoMutation.isPending}
+										title={`Показать график чего-то`}
+										onClick={() => handleChart("dashboard")}
+										desc={`KM`}
+									/>
+									<Uwidget
+										disabled={uPhotoMutation.isPending}
+										kind="secondary uwidget__standart"
+										title={`Показать график чего-то`}
+										onClick={() => handleChart("barchart")}
+										desc={`KM`}
+									/>
+									<Uwidget
+										kind="tertiary uwidget__item--special"
+										title={`Показать график чего-то`}
+										desc={`KM`}
+										children={<DashboardMinify />}
+										onClick={() => handleChart("saleschart")}
+									/>
+									<Uwidget
+										kind="tertiary uwidget__item--special"
+										title={`Показать график чего-то`}
+										desc={`KM`}
+										children={<DashboardMinify />}
+										onClick={() => handleChart("saleschart")}
+									/>
+								</ul>
 							</div>
 							<div className="udetails__chart">
 								{chart === "dashboard" && <DashboardChart />}

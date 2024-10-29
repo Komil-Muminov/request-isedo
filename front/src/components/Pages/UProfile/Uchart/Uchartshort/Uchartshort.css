@@ -1,12 +1,15 @@
 .uchartshort__content {
 	display: flex;
 	justify-content: space-between;
+	color: #fff;
 }
 
 .uchartshort__left {
 	display: flex;
 	flex-direction: column;
-	gap: 5px;
+	gap: 15px;
+	font-size: 12px;
+	margin-right: 120px;
 }
 
 .acountBalanceIcon {
@@ -18,11 +21,23 @@
 }
 .uchartshort__right {
 	display: flex;
-	flex-direction: column;
+}
+
+.trending-icon-content {
+	display: flex;
+	align-items: center;
 	gap: 5px;
+	align-self: center;
 }
 
 .trendingUpIcon {
-	fill: #fff;
+	fill: #00f8a5;
 	align-self: flex-end;
+}
+.trending-icon-text {
+	color: #00f8a5;
+}
+
+.static-text {
+	max-width: 150px;
 }

@@ -1,0 +1,19 @@
+.dashboard__minify-center-text {
+	font-size: 8px;
+}
+
+/* Секции графика */
+.recharts-pie-label-line {
+	stroke: #fff;
+}
+.recharts-pie-label-text {
+	fill: #fff;
+	font-size: 12px;
+}
+/* Секции графика */
+.dashboardMinify-desc {
+	display: flex;
+	align-items: center;
+	font-size: 10px;
+	
+}
