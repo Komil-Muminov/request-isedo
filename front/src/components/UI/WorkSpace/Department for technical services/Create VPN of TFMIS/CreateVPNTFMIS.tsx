@@ -26,7 +26,7 @@ import { getVPN, TVPN } from "../../../../API/GetVPN";
 import { postVPN } from "../../../../API/PostVPN";
 import { putRqstsById, PutRqstsByIdType } from "../../../../API/PutRqstById";
 
-const CreateVPNTFMIS = ({ rqstsDataById, currentOrganization }: any) => {
+const CreateVPNTFMIS = ({ rqstsDataById, currentOrganization, executor }: any) => {
   const generatedUserName =
     rqstsDataById &&
     typeRequests &&
@@ -61,11 +61,19 @@ const CreateVPNTFMIS = ({ rqstsDataById, currentOrganization }: any) => {
   );
 
   const onSubmit = (data: TVPN) => {
+    const now = new Date();
+    const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
+      now.getMonth() + 1
+    ).padStart(2, "0")}.${now.getFullYear()} в ${String(
+      now.getHours()
+    ).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+
     const updateReqData = {
       ...data,
       password: "123",
       status: true,
       userId: rqstsDataById?.userId,
+      dateChange: formattedDate,
     };
 
     console.log(updateReqData);
@@ -159,16 +167,29 @@ const CreateVPNTFMIS = ({ rqstsDataById, currentOrganization }: any) => {
       {disabledAddUserInOrganizationButton && (
         <VPNCard currentVPN={newLoginUserId} />
       )}
-
-      <div className="panel-executor">
-        <ButtonPanelControl
-          icon={
-            <AccountCircleIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
-          }
-          text="Создать"
-          handleSubmit={handleSubmit(onSubmit)}
-          activeSendButton={newLoginUserId ? true : false}
-        />
+      <div className="panel-buttons">
+        {disabledAddUserInOrganizationButton && (
+          <div className="wrapper-show-executor">
+            <p className="show-executor-title">
+              Исполнитель: <span>{executor?.fullName}</span>
+            </p>
+            <p className="show-executor-title">
+              Время: <span>{newLoginUserId?.dateChange}</span>
+            </p>
+          </div>
+        )}
+        <div className="panel-executor">
+          <ButtonPanelControl
+            icon={
+              <AccountCircleIcon
+                sx={{ fontSize: "18px", fontWeight: "bold" }}
+              />
+            }
+            text="Создать"
+            handleSubmit={handleSubmit(onSubmit)}
+            activeSendButton={newLoginUserId ? true : false}
+          />
+        </div>
       </div>
     </div>
   );

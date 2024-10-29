@@ -269,6 +269,7 @@ app.post("/register", (req: Request, res: Response) => {
     role,
     department,
     passport,
+    dateChange,
   } = req.body;
 
   if (!password || !uType) {
@@ -305,6 +306,7 @@ app.post("/register", (req: Request, res: Response) => {
       uIdentity: false,
       status: true,
       passport,
+      dateChange,
     };
     users.push(newUser);
     writeToFile(usersFilePath, users);
@@ -329,6 +331,7 @@ app.post("/register", (req: Request, res: Response) => {
       department,
       status: true,
       passport,
+      dateChange,
     };
     users.push(newUser);
     writeToFile(usersFilePath, users);
@@ -464,6 +467,7 @@ app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
       department: user.department,
       status: user.status,
       passport: user.passport,
+      dateChange: user.dateChange,
     });
   }
 
@@ -484,6 +488,7 @@ app.get("/users/me", authenticateJWT, (req: Request, res: Response) => {
     uIdentity: user.uIdentity,
     status: user.status,
     passport: user.passport,
+    dateChange: user.dateChange,
   });
 });
 
@@ -621,7 +626,7 @@ app.get("/requests", authenticateJWT, (req: Request, res: Response) => {
 // PUT Request Add Services
 
 app.put("/requests/:id", authenticateJWT, (req: Request, res: Response) => {
-  const { services } = req.body; // Получаем массив ids услуг
+  const { services, dateChange } = req.body; // Получаем массив ids услуг
   const requestId = parseInt(req.params.id); // Получаем ID заявки из параметров
 
   try {
@@ -638,6 +643,7 @@ app.put("/requests/:id", authenticateJWT, (req: Request, res: Response) => {
 
     // Добавляем только те id, которых ещё нет в массиве services
     request.services = [...new Set([...request.services, ...services])];
+    request.dateChange = dateChange;
 
     // Запись изменений обратно в файл
     fs.writeFileSync(requestsFilePath, JSON.stringify(requestData, null, 2));
@@ -651,21 +657,25 @@ app.put("/requests/:id", authenticateJWT, (req: Request, res: Response) => {
 });
 
 // Request BY ID GET
-app.get("/requests/show/:id", authenticateJWT, (req: Request, res: Response) => {
-  const showId = parseInt(req.params.id, 10); // Получаем id из URL-параметров
+app.get(
+  "/requests/show/:id",
+  authenticateJWT,
+  (req: Request, res: Response) => {
+    const showId = parseInt(req.params.id, 10); // Получаем id из URL-параметров
 
-  if (isNaN(showId)) {
-    return res.status(400).json({ error: "Некорректный ID" });
+    if (isNaN(showId)) {
+      return res.status(400).json({ error: "Некорректный ID" });
+    }
+
+    const requests = readFromFile(requestsFilePath);
+    const show = requests.find((request: any) => request.id === showId);
+
+    if (!show) {
+      return res.status(404).json({ error: "Заявка не найдена" });
+    }
+    res.status(200).json(show); // Возвращаем только найденную заявку
   }
-
-  const requests = readFromFile(requestsFilePath);
-  const show = requests.find((request: any) => request.id === showId);
-
-  if (!show) {
-    return res.status(404).json({ error: "Заявка не найдена" });
-  }
-  res.status(200).json(show); // Возвращаем только найденную заявку
-});
+);
 
 // GET Services
 
@@ -789,7 +799,7 @@ app.get("/certificates", authenticateJWT, (req: Request, res: Response) => {
 app.put("/certificates/:id", authenticateJWT, (req: Request, res: Response) => {
   const { userId } = req as any; // Получаем ID пользователя из токена
   const certificateId = parseInt(req.params.id); // Получаем ID сертификата из параметров
-  const { statusCode } = req.body; // Ожидаем, что в body будет передан новый statusCode
+  const { statusCode, dateChange } = req.body; // Ожидаем, что в body будет передан новый statusCode
 
   // Чтение пользователей из файла
   const users = readFromFile(usersFilePath);
@@ -827,6 +837,8 @@ app.put("/certificates/:id", authenticateJWT, (req: Request, res: Response) => {
 
     // Обновление statusCode сертификата
     certificate.statusCode = statusCode;
+    // Обновление даты изменение сертификата
+    certificate.dateChange = dateChange;
 
     // Запись изменений обратно в файл
     fs.writeFileSync(
@@ -939,6 +951,16 @@ app.put("/vpn/:id", authenticateJWT, (req: Request, res: Response) => {
     // Изменяем status на false
     getChangedVpn.status = false;
 
+    // Изменяем ключ dateChange
+    const now = new Date();
+    const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
+      now.getMonth() + 1
+    ).padStart(2, "0")}.${now.getFullYear()} в ${String(
+      now.getHours()
+    ).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+
+    getChangedVpn.dateChange = formattedDate;
+
     // Запись изменений обратно в файл
     fs.writeFileSync(vpnFilePath, JSON.stringify(vpnData, null, 2));
 
@@ -988,6 +1010,16 @@ app.put("/users/:id", authenticateJWT, (req: Request, res: Response) => {
 
     // Изменяем status на false
     getChangedUser.status = false;
+
+    // Изменяем ключ dateChange
+    const now = new Date();
+    const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
+      now.getMonth() + 1
+    ).padStart(2, "0")}.${now.getFullYear()} в ${String(
+      now.getHours()
+    ).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+
+    getChangedUser.dateChange = formattedDate;
 
     // Запись изменений обратно в файл
     fs.writeFileSync(usersFilePath, JSON.stringify(usersData, null, 2));
@@ -1104,27 +1136,31 @@ app.post("/invoices", authenticateJWT, (req: Request, res: Response) => {
 
 // EDIT REQUEST BY ID - PUT
 
-app.put("/requests/show/:id", authenticateJWT, (req: Request, res: Response) => {
-  const showId = parseInt(req.params.id, 10);
-  const { body: requestData } = req;
+app.put(
+  "/requests/show/:id",
+  authenticateJWT,
+  (req: Request, res: Response) => {
+    const showId = parseInt(req.params.id, 10);
+    const { body: requestData } = req;
 
-  if (isNaN(showId)) {
-    return res.status(400).json({ error: "Некорректный ID" });
+    if (isNaN(showId)) {
+      return res.status(400).json({ error: "Некорректный ID" });
+    }
+
+    const requests = readFromFile(requestsFilePath);
+    const index = requests.findIndex((show: any) => show.id === showId);
+
+    if (index === -1) {
+      return res.status(404).json({ error: "Заявка не найдена" });
+    }
+
+    // Обновление данных заявки
+    requests[index] = { ...requests[index], ...requestData };
+    writeToFile(requestsFilePath, requests);
+
+    res.status(200).json({ message: "Заявка успешно обновлена", requestData });
   }
-
-  const requests = readFromFile(requestsFilePath);
-  const index = requests.findIndex((show: any) => show.id === showId);
-
-  if (index === -1) {
-    return res.status(404).json({ error: "Заявка не найдена" });
-  }
-
-  // Обновление данных заявки
-  requests[index] = { ...requests[index], ...requestData };
-  writeToFile(requestsFilePath, requests);
-
-  res.status(200).json({ message: "Заявка успешно обновлена", requestData });
-});
+);
 
 // Что общего между registration и regorganization ?
 // reg-organization- организации которые впервые заходят на сайт

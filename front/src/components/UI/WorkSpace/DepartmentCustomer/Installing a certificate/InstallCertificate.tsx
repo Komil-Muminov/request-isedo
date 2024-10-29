@@ -18,6 +18,7 @@ const InstallCertificate = ({
   rqstsDataById,
   currentOrganization,
   getCertificateUser,
+  executor
 }: any) => {
   const {
     register,
@@ -71,6 +72,13 @@ const InstallCertificate = ({
     const dateFrom = `${day}.${month}.${year}`;
     const dateTo = `${day}.${month}.${year + 1}`;
 
+    const now = new Date();
+    const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
+      now.getMonth() + 1
+    ).padStart(2, "0")}.${now.getFullYear()} в ${String(
+      now.getHours()
+    ).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+
     const updateReqData = {
       ...data,
       userId: rqstsDataById?.userId,
@@ -79,6 +87,7 @@ const InstallCertificate = ({
       validFrom: dateFrom,
       validTo: dateTo,
       statusCode: 0,
+      dateChange: formattedDate,
     };
 
     postCertificateMutation.mutate(updateReqData);
@@ -171,14 +180,25 @@ const InstallCertificate = ({
           rqstsDataById={rqstsDataById}
         />
       )}
-
-      <div className="panel-executor">
-        <ButtonPanelControl
-          icon={<GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
-          text="Выдать"
-          handleSubmit={handleSubmit(onSubmit)}
-          activeSendButton={getCertificateUser ? true : false}
-        />
+      <div className="panel-buttons">
+        {getCertificateUser && (
+          <div className="wrapper-show-executor">
+            <p className="show-executor-title">
+              Исполнитель: <span>{executor?.fullName}</span>
+            </p>
+            <p className="show-executor-title">
+              Время: <span>{getCertificateUser?.dateChange}</span>
+            </p>
+          </div>
+        )}
+        <div className="panel-executor">
+          <ButtonPanelControl
+            icon={<GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
+            text="Выдать"
+            handleSubmit={handleSubmit(onSubmit)}
+            activeSendButton={getCertificateUser ? true : false}
+          />
+        </div>
       </div>
     </div>
   );

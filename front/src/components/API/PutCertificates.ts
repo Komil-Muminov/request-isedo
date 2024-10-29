@@ -13,7 +13,10 @@ export const putCertificates = async (
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ statusCode: updatedCertificate.statusCode }), // Отправляем только статус
+        body: JSON.stringify({
+          statusCode: updatedCertificate.statusCode,
+          dateChange: updatedCertificate.dateChange,
+        }), // Отправляем только статус
       }
     );
     if (!response.ok) {

@@ -24,6 +24,7 @@ export interface GetRqstsByIdType {
   organizationId: number;
   services: number[];
   loginImof: string;
+  dateChange: string;
 }
 
 export const getRqstsById = async (id: number): Promise<GetRqstsByIdType> => {

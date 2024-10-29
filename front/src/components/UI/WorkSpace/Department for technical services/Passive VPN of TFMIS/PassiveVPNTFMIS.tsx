@@ -22,7 +22,7 @@ import TechnicalServicesModal from "../../../TechnicalServicesModal/TechnicalSer
 import { putVpnById } from "../../../../API/PutVpnById";
 import VPNCard from ".././VPN Card/VPNCard";
 
-const PassiveVPNTFMIS = ({ currentOrganization }: any) => {
+const PassiveVPNTFMIS = ({ currentOrganization, executor }: any) => {
   const [isMouseDown, setIsMouseDown] = useState(false);
 
   const handleMouseDown = () => {
@@ -102,16 +102,27 @@ const PassiveVPNTFMIS = ({ currentOrganization }: any) => {
           </div>
         </div>
         <VPNCard currentVPN={currentVPN} />
-
-        <div className="panel-executor">
-          <ButtonPanelControl
-            icon={
-              <NoAccountsIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
-            }
-            text="Отправить в пассив"
-            handleShow={handleShow}
-            activeSendButton={!currentVPN?.status}
-          />
+        <div className="panel-buttons">
+          {currentVPN?.status === false && (
+            <div className="wrapper-show-executor">
+              <p className="show-executor-title">
+                Исполнитель: <span>{executor?.fullName}</span>
+              </p>
+              <p className="show-executor-title">
+                Время: <span>{currentVPN?.dateChange}</span>
+              </p>
+            </div>
+          )}
+          <div className="panel-executor">
+            <ButtonPanelControl
+              icon={
+                <NoAccountsIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+              }
+              text="Отправить в пассив"
+              handleShow={handleShow}
+              activeSendButton={!currentVPN?.status}
+            />
+          </div>
         </div>
       </div>
       {show && (

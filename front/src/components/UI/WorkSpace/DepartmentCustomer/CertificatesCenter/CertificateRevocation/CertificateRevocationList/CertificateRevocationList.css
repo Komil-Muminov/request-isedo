@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 20px 0px 20px;
-  border-top: 1px solid #00000040;  
+  border-top: 1px solid #00000040;
 }
 
 .certificate-content {
@@ -64,10 +64,35 @@ td .content {
   background-color: rgba(0, 153, 255, 0.119);
 }
 
+.panel-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px;
+}
+
 .panel-executor {
   width: 100%;
   display: flex;
   justify-content: end;
-  padding: 20px 20px;
   gap: 10px;
+}
+
+.wrapper-show-executor {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+.show-executor-title {
+  font-weight: 700;
+
+  color: #000000bd;
+}
+
+.show-executor-title span {
+  font-weight: normal;
+  color: #607d8b;
+  font-weight: 600;
 }

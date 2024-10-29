@@ -15,7 +15,7 @@ import { PutRequestServices } from "../../../../API/PutRequestServices";
 import { GetRqstsByIdType } from "../../../../API/GetRqstsById";
 import ServicesModal from "../../../ServicesModal/ServicesModal";
 
-const Services = ({ handleShowServicesList, rqstsDataById }: any) => {
+const Services = ({ handleShowServicesList, rqstsDataById, executor }: any) => {
   const [show, setShow] = useState<boolean>(false);
 
   const handleShow = (state: boolean) => {
@@ -91,8 +91,16 @@ const Services = ({ handleShowServicesList, rqstsDataById }: any) => {
   console.log(serviceIds);
 
   const handleSubmit = () => {
+    const now = new Date();
+    const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
+      now.getMonth() + 1
+    ).padStart(2, "0")}.${now.getFullYear()} в ${String(
+      now.getHours()
+    ).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+
     putOrganizationUserMutation.mutate({
       ...rqstsDataById,
+      dateChange: formattedDate,
       services: [...(rqstsDataById.services || []), ...serviceIds], // Используйте || [] для предотвращения ошибки
     });
   };
@@ -140,19 +148,35 @@ const Services = ({ handleShowServicesList, rqstsDataById }: any) => {
           </p>
         </div>
         <ul className="wrapper-service">{renderCurrentServiceList()}</ul>
-        <div className="panel-executor">
-          <ButtonPanelControl
-            icon={<GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
-            text="Выбрать услугу"
-            handleShow={handleShow}
-            activeSendButton={disabledButton}
-          />
-          <ButtonPanelControl
-            icon={<GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
-            text="Выставить"
-            activeSendButton={disabledButton}
-            handleSubmit={handleSubmit}
-          />
+        <div className="panel-buttons">
+          {renderCurrentServiceList() && (
+            <div className="wrapper-show-executor">
+              <p className="show-executor-title">
+                Исполнитель: <span>{executor?.fullName}</span>
+              </p>
+              <p className="show-executor-title">
+                Время: <span>{rqstsDataById?.dateChange}</span>
+              </p>
+            </div>
+          )}
+          <div className="panel-executor">
+            <ButtonPanelControl
+              icon={
+                <GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+              }
+              text="Выбрать услугу"
+              handleShow={handleShow}
+              activeSendButton={disabledButton}
+            />
+            <ButtonPanelControl
+              icon={
+                <GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+              }
+              text="Выставить"
+              activeSendButton={disabledButton}
+              handleSubmit={handleSubmit}
+            />
+          </div>
         </div>
       </div>
       {show && (

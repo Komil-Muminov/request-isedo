@@ -7,12 +7,13 @@ const DepartmentAccounting = ({
   currentOrganization,
   stageOne,
   stageTwo,
+  executor
 }: any) => {
   return (
     <>
       <div className="column-stage">
         {stageOne}
-        <CreateInvoice rqstsDataById={rqstsDataById} currentOrganization={currentOrganization}/>
+        <CreateInvoice rqstsDataById={rqstsDataById} currentOrganization={currentOrganization} executor={executor}/>
       </div>
     </>
   );

@@ -1,5 +1,6 @@
 [
   {
+<<<<<<< HEAD
     "event": "Успешный выход",
     "timestamp": "28.10.2024 10:56"
   },
@@ -87,5 +88,20 @@
     "event": "Успешный вход",
     "username": "km",
     "timestamp": "29.10.2024 15:43"
+=======
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "28.10.2024 14:22"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "28.10.2024 15:31"
+  },
+  {
+    "event": "Успешный вход",
+    "username": "m.norov",
+    "timestamp": "28.10.2024 16:31"
+>>>>>>> aa87bf98591ea8a7fd8dfa45b68ec96b2f04ed5d
   }
 ]

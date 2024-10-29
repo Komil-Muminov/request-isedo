@@ -25,11 +25,6 @@ const CertificateCard = ({
   statusCertificate,
   rqstsDataById,
 }: any) => {
-  const oldAndNewCertificateStatus =
-    getCertificateUser?.userId === rqstsDataById?.userId;
-
-  console.log(getCertificateUser, oldAndNewCertificateStatus);
-
   return (
     <div
       className={`info-certificate ${

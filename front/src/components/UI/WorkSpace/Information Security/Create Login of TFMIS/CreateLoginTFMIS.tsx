@@ -27,6 +27,7 @@ const CreateLoginTFMIS = ({
   rqstsDataById,
   getCertificateUser,
   currentOrganization,
+  executor,
 }: any) => {
   const generatedUserName =
     rqstsDataById &&
@@ -69,11 +70,19 @@ const CreateLoginTFMIS = ({
   );
 
   const onSubmit = (data: RegType) => {
+    const now = new Date();
+    const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
+      now.getMonth() + 1
+    ).padStart(2, "0")}.${now.getFullYear()} в ${String(
+      now.getHours()
+    ).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+
     const updateReqData = {
       ...data,
       uType: rqstsDataById?.reqType === typeRequests[0]?.name ? "bo" : "",
       password: "123",
       photo: "",
+      dateChange: formattedDate,
     };
     console.log(updateReqData);
     regMeMutation.mutate(updateReqData);
@@ -203,22 +212,37 @@ const CreateLoginTFMIS = ({
       {disabledAddUserInOrganizationButton && (
         <LoginTfmisCard currentUser={newLoginUserId} />
       )}
-
-      <div className="panel-executor">
-        <ButtonPanelControl
-          icon={
-            <AccountCircleIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
-          }
-          text="Создать"
-          handleSubmit={handleSubmit(onSubmit)}
-          activeSendButton={newLoginUserId ? true : false}
-        />
-        <ButtonPanelControl
-          icon={<DomainAddIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
-          text="Привязать к организации"
-          handleSubmit={addNewUserToOrganization}
-          activeSendButton={disabledAddUserInOrganizationButton}
-        />
+      <div className="panel-buttons">
+        {disabledAddUserInOrganizationButton && (
+          <div className="wrapper-show-executor">
+            <p className="show-executor-title">
+              Исполнитель: <span>{executor?.fullName}</span>
+            </p>
+            <p className="show-executor-title">
+              Время: <span>{newLoginUserId?.dateChange}</span>
+            </p>
+          </div>
+        )}
+        <div className="panel-executor">
+          <ButtonPanelControl
+            icon={
+              <AccountCircleIcon
+                sx={{ fontSize: "18px", fontWeight: "bold" }}
+              />
+            }
+            text="Создать"
+            handleSubmit={handleSubmit(onSubmit)}
+            activeSendButton={newLoginUserId ? true : false}
+          />
+          <ButtonPanelControl
+            icon={
+              <DomainAddIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+            }
+            text="Привязать к организации"
+            handleSubmit={addNewUserToOrganization}
+            activeSendButton={disabledAddUserInOrganizationButton}
+          />
+        </div>
       </div>
     </div>
   );

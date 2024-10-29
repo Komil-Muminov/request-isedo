@@ -23,7 +23,11 @@ import { invoiceDocuments } from "../../../../API/Data/Invoices Documents/Invoic
 
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 
-const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
+const CreateInvoice = ({
+  rqstsDataById,
+  currentOrganization,
+  executor,
+}: any) => {
   // Используем useMutation для вызова postPdfData
   const uploadPdfMutation = useMutation({
     mutationFn: (file: File) => postPdfData(file),
@@ -146,8 +150,16 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
   );
 
   const onSubmit = (data: TInvoices) => {
+    const now = new Date();
+    const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
+      now.getMonth() + 1
+    ).padStart(2, "0")}.${now.getFullYear()} в ${String(
+      now.getHours()
+    ).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+
     const updateReqData = {
       ...data,
+      dateChange: formattedDate,
       requestId: rqstsDataById?.id,
       files: files,
     };
@@ -340,13 +352,25 @@ const CreateInvoice = ({ rqstsDataById, currentOrganization }: any) => {
           <PDFViewerService currentFiles={currentInvoice?.files} />
         </div>
       )}
-      <div className="panel-executor">
-        <ButtonPanelControl
-          icon={<ReceiptIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
-          text="Выписать"
-          handleSubmit={handleSubmit(onSubmit)}
-          activeSendButton={disabledCreateInvoiceButton}
-        />
+      <div className="panel-buttons">
+        {currentInvoice && (
+          <div className="wrapper-show-executor">
+            <p className="show-executor-title">
+              Исполнитель: <span>{executor?.fullName}</span>
+            </p>
+            <p className="show-executor-title">
+              Время: <span>{currentInvoice?.dateChange}</span>
+            </p>
+          </div>
+        )}
+        <div className="panel-executor">
+          <ButtonPanelControl
+            icon={<ReceiptIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />}
+            text="Выписать"
+            handleSubmit={handleSubmit(onSubmit)}
+            activeSendButton={disabledCreateInvoiceButton}
+          />
+        </div>
       </div>
     </div>
   );

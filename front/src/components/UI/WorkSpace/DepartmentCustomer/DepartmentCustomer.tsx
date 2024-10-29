@@ -19,6 +19,7 @@ const DepartmentCustomer = ({
   stageOne,
   stageTwo,
   stageThree,
+  executor,
 }: any) => {
   const [showServicesList, setShowServicesList] = useState<boolean>(false);
 
@@ -46,7 +47,7 @@ const DepartmentCustomer = ({
   }, [getCertificateQuery]);
 
   const getCertificateUser = certificates.find(
-    (cert) => cert.userId === rqstsDataById?.userId
+    (cert) => cert.userName === rqstsDataById?.fullName
   );
 
   return (
@@ -56,6 +57,7 @@ const DepartmentCustomer = ({
         <CertificateRevocation
           getCertificateQuery={getCertificateQuery}
           certificates={certificates}
+          executor={executor}
         />
       </div>
       {/* Данный компонент нужен для другого запроса "Создание карточки организации и идентификации в системе ISEDO" */}
@@ -75,6 +77,7 @@ const DepartmentCustomer = ({
               rqstsDataById={rqstsDataById}
               currentOrganization={currentOrganization}
               getCertificateUser={getCertificateUser}
+              executor={executor}
             />
           </div>
         </>
@@ -85,6 +88,7 @@ const DepartmentCustomer = ({
           <Services
             handleShowServicesList={handleShowServicesList}
             rqstsDataById={rqstsDataById}
+            executor={executor}
           />
         </div>
       )}

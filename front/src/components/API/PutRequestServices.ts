@@ -16,7 +16,10 @@ export const PutRequestServices = async (
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ services: newData.services }),
+        body: JSON.stringify({
+          dateChange: newData.dateChange,
+          services: newData.services,
+        }),
       }
     );
 
