@@ -14,6 +14,7 @@ import ButtonPanelControl from "../../../ButtonPanelControl/ButtonPanelControl";
 import { PutRequestServices } from "../../../../API/PutRequestServices";
 import { GetRqstsByIdType } from "../../../../API/GetRqstsById";
 import ServicesModal from "../../../ServicesModal/ServicesModal";
+import PDFViewerService from "../../../PDF Viewer Service/PDFViewerService";
 
 const Services = ({ handleShowServicesList, rqstsDataById, executor }: any) => {
   const [show, setShow] = useState<boolean>(false);
@@ -119,9 +120,11 @@ const Services = ({ handleShowServicesList, rqstsDataById, executor }: any) => {
         .map((service) => <ServiceCard key={service.id} service={service} />);
     } else if (servicesList.length > 0) {
       // Если выбранных услуг нет, но есть услуги из servicesList
-      return servicesList.map((e) => {
-        return <ServiceCard key={e.id} service={e} />;
-      });
+      return (
+        <div className="wrapper-new-user-files">
+          <PDFViewerService title="Замима" hideFirstItem={true} />
+        </div>
+      );
     } else if (servicesFilteredByRequestId.length > 0) {
       // Если servicesList пуст, рендерим servicesFilteredByRequestId
       return servicesFilteredByRequestId.map((e) => {

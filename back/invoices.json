@@ -1,1 +1,24 @@
-[]
+[
+  {
+    "invoiceNumber": "BI624770",
+    "indexNumber": 5967,
+    "invoiceSender": "КОРХОНАИ ВОҲИДИ ДАВЛАТИИ \"МАРКАЗИ ТЕХНОЛОГИЯҲОИ ИТТИЛООТИИ МОЛИЯВӢ\"",
+    "invoiceSenderTax": "010088992",
+    "invoiceReceiver": "Muhsiddin and Parpisho Corporation",
+    "invoiceReceiverTax": "020003455",
+    "comments": "",
+    "totalAmount": 2670,
+    "date": "2024-10-08",
+    "dateChange": "29.10.2024 в 16:53",
+    "requestId": 1,
+    "files": [
+      {
+        "id": 1730202827339,
+        "fileName": "Счет-фактура.",
+        "size": "22.19 КБ",
+        "type": "pdf"
+      }
+    ],
+    "id": 1
+  }
+]

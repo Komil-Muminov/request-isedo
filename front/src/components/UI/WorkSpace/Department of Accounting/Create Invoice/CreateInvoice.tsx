@@ -83,6 +83,7 @@ const CreateInvoice = ({
     0
   );
 
+  // Пока что не нужен
   const renderCurrentServiceList = () => {
     // Проверяем, есть ли объекты в servicesList
     if (servicesList.length > 0) {
@@ -243,7 +244,11 @@ const CreateInvoice = ({
         </p>
       </div>
       {/* <input type="file" accept=".pdf" onChange={handleFileUpload} /> */}
-      <ul className="wrapper-service">{renderCurrentServiceList()}</ul>
+      <ul className="wrapper-service">
+        <div className="wrapper-new-user-files">
+          <PDFViewerService title="Замима" hideFirstItem={true} />
+        </div>
+      </ul>
       <div className="panel-control-certificate-revocation">
         <div className="certificates-revocation-title">
           <p>Налоговый счет</p>
