@@ -52,14 +52,17 @@ const DepartmentCustomer = ({
 
   return (
     <>
-      <div className="column-stage">
-        {stageOne}
-        <CertificateRevocation
-          getCertificateQuery={getCertificateQuery}
-          certificates={certificates}
-          executor={executor}
-        />
-      </div>
+      {stageOne && (
+        <div className="column-stage">
+          {stageOne}
+          <CertificateRevocation
+            getCertificateQuery={getCertificateQuery}
+            certificates={certificates}
+            executor={executor}
+          />
+        </div>
+      )}
+
       {/* Данный компонент нужен для другого запроса "Создание карточки организации и идентификации в системе ISEDO" */}
       {/* {rqstsDataById?.stepTask === 3 && (
         <>
@@ -69,7 +72,7 @@ const DepartmentCustomer = ({
           </div>
         </>
       )} */}
-      {rqstsDataById?.stepTask >= 3 && (
+      {stageTwo && (
         <>
           <div className="column-stage">
             {stageTwo}
@@ -82,7 +85,7 @@ const DepartmentCustomer = ({
           </div>
         </>
       )}
-      {rqstsDataById?.stepTask >= 6 && (
+      {stageThree && (
         <div className="column-stage">
           {stageThree}
           <Services

@@ -5,16 +5,21 @@ const DepartmentAccounting = ({
   //   currentUser,
   rqstsDataById,
   currentOrganization,
-  stageOne,
-  stageTwo,
-  executor
+  stageThree,
+  executor,
 }: any) => {
   return (
     <>
-      <div className="column-stage">
-        {stageOne}
-        <CreateInvoice rqstsDataById={rqstsDataById} currentOrganization={currentOrganization} executor={executor}/>
-      </div>
+      {stageThree && (
+        <div className="column-stage">
+          {stageThree}
+          <CreateInvoice
+            rqstsDataById={rqstsDataById}
+            currentOrganization={currentOrganization}
+            executor={executor}
+          />
+        </div>
+      )}
     </>
   );
 };

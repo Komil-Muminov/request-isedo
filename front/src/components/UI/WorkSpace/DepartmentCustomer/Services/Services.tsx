@@ -149,7 +149,7 @@ const Services = ({ handleShowServicesList, rqstsDataById, executor }: any) => {
         </div>
         <ul className="wrapper-service">{renderCurrentServiceList()}</ul>
         <div className="panel-buttons">
-          {renderCurrentServiceList() && (
+          {rqstsDataById?.services.length > 0 && (
             <div className="wrapper-show-executor">
               <p className="show-executor-title">
                 Исполнитель: <span>{executor?.fullName}</span>

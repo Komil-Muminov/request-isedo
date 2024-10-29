@@ -19,8 +19,15 @@ const WorkSpace = ({
 }: any) => {
   const changeOfAccountant = [departments[0], departments[1], departments[2]];
 
-  const [currentDepartment, setCurrentDepartment] =
+  const [currentDepartmentStageOne, setCurrentDepartmentStageOne] =
     useState<TDepartment[]>(changeOfAccountant);
+
+  const [currentDepartmentStageTwo, setCurrentDepartmentStageTwo] = useState<
+    TDepartment[]
+  >(currentDepartmentStageOne);
+
+  const [currentDepartmentStageThree, setCurrentDepartmentStageThree] =
+    useState<TDepartment[]>([departments[0], departments[3]]);
 
   // useEffect(() => {
   //   if (rqstsDataById?.stepTask > 0) {
@@ -48,7 +55,6 @@ const WorkSpace = ({
   );
 
   const [uinfo, setUinfo] = useState<GetMeType | null>(null);
-  // const [expanded, setExpanded] = useState<number | false>(false);
 
   useEffect(() => {
     if (uQuery.status === "success") {
@@ -56,10 +62,12 @@ const WorkSpace = ({
     }
   }, [uQuery.status, uQuery.data]);
 
-  console.log(currentDepartment);
-
-  const handleTabClick = (item: any) => {
-    const updatedArray = currentDepartment.map((department) => ({
+  const handleTabClick = (
+    item: any,
+    currentDeparment: any,
+    setCurrentDepartment: any
+  ) => {
+    const updatedArray = currentDeparment.map((department: any) => ({
       ...department,
       state: department.id === item.id ? true : false,
     }));
@@ -67,34 +75,56 @@ const WorkSpace = ({
     setCurrentDepartment(updatedArray);
   };
 
-  useEffect(() => {
-    if (rqstsDataById?.services.length > 0) {
-      setCurrentDepartment((prevDepartments) => {
-        // Проверяем, уже добавлен ли департамент
-        const isDepartmentAdded = prevDepartments.some(
-          (dept) => dept.id === departments[3].id
-        );
-        if (!isDepartmentAdded) {
-          return [...prevDepartments, departments[3]];
-        }
-        return prevDepartments; // Возвращаем предыдущее состояние, если департамент уже есть
-      });
-    }
-  }, [rqstsDataById?.services]);
+  // useEffect(() => {
+  //   if (rqstsDataById?.services.length > 0) {
+  //     setCurrentDepartmentStageOne((prevDepartments) => {
+  //       // Проверяем, уже добавлен ли департамент
+  //       const isDepartmentAdded = prevDepartments.some(
+  //         (dept) => dept.id === departments[3].id
+  //       );
+  //       if (!isDepartmentAdded) {
+  //         return [...prevDepartments, departments[3]];
+  //       }
+  //       return prevDepartments; // Возвращаем предыдущее состояние, если департамент уже есть
+  //     });
+  //   }
+  // }, [rqstsDataById?.services]);
 
-  const showDepartmentCustomer = currentDepartment.some(
+  // Department Customer
+
+  const showDepartmentCustomerStageOne = currentDepartmentStageOne.some(
     (e) => e.id === 1 && e.state === true
   );
 
-  const showInformationSecurity = currentDepartment.some(
+  const showDepartmentCustomerStageTwo = currentDepartmentStageTwo.some(
+    (e) => e.id === 1 && e.state === true
+  );
+
+  const showDepartmentCustomerStageThree = currentDepartmentStageThree.some(
+    (e) => e.id === 1 && e.state === true
+  );
+
+  // Information Security
+  const showInformationSecurityStageOne = currentDepartmentStageOne.some(
     (e) => e.id === 2 && e.state === true
   );
 
-  const showTechnicalServices = currentDepartment.some(
+  const showInformationSecurityStageTwo = currentDepartmentStageTwo.some(
+    (e) => e.id === 2 && e.state === true
+  );
+
+  // TechnicalServices
+
+  const showTechnicalServicesStageOne = currentDepartmentStageOne.some(
+    (e) => e.id === 3 && e.state === true
+  );
+  const showTechnicalServicesStageTwo = currentDepartmentStageTwo.some(
     (e) => e.id === 3 && e.state === true
   );
 
-  const showDepartmentOfAccounting = currentDepartment.some(
+  // Department Accounting
+
+  const showDepartmentOfAccountingStageThree = currentDepartmentStageThree.some(
     (e) => e.id === 4 && e.state === true
   );
 
@@ -102,14 +132,21 @@ const WorkSpace = ({
     <section className="wrapper-work-space">
       <TitleDocument title="Обработка заявки" />
       <div className="workspace-content">
-        <div className="navigation-tabs">
+        {/* STAGE ONE */}
+        <div className="navigation-tabs-stage-one">
           <ul className="wrapper-tabs">
-            {currentDepartment.map((e) => {
+            {currentDepartmentStageOne.map((e) => {
               return (
                 <li
                   key={e.id}
                   className={`tab ${e?.state ? "active" : ""}`}
-                  onClick={() => handleTabClick(e)}
+                  onClick={() =>
+                    handleTabClick(
+                      e,
+                      currentDepartmentStageOne,
+                      setCurrentDepartmentStageOne
+                    )
+                  }
                 >
                   {e.name}
                 </li>
@@ -117,8 +154,7 @@ const WorkSpace = ({
             })}
           </ul>
         </div>
-
-        {showDepartmentCustomer && (
+        {showDepartmentCustomerStageOne && (
           <DepartmentCustomer
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
@@ -128,19 +164,14 @@ const WorkSpace = ({
                 <p>Этап 1</p>
               </div>
             }
-            stageTwo={
-              <div className="stage-title second-stage">
-                <p>Этап 2</p>
-              </div>
-            }
-            stageThree={
-              <div className="stage-title third-stage">
-                <p>Этап 3</p>
-              </div>
-            }
+            // stageThree={
+            //   <div className="stage-title third-stage">
+            //     <p>Этап 3</p>
+            //   </div>
+            // }
           />
         )}
-        {showInformationSecurity && (
+        {showInformationSecurityStageOne && (
           <InformationSecurity
             currentUser={currentUser}
             rqstsDataById={rqstsDataById}
@@ -151,14 +182,14 @@ const WorkSpace = ({
                 <p>Этап 1</p>
               </div>
             }
-            stageTwo={
-              <div className="stage-title second-stage">
-                <p>Этап 2</p>
-              </div>
-            }
+            // stageTwo={
+            //   <div className="stage-title second-stage">
+            //     <p>Этап 2</p>
+            //   </div>
+            // }
           />
         )}
-        {showTechnicalServices && (
+        {showTechnicalServicesStageOne && (
           <TechnicalServices
             currentUser={currentUser}
             rqstsDataById={rqstsDataById}
@@ -169,6 +200,41 @@ const WorkSpace = ({
                 <p>Этап 1</p>
               </div>
             }
+            // stageTwo={
+            //   <div className="stage-title second-stage">
+            //     <p>Этап 2</p>
+            //   </div>
+            // }
+          />
+        )}
+
+        {/* STAGE TWO */}
+        <div className="navigation-tabs-stage-two">
+          <ul className="wrapper-tabs">
+            {currentDepartmentStageTwo.map((e) => {
+              return (
+                <li
+                  key={e.id}
+                  className={`tab ${e?.state ? "active" : ""}`}
+                  onClick={() =>
+                    handleTabClick(
+                      e,
+                      currentDepartmentStageTwo,
+                      setCurrentDepartmentStageTwo
+                    )
+                  }
+                >
+                  {e.name}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        {showDepartmentCustomerStageTwo && (
+          <DepartmentCustomer
+            rqstsDataById={rqstsDataById}
+            currentOrganization={currentOrganization}
+            executor={uinfo}
             stageTwo={
               <div className="stage-title second-stage">
                 <p>Этап 2</p>
@@ -176,18 +242,83 @@ const WorkSpace = ({
             }
           />
         )}
-        {showDepartmentOfAccounting && (
-          <DepartmentAccounting
+        {showInformationSecurityStageTwo && rqstsDataById?.stepTask >= 4 && (
+          <InformationSecurity
+            currentUser={currentUser}
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
             executor={uinfo}
-            stageOne={
-              <div className="stage-title">
+            stageTwo={
+              <div className="stage-title second-stage">
+                <p>Этап 2</p>
+              </div>
+            }
+          />
+        )}
+
+        {showTechnicalServicesStageTwo && rqstsDataById?.stepTask >= 4 && (
+          <TechnicalServices
+            currentUser={currentUser}
+            rqstsDataById={rqstsDataById}
+            currentOrganization={currentOrganization}
+            executor={uinfo}
+            stageTwo={
+              <div className="stage-title second-stage">
+                <p>Этап 2</p>
+              </div>
+            }
+          />
+        )}
+
+        {/* STAGE THREE */}
+        <div className="navigation-tabs-stage-three">
+          <ul className="wrapper-tabs">
+            {currentDepartmentStageThree.map((e) => {
+              return (
+                <li
+                  key={e.id}
+                  className={`tab ${e?.state ? "active" : ""}`}
+                  onClick={() =>
+                    handleTabClick(
+                      e,
+                      currentDepartmentStageThree,
+                      setCurrentDepartmentStageThree
+                    )
+                  }
+                >
+                  {e.name}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        {showDepartmentCustomerStageThree && (
+          <DepartmentCustomer
+            rqstsDataById={rqstsDataById}
+            currentOrganization={currentOrganization}
+            executor={uinfo}
+            stageThree={
+              <div className="stage-title third-stage">
                 <p>Этап 3</p>
               </div>
             }
           />
         )}
+
+        {showDepartmentOfAccountingStageThree &&
+          rqstsDataById?.services.length > 0 && (
+            <DepartmentAccounting
+              rqstsDataById={rqstsDataById}
+              currentOrganization={currentOrganization}
+              executor={uinfo}
+              stageThree={
+                <div className="stage-title">
+                  <p>Этап 3</p>
+                </div>
+              }
+            />
+          )}
       </div>
     </section>
   );
