@@ -1,5 +1,6 @@
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
 import Uchartshort from "../Uchart/Uchartshort/Uchartshort";
+
 import "./Uwidget.css";
 
 export interface UwidgetProps {
@@ -8,22 +9,29 @@ export interface UwidgetProps {
 	desc?: string | number;
 	kind?: string | undefined;
 	isLoading?: boolean;
-	disabled?: boolean;
+	isDisabled?: boolean;
 	onClick?: (e: React.SyntheticEvent<HTMLElement>) => void;
 }
 
 export const Uwidget: React.FC<UwidgetProps> = ({
+	children,
+	title,
+	isLoading,
+	isDisabled,
 	kind,
 	onClick,
 }: UwidgetProps) => {
 	return (
 		<>
-			<div className={`uwidget__content uwidget__style ${kind}`}>
-				<Uchartshort />
-				<Button onClick={onClick} className={`uwidget__btn ${kind}`}>
-					Показать полную информацию{" "}
-				</Button>
-			</div>
+			<li onClick={onClick} className="uwidget__item">
+				<div className={`uwidget__content uwidget__style ${kind}`}>
+					<h3 className="uwidget__item-title">{title ? title : "TITLE"}</h3>
+					{children ? children : <Uchartshort />}
+					{/* <Button onClick={onClick} className={`uwidget__btn ${kind}`}>
+						Показать полную информацию{" "}
+					</Button> */}
+				</div>
+			</li>
 		</>
 	);
 };
