@@ -1,0 +1,184 @@
+.desc {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.desc p {
+  font-size: 12px;
+  margin-top: 25px;
+}
+
+.desc * {
+  margin: 0;
+}
+
+/*
+   * MAKE CIRCLE
+   */
+
+.circle-container {
+  position: relative;
+  width: 40px;
+  height: 27px;
+  left: 50%;
+  bottom: 10px;
+}
+
+.circle-container > * {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #3b46d30a;
+}
+
+.circle {
+  background: white;
+}
+
+/*
+   * MAKE WAVE
+   */
+
+.wave {
+  background: url(https://coiger.github.io/fill-water-animation/wave.svg)
+    repeat-x;
+  opacity: 0.8;
+}
+
+.wave-below {
+  background-color: #3b46d3;
+}
+
+/*
+   * SET WAVE POSITION
+   */
+
+.wave._0 {
+  background-position: 0% 110%;
+}
+.wave-below._0 {
+  clip-path: polygon(0% 110%, 0% 110%, 110% 110%, 110% 110%);
+}
+
+.wave._50 {
+  background-position: 0% 57%;
+}
+.wave-below._50 {
+  clip-path: polygon(0% 110%, 0% 58%, 110% 58%, 110% 110%);
+}
+
+.wave._100 {
+  background-position: 0% 5%;
+}
+.wave-below._100 {
+  clip-path: polygon(0% 110%, 0% 15%, 110% 15%, 110% 110%);
+}
+
+/*
+   * DEFINE FILLING ANIMATION
+   */
+
+@keyframes fill-wave {
+  from {
+    background-position: -1200px 110%;
+  }
+}
+
+@keyframes fill-below {
+  from {
+    clip-path: polygon(0% 110%, 0% 110%, 110% 110%, 110% 110%);
+  }
+}
+
+/*
+   * DEFINE WAVE ANIMATION
+   */
+
+@keyframes wave-0 {
+  to {
+    background-position: 1200px 110%;
+  }
+}
+
+@keyframes wave-50 {
+  to {
+    background-position: 1200px 57%;
+  }
+}
+
+@keyframes wave-100 {
+  to {
+    background-position: 1200px 5%;
+  }
+}
+
+/*
+   * GIVE FILLING & WAVE ANIMATION
+   */
+
+:root {
+  --ease-in: cubic-bezier(0.58, 0.42, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.42, 0.58);
+}
+
+.wave {
+  animation-name: fill-wave, wave-0;
+  animation-duration: 5s, 7s;
+  animation-delay: 0s, 5s;
+  animation-fill-mode: forwards, none;
+  animation-iteration-count: 1, infinite;
+  animation-timing-function: var(--ease-in), var(--ease-out);
+}
+.wave._50 {
+  animation-name: fill-wave, wave-50;
+}
+.wave._100 {
+  animation-name: fill-wave, wave-100;
+}
+
+.wave:nth-child(2) {
+  animation-duration: 5s, 11s;
+}
+
+.wave:nth-child(3) {
+  animation-duration: 5s, 13s;
+}
+
+.wave-below {
+  animation: 5s var(--ease-in) forwards fill-below;
+}
+.wave-below._50 {
+  animation: 7s -2s var(--ease-in) forwards fill-below;
+}
+.wave-below._100 {
+  animation: 6s -1s var(--ease-in) forwards fill-below;
+}
+
+/*
+   * DEFINE TEXT ANIMATION
+   */
+@keyframes rise-up {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  70% {
+    transform: translateY(-10px);
+  }
+}
+
+.desc * {
+  animation: 1s 6s both rise-up;
+}
+
+.desc._50 p {
+  color: white;
+}
+
+.desc._100 {
+  color: white;
+}

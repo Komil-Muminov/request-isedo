@@ -15,24 +15,6 @@
     "validFrom": "23.09.2023",
     "validTo": "24.09.2024",
     "statusCode": 5,
-    "dateChange": "29.10.2024 в 08:50"
-  },
-  {
-    "userName": "Шарипов Амир Чамшедович",
-    "userTax": "250008809",
-    "userPhone": "880008671",
-    "role": "Главный бухгалтер",
-    "orgName": "Muhsiddin and Parpisho Corporation",
-    "orgTax": "020003455",
-    "orgPhone": "8008080",
-    "address": "Улица И.Сомони, д6",
-    "userId": 5,
-    "organizationId": 1,
-    "serialNumber": "200000dd1f63274b121773decc00000000dd1f",
-    "validFrom": "29.10.2024",
-    "validTo": "29.10.2025",
-    "statusCode": 0,
-    "dateChange": "29.10.2024 в 09:53",
-    "id": 57379
+    "dateChange": "30.10.2024 в 14:22"
   }
 ]

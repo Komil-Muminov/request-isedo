@@ -10,19 +10,6 @@
     "phone": "880006458",
     "role": "Сармухосиб",
     "status": false,
-    "dateChange": "29.10.2024 в 08:50"
-  },
-  {
-    "fullName": "Шарипов Амир Чамшедович",
-    "login": "sharipov.a",
-    "bz": 123,
-    "organization": "Muhsiddin and Parpisho Corporation",
-    "phone": "880008671",
-    "role": "Главный бухгалтер",
-    "password": "123",
-    "status": true,
-    "userId": 5,
-    "dateChange": "29.10.2024 в 10:01",
-    "id": 2
+    "dateChange": "30.10.2024 в 14:22"
   }
 ]

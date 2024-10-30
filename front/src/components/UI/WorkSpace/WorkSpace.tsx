@@ -11,6 +11,8 @@ import DepartmentAccounting from "./Department of Accounting/DepartmentAccountin
 import { GetMeType, useAuth } from "../../API/Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
+import PercentIndicator from "../Percent Indicator/PercentIndicator";
+import { getCertificates, TCertificates } from "../../API/GetCertificates";
 
 const WorkSpace = ({
   currentUser,
@@ -128,6 +130,25 @@ const WorkSpace = ({
     (e) => e.id === 4 && e.state === true
   );
 
+  const [certificates, setCertificates] = useState<TCertificates[]>([]);
+
+  const getCertificateQuery = useQuery({
+    queryFn: () => getCertificates(),
+    queryKey: ["certificates"],
+  });
+
+  useEffect(() => {
+    if (getCertificateQuery.status === "success") {
+      setCertificates(getCertificateQuery.data);
+    }
+  }, [getCertificateQuery]);
+
+  const getCertificateUser = certificates.find(
+    (cert) => cert.userId !== rqstsDataById?.userId
+  );
+
+  console.log(currentUser);
+
   return (
     <section className="wrapper-work-space">
       <TitleDocument title="Обработка заявки" />
@@ -148,7 +169,12 @@ const WorkSpace = ({
                     )
                   }
                 >
-                  {e.name}
+                  <p>{e.name}</p>
+                  <PercentIndicator
+                    currentRequest={rqstsDataById}
+                    currentCertificate={getCertificateUser}
+                    currentUser={currentUser}
+                  />
                 </li>
               );
             })}
@@ -209,28 +235,31 @@ const WorkSpace = ({
         )}
 
         {/* STAGE TWO */}
-        <div className="navigation-tabs-stage-two">
-          <ul className="wrapper-tabs">
-            {currentDepartmentStageTwo.map((e) => {
-              return (
-                <li
-                  key={e.id}
-                  className={`tab ${e?.state ? "active" : ""}`}
-                  onClick={() =>
-                    handleTabClick(
-                      e,
-                      currentDepartmentStageTwo,
-                      setCurrentDepartmentStageTwo
-                    )
-                  }
-                >
-                  {e.name}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        {showDepartmentCustomerStageTwo && (
+        {rqstsDataById?.stepTask > 2 && (
+          <div className="navigation-tabs-stage-two">
+            <ul className="wrapper-tabs">
+              {currentDepartmentStageTwo.map((e) => {
+                return (
+                  <li
+                    key={e.id}
+                    className={`tab ${e?.state ? "active" : ""}`}
+                    onClick={() =>
+                      handleTabClick(
+                        e,
+                        currentDepartmentStageTwo,
+                        setCurrentDepartmentStageTwo
+                      )
+                    }
+                  >
+                    {e.name}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+
+        {showDepartmentCustomerStageTwo && rqstsDataById?.stepTask > 2 && (
           <DepartmentCustomer
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
@@ -242,7 +271,7 @@ const WorkSpace = ({
             }
           />
         )}
-        {showInformationSecurityStageTwo && rqstsDataById?.stepTask >= 4 && (
+        {showInformationSecurityStageTwo && rqstsDataById?.stepTask > 2 && (
           <InformationSecurity
             currentUser={currentUser}
             rqstsDataById={rqstsDataById}
@@ -256,7 +285,7 @@ const WorkSpace = ({
           />
         )}
 
-        {showTechnicalServicesStageTwo && rqstsDataById?.stepTask >= 4 && (
+        {showTechnicalServicesStageTwo && rqstsDataById?.stepTask > 2 && (
           <TechnicalServices
             currentUser={currentUser}
             rqstsDataById={rqstsDataById}
@@ -271,29 +300,31 @@ const WorkSpace = ({
         )}
 
         {/* STAGE THREE */}
-        <div className="navigation-tabs-stage-three">
-          <ul className="wrapper-tabs">
-            {currentDepartmentStageThree.map((e) => {
-              return (
-                <li
-                  key={e.id}
-                  className={`tab ${e?.state ? "active" : ""}`}
-                  onClick={() =>
-                    handleTabClick(
-                      e,
-                      currentDepartmentStageThree,
-                      setCurrentDepartmentStageThree
-                    )
-                  }
-                >
-                  {e.name}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        {rqstsDataById?.stepTask > 5 && (
+          <div className="navigation-tabs-stage-three">
+            <ul className="wrapper-tabs">
+              {currentDepartmentStageThree.map((e) => {
+                return (
+                  <li
+                    key={e.id}
+                    className={`tab ${e?.state ? "active" : ""}`}
+                    onClick={() =>
+                      handleTabClick(
+                        e,
+                        currentDepartmentStageThree,
+                        setCurrentDepartmentStageThree
+                      )
+                    }
+                  >
+                    {e.name}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
 
-        {showDepartmentCustomerStageThree && (
+        {showDepartmentCustomerStageThree && rqstsDataById?.stepTask > 5 && (
           <DepartmentCustomer
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
