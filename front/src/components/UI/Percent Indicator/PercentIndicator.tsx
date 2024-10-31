@@ -16,7 +16,7 @@ const PercentIndicator = ({
         <div className={`wave-below _50`}></div>
         <div className={`desc _50`}>
           {/* <h2>Исполнено</h2> */}
-          <p>50%</p>
+          <p>33%</p>
         </div>
       </div>
     </div>
