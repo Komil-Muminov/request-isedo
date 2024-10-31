@@ -63,6 +63,10 @@
   clip-path: polygon(0% 110%, 0% 110%, 110% 110%, 110% 110%);
 }
 
+._0 p {
+  color: #000;
+}
+
 .wave._50 {
   background-position: 0% 57%;
 }

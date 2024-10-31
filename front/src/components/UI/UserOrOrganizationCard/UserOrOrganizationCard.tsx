@@ -21,8 +21,6 @@ const UserOrOrganizationCard = ({
     (e: any) => e.fileName === requiredFile
   );
 
-  console.log(uploadedFile, requiredFile);
-
   if (currentFile) handleFileUploadedStatus(currentFile);
 
   return (

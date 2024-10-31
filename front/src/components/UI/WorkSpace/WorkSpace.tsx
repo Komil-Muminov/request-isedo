@@ -13,6 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
 import PercentIndicator from "../Percent Indicator/PercentIndicator";
 import { getCertificates, TCertificates } from "../../API/GetCertificates";
+import { getVPN, TVPN } from "../../API/GetVPN";
 
 const WorkSpace = ({
   currentUser,
@@ -147,7 +148,43 @@ const WorkSpace = ({
     (cert) => cert.userId !== rqstsDataById?.userId
   );
 
-  console.log(currentUser);
+  const currentDepartmentCustomer = currentDepartmentStageOne.find(
+    (e) => e.state === true
+  );
+
+  const getVpnQuery = useQuery(
+    {
+      queryFn: () => getVPN(),
+      queryKey: ["vpn"],
+    },
+    queryClient
+  );
+
+  const [vpn, setVpn] = useState<TVPN[]>([]);
+
+  useEffect(() => {
+    if (getVpnQuery.status === "success") {
+      setVpn(getVpnQuery.data);
+    }
+  }, [getVpnQuery]);
+
+  const currentVPN = vpn.find((v) => {
+    return currentOrganization?.userIds.includes(v.userId);
+  });
+
+  const getPercent = (item: any) => {
+    if (
+      (item?.name === "Шуъба оид ба кор бо муштариён" &&
+        getCertificateUser?.statusCode === 5) ||
+      (item?.name === "Шуъба оид ба амнияти иттилоотӣ" &&
+        currentUser?.status === false) ||
+      (item?.name === "Шуъба оид ба хизматрасонии техникӣ" &&
+        currentVPN?.status === false)
+    ) {
+      return "100";
+    }
+    return "0";
+  };
 
   return (
     <section className="wrapper-work-space">
@@ -170,11 +207,7 @@ const WorkSpace = ({
                   }
                 >
                   <p>{e.name}</p>
-                  <PercentIndicator
-                    currentRequest={rqstsDataById}
-                    currentCertificate={getCertificateUser}
-                    currentUser={currentUser}
-                  />
+                  <PercentIndicator percent={getPercent(e)} />
                 </li>
               );
             })}

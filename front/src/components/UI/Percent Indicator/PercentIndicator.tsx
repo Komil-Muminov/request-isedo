@@ -1,22 +1,19 @@
-import React from "react";
 import "./PercentIndicator.css";
 
-const PercentIndicator = ({
-  currentRequest,
-  currentCertificate,
-  currentUser,
-}: any) => {
+const PercentIndicator = ({ percent }: any) => {
+  console.log(percent);
+
   return (
     <div className="percent-indicator">
       <div className="circle-container">
         <div className="circle"></div>
-        <div className={`wave _50`}></div>
-        <div className={`wave _50`}></div>
-        <div className={`wave _50`}></div>
-        <div className={`wave-below _50`}></div>
-        <div className={`desc _50`}>
+        <div className={`wave _${percent}`}></div>
+        <div className={`wave _${percent}`}></div>
+        <div className={`wave _${percent}`}></div>
+        <div className={`wave-below _${percent}`}></div>
+        <div className={`desc _${percent}`}>
           {/* <h2>Исполнено</h2> */}
-          <p>33%</p>
+          <p>{percent}%</p>
         </div>
       </div>
     </div>
