@@ -2,7 +2,6 @@ import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography"; // Import Typography for better text handling
-import { Container } from "@mui/material";
 
 interface ProgressBarProps {
 	completed: number;
@@ -19,18 +18,22 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ completed, total }) => {
 			alignItems="center"
 			justifyContent="center"
 		>
-			<CircularProgress variant="determinate" value={percentage} />
+			<CircularProgress
+				sx={{ color: "#4caf50" }}
+				variant="determinate"
+				value={percentage}
+				size={60}
+			/>
 			<Box
 				sx={{
 					position: "absolute",
 					display: "flex",
 					alignItems: "center",
 					justifyContent: "center",
-					color: "red",
 				}}
 			>
-				<Typography variant="caption" color="text.white">
-					<p style={{ color: "#fff" }}>{`${Math.round(percentage)}%`}</p>
+				<Typography variant="caption" color="#fff" fontSize={"16px"}>
+					{`${Math.round(percentage)}%`}
 				</Typography>
 			</Box>
 		</Box>
