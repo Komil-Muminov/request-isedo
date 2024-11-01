@@ -53,6 +53,11 @@
 	/* flex-direction: column; */
 }
 
+/* border top navigation's component */
+.css-1086bdv-MuiPaper-root-MuiAccordion-root::before {
+	opacity: 0;
+}
+
 .profile_center {
 	grid-area: profileCenter;
 	grid-column: 1/9;

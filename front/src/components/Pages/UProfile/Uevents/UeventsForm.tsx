@@ -33,7 +33,7 @@ export const UeventsForm: React.FC = ({ onAddEvent }) => {
 				<input
 					type="text"
 					name="title"
-					value={formValues.title.trim()}
+					value={formValues.title}
 					onChange={handleChange}
 					className="uevents__form-inp"
 					placeholder="Задача"
@@ -41,7 +41,7 @@ export const UeventsForm: React.FC = ({ onAddEvent }) => {
 				<input
 					type="text"
 					name="desc"
-					value={formValues.desc.trim()}
+					value={formValues.desc}
 					onChange={handleChange}
 					className="uevents__form-inp"
 					placeholder="Описание"
