@@ -1,7 +1,5 @@
 .uchartshort__content {
 	display: flex;
-	justify-content: space-between;
-	color: #fff;
 }
 
 .uchartshort__left {
@@ -22,6 +20,10 @@
 .uchartshort__right {
 	display: flex;
 }
+
+/* .uchartshort__right svg {
+	min-height: 400px;
+} */
 
 .trending-icon-content {
 	display: flex;

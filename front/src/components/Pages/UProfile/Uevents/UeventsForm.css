@@ -1,0 +1,38 @@
+.uevetns__form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	background: #fff;
+	border-radius: 10px;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+
+.uevents__form-inp {
+	border: none;
+	border: 1px solid rgba(225, 225, 225, 0.475);
+	outline: none;
+	padding: 10px 10px 10px 5px;
+	border-radius: 8px;
+	transition: background-color 0.2s ease-in-out;
+	background: rgba(184, 184, 184, 0.208);
+}
+.uevents__form-inp::placeholder {
+	font-size: 14px;
+	text-align: center;
+}
+
+.uevents__form-inp:hover {
+	background: rgba(184, 184, 184, 0.429);
+}
+
+.uevents__form-sbt {
+	color: #fff;
+	background: transparent;
+	background: rgba(255, 157, 157, 0.761);
+	transition: background-color 0.2s ease-in-out;
+}
+
+.uevents__form-sbt:hover:not(:focus-visible) {
+	background: rgba(255, 157, 157, 0.913);
+}

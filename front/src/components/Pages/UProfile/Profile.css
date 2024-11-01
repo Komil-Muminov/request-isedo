@@ -19,7 +19,7 @@
 .wrapper-profile {
 	align-items: stretch;
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(12, 1fr);
 	grid-template-rows: auto;
 	gap: 10px;
 }
@@ -55,14 +55,15 @@
 
 .profile_center {
 	grid-area: profileCenter;
-	grid-column: 3/10;
+	grid-column: 1/9;
 	grid-row: 1/1;
 }
 
 .profile_right {
 	grid-area: profileRight;
-	grid-column: 10/13;
+	grid-column: 9/13;
 	grid-row: 1/2;
+	/* z-index: 99999999999999; */
 }
 
 /* UbottomLink */
@@ -150,4 +151,77 @@
 
 .uidentify_link {
 	padding: 10px;
+}
+
+/* ProfileRight Tasks */
+
+.profile_events {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	background: linear-gradient(
+		112.1deg,
+		rgb(32, 38, 57) 11.4%,
+		rgb(63, 76, 119) 70.2%
+	);
+	border-radius: 20px;
+	color: #fff;
+	padding: 15px 13px;
+}
+.profile__events {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+.profile__events-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.profile__events-item {
+	display: flex;
+	flex-direction: column;
+	width: calc((100% - 10px * 2) / 3);
+}
+
+.profile__events-title {
+	text-align: center;
+}
+
+.profile__events-progress-bar {
+	text-align: center;
+}
+
+.show-events-form-btn {
+	align-self: center;
+	background-color: #ff8585ab;
+	transition: background-color 0.2s ease-in-out;
+}
+.show-events-form-btn:hover:not(:focus-visible) {
+	background-color: #ff8585e7;
+}
+
+.show-events-form-btn svg {
+	fill: #fff;
+}
+
+.profile__events-item-btn {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 15px;
+	backdrop-filter: blur(20px) saturate(180%);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.profile__events-delete svg {
+	fill: #ffffff87;
+	transition: fill 0.2s ease-in-out;
+}
+.profile__events-delete svg:hover {
+	fill: #ffffff;
 }

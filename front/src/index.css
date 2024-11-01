@@ -52,6 +52,13 @@ body {
 	background-color: #f7f7fc;
 }
 
+button {
+	padding: 0;
+	margin: 0;
+	border: none;
+	background: transparent;
+}
+
 .radix-themes {
 	background-color: #f7f7fc !important;
 }
@@ -188,12 +195,4 @@ a:hover {
 	);
 	box-shadow: 10px 10px 10px 10px rgba(218, 218, 218, 0.293);
 	border-radius: 20px;
-}
-.black-gradient {
-	color: #fff;
-	background: linear-gradient(
-		112.1deg,
-		rgb(32, 38, 57) 11.4%,
-		rgb(63, 76, 119) 70.2%
-	);
 }

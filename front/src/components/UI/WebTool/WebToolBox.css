@@ -2,6 +2,7 @@
 	position: fixed;
 	bottom: 2%;
 	right: 2%;
+	z-index: 999999999999;
 }
 
 .icon-button {
@@ -16,7 +17,7 @@
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 	cursor: pointer;
 	transition: box-shadow 0.3s ease, transform 0.3s ease;
-	z-index: 9999999999;
+	background: #000000ad;
 }
 
 .icon-button:hover {
@@ -24,13 +25,13 @@
 	transform: scale(1.1);
 	color: #000;
 	transition: all 0.3s;
+	background: #00000068;
 }
 
 .web-toolbox-container {
 	position: absolute;
 	background-color: rgba(0, 0, 0, 0.73);
 	color: rgba(255, 255, 255, 0.22);
-	z-index: 1400;
 	border-radius: 50px;
 	display: flex;
 	align-items: center;

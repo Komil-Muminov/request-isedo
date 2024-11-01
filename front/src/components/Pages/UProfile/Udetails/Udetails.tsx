@@ -184,27 +184,27 @@ const Udetails: React.FC = () => {
 									<Uwidget
 										kind="black-gradient uwidget__standart"
 										disabled={uPhotoMutation.isPending}
-										title={`Показать график чего-то`}
+										title={`График чего-то`}
 										onClick={() => handleChart("dashboard")}
 										desc={`KM`}
 									/>
 									<Uwidget
 										disabled={uPhotoMutation.isPending}
-										kind="secondary uwidget__standart"
-										title={`Показать график чего-то`}
+										kind="black-gradient uwidget__standart"
+										title={`График чего-то`}
 										onClick={() => handleChart("barchart")}
 										desc={`KM`}
 									/>
 									<Uwidget
 										kind="tertiary uwidget__item--special"
-										title={`Показать график чего-то`}
+										title={`График чего-то`}
 										desc={`KM`}
 										children={<DashboardMinify />}
 										onClick={() => handleChart("saleschart")}
 									/>
 									<Uwidget
 										kind="tertiary uwidget__item--special"
-										title={`Показать график чего-то`}
+										title={`График чего-то`}
 										desc={`KM`}
 										children={<DashboardMinify />}
 										onClick={() => handleChart("saleschart")}

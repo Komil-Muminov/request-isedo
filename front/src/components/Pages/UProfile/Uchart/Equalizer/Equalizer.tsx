@@ -34,7 +34,7 @@ const getBarColor = (value: number): string => {
 
 const EqualizerChart: React.FC = () => {
 	return (
-		<BarChart width={65} height={60} data={data}>
+		<BarChart width={95} height={105} data={data}>
 			<CartesianGrid stroke="transparent" />
 
 			<XAxis dataKey="name" hide />
