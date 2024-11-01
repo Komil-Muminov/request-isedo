@@ -224,10 +224,10 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageOne={
-              <div className="stage-title stage-indicator">
-                <p>Этап 1</p>
-                <p className="percent-title">100%</p>
-              </div>
+              <div
+                className="stage-title stage-indicator"
+                data-content="100% - Этап 1"
+              ></div>
             }
             // stageThree={
             //   <div className="stage-title third-stage">
@@ -243,12 +243,11 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageOne={
-              <div className="stage-title stage-indicator second-step">
-                <p>Этап 1</p>
-                <p className="percent-title">100%</p>
-              </div>
+              <div
+                className="stage-title stage-indicator"
+                data-content="100% - Этап 1"
+              ></div>
             }
-
             // stageTwo={
             //   <div className="stage-title second-stage">
             //     <p>Этап 2</p>
@@ -263,10 +262,10 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageOne={
-              <div className="stage-title stage-indicator third-step">
-                <p>Этап 1</p>
-                <p className="percent-title">100%</p>
-              </div>
+              <div
+                className="stage-title stage-indicator"
+                data-content="100% - Этап 1"
+              ></div>
             }
             // stageTwo={
             //   <div className="stage-title second-stage">
