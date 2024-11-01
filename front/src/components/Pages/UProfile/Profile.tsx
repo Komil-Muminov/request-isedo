@@ -15,6 +15,14 @@ import { Settings } from "@mui/icons-material";
 import { Ucalendar } from "../UProfile/Ucalendar/Ucalendar";
 import { Uevents } from "./Uevents/Uevents";
 import WebToolBox from "../../UI/WebTool/WebToolBox";
+import { UeventsForm } from "./Uevents/UeventsForm";
+import { UventsDataScheme } from "./Uevents/UeventsData";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ProgressBar from "../../UI/Progress-bar/Progress-bar";
+
 import "./Profile.css";
 import "./Udetails/Udetails.css";
 
@@ -28,10 +36,26 @@ const Profile: React.FC = () => {
 		queryClient,
 	);
 
-	// Устанавливаем по умолчанию открытый элемент "Профиль" (ID = 0)
 	const [expanded, setExpanded] = useState<number | false>(undefined);
 	const [selectedItem, setSelectedItem] = useState<UlinkScheme | null>(null);
+	const [uEvents, setUEvents] = useState<UventsDataScheme[]>([]); // LocalStorageEvents
+	const [showEvents, setShowEvents] = useState<boolean>(false); // ShowEventsBTN
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		const localStorageEvents = JSON.parse(
+			localStorage.getItem("events") ?? "[]",
+		);
+		setUEvents(localStorageEvents);
+	}, []);
+
+	const handleDeleteEvent = (itemId: number) => {
+		setUEvents((prev) => {
+			const updatedUevents = prev.filter((_, id) => id !== itemId);
+			localStorage.setItem("events", JSON.stringify(updatedUevents));
+			return updatedUevents;
+		});
+	};
 
 	const handleAccordion = (id: number) => {
 		setExpanded(expanded === id ? false : id);
@@ -42,7 +66,6 @@ const Profile: React.FC = () => {
 		navigate(`/uprofile/details/${item.url?.split("/").pop()}`);
 	};
 
-	// Закрытие аккордеона при клике вне
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
 			const target = event.target as HTMLElement;
@@ -64,15 +87,37 @@ const Profile: React.FC = () => {
 		return null;
 	}
 
+	// Progress-bar
+	const [progressBar, setProgressBar] = useState<{ [key: string]: number }>({});
+
+	useEffect(() => {
+		const getLocalProgressBar = JSON.parse(
+			localStorage.getItem("progressBar") ?? "[]",
+		);
+		setProgressBar((prev) => ({
+			...prev,
+			...getLocalProgressBar,
+		}));
+	}, [uEvents]);
+
+	useEffect(() => {
+		const completedEvents = uEvents.filter((item) => item.isDone).length;
+		const totalEvents = uEvents.length;
+		const newProgress = {
+			completedEvents,
+			totalEvents,
+		};
+		setProgressBar(newProgress);
+		localStorage.setItem("progressBar", JSON.stringify(progressBar));
+	}, [uEvents]);
+
 	return (
 		<section className="sections">
 			<WebToolBox />
 			<div className="profile__container">
 				<div className="profile_content">
 					<aside className="profile_left">
-						{/* <div className="profile_header"> */}
 						<Button onClick={() => setSelectedItem(null)}>Назад</Button>
-						{/* </div> */}
 						{UlinksProps.map(({ url, label, subLinks }, id) => (
 							<Accordion
 								key={id}
@@ -112,10 +157,60 @@ const Profile: React.FC = () => {
 							<div className="profile_ucalendar">
 								<Ucalendar />
 							</div>
+							{/* Events */}
+							<h3 className="profile__events-title">Ваши задачи</h3>
 							<div className="profile_events">
-								<Uevents children="Задачи" desc={`Описание`} />
-								<Uevents children="Задачи" desc={`Описание`} />
-								<Uevents children="Задачи" desc={`Описание`} />
+								{/* Сделать прогрессБар */}
+								<span className="profile__events-progress-bar">
+									{uEvents?.length > 0 ? `Progress` : `У вас нет задач`}
+								</span>
+								<ProgressBar
+									completed={progressBar.completedEvents}
+									total={progressBar.totalEvents}
+								/>
+								<Button
+									onClick={() => setShowEvents(!showEvents)}
+									className="show-events-form-btn"
+								>
+									{showEvents ? <RemoveCircleIcon /> : <AddCircleIcon />}
+								</Button>
+								<div className="profile__events">
+									{showEvents && <UeventsForm onAddEvent={setUEvents} />}
+
+									<div className="profile__events-list">
+										{uEvents.map((item, id) => (
+											<div key={id} className="profile__events-item">
+												<Uevents key={id} title={item.title} desc={item.desc} />
+												<div className="profile__events-item-btn">
+													<Button
+														className="profile__events-delete"
+														onClick={() => handleDeleteEvent(id)}
+													>
+														<DeleteIcon />
+													</Button>
+													<Button
+														onClick={() =>
+															setUEvents((prev) =>
+																prev.map((item, itemId) =>
+																	itemId === id
+																		? { ...item, isDone: !item.isDone }
+																		: item,
+																),
+															)
+														}
+														className={`uevents-done-btn ${
+															item.isDone
+																? "uevents-done-btn--isdone"
+																: "uevents-done-btn--notdone"
+														}`}
+													>
+														<CheckCircleOutlineIcon />
+													</Button>
+												</div>
+											</div>
+										))}
+									</div>
+								</div>
 							</div>
 						</aside>
 					</div>

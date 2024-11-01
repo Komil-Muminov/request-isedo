@@ -38,10 +38,23 @@
 		0 4px 6px rgba(255, 255, 255, 0.25);
 }
 
-.secondary {
+/* .secondary {
 	color: #fff;
 	background: #49fec3;
 	background: linear-gradient(135deg, #49fec3, #037bed);
+} */
+
+.uwidget__btn {
+	background: rgba(255, 255, 255, 0.081);
+}
+
+.black-gradient {
+	color: #fff;
+	background: linear-gradient(
+		112.1deg,
+		rgb(32, 38, 57) 11.4%,
+		rgb(63, 76, 119) 70.2%
+	);
 }
 
 .tertiary {
@@ -50,6 +63,8 @@
 	background: linear-gradient(135deg, #ee698e, #dbe4d9);
 }
 
-.uwidget__btn {
-	background: rgba(255, 255, 255, 0.081);
-}
+/* .secondary {
+	color: #fff;
+	background: #49fec3;
+	background: linear-gradient(135deg, #49fec3, #037bed);
+} */
