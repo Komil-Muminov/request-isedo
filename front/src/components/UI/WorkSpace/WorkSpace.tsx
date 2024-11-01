@@ -11,6 +11,9 @@ import DepartmentAccounting from "./Department of Accounting/DepartmentAccountin
 import { GetMeType, useAuth } from "../../API/Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../queryClient";
+import PercentIndicator from "../Percent Indicator/PercentIndicator";
+import { getCertificates, TCertificates } from "../../API/GetCertificates";
+import { getVPN, TVPN } from "../../API/GetVPN";
 
 const WorkSpace = ({
   currentUser,
@@ -128,6 +131,61 @@ const WorkSpace = ({
     (e) => e.id === 4 && e.state === true
   );
 
+  const [certificates, setCertificates] = useState<TCertificates[]>([]);
+
+  const getCertificateQuery = useQuery({
+    queryFn: () => getCertificates(),
+    queryKey: ["certificates"],
+  });
+
+  useEffect(() => {
+    if (getCertificateQuery.status === "success") {
+      setCertificates(getCertificateQuery.data);
+    }
+  }, [getCertificateQuery]);
+
+  const getCertificateUser = certificates.find(
+    (cert) => cert.userId !== rqstsDataById?.userId
+  );
+
+  const currentDepartmentCustomer = currentDepartmentStageOne.find(
+    (e) => e.state === true
+  );
+
+  const getVpnQuery = useQuery(
+    {
+      queryFn: () => getVPN(),
+      queryKey: ["vpn"],
+    },
+    queryClient
+  );
+
+  const [vpn, setVpn] = useState<TVPN[]>([]);
+
+  useEffect(() => {
+    if (getVpnQuery.status === "success") {
+      setVpn(getVpnQuery.data);
+    }
+  }, [getVpnQuery]);
+
+  const currentVPN = vpn.find((v) => {
+    return currentOrganization?.userIds.includes(v.userId);
+  });
+
+  const getPercent = (item: any) => {
+    if (
+      (item?.name === "Шуъба оид ба кор бо муштариён" &&
+        getCertificateUser?.statusCode === 5) ||
+      (item?.name === "Шуъба оид ба амнияти иттилоотӣ" &&
+        currentUser?.status === false) ||
+      (item?.name === "Шуъба оид ба хизматрасонии техникӣ" &&
+        currentVPN?.status === false)
+    ) {
+      return "100";
+    }
+    return "0";
+  };
+
   return (
     <section className="wrapper-work-space">
       <TitleDocument title="Обработка заявки" />
@@ -139,7 +197,9 @@ const WorkSpace = ({
               return (
                 <li
                   key={e.id}
-                  className={`tab ${e?.state ? "active" : ""}`}
+                  className={`tab percent-indicator ${
+                    e?.state ? "active" : ""
+                  }`}
                   onClick={() =>
                     handleTabClick(
                       e,
@@ -148,7 +208,11 @@ const WorkSpace = ({
                     )
                   }
                 >
-                  {e.name}
+                  <p>{e.name}</p>
+                  {/* <>
+                    <PercentIndicator percent={getPercent(e)} />
+                  </> */}
+                  <p className="percent-title">33%</p>
                 </li>
               );
             })}
@@ -160,8 +224,9 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageOne={
-              <div className="stage-title">
+              <div className="stage-title stage-indicator">
                 <p>Этап 1</p>
+                <p className="percent-title">100%</p>
               </div>
             }
             // stageThree={
@@ -178,10 +243,12 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageOne={
-              <div className="stage-title">
+              <div className="stage-title stage-indicator second-step">
                 <p>Этап 1</p>
+                <p className="percent-title">100%</p>
               </div>
             }
+
             // stageTwo={
             //   <div className="stage-title second-stage">
             //     <p>Этап 2</p>
@@ -196,8 +263,9 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageOne={
-              <div className="stage-title">
+              <div className="stage-title stage-indicator third-step">
                 <p>Этап 1</p>
+                <p className="percent-title">100%</p>
               </div>
             }
             // stageTwo={
@@ -209,28 +277,31 @@ const WorkSpace = ({
         )}
 
         {/* STAGE TWO */}
-        <div className="navigation-tabs-stage-two">
-          <ul className="wrapper-tabs">
-            {currentDepartmentStageTwo.map((e) => {
-              return (
-                <li
-                  key={e.id}
-                  className={`tab ${e?.state ? "active" : ""}`}
-                  onClick={() =>
-                    handleTabClick(
-                      e,
-                      currentDepartmentStageTwo,
-                      setCurrentDepartmentStageTwo
-                    )
-                  }
-                >
-                  {e.name}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        {showDepartmentCustomerStageTwo && (
+        {rqstsDataById?.stepTask > 2 && (
+          <div className="navigation-tabs-stage-two">
+            <ul className="wrapper-tabs">
+              {currentDepartmentStageTwo.map((e) => {
+                return (
+                  <li
+                    key={e.id}
+                    className={`tab ${e?.state ? "active" : ""}`}
+                    onClick={() =>
+                      handleTabClick(
+                        e,
+                        currentDepartmentStageTwo,
+                        setCurrentDepartmentStageTwo
+                      )
+                    }
+                  >
+                    {e.name}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+
+        {showDepartmentCustomerStageTwo && rqstsDataById?.stepTask > 2 && (
           <DepartmentCustomer
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
@@ -242,7 +313,7 @@ const WorkSpace = ({
             }
           />
         )}
-        {showInformationSecurityStageTwo && rqstsDataById?.stepTask >= 4 && (
+        {showInformationSecurityStageTwo && rqstsDataById?.stepTask > 2 && (
           <InformationSecurity
             currentUser={currentUser}
             rqstsDataById={rqstsDataById}
@@ -256,7 +327,7 @@ const WorkSpace = ({
           />
         )}
 
-        {showTechnicalServicesStageTwo && rqstsDataById?.stepTask >= 4 && (
+        {showTechnicalServicesStageTwo && rqstsDataById?.stepTask > 2 && (
           <TechnicalServices
             currentUser={currentUser}
             rqstsDataById={rqstsDataById}
@@ -271,29 +342,31 @@ const WorkSpace = ({
         )}
 
         {/* STAGE THREE */}
-        <div className="navigation-tabs-stage-three">
-          <ul className="wrapper-tabs">
-            {currentDepartmentStageThree.map((e) => {
-              return (
-                <li
-                  key={e.id}
-                  className={`tab ${e?.state ? "active" : ""}`}
-                  onClick={() =>
-                    handleTabClick(
-                      e,
-                      currentDepartmentStageThree,
-                      setCurrentDepartmentStageThree
-                    )
-                  }
-                >
-                  {e.name}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        {rqstsDataById?.stepTask > 5 && (
+          <div className="navigation-tabs-stage-three">
+            <ul className="wrapper-tabs">
+              {currentDepartmentStageThree.map((e) => {
+                return (
+                  <li
+                    key={e.id}
+                    className={`tab ${e?.state ? "active" : ""}`}
+                    onClick={() =>
+                      handleTabClick(
+                        e,
+                        currentDepartmentStageThree,
+                        setCurrentDepartmentStageThree
+                      )
+                    }
+                  >
+                    {e.name}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
 
-        {showDepartmentCustomerStageThree && (
+        {showDepartmentCustomerStageThree && rqstsDataById?.stepTask > 5 && (
           <DepartmentCustomer
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}

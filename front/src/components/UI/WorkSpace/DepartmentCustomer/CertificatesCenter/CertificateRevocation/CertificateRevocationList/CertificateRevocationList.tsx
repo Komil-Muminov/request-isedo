@@ -112,8 +112,6 @@ const CertificateRevocationList = ({
     }
   };
 
-  console.log(getCertificateUser);
-
   return (
     <>
       <div className="certificate-content">

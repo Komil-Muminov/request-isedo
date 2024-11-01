@@ -22,7 +22,7 @@
 }
 
 .tab {
-  padding: 10px;
+  padding: 15px;
   border-bottom: 3px solid transparent;
   cursor: pointer;
   transition: all 0.1s;
@@ -30,6 +30,37 @@
   transition: all 0.2s;
   width: 100%;
   text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 40px;
+}
+
+.percent-indicator {
+  position: relative;
+}
+
+.percent-indicator::after {
+  content: "";
+  position: absolute;
+  background: linear-gradient(135deg, #607d8b, #41ff6f);
+  width: 60%;
+  height: 8%;
+  bottom: -7%;
+  left: 0;
+}
+
+.percent-indicator .percent-title {
+  color: #33c157;
+  position: absolute;
+  top: 5%;
+  right: 3%;
+  z-index: 1;
+  font-size: 14px;
+}
+
+.tab.active .percent-title {
+  color: #fff;
 }
 
 .tab:hover {
@@ -46,19 +77,52 @@
   background-color: #607d8b; /* Оставляем фон как у активного элемента */
   color: #fff; /* Оставляем цвет текста */
 }
+
 .stage-title {
   background: linear-gradient(135deg, #e5624b, #607d8b);
   color: #fff;
   display: flex;
-  align-items: center;
-  padding: 5px;
-  max-width: 50px;
+  align-items: end;
+  padding-left: 3px;
+  width: 8%;
   justify-content: center;
   text-align: center;
   writing-mode: vertical-rl; /* Текст вертикально, справа налево */
   transform: rotate(180deg); /* Повернуть текст, чтобы читать сверху вниз */
 }
 
+.stage-indicator {
+  position: relative;
+}
+
+.stage-indicator::after {
+  content: "";
+  position: absolute;
+  background: linear-gradient(135deg, #41ff6f, #607d8b);
+  width: 30%;
+  height: 100%;
+  bottom: 0;
+  right: 0;
+  padding: 15px;
+}
+
+.stage-indicator .percent-title {
+  color: #fff;
+  position: absolute;
+  top: 46%;
+  right: 10%;
+  z-index: 1;
+  font-size: 15px;
+}
+
 .column-stage {
   display: flex;
+}
+
+.second-step {
+  width: 4%;
+}
+
+.third-step {
+  width: 4%;
 }

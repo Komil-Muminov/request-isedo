@@ -201,8 +201,6 @@ const ShowRequest = () => {
       return currentOrganization?.userIds.includes(e.id);
   });
 
-  console.log(newLoginTfmis);
-
   return (
     <main className="show-content">
       <div className="container">
