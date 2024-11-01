@@ -197,7 +197,9 @@ const WorkSpace = ({
               return (
                 <li
                   key={e.id}
-                  className={`tab ${e?.state ? "active" : ""}`}
+                  className={`tab percent-indicator ${
+                    e?.state ? "active" : ""
+                  }`}
                   onClick={() =>
                     handleTabClick(
                       e,
@@ -207,7 +209,10 @@ const WorkSpace = ({
                   }
                 >
                   <p>{e.name}</p>
-                  <PercentIndicator percent={getPercent(e)} />
+                  {/* <>
+                    <PercentIndicator percent={getPercent(e)} />
+                  </> */}
+                  <p className="percent-title">33%</p>
                 </li>
               );
             })}
@@ -219,8 +224,9 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageOne={
-              <div className="stage-title">
+              <div className="stage-title stage-indicator">
                 <p>Этап 1</p>
+                <p className="percent-title">100%</p>
               </div>
             }
             // stageThree={
@@ -237,10 +243,12 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageOne={
-              <div className="stage-title">
+              <div className="stage-title stage-indicator second-step">
                 <p>Этап 1</p>
+                <p className="percent-title">100%</p>
               </div>
             }
+
             // stageTwo={
             //   <div className="stage-title second-stage">
             //     <p>Этап 2</p>
@@ -255,8 +263,9 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageOne={
-              <div className="stage-title">
+              <div className="stage-title stage-indicator third-step">
                 <p>Этап 1</p>
+                <p className="percent-title">100%</p>
               </div>
             }
             // stageTwo={
