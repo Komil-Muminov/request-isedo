@@ -22,7 +22,7 @@
 }
 
 .tab {
-  padding: 15px;
+  padding: 20px;
   border-bottom: 3px solid transparent;
   cursor: pointer;
   transition: all 0.1s;
@@ -58,7 +58,7 @@
   right: 3%;
   z-index: 1;
   font-size: 14px;
-  padding-top: 3px;
+  margin-top: 6px;
 }
 
 .tab.active .percent-title {
