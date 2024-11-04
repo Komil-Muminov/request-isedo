@@ -43,7 +43,7 @@
 .percent-indicator::after {
   content: "";
   position: absolute;
-  background: linear-gradient(135deg, #607d8b, #41ff6f);
+  background: linear-gradient(135deg, #607d8b 0%, #41ff6f 50%, #607d8b 100%);
   /* background-color: #41ff6f; */
   width: var(--percent-width); /* Используем CSS-переменную */
   height: 8%;
@@ -102,7 +102,7 @@
   background: linear-gradient(135deg, #33c157, #607d8b);
   /* background: linear-gradient(135deg, #ff4141, #607d8b); */
   width: 100%;
-  height: 100%;
+  height: var(--percent-stage-height); /* Используем CSS-переменную */
   bottom: 0;
   right: 0;
   display: flex;

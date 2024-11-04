@@ -264,7 +264,14 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageOne={
-              <div className="stage-title stage-indicator">
+              <div
+                className="stage-title stage-indicator"
+                style={
+                  {
+                    "--percent-stage-height": `${calculateTotalPercent()}%`,
+                  } as React.CSSProperties
+                }
+              >
                 <p>
                   Этап 1 - выполнено: <span>{calculateTotalPercent()}%</span>
                 </p>
@@ -284,7 +291,14 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageOne={
-              <div className="stage-title stage-indicator">
+              <div
+                className="stage-title stage-indicator"
+                style={
+                  {
+                    "--percent-stage-height": `${calculateTotalPercent()}%`,
+                  } as React.CSSProperties
+                }
+              >
                 <p>
                   Этап 1 - выполнено: <span>{calculateTotalPercent()}%</span>
                 </p>
@@ -304,7 +318,14 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageOne={
-              <div className="stage-title stage-indicator">
+              <div
+                className="stage-title stage-indicator"
+                style={
+                  {
+                    "--percent-stage-height": `${calculateTotalPercent()}%`,
+                  } as React.CSSProperties
+                }
+              >
                 <p>Этап 1 - выполнено: {calculateTotalPercent()}%</p>
               </div>
             }
