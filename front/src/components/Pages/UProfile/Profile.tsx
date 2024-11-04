@@ -38,9 +38,37 @@ const Profile: React.FC = () => {
 
 	const [expanded, setExpanded] = useState<number | false>(undefined);
 	const [selectedItem, setSelectedItem] = useState<UlinkScheme | null>(null);
-	const [uEvents, setUEvents] = useState<UventsDataScheme[]>([]); // LocalStorageEvents
-	const [showEvents, setShowEvents] = useState<boolean>(false); // ShowEventsBTN
-	const navigate = useNavigate();
+	const [uEvents, setUEvents] = useState<UventsDataScheme[]>([]);
+	const [showEvents, setShowEvents] = useState<boolean>(false);
+
+	const [progressBar, setProgressBar] = useState<{
+		completedEvents: number;
+		totalEvents: number;
+	}>({
+		completedEvents: 0,
+		totalEvents: 0,
+	});
+
+	useEffect(() => {
+		const getLocalProgressBar = JSON.parse(
+			localStorage.getItem("progressBar") ?? "{}",
+		);
+		setProgressBar((prev) => ({
+			...prev,
+			...getLocalProgressBar,
+		}));
+	}, []);
+
+	useEffect(() => {
+		const completedEvents = uEvents.filter((item) => item.isDone).length;
+		const totalEvents = uEvents.length;
+		const newProgress = {
+			completedEvents,
+			totalEvents,
+		};
+		setProgressBar(newProgress);
+		localStorage.setItem("progressBar", JSON.stringify(newProgress));
+	}, [uEvents]);
 
 	useEffect(() => {
 		const localStorageEvents = JSON.parse(
@@ -61,6 +89,7 @@ const Profile: React.FC = () => {
 		setExpanded(expanded === id ? false : id);
 	};
 
+	const navigate = useNavigate();
 	const handleSelectItem = (item: UlinkScheme) => {
 		setSelectedItem(item);
 		navigate(`/uprofile/details/${item.url?.split("/").pop()}`);
@@ -86,30 +115,6 @@ const Profile: React.FC = () => {
 		console.log(uQuery.error);
 		return null;
 	}
-
-	// Progress-bar
-	const [progressBar, setProgressBar] = useState<{ [key: string]: number }>({});
-
-	useEffect(() => {
-		const getLocalProgressBar = JSON.parse(
-			localStorage.getItem("progressBar") ?? "[]",
-		);
-		setProgressBar((prev) => ({
-			...prev,
-			...getLocalProgressBar,
-		}));
-	}, [uEvents]);
-
-	useEffect(() => {
-		const completedEvents = uEvents.filter((item) => item.isDone).length;
-		const totalEvents = uEvents.length;
-		const newProgress = {
-			completedEvents,
-			totalEvents,
-		};
-		setProgressBar(newProgress);
-		localStorage.setItem("progressBar", JSON.stringify(progressBar));
-	}, [uEvents]);
 
 	return (
 		<section className="sections">
@@ -157,12 +162,10 @@ const Profile: React.FC = () => {
 							<div className="profile_ucalendar">
 								<Ucalendar />
 							</div>
-							{/* Events */}
 							<h3 className="profile__events-title">Ваши задачи</h3>
 							<div className="profile_events">
-								{/* Сделать прогрессБар */}
 								<span className="profile__events-progress-bar">
-									{uEvents?.length > 0 ? `Progress` : `У вас нет задач`}
+									{uEvents?.length > 0 ? `Прогресс-бар` : `У вас нет задач`}
 								</span>
 								<ProgressBar
 									completed={progressBar.completedEvents}

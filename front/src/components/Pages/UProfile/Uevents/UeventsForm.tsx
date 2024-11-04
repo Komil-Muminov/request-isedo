@@ -16,14 +16,16 @@ export const UeventsForm: React.FC = ({ onAddEvent }) => {
 		if (formValues.title && formValues.desc !== "") {
 			const newEvent = { ...formValues, isDone: false };
 			onAddEvent((prev) => [...prev, newEvent]);
-			localStorage.setItem(
-				"events",
-				JSON.stringify([
-					...JSON.parse(localStorage.getItem("events") || "[]"),
-					newEvent,
-				]),
-			);
-			setFormValues({ title: "", desc: "" }); // Сброс значений формы
+			if (onAddEvent) {
+				localStorage.setItem(
+					"events",
+					JSON.stringify([
+						...JSON.parse(localStorage.getItem("events") || "[]"),
+						newEvent,
+					]),
+				);
+			}
+			setFormValues({ title: "", desc: "" });
 		}
 	};
 
