@@ -20,7 +20,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
 }) => {
   console.log(`completed: ${completed}, total: ${total}`);
 
-  const completedChange = completed === "0" ? 0 : 1;
+  const completedChange = completed === "50" ? 0 : 1;
 
   const percentage = total ? (completedChange / total) * 100 : 0;
 
