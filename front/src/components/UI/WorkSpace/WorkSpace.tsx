@@ -15,6 +15,8 @@ import PercentIndicator from "../Percent Indicator/PercentIndicator";
 import { getCertificates, TCertificates } from "../../API/GetCertificates";
 import { getVPN, TVPN } from "../../API/GetVPN";
 
+import ProgressBar from "../Progress-bar/Progress-bar";
+
 const WorkSpace = ({
   currentUser,
   rqstsDataById,
@@ -212,7 +214,9 @@ const WorkSpace = ({
                   {/* <>
                     <PercentIndicator percent={getPercent(e)} />
                   </> */}
-                  <p className="percent-title">33%</p>
+                  <p className="percent-title">
+                    <ProgressBar completed={1} total={3} size={50} />
+                  </p>
                 </li>
               );
             })}
@@ -265,9 +269,7 @@ const WorkSpace = ({
             executor={uinfo}
             stageOne={
               <div className="stage-title stage-indicator">
-                <p>
-                  Этап 1 - выполнено: <span>100%</span>
-                </p>
+                <p>Этап 1 - выполнено:</p>
               </div>
             }
             // stageTwo={
