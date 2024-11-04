@@ -191,15 +191,12 @@ const WorkSpace = ({
   const departmentPercentStatus = [
     {
       name: "Шуъба оид ба кор бо муштариён",
-      status: false,
     },
     {
       name: "Шуъба оид ба амнияти иттилоотӣ",
-      status: false,
     },
     {
       name: "Шуъба оид ба хизматрасонии техникӣ",
-      status: false,
     },
   ];
 
@@ -211,10 +208,11 @@ const WorkSpace = ({
     return total === 99 ? 100 : total; // для корректного отображения 100%
   };
 
-  console.log(calculateTotalPercent());
-
   // Вызов ProgressBar с учётом логики getPercent:
-  const getPercentValue = (item: any) => (getPercent(item) === "33" ? 1 : 0);
+  // const getPercentValue = (item: any) => (getPercent(item) === "33" ? 1 : 0);
+
+  const getPercentValue = (item: any) =>
+    getPercent(item) === "0" ? "50" : "100";
 
   return (
     <section className="wrapper-work-space">
@@ -229,7 +227,7 @@ const WorkSpace = ({
                   key={e.id}
                   style={
                     {
-                      "--percent-width": `${calculateTotalPercent()}%`,
+                      "--percent-width": `${getPercentValue(e)}%`,
                     } as React.CSSProperties
                   } // Приведение типа
                   className={`tab percent-indicator ${

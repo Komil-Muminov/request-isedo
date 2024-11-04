@@ -44,6 +44,7 @@
   content: "";
   position: absolute;
   background: linear-gradient(135deg, #607d8b, #41ff6f);
+  /* background-color: #41ff6f; */
   width: var(--percent-width); /* Используем CSS-переменную */
   height: 8%;
   bottom: -7%;

@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography"; // Import Typography for bett
 import "../WorkSpace/WorkSpace.css";
 
 interface ProgressBarProps {
-  completed: number;
+  completed: string;
   total: number;
   size?: number;
   item: any;
@@ -20,7 +20,9 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
 }) => {
   console.log(`completed: ${completed}, total: ${total}`);
 
-  const percentage = total ? (completed / total) * 100 : 0;
+  const completedChange = completed === "0" ? 0 : 1;
+
+  const percentage = total ? (completedChange / total) * 100 : 0;
 
   console.log(percentage);
 
