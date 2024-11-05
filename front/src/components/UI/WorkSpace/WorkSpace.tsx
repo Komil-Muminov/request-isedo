@@ -183,10 +183,36 @@ const WorkSpace = ({
       (item?.name === "Шуъба оид ба хизматрасонии техникӣ" &&
         currentVPN?.status === false)
     ) {
-      return "100";
+      return "33";
     }
     return "0";
   };
+
+  const departmentPercentStatus = [
+    {
+      name: "Шуъба оид ба кор бо муштариён",
+    },
+    {
+      name: "Шуъба оид ба амнияти иттилоотӣ",
+    },
+    {
+      name: "Шуъба оид ба хизматрасонии техникӣ",
+    },
+  ];
+
+  const calculateTotalPercent = () => {
+    const total = departmentPercentStatus
+      .map((dept) => parseInt(getPercent(dept), 10)) // преобразуем строку в число
+      .reduce((acc, percent) => acc + percent, 0);
+
+    return total === 99 ? 100 : total; // для корректного отображения 100%
+  };
+
+  // Вызов ProgressBar с учётом логики getPercent:
+  // const getPercentValue = (item: any) => (getPercent(item) === "33" ? 1 : 0);
+
+  const getPercentValue = (item: any) =>
+    getPercent(item) === "0" ? "50" : "100";
 
   return (
     <section className="wrapper-work-space">
@@ -199,6 +225,11 @@ const WorkSpace = ({
               return (
                 <li
                   key={e.id}
+                  style={
+                    {
+                      "--percent-width": `${getPercentValue(e)}%`,
+                    } as React.CSSProperties
+                  } // Приведение типа
                   className={`tab percent-indicator ${
                     e?.state ? "active" : ""
                   }`}
@@ -215,7 +246,12 @@ const WorkSpace = ({
                     <PercentIndicator percent={getPercent(e)} />
                   </> */}
                   <p className="percent-title">
-                    <ProgressBar completed={1} total={3} size={50} />
+                    <ProgressBar
+                      completed={getPercentValue(e)}
+                      total={currentDepartmentStageOne.length}
+                      size={45}
+                      item={e}
+                    />
                   </p>
                 </li>
               );
@@ -228,9 +264,16 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageOne={
-              <div className="stage-title stage-indicator">
+              <div
+                className="stage-title stage-indicator"
+                style={
+                  {
+                    "--percent-stage-height": `${calculateTotalPercent()}%`,
+                  } as React.CSSProperties
+                }
+              >
                 <p>
-                  Этап 1 - выполнено: <span>100%</span>
+                  Этап 1 - выполнено: <span>{calculateTotalPercent()}%</span>
                 </p>
               </div>
             }
@@ -248,9 +291,16 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageOne={
-              <div className="stage-title stage-indicator">
+              <div
+                className="stage-title stage-indicator"
+                style={
+                  {
+                    "--percent-stage-height": `${calculateTotalPercent()}%`,
+                  } as React.CSSProperties
+                }
+              >
                 <p>
-                  Этап 1 - выполнено: <span>100%</span>
+                  Этап 1 - выполнено: <span>{calculateTotalPercent()}%</span>
                 </p>
               </div>
             }
@@ -268,8 +318,15 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageOne={
-              <div className="stage-title stage-indicator">
-                <p>Этап 1 - выполнено:</p>
+              <div
+                className="stage-title stage-indicator"
+                style={
+                  {
+                    "--percent-stage-height": `${calculateTotalPercent()}%`,
+                  } as React.CSSProperties
+                }
+              >
+                <p>Этап 1 - выполнено: {calculateTotalPercent()}%</p>
               </div>
             }
             // stageTwo={
