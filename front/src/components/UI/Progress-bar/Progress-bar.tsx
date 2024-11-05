@@ -1,62 +1,61 @@
 import React from "react";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography"; // Import Typography for better text handling
-
-import "../WorkSpace/WorkSpace.css";
+import { CircularProgress, Box, Typography } from "@mui/material";
 
 interface ProgressBarProps {
-  completed: string;
-  total: number;
-  size?: number;
-  item: any;
+	completed: string | number;
+	total: number;
+	size?: number;
+	item?: any;
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({
-  completed,
-  total,
-  size,
-  item,
+	completed,
+	total,
+	size = 60,
+	item,
 }) => {
-  console.log(`completed: ${completed}, total: ${total}`);
+	// Преобразуем completed в число, чтобы избежать ошибок
+	const completedValue = Number(completed);
 
-  const completedChange = completed === "50" ? 0 : 1;
+	// Безопасное вычисление процента
+	const percentage = total > 0 ? (completedValue / total) * 100 : 0;
 
-  const percentage = total ? (completedChange / total) * 100 : 0;
+	// Определяем цвет круга на основе процента
+	const circleColor = React.useMemo(() => {
+		if (percentage === 100) return "#4caf50"; // Зеленый при 100%
+		return percentage >= 50 ? "#ff9800" : "#f44336"; // Оранжевый при 50-99%, Красный при < 50%
+	}, [percentage]);
 
-  console.log(percentage);
-
-  return (
-    <Box
-      position="relative"
-      display="inline-flex"
-      alignItems="center"
-      justifyContent="center"
-    >
-      <CircularProgress
-        sx={{ color: "#4caf50" }}
-        variant="determinate"
-        value={percentage === 0 ? 33 : 100}
-        size={size ? size : 60}
-      />
-      <Box
-        sx={{
-          position: "absolute",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Typography
-          variant="caption"
-          color={item?.state ? "active" : "#000"}
-          fontSize={"15px"}
-        >
-          {`${Math.round(percentage)}%`}
-        </Typography>
-      </Box>
-    </Box>
-  );
+	// Лог для отладки
+	console.log(`Completed: ${completedValue}, Total: ${total}`);
+	console.log(`Percentage: ${percentage}`);
+	return (
+		<Box
+			position="relative"
+			display="inline-flex"
+			alignItems="center"
+			justifyContent="center"
+		>
+			<CircularProgress
+				sx={{ color: circleColor }} // Цвет круга меняется в зависимости от процента
+				variant="determinate"
+				value={percentage}
+				size={size}
+			/>
+			<Box
+				sx={{
+					position: "absolute",
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+				}}
+			>
+				<Typography variant="caption" color="#fff" fontSize="15px">
+					{`${Math.round(percentage)}%`}
+				</Typography>
+			</Box>
+		</Box>
+	);
 };
 
 export default ProgressBar;
