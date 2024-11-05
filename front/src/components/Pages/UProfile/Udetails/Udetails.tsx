@@ -196,16 +196,14 @@ const Udetails: React.FC = () => {
 										desc={`KM`}
 									/>
 									<Uwidget
-										type={`special`}
-										kind="tertiary uwidget__item--special"
+										kind="tertiary uwidget__item-special-1 uwidget__item--special"
 										title={`График чего-то`}
 										desc={`KM`}
 										children={<DashboardMinify />}
 										onClick={() => handleChart("saleschart")}
 									/>
 									<Uwidget
-										type={`special`}
-										kind="tertiary uwidget__item--special"
+										kind="tertiary uwidget__item-special-2 uwidget__item--special"
 										title={`График чего-то`}
 										desc={`KM`}
 										children={<DashboardMinify />}
