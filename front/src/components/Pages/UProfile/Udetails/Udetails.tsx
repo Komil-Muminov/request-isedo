@@ -11,10 +11,10 @@ import { Uwidget } from "../Uwidget/Uwidget";
 import Barchart from "../Uchart/Barchart/Barchart";
 import DashboardChart from "../Uchart/Dashboard/Dashboardchart";
 import Saleschart from "../Uchart/Saleschart/Saleschart";
-import { Settings } from "@mui/icons-material";
-import "./Udetails.css";
 import DashboardMinify from "../Uchart/DashboardMinify/DashboardMinify";
+import { Settings } from "@mui/icons-material";
 
+import "./Udetails.css";
 const Udetails: React.FC = () => {
 	const [uPhoto, setphoto] = useState<CurrUserPhoto | null>(null);
 	const handleUphoto = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -196,6 +196,7 @@ const Udetails: React.FC = () => {
 										desc={`KM`}
 									/>
 									<Uwidget
+										type={`special`}
 										kind="tertiary uwidget__item--special"
 										title={`График чего-то`}
 										desc={`KM`}
@@ -203,6 +204,7 @@ const Udetails: React.FC = () => {
 										onClick={() => handleChart("saleschart")}
 									/>
 									<Uwidget
+										type={`special`}
 										kind="tertiary uwidget__item--special"
 										title={`График чего-то`}
 										desc={`KM`}

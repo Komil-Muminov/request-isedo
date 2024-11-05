@@ -121,7 +121,7 @@ const Profile: React.FC = () => {
 			<WebToolBox />
 			<div className="profile__container">
 				<div className="profile_content">
-					<aside className="profile_left">
+					<div className={`${"profile_left"}`}>
 						<Button onClick={() => setSelectedItem(null)}>Назад</Button>
 						{UlinksProps.map(({ url, label, subLinks }, id) => (
 							<Accordion
@@ -151,7 +151,7 @@ const Profile: React.FC = () => {
 								</AccordionDetails>
 							</Accordion>
 						))}
-					</aside>
+					</div>
 					<div className="wrapper-profile">
 						<div className="profile_style profile_center">
 							<div className="profile__center_content">
