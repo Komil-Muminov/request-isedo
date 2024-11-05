@@ -394,18 +394,6 @@ const ShowRequest = () => {
             />
           </div>
         </section>
-        {rqstsDataById?.stepCode === 3 && uinfo?.uType === "bo" && (
-          <section className="access-system">
-            <TitleDocument title="Документы услуг" />
-            <div className="wrapper-cards">
-              <div className="file-list">
-                <PDFViewerService title="Логин TFMIS" />
-                <PDFViewerService title="Логин VPN" />
-                <PDFViewerService title="Счет-фактура" />
-              </div>
-            </div>
-          </section>
-        )}
 
         {/* Рабочее пространство */}
         {uinfo?.uType !== "bo" && (
@@ -414,6 +402,28 @@ const ShowRequest = () => {
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
           />
+        )}
+        {rqstsDataById?.stepCode === 3 && (
+          <section className="access-system">
+            <TitleDocument title="Документы услуг" />
+            <div className="wrapper-cards">
+              <div className="file-list">
+                <PDFViewerService title="Счет-фактура" />
+                <PDFViewerService title="Замима" hideFirstItem={true} />
+
+                {/* {rqstsDataById?.stepCode === 3 && uinfo?.uType === "bo" && (
+                <>
+                  <PDFViewerService title="Логин TFMIS" />
+                  <PDFViewerService title="Логин VPN" />
+                </>
+              )} */}
+                <h1 style={{ fontSize: "16px" }}>
+                  Логин и пароль для входа в системы отправлены на электронную
+                  почту нового главного бухгалтера.
+                </h1>
+              </div>
+            </div>
+          </section>
         )}
       </div>
     </main>
