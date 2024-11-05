@@ -68,3 +68,13 @@
 	background: #49fec3;
 	background: linear-gradient(135deg, #49fec3, #037bed);
 } */
+
+/* DarkMode */
+
+.dark-mode {
+	background: linear-gradient(
+		112.1deg,
+		rgb(32, 38, 57) 11.4%,
+		rgb(63, 76, 119) 70.2%
+	);
+}
