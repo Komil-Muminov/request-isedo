@@ -3,6 +3,10 @@
 	padding: 0 30px;
 	margin: 0 auto;
 }
+.profile.dark-mode .profile__prev-btn {
+	color: #fff;
+}
+
 /* .profile_header {
 	display: flex;
 	align-items: center;
@@ -15,6 +19,94 @@
 	justify-content: center;
 	gap: 20px;
 }
+.dark-mode-btn {
+	align-self: flex-end;
+}
+
+.profile.dark-mode .udetails__setting-icon {
+	fill: #fffffff0;
+}
+
+/* Accordion darkmode */
+
+.profile.dark-mode .profile_left {
+	background: linear-gradient(
+		112.1deg,
+		rgb(32, 38, 57) 11.4%,
+		rgb(63, 76, 119) 70.2%
+	);
+	border-radius: 10px;
+	color: #e0e0e0;
+	box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.profile.dark-mode .uaccordion_label {
+	display: flex;
+	align-items: center;
+	color: #e0e0e0;
+	font-weight: 500;
+}
+
+.profile.dark-mode .uaccordion_label p {
+	color: #eceef2;
+}
+
+.profile.dark-mode .MuiAccordion-root {
+	background: rgba(255, 255, 255, 0.019);
+	border-radius: 10px;
+}
+
+.profile.dark-mode .MuiAccordionSummary-root {
+	background-color: rgba(255, 255, 255, 0.07);
+	color: #d0d7eb;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	transition: background-color 0.3s ease;
+	cursor: pointer;
+}
+
+.profile.dark-mode .MuiAccordionSummary-root:hover {
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+.profile.dark-mode .MuiAccordionSummary-expandIcon {
+	color: #a0a8d0;
+	transition: color 0.3s ease;
+}
+
+.profile.dark-mode .MuiAccordionSummary-expandIcon:hover {
+	color: #d0d7eb;
+}
+
+.profile.dark-mode .MuiAccordionDetails-root {
+	background-color: rgba(255, 255, 255, 0.03);
+	padding: 12px 20px;
+}
+
+.profile.dark-mode .ulins_sublinks {
+	gap: 6px;
+}
+
+.profile.dark-mode .ulins_sublinks a {
+	color: #fff;
+	transition: color 0.2s ease-in-out;
+}
+
+.profile.dark-mode .ulins_sublinks a:hover {
+	color: #d0d6f1;
+	color: #a0b2e5;
+}
+
+.profile.dark-mode .Ulink {
+	color: #a0b2e5;
+	text-decoration: none;
+	font-size: 0.9rem;
+	transition: color 0.3s ease;
+}
+/* иконка аккордиона (раскрывание и закрывание) */
+.profile.dark-mode .css-i4bv87-MuiSvgIcon-root {
+	fill: #fff;
+}
+/* Accordion darkmode */
 
 .wrapper-profile {
 	align-items: stretch;
@@ -107,6 +199,13 @@
 	color: #fff;
 }
 
+/* Accordion */
+
+.profile.dark-mode .css-1f773le-MuiButtonBase-root-MuiAccordionSummary-root {
+	/* background: transparent !important; */
+	border: none !important;
+	border-radius: 10px;
+}
 .uaccordion_label {
 	display: flex;
 	align-items: center;
@@ -179,6 +278,14 @@
 	flex-wrap: wrap;
 }
 
+/* DarkMode */
+.profile.dark-mode .profile__events-title {
+	color: #fff;
+}
+
+.profile.dark-mode .profile_events {
+	background: #133051;
+}
 .profile__events-list {
 	display: flex;
 	flex-wrap: wrap;
@@ -195,6 +302,7 @@
 	text-align: center;
 }
 
+/* DarkMode */
 .profile__events-progress-bar {
 	text-align: center;
 }
@@ -230,7 +338,3 @@
 .profile__events-delete svg:hover {
 	fill: #ffffff;
 }
-
-/* DARK-MODE */
-
-/* DARK-MODE */

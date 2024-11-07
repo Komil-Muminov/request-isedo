@@ -4,7 +4,7 @@ import Registration from "../Registration.tsx/Registarion";
 import Authorization from "../Authorization/Authorization";
 import { ButtonKM } from "../../../UI/Button/ButtonKM";
 const Auth: React.FC = () => {
-	const [authType, setAuthType] = React.useState<string>("registration");
+	const [authType, setAuthType] = React.useState<string>("auth");
 
 	const handleClick = (state: string) => {
 		setAuthType(state);

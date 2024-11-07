@@ -22,6 +22,7 @@ import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ProgressBar from "../../UI/Progress-bar/Progress-bar";
+import { useDarkMode } from "../../API/Hooks/UseDarkMode";
 
 import "./Profile.css";
 import "./Udetails/Udetails.css";
@@ -84,12 +85,12 @@ const Profile: React.FC = () => {
 			return updatedUevents;
 		});
 	};
+	const navigate = useNavigate();
 
 	const handleAccordion = (id: number) => {
-		setExpanded(expanded === id ? false : id);
+		setExpanded((prevExpanded) => (prevExpanded === id ? false : id));
 	};
 
-	const navigate = useNavigate();
 	const handleSelectItem = (item: UlinkScheme) => {
 		setSelectedItem(item);
 		navigate(`/uprofile/details/${item.url?.split("/").pop()}`);
@@ -116,13 +117,19 @@ const Profile: React.FC = () => {
 		return null;
 	}
 
+	const { isDarkMode, darkModeToggle } = useDarkMode();
+
 	return (
-		<section className="sections">
-			<WebToolBox />
+		<section className="sections profile">
 			<div className="profile__container">
 				<div className="profile_content">
 					<div className={`${"profile_left"}`}>
-						<Button onClick={() => setSelectedItem(null)}>Назад</Button>
+						<Button
+							className="profile__prev-btn"
+							onClick={() => setSelectedItem(null)}
+						>
+							Назад
+						</Button>
 						{UlinksProps.map(({ url, label, subLinks }, id) => (
 							<Accordion
 								key={id}
@@ -137,7 +144,7 @@ const Profile: React.FC = () => {
 								>
 									<div className="uaccordion_label">
 										<Settings />
-										<p>{label}</p>
+										<p className="uaccordion_label-text">{label}</p>
 									</div>
 								</AccordionSummary>
 								<AccordionDetails className="ulins_sublinks">
@@ -152,6 +159,7 @@ const Profile: React.FC = () => {
 							</Accordion>
 						))}
 					</div>
+
 					<div className="wrapper-profile">
 						<div className="profile_style profile_center">
 							<div className="profile__center_content">

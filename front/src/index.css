@@ -196,3 +196,14 @@ a:hover {
 	box-shadow: 10px 10px 10px 10px rgba(218, 218, 218, 0.293);
 	border-radius: 20px;
 }
+
+/* DarkMode */
+
+.dark-mode {
+	background: linear-gradient(
+		112.1deg,
+		rgb(32, 38, 57) 11.4%,
+		rgb(63, 76, 119) 70.2%
+	) !important;
+	/* Import нужен для даркмод */
+}

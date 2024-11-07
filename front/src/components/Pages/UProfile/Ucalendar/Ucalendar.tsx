@@ -208,7 +208,7 @@ export const Ucalendar = () => {
 				<Button
 					variant="outlined"
 					disabled={events.length === 0}
-					className="ucalendar__btn delete-all-events-button "
+					className="ucalendar__btn delete-all-events-button"
 					onClick={handleDeleteAllEvents}
 				>
 					Удалить все события
@@ -308,7 +308,7 @@ export const Ucalendar = () => {
 
 					{showForm && (
 						<div className="calendar__event_form">
-							<h3>Добавить задачу:</h3>
+							<h3 className="calendar__events-form-title">Добавить задачу:</h3>
 							<div className="calendar__event_content">
 								<input
 									className="event__inp"

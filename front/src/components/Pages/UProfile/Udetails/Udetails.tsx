@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { GetMeType, useAuth } from "../../../API/Hooks/useAuth";
 import defUphoto from "../../../../assets/ErrorPage.jpg";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -13,8 +14,10 @@ import DashboardChart from "../Uchart/Dashboard/Dashboardchart";
 import Saleschart from "../Uchart/Saleschart/Saleschart";
 import DashboardMinify from "../Uchart/DashboardMinify/DashboardMinify";
 import { Settings } from "@mui/icons-material";
+import { useDarkMode } from "../../../API/Hooks/UseDarkMode";
 
 import "./Udetails.css";
+import "../../../../index.css";
 const Udetails: React.FC = () => {
 	const [uPhoto, setphoto] = useState<CurrUserPhoto | null>(null);
 	const handleUphoto = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,6 +68,23 @@ const Udetails: React.FC = () => {
 
 	const [chart, setSchart] = useState<string>("");
 
+	if (document.querySelector(".profile.dark-mode")) {
+		document
+			.querySelector(".uwidget__item--special")
+			?.classList.add("dark-mode");
+
+		document
+			.querySelector(".uwidget__item-special-2")
+			?.classList.add("dark-mode");
+	} else {
+		document
+			.querySelector(".uwidget__item--special")
+			?.classList.remove("dark-mode");
+		document
+			.querySelector(".uwidget__item-special-2")
+			?.classList.remove("dark-mode");
+	}
+
 	const handleChart = (state: string) => {
 		if (chart === state) {
 			setSchart("");
@@ -72,6 +92,8 @@ const Udetails: React.FC = () => {
 			setSchart(state);
 		}
 	};
+
+	const { darkModeToggle } = useDarkMode();
 
 	return (
 		<>
@@ -87,7 +109,20 @@ const Udetails: React.FC = () => {
 								}`}
 							>
 								<div className="udetails__setting">
-									<Settings sx={{ fill: "#464531" }} />
+									<button
+										className={`dark-mode-btn ${
+											document.querySelector(".profile.dark-mode")
+												? "active"
+												: ""
+										}`}
+										onClick={darkModeToggle}
+									>
+										{/* Можно добавить иконку с помощью псевдоэлемента */}
+									</button>
+									<Settings
+										className="udetails__setting-icon"
+										sx={{ fill: "#464531" }}
+									/>
 								</div>
 								<div className="user-details_photo">
 									<div className="user_photo">

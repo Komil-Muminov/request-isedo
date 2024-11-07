@@ -10,11 +10,36 @@
 	min-height: 320px;
 	background: red;
 }
-.udetails__setting:hover path {
+.udetails__setting-icon:hover path {
 	transition: all 0.2s ease-in-out;
 	fill: rgba(109, 109, 109, 0.478);
 }
 
+.udetails__setting-darkmode-icon:hover {
+	fill: red;
+}
+
+.profile.dark-mode .udetails__setting-darkmode-icon {
+	fill: #333;
+}
+
+.dark-mode-btn {
+	position: relative;
+	padding: 10px;
+	font-size: 24px;
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+.dark-mode-btn::before {
+	content: "☀️";
+	font-size: 24px;
+}
+
+.dark-mode-btn.active::before {
+	content: "🌒";
+}
 .user-details {
 	height: 100%;
 	display: flex;
@@ -46,6 +71,16 @@
 	/* padding: 20px 10px; */
 	margin-bottom: 15px;
 }
+
+/* darkMode */
+.profile.dark-mode .udetails__card {
+	background: linear-gradient(
+		112.1deg,
+		rgb(32, 38, 57) 11.4%,
+		rgb(63, 76, 119) 70.2%
+	);
+}
+/* darkMode */
 
 .unidentified--bg {
 	background: linear-gradient(135deg, #386c99d4, #7b4eb35b);
@@ -99,10 +134,15 @@
 	bottom: 0;
 	right: 0;
 }
+.user_photo {
+	transition: background-color 0.3s ease-in-out;
+}
 
 .user_photo:hover:not(:focus-visible) {
-	transition: background-color 0.2s ease-in-out;
-	background-color: rgba(23, 23, 23, 0.039);
+	background-color: rgba(233, 86, 86, 0.633);
+}
+.profile.dark-mode .user_photo:hover:not(:focus-visible) {
+	background-color: rgba(250, 161, 161, 0.107);
 }
 
 .uphoto__setting {
@@ -163,6 +203,23 @@
 	font-size: 18px;
 }
 
+/* DarkMode */
+
+.profile.dark-mode .udetails__info-list {
+	background: linear-gradient(360deg, #84fab0 0%, #8fd3f4 100%);
+	/* background: rgba(255, 255, 255, 0.2); */
+	border: none;
+}
+.profile.dark-mode .list-title {
+	color: #fff;
+	font-weight: 700;
+}
+
+.profile.dark-mode .list-description {
+	color: #ffffffe7;
+}
+/* DarkMode */
+
 .user__details_right {
 	align-self: stretch;
 	/* border-radius: 16px; */
@@ -198,6 +255,7 @@
 	grid-row: auto;
 	gap: 10px;
 }
+
 .uwidget__item {
 	min-height: max-content;
 }
@@ -243,3 +301,5 @@
 	border-radius: 20px;
 	min-height: 200px;
 }
+
+/* DarkMode */
