@@ -37,7 +37,7 @@ const Profile: React.FC = () => {
 		queryClient,
 	);
 
-	const [expanded, setExpanded] = useState<number | false>(undefined);
+	const [expanded, setExpanded] = useState<number | false | null>(null);
 	const [selectedItem, setSelectedItem] = useState<UlinkScheme | null>(null);
 	const [uEvents, setUEvents] = useState<UventsDataScheme[]>([]);
 	const [showEvents, setShowEvents] = useState<boolean>(false);
@@ -88,7 +88,7 @@ const Profile: React.FC = () => {
 	const navigate = useNavigate();
 
 	const handleAccordion = (id: number) => {
-		setExpanded((prevExpanded) => (prevExpanded === id ? false : id));
+		setExpanded((prevExpanded) => (prevExpanded === id ? null : id));
 	};
 
 	const handleSelectItem = (item: UlinkScheme) => {
@@ -133,7 +133,7 @@ const Profile: React.FC = () => {
 						{UlinksProps.map(({ url, label, subLinks }, id) => (
 							<Accordion
 								key={id}
-								expanded={expanded === id}
+								expanded={expanded === id} // Сравниваем id аккордеона с состоянием expanded
 								onChange={() => handleAccordion(id)}
 							>
 								<AccordionSummary

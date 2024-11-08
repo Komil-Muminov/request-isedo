@@ -152,6 +152,15 @@
 	/* flex-direction: column; */
 }
 
+/* Убираем маргин у элементов аккордиона */
+.css-1086bdv-MuiPaper-root-MuiAccordion-root.Mui-expanded {
+	margin: 0 !important;
+}
+.css-1086bdv-MuiPaper-root-MuiAccordion-root.Mui-expanded {
+	margin: 0 !important;
+}
+/* Убираем маргин у элементов аккордиона */
+
 /* border top navigation's component */
 .css-1086bdv-MuiPaper-root-MuiAccordion-root::before {
 	opacity: 0;
