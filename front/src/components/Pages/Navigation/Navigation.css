@@ -4,6 +4,17 @@
 	background-color: #fff;
 }
 
+/* DarkMode */
+.profile.dark-mode .navigation__section {
+	background-color: linear-gradient(
+		112.1deg,
+		rgb(32, 38, 57) 11.4%,
+		rgb(63, 76, 119) 70.2%
+	);
+}
+
+/* DarkMode */
+
 .navigation__content {
 	display: flex;
 	justify-content: space-between;
@@ -103,4 +114,8 @@
 	font-weight: 700;
 	color: #000;
 	font-size: 24px;
+}
+
+.navigation__section.dark-mode .account-text p {
+	color: #fff;
 }

@@ -40,8 +40,8 @@ const Uchartshort: React.FC<Uchartshort> = ({
 
 	return (
 		<>
-			{UchartshortData.map((item) => (
-				<>
+			{UchartshortData.map((item, id) => (
+				<div key={id}>
 					<div className="uchartshort__content">
 						<div className="uchartshort__left">
 							{/* <AccountBalanceIcon className="acountBalanceIcon" /> */}
@@ -59,7 +59,7 @@ const Uchartshort: React.FC<Uchartshort> = ({
 							{children ? children : <EqualizerChart />}
 						</div>
 					</div>
-				</>
+				</div>
 			))}
 		</>
 	);
