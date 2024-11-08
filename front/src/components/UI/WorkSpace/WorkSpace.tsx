@@ -174,7 +174,7 @@ const WorkSpace = ({
     return currentOrganization?.userIds.includes(v.userId);
   });
 
-  const getPercent = (item: any) => {
+  const getPercentStageOne = (item: any) => {
     if (
       (item?.name === "Шуъба оид ба кор бо муштариён" &&
         getCertificateUser?.statusCode === 5) ||
@@ -202,17 +202,17 @@ const WorkSpace = ({
 
   const calculateTotalPercent = () => {
     const total = departmentPercentStatus
-      .map((dept) => parseInt(getPercent(dept), 10)) // преобразуем строку в число
+      .map((dept) => parseInt(getPercentStageOne(dept), 10)) // преобразуем строку в число
       .reduce((acc, percent) => acc + percent, 0);
 
     return total === 99 ? 100 : total; // для корректного отображения 100%
   };
 
-  // Вызов ProgressBar с учётом логики getPercent:
-  // const getPercentValue = (item: any) => (getPercent(item) === "33" ? 1 : 0);
+  // Вызов ProgressBar с учётом логики getPercentStageOne:
+  // const getPercentStageOneValue = (item: any) => (getPercentStageOne(item) === "33" ? 1 : 0);
 
-  const getPercentValue = (item: any) =>
-    getPercent(item) === "0" ? "50" : "100";
+  const getPercentStageOneValue = (item: any) =>
+    getPercentStageOne(item) === "0" ? "50" : "100";
 
   console.log(calculateTotalPercent());
 
@@ -230,9 +230,11 @@ const WorkSpace = ({
                   style={
                     {
                       "--percent-color": `${
-                        getPercentValue(e) === "50" ? "#ff9800" : "#41ff6f"
+                        getPercentStageOneValue(e) === "50"
+                          ? "#ff9800"
+                          : "#41ff6f"
                       }`,
-                      "--percent-width": `${getPercentValue(e)}%`,
+                      "--percent-width": `${getPercentStageOneValue(e)}%`,
                     } as React.CSSProperties
                   } // Приведение типа
                   className={`tab percent-indicator ${
@@ -247,13 +249,10 @@ const WorkSpace = ({
                   }
                 >
                   <p>{e.name}</p>
-                  {/* <>
-                    <PercentIndicator percent={getPercent(e)} />
-                  </> */}
                   <p className="percent-title">
                     <ProgressBar
                       completed={
-                        (Number(getPercentValue(e)) / 100) *
+                        (Number(getPercentStageOneValue(e)) / 100) *
                         currentDepartmentStageOne.length
                       }
                       total={currentDepartmentStageOne.length}
@@ -276,12 +275,36 @@ const WorkSpace = ({
                 className="stage-title stage-indicator"
                 style={
                   {
+                    "--percent-stage-color": `${
+                      calculateTotalPercent() === 0
+                        ? "#ff4e4e"
+                        : calculateTotalPercent() > 0 &&
+                          calculateTotalPercent() < 100
+                        ? "#ff9800"
+                        : "#33c157"
+                    }`,
                     "--percent-stage-height": `${calculateTotalPercent()}%`,
                   } as React.CSSProperties
                 }
               >
                 <p>
-                  Этап 1 - выполнено: <span>{calculateTotalPercent()}%</span>
+                  Этап 1 - выполнено:{" "}
+                  <span
+                    style={
+                      {
+                        "--percent-stage-color": `${
+                          calculateTotalPercent() === 0
+                            ? "#ff4e4e"
+                            : calculateTotalPercent() > 0 &&
+                              calculateTotalPercent() < 100
+                            ? "#ff9800"
+                            : "#33c157"
+                        }`,
+                      } as React.CSSProperties
+                    }
+                  >
+                    {calculateTotalPercent()}%
+                  </span>
                 </p>
               </div>
             }
@@ -303,12 +326,36 @@ const WorkSpace = ({
                 className="stage-title stage-indicator"
                 style={
                   {
+                    "--percent-stage-color": `${
+                      calculateTotalPercent() === 0
+                        ? "#ff4e4e"
+                        : calculateTotalPercent() > 0 &&
+                          calculateTotalPercent() < 100
+                        ? "#ff9800"
+                        : "#33c157"
+                    }`,
                     "--percent-stage-height": `${calculateTotalPercent()}%`,
                   } as React.CSSProperties
                 }
               >
                 <p>
-                  Этап 1 - выполнено: <span>{calculateTotalPercent()}%</span>
+                  Этап 1 - выполнено:{" "}
+                  <span
+                    style={
+                      {
+                        "--percent-stage-color": `${
+                          calculateTotalPercent() === 0
+                            ? "#ff4e4e"
+                            : calculateTotalPercent() > 0 &&
+                              calculateTotalPercent() < 100
+                            ? "#ff9800"
+                            : "#33c157"
+                        }`,
+                      } as React.CSSProperties
+                    }
+                  >
+                    {calculateTotalPercent()}%
+                  </span>
                 </p>
               </div>
             }
@@ -330,11 +377,37 @@ const WorkSpace = ({
                 className="stage-title stage-indicator"
                 style={
                   {
+                    "--percent-stage-color": `${
+                      calculateTotalPercent() === 0
+                        ? "#ff4e4e"
+                        : calculateTotalPercent() > 0 &&
+                          calculateTotalPercent() < 100
+                        ? "#ff9800"
+                        : "#33c157"
+                    }`,
                     "--percent-stage-height": `${calculateTotalPercent()}%`,
                   } as React.CSSProperties
                 }
               >
-                <p>Этап 1 - выполнено: {calculateTotalPercent()}%</p>
+                <p>
+                  Этап 1 - выполнено:{" "}
+                  <span
+                    style={
+                      {
+                        "--percent-stage-color": `${
+                          calculateTotalPercent() === 0
+                            ? "#ff4e4e"
+                            : calculateTotalPercent() > 0 &&
+                              calculateTotalPercent() < 100
+                            ? "#ff9800"
+                            : "#33c157"
+                        }`,
+                      } as React.CSSProperties
+                    }
+                  >
+                    {calculateTotalPercent()}%
+                  </span>
+                </p>
               </div>
             }
             // stageTwo={
@@ -353,7 +426,19 @@ const WorkSpace = ({
                 return (
                   <li
                     key={e.id}
-                    className={`tab ${e?.state ? "active" : ""}`}
+                    style={
+                      {
+                        "--percent-color": `${
+                          getPercentStageOneValue(e) === "50"
+                            ? "#ff9800"
+                            : "#41ff6f"
+                        }`,
+                        "--percent-width": `${getPercentStageOneValue(e)}%`,
+                      } as React.CSSProperties
+                    } // Приведение типа
+                    className={`tab percent-indicator ${
+                      e?.state ? "active" : ""
+                    }`}
                     onClick={() =>
                       handleTabClick(
                         e,
@@ -362,7 +447,18 @@ const WorkSpace = ({
                       )
                     }
                   >
-                    {e.name}
+                    <p>{e.name}</p>
+                    <p className="percent-title">
+                      <ProgressBar
+                        completed={
+                          (Number(getPercentStageOneValue(e)) / 100) *
+                          currentDepartmentStageOne.length
+                        }
+                        total={currentDepartmentStageOne.length}
+                        size={45}
+                        item={e}
+                      />
+                    </p>
                   </li>
                 );
               })}

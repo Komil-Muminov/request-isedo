@@ -54,7 +54,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         <Typography
           variant="caption"
           color={`${item?.state ? "#fff" : circleColor} #fff`}
-          fontSize="15px"
+          fontSize={item ? "12px" : "15px"}
         >
           {`${Math.round(percentage)}%`}
         </Typography>
