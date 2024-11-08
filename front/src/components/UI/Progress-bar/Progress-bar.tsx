@@ -29,7 +29,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   // Лог для отладки
   console.log(`Completed: ${completedValue}, Total: ${total}`);
   console.log(`Percentage: ${percentage}`);
-  
+
   return (
     <Box
       position="relative"

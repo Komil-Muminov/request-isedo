@@ -43,7 +43,12 @@
 .percent-indicator::after {
   content: "";
   position: absolute;
-  background: linear-gradient(135deg, #607d8b 0%, #41ff6f 50%, #607d8b 100%);
+  background: linear-gradient(
+    135deg,
+    #607d8b 0%,
+    var(--percent-color) 50%,
+    #607d8b 100%
+  );
   /* background-color: #41ff6f; */
   width: var(--percent-width); /* Используем CSS-переменную */
   height: 8%;

@@ -214,6 +214,8 @@ const WorkSpace = ({
   const getPercentValue = (item: any) =>
     getPercent(item) === "0" ? "50" : "100";
 
+  console.log(calculateTotalPercent());
+
   return (
     <section className="wrapper-work-space">
       <TitleDocument title="Обработка заявки" />
@@ -227,6 +229,9 @@ const WorkSpace = ({
                   key={e.id}
                   style={
                     {
+                      "--percent-color": `${
+                        getPercentValue(e) === "50" ? "#ff9800" : "#41ff6f"
+                      }`,
                       "--percent-width": `${getPercentValue(e)}%`,
                     } as React.CSSProperties
                   } // Приведение типа
@@ -247,7 +252,10 @@ const WorkSpace = ({
                   </> */}
                   <p className="percent-title">
                     <ProgressBar
-                      completed={1}
+                      completed={
+                        (Number(getPercentValue(e)) / 100) *
+                        currentDepartmentStageOne.length
+                      }
                       total={currentDepartmentStageOne.length}
                       size={45}
                       item={e}
