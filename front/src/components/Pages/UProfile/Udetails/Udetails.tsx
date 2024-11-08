@@ -109,20 +109,21 @@ const Udetails: React.FC = () => {
 								}`}
 							>
 								<div className="udetails__setting">
+									<button title="Настройки">
+										<Settings
+											className="udetails__setting-icon"
+											sx={{ fill: "#464531" }}
+										/>
+									</button>
 									<button
 										className={`dark-mode-btn ${
 											document.querySelector(".profile.dark-mode")
 												? "active"
 												: ""
 										}`}
+										title="Сменить тему"
 										onClick={darkModeToggle}
-									>
-										{/* Можно добавить иконку с помощью псевдоэлемента */}
-									</button>
-									<Settings
-										className="udetails__setting-icon"
-										sx={{ fill: "#464531" }}
-									/>
+									></button>
 								</div>
 								<div className="user-details_photo">
 									<div className="user_photo">
@@ -217,7 +218,7 @@ const Udetails: React.FC = () => {
 							<div className="udetails__uwidget">
 								<ul className="udetails__uwidget-list">
 									<Uwidget
-										kind="black-gradient uwidget__standart"
+										kind="black-gradient uwidget__standart uwidget__standart-1"
 										disabled={uPhotoMutation.isPending}
 										title={`График чего-то`}
 										onClick={() => handleChart("dashboard")}

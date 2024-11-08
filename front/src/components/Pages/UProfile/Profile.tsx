@@ -172,13 +172,20 @@ const Profile: React.FC = () => {
 							</div>
 							<h3 className="profile__events-title">Ваши задачи</h3>
 							<div className="profile_events">
-								<span className="profile__events-progress-bar">
-									{uEvents?.length > 0 ? `Прогресс-бар` : `У вас нет задач`}
-								</span>
-								<ProgressBar
-									completed={progressBar.completedEvents}
-									total={progressBar.totalEvents}
-								/>
+								<div className="profile__events-progress-bar">
+									{uEvents?.length > 0 ? (
+										<>
+											<p className="progressbar__text">Прогресс</p>
+											<ProgressBar
+												completed={progressBar.completedEvents}
+												total={progressBar.totalEvents}
+											/>
+										</>
+									) : (
+										"Добавьте задачу блять!"
+									)}
+								</div>
+
 								<Button
 									onClick={() => setShowEvents(!showEvents)}
 									className="show-events-form-btn"

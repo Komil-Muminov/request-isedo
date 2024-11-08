@@ -5,6 +5,11 @@
 	gap: 10px;
 }
 .udetails__setting {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
 	align-self: flex-end;
 }
 .uwidget__item--special {
@@ -27,11 +32,6 @@
 
 .dark-mode-btn {
 	position: relative;
-	padding: 10px;
-	font-size: 24px;
-	background: none;
-	border: none;
-	cursor: pointer;
 }
 
 .dark-mode-btn::before {
@@ -41,6 +41,7 @@
 
 .dark-mode-btn.active::before {
 	content: "🌒";
+	font-size: 24px;
 }
 .user-details {
 	height: 100%;
@@ -270,6 +271,9 @@
 	grid-column: 1/2;
 } */
 
+.uwidget__standart-1 {
+	margin-bottom: 10px;
+}
 .uwidget__item:nth-child(3) {
 	grid-column: 2 / 4;
 	grid-row: 1 / 3;
