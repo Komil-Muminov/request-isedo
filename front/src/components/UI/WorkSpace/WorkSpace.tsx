@@ -16,6 +16,7 @@ import { getCertificates, TCertificates } from "../../API/GetCertificates";
 import { getVPN, TVPN } from "../../API/GetVPN";
 
 import ProgressBar from "../Progress-bar/Progress-bar";
+import { getUsers, TGetUsers } from "../../API/GetUsers";
 
 const WorkSpace = ({
   currentUser,
@@ -49,6 +50,28 @@ const WorkSpace = ({
   //     });
   //   }
   // }, [rqstsDataById?.stepTask]);
+
+  const [users, setUsers] = useState<TGetUsers[] | null>(null);
+
+  const usersQuery = useQuery(
+    {
+      queryFn: () => getUsers(),
+      queryKey: ["users"],
+    },
+    queryClient
+  );
+
+  useEffect(() => {
+    if (usersQuery.status === "success") {
+      setUsers(usersQuery.data);
+    }
+  }, [usersQuery]);
+
+  const currentNewUser = users?.find(
+    (e) => e.fullName === rqstsDataById?.fullName
+  );
+
+  console.log(users);
 
   const { getMe } = useAuth();
   const uQuery = useQuery(
@@ -150,6 +173,12 @@ const WorkSpace = ({
     (cert) => cert.userId !== rqstsDataById?.userId
   );
 
+  const getCertificateNewUser = certificates.find(
+    (cert) => cert.userId === rqstsDataById?.userId
+  );
+
+  console.log(getCertificateNewUser, "-=gdfgfdg==========");
+
   const currentDepartmentCustomer = currentDepartmentStageOne.find(
     (e) => e.state === true
   );
@@ -174,19 +203,59 @@ const WorkSpace = ({
     return currentOrganization?.userIds.includes(v.userId);
   });
 
-  const getPercentStageOne = (item: any) => {
-    if (
-      (item?.name === "Шуъба оид ба кор бо муштариён" &&
-        getCertificateUser?.statusCode === 5) ||
-      (item?.name === "Шуъба оид ба амнияти иттилоотӣ" &&
-        currentUser?.status === false) ||
-      (item?.name === "Шуъба оид ба хизматрасонии техникӣ" &&
-        currentVPN?.status === false)
-    ) {
-      return "33";
+  const currentNewVPN = vpn.find((v) => rqstsDataById?.fullName === v.fullName);
+
+  console.log(currentNewUser);
+
+  // Универсальная функция для вычисления процента выполнения отдела на каждом этапе
+  const getDepartmentPercent = (
+    item: { name: string },
+    stage: number
+  ): string => {
+    switch (stage) {
+      case 1:
+        return (item.name === "Шуъба оид ба кор бо муштариён" &&
+          getCertificateUser?.statusCode === 5) ||
+          (item.name === "Шуъба оид ба амнияти иттилоотӣ" &&
+            currentUser?.status === false) ||
+          (item.name === "Шуъба оид ба хизматрасонии техникӣ" &&
+            currentVPN?.status === false)
+          ? "33"
+          : "0";
+
+      case 2:
+        // Добавьте логику для второго этапа здесь
+        return (item.name === "Шуъба оид ба кор бо муштариён" &&
+          getCertificateNewUser) ||
+          (item.name === "Шуъба оид ба амнияти иттилоотӣ" &&
+            currentNewUser?.status === true) ||
+          (item.name === "Шуъба оид ба хизматрасонии техникӣ" &&
+            currentNewVPN?.status === true)
+          ? "33"
+          : "0";
+
+      case 3:
+        // Добавьте логику для третьего этапа здесь
+        return "" /* Ваши условия для третьего этапа */;
+
+      default:
+        return "0";
     }
-    return "0";
   };
+
+  // const getPercentStageOne = (item: any) => {
+  //   if (
+  //     (item?.name === "Шуъба оид ба кор бо муштариён" &&
+  //       getCertificateUser?.statusCode === 5) ||
+  //     (item?.name === "Шуъба оид ба амнияти иттилоотӣ" &&
+  //       currentUser?.status === false) ||
+  //     (item?.name === "Шуъба оид ба хизматрасонии техникӣ" &&
+  //       currentVPN?.status === false)
+  //   ) {
+  //     return "33";
+  //   }
+  //   return "0";
+  // };
 
   const departmentPercentStatus = [
     {
@@ -202,17 +271,17 @@ const WorkSpace = ({
 
   const calculateTotalPercent = () => {
     const total = departmentPercentStatus
-      .map((dept) => parseInt(getPercentStageOne(dept), 10)) // преобразуем строку в число
+      .map((dept) => parseInt(getDepartmentPercent(dept, 1), 10)) // преобразуем строку в число
       .reduce((acc, percent) => acc + percent, 0);
 
     return total === 99 ? 100 : total; // для корректного отображения 100%
   };
 
   // Вызов ProgressBar с учётом логики getPercentStageOne:
-  // const getPercentStageOneValue = (item: any) => (getPercentStageOne(item) === "33" ? 1 : 0);
+  // const getPercentStageValue  = (item: any) => (getPercentStageOne(item) === "33" ? 1 : 0);
 
-  const getPercentStageOneValue = (item: any) =>
-    getPercentStageOne(item) === "0" ? "50" : "100";
+  const getPercentStageValue = (item: any, stage: number) =>
+    getDepartmentPercent(item, stage) === "0" ? "50" : "100";
 
   console.log(calculateTotalPercent());
 
@@ -230,11 +299,11 @@ const WorkSpace = ({
                   style={
                     {
                       "--percent-color": `${
-                        getPercentStageOneValue(e) === "50"
+                        getPercentStageValue(e, 1) === "50"
                           ? "#ff9800"
                           : "#41ff6f"
                       }`,
-                      "--percent-width": `${getPercentStageOneValue(e)}%`,
+                      "--percent-width": `${getPercentStageValue(e, 1)}%`,
                     } as React.CSSProperties
                   } // Приведение типа
                   className={`tab percent-indicator ${
@@ -252,7 +321,7 @@ const WorkSpace = ({
                   <p className="percent-title">
                     <ProgressBar
                       completed={
-                        (Number(getPercentStageOneValue(e)) / 100) *
+                        (Number(getPercentStageValue(e, 1)) / 100) *
                         currentDepartmentStageOne.length
                       }
                       total={currentDepartmentStageOne.length}
@@ -429,11 +498,11 @@ const WorkSpace = ({
                     style={
                       {
                         "--percent-color": `${
-                          getPercentStageOneValue(e) === "50"
+                          getPercentStageValue(e, 2) === "50"
                             ? "#ff9800"
                             : "#41ff6f"
                         }`,
-                        "--percent-width": `${getPercentStageOneValue(e)}%`,
+                        "--percent-width": `${getPercentStageValue(e, 2)}%`,
                       } as React.CSSProperties
                     } // Приведение типа
                     className={`tab percent-indicator ${
@@ -451,10 +520,10 @@ const WorkSpace = ({
                     <p className="percent-title">
                       <ProgressBar
                         completed={
-                          (Number(getPercentStageOneValue(e)) / 100) *
-                          currentDepartmentStageOne.length
+                          (Number(getPercentStageValue(e, 2)) / 100) *
+                          currentDepartmentStageTwo.length
                         }
-                        total={currentDepartmentStageOne.length}
+                        total={currentDepartmentStageTwo.length}
                         size={45}
                         item={e}
                       />
