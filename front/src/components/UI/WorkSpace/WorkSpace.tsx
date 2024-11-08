@@ -247,7 +247,7 @@ const WorkSpace = ({
                   </> */}
                   <p className="percent-title">
                     <ProgressBar
-                      completed={getPercentValue(e)}
+                      completed={1}
                       total={currentDepartmentStageOne.length}
                       size={45}
                       item={e}
