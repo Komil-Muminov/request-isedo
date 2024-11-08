@@ -1,3 +1,4 @@
+/* Cделать иконки прогресс бара hover и тд */
 .uprofile_list {
 	display: flex;
 	flex-direction: column;
@@ -13,6 +14,7 @@
 .udetails__setting-icon:hover path {
 	transition: all 0.2s ease-in-out;
 	fill: rgba(109, 109, 109, 0.478);
+	background: red;
 }
 
 .udetails__setting-darkmode-icon:hover {
@@ -139,7 +141,7 @@
 }
 
 .user_photo:hover:not(:focus-visible) {
-	background-color: rgba(233, 86, 86, 0.633);
+	background-color: rgba(233, 86, 86, 0.24);
 }
 .profile.dark-mode .user_photo:hover:not(:focus-visible) {
 	background-color: rgba(250, 161, 161, 0.107);
@@ -206,8 +208,8 @@
 /* DarkMode */
 
 .profile.dark-mode .udetails__info-list {
-	background: linear-gradient(360deg, #84fab0 0%, #8fd3f4 100%);
 	/* background: rgba(255, 255, 255, 0.2); */
+	background: linear-gradient(360deg, #84faafd9 0%, #8fd3f4 100%);
 	border: none;
 }
 .profile.dark-mode .list-title {

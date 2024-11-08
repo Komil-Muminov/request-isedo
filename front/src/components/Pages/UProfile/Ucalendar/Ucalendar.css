@@ -1,6 +1,3 @@
-button {
-	border-radius: 8px !important;
-}
 /* Основной контейнер */
 .ucalendar__content {
 	display: flex;
@@ -24,24 +21,18 @@ button {
 	border-radius: 12px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(10px);
-	border: 1px solid rgba(255, 255, 255, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.092);
 }
 
 /* Кнопки */
 
 .ucalendar__btn {
-	padding: 10px 20px;
-	background-color: rgba(255, 255, 255, 0.5);
-	border: 1px solid rgba(255, 255, 255, 0.3);
-	border-radius: 6px;
-	cursor: pointer;
 	transition: background-color 0.3s ease, color 0.3s ease;
 	backdrop-filter: blur(10px);
 	text-align: center;
-	background-color: rgba(0, 128, 0, 0.486);
-	border: none;
+	background-color: rgba(51, 234, 51, 0.413);
 	padding: 10px;
-	color: #ffffff93;
+	color: #ffffff96;
 	border: none;
 	border-radius: 19px !important;
 }
@@ -61,7 +52,7 @@ button {
 	background-color: rgba(0, 128, 0, 0.486);
 }
 .ucalendar__btn:hover {
-	background-color: green;
+	background-color: rgba(12, 212, 12, 0.738);
 	border: none;
 	color: #fff;
 }
@@ -77,12 +68,19 @@ button {
 }
 .react-calendar__tile--active {
 	background-color: rgb(250, 201, 54) !important;
+	border-radius: 10px;
 }
 
 .react-calendar__tile--now {
 	background-color: rgba(250, 93, 49, 0.715) !important;
 	color: #fff !important;
-	text-decoration: underline;
+	border-radius: 10px;
+}
+.react-calendar__tile:hover {
+	border-radius: 10px;
+}
+.profile.dark-mode .react-calendar button:hover {
+	color: #333;
 }
 
 .calendar__event_card {
@@ -94,7 +92,6 @@ button {
 	border-radius: 16px;
 	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 	color: #fff;
-	font-weight: 500;
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
 	padding: 10px;
 	width: 100%;
@@ -147,15 +144,23 @@ button {
 	width: calc((100% - 20px) / 2);
 	border: none;
 	padding: 15px 15px 15px 15px;
-	resize: none !important;
+	resize: none;
 	transition: background-color 0.2s ease-in-out;
 	border-radius: 10px;
 	align-self: stretch;
-	background: transparent !important;
+	background: transparent;
+}
+.profile.dark-mode .event__inp,
+.profile.dark-mode .event__inp::placeholder {
+	color: #fff;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+	filter: invert(50%) sepia(1) saturate(5) hue-rotate(180deg);
 }
 
 .event__inp:hover:not(:focus-visible) {
-	background: rgba(160, 160, 160, 0.161) !important;
+	background: rgba(160, 160, 160, 0.161);
 }
 
 .event__inp:focus {
@@ -174,13 +179,16 @@ button {
 .show__events-deletealltasks {
 	content: "";
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: 3px;
+	right: 2%;
 	align-self: flex-end;
-	padding: 10px 10px 10px 10px;
+	padding: 3px;
 	max-width: 4px;
 	width: 100%;
-	/* background-color: #ffffff5a; */
+}
+
+.show__events-deletealltasks:hover:not(:focus-visible) {
+	background-color: #ffffff5a;
 }
 .show__events-deletealltasks--hidden {
 	display: none;
@@ -216,16 +224,19 @@ button {
 
 .calendar__show--delete {
 	align-self: flex-end;
-	background-color: #ffffff5a;
 	transition: all 0.2s ease-in-out;
 }
 
 .calendar__show--delete svg path {
-	fill: #fff;
+	fill: rgba(233, 233, 233, 0.835);
 }
 
 .calendar__show--delete:hover path {
-	fill: rgba(200, 200, 200, 0.823);
+	fill: #fff;
+}
+
+.calendar__show--delete:hover {
+	background-color: #ffffff5a;
 }
 
 /* DarkMode */
