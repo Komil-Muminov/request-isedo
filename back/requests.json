@@ -11,7 +11,7 @@
     "dateTime": "24.10.2024.09:01",
     "password": "123",
     "loginImof": "Есть",
-    "stepCode": 2,
+    "stepCode": 3,
     "stepTask": 6,
     "files": [
       {
@@ -35,8 +35,12 @@
     ],
     "userId": 5,
     "organizationId": 1,
-    "services": [],
-    "dateChange": "",
+    "services": [
+      1,
+      2,
+      3
+    ],
+    "dateChange": "08.11.2024 в 11:54",
     "id": 1
   }
 ]

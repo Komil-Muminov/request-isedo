@@ -17,6 +17,7 @@ import { getVPN, TVPN } from "../../API/GetVPN";
 
 import ProgressBar from "../Progress-bar/Progress-bar";
 import { getUsers, TGetUsers } from "../../API/GetUsers";
+import { getInvoices, TInvoices } from "../../API/GetInvoices";
 
 const WorkSpace = ({
   currentUser,
@@ -205,7 +206,25 @@ const WorkSpace = ({
 
   const currentNewVPN = vpn.find((v) => rqstsDataById?.fullName === v.fullName);
 
-  console.log(currentNewUser);
+  const [invoices, setInvoices] = useState<TInvoices[]>([]);
+
+  const getInvoicesQuery = useQuery(
+    {
+      queryFn: () => getInvoices(),
+      queryKey: ["invoices"],
+    },
+    queryClient
+  );
+
+  useEffect(() => {
+    if (getInvoicesQuery.status === "success") {
+      setInvoices(getInvoicesQuery.data);
+    }
+  }, [getInvoicesQuery]);
+
+  const currentInvoice = invoices.find(
+    (e) => e.requestId === rqstsDataById?.id
+  );
 
   // Универсальная функция для вычисления процента выполнения отдела на каждом этапе
   const getDepartmentPercent = (
@@ -224,7 +243,6 @@ const WorkSpace = ({
           : "0";
 
       case 2:
-        // Добавьте логику для второго этапа здесь
         return (item.name === "Шуъба оид ба кор бо муштариён" &&
           getCertificateNewUser) ||
           (item.name === "Шуъба оид ба амнияти иттилоотӣ" &&
@@ -235,8 +253,12 @@ const WorkSpace = ({
           : "0";
 
       case 3:
-        // Добавьте логику для третьего этапа здесь
-        return "" /* Ваши условия для третьего этапа */;
+        console.log(item.name, rqstsDataById?.services.length, currentInvoice); // Логирование для отладки
+        return (item.name === "Шуъба оид ба кор бо муштариён" &&
+          rqstsDataById?.services.length > 0) ||
+          (item.name === "Шуъбаи муҳосибот ва хоҷагӣ" && currentInvoice)
+          ? "50"
+          : "0";
 
       default:
         return "0";
@@ -267,11 +289,14 @@ const WorkSpace = ({
     {
       name: "Шуъба оид ба хизматрасонии техникӣ",
     },
+    {
+      name: "Шуъбаи муҳосибот ва хоҷагӣ",
+    },
   ];
 
-  const calculateTotalPercent = () => {
+  const calculateTotalPercent = (stage: number) => {
     const total = departmentPercentStatus
-      .map((dept) => parseInt(getDepartmentPercent(dept, 1), 10)) // преобразуем строку в число
+      .map((dept) => parseInt(getDepartmentPercent(dept, stage), 10)) // преобразуем строку в число
       .reduce((acc, percent) => acc + percent, 0);
 
     return total === 99 ? 100 : total; // для корректного отображения 100%
@@ -283,7 +308,7 @@ const WorkSpace = ({
   const getPercentStageValue = (item: any, stage: number) =>
     getDepartmentPercent(item, stage) === "0" ? "50" : "100";
 
-  console.log(calculateTotalPercent());
+  console.log(calculateTotalPercent(3));
 
   return (
     <section className="wrapper-work-space">
@@ -345,14 +370,14 @@ const WorkSpace = ({
                 style={
                   {
                     "--percent-stage-color": `${
-                      calculateTotalPercent() === 0
+                      calculateTotalPercent(1) === 0
                         ? "#ff4e4e"
-                        : calculateTotalPercent() > 0 &&
-                          calculateTotalPercent() < 100
+                        : calculateTotalPercent(1) > 0 &&
+                          calculateTotalPercent(1) < 100
                         ? "#ff9800"
                         : "#33c157"
                     }`,
-                    "--percent-stage-height": `${calculateTotalPercent()}%`,
+                    "--percent-stage-height": `${calculateTotalPercent(1)}%`,
                   } as React.CSSProperties
                 }
               >
@@ -362,17 +387,17 @@ const WorkSpace = ({
                     style={
                       {
                         "--percent-stage-color": `${
-                          calculateTotalPercent() === 0
+                          calculateTotalPercent(1) === 0
                             ? "#ff4e4e"
-                            : calculateTotalPercent() > 0 &&
-                              calculateTotalPercent() < 100
+                            : calculateTotalPercent(1) > 0 &&
+                              calculateTotalPercent(1) < 100
                             ? "#ff9800"
                             : "#33c157"
                         }`,
                       } as React.CSSProperties
                     }
                   >
-                    {calculateTotalPercent()}%
+                    {calculateTotalPercent(1)}%
                   </span>
                 </p>
               </div>
@@ -396,14 +421,14 @@ const WorkSpace = ({
                 style={
                   {
                     "--percent-stage-color": `${
-                      calculateTotalPercent() === 0
+                      calculateTotalPercent(1) === 0
                         ? "#ff4e4e"
-                        : calculateTotalPercent() > 0 &&
-                          calculateTotalPercent() < 100
+                        : calculateTotalPercent(1) > 0 &&
+                          calculateTotalPercent(1) < 100
                         ? "#ff9800"
                         : "#33c157"
                     }`,
-                    "--percent-stage-height": `${calculateTotalPercent()}%`,
+                    "--percent-stage-height": `${calculateTotalPercent(1)}%`,
                   } as React.CSSProperties
                 }
               >
@@ -413,17 +438,17 @@ const WorkSpace = ({
                     style={
                       {
                         "--percent-stage-color": `${
-                          calculateTotalPercent() === 0
+                          calculateTotalPercent(1) === 0
                             ? "#ff4e4e"
-                            : calculateTotalPercent() > 0 &&
-                              calculateTotalPercent() < 100
+                            : calculateTotalPercent(1) > 0 &&
+                              calculateTotalPercent(1) < 100
                             ? "#ff9800"
                             : "#33c157"
                         }`,
                       } as React.CSSProperties
                     }
                   >
-                    {calculateTotalPercent()}%
+                    {calculateTotalPercent(1)}%
                   </span>
                 </p>
               </div>
@@ -447,14 +472,14 @@ const WorkSpace = ({
                 style={
                   {
                     "--percent-stage-color": `${
-                      calculateTotalPercent() === 0
+                      calculateTotalPercent(1) === 0
                         ? "#ff4e4e"
-                        : calculateTotalPercent() > 0 &&
-                          calculateTotalPercent() < 100
+                        : calculateTotalPercent(1) > 0 &&
+                          calculateTotalPercent(1) < 100
                         ? "#ff9800"
                         : "#33c157"
                     }`,
-                    "--percent-stage-height": `${calculateTotalPercent()}%`,
+                    "--percent-stage-height": `${calculateTotalPercent(1)}%`,
                   } as React.CSSProperties
                 }
               >
@@ -464,17 +489,17 @@ const WorkSpace = ({
                     style={
                       {
                         "--percent-stage-color": `${
-                          calculateTotalPercent() === 0
+                          calculateTotalPercent(1) === 0
                             ? "#ff4e4e"
-                            : calculateTotalPercent() > 0 &&
-                              calculateTotalPercent() < 100
+                            : calculateTotalPercent(1) > 0 &&
+                              calculateTotalPercent(1) < 100
                             ? "#ff9800"
                             : "#33c157"
                         }`,
                       } as React.CSSProperties
                     }
                   >
-                    {calculateTotalPercent()}%
+                    {calculateTotalPercent(1)}%
                   </span>
                 </p>
               </div>
@@ -541,8 +566,41 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageTwo={
-              <div className="stage-title second-stage">
-                <p>Этап 2</p>
+              <div
+                className="stage-title stage-indicator"
+                style={
+                  {
+                    "--percent-stage-color": `${
+                      calculateTotalPercent(2) === 0
+                        ? "#ff4e4e"
+                        : calculateTotalPercent(2) > 0 &&
+                          calculateTotalPercent(2) < 100
+                        ? "#ff9800"
+                        : "#33c157"
+                    }`,
+                    "--percent-stage-height": `${calculateTotalPercent(2)}%`,
+                  } as React.CSSProperties
+                }
+              >
+                <p>
+                  Этап 2 - выполнено:{" "}
+                  <span
+                    style={
+                      {
+                        "--percent-stage-color": `${
+                          calculateTotalPercent(2) === 0
+                            ? "#ff4e4e"
+                            : calculateTotalPercent(2) > 0 &&
+                              calculateTotalPercent(2) < 100
+                            ? "#ff9800"
+                            : "#33c157"
+                        }`,
+                      } as React.CSSProperties
+                    }
+                  >
+                    {calculateTotalPercent(2)}%
+                  </span>
+                </p>
               </div>
             }
           />
@@ -554,8 +612,41 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageTwo={
-              <div className="stage-title second-stage">
-                <p>Этап 2</p>
+              <div
+                className="stage-title stage-indicator"
+                style={
+                  {
+                    "--percent-stage-color": `${
+                      calculateTotalPercent(2) === 0
+                        ? "#ff4e4e"
+                        : calculateTotalPercent(2) > 0 &&
+                          calculateTotalPercent(2) < 100
+                        ? "#ff9800"
+                        : "#33c157"
+                    }`,
+                    "--percent-stage-height": `${calculateTotalPercent(2)}%`,
+                  } as React.CSSProperties
+                }
+              >
+                <p>
+                  Этап 2 - выполнено:{" "}
+                  <span
+                    style={
+                      {
+                        "--percent-stage-color": `${
+                          calculateTotalPercent(2) === 0
+                            ? "#ff4e4e"
+                            : calculateTotalPercent(2) > 0 &&
+                              calculateTotalPercent(2) < 100
+                            ? "#ff9800"
+                            : "#33c157"
+                        }`,
+                      } as React.CSSProperties
+                    }
+                  >
+                    {calculateTotalPercent(2)}%
+                  </span>
+                </p>
               </div>
             }
           />
@@ -568,8 +659,41 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageTwo={
-              <div className="stage-title second-stage">
-                <p>Этап 2</p>
+              <div
+                className="stage-title stage-indicator"
+                style={
+                  {
+                    "--percent-stage-color": `${
+                      calculateTotalPercent(2) === 0
+                        ? "#ff4e4e"
+                        : calculateTotalPercent(2) > 0 &&
+                          calculateTotalPercent(2) < 100
+                        ? "#ff9800"
+                        : "#33c157"
+                    }`,
+                    "--percent-stage-height": `${calculateTotalPercent(2)}%`,
+                  } as React.CSSProperties
+                }
+              >
+                <p>
+                  Этап 2 - выполнено:{" "}
+                  <span
+                    style={
+                      {
+                        "--percent-stage-color": `${
+                          calculateTotalPercent(2) === 0
+                            ? "#ff4e4e"
+                            : calculateTotalPercent(2) > 0 &&
+                              calculateTotalPercent(2) < 100
+                            ? "#ff9800"
+                            : "#33c157"
+                        }`,
+                      } as React.CSSProperties
+                    }
+                  >
+                    {calculateTotalPercent(2)}%
+                  </span>
+                </p>
               </div>
             }
           />
@@ -583,7 +707,19 @@ const WorkSpace = ({
                 return (
                   <li
                     key={e.id}
-                    className={`tab ${e?.state ? "active" : ""}`}
+                    style={
+                      {
+                        "--percent-color": `${
+                          getPercentStageValue(e, 3) === "50"
+                            ? "#ff9800"
+                            : "#41ff6f"
+                        }`,
+                        "--percent-width": `${getPercentStageValue(e, 3)}%`,
+                      } as React.CSSProperties
+                    } // Приведение типа
+                    className={`tab percent-indicator ${
+                      e?.state ? "active" : ""
+                    }`}
                     onClick={() =>
                       handleTabClick(
                         e,
@@ -592,7 +728,18 @@ const WorkSpace = ({
                       )
                     }
                   >
-                    {e.name}
+                    <p>{e.name}</p>
+                    <p className="percent-title">
+                      <ProgressBar
+                        completed={
+                          (Number(getPercentStageValue(e, 3)) / 100) *
+                          currentDepartmentStageThree.length
+                        }
+                        total={currentDepartmentStageThree.length}
+                        size={45}
+                        item={e}
+                      />
+                    </p>
                   </li>
                 );
               })}
@@ -606,8 +753,41 @@ const WorkSpace = ({
             currentOrganization={currentOrganization}
             executor={uinfo}
             stageThree={
-              <div className="stage-title third-stage">
-                <p>Этап 3</p>
+              <div
+                className="stage-title stage-indicator"
+                style={
+                  {
+                    "--percent-stage-color": `${
+                      calculateTotalPercent(3) === 0
+                        ? "#ff4e4e"
+                        : calculateTotalPercent(3) > 0 &&
+                          calculateTotalPercent(3) < 100
+                        ? "#ff9800"
+                        : "#33c157"
+                    }`,
+                    "--percent-stage-height": `${calculateTotalPercent(3)}%`,
+                  } as React.CSSProperties
+                }
+              >
+                <p>
+                  Этап 3 - выполнено:{" "}
+                  <span
+                    style={
+                      {
+                        "--percent-stage-color": `${
+                          calculateTotalPercent(3) === 0
+                            ? "#ff4e4e"
+                            : calculateTotalPercent(3) > 0 &&
+                              calculateTotalPercent(3) < 100
+                            ? "#ff9800"
+                            : "#33c157"
+                        }`,
+                      } as React.CSSProperties
+                    }
+                  >
+                    {calculateTotalPercent(3)}%
+                  </span>
+                </p>
               </div>
             }
           />
@@ -620,8 +800,41 @@ const WorkSpace = ({
               currentOrganization={currentOrganization}
               executor={uinfo}
               stageThree={
-                <div className="stage-title">
-                  <p>Этап 3</p>
+                <div
+                  className="stage-title stage-indicator"
+                  style={
+                    {
+                      "--percent-stage-color": `${
+                        calculateTotalPercent(3) === 0
+                          ? "#ff4e4e"
+                          : calculateTotalPercent(3) > 0 &&
+                            calculateTotalPercent(3) < 100
+                          ? "#ff9800"
+                          : "#33c157"
+                      }`,
+                      "--percent-stage-height": `${calculateTotalPercent(3)}%`,
+                    } as React.CSSProperties
+                  }
+                >
+                  <p>
+                    Этап 3 - выполнено:{" "}
+                    <span
+                      style={
+                        {
+                          "--percent-stage-color": `${
+                            calculateTotalPercent(3) === 0
+                              ? "#ff4e4e"
+                              : calculateTotalPercent(3) > 0 &&
+                                calculateTotalPercent(3) < 100
+                              ? "#ff9800"
+                              : "#33c157"
+                          }`,
+                        } as React.CSSProperties
+                      }
+                    >
+                      {calculateTotalPercent(3)}%
+                    </span>
+                  </p>
                 </div>
               }
             />
