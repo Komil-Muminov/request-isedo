@@ -109,7 +109,7 @@ const Udetails: React.FC = () => {
 								}`}
 							>
 								<div className="udetails__setting">
-									<button title="Настройки">
+									<button className="profile__settings-btn" title="Настройки">
 										<Settings
 											className="udetails__setting-icon"
 											sx={{ fill: "#464531" }}

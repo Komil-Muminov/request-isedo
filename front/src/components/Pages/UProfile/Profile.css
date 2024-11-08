@@ -21,11 +21,18 @@
 }
 .dark-mode-btn {
 	align-self: flex-end;
+	transition: transform 0.2s ease-in-out;
 }
 
+/* DarkMode */
+.dark-mode-btn:hover {
+	transform: translate(0, 1.5px);
+}
 .profile.dark-mode .udetails__setting-icon {
 	fill: #fffffff0;
 }
+
+/* DarkMode */
 
 /* Accordion darkmode */
 
