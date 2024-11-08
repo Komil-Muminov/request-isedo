@@ -271,6 +271,7 @@
 	border-radius: 20px;
 	color: #fff;
 	padding: 15px 13px;
+	min-height: 300px;
 }
 .profile__events {
 	display: flex;
@@ -338,3 +339,15 @@
 .profile__events-delete svg:hover {
 	fill: #ffffff;
 }
+
+.progressbar__text {
+	margin-bottom: 10px;
+}
+/* DarkMode */
+.profile.dark-mode .profile__events-delete svg path {
+	transition: fill 0.2s ease-in-out;
+}
+.profile.dark-mode .profile__events-delete svg:hover path {
+	fill: rgba(228, 228, 228, 0.55);
+}
+/* DarkMode */

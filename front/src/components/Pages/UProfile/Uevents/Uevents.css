@@ -31,17 +31,26 @@
 }
 
 .uevents-done-btn svg {
-	fill: #ffffffeb;
 	border-radius: 100%;
-	background: #ffffff55;
 }
 
-.uevents-done-btn--isdone svg {
-	fill: rgba(0, 128, 0, 0.919);
-	background: #ffffff;
+.uevents-done-btn--isdone svg path {
+	fill: rgb(26, 248, 26);
+	transition: fill 0.1s ease-in-out;
 }
 
-.uevents-done-btn--notdone svg {
+.uevents-done-btn--notdone svg path {
+	fill: rgba(255, 0, 0, 0.699);
+	transition: fill 0.1s ease-in-out;
+}
+
+.uevents-done-btn--notdone svg:hover path {
 	fill: red;
-	background: #ffffff5b;
 }
+
+/* DarkMode */
+
+.profile.dark-mode .uevents-done-btn--isdone svg {
+	fill: rgba(100, 255, 86, 0.837);
+}
+/* DarkMode */
