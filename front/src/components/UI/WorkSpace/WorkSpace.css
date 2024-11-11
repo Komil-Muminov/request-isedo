@@ -3,12 +3,13 @@
 }
 
 .workspace-content {
-  background-color: #fff;
-  border-radius: 20px;
+  background-color: #f7f7fc;
+  /* border-radius: 20px; */
   /* padding: 20px 0; */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.121);
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.121); */
   width: 100%;
   overflow: hidden;
+  border-radius: 20px;
 }
 
 /* .navigation-tabs {
@@ -124,4 +125,22 @@
 
 .column-stage {
   display: flex;
+  border-bottom: 1px solid #00000021;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.121);
+  border-radius: 0 0 20px 20px;
+  overflow: hidden;
+}
+
+.navigation-tabs-stage-one,
+.navigation-tabs-stage-two,
+.navigation-tabs-stage-three {
+  background-color: #fff;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+}
+
+.navigation-tabs-stage-two,
+.navigation-tabs-stage-three {
+  margin-top: 20px;
 }
