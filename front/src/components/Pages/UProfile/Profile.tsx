@@ -117,8 +117,6 @@ const Profile: React.FC = () => {
 		return null;
 	}
 
-	const { isDarkMode, darkModeToggle } = useDarkMode();
-
 	return (
 		<section className="sections profile">
 			<div className="profile__container">
