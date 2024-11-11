@@ -399,6 +399,54 @@ const AddRequest: React.FC = () => {
             register={register}
           />
         )}
+        {reqType === "Смена главного бухгалтера и руководителя" && (
+          <ChangeManagement
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            dirtyFields={dirtyFields}
+            register={register}
+          />
+        )}
+        {reqType === "Продление сертификата главного бухгалтера" && (
+          <ChangeManagement
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            dirtyFields={dirtyFields}
+            register={register}
+          />
+        )}
+        {reqType === "Продление сертификата руководителя" && (
+          <ChangeManagement
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            dirtyFields={dirtyFields}
+            register={register}
+          />
+        )}
+        {reqType === "Продажа токена" && (
+          <ChangeManagement
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            dirtyFields={dirtyFields}
+            register={register}
+          />
+        )}
+        {reqType === "Предоставление доступа к модулям" && (
+          <ChangeManagement
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            dirtyFields={dirtyFields}
+            register={register}
+          />
+        )}
+        {reqType === "Техническая поддержка" && (
+          <ChangeManagement
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            dirtyFields={dirtyFields}
+            register={register}
+          />
+        )}
       </div>
 
       {showTypeRequest && (
