@@ -61,7 +61,7 @@
 } */
 
 .user_info:hover {
-	background-color: #f1f5f9;
+	background-color: #f1f5f90e;
 	cursor: pointer;
 }
 
@@ -69,9 +69,9 @@
 	background-color: #e2e8f0;
 	padding: 5px;
 	border-radius: 10px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	/* display: flex; */
+	/* justify-content: center; */
+	/* align-items: center; */
 }
 
 .settings {
@@ -118,4 +118,12 @@
 
 .navigation__section.dark-mode .account-text p {
 	color: #fff;
+}
+
+.navigation__section.dark-mode .settings svg:nth-child(1) {
+	fill: #fff;
+}
+
+.navigation__section.dark-mode .settings svg:nth-child(3) {
+	fill: #fff;
 }
