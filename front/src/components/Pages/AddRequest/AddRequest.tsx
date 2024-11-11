@@ -26,15 +26,11 @@ import DoneIcon from "@mui/icons-material/Done";
 import TitleDocument from "../../UI/TitleDocument/TitleDocument";
 import TypeRequest from "../../UI/TypeRequest/TypeRequest";
 
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-
 import AssignmentIcon from "@mui/icons-material/Assignment";
 
 import UserOrOrganizationCard from "../../UI/UserOrOrganizationCard/UserOrOrganizationCard";
 
 import CardFileService from "../../UI/CardFileService/CardFileService";
-
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -42,264 +38,266 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import {
-	getOrganizations,
-	TGetOrganizations,
+  getOrganizations,
+  TGetOrganizations,
 } from "../../API/GetOrganizations";
 import { getUsers, TGetUsers } from "../../API/GetUsers";
 import FileService from "../../UI/File Services/FileService";
+import ChangeChiefAccountant from "./Types of Requests/Change of chief accountant/ChangeChiefAccountant";
+import ChangeManagement from "./Types of Requests/Change of management/ChangeManagement";
 // import { toast, ToastContainer } from "react-toastify";
 
 const AddRequest: React.FC = () => {
-	// Состояние текущего активного шага в индикаторе.
+  // Состояние текущего активного шага в индикаторе.
 
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	const { getMe } = useAuth();
-	const uQuery = useQuery(
-		{
-			queryFn: () => getMe(),
-			queryKey: ["users", "me"],
-		},
-		queryClient,
-	);
+  const { getMe } = useAuth();
+  const uQuery = useQuery(
+    {
+      queryFn: () => getMe(),
+      queryKey: ["users", "me"],
+    },
+    queryClient
+  );
 
-	const [uinfo, setUinfo] = useState<GetMeType | null>(null);
-	// const [expanded, setExpanded] = useState<number | false>(false);
+  const [uinfo, setUinfo] = useState<GetMeType | null>(null);
+  // const [expanded, setExpanded] = useState<number | false>(false);
 
-	useEffect(() => {
-		if (uQuery.status === "success") {
-			setUinfo(uQuery.data);
-		}
-	}, [uQuery.status, uQuery.data]);
+  useEffect(() => {
+    if (uQuery.status === "success") {
+      setUinfo(uQuery.data);
+    }
+  }, [uQuery.status, uQuery.data]);
 
-	if (uQuery.status === "pending") return <Loader />;
-	if (uQuery.status === "error") {
-		console.log(uQuery.error);
-		return null;
-	}
+  if (uQuery.status === "pending") return <Loader />;
+  if (uQuery.status === "error") {
+    console.log(uQuery.error);
+    return null;
+  }
 
-	const steps =
-		uinfo?.uType === "kvd"
-			? stepsOfKvd
-			: uinfo?.uType === "bo"
-			? stepsOfBo
-			: [];
+  const steps =
+    uinfo?.uType === "kvd"
+      ? stepsOfKvd
+      : uinfo?.uType === "bo"
+      ? stepsOfBo
+      : [];
 
-	const {
-		register,
-		// Записывает все стейты в массив
-		handleSubmit,
-		// Функция dirtyFields возвращает true или false в зависимости от того, было ли изменено поле "Название организации".
-		// Поле для бухгалтера становится доступным только если поле "Название организации" было изменено.
-		watch,
-		setValue,
-		getValues,
-		formState: { dirtyFields },
-	} = useForm<PostRqstScheme>({
-		defaultValues: {
-			fullName: "",
-			tax: "",
-			phone: "",
-			email: "",
-			passport: "",
-			role: "",
-			token: "",
-			reqType: "Смена главного бухгалтера",
-			dateTime: "",
-			password: "123",
-			loginImof: "",
-		},
-	});
+  const {
+    register,
+    // Записывает все стейты в массив
+    handleSubmit,
+    // Функция dirtyFields возвращает true или false в зависимости от того, было ли изменено поле "Название организации".
+    // Поле для бухгалтера становится доступным только если поле "Название организации" было изменено.
+    watch,
+    setValue,
+    getValues,
+    formState: { dirtyFields },
+  } = useForm<PostRqstScheme>({
+    defaultValues: {
+      fullName: "",
+      tax: "",
+      phone: "",
+      email: "",
+      passport: "",
+      role: "",
+      token: "",
+      reqType: "Смена главного бухгалтера",
+      dateTime: "",
+      password: "123",
+      loginImof: "",
+    },
+  });
 
-	// useEffect(() => {
-	//   if (uQuery.status === "success" && uinfo) {
-	//     setValue("fullName", uinfo.fullName || "");
-	//     setValue("role", uinfo.role || "");
-	//     setValue("phone", uinfo.phone || "");
-	//     setValue("email", uinfo.email || "");
-	//     setValue("tax", uinfo.tax || "");
-	//   }
-	// }, [uQuery.status, uinfo]);
+  // useEffect(() => {
+  //   if (uQuery.status === "success" && uinfo) {
+  //     setValue("fullName", uinfo.fullName || "");
+  //     setValue("role", uinfo.role || "");
+  //     setValue("phone", uinfo.phone || "");
+  //     setValue("email", uinfo.email || "");
+  //     setValue("tax", uinfo.tax || "");
+  //   }
+  // }, [uQuery.status, uinfo]);
 
-	// Функция для отслеживания изменений значений в реальном времени.
-	const reqType = watch("reqType");
+  // Функция для отслеживания изменений значений в реальном времени.
+  const reqType = watch("reqType");
 
-	const postRqstsMutation = useMutation(
-		{
-			mutationFn: (data: PostRqstScheme) => postRequest(data),
-			onSuccess: (response) => {
-				queryClient.invalidateQueries({ queryKey: ["requests"] });
-				// const createdRequestId = response.requestData.id;
-				// navigate(`/requests/show/${createdRequestId}`);
-			},
-		},
-		queryClient,
-	);
+  const postRqstsMutation = useMutation(
+    {
+      mutationFn: (data: PostRqstScheme) => postRequest(data),
+      onSuccess: (response) => {
+        queryClient.invalidateQueries({ queryKey: ["requests"] });
+        // const createdRequestId = response.requestData.id;
+        // navigate(`/requests/show/${createdRequestId}`);
+      },
+    },
+    queryClient
+  );
 
-	interface FileType {
-		fileName: string;
-	}
+  interface FileType {
+    fileName: string;
+  }
 
-	const [files, setFiles] = useState<FileType[]>([]);
+  const [files, setFiles] = useState<FileType[]>([]);
 
-	const handleGetFile = (file: File) => {
-		const sizeInBytes = file.size; // Размер в байтах
-		const sizeInKB = (sizeInBytes / 1024).toFixed(2); // Преобразуем в КБ (строка)
-		const sizeInMB = (sizeInBytes / (1024 * 1024)).toFixed(2); // Преобразуем в МБ (строка)
+  const handleGetFile = (file: File) => {
+    const sizeInBytes = file.size; // Размер в байтах
+    const sizeInKB = (sizeInBytes / 1024).toFixed(2); // Преобразуем в КБ (строка)
+    const sizeInMB = (sizeInBytes / (1024 * 1024)).toFixed(2); // Преобразуем в МБ (строка)
 
-		// Преобразуем строки с числами в числа для сравнения
-		const fileSize =
-			parseFloat(sizeInKB) < 1000 ? `${sizeInKB} КБ` : `${sizeInMB} МБ`;
+    // Преобразуем строки с числами в числа для сравнения
+    const fileSize =
+      parseFloat(sizeInKB) < 1000 ? `${sizeInKB} КБ` : `${sizeInMB} МБ`;
 
-		const fileName = file.name.split(".")[0];
+    const fileName = file.name.split(".")[0];
 
-		const fileType = file.type.split("/")[1]; // Например, "pdf" из "application/pdf"
+    const fileType = file.type.split("/")[1]; // Например, "pdf" из "application/pdf"
 
-		const newFile = {
-			id: new Date().getTime(),
-			fileName: `${fileName}.`,
-			size: fileSize,
-			type: fileType,
-		};
+    const newFile = {
+      id: new Date().getTime(),
+      fileName: `${fileName}.`,
+      size: fileSize,
+      type: fileType,
+    };
 
-		if (newFile.fileName) {
-			setFiles((prevFiles) => [...prevFiles, newFile]);
-		}
-	};
+    if (newFile.fileName) {
+      setFiles((prevFiles) => [...prevFiles, newFile]);
+    }
+  };
 
-	const activeSendButton = uinfo?.uType === "bo" && postRqstsMutation.isSuccess;
+  const activeSendButton = uinfo?.uType === "bo" && postRqstsMutation.isSuccess;
 
-	const [showTypeRequest, setShowTypeRequest] = useState<boolean>(true);
+  const [showTypeRequest, setShowTypeRequest] = useState<boolean>(true);
 
-	const [users, setUsers] = useState<TGetUsers[] | null>(null);
+  const [users, setUsers] = useState<TGetUsers[] | null>(null);
 
-	const usersQuery = useQuery(
-		{
-			queryFn: () => getUsers(),
-			queryKey: ["users"],
-		},
-		queryClient,
-	);
+  const usersQuery = useQuery(
+    {
+      queryFn: () => getUsers(),
+      queryKey: ["users"],
+    },
+    queryClient
+  );
 
-	useEffect(() => {
-		if (usersQuery.status === "success") {
-			setUsers(usersQuery.data);
-		}
-	}, [usersQuery]);
+  useEffect(() => {
+    if (usersQuery.status === "success") {
+      setUsers(usersQuery.data);
+    }
+  }, [usersQuery]);
 
-	const [organizations, setOrganizations] = useState<
-		TGetOrganizations[] | null
-	>(null);
+  const [organizations, setOrganizations] = useState<
+    TGetOrganizations[] | null
+  >(null);
 
-	const getOrganizationsQuery = useQuery(
-		{
-			queryFn: () => getOrganizations(),
-			queryKey: ["organizations"],
-		},
-		queryClient,
-	);
+  const getOrganizationsQuery = useQuery(
+    {
+      queryFn: () => getOrganizations(),
+      queryKey: ["organizations"],
+    },
+    queryClient
+  );
 
-	useEffect(() => {
-		if (getOrganizationsQuery.status === "success") {
-			setOrganizations(getOrganizationsQuery.data);
-		}
-	}, [getOrganizationsQuery]);
+  useEffect(() => {
+    if (getOrganizationsQuery.status === "success") {
+      setOrganizations(getOrganizationsQuery.data);
+    }
+  }, [getOrganizationsQuery]);
 
-	// Данные карточки пользователя
-	const currentUser = users?.find((user) => {
-		return organizations?.find((org) => {
-			return org.userIds.find((userId) => userId === user.id);
-		});
-	});
+  // Данные карточки пользователя
+  const currentUser = users?.find((user) => {
+    return organizations?.find((org) => {
+      return org.userIds.find((userId) => userId === user.id);
+    });
+  });
 
-	// Данные карточки организации
-	const currentOrganization = organizations?.find((org) => {
-		return org.userIds.find((userId) => userId === uinfo?.userId);
-	});
+  // Данные карточки организации
+  const currentOrganization = organizations?.find((org) => {
+    return org.userIds.find((userId) => userId === uinfo?.userId);
+  });
 
-	console.log(files);
+  console.log(files);
 
-	// Увеличивает номер текущего шага на 1.
-	const onSubmit = (data: PostRqstScheme) => {
-		const stepFound = steps.find((e) => e.stepCode === 0);
+  // Увеличивает номер текущего шага на 1.
+  const onSubmit = (data: PostRqstScheme) => {
+    const stepFound = steps.find((e) => e.stepCode === 0);
 
-		const getDate = new Date();
+    const getDate = new Date();
 
-		const day = String(getDate.getDate()).padStart(2, "0");
-		const month = String(getDate.getMonth() + 1).padStart(2, "0");
-		const year = getDate.getFullYear();
-		const hours = String(getDate.getHours()).padStart(2, "0");
-		const minutes = String(getDate.getMinutes()).padStart(2, "0");
+    const day = String(getDate.getDate()).padStart(2, "0");
+    const month = String(getDate.getMonth() + 1).padStart(2, "0");
+    const year = getDate.getFullYear();
+    const hours = String(getDate.getHours()).padStart(2, "0");
+    const minutes = String(getDate.getMinutes()).padStart(2, "0");
 
-		const date = `${day}.${month}.${year}.${hours}:${minutes}`;
+    const date = `${day}.${month}.${year}.${hours}:${minutes}`;
 
-		const now = new Date();
-		const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
-			now.getMonth() + 1,
-		).padStart(2, "0")}.${now.getFullYear()} в ${String(
-			now.getHours(),
-		).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+    const now = new Date();
+    const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
+      now.getMonth() + 1
+    ).padStart(2, "0")}.${now.getFullYear()} в ${String(
+      now.getHours()
+    ).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
 
-		const updateReqData = {
-			...data,
-			stepCode: stepFound?.stepCode || 0,
-			stepTask: 0,
-			dateTime: date,
-			files: files,
-			userId: uinfo?.userId,
-			organizationId: currentOrganization?.id,
-			services: [],
-			dataChange: formattedDate,
-		};
+    const updateReqData = {
+      ...data,
+      stepCode: stepFound?.stepCode || 0,
+      stepTask: 0,
+      dateTime: date,
+      files: files,
+      userId: uinfo?.userId,
+      organizationId: currentOrganization?.id,
+      services: [],
+      dataChange: formattedDate,
+    };
 
-		postRqstsMutation.mutate(updateReqData);
+    postRqstsMutation.mutate(updateReqData);
 
-		alert(
-			`Новый главных бухгалтер ${data?.fullName} не найден в системе, можете продолжить заявку.`,
-		);
+    alert(
+      `Новый главных бухгалтер ${data?.fullName} не найден в системе, можете продолжить заявку.`
+    );
 
-		navigate(`/requests`);
-	};
+    navigate(`/requests`);
+  };
 
-	const [fileUploadedStatus, setFileUploadedStatus] = useState<boolean>(false);
+  const [fileUploadedStatus, setFileUploadedStatus] = useState<boolean>(false);
 
-	const handleFileUploadedStatus = (state: boolean) => {
-		setFileUploadedStatus(state);
-	};
+  const handleFileUploadedStatus = (state: boolean) => {
+    setFileUploadedStatus(state);
+  };
 
-	const secondFileStatus = files.some((e) => e.fileName === fileInfo[1]?.name);
-	const thirdFileStatus = files.some((e) => e.fileName === fileInfo[2]?.name);
+  const secondFileStatus = files.some((e) => e.fileName === fileInfo[1]?.name);
+  const thirdFileStatus = files.some((e) => e.fileName === fileInfo[2]?.name);
 
-	return (
-		<section className="add-content">
-			<div className="container">
-				<div className="details-steps">
-					<TitleDocument title="Новая заявка" />
-				</div>
-				<div className="addRequest__content">
-					{/* <Stepper>: Компонент для отображения шагового индикатора, который отображает прогресс.
-					 */}
-					<div className="panel-control">
-						<ButtonPanelControl
-							goBack={() => navigate(-1)}
-							icon={
-								<ArrowBackIosIcon
-									sx={{ fontSize: "18px", fontWeight: "bold" }}
-								/>
-							}
-							text="Назад"
-						/>
-						<div className="wrapper-buttons">
-							<ButtonPanelControl
-								icon={
-									<AssignmentIcon
-										sx={{ fontSize: "18px", fontWeight: "bold" }}
-									/>
-								}
-								text="Выбрать тип заявки"
-								setShowTypeRequest={setShowTypeRequest}
-							/>
-							{/* <ButtonPanelControl
+  return (
+    <section className="add-content">
+      <div className="container">
+        <div className="details-steps">
+          <TitleDocument title="Новая заявка" />
+        </div>
+        <div className="addRequest__content">
+          {/* <Stepper>: Компонент для отображения шагового индикатора, который отображает прогресс.
+           */}
+          <div className="panel-control">
+            <ButtonPanelControl
+              goBack={() => navigate(-1)}
+              icon={
+                <ArrowBackIosIcon
+                  sx={{ fontSize: "18px", fontWeight: "bold" }}
+                />
+              }
+              text="Назад"
+            />
+            <div className="wrapper-buttons">
+              <ButtonPanelControl
+                icon={
+                  <AssignmentIcon
+                    sx={{ fontSize: "18px", fontWeight: "bold" }}
+                  />
+                }
+                text="Выбрать тип заявки"
+                setShowTypeRequest={setShowTypeRequest}
+              />
+              {/* <ButtonPanelControl
                 icon={
                   <SaveIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
                 }
@@ -307,268 +305,159 @@ const AddRequest: React.FC = () => {
                 handleSubmit={handleSubmit(onSubmit)}
                 activeSendButton={activeSendButton}
               /> */}
-							<ButtonPanelControl
-								icon={
-									<UnsubscribeIcon
-										sx={{ fontSize: "18px", fontWeight: "bold" }}
-									/>
-								}
-								text="Сохранить"
-								handleSubmit={handleSubmit(onSubmit)}
-								activeSendButton={activeSendButton}
-							/>
-							{uinfo?.uType === "kvd" && (
-								<ButtonPanelControl
-									icon={
-										<CancelIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
-									}
-									text="Отклонить"
-									activeSendButton={true}
-								/>
-							)}
-							{uinfo?.uType === "kvd" && (
-								<ButtonPanelControl
-									icon={
-										<DoneIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
-									}
-									text="Завершить"
-									activeSendButton={true}
-								/>
-							)}
-						</div>
-					</div>
-					<Stepper
-						sx={{
-							display: "flex",
-							justifyContent: "space-between",
-							padding: "20px",
-							width: "100%",
-							// Убираем линии между шагами
-							"& .MuiStepConnector-root": {
-								display: "none",
-							},
-						}}
-						activeStep={steps[0]?.stepCode}
-						alternativeLabel
-					>
-						{steps.map((e, index) => (
-							<Step
-								key={index}
-								sx={{
-									display: "flex",
-									flex: "1",
-									justifyContent: "center",
-									alignItems: "center",
-									position: "relative",
-									"&:first-of-type": {
-										flex: "0 0 auto", // первый шаг фиксированный
-										marginLeft: 0,
-									},
-									"&:last-of-type": {
-										flex: "0 0 auto", // последний шаг фиксированный
-										marginRight: 0,
-									},
-								}}
-							>
-								<StepLabel>
-									<p className="step-header">{e.stepName}</p>
-									<p>{e.initiators}</p>
-								</StepLabel>
-							</Step>
-						))}
-					</Stepper>
-				</div>
-				{/* Детали заявки */}
-				{reqType === "Смена главного бухгалтера" && (
-					<>
-						<section className="old-accountant">
-							<TitleDocument title="Прошлый главный бухгалтер" />
-							<div className="wrapper-cards">
-								<UserOrOrganizationCard
-									currentUser={currentUser}
-									title="Карточка пользователя"
-									newFileService={<FileService handleGetFile={handleGetFile} />}
-									requiredFile={fileInfo[0]?.name}
-									handleFileUploadedStatus={handleFileUploadedStatus}
-									uploadedFile={files}
-									requiredDocuments={
-										<ul className="required-documents">
-											<p>Необходимые документы:</p>
-											<li>
-												{fileUploadedStatus ? (
-													<CheckCircleOutlineIcon sx={{ color: "green" }} />
-												) : (
-													<HighlightOffIcon sx={{ color: "red" }} />
-												)}
-												<p>{fileInfo[0]?.name}</p>
-											</li>
-										</ul>
-									}
-									// fileService={
-									//   <CardFileService
-									//     item={fileInfo[0]}
-									//     handleGetFile={handleGetFile}
-									//     getFile={getFile}
-									//   />
-									// }
-								/>
-								<UserOrOrganizationCard
-									currentOrganization={currentOrganization}
-									title="Карточка организации"
-								/>
-							</div>
-						</section>
-						<section className="new-accountant">
-							<TitleDocument title="Новый главный бухгалтер" />
-							<div className="wrapper-cards wrapper-cards-padding">
-								<div className="inputs-list">
-									<TextField
-										{...register("fullName")}
-										type="text"
-										id="fullName"
-										className="request_inp"
-										// KM
-										label="ФИО"
-									/>
-									<TextField
-										{...register("tax")}
-										id="tax"
-										type="text"
-										className="request_inp"
-										label="ИНН"
-									/>
-									<TextField
-										{...register("phone")}
-										id="phone"
-										type="text"
-										className="request_inp"
-										label="Номер телефона"
-									/>
-									<TextField
-										{...register("email")}
-										id="email"
-										type="text"
-										className="request_inp"
-										label="E-mail адрес"
-									/>
-									<TextField
-										{...register("passport")}
-										id="passport"
-										type="text"
-										className="request_inp"
-										label="Серия и номер паспорта"
-									/>
-									<TextField
-										{...register("role")}
-										id="role"
-										type="text"
-										className="request_inp"
-										label="Должность"
-									/>
-									{/* test commit  */}
-									<Box className="request_inp" sx={{ minWidth: 120 }}>
-										<FormControl fullWidth>
-											<InputLabel id="demo-simple-select-label">
-												Наличие токена
-											</InputLabel>
-											<Select
-												{...register("token")}
-												labelId="demo-simple-select-label"
-												id="token"
-												label="token"
-											>
-												<MenuItem value="Есть">Есть</MenuItem>
-												<MenuItem value="Нет">Нет</MenuItem>
-											</Select>
-										</FormControl>
-									</Box>
-									<Box className="request_inp" sx={{ minWidth: 120 }}>
-										<FormControl fullWidth>
-											<InputLabel id="demo-simple-select-label">
-												Наличие логина iMoF
-											</InputLabel>
-											<Select
-												{...register("loginImof")}
-												labelId="demo-simple-select-label"
-												id="loginImof"
-												label="loginImof"
-											>
-												<MenuItem value="Есть">Есть</MenuItem>
-												<MenuItem value="Нет">Нет</MenuItem>
-											</Select>
-										</FormControl>
-									</Box>
-									<FileService />
-									<ul className="required-documents">
-										<p>Необходимые документы:</p>
-										<li>
-											{secondFileStatus ? (
-												<CheckCircleOutlineIcon sx={{ color: "green" }} />
-											) : (
-												<HighlightOffIcon sx={{ color: "red" }} />
-											)}
-											<p>{fileInfo[1]?.name}</p>
-										</li>
-										<li>
-											{thirdFileStatus ? (
-												<CheckCircleOutlineIcon sx={{ color: "green" }} />
-											) : (
-												<HighlightOffIcon sx={{ color: "red" }} />
-											)}
-											<p>{fileInfo[2]?.name}</p>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</section>
-					</>
-				)}
-				{reqType === "Смена руководителя" && (
-					<section className="details-request">
-						<TitleDocument title="Требуемые документы" />
-						<div className="form_content">
-							<form className="request_form" onSubmit={handleSubmit(onSubmit)}>
-								<div className="inputs-list">
-									<TextField
-										{...register("fullName")}
-										type="text"
-										id="fullName"
-										className="request_inp"
-										// KM
-										placeholder="ФИО"
-									/>
-									<TextField
-										{...register("role")}
-										id="role"
-										type="text"
-										className="request_inp"
-										placeholder="Должность"
-										disabled={!dirtyFields.role}
-									/>
-									<TextField
-										{...register("phone")}
-										id="phone"
-										type="text"
-										className="request_inp"
-										placeholder="Номер телефона"
-										disabled={!dirtyFields.phone}
-									/>
-								</div>
-							</form>
-						</div>
-					</section>
-				)}
-			</div>
+              <ButtonPanelControl
+                icon={
+                  <UnsubscribeIcon
+                    sx={{ fontSize: "18px", fontWeight: "bold" }}
+                  />
+                }
+                text="Сохранить"
+                handleSubmit={handleSubmit(onSubmit)}
+                activeSendButton={activeSendButton}
+              />
+              {uinfo?.uType === "kvd" && (
+                <ButtonPanelControl
+                  icon={
+                    <CancelIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+                  }
+                  text="Отклонить"
+                  activeSendButton={true}
+                />
+              )}
+              {uinfo?.uType === "kvd" && (
+                <ButtonPanelControl
+                  icon={
+                    <DoneIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+                  }
+                  text="Завершить"
+                  activeSendButton={true}
+                />
+              )}
+            </div>
+          </div>
+          <Stepper
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              padding: "20px",
+              width: "100%",
+              // Убираем линии между шагами
+              "& .MuiStepConnector-root": {
+                display: "none",
+              },
+            }}
+            activeStep={steps[0]?.stepCode}
+            alternativeLabel
+          >
+            {steps.map((e, index) => (
+              <Step
+                key={index}
+                sx={{
+                  display: "flex",
+                  flex: "1",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  position: "relative",
+                  "&:first-of-type": {
+                    flex: "0 0 auto", // первый шаг фиксированный
+                    marginLeft: 0,
+                  },
+                  "&:last-of-type": {
+                    flex: "0 0 auto", // последний шаг фиксированный
+                    marginRight: 0,
+                  },
+                }}
+              >
+                <StepLabel>
+                  <p className="step-header">{e.stepName}</p>
+                  {/* <p>{e.initiators}</p> */}
+                </StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        </div>
+        {/* Детали заявки */}
+        {reqType === "Смена главного бухгалтера" && (
+          <ChangeChiefAccountant
+            currentUser={currentUser}
+            handleGetFile={handleGetFile}
+            fileInfo={fileInfo}
+            handleFileUploadedStatus={handleFileUploadedStatus}
+            files={files}
+            fileUploadedStatus={fileUploadedStatus}
+            currentOrganization={currentOrganization}
+            secondFileStatus={secondFileStatus}
+            thirdFileStatus={thirdFileStatus}
+            register={register}
+          />
+        )}
+        {reqType === "Смена руководителя" && (
+          <ChangeManagement
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            dirtyFields={dirtyFields}
+            register={register}
+          />
+        )}
+        {reqType === "Смена главного бухгалтера и руководителя" && (
+          <ChangeManagement
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            dirtyFields={dirtyFields}
+            register={register}
+          />
+        )}
+        {reqType === "Продление сертификата главного бухгалтера" && (
+          <ChangeManagement
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            dirtyFields={dirtyFields}
+            register={register}
+          />
+        )}
+        {reqType === "Продление сертификата руководителя" && (
+          <ChangeManagement
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            dirtyFields={dirtyFields}
+            register={register}
+          />
+        )}
+        {reqType === "Продажа токена" && (
+          <ChangeManagement
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            dirtyFields={dirtyFields}
+            register={register}
+          />
+        )}
+        {reqType === "Предоставление доступа к модулям" && (
+          <ChangeManagement
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            dirtyFields={dirtyFields}
+            register={register}
+          />
+        )}
+        {reqType === "Техническая поддержка" && (
+          <ChangeManagement
+            handleSubmit={handleSubmit}
+            onSubmit={onSubmit}
+            dirtyFields={dirtyFields}
+            register={register}
+          />
+        )}
+      </div>
 
-			{showTypeRequest && (
-				<TypeRequest
-					setReqType={(value: any) => setValue("reqType", value)}
-					setShowTypeRequest={setShowTypeRequest}
-					reqType={reqType}
-				/>
-			)}
-		</section>
-	);
+      {showTypeRequest && (
+        <TypeRequest
+          setReqType={(value: any) => setValue("reqType", value)}
+          setShowTypeRequest={setShowTypeRequest}
+          reqType={reqType}
+        />
+      )}
+    </section>
+  );
 };
 
 export default AddRequest;

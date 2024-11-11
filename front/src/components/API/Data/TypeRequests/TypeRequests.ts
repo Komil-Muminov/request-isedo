@@ -20,25 +20,30 @@ export const typeRequests: ItypeRequests[] = [
   {
     id: 3,
     image: changeOfAccountant,
-    name: "Продление сертификата главного бухгалтера",
+    name: "Смена главного бухгалтера и руководителя",
   },
   {
     id: 4,
     image: changeOfAccountant,
-    name: "Продление сертификата руководителя",
+    name: "Продление сертификата главного бухгалтера",
   },
   {
     id: 5,
     image: changeOfAccountant,
-    name: "Продажа токена",
+    name: "Продление сертификата руководителя",
   },
   {
     id: 6,
     image: changeOfAccountant,
-    name: "Предоставление доступа к модулям",
+    name: "Продажа токена",
   },
   {
     id: 7,
+    image: changeOfAccountant,
+    name: "Предоставление доступа к модулям",
+  },
+  {
+    id: 8,
     image: changeOfAccountant,
     name: "Техническая поддержка",
   },
