@@ -2,6 +2,8 @@ import "../UserOrOrganizationCard.css";
 import sampleImage from "../../../../../../back/uploads/929493.png";
 
 const UserCard = ({ currentUser }: any) => {
+  console.log(currentUser, "MUHSIDIN");
+
   return (
     <div className="info-accountant">
       <div className="wrapper-info">
