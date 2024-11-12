@@ -25,26 +25,26 @@ export const typeRequests: ItypeRequests[] = [
   {
     id: 4,
     image: changeOfAccountant,
-    name: "Продление сертификата главного бухгалтера",
+    name: "Выдача токена и сертификата",
   },
   {
     id: 5,
     image: changeOfAccountant,
-    name: "Продление сертификата руководителя",
+    name: "Выдача токена",
   },
   {
     id: 6,
     image: changeOfAccountant,
-    name: "Продажа токена",
+    name: "Выдача сертификата",
   },
   {
     id: 7,
     image: changeOfAccountant,
-    name: "Предоставление доступа к модулям",
+    name: "Смена пароля",
   },
   {
     id: 8,
     image: changeOfAccountant,
-    name: "Техническая поддержка",
+    name: "Создание ИНН в TFMIS",
   },
 ];

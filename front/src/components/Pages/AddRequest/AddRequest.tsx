@@ -45,6 +45,7 @@ import { getUsers, TGetUsers } from "../../API/GetUsers";
 import FileService from "../../UI/File Services/FileService";
 import ChangeChiefAccountant from "./Types of Requests/Change of chief accountant/ChangeChiefAccountant";
 import ChangeManagement from "./Types of Requests/Change of management/ChangeManagement";
+import TokenIssuance from "./Types of Requests/Token issuance/TokenIssuance";
 // import { toast, ToastContainer } from "react-toastify";
 
 const AddRequest: React.FC = () => {
@@ -203,12 +204,18 @@ const AddRequest: React.FC = () => {
     }
   }, [getOrganizationsQuery]);
 
+  // Данные карточки нынешнего главного бухгалтера
+  const currentAccountant = users?.find(
+    (user) =>
+      uinfo?.orgName === user.orgName &&
+      user.role === "Главный бухгалтер" &&
+      user.status === true
+  );
+
   // Данные карточки пользователя
-  const currentUser = users?.find((user) => {
-    return organizations?.find((org) => {
-      return org.userIds.find((userId) => userId === user.id);
-    });
-  });
+  const currentUser = users?.find((user) => user.username === uinfo?.username);
+
+  console.log(currentUser);
 
   // Данные карточки организации
   const currentOrganization = organizations?.find((org) => {
@@ -379,7 +386,7 @@ const AddRequest: React.FC = () => {
         {/* Детали заявки */}
         {reqType === "Смена главного бухгалтера" && (
           <ChangeChiefAccountant
-            currentUser={currentUser}
+            currentUser={currentAccountant}
             handleGetFile={handleGetFile}
             fileInfo={fileInfo}
             handleFileUploadedStatus={handleFileUploadedStatus}
@@ -395,7 +402,6 @@ const AddRequest: React.FC = () => {
           <ChangeManagement
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
-            dirtyFields={dirtyFields}
             register={register}
           />
         )}
@@ -403,47 +409,48 @@ const AddRequest: React.FC = () => {
           <ChangeManagement
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
-            dirtyFields={dirtyFields}
             register={register}
           />
         )}
-        {reqType === "Продление сертификата главного бухгалтера" && (
+        {reqType === "Выдача токена и сертификата" && (
           <ChangeManagement
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
-            dirtyFields={dirtyFields}
             register={register}
           />
         )}
-        {reqType === "Продление сертификата руководителя" && (
-          <ChangeManagement
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            dirtyFields={dirtyFields}
+        {reqType === "Выдача токена" && (
+          <TokenIssuance
+            currentUser={currentUser}
+            handleGetFile={handleGetFile}
+            fileInfo={fileInfo}
+            handleFileUploadedStatus={handleFileUploadedStatus}
+            files={files}
+            fileUploadedStatus={fileUploadedStatus}
+            currentOrganization={currentOrganization}
+            secondFileStatus={secondFileStatus}
+            thirdFileStatus={thirdFileStatus}
             register={register}
           />
         )}
-        {reqType === "Продажа токена" && (
+        {reqType === "Выдача сертификата" && (
           <ChangeManagement
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
-            dirtyFields={dirtyFields}
             register={register}
           />
         )}
-        {reqType === "Предоставление доступа к модулям" && (
+        {reqType === "Смена пароля" && (
           <ChangeManagement
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
-            dirtyFields={dirtyFields}
             register={register}
           />
         )}
-        {reqType === "Техническая поддержка" && (
+        {reqType === "Создание ИНН в TFMIS" && (
           <ChangeManagement
             handleSubmit={handleSubmit}
             onSubmit={onSubmit}
-            dirtyFields={dirtyFields}
             register={register}
           />
         )}

@@ -5,7 +5,6 @@ import { TextField } from "@mui/material";
 const ChangeManagement = ({
   handleSubmit,
   onSubmit,
-  dirtyFields,
   register,
 }: any) => {
   return (
@@ -28,7 +27,6 @@ const ChangeManagement = ({
               type="text"
               className="request_inp"
               placeholder="Должность"
-              disabled={!dirtyFields.role}
             />
             <TextField
               {...register("phone")}
@@ -36,7 +34,6 @@ const ChangeManagement = ({
               type="text"
               className="request_inp"
               placeholder="Номер телефона"
-              disabled={!dirtyFields.phone}
             />
           </div>
         </form>
