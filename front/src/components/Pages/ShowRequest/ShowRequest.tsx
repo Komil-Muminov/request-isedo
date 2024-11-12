@@ -43,6 +43,8 @@ import {
 import FileService from "../../UI/File Services/FileService";
 import PDFViewerService from "../../UI/PDF Viewer Service/PDFViewerService";
 import { postRequestFile } from "../../API/postRequestFile";
+import ShowChangeChiefAccountant from "./Show Types Of Request/Show Change of chief accountant/ShowChangeChiefAccountant";
+import ShowTokenIssuance from "./Show Types Of Request/Show Token issuance/ShowTokenIssuance";
 
 const ShowRequest = () => {
   const navigate = useNavigate();
@@ -174,6 +176,14 @@ const ShowRequest = () => {
       postFileMutation.mutate(formData);
     }
   };
+
+  // Данные карточки нынешнего главного бухгалтера
+  const currentAccountant = users?.find(
+    (user) =>
+      uinfo?.orgName === user.orgName &&
+      user.role === "Главный бухгалтер" &&
+      user.status === true
+  );
 
   // Данные карточки пользователя
   const currentUser = users?.find((user) => {
@@ -339,62 +349,24 @@ const ShowRequest = () => {
             ))}
           </Stepper>
         </section>
-        <section className="old-accountant">
-          <TitleDocument title="Прошлый главный бухгалтер" />
-          <div className="wrapper-cards">
-            <UserOrOrganizationCard
-              currentUser={currentUser}
-              title="Карточка пользователя"
-              PDFViewerService={<PDFViewerService item={fileInfo[0]} />}
-              // fileService={
-              //   <CardFileService
-              //     item={fileInfo[0]}
-              //     rqstsDataById={rqstsDataById}
-              //   />
-              // }
-            />
-            <UserOrOrganizationCard
-              currentOrganization={currentOrganization}
-              title="Карточка организации"
-            />
-          </div>
-        </section>
-        <section className="new-accountant">
-          <TitleDocument title="Новый главный бухгалтер" />
-          <div className="wrapper-cards">
-            <UserOrOrganizationCard
-              currentUser={rqstsDataById}
-              userType={uinfo?.uType}
-              title="Карточка пользователя"
-              PDFViewerService={
-                <div className="wrapper-new-user-files">
-                  <PDFViewerService
-                    currentFiles={rqstsDataById?.files}
-                    hideFirstItem={true}
-                  />
-                </div>
-              }
-              checkUser={
-                <div className="panel-check-user">
-                  <ButtonPanelControl
-                    icon={
-                      <PersonSearchIcon
-                        sx={{ fontSize: "18px", fontWeight: "bold" }}
-                      />
-                    }
-                    text="Проверить заявку"
-                    activeSendButton={disabledAddUserButton}
-                  />
-                </div>
-              }
-            />
-            <UserOrOrganizationCard
-              currentOrganization={currentOrganization}
-              title="Карточка организации"
-            />
-          </div>
-        </section>
-
+        {rqstsDataById?.reqType === "Смена главного бухгалтера" && (
+          <ShowChangeChiefAccountant
+            currentUser={currentUser}
+            fileInfo={fileInfo}
+            currentOrganization={currentOrganization}
+            rqstsDataById={rqstsDataById}
+            uinfo={uinfo}
+            disabledAddUserButton={disabledAddUserButton}
+          />
+        )}
+        {rqstsDataById?.reqType === "Выдача токена" && (
+          <ShowTokenIssuance
+            currentOrganization={currentOrganization}
+            rqstsDataById={rqstsDataById}
+            uinfo={uinfo}
+            disabledAddUserButton={disabledAddUserButton}
+          />
+        )}
         {/* Рабочее пространство */}
         {uinfo?.uType !== "bo" && (
           <WorkSpace

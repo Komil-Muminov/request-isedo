@@ -7,18 +7,7 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import UserOrOrganizationCard from "../../../../UI/UserOrOrganizationCard/UserOrOrganizationCard";
 import FileService from "../../../../UI/File Services/FileService";
 
-const TokenIssuance = ({
-  currentUser,
-  handleGetFile,
-  fileInfo,
-  handleFileUploadedStatus,
-  files,
-  fileUploadedStatus,
-  currentOrganization,
-  secondFileStatus,
-  thirdFileStatus,
-  register,
-}: any) => {
+const TokenIssuance = ({ currentUser, currentOrganization }: any) => {
   return (
     <>
       <section className="old-accountant">
@@ -27,23 +16,23 @@ const TokenIssuance = ({
           <UserOrOrganizationCard
             currentUser={currentUser}
             title="Карточка пользователя"
-            newFileService={<FileService handleGetFile={handleGetFile} />}
-            requiredFile={fileInfo[0]?.name}
-            handleFileUploadedStatus={handleFileUploadedStatus}
-            uploadedFile={files}
-            requiredDocuments={
-              <ul className="required-documents">
-                <p>Необходимые документы:</p>
-                <li>
-                  {fileUploadedStatus ? (
-                    <CheckCircleOutlineIcon sx={{ color: "green" }} />
-                  ) : (
-                    <HighlightOffIcon sx={{ color: "red" }} />
-                  )}
-                  <p>{fileInfo[0]?.name}</p>
-                </li>
-              </ul>
-            }
+            // newFileService={<FileService handleGetFile={handleGetFile} />}
+            // requiredFile={fileInfo[0]?.name}
+            // handleFileUploadedStatus={handleFileUploadedStatus}
+            // uploadedFile={files}
+            // requiredDocuments={
+            //   <ul className="required-documents">
+            //     <p>Необходимые документы:</p>
+            //     <li>
+            //       {fileUploadedStatus ? (
+            //         <CheckCircleOutlineIcon sx={{ color: "green" }} />
+            //       ) : (
+            //         <HighlightOffIcon sx={{ color: "red" }} />
+            //       )}
+            //       <p>{fileInfo[0]?.name}</p>
+            //     </li>
+            //   </ul>
+            // }
           />
           <UserOrOrganizationCard
             currentOrganization={currentOrganization}

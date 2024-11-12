@@ -42,7 +42,9 @@ const UserOrOrganizationCard = ({
       )}
 
       {requiredDocuments}
-      <div className="wrapper-pdf-viewer-service">{PDFViewerService}</div>
+      {PDFViewerService && (
+        <div className="wrapper-pdf-viewer-service">{PDFViewerService}</div>
+      )}
       {/* <div className="wrapper-card-file-service">{fileService}</div> */}
       {userType !== "bo" && checkUser}
     </div>

@@ -42,5 +42,24 @@
     ],
     "dateChange": "08.11.2024 в 11:54",
     "id": 1
+  },
+  {
+    "fullName": "Мухсиддин Махмадалиев",
+    "tax": "080005504",
+    "phone": "880001304",
+    "email": "muhsiddin@gmail.com",
+    "passport": "A0825871",
+    "role": "Руководитель",
+    "reqType": "Выдача токена",
+    "password": "123",
+    "stepCode": 0,
+    "stepTask": 0,
+    "dateTime": "12.11.2024.11:26",
+    "files": [],
+    "userId": 5,
+    "organizationId": 1,
+    "services": [],
+    "dataChange": "12.11.2024 в 11:26",
+    "id": 2
   }
 ]
