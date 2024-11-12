@@ -52,7 +52,7 @@
     "role": "Руководитель",
     "reqType": "Выдача токена",
     "password": "123",
-    "stepCode": 0,
+    "stepCode": 1,
     "stepTask": 0,
     "dateTime": "12.11.2024.11:26",
     "files": [],
