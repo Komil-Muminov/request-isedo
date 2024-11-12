@@ -23,8 +23,9 @@ const WorkSpace = ({
   currentUser,
   rqstsDataById,
   currentOrganization,
+  departmentsList,
 }: any) => {
-  const changeOfAccountant = [departments[0], departments[1], departments[2]];
+  const changeOfAccountant = departmentsList;
 
   const [currentDepartmentStageOne, setCurrentDepartmentStageOne] =
     useState<TDepartment[]>(changeOfAccountant);
@@ -35,22 +36,6 @@ const WorkSpace = ({
 
   const [currentDepartmentStageThree, setCurrentDepartmentStageThree] =
     useState<TDepartment[]>([departments[0], departments[3]]);
-
-  // useEffect(() => {
-  //   if (rqstsDataById?.stepTask > 0) {
-  //     setCurrentDepartment((prevDepartments) => {
-  //       const newDepartments = [departments[1], departments[2]];
-  //       const combinedDepartments = [...prevDepartments, ...newDepartments];
-
-  //       // Удаляем дубликаты, оставляя уникальные элементы
-  //       const uniqueDepartments = Array.from(
-  //         new Set(combinedDepartments.map((dept) => dept.id))
-  //       ).map((id) => combinedDepartments.find((dept) => dept.id === id));
-
-  //       return uniqueDepartments;
-  //     });
-  //   }
-  // }, [rqstsDataById?.stepTask]);
 
   const [users, setUsers] = useState<TGetUsers[] | null>(null);
 
@@ -103,21 +88,6 @@ const WorkSpace = ({
 
     setCurrentDepartment(updatedArray);
   };
-
-  // useEffect(() => {
-  //   if (rqstsDataById?.services.length > 0) {
-  //     setCurrentDepartmentStageOne((prevDepartments) => {
-  //       // Проверяем, уже добавлен ли департамент
-  //       const isDepartmentAdded = prevDepartments.some(
-  //         (dept) => dept.id === departments[3].id
-  //       );
-  //       if (!isDepartmentAdded) {
-  //         return [...prevDepartments, departments[3]];
-  //       }
-  //       return prevDepartments; // Возвращаем предыдущее состояние, если департамент уже есть
-  //     });
-  //   }
-  // }, [rqstsDataById?.services]);
 
   // Department Customer
 
@@ -265,20 +235,6 @@ const WorkSpace = ({
     }
   };
 
-  // const getPercentStageOne = (item: any) => {
-  //   if (
-  //     (item?.name === "Шуъба оид ба кор бо муштариён" &&
-  //       getCertificateUser?.statusCode === 5) ||
-  //     (item?.name === "Шуъба оид ба амнияти иттилоотӣ" &&
-  //       currentUser?.status === false) ||
-  //     (item?.name === "Шуъба оид ба хизматрасонии техникӣ" &&
-  //       currentVPN?.status === false)
-  //   ) {
-  //     return "33";
-  //   }
-  //   return "0";
-  // };
-
   const departmentPercentStatus = [
     {
       name: "Шуъба оид ба кор бо муштариён",
@@ -302,13 +258,8 @@ const WorkSpace = ({
     return total === 99 ? 100 : total; // для корректного отображения 100%
   };
 
-  // Вызов ProgressBar с учётом логики getPercentStageOne:
-  // const getPercentStageValue  = (item: any) => (getPercentStageOne(item) === "33" ? 1 : 0);
-
   const getPercentStageValue = (item: any, stage: number) =>
     getDepartmentPercent(item, stage) === "0" ? "50" : "100";
-
-  console.log(calculateTotalPercent(3));
 
   return (
     <section className="wrapper-work-space">

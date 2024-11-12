@@ -211,6 +211,8 @@ const ShowRequest = () => {
       return currentOrganization?.userIds.includes(e.id);
   });
 
+  // ======================= WORKSPACE =====================
+
   return (
     <main className="show-content">
       <div className="container">
@@ -365,14 +367,7 @@ const ShowRequest = () => {
             rqstsDataById={rqstsDataById}
             uinfo={uinfo}
             disabledAddUserButton={disabledAddUserButton}
-          />
-        )}
-        {/* Рабочее пространство */}
-        {uinfo?.uType !== "bo" && (
-          <WorkSpace
             currentUser={currentUser}
-            rqstsDataById={rqstsDataById}
-            currentOrganization={currentOrganization}
           />
         )}
         {rqstsDataById?.stepCode === 3 && (
@@ -382,7 +377,6 @@ const ShowRequest = () => {
               <div className="file-list">
                 <PDFViewerService title="Счет-фактура" />
                 <PDFViewerService title="Замима" hideFirstItem={true} />
-
                 {/* {rqstsDataById?.stepCode === 3 && uinfo?.uType === "bo" && (
                 <>
                   <PDFViewerService title="Логин TFMIS" />
