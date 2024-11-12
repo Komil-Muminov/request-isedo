@@ -230,6 +230,7 @@ const Profile: React.FC = () => {
 							</div>
 						</aside>
 					</div>
+					<WebToolBox />
 				</div>
 			</div>
 		</section>
