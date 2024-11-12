@@ -27,18 +27,18 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
 	}, [percentage]);
 
 	// Gift
-	const giveGift = (percent: number | null) => {
-		if (percent === 100) {
-			alert("Поздравляем вы все задачи сделали");
-		}
-	};
+	// const giveGift = (percent: number | null) => {
+	// 	if (percent === 100) {
+	// 		console.log(Поздравляем вы все задачи сделали);
+	// 	}
+	// };
 
 	// Лог для отладки
 
 	// UseEffect
-	useEffect(() => {
-		giveGift(percentage);
-	}, [percentage]);
+	// useEffect(() => {
+	// 	giveGift(percentage);
+	// }, [percentage]);
 	return (
 		<Box
 			position="relative"
