@@ -68,25 +68,6 @@ const Udetails: React.FC = () => {
 
 	const [chart, setSchart] = useState<string>("");
 
-	useEffect(() => {
-		if (document.querySelector(".profile.dark-mode")) {
-			document
-				.querySelector(".uwidget__item--special")
-				?.classList.add("dark-mode");
-
-			document
-				.querySelector(".uwidget__item-special-2")
-				?.classList.add("dark-mode");
-		} else {
-			document
-				.querySelector(".uwidget__item--special")
-				?.classList.remove("dark-mode");
-			document
-				.querySelector(".uwidget__item-special-2")
-				?.classList.remove("dark-mode");
-		}
-	}, []);
-
 	const handleChart = (state: string) => {
 		if (chart === state) {
 			setSchart("");

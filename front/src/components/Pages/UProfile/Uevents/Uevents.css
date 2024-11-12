@@ -15,6 +15,10 @@
 	margin-bottom: 10px;
 }
 
+.profile.dark-mode .uevents__card {
+	background: linear-gradient(360deg, #84faafd9 0%, #8fd3f4 100%);
+}
+
 .uevents__card:hover {
 	transform: translateY(-8px);
 	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15),
