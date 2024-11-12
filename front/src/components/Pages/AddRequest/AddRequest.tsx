@@ -257,7 +257,32 @@ const AddRequest: React.FC = () => {
       dataChange: formattedDate,
     };
 
-    postRqstsMutation.mutate(updateReqData);
+    const reqTypeDataTokenIssuance = {
+      fullName: currentUser?.fullName,
+      tax: currentUser?.tax,
+      phone: currentUser?.phone,
+      email: currentUser?.email,
+      passport: currentUser?.passport,
+      role: currentUser?.role,
+      reqType: reqType,
+      password: "123",
+      stepCode: stepFound?.stepCode || 0,
+      stepTask: 0,
+      dateTime: date,
+      files: files,
+      userId: uinfo?.userId,
+      organizationId: currentOrganization?.id,
+      services: [],
+      dataChange: formattedDate,
+    };
+
+    switch (reqType) {
+      case "Смена главного бухгалтера":
+        postRqstsMutation.mutate(updateReqData);
+        break;
+      case "Выдача токена":
+        postRqstsMutation.mutate(reqTypeDataTokenIssuance);
+    }
 
     alert(
       `Новый главных бухгалтер ${data?.fullName} не найден в системе, можете продолжить заявку.`
@@ -422,15 +447,7 @@ const AddRequest: React.FC = () => {
         {reqType === "Выдача токена" && (
           <TokenIssuance
             currentUser={currentUser}
-            handleGetFile={handleGetFile}
-            fileInfo={fileInfo}
-            handleFileUploadedStatus={handleFileUploadedStatus}
-            files={files}
-            fileUploadedStatus={fileUploadedStatus}
             currentOrganization={currentOrganization}
-            secondFileStatus={secondFileStatus}
-            thirdFileStatus={thirdFileStatus}
-            register={register}
           />
         )}
         {reqType === "Выдача сертификата" && (
