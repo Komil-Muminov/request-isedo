@@ -50,15 +50,20 @@ const Profile: React.FC = () => {
 		totalEvents: 0,
 	});
 
-	useEffect(() => {
-		const getLocalProgressBar = JSON.parse(
-			localStorage.getItem("progressBar") ?? "{}",
-		);
-		setProgressBar((prev) => ({
-			...prev,
-			...getLocalProgressBar,
-		}));
-	}, []);
+	// DarkMode
+	// useEffect(() => {
+	// 	const getLocalProgressBar = JSON.parse(
+	// 		localStorage.getItem("progressBar") ?? "{}",
+	// 	);
+	// 	setProgressBar((prev) => ({
+	// 		...prev,
+	// 		...getLocalProgressBar,
+	// 	}));
+	// }, []);
+
+	// darkMode
+	const { handleIsDarkMode, isDarkMode } = useDarkMode(".profile");
+	// darkMode
 
 	useEffect(() => {
 		const completedEvents = uEvents.filter((item) => item.isDone).length;
@@ -120,6 +125,7 @@ const Profile: React.FC = () => {
 	return (
 		<section className="sections profile">
 			<div className="profile__container">
+				<button onClick={handleIsDarkMode}>Сменить тему 222</button>
 				<div className="profile_content">
 					<div className={`${"profile_left"}`}>
 						<Button
@@ -157,7 +163,6 @@ const Profile: React.FC = () => {
 							</Accordion>
 						))}
 					</div>
-
 					<div className="wrapper-profile">
 						<div className="profile_style profile_center">
 							<div className="profile__center_content">
