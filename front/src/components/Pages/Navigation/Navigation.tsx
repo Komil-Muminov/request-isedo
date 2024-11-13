@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import log from "../../../assets/Formal/log.webp";
 import { Avatar } from "@mui/material";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -204,7 +204,7 @@ export const Navigation: React.FC = () => {
 									<Tooltip title="Open settings">
 										<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
 											<Avatar
-												alt="Remy Sharp"
+												alt="alt"
 												src={
 													getUinfoQuery.data?.photo
 														? `http://localhost:3000${getUinfoQuery.data.photo}`
