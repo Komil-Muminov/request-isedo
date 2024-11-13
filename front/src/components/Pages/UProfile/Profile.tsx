@@ -22,7 +22,6 @@ import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ProgressBar from "../../UI/Progress-bar/Progress-bar";
-import { useDarkMode } from "../../API/Hooks/UseDarkMode";
 
 import "./Profile.css";
 import "./Udetails/Udetails.css";
@@ -60,10 +59,6 @@ const Profile: React.FC = () => {
 	// 		...getLocalProgressBar,
 	// 	}));
 	// }, []);
-
-	// darkMode
-	const { handleIsDarkMode, isDarkMode } = useDarkMode(".profile");
-	// darkMode
 
 	useEffect(() => {
 		const completedEvents = uEvents.filter((item) => item.isDone).length;
@@ -125,7 +120,6 @@ const Profile: React.FC = () => {
 	return (
 		<section className="sections profile">
 			<div className="profile__container">
-				<button onClick={handleIsDarkMode}>Сменить тему 222</button>
 				<div className="profile_content">
 					<div className={`${"profile_left"}`}>
 						<Button
@@ -198,9 +192,9 @@ const Profile: React.FC = () => {
 								<div className="profile__events">
 									{showEvents && <UeventsForm onAddEvent={setUEvents} />}
 
-									<div className="profile__events-list">
+									<ul className="profile__events-list">
 										{uEvents.map((item, id) => (
-											<div key={id} className="profile__events-item">
+											<li key={id} className="profile__events-item">
 												<Uevents key={id} title={item.title} desc={item.desc} />
 												<div className="profile__events-item-btn">
 													<Button
@@ -228,9 +222,9 @@ const Profile: React.FC = () => {
 														<CheckCircleOutlineIcon />
 													</Button>
 												</div>
-											</div>
+											</li>
 										))}
-									</div>
+									</ul>
 								</div>
 							</div>
 						</aside>
