@@ -167,12 +167,14 @@ const Profile: React.FC = () => {
 							<div className="profile_ucalendar">
 								<Ucalendar />
 							</div>
-							<h3 className="profile__events-title">Ваши задачи</h3>
+							<h3 className="profile__events-title">Предстоящие задачи</h3>
 							<div className="profile_events">
 								<div className="profile__events-progress-bar">
 									{uEvents?.length > 0 ? (
 										<>
-											<p className="progressbar__text">Прогресс</p>
+											<p className="progressbar__text">
+												Индикатор выполненых задач
+											</p>
 											<ProgressBar
 												completed={progressBar.completedEvents}
 												total={progressBar.totalEvents}
