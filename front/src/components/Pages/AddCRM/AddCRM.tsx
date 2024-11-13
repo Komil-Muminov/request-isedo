@@ -17,7 +17,6 @@ import { Loader } from "../../UI/Loader/Loader";
 import { GetMeType, useAuth } from "../../API/Hooks/useAuth";
 import { queryClient } from "../../../queryClient";
 import { useQuery } from "@tanstack/react-query";
-import ButtonPanelControl from "../../UI/ButtonPanelControl/ButtonPanelControl";
 import { useNavigate } from "react-router-dom";
 
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -27,6 +26,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import DoneIcon from "@mui/icons-material/Done";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import FileService from "../../UI/File Services/FileService";
+import ButtonPanelControl from "../../UI/ButtonPanelControl/ButtonPanelControl";
 
 const AddCRM = () => {
   const navigate = useNavigate();

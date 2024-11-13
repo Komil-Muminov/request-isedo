@@ -4,7 +4,6 @@ import UserOrOrganizationCard from "../../../../UI/UserOrOrganizationCard/UserOr
 import PDFViewerService from "../../../../UI/PDF Viewer Service/PDFViewerService";
 import ButtonPanelControl from "../../../../UI/ButtonPanelControl/ButtonPanelControl";
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
-import WorkSpace from "../../../../UI/WorkSpace/WorkSpace";
 import { departments } from "../../../../API/Data/Departments/Departments";
 
 const ShowTokenIssuance = ({
@@ -30,15 +29,6 @@ const ShowTokenIssuance = ({
           />
         </div>
       </section>
-      {/* Рабочее пространство */}
-      {uinfo?.uType !== "bo" && (
-        <WorkSpace
-          currentUser={currentUser}
-          rqstsDataById={rqstsDataById}
-          currentOrganization={currentOrganization}
-          departmentsList={[departments[0]]}
-        />
-      )}
     </>
   );
 };

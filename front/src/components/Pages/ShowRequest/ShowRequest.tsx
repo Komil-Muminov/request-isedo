@@ -23,7 +23,6 @@ import "./ShowRequest.css";
 
 import "../../../index.css";
 import TitleDocument from "../../UI/TitleDocument/TitleDocument";
-import WorkSpace from "../../UI/WorkSpace/WorkSpace";
 import { putRqstsById, PutRqstsByIdType } from "../../API/PutRqstById";
 import UserOrOrganizationCard from "../../UI/UserOrOrganizationCard/UserOrOrganizationCard";
 import CardFileService from "../../UI/CardFileService/CardFileService";
