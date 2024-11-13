@@ -123,6 +123,15 @@ th {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.121);
 }
 
+.wrapper-documents {
+  flex-direction: column;
+}
+
+.wrapper-documents h1 {
+  padding: 0 20px 20px 20px;
+  margin: 0 auto;
+}
+
 .wrapper-cards-padding {
   padding: 20px;
 }

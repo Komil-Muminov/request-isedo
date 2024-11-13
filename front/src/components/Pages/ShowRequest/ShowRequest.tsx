@@ -23,7 +23,6 @@ import "./ShowRequest.css";
 
 import "../../../index.css";
 import TitleDocument from "../../UI/TitleDocument/TitleDocument";
-import WorkSpace from "../../UI/WorkSpace/WorkSpace";
 import { putRqstsById, PutRqstsByIdType } from "../../API/PutRqstById";
 import UserOrOrganizationCard from "../../UI/UserOrOrganizationCard/UserOrOrganizationCard";
 import CardFileService from "../../UI/CardFileService/CardFileService";
@@ -211,6 +210,21 @@ const ShowRequest = () => {
       return currentOrganization?.userIds.includes(e.id);
   });
 
+  const handleActiveStep = () => {
+    if (
+      rqstsDataById?.stepCode === 3 ||
+      rqstsDataById?.reqType === "Смена главного бухгалтера"
+    ) {
+      return rqstsDataById?.stepCode + 1;
+    } else if (
+      rqstsDataById?.stepCode === 2 ||
+      rqstsDataById?.reqType === "Выдача токена"
+    ) {
+      return rqstsDataById?.stepCode + 2;
+    }
+    return rqstsDataById?.stepCode;
+  };
+
   // ======================= WORKSPACE =====================
 
   return (
@@ -281,11 +295,7 @@ const ShowRequest = () => {
                 display: "none",
               },
             }}
-            activeStep={
-              rqstsDataById?.stepCode === 3
-                ? rqstsDataById?.stepCode + 1
-                : rqstsDataById?.stepCode
-            }
+            activeStep={handleActiveStep()}
             alternativeLabel
           >
             {steps.map((e, index) => (
@@ -366,14 +376,12 @@ const ShowRequest = () => {
             currentOrganization={currentOrganization}
             rqstsDataById={rqstsDataById}
             uinfo={uinfo}
-            disabledAddUserButton={disabledAddUserButton}
-            currentUser={currentUser}
           />
         )}
-        {rqstsDataById?.stepCode === 3 && (
+        {rqstsDataById && rqstsDataById?.stepCode >= 3 && (
           <section className="access-system">
             <TitleDocument title="Документы услуг" />
-            <div className="wrapper-cards">
+            <div className="wrapper-cards wrapper-documents">
               <div className="file-list">
                 <PDFViewerService title="Счет-фактура" />
                 <PDFViewerService title="Замима" hideFirstItem={true} />
@@ -383,11 +391,11 @@ const ShowRequest = () => {
                   <PDFViewerService title="Логин VPN" />
                 </>
               )} */}
+              </div>
                 <h1 style={{ fontSize: "16px" }}>
                   Логин и пароль для входа в системы отправлены на электронную
                   почту нового главного бухгалтера.
                 </h1>
-              </div>
             </div>
           </section>
         )}

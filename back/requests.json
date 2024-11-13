@@ -52,14 +52,17 @@
     "role": "Руководитель",
     "reqType": "Выдача токена",
     "password": "123",
-    "stepCode": 1,
+    "stepCode": 3,
     "stepTask": 0,
     "dateTime": "12.11.2024.11:26",
     "files": [],
     "userId": 5,
     "organizationId": 1,
-    "services": [],
+    "services": [
+      4
+    ],
     "dataChange": "12.11.2024 в 11:26",
-    "id": 2
+    "id": 2,
+    "dateChange": "13.11.2024 в 12:07"
   }
 ]

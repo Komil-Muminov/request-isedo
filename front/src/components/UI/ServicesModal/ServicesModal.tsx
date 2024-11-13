@@ -16,7 +16,7 @@ const ServicesModal = ({
   useEffect(() => {
     const defaultSelectedIndexes = services
       ?.map((e: any, index: number) =>
-        e.reqType === rqstsDataById?.reqType ? index : -1
+        e.reqType.includes(rqstsDataById?.reqType) ? index : -1
       )
       .filter((index: number) => index !== -1); // убираем все -1
     setSelectedRowIndexes(defaultSelectedIndexes);

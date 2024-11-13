@@ -8,7 +8,7 @@ export interface TServices {
   tax: string;
   sumTax: number;
   total: number;
-  reqType: string;
+  reqType: string[] | string;
 }
 
 const token = localStorage.getItem("token");

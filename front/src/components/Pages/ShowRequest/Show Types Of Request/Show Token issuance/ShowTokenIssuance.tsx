@@ -4,15 +4,13 @@ import UserOrOrganizationCard from "../../../../UI/UserOrOrganizationCard/UserOr
 import PDFViewerService from "../../../../UI/PDF Viewer Service/PDFViewerService";
 import ButtonPanelControl from "../../../../UI/ButtonPanelControl/ButtonPanelControl";
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
-import WorkSpace from "../../../../UI/WorkSpace/WorkSpace";
 import { departments } from "../../../../API/Data/Departments/Departments";
+import WorkSpaceTokenIssuance from "../../../../UI/WorkSpace/Workspace Token issuance/WorkSpaceTokenIssuance";
 
 const ShowTokenIssuance = ({
   currentOrganization,
   rqstsDataById,
   uinfo,
-  disabledAddUserButton,
-  currentUser,
 }: any) => {
   return (
     <>
@@ -32,11 +30,9 @@ const ShowTokenIssuance = ({
       </section>
       {/* Рабочее пространство */}
       {uinfo?.uType !== "bo" && (
-        <WorkSpace
-          currentUser={currentUser}
+        <WorkSpaceTokenIssuance
           rqstsDataById={rqstsDataById}
           currentOrganization={currentOrganization}
-          departmentsList={[departments[0]]}
         />
       )}
     </>
