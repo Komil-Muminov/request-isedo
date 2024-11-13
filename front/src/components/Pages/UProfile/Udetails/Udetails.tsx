@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { GetMeType, useAuth } from "../../../API/Hooks/useAuth";
 import defUphoto from "../../../../assets/ErrorPage.jpg";
 import { useQuery, useMutation } from "@tanstack/react-query";
@@ -76,7 +75,13 @@ const Udetails: React.FC = () => {
 		}
 	};
 
-	const { darkModeToggle } = useDarkMode();
+	const { handleIsDarkMode, isDarkMode } = useDarkMode(
+		".profile",
+		".navigation__section",
+		".register__section",
+		".uwidget__item--special",
+		".uwidget__item-special-2 ",
+	);
 
 	return (
 		<>
@@ -105,7 +110,7 @@ const Udetails: React.FC = () => {
 												: ""
 										}`}
 										title="Сменить тему"
-										onClick={darkModeToggle}
+										onClick={handleIsDarkMode}
 									></button>
 								</div>
 								<div className="user-details_photo">

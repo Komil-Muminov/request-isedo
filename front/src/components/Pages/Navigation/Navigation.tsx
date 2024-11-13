@@ -5,7 +5,6 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { queryClient } from "../../../queryClient";
 import { useAuth } from "../../API/Hooks/useAuth";
-import { Loader } from "../../UI/Loader/Loader";
 import { logout } from "../../API/Logout";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -19,7 +18,6 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { useRef } from "react";
 
 import "./Navigation.css";
 
@@ -31,15 +29,15 @@ export const Navigation: React.FC = () => {
 			mutationFn: () => logout(),
 			onSuccess: () => {
 				queryClient.invalidateQueries({ queryKey: ["users", "me"] });
-				console.log(`logout invalidated usersMe`);
+				queryClient.setQueryData(["users", "me"], null);
 				navigate("/");
 			},
 		},
 		queryClient,
 	);
 
-	const handleLogout = () => {
-		logoutMutate.mutate();
+	const handleLogout = async () => {
+		await logoutMutate.mutateAsync();
 	};
 
 	// UserAvatar
@@ -74,31 +72,14 @@ export const Navigation: React.FC = () => {
 		queryClient,
 	);
 
-	const [navIsDarkMode, setNavIsDarkMode] = useState<boolean>(() => {
-		const getDarkMode = localStorage.getItem("darkMode");
-		return getDarkMode === "true";
-	});
-	useEffect(() => {
-		if (navIsDarkMode) {
-			console.log(localStorage.getItem("darkMode"));
-			document
-				.querySelector(".navigation__section")
-				?.classList.add("dark-mode");
-		} else {
-			document
-				.querySelector(".navigation__section")
-				?.classList.remove("dark-mode");
-		}
-	}, [navIsDarkMode]);
-
 	return (
 		<>
 			<section className="sections navigation__section">
 				<div className="container">
 					<div className="navigation__content">
-						<nav className="nav_info">
-							{/* <ul className="nav_info-list"> */}
-							{/* <li className="info_list-item mulish-info-list-item">
+						{/* <nav className="nav_info"> */}
+						{/* <ul className="nav_info-list"> */}
+						{/* <li className="info_list-item mulish-info-list-item">
 									<svg
 										width="8px"
 										height="8px"
@@ -139,7 +120,7 @@ export const Navigation: React.FC = () => {
 										<span className=""> 123456789</span>
 									</div>
 								</li> */}
-							{/* <li className="info_list-item mulish-info-list-item">
+						{/* <li className="info_list-item mulish-info-list-item">
 									<svg
 										width="8px"
 										height="8px"
@@ -165,7 +146,7 @@ export const Navigation: React.FC = () => {
 									</div>
 								</li> */}
 
-							{/* <li className="info_list-item mulish-info-list-item">
+						{/* <li className="info_list-item mulish-info-list-item">
 									<svg
 										width="8px"
 										height="8px"
@@ -190,9 +171,9 @@ export const Navigation: React.FC = () => {
 										</span>
 									</div>
 								</li> */}
-							{/* Другие элементы списка */}
-							{/* </ul> */}
-						</nav>
+						{/* Другие элементы списка */}
+						{/* </ul> */}
+						{/* </nav> */}
 
 						<div className="nav__log">
 							<Link to="requests" className="nav__log-account">

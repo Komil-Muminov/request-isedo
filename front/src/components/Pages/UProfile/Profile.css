@@ -312,7 +312,8 @@
 .profile__events-item {
 	display: flex;
 	flex-direction: column;
-	width: calc((100% - 10px * 2) / 3);
+	width: 100%;
+	/* width: calc((100% - 10px * 2) / 3); */
 }
 
 .profile__events-title {
@@ -340,12 +341,15 @@
 .profile__events-item-btn {
 	display: flex;
 	align-items: center;
-	gap: 5px;
+	justify-content: center;
+	max-width: max-content;
+	/* gap: 5px; */
 	background: rgba(255, 255, 255, 0.2);
 	border-radius: 15px;
 	backdrop-filter: blur(20px) saturate(180%);
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 	border: 1px solid rgba(255, 255, 255, 0.3);
+	margin: 0 auto;
 }
 
 .profile__events-delete svg {
