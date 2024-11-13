@@ -167,10 +167,17 @@ const CreateInvoice = ({
 
     posInvoicesMutation.mutate(updateReqData);
 
+    const handleCurrentStepCode = () => {
+      if (rqstsDataById?.reqType === "Выдача токена") {
+        return rqstsDataById.stepCode + 2;
+      }
+      return rqstsDataById.stepCode + 1;
+    };
+
     if (rqstsDataById)
       putRqstsByIdMutation.mutate({
         ...rqstsDataById,
-        stepCode: rqstsDataById && rqstsDataById.stepCode + 1,
+        stepCode: handleCurrentStepCode(),
       });
   };
 

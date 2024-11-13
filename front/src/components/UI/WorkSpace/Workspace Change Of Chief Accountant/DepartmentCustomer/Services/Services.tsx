@@ -40,9 +40,11 @@ const Services = ({ handleShowServicesList, rqstsDataById, executor }: any) => {
     }
   }, [getServicesQuery]);
 
-  const servicesFilteredByRequestId = services.filter(
-    (e) => e.reqType === rqstsDataById?.reqType
-  );
+  const servicesFilteredByRequestId = services.filter((service) => {
+    return service.reqType.includes(rqstsDataById?.reqType);
+  });
+
+  console.log(servicesFilteredByRequestId, "============");
 
   console.log(servicesFilteredByRequestId);
 
@@ -89,7 +91,7 @@ const Services = ({ handleShowServicesList, rqstsDataById, executor }: any) => {
     handleShow(false);
   };
 
-  console.log(serviceIds);
+  console.log(selectedRowIndexes);
 
   const handleSubmit = () => {
     const now = new Date();
@@ -134,6 +136,8 @@ const Services = ({ handleShowServicesList, rqstsDataById, executor }: any) => {
       return null;
     }
   };
+
+  console.log(servicesList, servicesFilteredByRequestId);
 
   return (
     <>

@@ -5,13 +5,12 @@ import PDFViewerService from "../../../../UI/PDF Viewer Service/PDFViewerService
 import ButtonPanelControl from "../../../../UI/ButtonPanelControl/ButtonPanelControl";
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 import { departments } from "../../../../API/Data/Departments/Departments";
+import WorkSpaceTokenIssuance from "../../../../UI/WorkSpace/Workspace Token issuance/WorkSpaceTokenIssuance";
 
 const ShowTokenIssuance = ({
   currentOrganization,
   rqstsDataById,
   uinfo,
-  disabledAddUserButton,
-  currentUser,
 }: any) => {
   return (
     <>
@@ -29,6 +28,13 @@ const ShowTokenIssuance = ({
           />
         </div>
       </section>
+      {/* Рабочее пространство */}
+      {uinfo?.uType !== "bo" && (
+        <WorkSpaceTokenIssuance
+          rqstsDataById={rqstsDataById}
+          currentOrganization={currentOrganization}
+        />
+      )}
     </>
   );
 };

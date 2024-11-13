@@ -11,7 +11,10 @@ import CertificateRevocation from "./CertificatesCenter/CertificateRevocation/Ce
 import InstallCertificate from "./Installing a certificate/InstallCertificate";
 import CreateOrganizationCard from "./Create organization card/CreateOrganizationCard";
 import { useQuery } from "@tanstack/react-query";
-import { getCertificates, TCertificates } from "../../../../API/GetCertificates";
+import {
+  getCertificates,
+  TCertificates,
+} from "../../../../API/GetCertificates";
 
 const DepartmentCustomer = ({
   rqstsDataById,
