@@ -4,12 +4,15 @@ import UserOrOrganizationCard from "../../../../UI/UserOrOrganizationCard/UserOr
 import PDFViewerService from "../../../../UI/PDF Viewer Service/PDFViewerService";
 import ButtonPanelControl from "../../../../UI/ButtonPanelControl/ButtonPanelControl";
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
+import WorkSpace from "../../../../UI/WorkSpace/WorkSpace";
+import { departments } from "../../../../API/Data/Departments/Departments";
 
 const ShowTokenIssuance = ({
   currentOrganization,
   rqstsDataById,
   uinfo,
   disabledAddUserButton,
+  currentUser,
 }: any) => {
   return (
     <>
@@ -20,27 +23,6 @@ const ShowTokenIssuance = ({
             currentUser={rqstsDataById}
             userType={uinfo?.uType}
             title="Карточка пользователя"
-            PDFViewerService={
-              <div className="wrapper-new-user-files">
-                <PDFViewerService
-                  currentFiles={rqstsDataById?.files}
-                  hideFirstItem={true}
-                />
-              </div>
-            }
-            checkUser={
-              <div className="panel-check-user">
-                <ButtonPanelControl
-                  icon={
-                    <PersonSearchIcon
-                      sx={{ fontSize: "18px", fontWeight: "bold" }}
-                    />
-                  }
-                  text="Проверить заявку"
-                  activeSendButton={disabledAddUserButton}
-                />
-              </div>
-            }
           />
           <UserOrOrganizationCard
             currentOrganization={currentOrganization}
@@ -48,6 +30,15 @@ const ShowTokenIssuance = ({
           />
         </div>
       </section>
+      {/* Рабочее пространство */}
+      {uinfo?.uType !== "bo" && (
+        <WorkSpace
+          currentUser={currentUser}
+          rqstsDataById={rqstsDataById}
+          currentOrganization={currentOrganization}
+          departmentsList={[departments[0]]}
+        />
+      )}
     </>
   );
 };
