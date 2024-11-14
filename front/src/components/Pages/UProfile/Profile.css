@@ -387,9 +387,15 @@
 .profile__show-aside-btn {
 	content: "";
 	position: absolute;
-	right: 33%;
-	bottom: 90%;
+	bottom: 0;
+	right: 0;
+	top: 120%;
 	max-width: max-content;
 	font-size: 20px;
 }
+
+.profile.dark-mode .profile__show-aside-btn svg {
+	color: #fff;
+}
+
 /* ShowRightAside */
