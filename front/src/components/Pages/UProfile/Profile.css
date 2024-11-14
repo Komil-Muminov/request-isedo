@@ -132,7 +132,7 @@
 		0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-	/* // Сделать showAside */
+/* // Сделать showAside */
 /* .profile__center-full .profile__show-aside-btn svg path {
 	fill: #fff;
 } */
@@ -288,9 +288,10 @@
 		rgb(63, 76, 119) 70.2%
 	);
 	border-radius: 20px;
-	color: #fff;
+	color: #333;
 	padding: 15px 13px;
 	min-height: 300px;
+	background: #fff;
 }
 .profile__events {
 	display: flex;
@@ -328,6 +329,10 @@
 	text-align: center;
 }
 
+.profile.dark-mode .profile__events-progress-bar span {
+	color: #fff;
+}
+
 .show-events-form-btn {
 	align-self: center;
 	background-color: #ff8585ab;
@@ -353,6 +358,8 @@
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	margin: 0 auto;
+	background: #000000b3;
+	border: none;
 }
 
 .profile__events-delete svg {
@@ -363,7 +370,8 @@
 	fill: #ffffff;
 }
 
-.progressbar__text {
+.profile.dark-mode .progressbar__text {
+	color: #fff;
 	margin-bottom: 10px;
 }
 /* DarkMode */
