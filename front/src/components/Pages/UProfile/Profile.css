@@ -119,7 +119,7 @@
 	display: grid;
 	grid-template-columns: repeat(12, 1fr);
 	grid-template-rows: auto;
-	gap: 10px;
+	gap: 25px;
 }
 
 .profile_style {
@@ -132,10 +132,14 @@
 		0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
+/* // Сделать showAside */
+/* .profile__center-full .profile__show-aside-btn svg path {
+	fill: #fff;
+} */
+
 .profile_left {
 	display: flex;
 	justify-content: space-between;
-
 	border-radius: 10px;
 	padding: 30px;
 	border: 1px solid #0000000f;
@@ -144,11 +148,6 @@
 		0 2px 4px -1px rgba(0, 0, 0, 0.06);
 	top: 13%;
 	width: 100%;
-	/* max-height: 200px; */
-	/* max-width: 300px; */
-	/* left: 18%; */
-	/* position: fixed; */ /* justify-content: center; */
-	/* flex-direction: column; */
 }
 
 /* Убираем маргин у элементов аккордиона */
@@ -170,6 +169,11 @@
 	grid-column: 1/9;
 	grid-row: 1/1;
 }
+/* showAside true ? */
+.profile__center-full {
+	grid-column: 1/13;
+}
+/* showAside true ? */
 
 .profile_right {
 	grid-area: profileRight;
@@ -284,9 +288,10 @@
 		rgb(63, 76, 119) 70.2%
 	);
 	border-radius: 20px;
-	color: #fff;
+	color: #333;
 	padding: 15px 13px;
 	min-height: 300px;
+	background: #fff;
 }
 .profile__events {
 	display: flex;
@@ -324,6 +329,10 @@
 	text-align: center;
 }
 
+.profile.dark-mode .profile__events-progress-bar span {
+	color: #fff;
+}
+
 .show-events-form-btn {
 	align-self: center;
 	background-color: #ff8585ab;
@@ -349,6 +358,8 @@
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 	border: 1px solid rgba(255, 255, 255, 0.3);
 	margin: 0 auto;
+	background: #000000b3;
+	border: none;
 }
 
 .profile__events-delete svg {
@@ -359,7 +370,8 @@
 	fill: #ffffff;
 }
 
-.progressbar__text {
+.profile.dark-mode .progressbar__text {
+	color: #fff;
 	margin-bottom: 10px;
 }
 /* DarkMode */
@@ -370,3 +382,24 @@
 	fill: rgba(228, 228, 228, 0.55);
 }
 /* DarkMode */
+
+/* ShowRightAside */
+.profile__show-aside-btn {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	top: 50%;
+	max-width: max-content;
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+	background-color: rgba(189, 189, 189, 0.601);
+	border-radius: 4px;
+}
+
+.profile.dark-mode .profile__show-aside-btn svg {
+	color: #fff;
+}
+
+/* ShowRightAside */

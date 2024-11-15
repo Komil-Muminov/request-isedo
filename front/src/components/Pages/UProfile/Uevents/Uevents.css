@@ -1,7 +1,8 @@
 .uevents__card {
 	display: flex;
 	align-items: center;
-	background: linear-gradient(135deg, #981bbbd8, #4bc9e5);
+	/* background: linear-gradient(135deg, #981bbbd8, #4bc9e5); */
+	background: #f0f1f5;
 	border-radius: 20px;
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(255, 255, 255, 0.2);
 	padding: 10px;
@@ -10,23 +11,25 @@
 	width: 100%;
 	margin-bottom: 10px;
 	gap: 20px;
+	min-height: 110px;
 }
 
 .vertical-line {
-	max-width: 2px;
+	max-width: 1.8px;
 	width: 100%;
-	min-height: 50px;
-	background-image: linear-gradient(to bottom, #ff7e5f, #feb47b);
+	min-height: 90%;
+	background-image: linear-gradient(to top, #ff7e5f, #feb47b);
 }
 
 .profile.dark-mode .uevents__card {
 	background: linear-gradient(360deg, #84faafd9 0%, #8fd3f4 100%);
+	color: #fff;
 }
 
 .uevents__card:hover {
 	transform: translateY(-8px);
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15),
-		0 4px 6px rgba(255, 255, 255, 0.25);
+	/* box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15),
+		0 4px 6px rgba(255, 255, 255, 0.25); */
 }
 
 .uevents__content {

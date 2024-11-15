@@ -8,7 +8,6 @@ interface TProps {
 	date?: Date;
 }
 export const Uevents: React.FC<TProps> = ({
-	// avatar,
 	loading,
 	title,
 	desc = "km",

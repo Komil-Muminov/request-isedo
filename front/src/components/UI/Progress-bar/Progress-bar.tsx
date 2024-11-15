@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { CircularProgress, Box, Typography } from "@mui/material";
 
 interface ProgressBarProps {
@@ -15,30 +15,15 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
 	item,
 }) => {
 	// Преобразуем completed в число, чтобы избежать ошибок
-	const completedValue = Number(completed);
+	const completedValue = isNaN(Number(completed)) ? 0 : Number(completed);
 
 	// Безопасное вычисление процента
 	const percentage = total > 0 ? (completedValue / total) * 100 : 0;
 
 	// Определяем цвет круга на основе процента
-	const circleColor = React.useMemo(() => {
-		if (percentage === 100) return "#4caf50"; // Зеленый при 100%
-		return percentage >= 50 ? "#ff9800" : "#f44336"; // Оранжевый при 50-99%, Красный при < 50%
-	}, [percentage]);
+	const circleColor =
+		percentage === 100 ? "#4caf50" : percentage >= 50 ? "#ff9800" : "#f44336";
 
-	// Gift
-	// const giveGift = (percent: number | null) => {
-	// 	if (percent === 100) {
-	// 		console.log(Поздравляем вы все задачи сделали);
-	// 	}
-	// };
-
-	// Лог для отладки
-
-	// UseEffect
-	// useEffect(() => {
-	// 	giveGift(percentage);
-	// }, [percentage]);
 	return (
 		<Box
 			position="relative"
@@ -47,7 +32,9 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
 			justifyContent="center"
 		>
 			<CircularProgress
-				sx={{ color: circleColor }} // Цвет круга меняется в зависимости от процента
+				sx={{
+					color: `${circleColor} !important`,
+				}}
 				variant="determinate"
 				value={percentage}
 				size={size}
@@ -62,7 +49,9 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
 			>
 				<Typography
 					variant="caption"
-					color={`${item?.state ? "#fff" : circleColor} #fff`}
+					sx={{
+						color: item?.state && "#fff !important",
+					}}
 					fontSize={item ? "12px" : "15px"}
 				>
 					{`${Math.round(percentage)}%`}
