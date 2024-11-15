@@ -389,14 +389,13 @@
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	top: 60%;
+	top: 50%;
 	max-width: max-content;
 	font-size: 20px;
 	display: flex;
 	align-items: center;
 	background-color: rgba(189, 189, 189, 0.601);
 	border-radius: 4px;
-	min-height: 300px;
 }
 
 .profile.dark-mode .profile__show-aside-btn svg {
