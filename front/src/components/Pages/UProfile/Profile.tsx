@@ -181,33 +181,34 @@ const Profile: React.FC = () => {
 							<div className="profile__center_content">
 								<Outlet />
 							</div>
-							<button
-								onClick={() => setAsideIsOpen(!asideIsOpen)}
-								className="profile__show-aside-btn"
-							>
-								{asideIsOpen ? (
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="24"
-										height="24"
-										className="open-svg"
-										viewBox="0 0 24 24"
-									>
-										<path d="M16 19V5L5 12z" fill="currentColor" />
-									</svg>
-								) : (
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="24"
-										height="24"
-										className="close-svg"
-										viewBox="0 0 24 24"
-									>
-										<path d="M8 5v14l11-7z" fill="currentColor" />
-									</svg>
-								)}
-							</button>
 						</div>
+
+						<button
+							onClick={() => setAsideIsOpen(!asideIsOpen)}
+							className="profile__show-aside-btn"
+						>
+							{asideIsOpen ? (
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="24"
+									height="24"
+									className="open-svg"
+									viewBox="0 0 24 24"
+								>
+									<path d="M16 19V5L5 12z" fill="currentColor" />
+								</svg>
+							) : (
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="24"
+									height="24"
+									className="close-svg"
+									viewBox="0 0 24 24"
+								>
+									<path d="M8 5v14l11-7z" fill="currentColor" />
+								</svg>
+							)}
+						</button>
 						{/* Сделать showAside */}
 						{asideIsOpen ? (
 							<aside className="profile_style profile_right">
