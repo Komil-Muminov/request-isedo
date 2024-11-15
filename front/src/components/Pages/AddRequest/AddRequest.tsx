@@ -46,6 +46,7 @@ import FileService from "../../UI/File Services/FileService";
 import ChangeChiefAccountant from "./Types of Requests/Change of chief accountant/ChangeChiefAccountant";
 import ChangeManagement from "./Types of Requests/Change of management/ChangeManagement";
 import TokenIssuance from "./Types of Requests/Token issuance/TokenIssuance";
+import CertificateIssuance from "./Types of Requests/Certificate issuance/CertificateIssuance";
 // import { toast, ToastContainer } from "react-toastify";
 
 const AddRequest: React.FC = () => {
@@ -209,6 +210,14 @@ const AddRequest: React.FC = () => {
     (user) =>
       uinfo?.orgName === user.orgName &&
       user.role === "Главный бухгалтер" &&
+      user.status === true
+  );
+
+  // Данные карточки нынешнего руководителя
+  const currentHead = users?.find(
+    (user) =>
+      uinfo?.orgName === user.orgName &&
+      user.role === "Руководитель" &&
       user.status === true
   );
 
@@ -425,16 +434,22 @@ const AddRequest: React.FC = () => {
         )}
         {reqType === "Смена руководителя" && (
           <ChangeManagement
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
+            currentUser={currentHead}
+            handleGetFile={handleGetFile}
+            fileInfo={fileInfo}
+            handleFileUploadedStatus={handleFileUploadedStatus}
+            files={files}
+            fileUploadedStatus={fileUploadedStatus}
+            currentOrganization={currentOrganization}
+            secondFileStatus={secondFileStatus}
+            thirdFileStatus={thirdFileStatus}
             register={register}
           />
         )}
         {reqType === "Смена главного бухгалтера и руководителя" && (
           <ChangeManagement
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            register={register}
+            currentUser={currentUser}
+            currentOrganization={currentOrganization}
           />
         )}
         {reqType === "Выдача токена и сертификата" && (
@@ -451,10 +466,11 @@ const AddRequest: React.FC = () => {
           />
         )}
         {reqType === "Выдача сертификата" && (
-          <ChangeManagement
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            register={register}
+          <CertificateIssuance
+            currentUser={
+              uinfo?.role === "Руководитель" ? currentAccountant : currentHead
+            }
+            currentOrganization={currentOrganization}
           />
         )}
         {reqType === "Смена пароля" && (

@@ -22,20 +22,21 @@ export const typeRequests: ItypeRequests[] = [
     image: changeOfAccountant,
     name: "Смена главного бухгалтера и руководителя",
   },
+
   {
     id: 4,
-    image: changeOfAccountant,
-    name: "Выдача токена и сертификата",
-  },
-  {
-    id: 5,
     image: changeOfAccountant,
     name: "Выдача токена",
   },
   {
-    id: 6,
+    id: 5,
     image: changeOfAccountant,
     name: "Выдача сертификата",
+  },
+  {
+    id: 6,
+    image: changeOfAccountant,
+    name: "Выдача токена и сертификата",
   },
   {
     id: 7,

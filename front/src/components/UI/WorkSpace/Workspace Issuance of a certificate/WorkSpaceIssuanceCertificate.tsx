@@ -19,11 +19,11 @@ import InformationSecurity from "../Workspace Change Of Chief Accountant/Informa
 import TechnicalServices from "../Workspace Change Of Chief Accountant/Department for technical services/TechnicalServices";
 import DepartmentAccounting from "../Workspace Change Of Chief Accountant/Department of Accounting/DepartmentAccounting";
 
-const WorkSpaceTokenIssuance = ({
+const WorkSpaceIssuanceCertificate = ({
   rqstsDataById,
   currentOrganization,
 }: any) => {
-  const changeOfAccountant = [departments[0], departments[3]];
+  const changeOfAccountant = [departments[0], departments[2]];
 
   const [currentDepartmentStageOne, setCurrentDepartmentStageOne] =
     useState<TDepartment[]>(changeOfAccountant);
@@ -297,4 +297,4 @@ const WorkSpaceTokenIssuance = ({
   );
 };
 
-export default WorkSpaceTokenIssuance;
+export default WorkSpaceIssuanceCertificate;
