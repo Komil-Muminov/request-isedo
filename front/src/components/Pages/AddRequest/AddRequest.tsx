@@ -47,6 +47,10 @@ import ChangeChiefAccountant from "./Types of Requests/Change of chief accountan
 import ChangeManagement from "./Types of Requests/Change of management/ChangeManagement";
 import TokenIssuance from "./Types of Requests/Token issuance/TokenIssuance";
 import CertificateIssuance from "./Types of Requests/Certificate issuance/CertificateIssuance";
+import IssuanceTokenCertificate from "./Types of Requests/Issuance of token and certificate/IssuanceTokenCertificate";
+import ChangePassword from "./Types of Requests/Change password/ChangePassword";
+import CreateTinTfmis from "./Types of Requests/Creating TIN in TFMIS/CreateTinTfmis";
+import ChangeChiefAccountantAndManager from "./Types of Requests/Change of chief accountant and manager/ChangeChiefAccountantAndManager";
 // import { toast, ToastContainer } from "react-toastify";
 
 const AddRequest: React.FC = () => {
@@ -285,12 +289,36 @@ const AddRequest: React.FC = () => {
       dataChange: formattedDate,
     };
 
+    const currentUserData =
+      uinfo?.role === "Руководитель" ? currentAccountant : currentHead;
+
+    const reqTypeDataIssuanceFromAccountantAndManager = {
+      fullName: currentUserData?.fullName,
+      tax: currentUserData?.tax,
+      phone: currentUserData?.phone,
+      email: currentUserData?.email,
+      passport: currentUserData?.passport,
+      role: currentUserData?.role,
+      reqType: reqType,
+      password: "123",
+      stepCode: stepFound?.stepCode || 0,
+      stepTask: 0,
+      dateTime: date,
+      files: files,
+      userId: uinfo?.userId,
+      organizationId: currentOrganization?.id,
+      services: [],
+      dataChange: formattedDate,
+    };
+
     switch (reqType) {
       case "Смена главного бухгалтера":
         postRqstsMutation.mutate(updateReqData);
         break;
       case "Выдача токена":
         postRqstsMutation.mutate(reqTypeDataTokenIssuance);
+      case "Выдача сертификата":
+        postRqstsMutation.mutate(reqTypeDataIssuanceFromAccountantAndManager);
     }
 
     alert(
@@ -447,16 +475,26 @@ const AddRequest: React.FC = () => {
           />
         )}
         {reqType === "Смена главного бухгалтера и руководителя" && (
-          <ChangeManagement
-            currentUser={currentUser}
+          <ChangeChiefAccountantAndManager
+            currentUser={currentAccountant}
+            currentManager={currentHead}
+            handleGetFile={handleGetFile}
+            fileInfo={fileInfo}
+            handleFileUploadedStatus={handleFileUploadedStatus}
+            files={files}
+            fileUploadedStatus={fileUploadedStatus}
             currentOrganization={currentOrganization}
+            secondFileStatus={secondFileStatus}
+            thirdFileStatus={thirdFileStatus}
+            register={register}
           />
         )}
         {reqType === "Выдача токена и сертификата" && (
-          <ChangeManagement
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            register={register}
+          <IssuanceTokenCertificate
+            currentUser={
+              uinfo?.role === "Руководитель" ? currentAccountant : currentHead
+            }
+            currentOrganization={currentOrganization}
           />
         )}
         {reqType === "Выдача токена" && (
@@ -474,16 +512,18 @@ const AddRequest: React.FC = () => {
           />
         )}
         {reqType === "Смена пароля" && (
-          <ChangeManagement
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
-            register={register}
+          <ChangePassword
+            currentUser={
+              uinfo?.role === "Руководитель" ? currentAccountant : currentHead
+            }
+            currentOrganization={currentOrganization}
           />
         )}
         {reqType === "Создание ИНН в TFMIS" && (
-          <ChangeManagement
-            handleSubmit={handleSubmit}
-            onSubmit={onSubmit}
+          <CreateTinTfmis
+            fileInfo={fileInfo}
+            secondFileStatus={secondFileStatus}
+            thirdFileStatus={thirdFileStatus}
             register={register}
           />
         )}

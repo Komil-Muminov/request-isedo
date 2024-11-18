@@ -64,5 +64,24 @@
     "dataChange": "12.11.2024 в 11:26",
     "id": 2,
     "dateChange": "13.11.2024 в 12:07"
+  },
+  {
+    "fullName": "Шарипов Амир Чамшедович",
+    "tax": "250008809",
+    "phone": "880008671",
+    "email": "jsharipovamir@gmail.com",
+    "passport": "A04513403",
+    "role": "Главный бухгалтер",
+    "reqType": "Выдача сертификата",
+    "password": "123",
+    "stepCode": 1,
+    "stepTask": 0,
+    "dateTime": "18.11.2024.10:06",
+    "files": [],
+    "userId": 5,
+    "organizationId": 1,
+    "services": [],
+    "dataChange": "18.11.2024 в 10:06",
+    "id": 3
   }
 ]

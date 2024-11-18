@@ -1,7 +1,11 @@
 import React from "react";
 import TitleDocument from "../../../../UI/TitleDocument/TitleDocument";
+
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import UserOrOrganizationCard from "../../../../UI/UserOrOrganizationCard/UserOrOrganizationCard";
 import FileService from "../../../../UI/File Services/FileService";
+
 import {
   Box,
   FormControl,
@@ -11,62 +15,16 @@ import {
   TextField,
 } from "@mui/material";
 
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-
-const ChangeManagement = ({
-  currentUser,
-  handleGetFile,
+const CreateTinTfmis = ({
   fileInfo,
-  handleFileUploadedStatus,
-  files,
-  fileUploadedStatus,
-  currentOrganization,
   secondFileStatus,
   thirdFileStatus,
   register,
 }: any) => {
   return (
     <>
-      <section className="old-accountant">
-        <TitleDocument title="Прошлый руководитель" />
-        <div className="wrapper-cards">
-          <UserOrOrganizationCard
-            currentUser={currentUser}
-            title="Карточка пользователя"
-            newFileService={<FileService handleGetFile={handleGetFile} />}
-            requiredFile={fileInfo[0]?.name}
-            handleFileUploadedStatus={handleFileUploadedStatus}
-            uploadedFile={files}
-            requiredDocuments={
-              <ul className="required-documents">
-                <p>Необходимые документы:</p>
-                <li>
-                  {fileUploadedStatus ? (
-                    <CheckCircleOutlineIcon sx={{ color: "green" }} />
-                  ) : (
-                    <HighlightOffIcon sx={{ color: "red" }} />
-                  )}
-                  <p>{fileInfo[0]?.name}</p>
-                </li>
-              </ul>
-            }
-            // fileService={
-            //   <CardFileService
-            //     item={fileInfo[0]}
-            //     handleGetFile={handleGetFile}
-            //     getFile={getFile}
-            //   />
-            // }
-          />
-          <UserOrOrganizationCard
-            currentOrganization={currentOrganization}
-            title="Карточка организации"
-          />
-        </div>
-      </section>
-      <section className="new-accountant">
-        <TitleDocument title="Новый руководитель" />
+      <section className="new--tin">
+        <TitleDocument title="Новый ИНН" />
         <div className="wrapper-cards wrapper-cards-padding">
           <div className="inputs-list">
             <TextField
@@ -172,4 +130,4 @@ const ChangeManagement = ({
   );
 };
 
-export default ChangeManagement;
+export default CreateTinTfmis;

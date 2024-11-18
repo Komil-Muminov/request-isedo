@@ -5,6 +5,7 @@ import OrganizationCard from "./OrganizationCard/OrganizationCard";
 
 const UserOrOrganizationCard = ({
   currentUser,
+  currentManager,
   currentOrganization,
   title,
   fileService,
@@ -17,6 +18,8 @@ const UserOrOrganizationCard = ({
   uploadedFile,
   userType,
 }: any) => {
+  console.log(currentManager, "===========+=============");
+
   const currentFile = uploadedFile?.some(
     (e: any) => e.fileName === requiredFile
   );
@@ -31,6 +34,7 @@ const UserOrOrganizationCard = ({
     >
       <p className="card-title">{title}</p>
       {currentUser && <UserCard currentUser={currentUser} />}
+      {currentManager && <UserCard currentUser={currentManager} />}
       {currentOrganization && (
         <OrganizationCard currentOrganization={currentOrganization} />
       )}

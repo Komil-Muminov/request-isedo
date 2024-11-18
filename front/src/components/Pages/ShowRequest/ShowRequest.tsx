@@ -44,6 +44,7 @@ import PDFViewerService from "../../UI/PDF Viewer Service/PDFViewerService";
 import { postRequestFile } from "../../API/postRequestFile";
 import ShowChangeChiefAccountant from "./Show Types Of Request/Show Change of chief accountant/ShowChangeChiefAccountant";
 import ShowTokenIssuance from "./Show Types Of Request/Show Token issuance/ShowTokenIssuance";
+import ShowCertificateIssuance from "./Show Types Of Request/Show Certificate issuance/ShowCertificateIssuance";
 
 const ShowRequest = () => {
   const navigate = useNavigate();
@@ -231,7 +232,9 @@ const ShowRequest = () => {
     <main className="show-content">
       <div className="container">
         <div className="details-steps">
-          <TitleDocument title={`Заявка №${rqstsDataById?.id}`} />
+          <TitleDocument
+            title={`Заявка №${rqstsDataById?.id} - ${rqstsDataById?.reqType}`}
+          />
         </div>
         <section className="show-steps">
           <div className="panel-control">
@@ -378,6 +381,13 @@ const ShowRequest = () => {
             uinfo={uinfo}
           />
         )}
+        {rqstsDataById?.reqType === "Выдача сертификата" && (
+          <ShowCertificateIssuance
+            currentOrganization={currentOrganization}
+            rqstsDataById={rqstsDataById}
+            uinfo={uinfo}
+          />
+        )}
         {rqstsDataById && rqstsDataById?.stepCode >= 3 && (
           <section className="access-system">
             <TitleDocument title="Документы услуг" />
@@ -392,10 +402,10 @@ const ShowRequest = () => {
                 </>
               )} */}
               </div>
-                <h1 style={{ fontSize: "16px" }}>
-                  Логин и пароль для входа в системы отправлены на электронную
-                  почту нового главного бухгалтера.
-                </h1>
+              <h1 style={{ fontSize: "16px" }}>
+                Логин и пароль для входа в системы отправлены на электронную
+                почту нового главного бухгалтера.
+              </h1>
             </div>
           </section>
         )}
