@@ -63,6 +63,8 @@
 /* dark-mode */
 
 .profile.dark-mode .rbc-toolbar {
+	display: flex;
+	flex-direction: column;
 	background: transparent;
 }
 
