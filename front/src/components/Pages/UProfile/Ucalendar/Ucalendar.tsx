@@ -106,8 +106,8 @@ export const Ucalendar = () => {
 	};
 
 	const handleSelectSlot = ({ start, end }: { start: Date; end: Date }) => {
-		setSelectedEventId(null); // Сбрасываем выбранное событие
-		setShowForm((prev) => !prev); // Переключаем видимость формы
+		setSelectedEventId(null); 
+		setShowForm((prev) => !prev); 
 		if (!showForm) {
 			setFormData({
 				title: "",
@@ -125,8 +125,8 @@ export const Ucalendar = () => {
 			start: format(event.start, "yyyy-MM-dd'T'HH:mm"),
 			end: format(event.end, "yyyy-MM-dd'T'HH:mm"),
 		});
-		setSelectedEventId(event.id); // Запоминаем ID выбранного события
-		setShowForm(false); // Прячем форму, если выбрано событие
+		setSelectedEventId(event.id); 
+		setShowForm(false); 
 	};
 
 	const handleDeleteEvent = (eventId: number) => {
