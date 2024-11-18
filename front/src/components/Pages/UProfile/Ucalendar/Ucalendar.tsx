@@ -137,7 +137,11 @@ export const Ucalendar = () => {
 
 	return (
 		<Box className="calendar-container">
-			<Typography sx={{ textAlign: "center" }} className="ucalendar-title" variant="h5">
+			<Typography
+				sx={{ textAlign: "center" }}
+				className="ucalendar-title"
+				variant="h5"
+			>
 				Календарь
 			</Typography>
 
@@ -191,38 +195,38 @@ export const Ucalendar = () => {
 			{/* Форма редактирования/добавления события */}
 			{showForm && (
 				<Paper elevation={5} className="form-paper">
-					<Typography variant="h6">Добавить событие</Typography>
-					<TextField
-						label="Заголовок"
+					<Typography variant="h6" className="form-paper-title">
+						Добавить событие
+					</Typography>
+					<input
 						name="title"
+						className="ucalendar__events-inp"
 						value={formData.title}
+						placeholder="Заголовок"
 						onChange={handleInputChange}
-						fullWidth
 					/>
-					<TextField
-						label="Описание"
+					<input
 						name="description"
+						className="ucalendar__events-inp"
 						value={formData.description}
+						placeholder="Описание"
 						onChange={handleInputChange}
-						fullWidth
 					/>
-					<TextField
-						label="Начало"
+					<input
 						type="datetime-local"
+						className="ucalendar__events-inp"
 						name="start"
+						placeholder="Начало"
 						value={formData.start}
 						onChange={handleInputChange}
-						fullWidth
-						InputLabelProps={{ shrink: true }}
 					/>
-					<TextField
-						label="Конец"
+					<input
+						className="ucalendar__events-inp"
 						type="datetime-local"
 						name="end"
 						value={formData.end}
+						placeholder="Конец"
 						onChange={handleInputChange}
-						fullWidth
-						InputLabelProps={{ shrink: true }}
 					/>
 					<Button
 						variant="contained"

@@ -108,6 +108,21 @@
 	border: none;
 }
 
+.profile.dark-mode .form-paper {
+	background: transparent;
+}
+
+.profile.dark-mode .form-paper-title {
+	color: #fff;
+}
+
+.profile.dark-mode input {
+	color: #fff;
+}
+
+.profile.dark-mode input::placeholder {
+	color: #fff !important;
+}
 /* dark-mode */
 
 .rbc-event-continues-prior {
@@ -235,4 +250,27 @@
 
 .event-card-title {
 	text-align: center !important;
+}
+
+.form-paper-title {
+	text-align: center;
+}
+.ucalendar__events-inp {
+	padding: 15px;
+	border: none;
+	background: #6f6f6f76;
+	border-radius: 10px;
+}
+
+.ucalendar__events-inp:focus {
+	outline: none;
+	background: #6f6f6f42;
+}
+
+.ucalendar__events-inp:active {
+	background: #6f6f6f23;
+}
+
+.ucalendar__events-inp[type="datetime-local"]::-webkit-calendar-picker-indicator {
+	filter: invert(1);
 }
