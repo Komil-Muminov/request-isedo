@@ -6,7 +6,7 @@ import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
 import ru from "date-fns/locale/ru";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { Button, TextField, Box, Typography, Paper } from "@mui/material";
+import { Button, Box, Typography, Paper } from "@mui/material";
 import { parseISO } from "date-fns";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -106,8 +106,8 @@ export const Ucalendar = () => {
 	};
 
 	const handleSelectSlot = ({ start, end }: { start: Date; end: Date }) => {
-		setSelectedEventId(null); 
-		setShowForm((prev) => !prev); 
+		setSelectedEventId(null);
+		setShowForm((prev) => !prev);
 		if (!showForm) {
 			setFormData({
 				title: "",
@@ -125,8 +125,8 @@ export const Ucalendar = () => {
 			start: format(event.start, "yyyy-MM-dd'T'HH:mm"),
 			end: format(event.end, "yyyy-MM-dd'T'HH:mm"),
 		});
-		setSelectedEventId(event.id); 
-		setShowForm(false); 
+		setSelectedEventId(event.id);
+		setShowForm(false);
 	};
 
 	const handleDeleteEvent = (eventId: number) => {
