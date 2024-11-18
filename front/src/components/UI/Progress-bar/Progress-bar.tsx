@@ -60,6 +60,5 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
 		</Box>
 	);
 };
-// dsad
 
 export default ProgressBar;
