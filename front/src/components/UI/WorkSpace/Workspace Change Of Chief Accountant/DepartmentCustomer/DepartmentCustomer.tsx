@@ -53,13 +53,15 @@ const DepartmentCustomer = ({
     (cert) => cert.userName === rqstsDataById?.fullName
   );
 
+  console.log();
+
   return (
     <>
       {stageOne && (
         <div className="column-stage">
           {stageOne}
           <CertificateRevocation
-            getCertificateQuery={getCertificateQuery}
+            rqstsDataById={rqstsDataById}
             certificates={certificates}
             executor={executor}
           />

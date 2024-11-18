@@ -6,6 +6,7 @@ import ButtonPanelControl from "../../../../UI/ButtonPanelControl/ButtonPanelCon
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 import { departments } from "../../../../API/Data/Departments/Departments";
 import WorkSpaceTokenIssuance from "../../../../UI/WorkSpace/Workspace Token issuance/WorkSpaceTokenIssuance";
+import WorkSpaceCertificateIssuance from "../../../../UI/WorkSpace/Workspace Certificate Issuance/WorkSpaceCertificateIssuance";
 
 const ShowCertificateIssuance = ({
   currentOrganization,
@@ -30,7 +31,7 @@ const ShowCertificateIssuance = ({
       </section>
       {/* Рабочее пространство */}
       {uinfo?.uType !== "bo" && (
-        <WorkSpaceTokenIssuance
+        <WorkSpaceCertificateIssuance
           rqstsDataById={rqstsDataById}
           currentOrganization={currentOrganization}
         />

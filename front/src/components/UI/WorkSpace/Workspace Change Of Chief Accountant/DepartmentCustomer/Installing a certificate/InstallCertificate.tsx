@@ -18,7 +18,7 @@ const InstallCertificate = ({
   rqstsDataById,
   currentOrganization,
   getCertificateUser,
-  executor
+  executor,
 }: any) => {
   const {
     register,

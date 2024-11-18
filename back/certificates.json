@@ -29,10 +29,10 @@
     "userId": 5,
     "organizationId": 1,
     "serialNumber": "200000dd1f63274b121773decc00000000dd1f",
-    "validFrom": "08.11.2024",
-    "validTo": "08.11.2025",
     "statusCode": 0,
-    "dateChange": "08.11.2024 в 10:41",
-    "id": 57379
+    "dateChange": "18.11.2024 в 18:09",
+    "id": 57379,
+    "validFrom": "18.11.2024",
+    "validTo": "18.11.2025"
   }
 ]
