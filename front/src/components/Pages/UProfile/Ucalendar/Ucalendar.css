@@ -62,6 +62,13 @@
 
 /* dark-mode */
 
+.profile.dark-mode .rbc-toolbar {
+	background: transparent;
+}
+
+.profile.dark-mode .rbc-toolbar-label {
+	color: #fff;
+}
 .profile.dark-mode .rbc-button-link {
 	color: #fff;
 }
@@ -91,6 +98,16 @@
 	border: none;
 	border-radius: 10px;
 }
+
+.profile.dark-mode .ucalendar-title {
+	color: #fff;
+}
+
+.profile.dark-mode .rbc-header {
+	color: #fff;
+	border: none;
+}
+
 /* dark-mode */
 
 .rbc-event-continues-prior {

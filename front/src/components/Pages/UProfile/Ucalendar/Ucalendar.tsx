@@ -137,7 +137,7 @@ export const Ucalendar = () => {
 
 	return (
 		<Box className="calendar-container">
-			<Typography sx={{ textAlign: "center" }} variant="h5">
+			<Typography sx={{ textAlign: "center" }} className="ucalendar-title" variant="h5">
 				Календарь
 			</Typography>
 
