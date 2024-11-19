@@ -116,11 +116,11 @@
 }
 
 .profile.dark-mode input {
-	color: #fff;
+	color: #000;
 }
 
 .profile.dark-mode input::placeholder {
-	color: #fff !important;
+	color: #000;
 }
 /* dark-mode */
 
