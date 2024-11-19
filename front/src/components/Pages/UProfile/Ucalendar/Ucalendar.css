@@ -12,10 +12,11 @@
 /* Ucalendar.css */
 .rbc-toolbar {
 	display: flex;
-	background-color: #f5f5f5;
 	padding: 10px;
+	gap: 10px;
 	border-radius: 8px;
-	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	flex-direction: column;
+	/* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
 }
 
 .rbc-toolbar button {
