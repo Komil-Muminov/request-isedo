@@ -17,6 +17,8 @@ import ButtonPanelControl from "../../../../../../ButtonPanelControl/ButtonPanel
 
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
+import GppGoodIcon from "@mui/icons-material/GppGood";
+
 import { getCertificates } from "../../../../../../../API/GetCertificates";
 import { TCertificates } from "../../../../../../../API/GetCertificates";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -28,15 +30,19 @@ import { statusOfCertificates } from "../../../../../../../API/Data/Certificates
 import { putCertificates } from "../../../../../../../API/PutCertificates";
 import OrganizationCard from "../../../../../../UserOrOrganizationCard/OrganizationCard/OrganizationCard";
 import CertificateCard from "../../CertificateCard/CertificateCard";
+import {
+  putRqstsById,
+  PutRqstsByIdType,
+} from "../../../../../../../API/PutRqstById";
 
 interface TProps {
-  getCertificateQuery: any;
+  rqstsDataById: any;
   certificates: TCertificates[];
   executor: any;
 }
 
 const CertificateRevocationList = ({
-  getCertificateQuery,
+  rqstsDataById,
   certificates,
   executor,
 }: TProps) => {
@@ -77,8 +83,19 @@ const CertificateRevocationList = ({
     return users?.some((user) => cert.userId === user.id);
   });
 
+  // Данные для типа заявки "Смена сертификата", если заявку подает руководитель, то смена сертификата бухгалтера, а иначе наоборот
+
+  const getCertificateIssuanceType = certificates.find(
+    (cert) => cert.userName === rqstsDataById?.fullName
+  );
+
+  const getCertificate =
+    rqstsDataById?.reqType === "Выдача сертификата"
+      ? getCertificateIssuanceType
+      : getCertificateUser;
+
   const statusCertificate = statusOfCertificates.find(
-    (e) => e.code === getCertificateUser?.statusCode
+    (e) => e.code === getCertificate?.statusCode
   );
 
   // Мутация для обновления сертификата
@@ -94,6 +111,18 @@ const CertificateRevocationList = ({
     },
   });
 
+  const putRqstsByIdMutation = useMutation(
+    {
+      mutationFn: (data: PutRqstsByIdType) => putRqstsById(data),
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [`request-${rqstsDataById?.id}`],
+        });
+      },
+    },
+    queryClient
+  );
+
   // Функция для изменения статуса сертификата
   const handleChangeStatus = (code: number) => {
     const now = new Date();
@@ -103,13 +132,48 @@ const CertificateRevocationList = ({
       now.getHours()
     ).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
 
-    if (getCertificateUser) {
+    const day = String(now.getDate()).padStart(2, "0");
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const year = now.getFullYear();
+
+    const dateFrom = `${day}.${month}.${year}`;
+    const dateTo = `${day}.${month}.${year + 1}`;
+
+    console.log(dateFrom, dateTo, rqstsDataById?.reqType);
+
+    if (
+      rqstsDataById?.reqType === "Смена главного бухгалтера" &&
+      getCertificate
+    ) {
       certificateMutation.mutate({
-        ...getCertificateUser,
+        ...getCertificate,
         statusCode: code, // Изменение statusCode с 0 на 5
         dateChange: formattedDate,
       });
+    } else if (
+      rqstsDataById?.reqType === "Выдача сертификата" &&
+      getCertificate
+    ) {
+      console.log("Data before mutation:", {
+        ...getCertificate,
+        validFrom: dateFrom,
+        validTo: dateTo,
+        dateChange: formattedDate,
+      });
+
+      certificateMutation.mutate({
+        ...getCertificate,
+        validFrom: dateFrom,
+        validTo: dateTo,
+        dateChange: formattedDate,
+      });
     }
+
+    if (rqstsDataById)
+      putRqstsByIdMutation.mutate({
+        ...rqstsDataById,
+        stepTask: rqstsDataById && rqstsDataById.stepTask + 1,
+      });
   };
 
   return (
@@ -122,35 +186,42 @@ const CertificateRevocationList = ({
           </div>
         </div>
         <CertificateCard
-          getCertificateUser={getCertificateUser}
+          getCertificateUser={getCertificate}
           statusCertificate={statusCertificate?.name}
         />
         <div className="panel-buttons">
-          {getCertificateUser?.statusCode === 5 && (
+          {getCertificate?.statusCode === 5 && (
             <div className="wrapper-show-executor">
               <p className="show-executor-title">
                 Исполнитель: <span>{executor?.fullName}</span>
               </p>
               <p className="show-executor-title">
-                Время: <span>{getCertificateUser?.dateChange}</span>
+                Время: <span>{getCertificate?.dateChange}</span>
               </p>
             </div>
           )}
           <div className="panel-executor">
             <ButtonPanelControl
               icon={
-                <GppBadIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+                rqstsDataById?.reqType === "Смена главного бухгалтера" ? (
+                  <GppBadIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+                ) : (
+                  <GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
+                )
               }
-              text="Отозвать"
+              text={
+                rqstsDataById?.reqType === "Смена главного бухгалтера"
+                  ? "Отозвать"
+                  : "Выдать"
+              }
               handleShow={handleShow}
-              activeSendButton={
-                getCertificateUser?.statusCode === 5 ? true : false
-              }
+              handleSubmit={handleChangeStatus}
+              activeSendButton={getCertificate?.statusCode === 5 ? true : false}
             />
           </div>
         </div>
       </div>
-      {show && (
+      {show && rqstsDataById?.reqType === "Смена главного бухгалтера" && (
         <CertificateRevocationModal
           handleShow={handleShow}
           handleChangeStatus={handleChangeStatus}
