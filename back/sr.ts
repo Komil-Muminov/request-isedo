@@ -372,24 +372,24 @@ const readLogs = (): LogEntry[] => {
 };
 
 // Запись логов в файл
-// const writeLogs = (logs: LogEntry[]) => {
-// 	fs.writeFileSync(logsFilePath, JSON.stringify(logs, null, 2));
-// };
+const writeLogs = (logs: LogEntry[]) => {
+	fs.writeFileSync(logsFilePath, JSON.stringify(logs, null, 2));
+};
 
 // Эндпоинт для входа в систему
 app.post("/login", (req: Request, res: Response) => {
   const { username, password } = req.body;
-  // const logs = readLogs();
+  const logs = readLogs();
 
-  // if (!username || !password) {
-  //   logs.push({
-  //     event: "Неудачная попытка входа: отсутствуют обязательные поля",
-  //     username: "unknown",
-  //     timestamp: formatTimestamp(new Date()),
-  //   });
-  //   writeLogs(logs);
-  //   return res.status(400).json({ error: "Отсутствуют обязательные поля" });
-  // }
+  if (!username || !password) {
+    logs.push({
+      event: "Неудачная попытка входа: отсутствуют обязательные поля",
+      username: "unknown",
+      timestamp: formatTimestamp(new Date()),
+    });
+    writeLogs(logs);
+    return res.status(400).json({ error: "Отсутствуют обязательные поля" });
+  }
 
   const users = readFromFile(usersFilePath);
 
@@ -397,28 +397,28 @@ app.post("/login", (req: Request, res: Response) => {
     (user: any) => user.username === username && user.password === password
   );
 
-  // if (!user) {
-  //   logs.push({
-  //     event: "Неудачная попытка входа",
-  //     username,
-  //     timestamp: formatTimestamp(new Date()),
-  //   });
-  //   writeLogs(logs);
-  //   return res
-  //     .status(401)
-  //     .json({ error: "Неверное имя пользователя или пароль" });
-  // }
+  if (!user) {
+    logs.push({
+      event: "Неудачная попытка входа",
+      username,
+      timestamp: formatTimestamp(new Date()),
+    });
+    writeLogs(logs);
+    return res
+      .status(401)
+      .json({ error: "Неверное имя пользователя или пароль" });
+  }
 
   const token = jwt.sign({ userId: user.id }, jwtSecret, {
     expiresIn: "1h",
   });
 
-  // logs.push({
-  //   event: "Успешный вход",
-  //   username,
-  //   timestamp: formatTimestamp(new Date()),
-  // });
-  // writeLogs(logs);
+  logs.push({
+    event: "Успешный вход",
+    username,
+    timestamp: formatTimestamp(new Date()),
+  });
+  writeLogs(logs);
 
   res.status(200).json({ message: "Логин успешный", token });
 });
