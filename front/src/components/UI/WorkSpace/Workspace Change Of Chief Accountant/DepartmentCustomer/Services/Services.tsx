@@ -103,7 +103,6 @@ const Services = ({ handleShowServicesList, rqstsDataById, executor }: any) => {
 
     putOrganizationUserMutation.mutate({
       ...rqstsDataById,
-      dateChange: formattedDate,
       services: [...(rqstsDataById.services || []), ...serviceIds], // Используйте || [] для предотвращения ошибки
     });
   };

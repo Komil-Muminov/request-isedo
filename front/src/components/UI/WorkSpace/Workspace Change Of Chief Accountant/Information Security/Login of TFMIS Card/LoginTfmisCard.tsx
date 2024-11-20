@@ -22,11 +22,17 @@ const LoginTfmisList = ({ title, desc }: any) => {
   );
 };
 
-const LoginTfmisCard = ({ currentUser }: any) => {
+const LoginTfmisCard = ({ currentUser, rqstsDataById }: any) => {
+  const successIssuanceCertificate =
+    rqstsDataById?.reqType === "Выдача сертификата" &&
+    rqstsDataById?.stepTask > 1
+      ? true
+      : false;
+
   return (
     <div
       className={`info-login-tfmis ${
-        currentUser?.status === false
+        currentUser?.status === false || !successIssuanceCertificate
           ? "passive-login-tfmis"
           : currentUser
           ? "active-login-tfmis"

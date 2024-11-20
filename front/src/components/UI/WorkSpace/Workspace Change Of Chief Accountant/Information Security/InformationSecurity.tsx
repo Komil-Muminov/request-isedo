@@ -15,7 +15,11 @@ const InformationSecurity = ({
       {stageOne && (
         <div className="column-stage">
           {stageOne}
-          <PassiveLoginTFMIS currentUser={currentUser} executor={executor} />
+          <PassiveLoginTFMIS
+            currentUser={currentUser}
+            executor={executor}
+            rqstsDataById={rqstsDataById}
+          />
         </div>
       )}
       {stageTwo && (

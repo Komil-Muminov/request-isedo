@@ -12,6 +12,7 @@ const ShowCertificateIssuance = ({
   currentOrganization,
   rqstsDataById,
   uinfo,
+  currentUserRequest,
 }: any) => {
   return (
     <>
@@ -34,6 +35,7 @@ const ShowCertificateIssuance = ({
         <WorkSpaceCertificateIssuance
           rqstsDataById={rqstsDataById}
           currentOrganization={currentOrganization}
+          currentUserRequest={currentUserRequest}
         />
       )}
     </>

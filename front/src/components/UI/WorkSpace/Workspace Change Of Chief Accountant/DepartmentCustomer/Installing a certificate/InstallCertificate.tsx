@@ -103,8 +103,6 @@ const InstallCertificate = ({
     (e) => e.code === getCertificateUser?.statusCode
   );
 
-  console.log(statusCertificate);
-
   return (
     <div className="certificate-content">
       <div className="panel-control-certificate-revocation">

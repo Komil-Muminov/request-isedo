@@ -22,8 +22,9 @@ import DepartmentAccounting from "../Workspace Change Of Chief Accountant/Depart
 const WorkSpaceCertificateIssuance = ({
   rqstsDataById,
   currentOrganization,
+  currentUserRequest,
 }: any) => {
-  const changeOfAccountant = [departments[0], departments[3]];
+  const changeOfAccountant = [departments[0], departments[1]];
 
   const [currentDepartmentStageOne, setCurrentDepartmentStageOne] =
     useState<TDepartment[]>(changeOfAccountant);
@@ -84,8 +85,8 @@ const WorkSpaceCertificateIssuance = ({
 
   // Department Accounting
 
-  const showDepartmentOfAccountingStageOne = currentDepartmentStageOne.some(
-    (e) => e.id === 4 && e.state === true
+  const showInformationSecurityStageOne = currentDepartmentStageOne.some(
+    (e) => e.id === 2 && e.state === true
   );
 
   const [invoices, setInvoices] = useState<TInvoices[]>([]);
@@ -116,9 +117,9 @@ const WorkSpaceCertificateIssuance = ({
     switch (stage) {
       case 1:
         return (item.name === "Шуъба оид ба кор бо муштариён" &&
-          rqstsDataById?.stepTask >= 1 &&
-          rqstsDataById?.stepTask <= 2) ||
-          (item.name === "Шуъбаи муҳосибот ва хоҷагӣ" && currentInvoice)
+          rqstsDataById?.stepTask >= 1) ||
+          (item.name === "Шуъба оид ба амнияти иттилоотӣ" &&
+            rqstsDataById?.stepTask >= 2)
           ? "50"
           : "0";
 
@@ -132,7 +133,7 @@ const WorkSpaceCertificateIssuance = ({
       name: "Шуъба оид ба кор бо муштариён",
     },
     {
-      name: "Шуъбаи муҳосибот ва хоҷагӣ",
+      name: "Шуъба оид ба амнияти иттилоотӣ",
     },
   ];
 
@@ -247,52 +248,57 @@ const WorkSpaceCertificateIssuance = ({
           />
         )}
 
-        {showDepartmentOfAccountingStageOne &&
-          rqstsDataById?.services.length > 0 && (
-            <DepartmentAccounting
-              rqstsDataById={rqstsDataById}
-              currentOrganization={currentOrganization}
-              executor={uinfo}
-              stageThree={
-                <div
-                  className="stage-title stage-indicator"
-                  style={
-                    {
-                      "--percent-stage-color": `${
-                        calculateTotalPercent(1) === 0
-                          ? "#ff4e4e"
-                          : calculateTotalPercent(1) > 0 &&
-                            calculateTotalPercent(1) < 100
-                          ? "#ff9800"
-                          : "#33c157"
-                      }`,
-                      "--percent-stage-height": `${calculateTotalPercent(1)}%`,
-                    } as React.CSSProperties
-                  }
-                >
-                  <p>
-                    Этап 1 - выполнено:{" "}
-                    <span
-                      style={
-                        {
-                          "--percent-stage-color": `${
-                            calculateTotalPercent(1) === 0
-                              ? "#ff4e4e"
-                              : calculateTotalPercent(1) > 0 &&
-                                calculateTotalPercent(1) < 100
-                              ? "#ff9800"
-                              : "#33c157"
-                          }`,
-                        } as React.CSSProperties
-                      }
-                    >
-                      {calculateTotalPercent(1)}%
-                    </span>
-                  </p>
-                </div>
-              }
-            />
-          )}
+        {showInformationSecurityStageOne && rqstsDataById?.stepTask > 0 && (
+          <InformationSecurity
+            currentUser={currentUserRequest}
+            rqstsDataById={rqstsDataById}
+            currentOrganization={currentOrganization}
+            executor={uinfo}
+            stageOne={
+              <div
+                className="stage-title stage-indicator"
+                style={
+                  {
+                    "--percent-stage-color": `${
+                      calculateTotalPercent(1) === 0
+                        ? "#ff4e4e"
+                        : calculateTotalPercent(1) > 0 &&
+                          calculateTotalPercent(1) < 100
+                        ? "#ff9800"
+                        : "#33c157"
+                    }`,
+                    "--percent-stage-height": `${calculateTotalPercent(1)}%`,
+                  } as React.CSSProperties
+                }
+              >
+                <p>
+                  Этап 1 - выполнено:{" "}
+                  <span
+                    style={
+                      {
+                        "--percent-stage-color": `${
+                          calculateTotalPercent(1) === 0
+                            ? "#ff4e4e"
+                            : calculateTotalPercent(1) > 0 &&
+                              calculateTotalPercent(1) < 100
+                            ? "#ff9800"
+                            : "#33c157"
+                        }`,
+                      } as React.CSSProperties
+                    }
+                  >
+                    {calculateTotalPercent(1)}%
+                  </span>
+                </p>
+              </div>
+            }
+            // stageTwo={
+            //   <div className="stage-title second-stage">
+            //     <p>Этап 2</p>
+            //   </div>
+            // }
+          />
+        )}
       </div>
     </section>
   );

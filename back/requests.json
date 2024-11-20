@@ -35,11 +35,7 @@
     ],
     "userId": 5,
     "organizationId": 1,
-    "services": [
-      1,
-      2,
-      3
-    ],
+    "services": [1, 2, 3],
     "dateChange": "08.11.2024 в 11:54",
     "id": 1
   },
@@ -58,10 +54,7 @@
     "files": [],
     "userId": 5,
     "organizationId": 1,
-    "services": [
-      4
-    ],
-    "dataChange": "12.11.2024 в 11:26",
+    "services": [4],
     "id": 2,
     "dateChange": "13.11.2024 в 12:07"
   },
@@ -75,13 +68,13 @@
     "reqType": "Выдача сертификата",
     "password": "123",
     "stepCode": 1,
-    "stepTask": 1,
+    "stepTask": 2,
     "dateTime": "18.11.2024.10:06",
     "files": [],
     "userId": 5,
     "organizationId": 1,
     "services": [],
-    "dataChange": "18.11.2024 в 10:06",
-    "id": 3
+    "id": 3,
+    "dateChange": "20.11.2024 в 17:24"
   }
 ]

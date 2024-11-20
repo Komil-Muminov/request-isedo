@@ -154,13 +154,6 @@ const CertificateRevocationList = ({
       rqstsDataById?.reqType === "Выдача сертификата" &&
       getCertificate
     ) {
-      console.log("Data before mutation:", {
-        ...getCertificate,
-        validFrom: dateFrom,
-        validTo: dateTo,
-        dateChange: formattedDate,
-      });
-
       certificateMutation.mutate({
         ...getCertificate,
         validFrom: dateFrom,
@@ -176,6 +169,10 @@ const CertificateRevocationList = ({
       });
   };
 
+  const activeButtonIssuanceCertificateType =
+    rqstsDataById?.stepTask > 0 &&
+    rqstsDataById?.reqType === "Выдача сертификата";
+
   return (
     <>
       <div className="certificate-content">
@@ -188,6 +185,7 @@ const CertificateRevocationList = ({
         <CertificateCard
           getCertificateUser={getCertificate}
           statusCertificate={statusCertificate?.name}
+          rqstsDataById={rqstsDataById}
         />
         <div className="panel-buttons">
           {getCertificate?.statusCode === 5 && (
@@ -216,7 +214,12 @@ const CertificateRevocationList = ({
               }
               handleShow={handleShow}
               handleSubmit={handleChangeStatus}
-              activeSendButton={getCertificate?.statusCode === 5 ? true : false}
+              activeSendButton={
+                getCertificate?.statusCode === 5 ||
+                activeButtonIssuanceCertificateType
+                  ? true
+                  : false
+              }
             />
           </div>
         </div>

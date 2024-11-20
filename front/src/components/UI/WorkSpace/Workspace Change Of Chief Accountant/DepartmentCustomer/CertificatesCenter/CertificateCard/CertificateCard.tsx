@@ -28,7 +28,7 @@ const CertificateCard = ({
   return (
     <div
       className={`info-certificate ${
-        getCertificateUser?.statusCode === 5
+        getCertificateUser?.statusCode === 5 || rqstsDataById?.stepTask < 1
           ? "passive-certificate"
           : getCertificateUser?.statusCode === 0
           ? "active-certificate"
