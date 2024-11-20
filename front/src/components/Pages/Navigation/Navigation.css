@@ -3,7 +3,6 @@
 .sections.navigation__section {
 	background-color: #fff;
 }
-
 /* DarkMode */
 .profile.dark-mode .navigation__section {
 	background-color: linear-gradient(

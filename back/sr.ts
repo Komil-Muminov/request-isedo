@@ -1014,9 +1014,6 @@ app.put("/users/:id", authenticateJWT, (req: Request, res: Response) => {
     // Обновляем данные пользователя
     Object.assign(getChangedUser, req.body); // Обновляем поля измененного пользователя на основе тела запроса
 
-    // // Изменяем status на false
-    // getChangedUser.status = false;
-
     // Изменяем ключ dateChange
     const now = new Date();
     const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
@@ -1173,6 +1170,10 @@ app.put(
 
     requests[index].dateChange = formattedDate;
 
+    writeToFile(requestsFilePath, requests);
+
+    // Обновление данных заявки
+    requests[index] = { ...requests[index], ...requestData };
     writeToFile(requestsFilePath, requests);
 
     res.status(200).json({ message: "Заявка успешно обновлена", requestData });
