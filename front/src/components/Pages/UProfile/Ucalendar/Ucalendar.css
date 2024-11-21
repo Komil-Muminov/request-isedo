@@ -254,11 +254,39 @@
 .form-paper-title {
 	text-align: center;
 }
+
+.ucalendar__form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	background: #fff;
+	border-radius: 10px;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+
 .ucalendar__events-inp {
 	padding: 15px;
 	border: none;
-	background: #6f6f6f76;
-	border-radius: 10px;
+	border: none;
+	border: 1px solid rgba(225, 225, 225, 0.475);
+	outline: none;
+	padding: 10px 10px 10px 5px;
+	border-radius: 8px;
+	transition: background-color 0.2s ease-in-out;
+	background: rgba(184, 184, 184, 0.208);
+}
+
+.ucalendar-sbt {
+	background: rgba(255, 157, 157, 0.761);
+	font-size: 14px;
+	font-weight: 400;
+	color: #ffffff86;
+}
+
+.ucalendar-sbt:hover:not(:focus-visible) {
+	background: rgba(255, 157, 157, 0.913);
+	color: #fff;
 }
 
 .ucalendar__events-inp:focus {

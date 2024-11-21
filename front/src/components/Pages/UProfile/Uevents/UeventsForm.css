@@ -31,8 +31,10 @@
 	background: transparent;
 	background: rgba(255, 157, 157, 0.761);
 	transition: background-color 0.2s ease-in-out;
+	color: #ffffff86;
+	transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
-
 .uevents__form-sbt:hover:not(:focus-visible) {
 	background: rgba(255, 157, 157, 0.913);
+	color: #fff;
 }

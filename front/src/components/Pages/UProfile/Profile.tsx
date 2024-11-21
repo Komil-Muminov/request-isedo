@@ -20,6 +20,7 @@ import { UventsDataScheme } from "./Uevents/UeventsData";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import { motion } from "framer-motion";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ProgressBar from "../../UI/Progress-bar/Progress-bar";
 
@@ -38,7 +39,6 @@ const Profile: React.FC = () => {
 
 	const [expanded, setExpanded] = useState<number | false | null>(null);
 	const [selectedItem, setSelectedItem] = useState<UlinkScheme | null>(null);
-	const [asideIsOpen, setAsideIsOpen] = useState<boolean>(false);
 	const [uEvents, setUEvents] = useState<UventsDataScheme[]>([]);
 	const [showEvents, setShowEvents] = useState<boolean>(false);
 
@@ -172,117 +172,80 @@ const Profile: React.FC = () => {
 						))}
 					</div>
 					<div className="wrapper-profile">
-						{/* Сделать showAside */}
-						<div
-							className={`profile_style profile_center ${
-								!asideIsOpen ? "profile__center-full" : ""
-							}`}
-						>
+						<div className={`profile_style profile_center`}>
 							<div className="profile__center_content">
 								<Outlet />
 							</div>
 						</div>
 
-						<button
-							onClick={() => setAsideIsOpen(!asideIsOpen)}
-							className="profile__show-aside-btn"
-						>
-							{asideIsOpen ? (
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="24"
-									height="24"
-									className="open-svg"
-									viewBox="0 0 24 24"
-								>
-									<path d="M16 19V5L5 12z" fill="currentColor" />
-								</svg>
-							) : (
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="24"
-									height="24"
-									className="close-svg"
-									viewBox="0 0 24 24"
-								>
-									<path d="M8 5v14l11-7z" fill="currentColor" />
-								</svg>
-							)}
-						</button>
 						{/* Сделать showAside */}
-						{asideIsOpen ? (
-							<aside className="profile_style profile_right">
-								<div className="profile_ucalendar">
-									<Ucalendar />
+						<aside className="profile_style profile_right">
+							<div className="profile_ucalendar">
+								<Ucalendar />
+							</div>
+							<h3 className="profile__events-title">Предстоящие задачи</h3>
+							<div className="profile_events">
+								<div className="profile__events-progress-bar">
+									{uEvents?.length > 0 ? (
+										<>
+											<p className="progressbar__text">
+												Индикатор выполненых задач
+											</p>
+											<ProgressBar
+												completed={progressBar.completedEvents}
+												total={progressBar.totalEvents}
+											/>
+										</>
+									) : (
+										"Добавьте задачу блять!"
+									)}
 								</div>
-								<h3 className="profile__events-title">Предстоящие задачи</h3>
-								<div className="profile_events">
-									<div className="profile__events-progress-bar">
-										{uEvents?.length > 0 ? (
-											<>
-												<p className="progressbar__text">
-													Индикатор выполненых задач
-												</p>
-												<ProgressBar
-													completed={progressBar.completedEvents}
-													total={progressBar.totalEvents}
-												/>
-											</>
-										) : (
-											"Добавьте задачу блять!"
-										)}
-									</div>
 
-									<Button
-										onClick={() => setShowEvents(!showEvents)}
-										className="show-events-form-btn"
-									>
-										{showEvents ? <RemoveCircleIcon /> : <AddCircleIcon />}
-									</Button>
-									<div className="profile__events">
-										{showEvents && <UeventsForm onAddEvent={setUEvents} />}
+								<Button
+									onClick={() => setShowEvents(!showEvents)}
+									className="show-events-form-btn"
+								>
+									{showEvents ? <RemoveCircleIcon /> : <AddCircleIcon />}
+								</Button>
+								<div className="profile__events">
+									{showEvents && <UeventsForm onAddEvent={setUEvents} />}
 
-										<ul className="profile__events-list">
-											{uEvents.map((item, id) => (
-												<li key={id} className="profile__events-item">
-													<Uevents
-														key={id}
-														title={item.title}
-														desc={item.desc}
-													/>
-													<div className="profile__events-item-btn">
-														<Button
-															className="profile__events-delete"
-															onClick={() => handleDeleteEvent(id)}
-														>
-															<DeleteIcon />
-														</Button>
-														<Button
-															onClick={() =>
-																setUEvents((prev) =>
-																	prev.map((item, itemId) =>
-																		itemId === id
-																			? { ...item, isDone: !item.isDone }
-																			: item,
-																	),
-																)
-															}
-															className={`uevents-done-btn ${
-																item.isDone
-																	? "uevents-done-btn--isdone"
-																	: "uevents-done-btn--notdone"
-															}`}
-														>
-															<CheckCircleOutlineIcon />
-														</Button>
-													</div>
-												</li>
-											))}
-										</ul>
-									</div>
+									<ul className="profile__events-list">
+										{uEvents.map((item, id) => (
+											<li key={id} className="profile__events-item">
+												<Uevents key={id} title={item.title} desc={item.desc} />
+												<div className="profile__events-item-btn">
+													<Button
+														className="profile__events-delete"
+														onClick={() => handleDeleteEvent(id)}
+													>
+														<DeleteIcon />
+													</Button>
+													<Button
+														onClick={() =>
+															setUEvents((prev) =>
+																prev.map((item, itemId) =>
+																	itemId === id
+																		? { ...item, isDone: !item.isDone }
+																		: item,
+																),
+															)
+														}
+														className={`uevents-done-btn ${
+															item.isDone
+																? "uevents-done-btn--isdone"
+																: "uevents-done-btn--notdone"
+														}`}
+													>
+														<CheckCircleOutlineIcon />
+													</Button>
+												</div>
+											</li>
+										))}
+									</ul>
 								</div>
-							</aside>
-						) : null}
+							</div>
+						</aside>
 					</div>
 					<WebToolBox />
 				</div>
