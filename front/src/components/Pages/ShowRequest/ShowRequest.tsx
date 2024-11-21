@@ -177,25 +177,27 @@ const ShowRequest = () => {
     }
   };
 
-  // Данные карточки нынешнего главного бухгалтера
-  const currentAccountant = users?.find(
-    (user) =>
-      uinfo?.orgName === user.orgName &&
-      user.role === "Главный бухгалтер" &&
-      user.status === true
-  );
-
-  // Данные карточки пользователя
-  const currentUser = users?.find((user) => {
-    return organizations?.find((org) => {
-      return org.userIds.find((userId) => userId === user.id);
-    });
-  });
-
   // Данные карточки организации
   const currentOrganization = organizations?.find(
     (e) => e.id === rqstsDataById?.organizationId
   );
+
+  // Данные карточки нынешнего главного бухгалтера
+
+  const currentAccountant = users?.find((user) => {
+    if (currentOrganization)
+      return (
+        currentOrganization.userIds.includes(user.id) && user.status === false
+      );
+  });
+
+  // Данные карточки пользователя в заявке
+
+  const currentUserRequest = users?.find(
+    (e) => e.fullName === rqstsDataById?.fullName
+  );
+
+  console.log(currentUserRequest);
 
   // Это условие не корректная, необходимо убедится что userIds существует новый бухгалтер, а не заявитель
   const disabledAddUserButton = currentOrganization?.userIds.includes(
@@ -366,7 +368,7 @@ const ShowRequest = () => {
         </section>
         {rqstsDataById?.reqType === "Смена главного бухгалтера" && (
           <ShowChangeChiefAccountant
-            currentUser={currentUser}
+            currentUser={currentAccountant}
             fileInfo={fileInfo}
             currentOrganization={currentOrganization}
             rqstsDataById={rqstsDataById}
@@ -386,6 +388,7 @@ const ShowRequest = () => {
             currentOrganization={currentOrganization}
             rqstsDataById={rqstsDataById}
             uinfo={uinfo}
+            currentUserRequest={currentUserRequest}
           />
         )}
         {rqstsDataById && rqstsDataById?.stepCode >= 3 && (

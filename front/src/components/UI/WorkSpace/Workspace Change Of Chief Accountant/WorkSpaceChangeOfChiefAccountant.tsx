@@ -221,7 +221,6 @@ const WorkSpaceChangeOfChiefAccountant = ({
           : "0";
 
       case 3:
-        console.log(item.name, rqstsDataById?.services.length, currentInvoice); // Логирование для отладки
         return (item.name === "Шуъба оид ба кор бо муштариён" &&
           rqstsDataById?.services.length > 0) ||
           (item.name === "Шуъбаи муҳосибот ва хоҷагӣ" && currentInvoice)

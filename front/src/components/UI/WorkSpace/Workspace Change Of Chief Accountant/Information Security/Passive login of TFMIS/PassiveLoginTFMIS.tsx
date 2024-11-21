@@ -13,8 +13,9 @@ import { TGetUsers } from "../../../../../API/GetUsers";
 import { putUserById } from "../../../../../API/PutUserById";
 import LoginTfmisCard from "../Login of TFMIS Card/LoginTfmisCard";
 import PassiveLoginTFMISModal from "../../../../Passive Login of TFMIS Modal/PassiveLoginTFMISModal";
+import { putRqstsById, PutRqstsByIdType } from "../../../../../API/PutRqstById";
 
-const PassiveLoginTFMIS = ({ currentUser, executor }: any) => {
+const PassiveLoginTFMIS = ({ currentUser, executor, rqstsDataById }: any) => {
   // GET USERS
 
   const [show, setShow] = useState<boolean>(false);
@@ -35,9 +36,31 @@ const PassiveLoginTFMIS = ({ currentUser, executor }: any) => {
     },
   });
 
+  const putRqstsByIdMutation = useMutation(
+    {
+      mutationFn: (data: PutRqstsByIdType) => putRqstsById(data),
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [`request-${rqstsDataById?.id}`],
+        });
+      },
+    },
+    queryClient
+  );
+
   // Функция для изменения статуса сертификата
   const handleChangeStatus = () => {
-    if (currentUser) mutation.mutate(currentUser);
+    if (rqstsDataById)
+      putRqstsByIdMutation.mutate({
+        ...rqstsDataById,
+        stepTask: rqstsDataById && rqstsDataById.stepTask + 1,
+      });
+
+    if (rqstsDataById?.reqType === "Смена главного бухгалтера" && currentUser) {
+      mutation.mutate({ ...currentUser, status: false });
+    } else if (rqstsDataById?.reqType === "Выдача сертификата" && currentUser) {
+      mutation.mutate(currentUser);
+    }
   };
 
   return (
@@ -50,7 +73,10 @@ const PassiveLoginTFMIS = ({ currentUser, executor }: any) => {
           </div>
         </div>
 
-        <LoginTfmisCard currentUser={currentUser} />
+        <LoginTfmisCard
+          currentUser={currentUser}
+          rqstsDataById={rqstsDataById}
+        />
         <div className="panel-buttons">
           {currentUser?.status === false && (
             <div className="wrapper-show-executor">
@@ -68,8 +94,8 @@ const PassiveLoginTFMIS = ({ currentUser, executor }: any) => {
                 <NoAccountsIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
               }
               text="Отправить в пассив"
-              handleShow={handleShow}
-              activeSendButton={!currentUser?.status}
+              handleSubmit={handleChangeStatus}
+              activeSendButton={rqstsDataById?.stepTask > 1}
             />
           </div>
         </div>
