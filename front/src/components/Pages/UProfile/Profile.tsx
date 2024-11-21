@@ -192,20 +192,20 @@ const Profile: React.FC = () => {
 									xmlns="http://www.w3.org/2000/svg"
 									width="24"
 									height="24"
-									className="open-svg"
+									className="close-svg"
 									viewBox="0 0 24 24"
 								>
-									<path d="M16 19V5L5 12z" fill="currentColor" />
+									<path d="M8 5v14l11-7z" fill="currentColor" />
 								</svg>
 							) : (
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									width="24"
 									height="24"
-									className="close-svg"
+									className="open-svg"
 									viewBox="0 0 24 24"
 								>
-									<path d="M8 5v14l11-7z" fill="currentColor" />
+									<path d="M16 19V5L5 12z" fill="currentColor" />
 								</svg>
 							)}
 						</button>
