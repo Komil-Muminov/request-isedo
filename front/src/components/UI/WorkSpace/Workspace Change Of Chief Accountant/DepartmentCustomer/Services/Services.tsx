@@ -16,7 +16,12 @@ import { GetRqstsByIdType } from "../../../../../API/GetRqstsById";
 import ServicesModal from "../../../../ServicesModal/ServicesModal";
 import PDFViewerService from "../../../../PDF Viewer Service/PDFViewerService";
 
-const Services = ({ handleShowServicesList, rqstsDataById, executor }: any) => {
+const Services = ({
+  handleShowServicesList,
+  rqstsDataById,
+  executor,
+  defaultService,
+}: any) => {
   const [show, setShow] = useState<boolean>(false);
 
   const handleShow = (state: boolean) => {
@@ -94,17 +99,21 @@ const Services = ({ handleShowServicesList, rqstsDataById, executor }: any) => {
   console.log(selectedRowIndexes);
 
   const handleSubmit = () => {
-    const now = new Date();
-    const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
-      now.getMonth() + 1
-    ).padStart(2, "0")}.${now.getFullYear()} в ${String(
-      now.getHours()
-    ).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+    const services = [
+      ...(Array.isArray(rqstsDataById.services) ? rqstsDataById.services : []),
+      ...(Array.isArray(serviceIds) && serviceIds.length > 0
+        ? serviceIds
+        : [defaultService]), // Преобразуем defaultService в массив, если оно не массив
+    ];
 
-    putOrganizationUserMutation.mutate({
+    const servicesData = {
       ...rqstsDataById,
-      services: [...(rqstsDataById.services || []), ...serviceIds], // Используйте || [] для предотвращения ошибки
-    });
+      services,
+    };
+
+    console.log(servicesData);
+
+    putOrganizationUserMutation.mutate(servicesData);
   };
 
   const servicesList = services.filter((e) => {

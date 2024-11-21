@@ -73,8 +73,8 @@
     "files": [],
     "userId": 5,
     "organizationId": 1,
-    "services": [],
+    "services": [1],
     "id": 3,
-    "dateChange": "20.11.2024 в 17:24"
+    "dateChange": "21.11.2024 в 17:00"
   }
 ]

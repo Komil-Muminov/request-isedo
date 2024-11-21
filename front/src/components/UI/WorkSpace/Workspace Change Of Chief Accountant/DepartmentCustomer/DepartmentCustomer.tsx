@@ -23,6 +23,7 @@ const DepartmentCustomer = ({
   stageTwo,
   stageThree,
   executor,
+  defaultService,
 }: any) => {
   const [showServicesList, setShowServicesList] = useState<boolean>(false);
 
@@ -97,6 +98,7 @@ const DepartmentCustomer = ({
             handleShowServicesList={handleShowServicesList}
             rqstsDataById={rqstsDataById}
             executor={executor}
+            defaultService={defaultService}
           />
         </div>
       )}
