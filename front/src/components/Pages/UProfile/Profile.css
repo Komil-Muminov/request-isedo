@@ -400,8 +400,12 @@
 	cursor: pointer;
 }
 
+.profile__show-aside-btn:hover:not(:focus-visible) {
+	background-color: rgba(170, 170, 170, 0.842);
+}
+
 .profile.dark-mode .profile__show-aside-btn:hover:not(:focus-visible) {
-	background-color: rgba(240, 240, 240, 0.853);
+	background-color: rgba(255, 255, 255, 0.349);
 }
 
 .profile.dark-mode .profile__show-aside-btn svg {
