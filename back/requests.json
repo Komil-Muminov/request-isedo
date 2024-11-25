@@ -35,7 +35,11 @@
     ],
     "userId": 5,
     "organizationId": 1,
-    "services": [1, 2, 3],
+    "services": [
+      1,
+      2,
+      3
+    ],
     "dateChange": "08.11.2024 в 11:54",
     "id": 1
   },
@@ -54,7 +58,9 @@
     "files": [],
     "userId": 5,
     "organizationId": 1,
-    "services": [4],
+    "services": [
+      4
+    ],
     "id": 2,
     "dateChange": "13.11.2024 в 12:07"
   },
@@ -67,14 +73,16 @@
     "role": "Главный бухгалтер",
     "reqType": "Выдача сертификата",
     "password": "123",
-    "stepCode": 1,
+    "stepCode": 3,
     "stepTask": 2,
     "dateTime": "18.11.2024.10:06",
     "files": [],
     "userId": 5,
     "organizationId": 1,
-    "services": [],
+    "services": [
+      1
+    ],
     "id": 3,
-    "dateChange": "20.11.2024 в 17:24"
+    "dateChange": "25.11.2024 в 09:50"
   }
 ]

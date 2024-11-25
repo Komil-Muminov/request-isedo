@@ -17,7 +17,6 @@ export const PutRequestServices = async (
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          dateChange: newData.dateChange,
           services: newData.services,
         }),
       }

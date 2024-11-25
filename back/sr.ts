@@ -626,7 +626,7 @@ app.get("/requests", authenticateJWT, (req: Request, res: Response) => {
 // PUT Request Add Services
 
 app.put("/requests/:id", authenticateJWT, (req: Request, res: Response) => {
-  const { services, dateChange } = req.body; // Получаем массив ids услуг
+  const { services } = req.body; // Получаем массив ids услуг
   const requestId = parseInt(req.params.id); // Получаем ID заявки из параметров
 
   try {
@@ -641,9 +641,17 @@ app.put("/requests/:id", authenticateJWT, (req: Request, res: Response) => {
       return res.status(404).json({ error: "Заявка не найдена" });
     }
 
+    // Изменяем ключ dateChange
+    const now = new Date();
+    const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
+      now.getMonth() + 1
+    ).padStart(2, "0")}.${now.getFullYear()} в ${String(
+      now.getHours()
+    ).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+
     // Добавляем только те id, которых ещё нет в массиве services
     request.services = [...new Set([...request.services, ...services])];
-    request.dateChange = dateChange;
+    request.dateChange = formattedDate;
 
     // Запись изменений обратно в файл
     fs.writeFileSync(requestsFilePath, JSON.stringify(requestData, null, 2));
@@ -1157,9 +1165,6 @@ app.put(
       return res.status(404).json({ error: "Заявка не найдена" });
     }
 
-    // Обновление данных заявки
-    requests[index] = { ...requests[index], ...requestData };
-
     // Изменяем ключ dateChange
     const now = new Date();
     const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
@@ -1173,8 +1178,15 @@ app.put(
     writeToFile(requestsFilePath, requests);
 
     // Обновление данных заявки
-    requests[index] = { ...requests[index], ...requestData };
+    requests[index] = {
+      ...requests[index],
+      ...requestData,
+      dateChange: formattedDate,
+    };
+
     writeToFile(requestsFilePath, requests);
+
+    console.log("REQUEST SHOW ID", requests);
 
     res.status(200).json({ message: "Заявка успешно обновлена", requestData });
   }

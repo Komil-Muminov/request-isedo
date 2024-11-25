@@ -223,7 +223,7 @@ const WorkSpaceChangeOfChiefAccountant = ({
       case 3:
         return (item.name === "Шуъба оид ба кор бо муштариён" &&
           rqstsDataById?.services.length > 0) ||
-          (item.name === "Шуъбаи муҳосибот ва хоҷагӣ" && currentInvoice)
+          (item.name === "Шуъба муҳосибот ва хоҷагӣ" && currentInvoice)
           ? "50"
           : "0";
 
@@ -243,7 +243,7 @@ const WorkSpaceChangeOfChiefAccountant = ({
       name: "Шуъба оид ба хизматрасонии техникӣ",
     },
     {
-      name: "Шуъбаи муҳосибот ва хоҷагӣ",
+      name: "Шуъба муҳосибот ва хоҷагӣ",
     },
   ];
 
