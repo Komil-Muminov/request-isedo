@@ -32,6 +32,7 @@
 
 .profile__settings-btn {
 	cursor: pointer;
+	align-self: flex-end;
 }
 
 .dark-mode-btn {

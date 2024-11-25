@@ -22,5 +22,6 @@ export const useDarkMode = (...elementClassName: string[]) => {
 	const handleIsDarkMode = () => {
 		setIsDarkMode((prev) => !prev);
 	};
+
 	return { isDarkMode, handleIsDarkMode };
 };
