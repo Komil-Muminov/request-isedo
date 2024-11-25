@@ -13,13 +13,11 @@ body[data-theme="night"] {
 /* Контейнер переключателя */
 .switcher__content {
 	position: relative;
-
 	min-height: 35px;
 	min-width: 100px;
 	background: #ddd;
 	border-radius: 35px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-	overflow: hidden;
 	transition: background 0.4s ease;
 }
 
