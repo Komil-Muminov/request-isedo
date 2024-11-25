@@ -122,6 +122,8 @@ const WorkSpaceCertificateIssuance = ({
     (e) => e.requestId === rqstsDataById?.id
   );
 
+  console.log(currentInvoice);
+
   // Универсальная функция для вычисления процента выполнения отдела на каждом этапе
   const getDepartmentPercent = (
     item: { name: string },
@@ -135,10 +137,12 @@ const WorkSpaceCertificateIssuance = ({
             rqstsDataById?.stepTask >= 2)
           ? "50"
           : "0";
+
       case 3:
         return (item.name === "Шуъба оид ба кор бо муштариён" &&
           rqstsDataById?.services.length > 0) ||
-          (item.name === "Шуъбаи муҳосибот ва хоҷагӣ" && currentInvoice)
+          (item.name === "Шуъба муҳосибот ва хоҷагӣ" &&
+            rqstsDataById?.stepCode > 2)
           ? "50"
           : "0";
 

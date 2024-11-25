@@ -22,7 +22,7 @@ export const departments: TDepartment[] = [
   },
   {
     id: 4,
-    name: "Шуъбаи муҳосибот ва хоҷагӣ",
+    name: "Шуъба муҳосибот ва хоҷагӣ",
     state: false,
   },
   {
@@ -32,7 +32,7 @@ export const departments: TDepartment[] = [
   },
   {
     id: 6,
-    name: "Шуъбаи оид ба маъмуриятчигӣ ва нигаҳдошти системавӣ",
+    name: "Шуъба оид ба маъмуриятчигӣ ва нигаҳдошти системавӣ",
     state: false,
   },
   {

@@ -117,7 +117,7 @@ const WorkSpaceTokenIssuance = ({
       case 1:
         return (item.name === "Шуъба оид ба кор бо муштариён" &&
           rqstsDataById?.services.length > 0) ||
-          (item.name === "Шуъбаи муҳосибот ва хоҷагӣ" && currentInvoice)
+          (item.name === "Шуъба муҳосибот ва хоҷагӣ" && currentInvoice)
           ? "50"
           : "0";
 
@@ -131,7 +131,7 @@ const WorkSpaceTokenIssuance = ({
       name: "Шуъба оид ба кор бо муштариён",
     },
     {
-      name: "Шуъбаи муҳосибот ва хоҷагӣ",
+      name: "Шуъба муҳосибот ва хоҷагӣ",
     },
   ];
 

@@ -171,6 +171,11 @@ const CreateInvoice = ({
       if (rqstsDataById?.reqType === "Выдача токена") {
         return rqstsDataById.stepCode + 2;
       }
+
+      if (rqstsDataById?.reqType === "Выдача сертификата") {
+        return rqstsDataById.stepCode + 2;
+      }
+
       return rqstsDataById.stepCode + 1;
     };
 
