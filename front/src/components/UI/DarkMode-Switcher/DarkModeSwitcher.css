@@ -1,0 +1,97 @@
+body[data-theme="day"] {
+	background: linear-gradient(to bottom, #87cefa, #f0f8ff); /* Голубое небо */
+	color: #333;
+	transition: background 0.5s, color 0.5s;
+}
+
+body[data-theme="night"] {
+	background: linear-gradient(to bottom, #2f4f4f, #000); /* Тёмное небо */
+	color: #eee;
+	transition: background 0.5s, color 0.5s;
+}
+
+/* Контейнер переключателя */
+.switcher__content {
+	position: relative;
+	display: inline-block;
+	width: 140px;
+	height: 70px;
+	background: #ddd;
+	border-radius: 35px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	transition: background 0.4s ease;
+}
+
+.switcher__toggle {
+	cursor: pointer;
+	width: max-content;
+}
+
+.switcher__toggle.light .switcher__content {
+	background-image: url("../../../assets/sun-darkMode2.png");
+	background-size: cover;
+}
+
+.switcher__toggle.dark .switcher__content {
+	background-image: url("../../../assets/moon-darkMode.png");
+	background-size: cover;
+}
+
+.switcher__toggle.dark .slider {
+	transform: translateX(70px);
+}
+
+.switcher__toggle-icon {
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 40px;
+	z-index: 2;
+	transition: transform 0.4s ease, left 0.4s ease, right 0.4s ease;
+}
+
+.slider {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	max-width: 40px;
+	width: 100%;
+	min-height: 40px;
+	background: rgba(255, 255, 255, 0.498);
+	border-radius: 50%;
+	transition: transform 0.4s ease;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.slider:hover:not(:focus-visible) {
+	background: rgba(255, 255, 255, 0.863);
+}
+
+.icon-left {
+	left: 25%; /* Для 🌙 */
+	animation: glowMoon 2s infinite alternate;
+}
+
+.icon-right {
+	left: 75%; /* Для ☀️ */
+	animation: glowSun 2s infinite alternate;
+}
+
+@keyframes glowMoon {
+	from {
+		text-shadow: 0 0 8px #fff, 0 0 16px #aaa;
+	}
+	to {
+		text-shadow: 0 0 15px #fff, 0 0 30px #aaa;
+	}
+}
+
+@keyframes glowSun {
+	from {
+		text-shadow: 0 0 8px #ffd700, 0 0 16px #ffa500;
+	}
+	to {
+		text-shadow: 0 0 15px #ffd700, 0 0 30px #ffa500;
+	}
+}

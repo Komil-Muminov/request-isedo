@@ -17,6 +17,7 @@ import { useDarkMode } from "../../../API/Hooks/UseDarkMode";
 
 import "./Udetails.css";
 import "../../../../index.css";
+import DarkModeSwitcher from "../../../UI/DarkMode-Switcher/DarkModeSwitcher";
 const Udetails: React.FC = () => {
 	const [uPhoto, setphoto] = useState<CurrUserPhoto | null>(null);
 	const handleUphoto = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -112,6 +113,10 @@ const Udetails: React.FC = () => {
 										title="Сменить тему"
 										onClick={handleIsDarkMode}
 									></button>
+									<DarkModeSwitcher
+										isDarkMode={isDarkMode}
+										onClick={handleIsDarkMode}
+									/>
 								</div>
 								<div className="user-details_photo">
 									<div className="user_photo">
