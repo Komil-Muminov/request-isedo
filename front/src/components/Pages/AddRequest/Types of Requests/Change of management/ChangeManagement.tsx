@@ -22,8 +22,8 @@ const ChangeManagement = ({
   files,
   fileUploadedStatus,
   currentOrganization,
-  secondFileStatus,
-  thirdFileStatus,
+  firstRequiredFile,
+  secondRequiredFile,
   register,
 }: any) => {
   return (
@@ -35,7 +35,7 @@ const ChangeManagement = ({
             currentUser={currentUser}
             title="Карточка пользователя"
             newFileService={<FileService handleGetFile={handleGetFile} />}
-            requiredFile={fileInfo[0]?.name}
+            requiredFile={fileInfo[3]?.name}
             handleFileUploadedStatus={handleFileUploadedStatus}
             uploadedFile={files}
             requiredDocuments={
@@ -47,7 +47,7 @@ const ChangeManagement = ({
                   ) : (
                     <HighlightOffIcon sx={{ color: "red" }} />
                   )}
-                  <p>{fileInfo[0]?.name}</p>
+                  <p>{fileInfo[3]?.name}</p>
                 </li>
               </ul>
             }
@@ -149,15 +149,15 @@ const ChangeManagement = ({
             <ul className="required-documents">
               <p>Необходимые документы:</p>
               <li>
-                {secondFileStatus ? (
+                {firstRequiredFile ? (
                   <CheckCircleOutlineIcon sx={{ color: "green" }} />
                 ) : (
                   <HighlightOffIcon sx={{ color: "red" }} />
                 )}
-                <p>{fileInfo[1]?.name}</p>
+                <p>{fileInfo[4]?.name}</p>
               </li>
               <li>
-                {thirdFileStatus ? (
+                {secondRequiredFile ? (
                   <CheckCircleOutlineIcon sx={{ color: "green" }} />
                 ) : (
                   <HighlightOffIcon sx={{ color: "red" }} />

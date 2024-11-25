@@ -45,6 +45,7 @@ import { postRequestFile } from "../../API/postRequestFile";
 import ShowChangeChiefAccountant from "./Show Types Of Request/Show Change of chief accountant/ShowChangeChiefAccountant";
 import ShowTokenIssuance from "./Show Types Of Request/Show Token issuance/ShowTokenIssuance";
 import ShowCertificateIssuance from "./Show Types Of Request/Show Certificate issuance/ShowCertificateIssuance";
+import ShowChangeManagement from "./Show Types Of Request/Show Change of management/ShowChangeManagement";
 
 const ShowRequest = () => {
   const navigate = useNavigate();
@@ -187,7 +188,18 @@ const ShowRequest = () => {
   const currentAccountant = users?.find((user) => {
     if (currentOrganization)
       return (
-        currentOrganization.userIds.includes(user.id) && user.status === false
+        currentOrganization.userIds.includes(user.id) &&
+        user.role === "Главный бухгалтер"
+      );
+  });
+
+  // Данные карточки нынешнего руководителя
+
+  const currentManagement = users?.find((user) => {
+    if (currentOrganization)
+      return (
+        currentOrganization.userIds.includes(user.id) &&
+        user.role === "Руководитель"
       );
   });
 
@@ -369,6 +381,16 @@ const ShowRequest = () => {
         {rqstsDataById?.reqType === "Смена главного бухгалтера" && (
           <ShowChangeChiefAccountant
             currentUser={currentAccountant}
+            fileInfo={fileInfo}
+            currentOrganization={currentOrganization}
+            rqstsDataById={rqstsDataById}
+            uinfo={uinfo}
+            disabledAddUserButton={disabledAddUserButton}
+          />
+        )}
+        {rqstsDataById?.reqType === "Смена руководителя" && (
+          <ShowChangeManagement
+            currentUser={currentManagement}
             fileInfo={fileInfo}
             currentOrganization={currentOrganization}
             rqstsDataById={rqstsDataById}

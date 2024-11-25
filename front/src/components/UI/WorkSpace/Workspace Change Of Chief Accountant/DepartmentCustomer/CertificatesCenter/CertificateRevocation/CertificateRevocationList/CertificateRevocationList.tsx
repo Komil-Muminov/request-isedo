@@ -39,12 +39,14 @@ interface TProps {
   rqstsDataById: any;
   certificates: TCertificates[];
   executor: any;
+  currentOrganization: any;
 }
 
 const CertificateRevocationList = ({
   rqstsDataById,
   certificates,
   executor,
+  currentOrganization,
 }: TProps) => {
   const [isMouseDown, setIsMouseDown] = useState(false);
 
@@ -78,9 +80,41 @@ const CertificateRevocationList = ({
     }
   }, [usersQuery]);
 
-  // Получаем сертификат пользвателя по идентификатору пользователя
+  // Нынешний главный бухгалтер
+  const currentAccountant = users?.find((user) => {
+    if (
+      currentOrganization.userIds.includes(user.id) &&
+      user.role === "Главный бухгалтер"
+    ) {
+      return user;
+    }
+  });
+
+  // Нынешний руководитель
+  const currentManagement = users?.find((user) => {
+    if (
+      currentOrganization.userIds.includes(user.id) &&
+      user.role === "Руководитель"
+    ) {
+      return user;
+    }
+  });
+
+  // Получаем сертификат пользователя по идентификатору пользователя
   const getCertificateUser = certificates.find((cert) => {
-    return users?.some((user) => cert.userId === user.id);
+    if (
+      rqstsDataById?.reqType === "Смена главного бухгалтера" &&
+      currentAccountant.id === cert.userId
+    ) {
+      return cert;
+    }
+    if (
+      rqstsDataById?.reqType === "Смена руководителя" &&
+      currentManagement.id === cert.userId
+    ) {
+      return cert;
+    }
+    // return users?.some((user) => cert.userId === user.id);
   });
 
   // Данные для типа заявки "Смена сертификата", если заявку подает руководитель, то смена сертификата бухгалтера, а иначе наоборот
