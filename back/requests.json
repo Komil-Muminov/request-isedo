@@ -98,7 +98,7 @@
     "password": "123",
     "loginImof": "Есть",
     "stepCode": 2,
-    "stepTask": 2,
+    "stepTask": 6,
     "files": [
       {
         "id": 1732545002702,
@@ -124,6 +124,6 @@
     "services": [],
     "dataChange": "25.11.2024 в 19:30",
     "id": 4,
-    "dateChange": "26.11.2024 в 10:27"
+    "dateChange": "26.11.2024 в 17:03"
   }
 ]

@@ -6,6 +6,7 @@ import ButtonPanelControl from "../../../../UI/ButtonPanelControl/ButtonPanelCon
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 import { departments } from "../../../../API/Data/Departments/Departments";
 import WorkSpaceChangeOfChiefAccountant from "../../../../UI/WorkSpace/Workspace Change Of Chief Accountant/WorkSpaceChangeOfChiefAccountant";
+import WorkSpaceChangeManagement from "../../../../UI/WorkSpace/Workspace Change Of Management/WorkSpaceChangeManagement";
 
 const ShowChangeManagement = ({
   currentUser,
@@ -75,7 +76,7 @@ const ShowChangeManagement = ({
       </section>
       {/* Рабочее пространство */}
       {uinfo?.uType !== "bo" && (
-        <WorkSpaceChangeOfChiefAccountant
+        <WorkSpaceChangeManagement
           currentUser={currentUser}
           rqstsDataById={rqstsDataById}
           currentOrganization={currentOrganization}

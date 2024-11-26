@@ -13,11 +13,13 @@ const ButtonPanelControl = ({
 }: TProps) => {
   const handleClick = () => {
     if (goBack) goBack(false);
-    if (handleSubmit && handleCloseAfterSave) {
-      handleSubmit();
-      handleCloseAfterSave();
-    }
+
+    if (handleSubmit) handleSubmit();
+
+    if (handleCloseAfterSave) handleCloseAfterSave();
+
     if (setShowTypeRequest) setShowTypeRequest(true);
+
     if (handleShow) handleShow(true);
   };
 

@@ -9,7 +9,6 @@ const TechnicalServices = ({
   stageOne,
   stageTwo,
   executor,
-  
 }: any) => {
   return (
     <>

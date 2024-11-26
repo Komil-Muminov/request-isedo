@@ -1,6 +1,6 @@
 export interface TVPN {
   id: number;
-  userId: number | null;
+  userId?: number | null;
   bz: number;
   password: string;
   fullName: string;

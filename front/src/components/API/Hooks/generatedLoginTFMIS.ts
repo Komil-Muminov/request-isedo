@@ -12,9 +12,12 @@ export function generatedLoginTFMIS(
   typeRequests: TypeRequest[]
 ): string | null {
   // Проверяем условие
-  if (rqstsDataById?.reqType === typeRequests[0]?.name) {
+  if (
+    rqstsDataById?.reqType === typeRequests[0]?.name ||
+    rqstsDataById?.reqType === typeRequests[1]?.name
+  ) {
     // Создаем префикс и добавляем цифры
-    const prefix = "bo_123";
+    const prefix = `bo_${Date.now()}`;
 
     // Извлекаем фамилию из полного имени
     const fullName = rqstsDataById?.fullName; // Например: "Шарипов Амир Чамшедович"

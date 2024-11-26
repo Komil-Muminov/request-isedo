@@ -758,17 +758,6 @@ app.post("/certificates", authenticateJWT, (req: Request, res: Response) => {
 
   const certificates = readFromFile(certificatesFilePath);
 
-  // Проверка, если userId уже существует в массиве сертификатов
-  const existingCertificate = certificates.find(
-    (cert: any) => cert.userId === Number(requestData.userId) // Преобразуем userId в число
-  );
-
-  if (existingCertificate) {
-    return res.status(409).json({
-      error: "Сертификат для данного пользователя уже существует.",
-    });
-  }
-
   // Генерация уникального ID и добавление сертификата
   requestData.id = generateUniqueId(certificates);
 

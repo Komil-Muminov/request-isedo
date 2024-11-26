@@ -22,7 +22,8 @@
     "organization": "Muhsiddin and Parpisho Corporation",
     "phone": "880001304",
     "role": "Руководитель",
-    "status": true
+    "status": false,
+    "dateChange": "26.11.2024 в 15:04"
   },
   {
     "fullName": "Шарипов Амир Чамшедович",
@@ -36,5 +37,18 @@
     "userId": 6,
     "dateChange": "08.11.2024 в 10:42",
     "id": 3
+  },
+  {
+    "fullName": "Шарипов Рохбар",
+    "login": "sharipov.r",
+    "bz": 123,
+    "organization": "Muhsiddin and Parpisho Corporation",
+    "phone": "880008671",
+    "role": "Руководитель",
+    "password": "123",
+    "status": true,
+    "userId": 7,
+    "dateChange": "26.11.2024 в 17:03",
+    "id": 4
   }
 ]

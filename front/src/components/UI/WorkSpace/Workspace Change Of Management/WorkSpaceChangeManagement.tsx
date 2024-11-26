@@ -55,7 +55,6 @@ const WorkSpaceChangeManagement = ({
     (e) => e.fullName === rqstsDataById?.fullName
   );
 
-
   const { getMe } = useAuth();
   const uQuery = useQuery(
     {
@@ -145,6 +144,11 @@ const WorkSpaceChangeManagement = ({
     (cert) => cert.userId === rqstsDataById?.userId
   );
 
+  const currentCertificateUser = certificates.find(
+    (cert) => cert.userName === rqstsDataById?.fullName
+  );
+
+  console.log(currentCertificateUser);
 
   const currentDepartmentCustomer = currentDepartmentStageOne.find(
     (e) => e.state === true
@@ -210,7 +214,7 @@ const WorkSpaceChangeManagement = ({
 
       case 2:
         return (item.name === "Шуъба оид ба кор бо муштариён" &&
-          getCertificateNewUser) ||
+          currentCertificateUser) ||
           (item.name === "Шуъба оид ба амнияти иттилоотӣ" &&
             currentNewUser?.status === true) ||
           (item.name === "Шуъба оид ба хизматрасонии техникӣ" &&

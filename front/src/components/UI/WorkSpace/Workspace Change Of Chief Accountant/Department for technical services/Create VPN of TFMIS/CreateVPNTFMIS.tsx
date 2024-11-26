@@ -17,7 +17,6 @@ import {
   putOrganizationUser,
 } from "../../../../../API/PutOrganizationUser";
 
-import { getUsers, TGetUsers } from "../../../../API/GetUsers";
 import { useEffect, useState } from "react";
 
 import VPNCard from "../VPN Card/VPNCard";
@@ -26,8 +25,13 @@ import { getVPN, TVPN } from "../../../../../API/GetVPN";
 import { postVPN } from "../../../../../API/PostVPN";
 import { putRqstsById, PutRqstsByIdType } from "../../../../../API/PutRqstById";
 import ButtonPanelControl from "../../../../ButtonPanelControl/ButtonPanelControl";
+import { getUsers, TGetUsers } from "../../../../../API/GetUsers";
 
-const CreateVPNTFMIS = ({ rqstsDataById, currentOrganization, executor }: any) => {
+const CreateVPNTFMIS = ({
+  rqstsDataById,
+  currentOrganization,
+  executor,
+}: any) => {
   const generatedUserName =
     rqstsDataById &&
     typeRequests &&
@@ -61,6 +65,53 @@ const CreateVPNTFMIS = ({ rqstsDataById, currentOrganization, executor }: any) =
     queryClient
   );
 
+  const [users, setUsers] = useState<TGetUsers[] | null>(null);
+
+  const usersQuery = useQuery(
+    {
+      queryFn: () => getUsers(),
+      queryKey: ["users"],
+    },
+    queryClient
+  );
+
+  useEffect(() => {
+    if (usersQuery.status === "success") {
+      setUsers(usersQuery.data);
+    }
+  }, [usersQuery]);
+
+  // Данные карточки нынешнего главного бухгалтера
+
+  const currentAccountant = users?.find((user) => {
+    if (currentOrganization)
+      return (
+        currentOrganization.userIds.includes(user.id) &&
+        user.role === "Главный бухгалтер" &&
+        user.status === true
+      );
+  });
+
+  // Данные карточки нынешнего руководителя
+
+  const currentManagement = users?.find((user) => {
+    if (currentOrganization)
+      return (
+        currentOrganization.userIds.includes(user.id) &&
+        user.role === "Руководитель" &&
+        user.status === true
+      );
+  });
+
+  const currentVpnUserId =
+    rqstsDataById?.reqType === "Смена главного бухгалтера"
+      ? currentAccountant
+      : rqstsDataById?.reqType === "Смена руководителя"
+      ? currentManagement
+      : "";
+
+  console.log(currentVpnUserId);
+
   const onSubmit = (data: TVPN) => {
     const now = new Date();
     const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
@@ -73,10 +124,9 @@ const CreateVPNTFMIS = ({ rqstsDataById, currentOrganization, executor }: any) =
       ...data,
       password: "123",
       status: true,
-      userId: rqstsDataById?.userId,
+      userId: currentVpnUserId && currentVpnUserId?.id,
       dateChange: formattedDate,
     };
-
 
     postVPNMutation.mutate(updateReqData);
 
@@ -103,11 +153,12 @@ const CreateVPNTFMIS = ({ rqstsDataById, currentOrganization, executor }: any) =
     }
   }, [getVpnQuery]);
 
-  const newLoginUserId = vpn?.find((e) => e.login === generatedUserName);
+  const newLoginUserId = vpn?.find(
+    (e) => e.fullName === rqstsDataById?.fullName
+  );
 
   const disabledAddUserInOrganizationButton =
     currentOrganization.userIds.includes(newLoginUserId?.userId);
-
 
   return (
     <div className="certificate-content">
