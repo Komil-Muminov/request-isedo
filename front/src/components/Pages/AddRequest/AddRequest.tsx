@@ -228,14 +228,12 @@ const AddRequest: React.FC = () => {
   // Данные карточки пользователя
   const currentUser = users?.find((user) => user.username === uinfo?.username);
 
-  console.log(currentUser);
 
   // Данные карточки организации
   const currentOrganization = organizations?.find((org) => {
     return org.userIds.find((userId) => userId === uinfo?.userId);
   });
 
-  console.log(files);
 
   // Увеличивает номер текущего шага на 1.
   const onSubmit = (data: PostRqstScheme) => {

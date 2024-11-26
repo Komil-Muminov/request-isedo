@@ -18,7 +18,6 @@ const VPNCardList = ({ title, desc }: any) => {
 };
 
 const VPNCard = ({ currentVPN }: any) => {
-  console.log(currentVPN);
 
   return (
     <div

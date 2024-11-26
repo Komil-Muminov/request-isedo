@@ -18,7 +18,6 @@ const UserOrOrganizationCard = ({
   uploadedFile,
   userType,
 }: any) => {
-  console.log(currentManager, "===========+=============");
 
   const currentFile = uploadedFile?.some(
     (e: any) => e.fileName === requiredFile

@@ -44,8 +44,6 @@ const WorkSpaceTokenIssuance = ({
     }
   }, [usersQuery]);
 
-  console.log(users);
-
   const { getMe } = useAuth();
   const uQuery = useQuery(
     {
@@ -145,8 +143,6 @@ const WorkSpaceTokenIssuance = ({
 
   const getPercentStageValue = (item: any, stage: number) =>
     getDepartmentPercent(item, stage) === "0" ? "50" : "100";
-
-  console.log(calculateTotalPercent(1));
 
   return (
     <section className="wrapper-work-space">

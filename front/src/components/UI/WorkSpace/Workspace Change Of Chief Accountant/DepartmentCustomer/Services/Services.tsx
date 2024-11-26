@@ -49,9 +49,7 @@ const Services = ({
     return service.reqType.includes(rqstsDataById?.reqType);
   });
 
-  console.log(servicesFilteredByRequestId, "============");
 
-  console.log(servicesFilteredByRequestId);
 
   const selectedServicesTotal = selectedRowIndexes.map(
     (index) => services[index]
@@ -70,7 +68,6 @@ const Services = ({
 
   const [serviceIds, setServiceIds] = useState<number[]>([]);
 
-  console.log(servicesFilteredByRequestId, selectedServicesTotal);
 
   const putOrganizationUserMutation = useMutation({
     mutationFn: (data: GetRqstsByIdType) => PutRequestServices(data),
@@ -96,7 +93,6 @@ const Services = ({
     handleShow(false);
   };
 
-  console.log(selectedRowIndexes);
 
   const handleSubmit = () => {
     const services = [
@@ -111,7 +107,6 @@ const Services = ({
       services,
     };
 
-    console.log(servicesData);
 
     putOrganizationUserMutation.mutate(servicesData);
   };
@@ -145,7 +140,6 @@ const Services = ({
     }
   };
 
-  console.log(servicesList, servicesFilteredByRequestId);
 
   return (
     <>

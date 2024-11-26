@@ -54,7 +54,6 @@ const DepartmentCustomer = ({
     (cert) => cert.userName === rqstsDataById?.fullName
   );
 
-  console.log();
 
   return (
     <>

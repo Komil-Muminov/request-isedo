@@ -14,7 +14,6 @@ const InvoiceCardList = ({ title, desc }: any) => {
 };
 
 const InvoiceCard = ({ currentInvoice }: any) => {
-  console.log(currentInvoice);
 
   return (
     <div className="info-invoice">

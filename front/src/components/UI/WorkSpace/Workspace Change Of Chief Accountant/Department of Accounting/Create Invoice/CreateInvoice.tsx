@@ -70,7 +70,6 @@ const CreateInvoice = ({
     return rqstsDataById?.services.includes(currentService.id);
   });
 
-  console.log(servicesFilteredByRequestId);
 
   const servicesList = services.filter((e) => {
     return rqstsDataById?.services.some((service: any) => service === e.id);

@@ -209,7 +209,6 @@ const ShowRequest = () => {
     (e) => e.fullName === rqstsDataById?.fullName
   );
 
-  console.log(currentUserRequest);
 
   // Это условие не корректная, необходимо убедится что userIds существует новый бухгалтер, а не заявитель
   const disabledAddUserButton = currentOrganization?.userIds.includes(

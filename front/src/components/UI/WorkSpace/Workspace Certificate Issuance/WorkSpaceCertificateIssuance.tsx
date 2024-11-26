@@ -48,7 +48,6 @@ const WorkSpaceCertificateIssuance = ({
     }
   }, [usersQuery]);
 
-  console.log(users);
 
   const { getMe } = useAuth();
   const uQuery = useQuery(
@@ -122,7 +121,6 @@ const WorkSpaceCertificateIssuance = ({
     (e) => e.requestId === rqstsDataById?.id
   );
 
-  console.log(currentInvoice);
 
   // Универсальная функция для вычисления процента выполнения отдела на каждом этапе
   const getDepartmentPercent = (

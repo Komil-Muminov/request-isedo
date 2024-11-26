@@ -77,7 +77,6 @@ const CreateVPNTFMIS = ({ rqstsDataById, currentOrganization, executor }: any) =
       dateChange: formattedDate,
     };
 
-    console.log(updateReqData);
 
     postVPNMutation.mutate(updateReqData);
 
@@ -109,7 +108,6 @@ const CreateVPNTFMIS = ({ rqstsDataById, currentOrganization, executor }: any) =
   const disabledAddUserInOrganizationButton =
     currentOrganization.userIds.includes(newLoginUserId?.userId);
 
-  console.log(newLoginUserId);
 
   return (
     <div className="certificate-content">

@@ -55,7 +55,6 @@ const WorkSpaceChangeOfChiefAccountant = ({
     (e) => e.fullName === rqstsDataById?.fullName
   );
 
-  console.log(users);
 
   const { getMe } = useAuth();
   const uQuery = useQuery(
@@ -146,7 +145,6 @@ const WorkSpaceChangeOfChiefAccountant = ({
     (cert) => cert.userId === rqstsDataById?.userId
   );
 
-  console.log(getCertificateNewUser, "-=gdfgfdg==========");
 
   const currentDepartmentCustomer = currentDepartmentStageOne.find(
     (e) => e.state === true

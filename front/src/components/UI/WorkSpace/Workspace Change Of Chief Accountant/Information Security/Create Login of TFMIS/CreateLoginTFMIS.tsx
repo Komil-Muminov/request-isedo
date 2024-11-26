@@ -84,7 +84,6 @@ const CreateLoginTFMIS = ({
       photo: "",
       dateChange: formattedDate,
     };
-    console.log(updateReqData);
     regMeMutation.mutate(updateReqData);
 
     if (rqstsDataById)
@@ -132,7 +131,6 @@ const CreateLoginTFMIS = ({
       });
   };
 
-  console.log(disabledAddUserInOrganizationButton);
 
   return (
     <div className="certificate-content">

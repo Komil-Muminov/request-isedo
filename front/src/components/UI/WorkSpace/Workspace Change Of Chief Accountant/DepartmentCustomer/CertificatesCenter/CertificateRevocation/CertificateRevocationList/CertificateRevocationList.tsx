@@ -173,7 +173,6 @@ const CertificateRevocationList = ({
     const dateFrom = `${day}.${month}.${year}`;
     const dateTo = `${day}.${month}.${year + 1}`;
 
-    console.log(dateFrom, dateTo, rqstsDataById?.reqType);
 
     if (
       rqstsDataById?.reqType === "Смена главного бухгалтера" &&
