@@ -104,7 +104,7 @@ const Udetails: React.FC = () => {
 											sx={{ fill: "#464531" }}
 										/>
 									</button>
-									<button
+									{/* <button
 										className={`dark-mode-btn ${
 											document.querySelector(".profile.dark-mode")
 												? "active"
@@ -112,7 +112,7 @@ const Udetails: React.FC = () => {
 										}`}
 										title="Сменить тему"
 										onClick={handleIsDarkMode}
-									></button>
+									></button> */}
 									<DarkModeSwitcher
 										isDarkMode={isDarkMode}
 										onClick={handleIsDarkMode}

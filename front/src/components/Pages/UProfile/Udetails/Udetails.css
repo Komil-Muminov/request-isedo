@@ -11,6 +11,7 @@
 	justify-content: center;
 	gap: 10px;
 	align-self: flex-end;
+	/* position: relative; */
 }
 .uwidget__item--special {
 	min-height: 320px;
@@ -35,20 +36,21 @@
 	align-self: flex-end;
 }
 
-.dark-mode-btn {
+/* .dark-mode-btn {
 	position: relative;
 	cursor: pointer;
-}
+} */
 
-.dark-mode-btn::before {
+/* .dark-mode-btn::before {
 	content: "☀️";
 	font-size: 24px;
-}
+} */
 
-.dark-mode-btn.active::before {
+/* .dark-mode-btn.active::before {
 	content: "🌒";
 	font-size: 24px;
-}
+} */
+
 .user-details {
 	height: 100%;
 	display: flex;
