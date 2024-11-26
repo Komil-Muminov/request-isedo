@@ -22,7 +22,11 @@ import TechnicalServicesModal from "../../../../TechnicalServicesModal/Technical
 import { putVpnById } from "../../../../../API/PutVpnById";
 import VPNCard from ".././VPN Card/VPNCard";
 
-const PassiveVPNTFMIS = ({ currentOrganization, executor }: any) => {
+const PassiveVPNTFMIS = ({
+  currentOrganization,
+  executor,
+  rqstsDataById,
+}: any) => {
   const [isMouseDown, setIsMouseDown] = useState(false);
 
   const handleMouseDown = () => {
@@ -65,10 +69,6 @@ const PassiveVPNTFMIS = ({ currentOrganization, executor }: any) => {
     }
   }, [getVpnQuery]);
 
-  const currentVPN = vpn.find((v) => {
-    return currentOrganization?.userIds.includes(v.userId);
-  });
-
   const [show, setShow] = useState<boolean>(false);
 
   const handleShow = (state: boolean) => {
@@ -85,6 +85,42 @@ const PassiveVPNTFMIS = ({ currentOrganization, executor }: any) => {
     onError: (error) => {
       console.error("Ошибка при обновлении VPN:", error);
     },
+  });
+
+  // Данные главного бухгалтера
+
+  const currentAccountant = users?.find((user) => {
+    if (currentOrganization)
+      return (
+        currentOrganization.userIds.includes(user.id) &&
+        user.role === "Главный бухгалтер"
+      );
+  });
+
+  // Данные руководителя
+
+  const currentManagement = users?.find((user) => {
+    if (currentOrganization)
+      return (
+        currentOrganization.userIds.includes(user.id) &&
+        user.role === "Руководитель"
+      );
+  });
+
+  const currentVPN = vpn.find((v) => {
+    if (
+      v?.userId === currentAccountant?.id &&
+      rqstsDataById?.reqType === "Смена главного бухгалтера"
+    ) {
+      return v;
+    }
+
+    if (
+      v?.userId === currentManagement?.id &&
+      rqstsDataById?.reqType === "Смена руководителя"
+    ) {
+      return v;
+    }
   });
 
   // Функция для изменения статуса сертификата

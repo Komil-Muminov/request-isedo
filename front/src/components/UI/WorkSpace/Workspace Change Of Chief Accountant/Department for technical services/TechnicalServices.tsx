@@ -9,6 +9,7 @@ const TechnicalServices = ({
   stageOne,
   stageTwo,
   executor,
+  
 }: any) => {
   return (
     <>
@@ -18,6 +19,7 @@ const TechnicalServices = ({
           <PassiveVPNTFMIS
             currentOrganization={currentOrganization}
             executor={executor}
+            rqstsDataById={rqstsDataById}
           />
         </div>
       )}
