@@ -6,7 +6,6 @@ const FileService = ({ handleGetFile }: any) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
     handleGetFile(file);
-    console.log(file);
 
     // Сброс значения инпута после выбора файла
     event.target.value = "";

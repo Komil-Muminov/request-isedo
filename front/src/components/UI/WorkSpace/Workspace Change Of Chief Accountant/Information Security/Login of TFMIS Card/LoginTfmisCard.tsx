@@ -29,10 +29,13 @@ const LoginTfmisCard = ({ currentUser, rqstsDataById }: any) => {
       ? true
       : false;
 
+
   return (
     <div
       className={`info-login-tfmis ${
-        currentUser?.status === false || !successIssuanceCertificate
+        currentUser?.status === false ||
+        (!successIssuanceCertificate &&
+          rqstsDataById?.reqType === "Выдача сертификата")
           ? "passive-login-tfmis"
           : currentUser
           ? "active-login-tfmis"

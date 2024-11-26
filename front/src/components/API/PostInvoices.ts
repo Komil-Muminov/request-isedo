@@ -3,7 +3,6 @@ import { TInvoices } from "./GetInvoices";
 const token = localStorage.getItem("token");
 
 export const postInvoices = async (newData: TInvoices): Promise<any> => {
-  console.log(newData);
   try {
     const response = await fetch("http://localhost:3000/invoices", {
       method: "POST",

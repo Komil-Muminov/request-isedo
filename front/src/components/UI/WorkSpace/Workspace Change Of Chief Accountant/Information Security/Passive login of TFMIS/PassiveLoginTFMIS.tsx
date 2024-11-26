@@ -56,9 +56,14 @@ const PassiveLoginTFMIS = ({ currentUser, executor, rqstsDataById }: any) => {
         stepTask: rqstsDataById && rqstsDataById.stepTask + 1,
       });
 
-    if (rqstsDataById?.reqType === "Смена главного бухгалтера" && currentUser) {
+    if (
+      (rqstsDataById?.reqType === "Смена главного бухгалтера" && currentUser) ||
+      (rqstsDataById?.reqType === "Смена руководителя" && currentUser)
+    ) {
       mutation.mutate({ ...currentUser, status: false });
-    } else if (rqstsDataById?.reqType === "Выдача сертификата" && currentUser) {
+    }
+
+    if (rqstsDataById?.reqType === "Выдача сертификата" && currentUser) {
       mutation.mutate(currentUser);
     }
   };
@@ -95,6 +100,7 @@ const PassiveLoginTFMIS = ({ currentUser, executor, rqstsDataById }: any) => {
               }
               text="Отправить в пассив"
               handleSubmit={handleChangeStatus}
+              handleShow={handleShow}
               activeSendButton={rqstsDataById?.stepTask > 1}
             />
           </div>

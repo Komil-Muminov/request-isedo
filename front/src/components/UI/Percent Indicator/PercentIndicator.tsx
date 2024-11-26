@@ -1,7 +1,6 @@
 import "./PercentIndicator.css";
 
 const PercentIndicator = ({ percent }: any) => {
-  console.log(percent);
 
   return (
     <div className="percent-indicator">

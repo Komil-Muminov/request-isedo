@@ -83,7 +83,8 @@ const CertificateRevocationList = ({
   // Нынешний главный бухгалтер
   const currentAccountant = users?.find((user) => {
     if (
-      currentOrganization.userIds.includes(user.id) &&
+      currentOrganization &&
+      currentOrganization?.userIds?.includes(user.id) &&
       user.role === "Главный бухгалтер"
     ) {
       return user;
@@ -93,7 +94,8 @@ const CertificateRevocationList = ({
   // Нынешний руководитель
   const currentManagement = users?.find((user) => {
     if (
-      currentOrganization.userIds.includes(user.id) &&
+      currentOrganization &&
+      currentOrganization?.userIds?.includes(user.id) &&
       user.role === "Руководитель"
     ) {
       return user;
@@ -173,7 +175,6 @@ const CertificateRevocationList = ({
     const dateFrom = `${day}.${month}.${year}`;
     const dateTo = `${day}.${month}.${year + 1}`;
 
-
     if (
       rqstsDataById?.reqType === "Смена главного бухгалтера" &&
       getCertificate
@@ -183,10 +184,17 @@ const CertificateRevocationList = ({
         statusCode: code, // Изменение statusCode с 0 на 5
         dateChange: formattedDate,
       });
-    } else if (
-      rqstsDataById?.reqType === "Выдача сертификата" &&
-      getCertificate
-    ) {
+    }
+
+    if (rqstsDataById?.reqType === "Смена руководителя" && getCertificate) {
+      certificateMutation.mutate({
+        ...getCertificate,
+        statusCode: code, // Изменение statusCode с 0 на 5
+        dateChange: formattedDate,
+      });
+    }
+
+    if (rqstsDataById?.reqType === "Выдача сертификата" && getCertificate) {
       certificateMutation.mutate({
         ...getCertificate,
         validFrom: dateFrom,
@@ -194,12 +202,6 @@ const CertificateRevocationList = ({
         dateChange: formattedDate,
       });
     }
-
-    if (rqstsDataById)
-      putRqstsByIdMutation.mutate({
-        ...rqstsDataById,
-        stepTask: rqstsDataById && rqstsDataById.stepTask + 1,
-      });
   };
 
   const activeButtonIssuanceCertificateType =
@@ -234,14 +236,16 @@ const CertificateRevocationList = ({
           <div className="panel-executor">
             <ButtonPanelControl
               icon={
-                rqstsDataById?.reqType === "Смена главного бухгалтера" ? (
+                rqstsDataById?.reqType === "Смена главного бухгалтера" ||
+                rqstsDataById?.reqType === "Смена руководителя" ? (
                   <GppBadIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
                 ) : (
                   <GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
                 )
               }
               text={
-                rqstsDataById?.reqType === "Смена главного бухгалтера"
+                rqstsDataById?.reqType === "Смена главного бухгалтера" ||
+                rqstsDataById?.reqType === "Смена руководителя"
                   ? "Отозвать"
                   : "Выдать"
               }
@@ -257,12 +261,13 @@ const CertificateRevocationList = ({
           </div>
         </div>
       </div>
-      {show && rqstsDataById?.reqType === "Смена главного бухгалтера" && (
-        <CertificateRevocationModal
-          handleShow={handleShow}
-          handleChangeStatus={handleChangeStatus}
-        />
-      )}
+      {(show && rqstsDataById?.reqType === "Смена главного бухгалтера") ||
+        (show && rqstsDataById?.reqType === "Смена руководителя" && (
+          <CertificateRevocationModal
+            handleShow={handleShow}
+            handleChangeStatus={handleChangeStatus}
+          />
+        ))}
     </>
   );
 };

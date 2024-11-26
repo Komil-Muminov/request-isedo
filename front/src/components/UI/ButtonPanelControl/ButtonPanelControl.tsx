@@ -13,7 +13,7 @@ const ButtonPanelControl = ({
 }: TProps) => {
   const handleClick = () => {
     if (goBack) goBack(false);
-    if (handleSubmit) {
+    if (handleSubmit && handleCloseAfterSave) {
       handleSubmit();
       handleCloseAfterSave();
     }

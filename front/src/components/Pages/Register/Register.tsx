@@ -20,13 +20,11 @@ export const Register = ({
   columnsOfModules,
   possibilityCreate,
 }: any) => {
-  console.log(columnsOfModules);
 
   const columns: any = columnsOfModules;
 
   const location = useLocation();
 
-  console.log(location);
 
   // Добавляем Link в каждый лист таблицы
   const handleRowClick = (params: any) => {

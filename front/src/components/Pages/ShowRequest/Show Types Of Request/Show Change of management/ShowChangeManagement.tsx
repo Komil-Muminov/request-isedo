@@ -19,7 +19,7 @@ const ShowChangeManagement = ({
     <>
       {" "}
       <section className="old-accountant">
-        <TitleDocument title="Прошлый главный бухгалтер" />
+        <TitleDocument title="Прошлый руководитель" />
         <div className="wrapper-cards">
           <UserOrOrganizationCard
             currentUser={currentUser}
@@ -39,7 +39,7 @@ const ShowChangeManagement = ({
         </div>
       </section>
       <section className="new-accountant">
-        <TitleDocument title="Новый главный бухгалтер" />
+        <TitleDocument title="Новый руководитель" />
         <div className="wrapper-cards">
           <UserOrOrganizationCard
             currentUser={rqstsDataById}

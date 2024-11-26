@@ -16,7 +16,6 @@ export const postPdfData = async (file: File): Promise<any> => {
     if (!response.ok) {
       throw new Error("Error on postPdfData");
     }
-    console.log(response);
 
     return response.json(); // Возвращаем результат
   } catch (error) {
