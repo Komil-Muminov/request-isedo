@@ -26,10 +26,6 @@ body[data-theme="night"] {
 }
 
 .switcher__toggle.light .switcher__content {
-	position: absolute;
-	right: 27px;
-	bottom: 48%;
-
 	background-image: url("../../../assets/sun-darkMode2.png");
 	background-size: cover;
 	background-position: 6px 27%;
