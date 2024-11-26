@@ -22,8 +22,8 @@ const ChangeChiefAccountant = ({
   files,
   fileUploadedStatus,
   currentOrganization,
-  secondFileStatus,
-  thirdFileStatus,
+  firstRequiredFile,
+  secondRequiredFile,
   register,
 }: any) => {
   return (
@@ -149,7 +149,7 @@ const ChangeChiefAccountant = ({
             <ul className="required-documents">
               <p>Необходимые документы:</p>
               <li>
-                {secondFileStatus ? (
+                {firstRequiredFile ? (
                   <CheckCircleOutlineIcon sx={{ color: "green" }} />
                 ) : (
                   <HighlightOffIcon sx={{ color: "red" }} />
@@ -157,7 +157,7 @@ const ChangeChiefAccountant = ({
                 <p>{fileInfo[1]?.name}</p>
               </li>
               <li>
-                {thirdFileStatus ? (
+                {secondRequiredFile ? (
                   <CheckCircleOutlineIcon sx={{ color: "green" }} />
                 ) : (
                   <HighlightOffIcon sx={{ color: "red" }} />

@@ -315,10 +315,15 @@ const AddRequest: React.FC = () => {
       case "Смена главного бухгалтера":
         postRqstsMutation.mutate(updateReqData);
         break;
+      case "Смена руководителя":
+        postRqstsMutation.mutate(updateReqData);
+        break;
       case "Выдача токена":
         postRqstsMutation.mutate(reqTypeDataTokenIssuance);
+        break;
       case "Выдача сертификата":
         postRqstsMutation.mutate(reqTypeDataIssuanceFromAccountantAndManager);
+        break;
     }
 
     alert(
@@ -334,8 +339,15 @@ const AddRequest: React.FC = () => {
     setFileUploadedStatus(state);
   };
 
-  const secondFileStatus = files.some((e) => e.fileName === fileInfo[1]?.name);
-  const thirdFileStatus = files.some((e) => e.fileName === fileInfo[2]?.name);
+  const appointmentAccountantFileName = files.some(
+    (e) => e.fileName === fileInfo[1]?.name
+  );
+  const copyPassportFileName = files.some(
+    (e) => e.fileName === fileInfo[2]?.name
+  );
+  const appointmentManagementFileName = files.some(
+    (e) => e.fileName === fileInfo[4]?.name
+  );
 
   return (
     <section className="add-content">
@@ -455,8 +467,8 @@ const AddRequest: React.FC = () => {
             files={files}
             fileUploadedStatus={fileUploadedStatus}
             currentOrganization={currentOrganization}
-            secondFileStatus={secondFileStatus}
-            thirdFileStatus={thirdFileStatus}
+            firstRequiredFile={appointmentAccountantFileName}
+            secondRequiredFile={copyPassportFileName}
             register={register}
           />
         )}
@@ -469,8 +481,8 @@ const AddRequest: React.FC = () => {
             files={files}
             fileUploadedStatus={fileUploadedStatus}
             currentOrganization={currentOrganization}
-            secondFileStatus={secondFileStatus}
-            thirdFileStatus={thirdFileStatus}
+            firstRequiredFile={appointmentManagementFileName}
+            secondRequiredFile={copyPassportFileName}
             register={register}
           />
         )}
@@ -484,8 +496,8 @@ const AddRequest: React.FC = () => {
             files={files}
             fileUploadedStatus={fileUploadedStatus}
             currentOrganization={currentOrganization}
-            secondFileStatus={secondFileStatus}
-            thirdFileStatus={thirdFileStatus}
+            firstRequiredFile={appointmentManagementFileName}
+            secondRequiredFile={copyPassportFileName}
             register={register}
           />
         )}

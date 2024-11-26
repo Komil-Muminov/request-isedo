@@ -65,6 +65,7 @@ const DepartmentCustomer = ({
             rqstsDataById={rqstsDataById}
             certificates={certificates}
             executor={executor}
+            currentOrganization={currentOrganization}
           />
         </div>
       )}
