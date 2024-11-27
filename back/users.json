@@ -88,8 +88,9 @@
     "department": "",
     "reqIdentity": true,
     "uIdentity": false,
-    "status": true,
-    "passport": "A0825871"
+    "status": false,
+    "passport": "A0825871",
+    "dateChange": "26.11.2024 в 10:27"
   },
   {
     "id": 6,
@@ -109,5 +110,24 @@
     "status": true,
     "passport": "A04513403",
     "dateChange": "21.11.2024 в 15:55"
+  },
+  {
+    "id": 7,
+    "uType": "bo",
+    "username": "bo_1732621433119_sharipov",
+    "password": "123",
+    "photo": "",
+    "fullName": "Шарипов Рохбар",
+    "phone": "880008671",
+    "tax": "250008809",
+    "email": "rohbarovich@gmail.com",
+    "role": "Руководитель",
+    "orgName": "Muhsiddin and Parpisho Corporation",
+    "orgTax": "020003455",
+    "reqIdentity": false,
+    "uIdentity": false,
+    "status": true,
+    "passport": "A04513403",
+    "dateChange": "26.11.2024 в 16:44"
   }
 ]

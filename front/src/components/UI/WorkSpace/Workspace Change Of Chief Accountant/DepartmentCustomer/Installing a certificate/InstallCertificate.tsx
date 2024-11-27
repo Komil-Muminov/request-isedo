@@ -90,6 +90,8 @@ const InstallCertificate = ({
       dateChange: formattedDate,
     };
 
+    console.log(updateReqData);
+
     postCertificateMutation.mutate(updateReqData);
 
     if (rqstsDataById)

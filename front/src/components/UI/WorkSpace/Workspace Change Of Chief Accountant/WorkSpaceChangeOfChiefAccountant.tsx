@@ -55,7 +55,6 @@ const WorkSpaceChangeOfChiefAccountant = ({
     (e) => e.fullName === rqstsDataById?.fullName
   );
 
-
   const { getMe } = useAuth();
   const uQuery = useQuery(
     {
@@ -145,7 +144,6 @@ const WorkSpaceChangeOfChiefAccountant = ({
     (cert) => cert.userId === rqstsDataById?.userId
   );
 
-
   const currentDepartmentCustomer = currentDepartmentStageOne.find(
     (e) => e.state === true
   );
@@ -166,8 +164,40 @@ const WorkSpaceChangeOfChiefAccountant = ({
     }
   }, [getVpnQuery]);
 
+  // Данные главного бухгалтера
+
+  const currentAccountant = users?.find((user) => {
+    if (currentOrganization)
+      return (
+        currentOrganization.userIds.includes(user.id) &&
+        user.role === "Главный бухгалтер"
+      );
+  });
+
+  // Данные руководителя
+
+  const currentManagement = users?.find((user) => {
+    if (currentOrganization)
+      return (
+        currentOrganization.userIds.includes(user.id) &&
+        user.role === "Руководитель"
+      );
+  });
+
   const currentVPN = vpn.find((v) => {
-    return currentOrganization?.userIds.includes(v.userId);
+    if (
+      v?.userId === currentAccountant?.id &&
+      rqstsDataById?.reqType === "Смена главного бухгалтера"
+    ) {
+      return v;
+    }
+
+    if (
+      v?.userId === currentManagement?.id &&
+      rqstsDataById?.reqType === "Смена руководителя"
+    ) {
+      return v;
+    }
   });
 
   const currentNewVPN = vpn.find((v) => rqstsDataById?.fullName === v.fullName);

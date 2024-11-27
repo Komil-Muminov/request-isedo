@@ -79,7 +79,11 @@ const CreateLoginTFMIS = ({
 
     const updateReqData = {
       ...data,
-      uType: rqstsDataById?.reqType === typeRequests[0]?.name ? "bo" : "",
+      uType:
+        rqstsDataById?.reqType === typeRequests[0]?.name ||
+        rqstsDataById?.reqType === typeRequests[1]?.name
+          ? "bo"
+          : "",
       password: "123",
       photo: "",
       dateChange: formattedDate,
@@ -118,10 +122,16 @@ const CreateLoginTFMIS = ({
     },
   });
 
-  const newLoginUserId = users?.find((e) => e.username === generatedUserName);
+  const newLoginUserId = users?.find(
+    (e) => e.fullName === rqstsDataById?.fullName
+  );
+
+  console.log(newLoginUserId);
 
   const disabledAddUserInOrganizationButton =
     currentOrganization.userIds.includes(newLoginUserId?.id);
+
+  console.log(newLoginUserId, disabledAddUserInOrganizationButton);
 
   const addNewUserToOrganization = () => {
     if (currentOrganization && newLoginUserId)
@@ -130,7 +140,6 @@ const CreateLoginTFMIS = ({
         userId: newLoginUserId?.id,
       });
   };
-
 
   return (
     <div className="certificate-content">

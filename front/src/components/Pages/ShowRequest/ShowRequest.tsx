@@ -209,7 +209,6 @@ const ShowRequest = () => {
     (e) => e.fullName === rqstsDataById?.fullName
   );
 
-
   // Это условие не корректная, необходимо убедится что userIds существует новый бухгалтер, а не заявитель
   const disabledAddUserButton = currentOrganization?.userIds.includes(
     rqstsDataById?.userId
@@ -226,12 +225,14 @@ const ShowRequest = () => {
 
   const handleActiveStep = () => {
     if (
-      rqstsDataById?.stepCode === 3 ||
-      rqstsDataById?.reqType === "Смена главного бухгалтера"
+      (rqstsDataById?.stepCode === 3 &&
+        rqstsDataById?.reqType === "Смена главного бухгалтера") ||
+      (rqstsDataById?.stepCode === 3 &&
+        rqstsDataById?.reqType === "Смена руководителя")
     ) {
       return rqstsDataById?.stepCode + 1;
     } else if (
-      rqstsDataById?.stepCode === 2 ||
+      rqstsDataById?.stepCode === 2 &&
       rqstsDataById?.reqType === "Выдача токена"
     ) {
       return rqstsDataById?.stepCode + 2;
