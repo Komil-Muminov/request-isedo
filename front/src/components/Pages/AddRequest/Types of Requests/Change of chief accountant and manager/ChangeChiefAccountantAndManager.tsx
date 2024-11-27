@@ -23,8 +23,12 @@ const ChangeChiefAccountantAndManager = ({
   files,
   fileUploadedStatus,
   currentOrganization,
-  secondFileStatus,
-  thirdFileStatus,
+  firstRequiredFile,
+  secondRequiredFile,
+  thirdRequiredFile,
+  fourthRequiredFile,
+  fiveRequiredFile,
+  sixRequiredFile,
   register,
 }: any) => {
   return (
@@ -44,20 +48,20 @@ const ChangeChiefAccountantAndManager = ({
               <ul className="required-documents">
                 <p>Необходимые документы:</p>
                 <li>
-                  {fileUploadedStatus ? (
-                    <CheckCircleOutlineIcon sx={{ color: "green" }} />
-                  ) : (
-                    <HighlightOffIcon sx={{ color: "red" }} />
-                  )}
-                  <p>{fileInfo[0]?.name}</p>
-                </li>
-                <li>
-                  {fileUploadedStatus ? (
+                  {firstRequiredFile ? (
                     <CheckCircleOutlineIcon sx={{ color: "green" }} />
                   ) : (
                     <HighlightOffIcon sx={{ color: "red" }} />
                   )}
                   <p>{fileInfo[3]?.name}</p>
+                </li>
+                <li>
+                  {secondRequiredFile ? (
+                    <CheckCircleOutlineIcon sx={{ color: "green" }} />
+                  ) : (
+                    <HighlightOffIcon sx={{ color: "red" }} />
+                  )}
+                  <p>{fileInfo[0]?.name}</p>
                 </li>
               </ul>
             }
@@ -159,20 +163,20 @@ const ChangeChiefAccountantAndManager = ({
             <ul className="required-documents">
               <p>Необходимые документы:</p>
               <li>
-                {secondFileStatus ? (
+                {thirdRequiredFile ? (
                   <CheckCircleOutlineIcon sx={{ color: "green" }} />
                 ) : (
                   <HighlightOffIcon sx={{ color: "red" }} />
                 )}
-                <p>{fileInfo[1]?.name}</p>
+                <p>{fileInfo[4]?.name}</p>
               </li>
               <li>
-                {thirdFileStatus ? (
+                {fourthRequiredFile ? (
                   <CheckCircleOutlineIcon sx={{ color: "green" }} />
                 ) : (
                   <HighlightOffIcon sx={{ color: "red" }} />
                 )}
-                <p>{fileInfo[2]?.name}</p>
+                <p>{fileInfo[5]?.name}</p>
               </li>
             </ul>
           </div>
@@ -183,44 +187,44 @@ const ChangeChiefAccountantAndManager = ({
         <div className="wrapper-cards wrapper-cards-padding">
           <div className="inputs-list">
             <TextField
-              {...register("fullName")}
+              {...register("fullNameAccountant")}
               type="text"
-              id="fullName"
+              id="fullNameAccountant"
               className="request_inp"
               // KM
               label="ФИО"
             />
             <TextField
-              {...register("tax")}
+              {...register("taxAccountant")}
               id="tax"
               type="text"
               className="request_inp"
               label="ИНН"
             />
             <TextField
-              {...register("phone")}
-              id="phone"
+              {...register("phoneAccountant")}
+              id="phoneAccountant"
               type="text"
               className="request_inp"
               label="Номер телефона"
             />
             <TextField
-              {...register("email")}
-              id="email"
+              {...register("emailAccountant")}
+              id="emailAccountant"
               type="text"
               className="request_inp"
               label="E-mail адрес"
             />
             <TextField
-              {...register("passport")}
-              id="passport"
+              {...register("passportAccountant")}
+              id="passportAccountant"
               type="text"
               className="request_inp"
               label="Серия и номер паспорта"
             />
             <TextField
-              {...register("role")}
-              id="role"
+              {...register("roleAccountant")}
+              id="roleAccountant"
               type="text"
               className="request_inp"
               label="Должность"
@@ -232,10 +236,10 @@ const ChangeChiefAccountantAndManager = ({
                   Наличие токена
                 </InputLabel>
                 <Select
-                  {...register("token")}
+                  {...register("tokenAccountant")}
                   labelId="demo-simple-select-label"
-                  id="token"
-                  label="token"
+                  id="tokenAccountant"
+                  label="tokenAccountant"
                 >
                   <MenuItem value="Есть">Есть</MenuItem>
                   <MenuItem value="Нет">Нет</MenuItem>
@@ -248,10 +252,10 @@ const ChangeChiefAccountantAndManager = ({
                   Наличие логина iMoF
                 </InputLabel>
                 <Select
-                  {...register("loginImof")}
+                  {...register("loginImofAccountant")}
                   labelId="demo-simple-select-label"
-                  id="loginImof"
-                  label="loginImof"
+                  id="loginImofAccountant"
+                  label="loginImofAccountant"
                 >
                   <MenuItem value="Есть">Есть</MenuItem>
                   <MenuItem value="Нет">Нет</MenuItem>
@@ -262,15 +266,15 @@ const ChangeChiefAccountantAndManager = ({
             <ul className="required-documents">
               <p>Необходимые документы:</p>
               <li>
-                {secondFileStatus ? (
+                {fiveRequiredFile ? (
                   <CheckCircleOutlineIcon sx={{ color: "green" }} />
                 ) : (
                   <HighlightOffIcon sx={{ color: "red" }} />
                 )}
-                <p>{fileInfo[4]?.name}</p>
+                <p>{fileInfo[1]?.name}</p>
               </li>
               <li>
-                {thirdFileStatus ? (
+                {sixRequiredFile ? (
                   <CheckCircleOutlineIcon sx={{ color: "green" }} />
                 ) : (
                   <HighlightOffIcon sx={{ color: "red" }} />

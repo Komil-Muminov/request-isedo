@@ -43,9 +43,4 @@ export const typeRequests: ItypeRequests[] = [
     image: changeOfAccountant,
     name: "Смена пароля",
   },
-  {
-    id: 8,
-    image: changeOfAccountant,
-    name: "Создание ИНН в TFMIS",
-  },
 ];

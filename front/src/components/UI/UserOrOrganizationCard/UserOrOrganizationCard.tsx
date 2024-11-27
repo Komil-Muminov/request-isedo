@@ -32,8 +32,8 @@ const UserOrOrganizationCard = ({
       }`}
     >
       <p className="card-title">{title}</p>
-      {currentUser && <UserCard currentUser={currentUser} />}
       {currentManager && <UserCard currentUser={currentManager} />}
+      {currentUser && <UserCard currentUser={currentUser} />}
       {currentOrganization && (
         <OrganizationCard currentOrganization={currentOrganization} />
       )}

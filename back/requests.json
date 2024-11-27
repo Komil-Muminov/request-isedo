@@ -88,9 +88,9 @@
   {
     "fullName": "Шарипов Рохбар",
     "tax": "250008809",
-    "phone": "880008671",
+    "phone": "880008508",
     "email": "rohbarovich@gmail.com",
-    "passport": "A04513403",
+    "passport": "A04002174",
     "role": "Руководитель",
     "token": "Есть",
     "reqType": "Смена руководителя",
@@ -127,5 +127,116 @@
     "dataChange": "25.11.2024 в 19:30",
     "id": 4,
     "dateChange": "26.11.2024 в 17:34"
+  },
+  {
+    "fullName": "Шарипов Амир Чамшедович",
+    "tax": "250008809",
+    "phone": "880008671",
+    "email": "jsharipovamir@gmail.com",
+    "passport": "A04513403",
+    "role": "Главный бухгалтер",
+    "reqType": "Выдача токена и сертификата",
+    "password": "123",
+    "stepCode": 3,
+    "stepTask": 2,
+    "dateTime": "27.11.2024.08:40",
+    "files": [],
+    "userId": 5,
+    "organizationId": 1,
+    "services": [
+      1,
+      4
+    ],
+    "dataChange": "27.11.2024 в 08:40",
+    "id": 5,
+    "dateChange": "27.11.2024 в 09:37"
+  },
+  {
+    "fullName": "Шарипов Амир Чамшедович",
+    "tax": "250008809",
+    "phone": "880008671",
+    "email": "jsharipovamir@gmail.com",
+    "passport": "A04513403",
+    "role": "Главный бухгалтер",
+    "reqType": "Смена пароля",
+    "password": "123",
+    "stepCode": 3,
+    "stepTask": 0,
+    "dateTime": "27.11.2024.10:08",
+    "files": [],
+    "userId": 5,
+    "organizationId": 1,
+    "services": [],
+    "dataChange": "27.11.2024 в 10:08",
+    "id": 6,
+    "dateChange": "27.11.2024 в 11:12"
+  },
+  {
+    "fullName": "Насрдинов Бехруз",
+    "tax": "020001804",
+    "phone": "880008404",
+    "email": "b.nasrdinov@itcmf.tj",
+    "passport": "A02348856",
+    "role": "Руководитель",
+    "token": "Есть",
+    "dateTime": "27.11.2024.14:14",
+    "password": "123",
+    "loginImof": "Есть",
+    "fullNameAccountant": "Зафаров Сулеймон",
+    "taxAccountant": "700435835",
+    "phoneAccountant": "880008444",
+    "emailAccountant": "s.zafarov@itcmf.tj",
+    "passportAccountant": "A03000564",
+    "roleAccountant": "Главный бухгалтер",
+    "tokenAccountant": "Есть",
+    "passwordAccountant": "123",
+    "loginImofAccountant": "Есть",
+    "reqType": "Смена главного бухгалтера и руководителя",
+    "stepCode": 1,
+    "stepTask": 0,
+    "files": [
+      {
+        "id": 1732698810725,
+        "fileName": "Карор дар бораи ба вазифа таъин намудани рохбар.",
+        "size": "22.19 КБ",
+        "type": "pdf"
+      },
+      {
+        "id": 1732698814357,
+        "fileName": "Нусхаи шиноснома (рохбар).",
+        "size": "22.19 КБ",
+        "type": "pdf"
+      },
+      {
+        "id": 1732698817735,
+        "fileName": "Карор дар бораи аз вазифа озод намудани рохбар.",
+        "size": "22.19 КБ",
+        "type": "pdf"
+      },
+      {
+        "id": 1732698819812,
+        "fileName": "Карор дар бораи аз вазифа озод намудани сармухосиб.",
+        "size": "22.19 КБ",
+        "type": "pdf"
+      },
+      {
+        "id": 1732698854334,
+        "fileName": "Карор дар бораи ба вазифа таъин намудани сармухосиб.",
+        "size": "22.19 КБ",
+        "type": "pdf"
+      },
+      {
+        "id": 1732698858614,
+        "fileName": "Нусхаи шиноснома (сармухосиб).",
+        "size": "22.19 КБ",
+        "type": "pdf"
+      }
+    ],
+    "userId": 8,
+    "organizationId": 1,
+    "services": [],
+    "dataChange": "27.11.2024 в 14:14",
+    "id": 7,
+    "dateChange": "27.11.2024 в 15:09"
   }
 ]

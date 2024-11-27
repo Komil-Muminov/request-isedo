@@ -24,18 +24,24 @@ const LoginTfmisList = ({ title, desc }: any) => {
 
 const LoginTfmisCard = ({ currentUser, rqstsDataById }: any) => {
   const successIssuanceCertificate =
-    rqstsDataById?.reqType === "Выдача сертификата" &&
-    rqstsDataById?.stepTask > 1
+    (rqstsDataById?.reqType === "Выдача сертификата" &&
+      rqstsDataById?.stepTask > 1) ||
+    (rqstsDataById?.reqType === "Выдача токена и сертификата" &&
+      rqstsDataById?.stepTask > 1) ||
+    (rqstsDataById?.reqType === "Смена пароля" && rqstsDataById?.stepCode >= 3)
       ? true
       : false;
-
 
   return (
     <div
       className={`info-login-tfmis ${
         currentUser?.status === false ||
         (!successIssuanceCertificate &&
-          rqstsDataById?.reqType === "Выдача сертификата")
+          rqstsDataById?.reqType === "Выдача сертификата") ||
+        (!successIssuanceCertificate &&
+          rqstsDataById?.reqType === "Выдача токена и сертификата") ||
+        (!successIssuanceCertificate &&
+          rqstsDataById?.reqType === "Смена пароля")
           ? "passive-login-tfmis"
           : currentUser
           ? "active-login-tfmis"

@@ -3,7 +3,19 @@ interface FileType {
   fileName: string;
 }
 
-export interface GetRqstsType {
+interface RequestAccountantData {
+  fullNameAccountant?: string;
+  taxAccountant?: string;
+  phoneAccountant?: string;
+  emailAccountant?: string;
+  passportAccountant?: string;
+  roleAccountant?: string;
+  tokenAccountant?: string;
+  passwordAccountant?: string;
+  loginImofAccountant?: string;
+}
+
+export interface GetRqstsType extends RequestAccountantData {
   id: number;
   fullName: string;
   role: string;

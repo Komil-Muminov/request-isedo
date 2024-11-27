@@ -3,7 +3,19 @@ interface FileType {
   fileName: string;
 }
 
-export interface PostRqstScheme {
+interface RequestAccountantData {
+  fullNameAccountant?: string;
+  taxAccountant?: string;
+  phoneAccountant?: string;
+  emailAccountant?: string;
+  passportAccountant?: string;
+  roleAccountant?: string;
+  tokenAccountant?: string;
+  passwordAccountant?: string;
+  loginImofAccountant?: string;
+}
+
+export interface PostRqstScheme extends RequestAccountantData {
   fullName: string;
   tax: string;
   phone: string;

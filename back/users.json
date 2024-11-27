@@ -96,7 +96,7 @@
     "id": 6,
     "uType": "bo",
     "username": "bo_123_sharipov",
-    "password": "123",
+    "password": "1234",
     "photo": "",
     "fullName": "Шарипов Амир Чамшедович",
     "phone": "880008671",
@@ -109,7 +109,7 @@
     "uIdentity": false,
     "status": true,
     "passport": "A04513403",
-    "dateChange": "21.11.2024 в 15:55"
+    "dateChange": "27.11.2024 в 11:12"
   },
   {
     "id": 7,
@@ -118,8 +118,8 @@
     "password": "123",
     "photo": "",
     "fullName": "Шарипов Рохбар",
-    "phone": "880008671",
-    "tax": "250008809",
+    "phone": "880008508",
+    "tax": "040003418",
     "email": "rohbarovich@gmail.com",
     "role": "Руководитель",
     "orgName": "Muhsiddin and Parpisho Corporation",
@@ -127,7 +127,26 @@
     "reqIdentity": false,
     "uIdentity": false,
     "status": true,
-    "passport": "A04513403",
+    "passport": "A04002174",
     "dateChange": "26.11.2024 в 16:44"
+  },
+  {
+    "id": 8,
+    "uType": "bo",
+    "username": "a.zieva",
+    "password": "123",
+    "photo": "",
+    "fullName": "Адиба Зиёева",
+    "phone": "880008441",
+    "tax": "040003489",
+    "email": "zieva.adiba@gmail.com",
+    "role": "Начальник отдела кадра",
+    "orgName": "Muhsiddin and Parpisho Corporation",
+    "orgTax": "050002899",
+    "department": "",
+    "reqIdentity": false,
+    "uIdentity": false,
+    "status": true,
+    "passport": "A0467834"
   }
 ]

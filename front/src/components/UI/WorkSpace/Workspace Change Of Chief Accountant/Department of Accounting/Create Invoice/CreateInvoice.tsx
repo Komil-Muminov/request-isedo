@@ -70,7 +70,6 @@ const CreateInvoice = ({
     return rqstsDataById?.services.includes(currentService.id);
   });
 
-
   const servicesList = services.filter((e) => {
     return rqstsDataById?.services.some((service: any) => service === e.id);
   });
@@ -172,6 +171,10 @@ const CreateInvoice = ({
       }
 
       if (rqstsDataById?.reqType === "Выдача сертификата") {
+        return rqstsDataById.stepCode + 2;
+      }
+
+      if (rqstsDataById?.reqType === "Выдача токена и сертификата") {
         return rqstsDataById.stepCode + 2;
       }
 

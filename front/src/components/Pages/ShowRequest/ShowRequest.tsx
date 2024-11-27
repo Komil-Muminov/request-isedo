@@ -46,6 +46,9 @@ import ShowChangeChiefAccountant from "./Show Types Of Request/Show Change of ch
 import ShowTokenIssuance from "./Show Types Of Request/Show Token issuance/ShowTokenIssuance";
 import ShowCertificateIssuance from "./Show Types Of Request/Show Certificate issuance/ShowCertificateIssuance";
 import ShowChangeManagement from "./Show Types Of Request/Show Change of management/ShowChangeManagement";
+import ShowTokenCertificateIssuance from "./Show Types Of Request/Show Issuance Of Token and Certificate/ShowTokenCertificateIssuance";
+import ShowChangePassword from "./Show Types Of Request/Show Change password/ShowChangePassword";
+import ShowChangeChiefAccountantAndManagement from "./Show Types Of Request/Show Change of Chief accountant and Management/ShowChangeChiefAccountantAndManagement";
 
 const ShowRequest = () => {
   const navigate = useNavigate();
@@ -231,12 +234,36 @@ const ShowRequest = () => {
         rqstsDataById?.reqType === "Смена руководителя")
     ) {
       return rqstsDataById?.stepCode + 1;
-    } else if (
-      rqstsDataById?.stepCode === 2 &&
+    }
+
+    if (
+      rqstsDataById?.stepCode === 3 &&
       rqstsDataById?.reqType === "Выдача токена"
     ) {
       return rqstsDataById?.stepCode + 2;
     }
+
+    if (
+      rqstsDataById?.stepCode === 3 &&
+      rqstsDataById?.reqType === "Выдача сертификата"
+    ) {
+      return rqstsDataById?.stepCode + 2;
+    }
+
+    if (
+      rqstsDataById?.stepCode === 3 &&
+      rqstsDataById?.reqType === "Выдача токена и сертификата"
+    ) {
+      return rqstsDataById?.stepCode + 2;
+    }
+
+    if (
+      rqstsDataById?.stepCode === 3 &&
+      rqstsDataById?.reqType === "Смена пароля"
+    ) {
+      return rqstsDataById?.stepCode + 2;
+    }
+
     return rqstsDataById?.stepCode;
   };
 
@@ -398,6 +425,17 @@ const ShowRequest = () => {
             disabledAddUserButton={disabledAddUserButton}
           />
         )}
+        {rqstsDataById?.reqType ===
+          "Смена главного бухгалтера и руководителя" && (
+          <ShowChangeChiefAccountantAndManagement
+            currentUser={currentManagement}
+            fileInfo={fileInfo}
+            currentOrganization={currentOrganization}
+            rqstsDataById={rqstsDataById}
+            uinfo={uinfo}
+            disabledAddUserButton={disabledAddUserButton}
+          />
+        )}
         {rqstsDataById?.reqType === "Выдача токена" && (
           <ShowTokenIssuance
             currentOrganization={currentOrganization}
@@ -407,6 +445,22 @@ const ShowRequest = () => {
         )}
         {rqstsDataById?.reqType === "Выдача сертификата" && (
           <ShowCertificateIssuance
+            currentOrganization={currentOrganization}
+            rqstsDataById={rqstsDataById}
+            uinfo={uinfo}
+            currentUserRequest={currentUserRequest}
+          />
+        )}
+        {rqstsDataById?.reqType === "Выдача токена и сертификата" && (
+          <ShowTokenCertificateIssuance
+            currentOrganization={currentOrganization}
+            rqstsDataById={rqstsDataById}
+            uinfo={uinfo}
+            currentUserRequest={currentUserRequest}
+          />
+        )}
+        {rqstsDataById?.reqType === "Смена пароля" && (
+          <ShowChangePassword
             currentOrganization={currentOrganization}
             rqstsDataById={rqstsDataById}
             uinfo={uinfo}

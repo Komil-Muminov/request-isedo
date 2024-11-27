@@ -126,7 +126,8 @@ const CertificateRevocationList = ({
   );
 
   const getCertificate =
-    rqstsDataById?.reqType === "Выдача сертификата"
+    rqstsDataById?.reqType === "Выдача сертификата" ||
+    rqstsDataById?.reqType === "Выдача токена и сертификата"
       ? getCertificateIssuanceType
       : getCertificateUser;
 
@@ -175,6 +176,12 @@ const CertificateRevocationList = ({
     const dateFrom = `${day}.${month}.${year}`;
     const dateTo = `${day}.${month}.${year + 1}`;
 
+    if (rqstsDataById)
+      putRqstsByIdMutation.mutate({
+        ...rqstsDataById,
+        stepTask: rqstsDataById && rqstsDataById.stepTask + 1,
+      });
+
     if (
       rqstsDataById?.reqType === "Смена главного бухгалтера" &&
       getCertificate
@@ -194,7 +201,11 @@ const CertificateRevocationList = ({
       });
     }
 
-    if (rqstsDataById?.reqType === "Выдача сертификата" && getCertificate) {
+    if (
+      (rqstsDataById?.reqType === "Выдача сертификата" && getCertificate) ||
+      (rqstsDataById?.reqType === "Выдача токена и сертификата" &&
+        getCertificate)
+    ) {
       certificateMutation.mutate({
         ...getCertificate,
         validFrom: dateFrom,
@@ -205,8 +216,10 @@ const CertificateRevocationList = ({
   };
 
   const activeButtonIssuanceCertificateType =
-    rqstsDataById?.stepTask > 0 &&
-    rqstsDataById?.reqType === "Выдача сертификата";
+    (rqstsDataById?.stepTask > 0 &&
+      rqstsDataById?.reqType === "Выдача сертификата") ||
+    (rqstsDataById?.stepTask > 0 &&
+      rqstsDataById?.reqType === "Выдача токена и сертификата");
 
   return (
     <>

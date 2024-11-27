@@ -97,8 +97,6 @@ const AddRequest: React.FC = () => {
     // Поле для бухгалтера становится доступным только если поле "Название организации" было изменено.
     watch,
     setValue,
-    getValues,
-    formState: { dirtyFields },
   } = useForm<PostRqstScheme>({
     defaultValues: {
       fullName: "",
@@ -108,10 +106,19 @@ const AddRequest: React.FC = () => {
       passport: "",
       role: "",
       token: "",
-      reqType: "Смена главного бухгалтера",
       dateTime: "",
       password: "123",
       loginImof: "",
+      fullNameAccountant: "",
+      taxAccountant: "",
+      phoneAccountant: "",
+      emailAccountant: "",
+      passportAccountant: "",
+      roleAccountant: "",
+      tokenAccountant: "",
+      passwordAccountant: "123",
+      loginImofAccountant: "",
+      reqType: "Смена главного бухгалтера",
     },
   });
 
@@ -228,12 +235,10 @@ const AddRequest: React.FC = () => {
   // Данные карточки пользователя
   const currentUser = users?.find((user) => user.username === uinfo?.username);
 
-
   // Данные карточки организации
   const currentOrganization = organizations?.find((org) => {
     return org.userIds.find((userId) => userId === uinfo?.userId);
   });
-
 
   // Увеличивает номер текущего шага на 1.
   const onSubmit = (data: PostRqstScheme) => {
@@ -316,10 +321,19 @@ const AddRequest: React.FC = () => {
       case "Смена руководителя":
         postRqstsMutation.mutate(updateReqData);
         break;
+      case "Смена главного бухгалтера и руководителя":
+        postRqstsMutation.mutate(updateReqData);
+        break;
       case "Выдача токена":
         postRqstsMutation.mutate(reqTypeDataTokenIssuance);
         break;
       case "Выдача сертификата":
+        postRqstsMutation.mutate(reqTypeDataIssuanceFromAccountantAndManager);
+        break;
+      case "Выдача токена и сертификата":
+        postRqstsMutation.mutate(reqTypeDataIssuanceFromAccountantAndManager);
+        break;
+      case "Смена пароля":
         postRqstsMutation.mutate(reqTypeDataIssuanceFromAccountantAndManager);
         break;
     }
@@ -337,14 +351,32 @@ const AddRequest: React.FC = () => {
     setFileUploadedStatus(state);
   };
 
+  // Documents of Management
+
+  const dismissalManagementFileName = files.some(
+    (e) => e.fileName === fileInfo[3]?.name
+  );
+
+  const appointmentManagementFileName = files.some(
+    (e) => e.fileName === fileInfo[4]?.name
+  );
+
+  const copyPassportManagementFileName = files.some(
+    (e) => e.fileName === fileInfo[5]?.name
+  );
+
+  // Documents of Accountant
+
+  const dismissalAccountantFileName = files.some(
+    (e) => e.fileName === fileInfo[0]?.name
+  );
+
   const appointmentAccountantFileName = files.some(
     (e) => e.fileName === fileInfo[1]?.name
   );
-  const copyPassportFileName = files.some(
+
+  const copyPassportAccountantFileName = files.some(
     (e) => e.fileName === fileInfo[2]?.name
-  );
-  const appointmentManagementFileName = files.some(
-    (e) => e.fileName === fileInfo[4]?.name
   );
 
   return (
@@ -465,8 +497,9 @@ const AddRequest: React.FC = () => {
             files={files}
             fileUploadedStatus={fileUploadedStatus}
             currentOrganization={currentOrganization}
-            firstRequiredFile={appointmentAccountantFileName}
-            secondRequiredFile={copyPassportFileName}
+            firstRequiredFile={dismissalAccountantFileName}
+            secondRequiredFile={appointmentAccountantFileName}
+            thirdRequiredFile={copyPassportAccountantFileName}
             register={register}
           />
         )}
@@ -479,8 +512,9 @@ const AddRequest: React.FC = () => {
             files={files}
             fileUploadedStatus={fileUploadedStatus}
             currentOrganization={currentOrganization}
-            firstRequiredFile={appointmentManagementFileName}
-            secondRequiredFile={copyPassportFileName}
+            firstRequiredFile={dismissalManagementFileName}
+            secondRequiredFile={appointmentManagementFileName}
+            thirdRequiredFile={copyPassportManagementFileName}
             register={register}
           />
         )}
@@ -494,8 +528,12 @@ const AddRequest: React.FC = () => {
             files={files}
             fileUploadedStatus={fileUploadedStatus}
             currentOrganization={currentOrganization}
-            firstRequiredFile={appointmentManagementFileName}
-            secondRequiredFile={copyPassportFileName}
+            firstRequiredFile={dismissalManagementFileName}
+            secondRequiredFile={dismissalAccountantFileName}
+            thirdRequiredFile={appointmentManagementFileName}
+            fourthRequiredFile={copyPassportManagementFileName}
+            fiveRequiredFile={appointmentAccountantFileName}
+            sixRequiredFile={copyPassportAccountantFileName}
             register={register}
           />
         )}
@@ -527,14 +565,6 @@ const AddRequest: React.FC = () => {
               uinfo?.role === "Руководитель" ? currentAccountant : currentHead
             }
             currentOrganization={currentOrganization}
-          />
-        )}
-        {reqType === "Создание ИНН в TFMIS" && (
-          <CreateTinTfmis
-            fileInfo={fileInfo}
-            secondFileStatus={secondFileStatus}
-            thirdFileStatus={thirdFileStatus}
-            register={register}
           />
         )}
       </div>
