@@ -207,20 +207,26 @@ const ShowRequest = () => {
   });
 
   // Данные карточки нынешнего главного бухгалтера который актив
-  const currentAccountantActive = users?.find(
-    (user) =>
-      uinfo?.orgName === user.orgName &&
-      user.role === "Главный бухгалтер" &&
-      user.status === true
-  );
+  const currentAccountantActive = users?.find((user) => {
+    if (currentOrganization)
+      return (
+        currentOrganization.userIds.includes(user.id) &&
+        user.role === "Главный бухгалтер" &&
+        user.status === true
+      );
+  });
+
+  console.log(currentAccountantActive);
 
   // Данные карточки нынешнего руководителя который актив
-  const currentHeadActive = users?.find(
-    (user) =>
-      uinfo?.orgName === user.orgName &&
-      user.role === "Руководитель" &&
-      user.status === true
-  );
+  const currentHeadActive = users?.find((user) => {
+    if (currentOrganization)
+      return (
+        currentOrganization.userIds.includes(user.id) &&
+        user.role === "Руководитель" &&
+        user.status === true
+      );
+  });
 
   // Данные карточки пользователя в заявке
 

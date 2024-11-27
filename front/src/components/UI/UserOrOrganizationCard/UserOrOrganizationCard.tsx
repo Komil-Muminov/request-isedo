@@ -18,7 +18,6 @@ const UserOrOrganizationCard = ({
   uploadedFile,
   userType,
 }: any) => {
-
   const currentFile = uploadedFile?.some(
     (e: any) => e.fileName === requiredFile
   );
