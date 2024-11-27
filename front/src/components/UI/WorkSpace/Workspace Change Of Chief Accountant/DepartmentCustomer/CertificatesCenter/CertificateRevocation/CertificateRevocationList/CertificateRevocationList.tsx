@@ -85,7 +85,8 @@ const CertificateRevocationList = ({
     if (
       currentOrganization &&
       currentOrganization?.userIds?.includes(user.id) &&
-      user.role === "Главный бухгалтер"
+      user.role === "Главный бухгалтер" &&
+      user.status === true
     ) {
       return user;
     }
@@ -96,7 +97,8 @@ const CertificateRevocationList = ({
     if (
       currentOrganization &&
       currentOrganization?.userIds?.includes(user.id) &&
-      user.role === "Руководитель"
+      user.role === "Руководитель" &&
+      user.status === true
     ) {
       return user;
     }
@@ -109,18 +111,31 @@ const CertificateRevocationList = ({
   const getCertificateUser = certificates.find((cert) => {
     if (
       rqstsDataById?.reqType === "Смена главного бухгалтера" &&
-      currentAccountant.id === cert.userId
+      currentAccountant.fullName === cert.userName
     ) {
       return cert;
     }
     if (
-      rqstsDataById?.reqType === "Смена руководителя" &&
-      currentManagement.id === cert.userId
+      (rqstsDataById?.reqType === "Смена руководителя" &&
+        currentManagement.fullName === cert.userName) ||
+      (rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя" &&
+        currentManagement.fullName === cert.userName)
     ) {
       return cert;
     }
     // return users?.some((user) => cert.userId === user.id);
   });
+
+  const getCertificateAccountantAndManagement = certificates.find((cert) => {
+    if (
+      currentAccountant.fullName === cert.userName &&
+      rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя"
+    ) {
+      return cert;
+    }
+  });
+
+  console.log(getCertificateAccountantAndManagement);
 
   // Данные для типа заявки "Смена сертификата", если заявку подает руководитель, то смена сертификата бухгалтера, а иначе наоборот
 
@@ -238,6 +253,14 @@ const CertificateRevocationList = ({
           statusCertificate={statusCertificate?.name}
           rqstsDataById={rqstsDataById}
         />
+        {rqstsDataById?.reqType ===
+          "Смена главного бухгалтера и руководителя" && (
+          <CertificateCard
+            getCertificateUser={getCertificateAccountantAndManagement}
+            statusCertificate={statusCertificate?.name}
+            rqstsDataById={rqstsDataById}
+          />
+        )}
         <div className="panel-buttons">
           {getCertificate?.statusCode === 5 && (
             <div className="wrapper-show-executor">

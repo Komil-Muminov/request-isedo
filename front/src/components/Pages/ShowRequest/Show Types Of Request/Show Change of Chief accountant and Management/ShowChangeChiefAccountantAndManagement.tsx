@@ -174,6 +174,7 @@ const ShowChangeChiefAccountantAndManagement = ({
       {uinfo?.uType !== "bo" && (
         <WorkSpaceChangeOfChiefAccountantAndManagement
           currentUser={currentManagement}
+          currentAccountant={currentAccountant}
           rqstsDataById={rqstsDataById}
           currentOrganization={currentOrganization}
         />

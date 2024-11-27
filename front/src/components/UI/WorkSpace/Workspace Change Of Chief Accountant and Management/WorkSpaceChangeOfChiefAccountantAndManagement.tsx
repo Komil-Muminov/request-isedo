@@ -20,6 +20,7 @@ import DepartmentAccounting from "../Workspace Change Of Chief Accountant/Depart
 
 const WorkSpaceChangeOfChiefAccountantAndManagement = ({
   currentUser,
+  currentAccountant,
   rqstsDataById,
   currentOrganization,
 }: any) => {
