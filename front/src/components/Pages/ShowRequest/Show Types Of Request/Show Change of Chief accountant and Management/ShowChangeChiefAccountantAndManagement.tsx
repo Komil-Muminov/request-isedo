@@ -10,24 +10,35 @@ import WorkSpaceChangeManagement from "../../../../UI/WorkSpace/Workspace Change
 import WorkSpaceChangeOfChiefAccountantAndManagement from "../../../../UI/WorkSpace/Workspace Change Of Chief Accountant and Management/WorkSpaceChangeOfChiefAccountantAndManagement";
 
 const ShowChangeChiefAccountantAndManagement = ({
-  currentUser,
   fileInfo,
   currentOrganization,
   rqstsDataById,
   uinfo,
   disabledAddUserButton,
+  currentAccountant,
+  currentManagement,
 }: any) => {
-  const ManagementFiles = rqstsDataById?.files.filter((e: any) => {
+  const ManagementFilesTemp = rqstsDataById?.files.filter((e: any) => {
     if (e.fileName.includes("рохбар")) {
       return e;
     }
   });
 
-  const AccountantFiles = rqstsDataById?.files.filter((e: any) => {
+  const AccountantFilesTemp = rqstsDataById?.files.filter((e: any) => {
     if (e.fileName.includes("сармухосиб")) {
       return e;
     }
   });
+
+  const oldUsersFiles = rqstsDataById?.files.filter((e: any) => {
+    if (e.fileName.includes("озод")) {
+      return e;
+    }
+  });
+
+  const ManagementFiles = [ManagementFilesTemp[0], ManagementFilesTemp[1]];
+
+  const AccountantFiles = [AccountantFilesTemp[1], AccountantFilesTemp[2]];
 
   const RequestManagementData = {
     id: rqstsDataById?.id,
@@ -78,9 +89,10 @@ const ShowChangeChiefAccountantAndManagement = ({
         <TitleDocument title="Прошлый руководитель" />
         <div className="wrapper-cards">
           <UserOrOrganizationCard
-            currentUser={currentUser}
+            currentManager={currentManagement}
+            currentUser={currentAccountant}
             title="Карточка пользователя"
-            PDFViewerService={<PDFViewerService item={fileInfo[0]} />}
+            PDFViewerService={<PDFViewerService currentFiles={oldUsersFiles} />}
             // fileService={
             //   <CardFileService
             //     item={fileInfo[0]}
@@ -103,10 +115,7 @@ const ShowChangeChiefAccountantAndManagement = ({
             title="Карточка пользователя"
             PDFViewerService={
               <div className="wrapper-new-user-files">
-                <PDFViewerService
-                  currentFiles={ManagementFiles}
-                  hideFirstItem={true}
-                />
+                <PDFViewerService currentFiles={ManagementFiles} />
               </div>
             }
             checkUser={
@@ -138,10 +147,7 @@ const ShowChangeChiefAccountantAndManagement = ({
             title="Карточка пользователя"
             PDFViewerService={
               <div className="wrapper-new-user-files">
-                <PDFViewerService
-                  currentFiles={AccountantFiles}
-                  hideFirstItem={true}
-                />
+                <PDFViewerService currentFiles={AccountantFiles} />
               </div>
             }
             checkUser={
@@ -167,7 +173,7 @@ const ShowChangeChiefAccountantAndManagement = ({
       {/* Рабочее пространство */}
       {uinfo?.uType !== "bo" && (
         <WorkSpaceChangeOfChiefAccountantAndManagement
-          currentUser={currentUser}
+          currentUser={currentManagement}
           rqstsDataById={rqstsDataById}
           currentOrganization={currentOrganization}
         />

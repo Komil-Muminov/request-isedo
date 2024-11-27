@@ -102,6 +102,9 @@ const CertificateRevocationList = ({
     }
   });
 
+  console.log(currentAccountant);
+  console.log(currentManagement);
+
   // Получаем сертификат пользователя по идентификатору пользователя
   const getCertificateUser = certificates.find((cert) => {
     if (
