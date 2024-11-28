@@ -271,6 +271,20 @@ const AddRequest: React.FC = () => {
       organizationId: currentOrganization?.id,
       services: [],
       dataChange: formattedDate,
+      pastUserIds: [currentAccountant?.id],
+    };
+
+    const reqTypeChangeAccountantAndManagement = {
+      ...data,
+      stepCode: stepFound?.stepCode || 0,
+      stepTask: 0,
+      dateTime: date,
+      files: files,
+      userId: uinfo?.userId,
+      organizationId: currentOrganization?.id,
+      services: [],
+      dataChange: formattedDate,
+      pastUserIds: [currentAccountant?.id, currentHead?.id],
     };
 
     const reqTypeDataTokenIssuance = {
@@ -312,6 +326,7 @@ const AddRequest: React.FC = () => {
       organizationId: currentOrganization?.id,
       services: [],
       dataChange: formattedDate,
+      pastUserIds: [currentUserData?.id],
     };
 
     switch (reqType) {
@@ -322,7 +337,7 @@ const AddRequest: React.FC = () => {
         postRqstsMutation.mutate(updateReqData);
         break;
       case "Смена главного бухгалтера и руководителя":
-        postRqstsMutation.mutate(updateReqData);
+        postRqstsMutation.mutate(reqTypeChangeAccountantAndManagement);
         break;
       case "Выдача токена":
         postRqstsMutation.mutate(reqTypeDataTokenIssuance);

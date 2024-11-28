@@ -20,6 +20,35 @@ const InstallCertificate = ({
   getCertificateUser,
   executor,
 }: any) => {
+  const getDefaultValues = () => {
+    const commonValues = {
+      userName: rqstsDataById?.fullName,
+      userTax: rqstsDataById?.tax,
+      userPhone: rqstsDataById?.phone,
+      role: rqstsDataById?.role,
+      orgName: currentOrganization?.name,
+      orgTax: currentOrganization?.tax,
+      orgPhone: currentOrganization?.phone,
+      address: currentOrganization?.address,
+    };
+
+    if (rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя") {
+      return {
+        ...commonValues,
+        userNameAccountant: rqstsDataById?.fullNameAccountant,
+        userTaxAccountant: rqstsDataById?.taxAccountant,
+        userPhoneAccountant: rqstsDataById?.phoneAccountant,
+        roleAccountant: rqstsDataById?.roleAccountant,
+        orgNameAccountant: currentOrganization?.name,
+        orgTaxAccountant: currentOrganization?.tax,
+        orgPhoneAccountant: currentOrganization?.phone,
+        addressAccountant: currentOrganization?.address,
+      };
+    }
+
+    return commonValues;
+  };
+
   const {
     register,
     // Записывает все стейты в массив
@@ -40,6 +69,14 @@ const InstallCertificate = ({
       orgTax: currentOrganization?.tax,
       orgPhone: currentOrganization?.phone,
       address: currentOrganization?.address,
+      userNameAccountant: rqstsDataById?.fullNameAccountant,
+      userTaxAccountant: rqstsDataById?.tax,
+      userPhoneAccountant: rqstsDataById?.phone,
+      roleAccountant: rqstsDataById?.role,
+      orgNameAccountant: currentOrganization?.name,
+      orgTaxAccountant: currentOrganization?.tax,
+      orgPhoneAccountant: currentOrganization?.phone,
+      addressAccountant: currentOrganization?.address,
     },
   });
 
@@ -81,7 +118,7 @@ const InstallCertificate = ({
 
     const updateReqData = {
       ...data,
-      userId: rqstsDataById?.userId,
+      userId: null,
       organizationId: currentOrganization?.id,
       serialNumber: "200000dd1f63274b121773decc00000000dd1f",
       validFrom: dateFrom,
@@ -173,6 +210,71 @@ const InstallCertificate = ({
           />
         </div>
       )}
+      {!getCertificateUser &&
+        rqstsDataById?.reqType ===
+          "Смена главного бухгалтера и руководителя" && (
+          <div
+            style={{ borderTop: "1px solid #00000021" }}
+            className="inputs-list install-certificate-inputs-list"
+          >
+            <TextField
+              {...register("userName")}
+              type="text"
+              id="userName"
+              className="request_inp"
+              label="ФИО"
+            />
+            <TextField
+              {...register("userTax")}
+              id="userTax"
+              type="text"
+              className="request_inp"
+              label="ИНН пользователя"
+            />
+            <TextField
+              {...register("userPhone")}
+              id="userPhone"
+              type="text"
+              className="request_inp"
+              label="Номер телефон пользователя"
+            />
+            <TextField
+              {...register("role")}
+              id="role"
+              type="text"
+              className="request_inp"
+              label="Должность"
+            />
+            <TextField
+              {...register("orgName")}
+              id="orgName"
+              type="text"
+              className="request_inp"
+              label="Организация"
+            />
+            <TextField
+              {...register("orgTax")}
+              id="orgTax"
+              type="text"
+              className="request_inp"
+              label="ИНН Организации"
+            />
+            <TextField
+              {...register("orgPhone")}
+              id="orgPhone"
+              type="text"
+              className="request_inp"
+              label="Номер телефон организации"
+            />
+            <TextField
+              {...register("address")}
+              id="address"
+              type="text"
+              className="request_inp"
+              label="Адрес"
+            />
+          </div>
+        )}
       {getCertificateUser && (
         <CertificateCard
           getCertificateUser={getCertificateUser}

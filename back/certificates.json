@@ -44,11 +44,11 @@
     "orgTax": "020003455",
     "orgPhone": "8008080",
     "address": "Улица И.Сомони, д6",
-    "userId": 5,
+    "userId": 6,
     "organizationId": 1,
     "serialNumber": "200000dd1f63274b121773decc00000000dd1f",
-    "statusCode": 0,
-    "dateChange": "27.11.2024 в 08:55",
+    "statusCode": 5,
+    "dateChange": "28.11.2024 в 11:12",
     "id": 57379,
     "validFrom": "27.11.2024",
     "validTo": "27.11.2025"
@@ -62,13 +62,13 @@
     "orgTax": "020003455",
     "orgPhone": "8008080",
     "address": "Улица И.Сомони, д6",
-    "userId": 4,
+    "userId": 7,
     "organizationId": 1,
     "serialNumber": "200000dd1f63274b121773decc00000000dd1f",
     "validFrom": "26.11.2024",
     "validTo": "26.11.2025",
-    "statusCode": 0,
-    "dateChange": "26.11.2024 в 15:59",
+    "statusCode": 5,
+    "dateChange": "28.11.2024 в 11:12",
     "id": 57380
   }
 ]

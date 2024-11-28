@@ -171,7 +171,7 @@ const WorkSpaceChangeManagement = ({
   }, [getVpnQuery]);
 
   const currentVPN = vpn.find((v) => {
-    return currentOrganization?.userIds.includes(v.userId);
+    return rqstsDataById?.pastUserIds.includes(v.userId);
   });
 
   const currentNewVPN = vpn.find((v) => rqstsDataById?.fullName === v.fullName);

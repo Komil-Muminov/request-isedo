@@ -4,6 +4,7 @@ import PassiveVPNTFMIS from "./Passive VPN of TFMIS/PassiveVPNTFMIS";
 
 const TechnicalServices = ({
   currentUser,
+  currentAccountant,
   rqstsDataById,
   currentOrganization,
   stageOne,
@@ -19,6 +20,8 @@ const TechnicalServices = ({
             currentOrganization={currentOrganization}
             executor={executor}
             rqstsDataById={rqstsDataById}
+            currentUser={currentUser}
+            currentAccountant={currentAccountant}
           />
         </div>
       )}

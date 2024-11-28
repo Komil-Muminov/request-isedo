@@ -107,9 +107,9 @@
     "orgTax": "020003455",
     "reqIdentity": false,
     "uIdentity": false,
-    "status": true,
+    "status": false,
     "passport": "A04513403",
-    "dateChange": "27.11.2024 в 11:12"
+    "dateChange": "28.11.2024 в 13:36"
   },
   {
     "id": 7,
@@ -126,9 +126,9 @@
     "orgTax": "020003455",
     "reqIdentity": false,
     "uIdentity": false,
-    "status": true,
+    "status": false,
     "passport": "A04002174",
-    "dateChange": "26.11.2024 в 16:44"
+    "dateChange": "28.11.2024 в 13:36"
   },
   {
     "id": 8,

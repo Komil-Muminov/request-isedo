@@ -4,6 +4,7 @@ import CreateLoginTFMIS from "./Create Login of TFMIS/CreateLoginTFMIS";
 
 const InformationSecurity = ({
   currentUser,
+  currentAccountant,
   rqstsDataById,
   currentOrganization,
   stageOne,
@@ -17,6 +18,7 @@ const InformationSecurity = ({
           {stageOne}
           <PassiveLoginTFMIS
             currentUser={currentUser}
+            currentAccountant={currentAccountant}
             executor={executor}
             rqstsDataById={rqstsDataById}
           />

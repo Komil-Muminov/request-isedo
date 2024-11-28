@@ -30,6 +30,7 @@ export interface GetRqstsByIdType extends RequestAccountantData {
   orgTax: string;
   orgName: string;
   userId: number;
+  pastUserIds: number[];
   passport: string;
   password: string;
   token: "";

@@ -26,6 +26,8 @@ const PassiveVPNTFMIS = ({
   currentOrganization,
   executor,
   rqstsDataById,
+  currentUser,
+  currentAccountant,
 }: any) => {
   const [isMouseDown, setIsMouseDown] = useState(false);
 
@@ -87,45 +89,59 @@ const PassiveVPNTFMIS = ({
     },
   });
 
-  // Данные главного бухгалтера
+  // // Данные главного бухгалтера
 
-  const currentAccountant = users?.find((user) => {
-    if (currentOrganization)
-      return (
-        currentOrganization.userIds.includes(user.id) &&
-        user.role === "Главный бухгалтер"
-      );
-  });
+  // const currentAccountant = users?.find((user) => {
+  //   if (currentOrganization)
+  //     return (
+  //       currentOrganization.userIds.includes(user.id) &&
+  //       user.role === "Главный бухгалтер"
+  //     );
+  // });
 
-  // Данные руководителя
+  // // Данные руководителя
 
-  const currentManagement = users?.find((user) => {
-    if (currentOrganization)
-      return (
-        currentOrganization.userIds.includes(user.id) &&
-        user.role === "Руководитель"
-      );
-  });
+  // const currentManagement = users?.find((user) => {
+  //   if (currentOrganization)
+  //     return (
+  //       currentOrganization.userIds.includes(user.id) &&
+  //       user.role === "Руководитель"
+  //     );
+  // });
 
   const currentVPN = vpn.find((v) => {
     if (
-      v?.userId === currentAccountant?.id &&
-      rqstsDataById?.reqType === "Смена главного бухгалтера"
+      (v?.userId === currentAccountant?.id &&
+        rqstsDataById?.reqType === "Смена главного бухгалтера") ||
+      (v?.userId === currentAccountant?.id &&
+        rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя")
     ) {
       return v;
     }
 
     if (
-      v?.userId === currentManagement?.id &&
+      v?.userId === currentUser?.id &&
       rqstsDataById?.reqType === "Смена руководителя"
     ) {
       return v;
     }
   });
 
+  const currentManagementVPN = vpn.find((v) => {
+    if (
+      v?.userId === currentUser?.id &&
+      rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя"
+    ) {
+      return v;
+    }
+  });
+
+  console.log(currentManagementVPN);
+
   // Функция для изменения статуса сертификата
   const handleChangeStatus = () => {
     if (currentVPN) mutation.mutate(currentVPN);
+    if (currentManagementVPN) mutation.mutate(currentManagementVPN);
   };
 
   return (
@@ -138,6 +154,10 @@ const PassiveVPNTFMIS = ({
           </div>
         </div>
         <VPNCard currentVPN={currentVPN} />
+        {rqstsDataById?.reqType ===
+          "Смена главного бухгалтера и руководителя" && (
+          <VPNCard currentVPN={currentManagementVPN} />
+        )}
         <div className="panel-buttons">
           {currentVPN?.status === false && (
             <div className="wrapper-show-executor">

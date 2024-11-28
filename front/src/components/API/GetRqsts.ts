@@ -30,6 +30,7 @@ export interface GetRqstsType extends RequestAccountantData {
   dateTime: string;
   files: FileType[];
   userId: number;
+  pastUserIds: number[];
   passport: string;
   password: string;
   token: "";

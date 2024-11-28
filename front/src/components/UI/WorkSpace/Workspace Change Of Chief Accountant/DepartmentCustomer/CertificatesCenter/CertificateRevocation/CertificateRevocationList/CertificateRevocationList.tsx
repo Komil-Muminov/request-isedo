@@ -104,32 +104,24 @@ const CertificateRevocationList = ({
     }
   });
 
-  console.log(currentAccountant);
-  console.log(currentManagement);
-
   // Получаем сертификат пользователя по идентификатору пользователя
   const getCertificateUser = certificates.find((cert) => {
     if (
-      rqstsDataById?.reqType === "Смена главного бухгалтера" &&
-      currentAccountant.fullName === cert.userName
-    ) {
-      return cert;
-    }
-    if (
+      (rqstsDataById?.reqType === "Смена главного бухгалтера" &&
+        rqstsDataById?.pastUserIds.includes(cert.userId)) ||
       (rqstsDataById?.reqType === "Смена руководителя" &&
-        currentManagement.fullName === cert.userName) ||
+        rqstsDataById?.pastUserIds.includes(cert.userId)) ||
       (rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя" &&
-        currentManagement.fullName === cert.userName)
+        rqstsDataById?.pastUserIds[0] === cert.userId)
     ) {
       return cert;
     }
-    // return users?.some((user) => cert.userId === user.id);
   });
 
   const getCertificateAccountantAndManagement = certificates.find((cert) => {
     if (
-      currentAccountant.fullName === cert.userName &&
-      rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя"
+      rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя" &&
+      rqstsDataById?.pastUserIds[1] === cert.userId
     ) {
       return cert;
     }
@@ -203,10 +195,23 @@ const CertificateRevocationList = ({
     if (
       (rqstsDataById?.reqType === "Смена главного бухгалтера" &&
         getCertificate) ||
-      (rqstsDataById?.reqType === "Смена руководителя" && getCertificate)
+      (rqstsDataById?.reqType === "Смена руководителя" && getCertificate) ||
+      (rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя" &&
+        getCertificate)
     ) {
       certificateMutation.mutate({
         ...getCertificate,
+        statusCode: code, // Изменение statusCode с 0 на 5
+        dateChange: formattedDate,
+      });
+    }
+
+    if (
+      rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя" &&
+      getCertificateAccountantAndManagement
+    ) {
+      certificateMutation.mutate({
+        ...getCertificateAccountantAndManagement,
         statusCode: code, // Изменение statusCode с 0 на 5
         dateChange: formattedDate,
       });
@@ -286,7 +291,14 @@ const CertificateRevocationList = ({
                   : "Выдать"
               }
               handleShow={handleShow}
-              handleSubmit={handleChangeStatus}
+              handleSubmit={
+                (show === false &&
+                  rqstsDataById?.reqType === "Выдача сертификата") ||
+                (show === false &&
+                  rqstsDataById?.reqType === "Выдача токена и сертификата")
+                  ? handleChangeStatus
+                  : ""
+              }
               activeSendButton={
                 getCertificate?.statusCode === 5 ||
                 activeButtonIssuanceCertificateType

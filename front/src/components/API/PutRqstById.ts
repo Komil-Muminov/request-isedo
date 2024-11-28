@@ -21,6 +21,7 @@ export interface PutRqstsByIdType {
   token: "";
   password: string;
   userId: number;
+  pastUserIds: number[];
   organizationId: number;
   dateChange: string;
 }

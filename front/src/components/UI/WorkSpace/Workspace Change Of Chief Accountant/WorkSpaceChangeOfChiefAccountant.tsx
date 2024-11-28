@@ -185,19 +185,7 @@ const WorkSpaceChangeOfChiefAccountant = ({
   });
 
   const currentVPN = vpn.find((v) => {
-    if (
-      v?.userId === currentAccountant?.id &&
-      rqstsDataById?.reqType === "Смена главного бухгалтера"
-    ) {
-      return v;
-    }
-
-    if (
-      v?.userId === currentManagement?.id &&
-      rqstsDataById?.reqType === "Смена руководителя"
-    ) {
-      return v;
-    }
+    return rqstsDataById?.pastUserIds.includes(v.userId);
   });
 
   const currentNewVPN = vpn.find((v) => rqstsDataById?.fullName === v.fullName);
@@ -439,6 +427,7 @@ const WorkSpaceChangeOfChiefAccountant = ({
         {showTechnicalServicesStageOne && (
           <TechnicalServices
             currentUser={currentUser}
+            currentAccountant={currentAccountant}
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
             executor={uinfo}

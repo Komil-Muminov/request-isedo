@@ -15,7 +15,13 @@ import LoginTfmisCard from "../Login of TFMIS Card/LoginTfmisCard";
 import PassiveLoginTFMISModal from "../../../../Passive Login of TFMIS Modal/PassiveLoginTFMISModal";
 import { putRqstsById, PutRqstsByIdType } from "../../../../../API/PutRqstById";
 
-const PassiveLoginTFMIS = ({ currentUser, executor, rqstsDataById }: any) => {
+const PassiveLoginTFMIS = ({
+  currentUser,
+  currentAccountant,
+  executor,
+  rqstsDataById,
+}: any) => {
+  
   // GET USERS
 
   const [show, setShow] = useState<boolean>(false);
@@ -58,9 +64,18 @@ const PassiveLoginTFMIS = ({ currentUser, executor, rqstsDataById }: any) => {
 
     if (
       (rqstsDataById?.reqType === "Смена главного бухгалтера" && currentUser) ||
-      (rqstsDataById?.reqType === "Смена руководителя" && currentUser)
+      (rqstsDataById?.reqType === "Смена руководителя" && currentUser) ||
+      (rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя" &&
+        currentUser)
     ) {
       mutation.mutate({ ...currentUser, status: false });
+    }
+
+    if (
+      rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя" &&
+      currentAccountant
+    ) {
+      mutation.mutate({ ...currentAccountant, status: false });
     }
 
     if (
@@ -106,6 +121,13 @@ const PassiveLoginTFMIS = ({ currentUser, executor, rqstsDataById }: any) => {
           currentUser={currentUser}
           rqstsDataById={rqstsDataById}
         />
+        {rqstsDataById?.reqType ===
+          "Смена главного бухгалтера и руководителя" && (
+          <LoginTfmisCard
+            currentUser={currentAccountant}
+            rqstsDataById={rqstsDataById}
+          />
+        )}
         <div className="panel-buttons">
           {currentUser?.status === false && (
             <div className="wrapper-show-executor">
@@ -130,7 +152,14 @@ const PassiveLoginTFMIS = ({ currentUser, executor, rqstsDataById }: any) => {
                   ? "Сменить пароль"
                   : "Отправить в пассив"
               }
-              handleSubmit={handleChangeStatus}
+              handleSubmit={
+                (show === false &&
+                  rqstsDataById?.reqType === "Выдача сертификата") ||
+                (show === false &&
+                  rqstsDataById?.reqType === "Выдача токена и сертификата")
+                  ? handleChangeStatus
+                  : ""
+              }
               handleShow={handleShow}
               activeSendButton={
                 rqstsDataById?.stepTask > 1 ||
@@ -142,12 +171,15 @@ const PassiveLoginTFMIS = ({ currentUser, executor, rqstsDataById }: any) => {
         </div>
       </div>
       {(show && rqstsDataById?.reqType === "Смена главного бухгалтера") ||
-        (show && rqstsDataById?.reqType === "Смена руководителя" && (
-          <PassiveLoginTFMISModal
-            handleShow={handleShow}
-            handleChangeStatus={handleChangeStatus}
-          />
-        ))}
+        (show && rqstsDataById?.reqType === "Смена руководителя") ||
+        (show &&
+          rqstsDataById?.reqType ===
+            "Смена главного бухгалтера и руководителя" && (
+            <PassiveLoginTFMISModal
+              handleShow={handleShow}
+              handleChangeStatus={handleChangeStatus}
+            />
+          ))}
     </>
   );
 };

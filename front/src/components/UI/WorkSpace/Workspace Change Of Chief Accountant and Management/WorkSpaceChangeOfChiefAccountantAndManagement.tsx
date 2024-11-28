@@ -172,8 +172,10 @@ const WorkSpaceChangeOfChiefAccountantAndManagement = ({
   }, [getVpnQuery]);
 
   const currentVPN = vpn.find((v) => {
-    return currentOrganization?.userIds.includes(v.userId);
+    return rqstsDataById?.pastUserIds.includes(v.userId);
   });
+
+  console.log(currentVPN);
 
   const currentNewVPN = vpn.find((v) => rqstsDataById?.fullName === v.fullName);
 
@@ -197,6 +199,15 @@ const WorkSpaceChangeOfChiefAccountantAndManagement = ({
     (e) => e.requestId === rqstsDataById?.id
   );
 
+  const getCertificateAccountant = certificates.find((cert) => {
+    if (
+      currentAccountant?.fullName === cert.userName &&
+      rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя"
+    ) {
+      return cert;
+    }
+  });
+
   // Универсальная функция для вычисления процента выполнения отдела на каждом этапе
   const getDepartmentPercent = (
     item: { name: string },
@@ -205,7 +216,7 @@ const WorkSpaceChangeOfChiefAccountantAndManagement = ({
     switch (stage) {
       case 1:
         return (item.name === "Шуъба оид ба кор бо муштариён" &&
-          getCertificateUser?.statusCode === 5) ||
+          getCertificateAccountant?.statusCode === 5) ||
           (item.name === "Шуъба оид ба амнияти иттилоотӣ" &&
             currentUser?.status === false) ||
           (item.name === "Шуъба оид ба хизматрасонии техникӣ" &&
@@ -363,6 +374,7 @@ const WorkSpaceChangeOfChiefAccountantAndManagement = ({
         {showInformationSecurityStageOne && (
           <InformationSecurity
             currentUser={currentUser}
+            currentAccountant={currentAccountant}
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
             executor={uinfo}
@@ -414,6 +426,7 @@ const WorkSpaceChangeOfChiefAccountantAndManagement = ({
         {showTechnicalServicesStageOne && (
           <TechnicalServices
             currentUser={currentUser}
+            currentAccountant={currentAccountant}
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
             executor={uinfo}

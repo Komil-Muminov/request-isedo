@@ -32,6 +32,7 @@ export interface PostRqstScheme extends RequestAccountantData {
   orgTax: string;
   orgName: string;
   userId: number;
+  pastUserIds: number[];
   organizationId: number;
   services: number[];
   loginImof: string;

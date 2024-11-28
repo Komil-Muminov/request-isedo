@@ -36,9 +36,11 @@ const ShowChangeChiefAccountantAndManagement = ({
     }
   });
 
-  const ManagementFiles = [ManagementFilesTemp[0], ManagementFilesTemp[1]];
+  const ManagementFiles = [ManagementFilesTemp[1], ManagementFilesTemp[2]];
 
   const AccountantFiles = [AccountantFilesTemp[1], AccountantFilesTemp[2]];
+
+  console.log(ManagementFilesTemp);
 
   const RequestManagementData = {
     id: rqstsDataById?.id,

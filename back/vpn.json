@@ -33,9 +33,9 @@
     "phone": "880008671",
     "role": "Главный бухгалтер",
     "password": "123",
-    "status": true,
+    "status": false,
     "userId": 6,
-    "dateChange": "08.11.2024 в 10:42",
+    "dateChange": "28.11.2024 в 16:21",
     "id": 3
   },
   {
@@ -46,9 +46,9 @@
     "phone": "880008671",
     "role": "Руководитель",
     "password": "123",
-    "status": true,
+    "status": false,
     "userId": 7,
-    "dateChange": "26.11.2024 в 17:03",
+    "dateChange": "28.11.2024 в 16:21",
     "id": 4
   }
 ]

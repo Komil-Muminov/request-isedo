@@ -140,12 +140,12 @@ const Udetails: React.FC = () => {
 										<UserInfoList
 											title="ФИО"
 											description={
-												uinfo?.fullName ? uinfo.fullName : uinfo?.uType
+												uinfo?.fullName ? uinfo?.fullName : uinfo?.uType
 											}
 										/>
 										<UserInfoList
 											title="Тип пользователя"
-											description={uinfo?.uType ? uinfo.uType : "Тип не указан"}
+											description={uinfo?.uType ? uinfo?.uType : "Тип не указан"}
 										/>
 										<UserInfoList
 											title="Идентификация"

@@ -35,13 +35,10 @@
     ],
     "userId": 5,
     "organizationId": 1,
-    "services": [
-      1,
-      2,
-      3
-    ],
+    "services": [1, 2, 3],
     "dateChange": "08.11.2024 в 11:54",
-    "id": 1
+    "id": 1,
+    "pastUserIds": [4]
   },
   {
     "fullName": "Мухсиддин Махмадалиев",
@@ -58,9 +55,7 @@
     "files": [],
     "userId": 5,
     "organizationId": 1,
-    "services": [
-      4
-    ],
+    "services": [4],
     "id": 2,
     "dateChange": "13.11.2024 в 12:07"
   },
@@ -79,11 +74,10 @@
     "files": [],
     "userId": 5,
     "organizationId": 1,
-    "services": [
-      1
-    ],
+    "services": [1],
     "id": 3,
-    "dateChange": "25.11.2024 в 09:50"
+    "dateChange": "25.11.2024 в 09:50",
+    "pastUserIds": [6]
   },
   {
     "fullName": "Шарипов Рохбар",
@@ -121,12 +115,11 @@
     ],
     "userId": 4,
     "organizationId": 1,
-    "services": [
-      null
-    ],
+    "services": [null],
     "dataChange": "25.11.2024 в 19:30",
     "id": 4,
-    "dateChange": "26.11.2024 в 17:34"
+    "dateChange": "26.11.2024 в 17:34",
+    "pastUserIds": [5]
   },
   {
     "fullName": "Шарипов Амир Чамшедович",
@@ -143,13 +136,11 @@
     "files": [],
     "userId": 5,
     "organizationId": 1,
-    "services": [
-      1,
-      4
-    ],
+    "services": [1, 4],
     "dataChange": "27.11.2024 в 08:40",
     "id": 5,
-    "dateChange": "27.11.2024 в 09:37"
+    "dateChange": "27.11.2024 в 09:37",
+    "pastUserIds": [6]
   },
   {
     "fullName": "Шарипов Амир Чамшедович",
@@ -169,21 +160,22 @@
     "services": [],
     "dataChange": "27.11.2024 в 10:08",
     "id": 6,
-    "dateChange": "27.11.2024 в 11:12"
+    "dateChange": "27.11.2024 в 11:12",
+    "pastUserIds": [6]
   },
   {
     "fullName": "Насрдинов Бехруз",
     "tax": "020001804",
     "phone": "880008404",
     "email": "b.nasrdinov@itcmf.tj",
-    "passport": "A02348856",
+    "passport": "A0234885",
     "role": "Руководитель",
     "token": "Есть",
-    "dateTime": "27.11.2024.14:14",
+    "dateTime": "28.11.2024.10:30",
     "password": "123",
     "loginImof": "Есть",
     "fullNameAccountant": "Зафаров Сулеймон",
-    "taxAccountant": "700435835",
+    "taxAccountant": "700435784",
     "phoneAccountant": "880008444",
     "emailAccountant": "s.zafarov@itcmf.tj",
     "passportAccountant": "A03000564",
@@ -192,41 +184,41 @@
     "passwordAccountant": "123",
     "loginImofAccountant": "Есть",
     "reqType": "Смена главного бухгалтера и руководителя",
-    "stepCode": 1,
-    "stepTask": 0,
+    "stepCode": 2,
+    "stepTask": 3,
     "files": [
       {
-        "id": 1732698810725,
-        "fileName": "Карор дар бораи ба вазифа таъин намудани рохбар.",
-        "size": "22.19 КБ",
-        "type": "pdf"
-      },
-      {
-        "id": 1732698814357,
-        "fileName": "Нусхаи шиноснома (рохбар).",
-        "size": "22.19 КБ",
-        "type": "pdf"
-      },
-      {
-        "id": 1732698817735,
-        "fileName": "Карор дар бораи аз вазифа озод намудани рохбар.",
-        "size": "22.19 КБ",
-        "type": "pdf"
-      },
-      {
-        "id": 1732698819812,
+        "id": 1732771705019,
         "fileName": "Карор дар бораи аз вазифа озод намудани сармухосиб.",
         "size": "22.19 КБ",
         "type": "pdf"
       },
       {
-        "id": 1732698854334,
+        "id": 1732771708702,
+        "fileName": "Карор дар бораи аз вазифа озод намудани рохбар.",
+        "size": "22.19 КБ",
+        "type": "pdf"
+      },
+      {
+        "id": 1732771715688,
+        "fileName": "Карор дар бораи ба вазифа таъин намудани рохбар.",
+        "size": "22.19 КБ",
+        "type": "pdf"
+      },
+      {
+        "id": 1732771720110,
+        "fileName": "Нусхаи шиноснома (рохбар).",
+        "size": "22.19 КБ",
+        "type": "pdf"
+      },
+      {
+        "id": 1732771726104,
         "fileName": "Карор дар бораи ба вазифа таъин намудани сармухосиб.",
         "size": "22.19 КБ",
         "type": "pdf"
       },
       {
-        "id": 1732698858614,
+        "id": 1732771729782,
         "fileName": "Нусхаи шиноснома (сармухосиб).",
         "size": "22.19 КБ",
         "type": "pdf"
@@ -235,8 +227,9 @@
     "userId": 8,
     "organizationId": 1,
     "services": [],
-    "dataChange": "27.11.2024 в 14:14",
+    "dataChange": "28.11.2024 в 10:30",
+    "pastUserIds": [6, 7],
     "id": 7,
-    "dateChange": "27.11.2024 в 15:09"
+    "dateChange": "28.11.2024 в 16:39"
   }
 ]

@@ -216,8 +216,6 @@ const ShowRequest = () => {
       );
   });
 
-  console.log(currentAccountantActive);
-
   // Данные карточки нынешнего руководителя который актив
   const currentHeadActive = users?.find((user) => {
     if (currentOrganization)
@@ -227,6 +225,22 @@ const ShowRequest = () => {
         user.status === true
       );
   });
+
+  const currentPastUsers = users?.filter((e) => {
+    if (rqstsDataById?.pastUserIds.includes(e.id)) {
+      return e;
+    }
+  });
+
+  const currentPastAccountant = currentPastUsers?.find(
+    (e) => e.role === "Главный бухгалтер"
+  );
+
+  const currentPastManagement = currentPastUsers?.find(
+    (e) => e.role === "Руководитель"
+  );
+
+  console.log(currentPastAccountant, currentPastManagement);
 
   // Данные карточки пользователя в заявке
 
@@ -450,8 +464,8 @@ const ShowRequest = () => {
         {rqstsDataById?.reqType ===
           "Смена главного бухгалтера и руководителя" && (
           <ShowChangeChiefAccountantAndManagement
-            currentAccountant={currentAccountantActive}
-            currentManagement={currentHeadActive}
+            currentAccountant={currentPastAccountant}
+            currentManagement={currentPastManagement}
             fileInfo={fileInfo}
             currentOrganization={currentOrganization}
             rqstsDataById={rqstsDataById}
