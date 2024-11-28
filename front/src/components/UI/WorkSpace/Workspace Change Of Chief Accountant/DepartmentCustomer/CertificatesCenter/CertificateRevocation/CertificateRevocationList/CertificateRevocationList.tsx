@@ -201,17 +201,10 @@ const CertificateRevocationList = ({
       });
 
     if (
-      rqstsDataById?.reqType === "Смена главного бухгалтера" &&
-      getCertificate
+      (rqstsDataById?.reqType === "Смена главного бухгалтера" &&
+        getCertificate) ||
+      (rqstsDataById?.reqType === "Смена руководителя" && getCertificate)
     ) {
-      certificateMutation.mutate({
-        ...getCertificate,
-        statusCode: code, // Изменение statusCode с 0 на 5
-        dateChange: formattedDate,
-      });
-    }
-
-    if (rqstsDataById?.reqType === "Смена руководителя" && getCertificate) {
       certificateMutation.mutate({
         ...getCertificate,
         statusCode: code, // Изменение statusCode с 0 на 5
@@ -276,7 +269,9 @@ const CertificateRevocationList = ({
             <ButtonPanelControl
               icon={
                 rqstsDataById?.reqType === "Смена главного бухгалтера" ||
-                rqstsDataById?.reqType === "Смена руководителя" ? (
+                rqstsDataById?.reqType === "Смена руководителя" ||
+                rqstsDataById?.reqType ===
+                  "Смена главного бухгалтера и руководителя" ? (
                   <GppBadIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
                 ) : (
                   <GppGoodIcon sx={{ fontSize: "18px", fontWeight: "bold" }} />
@@ -284,7 +279,9 @@ const CertificateRevocationList = ({
               }
               text={
                 rqstsDataById?.reqType === "Смена главного бухгалтера" ||
-                rqstsDataById?.reqType === "Смена руководителя"
+                rqstsDataById?.reqType === "Смена руководителя" ||
+                rqstsDataById?.reqType ===
+                  "Смена главного бухгалтера и руководителя"
                   ? "Отозвать"
                   : "Выдать"
               }
@@ -301,12 +298,15 @@ const CertificateRevocationList = ({
         </div>
       </div>
       {(show && rqstsDataById?.reqType === "Смена главного бухгалтера") ||
-        (show && rqstsDataById?.reqType === "Смена руководителя" && (
-          <CertificateRevocationModal
-            handleShow={handleShow}
-            handleChangeStatus={handleChangeStatus}
-          />
-        ))}
+        (show && rqstsDataById?.reqType === "Смена руководителя") ||
+        (show &&
+          rqstsDataById?.reqType ===
+            "Смена главного бухгалтера и руководителя" && (
+            <CertificateRevocationModal
+              handleShow={handleShow}
+              handleChangeStatus={handleChangeStatus}
+            />
+          ))}
     </>
   );
 };
