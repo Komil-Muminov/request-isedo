@@ -35,10 +35,16 @@
     ],
     "userId": 5,
     "organizationId": 1,
-    "services": [1, 2, 3],
+    "services": [
+      1,
+      2,
+      3
+    ],
     "dateChange": "08.11.2024 в 11:54",
     "id": 1,
-    "pastUserIds": [4]
+    "pastUserIds": [
+      4
+    ]
   },
   {
     "fullName": "Мухсиддин Махмадалиев",
@@ -55,7 +61,9 @@
     "files": [],
     "userId": 5,
     "organizationId": 1,
-    "services": [4],
+    "services": [
+      4
+    ],
     "id": 2,
     "dateChange": "13.11.2024 в 12:07"
   },
@@ -74,10 +82,14 @@
     "files": [],
     "userId": 5,
     "organizationId": 1,
-    "services": [1],
+    "services": [
+      1
+    ],
     "id": 3,
     "dateChange": "25.11.2024 в 09:50",
-    "pastUserIds": [6]
+    "pastUserIds": [
+      6
+    ]
   },
   {
     "fullName": "Шарипов Рохбар",
@@ -115,11 +127,15 @@
     ],
     "userId": 4,
     "organizationId": 1,
-    "services": [null],
+    "services": [
+      null
+    ],
     "dataChange": "25.11.2024 в 19:30",
     "id": 4,
     "dateChange": "26.11.2024 в 17:34",
-    "pastUserIds": [5]
+    "pastUserIds": [
+      5
+    ]
   },
   {
     "fullName": "Шарипов Амир Чамшедович",
@@ -136,11 +152,16 @@
     "files": [],
     "userId": 5,
     "organizationId": 1,
-    "services": [1, 4],
+    "services": [
+      1,
+      4
+    ],
     "dataChange": "27.11.2024 в 08:40",
     "id": 5,
     "dateChange": "27.11.2024 в 09:37",
-    "pastUserIds": [6]
+    "pastUserIds": [
+      6
+    ]
   },
   {
     "fullName": "Шарипов Амир Чамшедович",
@@ -161,7 +182,9 @@
     "dataChange": "27.11.2024 в 10:08",
     "id": 6,
     "dateChange": "27.11.2024 в 11:12",
-    "pastUserIds": [6]
+    "pastUserIds": [
+      6
+    ]
   },
   {
     "fullName": "Насрдинов Бехруз",
@@ -185,7 +208,7 @@
     "loginImofAccountant": "Есть",
     "reqType": "Смена главного бухгалтера и руководителя",
     "stepCode": 2,
-    "stepTask": 3,
+    "stepTask": 4,
     "files": [
       {
         "id": 1732771705019,
@@ -228,8 +251,11 @@
     "organizationId": 1,
     "services": [],
     "dataChange": "28.11.2024 в 10:30",
-    "pastUserIds": [6, 7],
+    "pastUserIds": [
+      6,
+      7
+    ],
     "id": 7,
-    "dateChange": "28.11.2024 в 16:39"
+    "dateChange": "29.11.2024 в 09:41"
   }
 ]

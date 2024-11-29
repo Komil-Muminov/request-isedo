@@ -25,7 +25,6 @@ import { putRqstsById, PutRqstsByIdType } from "../../../../../API/PutRqstById";
 
 const CreateLoginTFMIS = ({
   rqstsDataById,
-  getCertificateUser,
   currentOrganization,
   executor,
 }: any) => {
@@ -34,17 +33,37 @@ const CreateLoginTFMIS = ({
     typeRequests &&
     generatedLoginTFMIS(rqstsDataById, typeRequests);
 
-  const { register, handleSubmit } = useForm<RegType>({
+  interface newAccountantType {
+    usernameAccountant: string;
+    fullNameAccountant: string;
+    phoneAccountant: string;
+    taxAccountant: string;
+    emailAccountant: string;
+    roleAccountant: string;
+    passportAccountant: string;
+  }
+
+  const { register, handleSubmit } = useForm<RegType | newAccountantType>({
     defaultValues: {
+      // Руководитель
       username: generatedUserName,
       fullName: rqstsDataById?.fullName,
       phone: rqstsDataById?.phone,
       tax: rqstsDataById?.tax,
       email: rqstsDataById?.email,
-      orgName: currentOrganization?.name,
-      orgTax: currentOrganization?.tax,
       role: rqstsDataById?.role,
       passport: rqstsDataById?.passport,
+      // Главный бухгалтер
+      usernameAccountant: generatedUserName,
+      fullNameAccountant: rqstsDataById?.fullNameAccountant,
+      phoneAccountant: rqstsDataById?.phoneAccountant,
+      taxAccountant: rqstsDataById?.taxAccountant,
+      emailAccountant: rqstsDataById?.emailAccountant,
+      roleAccountant: rqstsDataById?.roleAccountant,
+      passportAccountant: rqstsDataById?.passportAccountant,
+      // Организация
+      orgName: currentOrganization?.name,
+      orgTax: currentOrganization?.tax,
     },
   });
 
@@ -151,6 +170,76 @@ const CreateLoginTFMIS = ({
       </div>
       {!disabledAddUserInOrganizationButton && (
         <div className="inputs-list install-certificate-inputs-list">
+          <TextField
+            {...register("tax")}
+            id="tax"
+            type="text"
+            className="request_inp"
+            label="ИНН"
+          />
+          <TextField
+            {...register("fullName")}
+            type="text"
+            id="fullName"
+            className="request_inp"
+            label="ФИО"
+          />
+          <TextField
+            {...register("username")}
+            id="username"
+            type="text"
+            className="request_inp"
+            label="Логин"
+          />
+          <TextField
+            {...register("email")}
+            id="email"
+            type="text"
+            className="request_inp"
+            label="e-mail"
+          />
+          <TextField
+            {...register("phone")}
+            id="phone"
+            type="text"
+            className="request_inp"
+            label="Телефон"
+          />
+          <TextField
+            {...register("passport")}
+            id="passport"
+            type="text"
+            className="request_inp"
+            label="Паспорт"
+          />
+          <TextField
+            {...register("role")}
+            id="role"
+            type="text"
+            className="request_inp"
+            label="Должность"
+          />
+          <TextField
+            {...register("orgName")}
+            id="orgName"
+            type="text"
+            className="request_inp"
+            label="Название организации"
+          />
+          <TextField
+            {...register("orgTax")}
+            id="orgTax"
+            type="text"
+            className="request_inp"
+            label="ИНН организация"
+          />
+        </div>
+      )}
+      {!disabledAddUserInOrganizationButton && (
+        <div
+          style={{ borderTop: "1px solid #00000021" }}
+          className="inputs-list install-certificate-inputs-list"
+        >
           <TextField
             {...register("tax")}
             id="tax"

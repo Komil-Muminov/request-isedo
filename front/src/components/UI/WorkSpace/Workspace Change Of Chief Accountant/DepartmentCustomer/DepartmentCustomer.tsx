@@ -54,6 +54,9 @@ const DepartmentCustomer = ({
     (cert) => cert.userName === rqstsDataById?.fullName
   );
 
+  const getCertificateAccountant = certificates.find(
+    (cert) => cert.userName === rqstsDataById?.fullNameAccountant
+  );
 
   return (
     <>
@@ -86,6 +89,7 @@ const DepartmentCustomer = ({
               rqstsDataById={rqstsDataById}
               currentOrganization={currentOrganization}
               getCertificateUser={getCertificateUser}
+              getCertificateAccountant={getCertificateAccountant}
               executor={executor}
             />
           </div>

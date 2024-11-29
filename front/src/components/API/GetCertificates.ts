@@ -1,6 +1,13 @@
+export interface AccountantManagementCertificate {
+  userNameAccountant?: string;
+  userTaxAccountant?: string;
+  userPhoneAccountant?: string;
+  roleAccountant?: string;
+}
+
 export interface TCertificates {
   id?: number;
-  userId: number | null;
+  userId?: number | null;
   userName: string;
   userTax: string;
   userPhone: string;
@@ -8,13 +15,13 @@ export interface TCertificates {
   orgName: string;
   orgTax: string;
   orgPhone: string;
-  region: string;
+  region?: string;
   address: string;
-  serialNumber: string;
-  validFrom: string;
-  validTo: string;
-  statusCode: number;
-  dateChange: string;
+  serialNumber?: string;
+  validFrom?: string;
+  validTo?: string;
+  statusCode?: number;
+  dateChange?: string;
 }
 
 const token = localStorage.getItem("token");

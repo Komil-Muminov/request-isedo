@@ -5,7 +5,10 @@ import GppGoodIcon from "@mui/icons-material/GppGood";
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { TCertificates } from "../../../../../API/GetCertificates";
+import {
+  AccountantManagementCertificate,
+  TCertificates,
+} from "../../../../../API/GetCertificates";
 import { postCertificates } from "../../../../../API/PostCertificates";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "../../../../../../queryClient";
@@ -18,37 +21,9 @@ const InstallCertificate = ({
   rqstsDataById,
   currentOrganization,
   getCertificateUser,
+  getCertificateAccountant,
   executor,
 }: any) => {
-  const getDefaultValues = () => {
-    const commonValues = {
-      userName: rqstsDataById?.fullName,
-      userTax: rqstsDataById?.tax,
-      userPhone: rqstsDataById?.phone,
-      role: rqstsDataById?.role,
-      orgName: currentOrganization?.name,
-      orgTax: currentOrganization?.tax,
-      orgPhone: currentOrganization?.phone,
-      address: currentOrganization?.address,
-    };
-
-    if (rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя") {
-      return {
-        ...commonValues,
-        userNameAccountant: rqstsDataById?.fullNameAccountant,
-        userTaxAccountant: rqstsDataById?.taxAccountant,
-        userPhoneAccountant: rqstsDataById?.phoneAccountant,
-        roleAccountant: rqstsDataById?.roleAccountant,
-        orgNameAccountant: currentOrganization?.name,
-        orgTaxAccountant: currentOrganization?.tax,
-        orgPhoneAccountant: currentOrganization?.phone,
-        addressAccountant: currentOrganization?.address,
-      };
-    }
-
-    return commonValues;
-  };
-
   const {
     register,
     // Записывает все стейты в массив
@@ -59,24 +34,23 @@ const InstallCertificate = ({
     setValue,
     getValues,
     formState: { dirtyFields },
-  } = useForm<TCertificates>({
+  } = useForm<TCertificates | AccountantManagementCertificate>({
     defaultValues: {
+      // Руководитель
       userName: rqstsDataById?.fullName,
       userTax: rqstsDataById?.tax,
       userPhone: rqstsDataById?.phone,
       role: rqstsDataById?.role,
+      // Главный бухгалтер
+      userNameAccountant: rqstsDataById?.fullNameAccountant,
+      userTaxAccountant: rqstsDataById?.taxAccountant,
+      userPhoneAccountant: rqstsDataById?.phoneAccountant,
+      roleAccountant: rqstsDataById?.roleAccountant,
+      // Организация
       orgName: currentOrganization?.name,
       orgTax: currentOrganization?.tax,
       orgPhone: currentOrganization?.phone,
       address: currentOrganization?.address,
-      userNameAccountant: rqstsDataById?.fullNameAccountant,
-      userTaxAccountant: rqstsDataById?.tax,
-      userPhoneAccountant: rqstsDataById?.phone,
-      roleAccountant: rqstsDataById?.role,
-      orgNameAccountant: currentOrganization?.name,
-      orgTaxAccountant: currentOrganization?.tax,
-      orgPhoneAccountant: currentOrganization?.phone,
-      addressAccountant: currentOrganization?.address,
     },
   });
 
@@ -99,7 +73,7 @@ const InstallCertificate = ({
     queryClient
   );
 
-  const onSubmit = (data: TCertificates) => {
+  const onSubmit = (data: any) => {
     const getDate = new Date();
 
     const day = String(getDate.getDate()).padStart(2, "0");
@@ -116,8 +90,30 @@ const InstallCertificate = ({
       now.getHours()
     ).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
 
-    const updateReqData = {
-      ...data,
+    const certificateDataFirstVersion: TCertificates = {
+      userName: data.userName,
+      userTax: data.userTax,
+      userPhone: data.userPhone,
+      role: data.role,
+      orgName: data.orgName,
+      orgTax: data.orgTax,
+      orgPhone: data.orgPhone,
+      address: data.address,
+    };
+
+    const certificateDataSecondVersion: TCertificates = {
+      userName: data?.userNameAccountant,
+      userTax: data?.userTaxAccountant,
+      userPhone: data?.userPhoneAccountant,
+      role: data?.roleAccountant,
+      orgName: data?.orgName,
+      orgTax: data?.orgTax,
+      orgPhone: data?.orgPhone,
+      address: data?.address,
+    };
+
+    const firstCertificateData = {
+      ...certificateDataFirstVersion,
       userId: null,
       organizationId: currentOrganization?.id,
       serialNumber: "200000dd1f63274b121773decc00000000dd1f",
@@ -127,9 +123,22 @@ const InstallCertificate = ({
       dateChange: formattedDate,
     };
 
-    console.log(updateReqData);
+    const secondCertificateData = {
+      ...certificateDataSecondVersion,
+      userId: null,
+      organizationId: currentOrganization?.id,
+      serialNumber: "200000dd1f63274b121773decc00000000dd1f",
+      validFrom: dateFrom,
+      validTo: dateTo,
+      statusCode: 0,
+      dateChange: formattedDate,
+    };
 
-    postCertificateMutation.mutate(updateReqData);
+    postCertificateMutation.mutate(firstCertificateData);
+
+    if (rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя") {
+      postCertificateMutation.mutate(secondCertificateData);
+    }
 
     if (rqstsDataById)
       putRqstsByIdMutation.mutate({
@@ -141,6 +150,12 @@ const InstallCertificate = ({
   const statusCertificate = statusOfCertificates.find(
     (e) => e.code === getCertificateUser?.statusCode
   );
+
+  const statusCertificateAccountant = statusOfCertificates.find(
+    (e) => e.code === getCertificateAccountant?.statusCode
+  );
+
+  console.log(getCertificateAccountant);
 
   return (
     <div className="certificate-content">
@@ -210,7 +225,7 @@ const InstallCertificate = ({
           />
         </div>
       )}
-      {!getCertificateUser &&
+      {!getCertificateAccountant &&
         rqstsDataById?.reqType ===
           "Смена главного бухгалтера и руководителя" && (
           <div
@@ -218,29 +233,29 @@ const InstallCertificate = ({
             className="inputs-list install-certificate-inputs-list"
           >
             <TextField
-              {...register("userName")}
+              {...register("userNameAccountant")}
               type="text"
-              id="userName"
+              id="userNameAccountant"
               className="request_inp"
               label="ФИО"
             />
             <TextField
-              {...register("userTax")}
-              id="userTax"
+              {...register("userTaxAccountant")}
+              id="userTaxAccountant"
               type="text"
               className="request_inp"
               label="ИНН пользователя"
             />
             <TextField
-              {...register("userPhone")}
-              id="userPhone"
+              {...register("userPhoneAccountant")}
+              id="userPhoneAccountant"
               type="text"
               className="request_inp"
               label="Номер телефон пользователя"
             />
             <TextField
-              {...register("role")}
-              id="role"
+              {...register("roleAccountant")}
+              id="roleAccountant"
               type="text"
               className="request_inp"
               label="Должность"
@@ -282,6 +297,15 @@ const InstallCertificate = ({
           rqstsDataById={rqstsDataById}
         />
       )}
+      {getCertificateAccountant &&
+        rqstsDataById?.reqType ===
+          "Смена главного бухгалтера и руководителя" && (
+          <CertificateCard
+            getCertificateUser={getCertificateAccountant}
+            statusCertificate={statusCertificateAccountant?.name}
+            rqstsDataById={rqstsDataById}
+          />
+        )}
       <div className="panel-buttons">
         {getCertificateUser && (
           <div className="wrapper-show-executor">
