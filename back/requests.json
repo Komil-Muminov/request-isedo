@@ -208,7 +208,7 @@
     "loginImofAccountant": "Есть",
     "reqType": "Смена главного бухгалтера и руководителя",
     "stepCode": 2,
-    "stepTask": 4,
+    "stepTask": 5,
     "files": [
       {
         "id": 1732771705019,
@@ -256,6 +256,6 @@
       7
     ],
     "id": 7,
-    "dateChange": "29.11.2024 в 09:41"
+    "dateChange": "29.11.2024 в 15:06"
   }
 ]

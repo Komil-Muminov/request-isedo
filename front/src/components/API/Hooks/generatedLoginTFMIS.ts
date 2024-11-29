@@ -9,18 +9,20 @@ interface TypeRequest {
 
 export function generatedLoginTFMIS(
   rqstsDataById: RqstsData,
-  typeRequests: TypeRequest[]
+  typeRequests: TypeRequest[],
+  fullNameData: string
 ): string | null {
   // Проверяем условие
   if (
     rqstsDataById?.reqType === typeRequests[0]?.name ||
-    rqstsDataById?.reqType === typeRequests[1]?.name
+    rqstsDataById?.reqType === typeRequests[1]?.name ||
+    rqstsDataById?.reqType === typeRequests[2]?.name
   ) {
     // Создаем префикс и добавляем цифры
     const prefix = `bo_${Date.now()}`;
 
     // Извлекаем фамилию из полного имени
-    const fullName = rqstsDataById?.fullName; // Например: "Шарипов Амир Чамшедович"
+    const fullName = fullNameData; // Например: "Шарипов Амир Чамшедович"
     if (fullName) {
       const lastName = fullName.split(" ")[0]; // "Шарипов"
 

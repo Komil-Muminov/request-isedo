@@ -148,5 +148,39 @@
     "uIdentity": false,
     "status": true,
     "passport": "A0467834"
+  },
+  {
+    "id": 9,
+    "uType": "bo",
+    "username": "bo_1732874782848_nasrdinov",
+    "password": "123",
+    "photo": "",
+    "fullName": "Насрдинов Бехруз",
+    "phone": "880008404",
+    "tax": "020001804",
+    "email": "b.nasrdinov@itcmf.tj",
+    "role": "Руководитель",
+    "reqIdentity": false,
+    "uIdentity": false,
+    "status": true,
+    "passport": "A0234885",
+    "dateChange": "29.11.2024 в 15:06"
+  },
+  {
+    "id": 10,
+    "uType": "bo",
+    "username": "bo_1732874782848_zafarov",
+    "password": "123",
+    "photo": "",
+    "fullName": "Зафаров Сулеймон",
+    "phone": "880008444",
+    "tax": "700435784",
+    "email": "s.zafarov@itcmf.tj",
+    "role": "Главный бухгалтер",
+    "reqIdentity": false,
+    "uIdentity": false,
+    "status": true,
+    "passport": "A03000564",
+    "dateChange": "29.11.2024 в 15:06"
   }
 ]

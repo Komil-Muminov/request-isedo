@@ -19,6 +19,8 @@ export const putCertificates = async (
     if (!response.ok) {
       throw new Error("Ошибка при обновлении сертификата");
     }
+    console.log(updatedCertificate);
+
     return response.json();
   } catch (error) {
     console.error("Ошибка:", error);

@@ -87,7 +87,6 @@ app.post(
     pdf(dataBuffer)
       .then((data) => {
         const text: string = data.text;
-        console.log("Extracted text:", text); // Логируем весь текст PDF,
 
         const cleanedText = text.replace(/\s+/g, " ").trim(); // Убираем лишние пробелы и переводы строк
 
@@ -832,8 +831,6 @@ app.put("/certificates/:id", authenticateJWT, (req: Request, res: Response) => {
       return res.status(400).json({ error: "Неверный формат statusCode" });
     }
 
-    console.log("Request body:", req.body);
-
     // Обновление statusCode сертификата
     certificate.statusCode = statusCode;
     // Обновление validFrom сертификата
@@ -842,6 +839,8 @@ app.put("/certificates/:id", authenticateJWT, (req: Request, res: Response) => {
     certificate.validTo = validTo;
     // Обновление даты изменение сертификата
     certificate.dateChange = dateChange;
+    // Обновление идентификатора пользователя
+    certificate.userId = req.body.userId;
 
     // Запись изменений обратно в файл
     fs.writeFileSync(
@@ -1084,8 +1083,6 @@ app.post("/invoices", authenticateJWT, (req: Request, res: Response) => {
     });
   }
 
-  console.log("Request body:", req.body);
-
   // Генерация уникального ID и добавление счета
   invoiceData.id = generateUniqueId(invoice);
 
@@ -1174,8 +1171,6 @@ app.put(
     };
 
     writeToFile(requestsFilePath, requests);
-
-    console.log("REQUEST SHOW ID", requests);
 
     res.status(200).json({ message: "Заявка успешно обновлена", requestData });
   }

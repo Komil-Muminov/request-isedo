@@ -10,6 +10,8 @@ const InformationSecurity = ({
   stageOne,
   stageTwo,
   executor,
+  currentCertificateUser,
+  currentCertificateUserAccountant,
 }: any) => {
   return (
     <>
@@ -32,6 +34,8 @@ const InformationSecurity = ({
             currentUser={currentUser}
             currentOrganization={currentOrganization}
             executor={executor}
+            currentCertificateUser={currentCertificateUser}
+            currentCertificateUserAccountant={currentCertificateUserAccountant}
           />
         </div>
       )}

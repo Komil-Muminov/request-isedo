@@ -137,19 +137,13 @@ const WorkSpaceChangeOfChiefAccountantAndManagement = ({
     }
   }, [getCertificateQuery]);
 
-  const getCertificateUser = certificates.find(
-    (cert) => cert.userId !== rqstsDataById?.userId
-  );
-
-  const getCertificateNewUser = certificates.find(
-    (cert) => cert.userId === rqstsDataById?.userId
-  );
-
   const currentCertificateUser = certificates.find(
     (cert) => cert.userName === rqstsDataById?.fullName
   );
 
-  console.log(currentCertificateUser);
+  const currentCertificateUserAccountant = certificates.find(
+    (cert) => cert.userName === rqstsDataById?.fullNameAccountant
+  );
 
   const currentDepartmentCustomer = currentDepartmentStageOne.find(
     (e) => e.state === true
@@ -574,6 +568,8 @@ const WorkSpaceChangeOfChiefAccountantAndManagement = ({
             currentUser={currentUser}
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
+            currentCertificateUser={currentCertificateUser}
+            currentCertificateUserAccountant={currentCertificateUserAccountant}
             executor={uinfo}
             stageTwo={
               <div
