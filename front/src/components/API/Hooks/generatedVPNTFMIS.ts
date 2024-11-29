@@ -9,14 +9,16 @@ interface TypeRequest {
 
 export function generatedVPNTFMIS(
   rqstsDataById: RqstsData,
-  typeRequests: TypeRequest[]
+  typeRequests: TypeRequest[],
+  fullNameData: string
 ): string | null {
   // Проверяем условие
   if (
     rqstsDataById?.reqType === typeRequests[0]?.name ||
-    rqstsDataById?.reqType === typeRequests[1]?.name
+    rqstsDataById?.reqType === typeRequests[1]?.name ||
+    rqstsDataById?.reqType === typeRequests[2]?.name
   ) {
-    const fullName = rqstsDataById?.fullName; // Например: "Шарипов Амир Чамшедович"
+    const fullName = fullNameData; // Например: "Шарипов Амир Чамшедович"
     if (fullName) {
       const nameParts = fullName.split(" "); // Разделяем по пробелам: ["Шарипов", "Амир", "Чамшедович"]
       const lastName = nameParts[0]; // Фамилия: "Шарипов"

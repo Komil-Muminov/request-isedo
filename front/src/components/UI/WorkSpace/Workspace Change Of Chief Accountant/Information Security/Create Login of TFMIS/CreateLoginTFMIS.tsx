@@ -415,7 +415,7 @@ const CreateLoginTFMIS = ({
       {disabledAddUserInOrganizationButton &&
         rqstsDataById?.reqType ===
           "Смена главного бухгалтера и руководителя" && (
-          <LoginTfmisCard currentUser={newLoginUserId} />
+          <LoginTfmisCard currentUser={newLoginUserAccountantId} />
         )}
       <div className="panel-buttons">
         {disabledAddUserInOrganizationButton && (

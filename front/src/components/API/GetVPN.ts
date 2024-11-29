@@ -1,15 +1,15 @@
 export interface TVPN {
-  id: number;
+  id?: number;
   userId?: number | null;
   bz: number;
-  password: string;
+  password?: string;
   fullName: string;
   login: string;
-  organization: string;
+  organization?: string;
   phone: string;
   role: string;
-  status: boolean;
-  dateChange: string;
+  status?: boolean;
+  dateChange?: string;
 }
 
 const token = localStorage.getItem("token");

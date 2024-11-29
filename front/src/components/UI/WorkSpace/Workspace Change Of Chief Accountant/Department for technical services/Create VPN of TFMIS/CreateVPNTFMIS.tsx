@@ -35,16 +35,41 @@ const CreateVPNTFMIS = ({
   const generatedUserName =
     rqstsDataById &&
     typeRequests &&
-    generatedVPNTFMIS(rqstsDataById, typeRequests);
+    generatedVPNTFMIS(rqstsDataById, typeRequests, rqstsDataById?.fullName);
 
-  const { register, handleSubmit } = useForm<TVPN>({
+  const generatedUserNameAccountant =
+    rqstsDataById &&
+    typeRequests &&
+    generatedVPNTFMIS(
+      rqstsDataById,
+      typeRequests,
+      rqstsDataById?.fullNameAccountant
+    );
+
+  interface newAccountantType {
+    fullNameAccountant: string;
+    loginAccountant: string;
+    bzAccountant: number;
+    phoneAccountant: string;
+    roleAccountant: string;
+  }
+
+  const { register, handleSubmit } = useForm<TVPN | newAccountantType>({
     defaultValues: {
+      // Руководитель
       fullName: rqstsDataById?.fullName,
       login: generatedUserName,
       bz: 123,
-      organization: currentOrganization?.name,
       phone: rqstsDataById?.phone,
       role: rqstsDataById?.role,
+      // Главный бухгалтер
+      fullNameAccountant: rqstsDataById?.fullNameAccountant,
+      loginAccountant: generatedUserNameAccountant,
+      bzAccountant: 123,
+      phoneAccountant: rqstsDataById?.phoneAccountant,
+      roleAccountant: rqstsDataById?.roleAccountant,
+      // Организация
+      organization: currentOrganization?.name,
     },
   });
 
@@ -110,9 +135,9 @@ const CreateVPNTFMIS = ({
       ? currentManagement
       : "";
 
-  console.log(currentVpnUserId);
+  console.log(currentAccountant, currentManagement);
 
-  const onSubmit = (data: TVPN) => {
+  const onSubmit = (data: any) => {
     const now = new Date();
     const formattedDate = `${String(now.getDate()).padStart(2, "0")}.${String(
       now.getMonth() + 1
@@ -128,7 +153,47 @@ const CreateVPNTFMIS = ({
       dateChange: formattedDate,
     };
 
-    postVPNMutation.mutate(updateReqData);
+    const firstVPNData: TVPN = {
+      fullName: data.fullName,
+      login: data.login,
+      bz: data.bz,
+      phone: data.phone,
+      role: data.role,
+      organization: data.organization,
+    };
+
+    const secondVPNData: TVPN = {
+      fullName: data.fullNameAccountant,
+      login: data.loginAccountant,
+      bz: data.bzAccountant,
+      phone: data.phoneAccountant,
+      role: data.roleAccountant,
+      organization: data.organization,
+    };
+
+    const firstVPN = {
+      ...firstVPNData,
+      password: "123",
+      status: true,
+      userId: currentManagement && currentManagement?.id,
+      dateChange: formattedDate,
+    };
+
+    const secondVPN = {
+      ...secondVPNData,
+      password: "123",
+      status: true,
+      userId: currentAccountant && currentAccountant?.id,
+      dateChange: formattedDate,
+    };
+
+    if (rqstsDataById?.reqType !== "Смена главного бухгалтера и руководителя")
+      postVPNMutation.mutate(updateReqData);
+
+    if (rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя") {
+      postVPNMutation.mutate(firstVPN);
+      postVPNMutation.mutate(secondVPN);
+    }
 
     if (rqstsDataById)
       putRqstsByIdMutation.mutate({
@@ -157,8 +222,16 @@ const CreateVPNTFMIS = ({
     (e) => e.fullName === rqstsDataById?.fullName
   );
 
+  const newLoginUserAccountantId = vpn?.find(
+    (e) => e.fullName === rqstsDataById?.fullNameAccountant
+  );
+
+  console.log(newLoginUserId, newLoginUserAccountantId);
+
   const disabledAddUserInOrganizationButton =
     currentOrganization.userIds.includes(newLoginUserId?.userId);
+
+  console.log(disabledAddUserInOrganizationButton);
 
   return (
     <div className="certificate-content">
@@ -214,9 +287,65 @@ const CreateVPNTFMIS = ({
           />
         </div>
       )}
+      {!disabledAddUserInOrganizationButton &&
+        rqstsDataById?.reqType ===
+          "Смена главного бухгалтера и руководителя" && (
+          <div
+            style={{ borderTop: "1px solid #00000021" }}
+            className="inputs-list install-certificate-inputs-list"
+          >
+            <TextField
+              {...register("fullNameAccountant")}
+              id="fullNameAccountant"
+              type="text"
+              className="request_inp"
+              label="ФИО"
+            />
+            <TextField
+              {...register("loginAccountant")}
+              type="text"
+              id="loginAccountant"
+              className="request_inp"
+              label="Логин"
+            />
+            <TextField
+              {...register("bzAccountant")}
+              id="bzAccountant"
+              type="text"
+              className="request_inp"
+              label="БЗ"
+            />
+            <TextField
+              {...register("organization")}
+              id="organization"
+              type="text"
+              className="request_inp"
+              label="Организация"
+            />
+            <TextField
+              {...register("phoneAccountant")}
+              id="phoneAccountant"
+              type="text"
+              className="request_inp"
+              label="Телефон"
+            />
+            <TextField
+              {...register("roleAccountant")}
+              id="roleAccountant"
+              type="text"
+              className="request_inp"
+              label="Должность"
+            />
+          </div>
+        )}
       {disabledAddUserInOrganizationButton && (
         <VPNCard currentVPN={newLoginUserId} />
       )}
+      {disabledAddUserInOrganizationButton &&
+        rqstsDataById?.reqType ===
+          "Смена главного бухгалтера и руководителя" && (
+          <VPNCard currentVPN={newLoginUserAccountantId} />
+        )}
       <div className="panel-buttons">
         {disabledAddUserInOrganizationButton && (
           <div className="wrapper-show-executor">
