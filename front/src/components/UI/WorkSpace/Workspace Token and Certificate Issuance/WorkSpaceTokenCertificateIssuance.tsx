@@ -373,7 +373,7 @@ const WorkSpaceTokenCertificateIssuance = ({
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
             executor={uinfo}
-            defaultService={1}
+            defaultService={[1]}
             stageThree={
               <div
                 className="stage-title stage-indicator"

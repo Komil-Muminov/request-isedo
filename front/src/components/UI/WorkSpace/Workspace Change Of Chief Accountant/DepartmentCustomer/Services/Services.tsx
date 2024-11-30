@@ -49,8 +49,6 @@ const Services = ({
     return service.reqType.includes(rqstsDataById?.reqType);
   });
 
-
-
   const selectedServicesTotal = selectedRowIndexes.map(
     (index) => services[index]
   );
@@ -67,7 +65,6 @@ const Services = ({
   }, 0);
 
   const [serviceIds, setServiceIds] = useState<number[]>([]);
-
 
   const putOrganizationUserMutation = useMutation({
     mutationFn: (data: GetRqstsByIdType) => PutRequestServices(data),
@@ -93,20 +90,20 @@ const Services = ({
     handleShow(false);
   };
 
-
   const handleSubmit = () => {
     const services = [
       ...(Array.isArray(rqstsDataById.services) ? rqstsDataById.services : []),
       ...(Array.isArray(serviceIds) && serviceIds.length > 0
         ? serviceIds
-        : [defaultService]), // Преобразуем defaultService в массив, если оно не массив
+        : [...defaultService]), // Преобразуем defaultService в массив, если оно не массив
     ];
+
+    console.log(services);
 
     const servicesData = {
       ...rqstsDataById,
       services,
     };
-
 
     putOrganizationUserMutation.mutate(servicesData);
   };
@@ -139,7 +136,6 @@ const Services = ({
       return null;
     }
   };
-
 
   return (
     <>

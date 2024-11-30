@@ -207,7 +207,7 @@
     "passwordAccountant": "123",
     "loginImofAccountant": "Есть",
     "reqType": "Смена главного бухгалтера и руководителя",
-    "stepCode": 2,
+    "stepCode": 3,
     "stepTask": 6,
     "files": [
       {
@@ -249,13 +249,18 @@
     ],
     "userId": 8,
     "organizationId": 1,
-    "services": [],
+    "services": [
+      1,
+      2,
+      3,
+      4
+    ],
     "dataChange": "28.11.2024 в 10:30",
     "pastUserIds": [
       6,
       7
     ],
     "id": 7,
-    "dateChange": "29.11.2024 в 16:48"
+    "dateChange": "30.11.2024 в 15:18"
   }
 ]

@@ -267,7 +267,9 @@ const ShowRequest = () => {
       (rqstsDataById?.stepCode === 3 &&
         rqstsDataById?.reqType === "Смена главного бухгалтера") ||
       (rqstsDataById?.stepCode === 3 &&
-        rqstsDataById?.reqType === "Смена руководителя")
+        rqstsDataById?.reqType === "Смена руководителя") ||
+      (rqstsDataById?.stepCode === 3 &&
+        rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя")
     ) {
       return rqstsDataById?.stepCode + 1;
     }
