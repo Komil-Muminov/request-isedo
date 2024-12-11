@@ -24,6 +24,7 @@ const ChangeManagement = ({
   currentOrganization,
   firstRequiredFile,
   secondRequiredFile,
+  thirdRequiredFile,
   register,
 }: any) => {
   return (
@@ -149,7 +150,7 @@ const ChangeManagement = ({
             <ul className="required-documents">
               <p>Необходимые документы:</p>
               <li>
-                {firstRequiredFile ? (
+                {secondRequiredFile ? (
                   <CheckCircleOutlineIcon sx={{ color: "green" }} />
                 ) : (
                   <HighlightOffIcon sx={{ color: "red" }} />
@@ -157,12 +158,12 @@ const ChangeManagement = ({
                 <p>{fileInfo[4]?.name}</p>
               </li>
               <li>
-                {secondRequiredFile ? (
+                {thirdRequiredFile ? (
                   <CheckCircleOutlineIcon sx={{ color: "green" }} />
                 ) : (
                   <HighlightOffIcon sx={{ color: "red" }} />
                 )}
-                <p>{fileInfo[2]?.name}</p>
+                <p>{fileInfo[5]?.name}</p>
               </li>
             </ul>
           </div>
