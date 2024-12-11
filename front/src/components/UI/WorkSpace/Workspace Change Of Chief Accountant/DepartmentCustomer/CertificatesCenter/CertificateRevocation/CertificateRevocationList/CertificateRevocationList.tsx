@@ -309,16 +309,16 @@ const CertificateRevocationList = ({
           </div>
         </div>
       </div>
-      {(show && rqstsDataById?.reqType === "Смена главного бухгалтера") ||
-        (show && rqstsDataById?.reqType === "Смена руководителя") ||
-        (show &&
+      {show &&
+        (rqstsDataById?.reqType === "Смена главного бухгалтера" ||
+          rqstsDataById?.reqType === "Смена руководителя" ||
           rqstsDataById?.reqType ===
-            "Смена главного бухгалтера и руководителя" && (
-            <CertificateRevocationModal
-              handleShow={handleShow}
-              handleChangeStatus={handleChangeStatus}
-            />
-          ))}
+            "Смена главного бухгалтера и руководителя") && (
+          <CertificateRevocationModal
+            handleShow={handleShow}
+            handleChangeStatus={handleChangeStatus}
+          />
+        )}
     </>
   );
 };

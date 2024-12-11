@@ -9,8 +9,8 @@
     "organization": "Muhsiddin and Parpisho Corporation",
     "phone": "880006458",
     "role": "Сармухосиб",
-    "status": false,
-    "dateChange": "08.11.2024 в 09:29"
+    "status": true,
+    "dateChange": "11.12.2024 в 14:38"
   },
   {
     "id": 2,
@@ -22,59 +22,7 @@
     "organization": "Muhsiddin and Parpisho Corporation",
     "phone": "880001304",
     "role": "Руководитель",
-    "status": false,
+    "status": true,
     "dateChange": "26.11.2024 в 15:04"
-  },
-  {
-    "fullName": "Шарипов Амир Чамшедович",
-    "login": "sharipov.a",
-    "bz": 123,
-    "organization": "Muhsiddin and Parpisho Corporation",
-    "phone": "880008671",
-    "role": "Главный бухгалтер",
-    "password": "123",
-    "status": false,
-    "userId": 6,
-    "dateChange": "28.11.2024 в 16:21",
-    "id": 3
-  },
-  {
-    "fullName": "Шарипов Рохбар",
-    "login": "sharipov.r",
-    "bz": 123,
-    "organization": "Muhsiddin and Parpisho Corporation",
-    "phone": "880008671",
-    "role": "Руководитель",
-    "password": "123",
-    "status": false,
-    "userId": 7,
-    "dateChange": "28.11.2024 в 16:21",
-    "id": 4
-  },
-  {
-    "fullName": "Зафаров Сулеймон",
-    "login": "zafarov.s",
-    "bz": 123,
-    "phone": "880008444",
-    "role": "Главный бухгалтер",
-    "organization": "Muhsiddin and Parpisho Corporation",
-    "password": "123",
-    "status": true,
-    "userId": 10,
-    "dateChange": "29.11.2024 в 16:48",
-    "id": 5
-  },
-  {
-    "fullName": "Насрдинов Бехруз",
-    "login": "nasrdinov.b",
-    "bz": 123,
-    "phone": "880008404",
-    "role": "Руководитель",
-    "organization": "Muhsiddin and Parpisho Corporation",
-    "password": "123",
-    "status": true,
-    "userId": 9,
-    "dateChange": "29.11.2024 в 16:48",
-    "id": 6
   }
 ]
