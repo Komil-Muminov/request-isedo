@@ -59,8 +59,8 @@ const ShowChangeChiefAccountantAndManagement = ({
     passport: rqstsDataById?.passport,
     role: rqstsDataById?.role,
     token: rqstsDataById?.token,
+    certificateSeries: rqstsDataById?.certificateSeries,
     password: rqstsDataById?.password,
-    loginImof: rqstsDataById?.loginImof,
   };
 
   const RequestAccountantData = {
@@ -80,6 +80,7 @@ const ShowChangeChiefAccountantAndManagement = ({
     passport: rqstsDataById?.passportAccountant,
     role: rqstsDataById?.roleAccountant,
     token: rqstsDataById?.tokenAccountant,
+    certificateSeries: rqstsDataById?.certificateSeries,
     password: rqstsDataById?.passwordAccountant,
   };
 

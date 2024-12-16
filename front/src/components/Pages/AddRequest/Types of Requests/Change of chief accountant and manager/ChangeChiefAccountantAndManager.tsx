@@ -143,6 +143,30 @@ const ChangeChiefAccountantAndManager = ({
                 </Select>
               </FormControl>
             </Box>
+            <Box className="request_inp" sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">
+                  Выберите заявку
+                </InputLabel>
+                <Select
+                  {...register("token")}
+                  labelId="demo-simple-select-label"
+                  id="token"
+                  label="token"
+                >
+                  <MenuItem value="Есть">
+                    Заявка на получение доступов в ИСУГФ - TFMIS
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+            <TextField
+              {...register("certificateSeries")}
+              id="certificateSeries"
+              type="text"
+              className="request_inp"
+              label="Серия сертификата"
+            />
             <FileService />
             <ul className="required-documents">
               <p>Необходимые документы:</p>
@@ -230,6 +254,30 @@ const ChangeChiefAccountantAndManager = ({
                 </Select>
               </FormControl>
             </Box>
+            <Box className="request_inp" sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">
+                  Выберите заявку
+                </InputLabel>
+                <Select
+                  {...register("token")}
+                  labelId="demo-simple-select-label"
+                  id="token"
+                  label="token"
+                >
+                  <MenuItem value="Есть">
+                    Заявка на получение доступов в ИСУГФ - TFMIS
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+            <TextField
+              {...register("certificateSeries")}
+              id="certificateSeries"
+              type="text"
+              className="request_inp"
+              label="Серия сертификата"
+            />
             <FileService />
             <ul className="required-documents">
               <p>Необходимые документы:</p>

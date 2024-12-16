@@ -108,7 +108,6 @@ const AddRequest: React.FC = () => {
       token: "",
       dateTime: "",
       password: "123",
-      loginImof: "",
       fullNameAccountant: "",
       taxAccountant: "",
       phoneAccountant: "",
@@ -116,6 +115,7 @@ const AddRequest: React.FC = () => {
       passportAccountant: "",
       roleAccountant: "",
       tokenAccountant: "",
+      certificateSeries: "",
       passwordAccountant: "123",
       reqType: "Смена главного бухгалтера",
     },
@@ -351,10 +351,6 @@ const AddRequest: React.FC = () => {
         postRqstsMutation.mutate(reqTypeDataIssuanceFromAccountantAndManager);
         break;
     }
-
-    alert(
-      `Новый главных бухгалтер ${data?.fullName} не найден в системе, можете продолжить заявку.`
-    );
 
     navigate(`/requests`);
   };
