@@ -117,29 +117,13 @@ const ChangeChiefAccountant = ({
             <Box className="request_inp" sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">
-                  Наличие токена
+                  Укажите, есть ли у вас токен
                 </InputLabel>
                 <Select
                   {...register("token")}
                   labelId="demo-simple-select-label"
                   id="token"
                   label="token"
-                >
-                  <MenuItem value="Есть">Есть</MenuItem>
-                  <MenuItem value="Нет">Нет</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-            <Box className="request_inp" sx={{ minWidth: 120 }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">
-                  Наличие логина iMoF
-                </InputLabel>
-                <Select
-                  {...register("loginImof")}
-                  labelId="demo-simple-select-label"
-                  id="loginImof"
-                  label="loginImof"
                 >
                   <MenuItem value="Есть">Есть</MenuItem>
                   <MenuItem value="Нет">Нет</MenuItem>

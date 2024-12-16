@@ -117,7 +117,6 @@ const AddRequest: React.FC = () => {
       roleAccountant: "",
       tokenAccountant: "",
       passwordAccountant: "123",
-      loginImofAccountant: "",
       reqType: "Смена главного бухгалтера",
     },
   });

@@ -81,7 +81,6 @@ const ShowChangeChiefAccountantAndManagement = ({
     role: rqstsDataById?.roleAccountant,
     token: rqstsDataById?.tokenAccountant,
     password: rqstsDataById?.passwordAccountant,
-    loginImof: rqstsDataById?.loginImofAccountant,
   };
 
   return (

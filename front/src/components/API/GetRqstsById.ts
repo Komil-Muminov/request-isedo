@@ -12,7 +12,6 @@ interface RequestAccountantData {
   roleAccountant?: string;
   tokenAccountant?: string;
   passwordAccountant?: string;
-  loginImofAccountant?: string;
 }
 
 export interface GetRqstsByIdType extends RequestAccountantData {
