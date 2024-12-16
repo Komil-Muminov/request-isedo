@@ -14,6 +14,7 @@ const ShowTokenCertificateIssuance = ({
   rqstsDataById,
   uinfo,
   currentUserRequest,
+  handleCheckRequest,
 }: any) => {
   return (
     <>

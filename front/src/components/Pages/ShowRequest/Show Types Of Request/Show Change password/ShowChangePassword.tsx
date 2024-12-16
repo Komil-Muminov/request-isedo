@@ -14,6 +14,7 @@ const ShowChangePassword = ({
   rqstsDataById,
   uinfo,
   currentUserRequest,
+  handleCheckRequest,
 }: any) => {
   return (
     <>

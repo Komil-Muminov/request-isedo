@@ -126,6 +126,14 @@ const ShowRequest = () => {
     putRqstsByIdMutation.mutate(updateReqData);
   };
 
+  const handleCheckRequest = () => {
+    const update = {
+      ...rqstsDataById,
+      status: true,
+    };
+    putRqstsByIdMutation.mutate(update);
+  };
+
   const [users, setUsers] = useState<TGetUsers[] | null>(null);
 
   const usersQuery = useQuery(
@@ -246,11 +254,6 @@ const ShowRequest = () => {
 
   const currentUserRequest = users?.find(
     (e) => e.fullName === rqstsDataById?.fullName
-  );
-
-  // Это условие не корректная, необходимо убедится что userIds существует новый бухгалтер, а не заявитель
-  const disabledAddUserButton = currentOrganization?.userIds.includes(
-    rqstsDataById?.userId
   );
 
   if (getRqstsByIdQuery.status === "pending") {
@@ -450,7 +453,7 @@ const ShowRequest = () => {
             currentOrganization={currentOrganization}
             rqstsDataById={rqstsDataById}
             uinfo={uinfo}
-            disabledAddUserButton={disabledAddUserButton}
+            handleCheckRequest={handleCheckRequest}
           />
         )}
         {rqstsDataById?.reqType === "Смена руководителя" && (
@@ -460,7 +463,7 @@ const ShowRequest = () => {
             currentOrganization={currentOrganization}
             rqstsDataById={rqstsDataById}
             uinfo={uinfo}
-            disabledAddUserButton={disabledAddUserButton}
+            handleCheckRequest={handleCheckRequest}
           />
         )}
         {rqstsDataById?.reqType ===
@@ -472,7 +475,7 @@ const ShowRequest = () => {
             currentOrganization={currentOrganization}
             rqstsDataById={rqstsDataById}
             uinfo={uinfo}
-            disabledAddUserButton={disabledAddUserButton}
+            handleCheckRequest={handleCheckRequest}
           />
         )}
         {rqstsDataById?.reqType === "Выдача токена" && (
@@ -480,6 +483,7 @@ const ShowRequest = () => {
             currentOrganization={currentOrganization}
             rqstsDataById={rqstsDataById}
             uinfo={uinfo}
+            handleCheckRequest={handleCheckRequest}
           />
         )}
         {rqstsDataById?.reqType === "Выдача сертификата" && (
@@ -488,6 +492,7 @@ const ShowRequest = () => {
             rqstsDataById={rqstsDataById}
             uinfo={uinfo}
             currentUserRequest={currentUserRequest}
+            handleCheckRequest={handleCheckRequest}
           />
         )}
         {rqstsDataById?.reqType === "Выдача токена и сертификата" && (
@@ -496,6 +501,7 @@ const ShowRequest = () => {
             rqstsDataById={rqstsDataById}
             uinfo={uinfo}
             currentUserRequest={currentUserRequest}
+            handleCheckRequest={handleCheckRequest}
           />
         )}
         {rqstsDataById?.reqType === "Смена пароля" && (
@@ -504,6 +510,7 @@ const ShowRequest = () => {
             rqstsDataById={rqstsDataById}
             uinfo={uinfo}
             currentUserRequest={currentUserRequest}
+            handleCheckRequest={handleCheckRequest}
           />
         )}
         {rqstsDataById && rqstsDataById?.stepCode >= 3 && (

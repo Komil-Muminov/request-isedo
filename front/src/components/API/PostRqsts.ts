@@ -12,6 +12,7 @@ interface RequestAccountantData {
   roleAccountant?: string;
   tokenAccountant?: string;
   certificateSeries?: string;
+  status?: boolean;
   passwordAccountant?: string;
 }
 

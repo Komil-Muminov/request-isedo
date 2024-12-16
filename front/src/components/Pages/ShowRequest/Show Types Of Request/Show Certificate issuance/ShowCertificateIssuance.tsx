@@ -13,6 +13,7 @@ const ShowCertificateIssuance = ({
   rqstsDataById,
   uinfo,
   currentUserRequest,
+  handleCheckRequest,
 }: any) => {
   return (
     <>
@@ -31,7 +32,7 @@ const ShowCertificateIssuance = ({
         </div>
       </section>
       {/* Рабочее пространство */}
-      {uinfo?.uType !== "bo" && (
+      {uinfo?.uType !== "bo"  && (
         <WorkSpaceCertificateIssuance
           rqstsDataById={rqstsDataById}
           currentOrganization={currentOrganization}
