@@ -78,7 +78,7 @@ const ShowChangeManagement = ({
                       />
                     }
                     text="Проверить заявку"
-                    activeSendButton={false}
+                    activeSendButton={rqstsDataById?.status}
                     handleSubmit={handleCheckRequest}
                   />
                 </div>

@@ -271,7 +271,11 @@ const AddRequest: React.FC = () => {
       organizationId: currentOrganization?.id,
       services: [],
       dataChange: formattedDate,
-      pastUserIds: [currentAccountant?.id],
+      pastUserIds: [
+        uinfo?.role === "Главный бухгалтер"
+          ? currentHead?.id
+          : currentAccountant?.id,
+      ],
     };
 
     const reqTypeChangeAccountantAndManagement = {
