@@ -235,7 +235,7 @@ const ShowRequest = () => {
   });
 
   const currentPastUsers = users?.filter((e) => {
-    if (rqstsDataById?.pastUserIds.includes(e.id)) {
+    if (rqstsDataById?.pastUserIds?.includes(e.id)) {
       return e;
     }
   });
@@ -247,8 +247,6 @@ const ShowRequest = () => {
   const currentPastManagement = currentPastUsers?.find(
     (e) => e.role === "Руководитель"
   );
-
-  console.log(currentPastAccountant, currentPastManagement);
 
   // Данные карточки пользователя в заявке
 
