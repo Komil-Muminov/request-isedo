@@ -14,6 +14,7 @@ const ShowCertificateIssuance = ({
   uinfo,
   currentUserRequest,
   handleCheckRequest,
+  issuanceCertificateUser,
 }: any) => {
   return (
     <>
@@ -21,7 +22,7 @@ const ShowCertificateIssuance = ({
         <TitleDocument title="Пользователь системы" />
         <div className="wrapper-cards">
           <UserOrOrganizationCard
-            currentUser={rqstsDataById}
+            currentUser={issuanceCertificateUser}
             userType={uinfo?.uType}
             title="Карточка пользователя"
           />
@@ -32,7 +33,7 @@ const ShowCertificateIssuance = ({
         </div>
       </section>
       {/* Рабочее пространство */}
-      {uinfo?.uType !== "bo"  && (
+      {uinfo?.uType !== "bo" && (
         <WorkSpaceCertificateIssuance
           rqstsDataById={rqstsDataById}
           currentOrganization={currentOrganization}

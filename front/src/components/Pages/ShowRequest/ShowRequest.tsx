@@ -306,6 +306,12 @@ const ShowRequest = () => {
     return rqstsDataById?.stepCode;
   };
 
+  const issuanceCertificateUser = users?.find((e) =>
+    rqstsDataById?.pastUserIds.includes(e.id)
+  );
+
+  console.log(issuanceCertificateUser);
+
   // ======================= WORKSPACE =====================
 
   return (
@@ -488,6 +494,7 @@ const ShowRequest = () => {
           <ShowCertificateIssuance
             currentOrganization={currentOrganization}
             rqstsDataById={rqstsDataById}
+            issuanceCertificateUser={issuanceCertificateUser}
             uinfo={uinfo}
             currentUserRequest={currentUserRequest}
             handleCheckRequest={handleCheckRequest}
