@@ -306,11 +306,9 @@ const ShowRequest = () => {
     return rqstsDataById?.stepCode;
   };
 
-  const issuanceCertificateUser = users?.find((e) =>
+  const currentUserFromPastUser = users?.find((e) =>
     rqstsDataById?.pastUserIds.includes(e.id)
   );
-
-  console.log(issuanceCertificateUser);
 
   // ======================= WORKSPACE =====================
 
@@ -494,7 +492,7 @@ const ShowRequest = () => {
           <ShowCertificateIssuance
             currentOrganization={currentOrganization}
             rqstsDataById={rqstsDataById}
-            issuanceCertificateUser={issuanceCertificateUser}
+            currentUserFromPastUser={currentUserFromPastUser}
             uinfo={uinfo}
             currentUserRequest={currentUserRequest}
             handleCheckRequest={handleCheckRequest}
@@ -513,6 +511,7 @@ const ShowRequest = () => {
           <ShowChangePassword
             currentOrganization={currentOrganization}
             rqstsDataById={rqstsDataById}
+            currentUserFromPastUser={currentUserFromPastUser}
             uinfo={uinfo}
             currentUserRequest={currentUserRequest}
             handleCheckRequest={handleCheckRequest}
