@@ -502,6 +502,7 @@ const ShowRequest = () => {
           <ShowTokenCertificateIssuance
             currentOrganization={currentOrganization}
             rqstsDataById={rqstsDataById}
+            currentUserFromPastUser={currentUserFromPastUser}
             uinfo={uinfo}
             currentUserRequest={currentUserRequest}
             handleCheckRequest={handleCheckRequest}
