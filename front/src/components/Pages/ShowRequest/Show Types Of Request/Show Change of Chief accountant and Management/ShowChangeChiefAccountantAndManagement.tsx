@@ -146,7 +146,7 @@ const ShowChangeChiefAccountantAndManagement = ({
                       />
                     }
                     text="Проверить заявку"
-                    activeSendButton={false}
+                    activeSendButton={rqstsDataById?.status}
                     handleSubmit={handleCheckRequest}
                   />
                 </div>
@@ -194,7 +194,7 @@ const ShowChangeChiefAccountantAndManagement = ({
                       />
                     }
                     text="Проверить заявку"
-                    activeSendButton={false}
+                    activeSendButton={rqstsDataById?.status}
                   />
                 </div>
               </div>

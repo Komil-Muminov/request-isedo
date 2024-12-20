@@ -178,9 +178,6 @@ const CreateLoginTFMIS = ({
 
     regMeMutation.mutate(firstUser);
 
-    console.log(firstUser);
-    console.log(secondUser);
-
     if (rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя") {
       regMeMutation.mutate(secondUser);
     }
