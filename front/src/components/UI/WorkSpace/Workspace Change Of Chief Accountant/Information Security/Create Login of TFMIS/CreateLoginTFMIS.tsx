@@ -134,6 +134,9 @@ const CreateLoginTFMIS = ({
       phone: data.phone,
       tax: data.tax,
       email: data.email,
+      orgName: data.orgName,
+      orgTax: data.orgTax,
+      department: "",
       role: data.role,
       passport: data.passport,
     };
@@ -144,6 +147,9 @@ const CreateLoginTFMIS = ({
       phone: data.phoneAccountant,
       tax: data.taxAccountant,
       email: data.emailAccountant,
+      orgName: data.orgName,
+      orgTax: data.orgTax,
+      department: "",
       role: data.roleAccountant,
       passport: data.passportAccountant,
     };

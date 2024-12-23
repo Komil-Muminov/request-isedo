@@ -140,8 +140,16 @@ const WorkSpaceChangeOfChiefAccountant = ({
     (cert) => cert.userId !== rqstsDataById?.userId
   );
 
+  // Оригинал
+
+  // const getCertificateNewUser = certificates.find(
+  //   (cert) => cert.userId === rqstsDataById?.userId
+  // );
+
+  // Для проверки условие
+
   const getCertificateNewUser = certificates.find(
-    (cert) => cert.userId === rqstsDataById?.userId
+    (cert) => cert.userName === rqstsDataById?.fullName
   );
 
   const currentDepartmentCustomer = currentDepartmentStageOne.find(
