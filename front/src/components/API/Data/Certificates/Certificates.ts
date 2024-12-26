@@ -7,37 +7,42 @@ interface TstatusOfCertificates {
 export const statusOfCertificates: TstatusOfCertificates[] = [
   {
     id: 1,
-    name: "Активный",
-    code: 0,
-  },
-  {
-    id: 2,
-    name: "Компрометация ключа",
+    name: "Не определен",
     code: 1,
   },
   {
-    id: 3,
-    name: "Компрометация ЦС",
+    id: 2,
+    name: "Активный",
     code: 2,
   },
   {
-    id: 4,
-    name: "Изменение принадлежности",
+    id: 3,
+    name: "Компрометация ключа",
     code: 3,
   },
   {
-    id: 5,
-    name: "Сертификат заменен",
+    id: 4,
+    name: "Компрометация ЦС",
     code: 4,
   },
   {
-    id: 6,
-    name: "Прекращение работы",
+    id: 5,
+    name: "Изменение принадлежности",
     code: 5,
   },
   {
-    id: 7,
-    name: "Приостановка действия",
+    id: 6,
+    name: "Сертификат заменен",
     code: 6,
+  },
+  {
+    id: 7,
+    name: "Прекращение работы",
+    code: 7,
+  },
+  {
+    id: 8,
+    name: "Приостановка действия",
+    code: 8,
   },
 ];

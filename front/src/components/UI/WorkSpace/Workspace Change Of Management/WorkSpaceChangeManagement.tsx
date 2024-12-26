@@ -204,7 +204,7 @@ const WorkSpaceChangeManagement = ({
     switch (stage) {
       case 1:
         return (item.name === "Шуъба оид ба кор бо муштариён" &&
-          getCertificateUser?.statusCode === 5) ||
+          getCertificateUser?.statusCode === 7) ||
           (item.name === "Шуъба оид ба амнияти иттилоотӣ" &&
             currentUser?.status === false) ||
           (item.name === "Шуъба оид ба хизматрасонии техникӣ" &&

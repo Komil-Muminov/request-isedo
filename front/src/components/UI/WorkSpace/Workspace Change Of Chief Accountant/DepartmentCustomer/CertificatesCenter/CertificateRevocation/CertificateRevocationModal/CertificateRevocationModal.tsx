@@ -27,7 +27,9 @@ const CertificateRevocationModal = ({
   handleShow,
   handleChangeStatus,
 }: TProps) => {
-  const [selectedReason, setSelectedReason] = useState(""); // состояние для выбранного значения
+  const [selectedReason, setSelectedReason] = useState(
+    statusOfCertificates.find((e) => e.id === 7)?.name || ""
+  ); // состояние для выбранного значения
 
   const handleSelectChange = (event: any) => {
     setSelectedReason(event.target.value); // сохраняем выбранное значение в состояние
@@ -102,9 +104,9 @@ const CertificateRevocationModal = ({
             <select
               name="revocationReason"
               id="revocationReason"
+              value={selectedReason} // Устанавливаем выбранное значение
               onChange={handleSelectChange}
             >
-              <option value="">Не определен</option>
               {statusOfCertificates.map((e) => {
                 return (
                   <option key={e.id} value={e.name}>

@@ -210,7 +210,7 @@ const WorkSpaceChangeOfChiefAccountantAndManagement = ({
     switch (stage) {
       case 1:
         return (item.name === "Шуъба оид ба кор бо муштариён" &&
-          getCertificateAccountant?.statusCode === 5) ||
+          getCertificateAccountant?.statusCode === 7) ||
           (item.name === "Шуъба оид ба амнияти иттилоотӣ" &&
             currentUser?.status === false) ||
           (item.name === "Шуъба оид ба хизматрасонии техникӣ" &&
