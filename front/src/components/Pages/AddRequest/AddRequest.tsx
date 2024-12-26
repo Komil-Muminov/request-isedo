@@ -266,7 +266,12 @@ const AddRequest: React.FC = () => {
       stepTask: 0,
       status: false,
       dateTime: date,
-      files: files,
+      files: [
+        ...files.filter(
+          (file, index, self) =>
+            self.findIndex((f) => f.fileName === file.fileName) === index
+        ),
+      ],
       userId: uinfo?.userId,
       organizationId: currentOrganization?.id,
       services: [],
