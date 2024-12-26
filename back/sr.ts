@@ -714,15 +714,6 @@ app.post("/services", authenticateJWT, (req: Request, res: Response) => {
   const users = readFromFile(usersFilePath);
   const user = users.find((u: any) => u.id === userId);
 
-  // Проверка, что пользователь существует и является "kvd"
-  if (!user || user.uType !== "kvd") {
-    return res.status(403).json({
-      error: `Вы не kvd и не можете добавить услугу. Ваш тип: ${
-        user?.uType || "неизвестен"
-      }`,
-    });
-  }
-
   const services = readFromFile(servicesFilePath);
 
   // Генерация уникального ID и добавление сертификата
@@ -745,15 +736,6 @@ app.post("/certificates", authenticateJWT, (req: Request, res: Response) => {
 
   const users = readFromFile(usersFilePath);
   const user = users.find((u: any) => u.id === userId);
-
-  // // Проверка, что пользователь существует и является "kvd"
-  // if (!user || user.uType !== "kvd") {
-  //   return res.status(403).json({
-  //     error: `Вы не kvd и не можете вложить сертификат. Ваш тип: ${
-  //       user?.uType || "неизвестен"
-  //     }`,
-  //   });
-  // }
 
   const certificates = readFromFile(certificatesFilePath);
 
@@ -1051,15 +1033,6 @@ app.post("/invoices", authenticateJWT, (req: Request, res: Response) => {
 
   const users = readFromFile(usersFilePath);
   const user = users.find((u: any) => u.id === userId);
-
-  // Проверка, что пользователь существует и является "kvd"
-  if (!user || user.uType !== "kvd") {
-    return res.status(403).json({
-      error: `Вы не kvd и не можете выписать счет. Ваш тип: ${
-        user?.uType || "неизвестен"
-      }`,
-    });
-  }
 
   const invoice = readFromFile(invoicesFilePath);
 
