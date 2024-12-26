@@ -277,7 +277,7 @@ const WorkSpaceTokenIssuance = ({
                               : calculateTotalPercent(1) > 0 &&
                                 calculateTotalPercent(1) < 100
                               ? "#ff9800"
-                              : "#33c157"
+                              : "#fff"
                           }`,
                         } as React.CSSProperties
                       }

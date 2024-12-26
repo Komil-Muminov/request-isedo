@@ -778,7 +778,7 @@ const WorkSpaceChangeManagement = ({
                               : calculateTotalPercent(3) > 0 &&
                                 calculateTotalPercent(3) < 100
                               ? "#ff9800"
-                              : "#33c157"
+                              : "#fff"
                           }`,
                         } as React.CSSProperties
                       }

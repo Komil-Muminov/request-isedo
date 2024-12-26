@@ -364,7 +364,7 @@ const WorkSpaceChangeOfChiefAccountant = ({
                             : calculateTotalPercent(1) > 0 &&
                               calculateTotalPercent(1) < 100
                             ? "#ff9800"
-                            : "#33c157"
+                            : "#fff"
                         }`,
                       } as React.CSSProperties
                     }
@@ -415,7 +415,7 @@ const WorkSpaceChangeOfChiefAccountant = ({
                             : calculateTotalPercent(1) > 0 &&
                               calculateTotalPercent(1) < 100
                             ? "#ff9800"
-                            : "#33c157"
+                            : "#fff"
                         }`,
                       } as React.CSSProperties
                     }
@@ -467,7 +467,7 @@ const WorkSpaceChangeOfChiefAccountant = ({
                             : calculateTotalPercent(1) > 0 &&
                               calculateTotalPercent(1) < 100
                             ? "#ff9800"
-                            : "#33c157"
+                            : "#fff"
                         }`,
                       } as React.CSSProperties
                     }
@@ -566,7 +566,7 @@ const WorkSpaceChangeOfChiefAccountant = ({
                             : calculateTotalPercent(2) > 0 &&
                               calculateTotalPercent(2) < 100
                             ? "#ff9800"
-                            : "#33c157"
+                            : "#fff"
                         }`,
                       } as React.CSSProperties
                     }
@@ -612,7 +612,7 @@ const WorkSpaceChangeOfChiefAccountant = ({
                             : calculateTotalPercent(2) > 0 &&
                               calculateTotalPercent(2) < 100
                             ? "#ff9800"
-                            : "#33c157"
+                            : "#fff"
                         }`,
                       } as React.CSSProperties
                     }
@@ -659,7 +659,7 @@ const WorkSpaceChangeOfChiefAccountant = ({
                             : calculateTotalPercent(2) > 0 &&
                               calculateTotalPercent(2) < 100
                             ? "#ff9800"
-                            : "#33c157"
+                            : "#fff"
                         }`,
                       } as React.CSSProperties
                     }
@@ -754,7 +754,7 @@ const WorkSpaceChangeOfChiefAccountant = ({
                             : calculateTotalPercent(3) > 0 &&
                               calculateTotalPercent(3) < 100
                             ? "#ff9800"
-                            : "#33c157"
+                            : "#fff"
                         }`,
                       } as React.CSSProperties
                     }
@@ -801,7 +801,7 @@ const WorkSpaceChangeOfChiefAccountant = ({
                               : calculateTotalPercent(3) > 0 &&
                                 calculateTotalPercent(3) < 100
                               ? "#ff9800"
-                              : "#33c157"
+                              : "#fff"
                           }`,
                         } as React.CSSProperties
                       }
