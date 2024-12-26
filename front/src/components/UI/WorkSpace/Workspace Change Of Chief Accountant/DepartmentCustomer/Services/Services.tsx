@@ -49,6 +49,9 @@ const Services = ({
     return service.reqType.includes(rqstsDataById?.reqType);
   });
 
+  console.log(servicesFilteredByRequestId);
+  
+
   const selectedServicesTotal = selectedRowIndexes.map(
     (index) => services[index]
   );

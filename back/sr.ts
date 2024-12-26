@@ -886,15 +886,6 @@ app.post("/vpn", authenticateJWT, (req: Request, res: Response) => {
   const users = readFromFile(usersFilePath);
   const user = users.find((u: any) => u.id === userId);
 
-  // Проверка, что пользователь существует и является "kvd"
-  if (!user || user.uType !== "kvd") {
-    return res.status(403).json({
-      error: `Вы не kvd и не можете вложить сертификат. Ваш тип: ${
-        user?.uType || "неизвестен"
-      }`,
-    });
-  }
-
   const vpn = readFromFile(vpnFilePath);
 
   // Проверка, если userId уже существует в массиве vpn-ов

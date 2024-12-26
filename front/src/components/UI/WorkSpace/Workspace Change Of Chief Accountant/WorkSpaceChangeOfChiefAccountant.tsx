@@ -725,6 +725,7 @@ const WorkSpaceChangeOfChiefAccountant = ({
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
             executor={uinfo}
+            defaultService={[1, 2, 3, 4]}
             stageThree={
               <div
                 className="stage-title stage-indicator"
