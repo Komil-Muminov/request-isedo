@@ -201,6 +201,7 @@ const WorkSpaceTokenIssuance = ({
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
             executor={uinfo}
+            defaultService={[4]}
             stageThree={
               <div
                 className="stage-title stage-indicator"
@@ -248,7 +249,6 @@ const WorkSpaceTokenIssuance = ({
               rqstsDataById={rqstsDataById}
               currentOrganization={currentOrganization}
               executor={uinfo}
-              defaultService={[4]}
               stageThree={
                 <div
                   className="stage-title stage-indicator"

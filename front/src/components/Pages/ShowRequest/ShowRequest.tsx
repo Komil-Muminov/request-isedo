@@ -307,7 +307,7 @@ const ShowRequest = () => {
   };
 
   const currentUserFromPastUser = users?.find((e) =>
-    rqstsDataById?.pastUserIds.includes(e.id)
+    rqstsDataById?.pastUserIds?.includes(e.id)
   );
 
   // ======================= WORKSPACE =====================
