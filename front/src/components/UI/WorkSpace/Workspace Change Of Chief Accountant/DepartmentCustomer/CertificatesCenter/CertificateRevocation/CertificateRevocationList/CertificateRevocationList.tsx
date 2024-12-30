@@ -243,7 +243,12 @@ const CertificateRevocationList = ({
         <div className="panel-control-certificate-revocation">
           <div className="certificates-revocation-title">
             {/* <CardMembershipIcon /> */}
-            <p>Отзыв сертификата</p>
+            <p>
+              {rqstsDataById?.reqType === "Выдача сертификата" ||
+              rqstsDataById?.reqType === "Выдача токена и сертификата"
+                ? "Выдача сертификата"
+                : "Отзыв сертификата"}
+            </p>
           </div>
         </div>
         <CertificateCard
