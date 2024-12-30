@@ -137,7 +137,7 @@ const WorkSpaceChangeManagement = ({
   }, [getCertificateQuery]);
 
   const getCertificateUser = certificates.find(
-    (cert) => cert.userId !== rqstsDataById?.userId
+    (cert) => cert.userId === rqstsDataById?.pastUserIds[0]
   );
 
   const getCertificateNewUser = certificates.find(
@@ -195,6 +195,8 @@ const WorkSpaceChangeManagement = ({
   const currentInvoice = invoices.find(
     (e) => e.requestId === rqstsDataById?.id
   );
+
+  console.log(getCertificateUser);
 
   // Универсальная функция для вычисления процента выполнения отдела на каждом этапе
   const getDepartmentPercent = (
