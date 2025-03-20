@@ -1,1 +1,41 @@
-[]
+[
+  {
+    "fullName": "ads",
+    "tax": "sada",
+    "phone": "da",
+    "email": "sda",
+    "passport": "sda",
+    "role": "asd",
+    "token": "Есть",
+    "dateTime": "10.02.2025.15:59",
+    "password": "123",
+    "loginImof": "Есть",
+    "fullNameAccountant": "",
+    "taxAccountant": "",
+    "phoneAccountant": "",
+    "emailAccountant": "",
+    "passportAccountant": "",
+    "roleAccountant": "",
+    "tokenAccountant": "",
+    "passwordAccountant": "123",
+    "loginImofAccountant": "",
+    "reqType": "Смена главного бухгалтера",
+    "stepCode": 0,
+    "stepTask": 0,
+    "files": [
+      {
+        "id": 1739185143555,
+        "fileName": "Описание бизнес-процесса и интерфейса модуля СРМ.",
+        "size": "567.25 КБ",
+        "type": "vnd.openxmlformats-officedocument.wordprocessingml.document"
+      }
+    ],
+    "userId": 3,
+    "services": [],
+    "dataChange": "10.02.2025 в 15:59",
+    "pastUserIds": [
+      3
+    ],
+    "id": 1
+  }
+]
