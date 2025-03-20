@@ -155,7 +155,8 @@ const PassiveLoginTFMIS = ({
                 (show === false &&
                   rqstsDataById?.reqType === "Выдача сертификата") ||
                 (show === false &&
-                  rqstsDataById?.reqType === "Выдача токена и сертификата")
+                  rqstsDataById?.reqType === "Выдача токена и сертификата") ||
+                (show === false && rqstsDataById?.reqType === "Смена пароля")
                   ? handleChangeStatus
                   : ""
               }

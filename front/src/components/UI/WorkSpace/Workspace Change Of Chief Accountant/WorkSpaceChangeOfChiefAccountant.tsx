@@ -140,8 +140,16 @@ const WorkSpaceChangeOfChiefAccountant = ({
     (cert) => cert.userId !== rqstsDataById?.userId
   );
 
+  // Оригинал
+
+  // const getCertificateNewUser = certificates.find(
+  //   (cert) => cert.userId === rqstsDataById?.userId
+  // );
+
+  // Для проверки условие
+
   const getCertificateNewUser = certificates.find(
-    (cert) => cert.userId === rqstsDataById?.userId
+    (cert) => cert.userName === rqstsDataById?.fullName
   );
 
   const currentDepartmentCustomer = currentDepartmentStageOne.find(
@@ -218,7 +226,7 @@ const WorkSpaceChangeOfChiefAccountant = ({
     switch (stage) {
       case 1:
         return (item.name === "Шуъба оид ба кор бо муштариён" &&
-          getCertificateUser?.statusCode === 5) ||
+          getCertificateUser?.statusCode === 7) ||
           (item.name === "Шуъба оид ба амнияти иттилоотӣ" &&
             currentUser?.status === false) ||
           (item.name === "Шуъба оид ба хизматрасонии техникӣ" &&
@@ -717,6 +725,7 @@ const WorkSpaceChangeOfChiefAccountant = ({
             rqstsDataById={rqstsDataById}
             currentOrganization={currentOrganization}
             executor={uinfo}
+            defaultService={[1, 2, 3, 4]}
             stageThree={
               <div
                 className="stage-title stage-indicator"

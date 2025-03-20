@@ -13,6 +13,8 @@ const ShowCertificateIssuance = ({
   rqstsDataById,
   uinfo,
   currentUserRequest,
+  handleCheckRequest,
+  currentUserFromPastUser,
 }: any) => {
   return (
     <>
@@ -20,7 +22,7 @@ const ShowCertificateIssuance = ({
         <TitleDocument title="Пользователь системы" />
         <div className="wrapper-cards">
           <UserOrOrganizationCard
-            currentUser={rqstsDataById}
+            currentUser={currentUserFromPastUser}
             userType={uinfo?.uType}
             title="Карточка пользователя"
           />

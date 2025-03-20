@@ -108,7 +108,6 @@ const AddRequest: React.FC = () => {
       token: "",
       dateTime: "",
       password: "123",
-      loginImof: "",
       fullNameAccountant: "",
       taxAccountant: "",
       phoneAccountant: "",
@@ -116,8 +115,8 @@ const AddRequest: React.FC = () => {
       passportAccountant: "",
       roleAccountant: "",
       tokenAccountant: "",
+      certificateSeries: "",
       passwordAccountant: "123",
-      loginImofAccountant: "",
       reqType: "Смена главного бухгалтера",
     },
   });
@@ -265,19 +264,30 @@ const AddRequest: React.FC = () => {
       ...data,
       stepCode: stepFound?.stepCode || 0,
       stepTask: 0,
+      status: false,
       dateTime: date,
-      files: files,
+      files: [
+        ...files.filter(
+          (file, index, self) =>
+            self.findIndex((f) => f.fileName === file.fileName) === index
+        ),
+      ],
       userId: uinfo?.userId,
       organizationId: currentOrganization?.id,
       services: [],
       dataChange: formattedDate,
-      pastUserIds: [currentAccountant?.id],
+      pastUserIds: [
+        uinfo?.role === "Главный бухгалтер"
+          ? currentHead?.id
+          : currentAccountant?.id,
+      ],
     };
 
     const reqTypeChangeAccountantAndManagement = {
       ...data,
       stepCode: stepFound?.stepCode || 0,
       stepTask: 0,
+      status: false,
       dateTime: date,
       files: files,
       userId: uinfo?.userId,
@@ -298,6 +308,7 @@ const AddRequest: React.FC = () => {
       password: "123",
       stepCode: stepFound?.stepCode || 0,
       stepTask: 0,
+      status: false,
       dateTime: date,
       files: files,
       userId: uinfo?.userId,
@@ -320,6 +331,7 @@ const AddRequest: React.FC = () => {
       password: "123",
       stepCode: stepFound?.stepCode || 0,
       stepTask: 0,
+      status: false,
       dateTime: date,
       files: files,
       userId: uinfo?.userId,
@@ -352,10 +364,6 @@ const AddRequest: React.FC = () => {
         postRqstsMutation.mutate(reqTypeDataIssuanceFromAccountantAndManager);
         break;
     }
-
-    alert(
-      `Новый главных бухгалтер ${data?.fullName} не найден в системе, можете продолжить заявку.`
-    );
 
     navigate(`/requests`);
   };

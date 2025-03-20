@@ -7,6 +7,7 @@ import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 import { departments } from "../../../../API/Data/Departments/Departments";
 import WorkSpaceChangeOfChiefAccountant from "../../../../UI/WorkSpace/Workspace Change Of Chief Accountant/WorkSpaceChangeOfChiefAccountant";
 import WorkSpaceChangeManagement from "../../../../UI/WorkSpace/Workspace Change Of Management/WorkSpaceChangeManagement";
+import { TextField } from "@mui/material";
 
 const ShowChangeManagement = ({
   currentUser,
@@ -14,7 +15,7 @@ const ShowChangeManagement = ({
   currentOrganization,
   rqstsDataById,
   uinfo,
-  disabledAddUserButton,
+  handleCheckRequest,
 }: any) => {
   return (
     <>
@@ -55,16 +56,32 @@ const ShowChangeManagement = ({
               </div>
             }
             checkUser={
-              <div className="panel-check-user">
-                <ButtonPanelControl
-                  icon={
-                    <PersonSearchIcon
-                      sx={{ fontSize: "18px", fontWeight: "bold" }}
-                    />
-                  }
-                  text="Проверить заявку"
-                  activeSendButton={disabledAddUserButton}
-                />
+              <div
+                style={{
+                  padding: "0px 20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                }}
+              >
+                <TextField label="ИНН" fullWidth />
+                <TextField label="ФИО" fullWidth />
+
+                <div
+                  className="panel-check-user"
+                  style={{ justifyContent: "end" }}
+                >
+                  <ButtonPanelControl
+                    icon={
+                      <PersonSearchIcon
+                        sx={{ fontSize: "18px", fontWeight: "bold" }}
+                      />
+                    }
+                    text="Проверить заявку"
+                    activeSendButton={rqstsDataById?.status}
+                    handleSubmit={handleCheckRequest}
+                  />
+                </div>
               </div>
             }
           />
@@ -75,7 +92,7 @@ const ShowChangeManagement = ({
         </div>
       </section>
       {/* Рабочее пространство */}
-      {uinfo?.uType !== "bo" && (
+      {uinfo?.uType !== "bo" && rqstsDataById?.status && (
         <WorkSpaceChangeManagement
           currentUser={currentUser}
           rqstsDataById={rqstsDataById}

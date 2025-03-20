@@ -11,6 +11,7 @@ const ShowTokenIssuance = ({
   currentOrganization,
   rqstsDataById,
   uinfo,
+  handleCheckRequest,
 }: any) => {
   return (
     <>

@@ -28,7 +28,7 @@ const CertificateCard = ({
   return (
     <div
       className={`info-certificate ${
-        getCertificateUser?.statusCode === 5 ||
+        getCertificateUser?.statusCode === 7 ||
         (rqstsDataById?.reqType === "Выдача сертификата" &&
           rqstsDataById?.stepTask < 1) ||
         (rqstsDataById?.reqType === "Выдача токена и сертификата" &&
@@ -41,7 +41,7 @@ const CertificateCard = ({
     >
       <div className="wrapper-info-certificate">
         <div className="wrapper-image-certificate">
-          {getCertificateUser?.statusCode === 5 ? (
+          {getCertificateUser?.statusCode === 7 ? (
             <div className="passive-certificate-icon">
               <motion.div
                 initial={{ x: 0 }} // Начальная позиция

@@ -130,7 +130,7 @@ const ChangeChiefAccountantAndManager = ({
             <Box className="request_inp" sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">
-                  Наличие токена
+                  Укажите, есть ли у вас токен
                 </InputLabel>
                 <Select
                   {...register("token")}
@@ -146,19 +146,27 @@ const ChangeChiefAccountantAndManager = ({
             <Box className="request_inp" sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">
-                  Наличие логина iMoF
+                  Выберите заявку
                 </InputLabel>
                 <Select
-                  {...register("loginImof")}
+                  {...register("token")}
                   labelId="demo-simple-select-label"
-                  id="loginImof"
-                  label="loginImof"
+                  id="token"
+                  label="token"
                 >
-                  <MenuItem value="Есть">Есть</MenuItem>
-                  <MenuItem value="Нет">Нет</MenuItem>
+                  <MenuItem value="Есть">
+                    Заявка на получение доступов в ИСУГФ - TFMIS
+                  </MenuItem>
                 </Select>
               </FormControl>
             </Box>
+            <TextField
+              {...register("certificateSeries")}
+              id="certificateSeries"
+              type="text"
+              className="request_inp"
+              label="Серия сертификата"
+            />
             <FileService />
             <ul className="required-documents">
               <p>Необходимые документы:</p>
@@ -233,7 +241,7 @@ const ChangeChiefAccountantAndManager = ({
             <Box className="request_inp" sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">
-                  Наличие токена
+                  Укажите, есть ли у вас токен
                 </InputLabel>
                 <Select
                   {...register("tokenAccountant")}
@@ -249,19 +257,27 @@ const ChangeChiefAccountantAndManager = ({
             <Box className="request_inp" sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">
-                  Наличие логина iMoF
+                  Выберите заявку
                 </InputLabel>
                 <Select
-                  {...register("loginImofAccountant")}
+                  {...register("token")}
                   labelId="demo-simple-select-label"
-                  id="loginImofAccountant"
-                  label="loginImofAccountant"
+                  id="token"
+                  label="token"
                 >
-                  <MenuItem value="Есть">Есть</MenuItem>
-                  <MenuItem value="Нет">Нет</MenuItem>
+                  <MenuItem value="Есть">
+                    Заявка на получение доступов в ИСУГФ - TFMIS
+                  </MenuItem>
                 </Select>
               </FormControl>
             </Box>
+            <TextField
+              {...register("certificateSeries")}
+              id="certificateSeries"
+              type="text"
+              className="request_inp"
+              label="Серия сертификата"
+            />
             <FileService />
             <ul className="required-documents">
               <p>Необходимые документы:</p>

@@ -201,7 +201,7 @@ const CertificateRevocationList = ({
     ) {
       certificateMutation.mutate({
         ...getCertificate,
-        statusCode: code, // Изменение statusCode с 0 на 5
+        statusCode: code, // Изменение statusCode с 0 на 7
         dateChange: formattedDate,
       });
     }
@@ -212,7 +212,7 @@ const CertificateRevocationList = ({
     ) {
       certificateMutation.mutate({
         ...getCertificateAccountantAndManagement,
-        statusCode: code, // Изменение statusCode с 0 на 5
+        statusCode: code, // Изменение statusCode с 0 на 7
         dateChange: formattedDate,
       });
     }
@@ -260,7 +260,7 @@ const CertificateRevocationList = ({
           />
         )}
         <div className="panel-buttons">
-          {getCertificate?.statusCode === 5 && (
+          {getCertificate?.statusCode === 7 && (
             <div className="wrapper-show-executor">
               <p className="show-executor-title">
                 Исполнитель: <span>{executor?.fullName}</span>
@@ -300,7 +300,7 @@ const CertificateRevocationList = ({
                   : ""
               }
               activeSendButton={
-                getCertificate?.statusCode === 5 ||
+                getCertificate?.statusCode === 7 ||
                 activeButtonIssuanceCertificateType
                   ? true
                   : false

@@ -11,8 +11,9 @@ interface RequestAccountantData {
   passportAccountant?: string;
   roleAccountant?: string;
   tokenAccountant?: string;
+  certificateSeries?: string;
+  status?: boolean;
   passwordAccountant?: string;
-  loginImofAccountant?: string;
 }
 
 export interface GetRqstsType extends RequestAccountantData {
@@ -36,7 +37,6 @@ export interface GetRqstsType extends RequestAccountantData {
   token: "";
   organizationId: number;
   services: number[];
-  loginImof: string;
   dateChange: string;
 }
 

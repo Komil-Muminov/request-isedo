@@ -8,15 +8,16 @@ import { departments } from "../../../../API/Data/Departments/Departments";
 import WorkSpaceChangeOfChiefAccountant from "../../../../UI/WorkSpace/Workspace Change Of Chief Accountant/WorkSpaceChangeOfChiefAccountant";
 import WorkSpaceChangeManagement from "../../../../UI/WorkSpace/Workspace Change Of Management/WorkSpaceChangeManagement";
 import WorkSpaceChangeOfChiefAccountantAndManagement from "../../../../UI/WorkSpace/Workspace Change Of Chief Accountant and Management/WorkSpaceChangeOfChiefAccountantAndManagement";
+import { TextField } from "@mui/material";
 
 const ShowChangeChiefAccountantAndManagement = ({
   fileInfo,
   currentOrganization,
   rqstsDataById,
   uinfo,
-  disabledAddUserButton,
   currentAccountant,
   currentManagement,
+  handleCheckRequest,
 }: any) => {
   const ManagementFilesTemp = rqstsDataById?.files.filter((e: any) => {
     if (e.fileName.includes("рохбар")) {
@@ -59,8 +60,9 @@ const ShowChangeChiefAccountantAndManagement = ({
     passport: rqstsDataById?.passport,
     role: rqstsDataById?.role,
     token: rqstsDataById?.token,
+    certificateSeries: rqstsDataById?.certificateSeries,
+    status: rqstsDataById?.status,
     password: rqstsDataById?.password,
-    loginImof: rqstsDataById?.loginImof,
   };
 
   const RequestAccountantData = {
@@ -80,8 +82,9 @@ const ShowChangeChiefAccountantAndManagement = ({
     passport: rqstsDataById?.passportAccountant,
     role: rqstsDataById?.roleAccountant,
     token: rqstsDataById?.tokenAccountant,
+    certificateSeries: rqstsDataById?.certificateSeries,
+    status: rqstsDataById?.status,
     password: rqstsDataById?.passwordAccountant,
-    loginImof: rqstsDataById?.loginImofAccountant,
   };
 
   return (
@@ -121,16 +124,32 @@ const ShowChangeChiefAccountantAndManagement = ({
               </div>
             }
             checkUser={
-              <div className="panel-check-user">
-                <ButtonPanelControl
-                  icon={
-                    <PersonSearchIcon
-                      sx={{ fontSize: "18px", fontWeight: "bold" }}
-                    />
-                  }
-                  text="Проверить заявку"
-                  activeSendButton={disabledAddUserButton}
-                />
+              <div
+                style={{
+                  padding: "0px 20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                }}
+              >
+                <TextField label="ИНН" fullWidth />
+                <TextField label="ФИО" fullWidth />
+
+                <div
+                  className="panel-check-user"
+                  style={{ justifyContent: "end" }}
+                >
+                  <ButtonPanelControl
+                    icon={
+                      <PersonSearchIcon
+                        sx={{ fontSize: "18px", fontWeight: "bold" }}
+                      />
+                    }
+                    text="Проверить заявку"
+                    activeSendButton={rqstsDataById?.status}
+                    handleSubmit={handleCheckRequest}
+                  />
+                </div>
               </div>
             }
           />
@@ -153,16 +172,31 @@ const ShowChangeChiefAccountantAndManagement = ({
               </div>
             }
             checkUser={
-              <div className="panel-check-user">
-                <ButtonPanelControl
-                  icon={
-                    <PersonSearchIcon
-                      sx={{ fontSize: "18px", fontWeight: "bold" }}
-                    />
-                  }
-                  text="Проверить заявку"
-                  activeSendButton={disabledAddUserButton}
-                />
+              <div
+                style={{
+                  padding: "0px 20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                }}
+              >
+                <TextField label="ИНН" fullWidth />
+                <TextField label="ФИО" fullWidth />
+
+                <div
+                  className="panel-check-user"
+                  style={{ justifyContent: "end" }}
+                >
+                  <ButtonPanelControl
+                    icon={
+                      <PersonSearchIcon
+                        sx={{ fontSize: "18px", fontWeight: "bold" }}
+                      />
+                    }
+                    text="Проверить заявку"
+                    activeSendButton={rqstsDataById?.status}
+                  />
+                </div>
               </div>
             }
           />
@@ -173,7 +207,7 @@ const ShowChangeChiefAccountantAndManagement = ({
         </div>
       </section>
       {/* Рабочее пространство */}
-      {uinfo?.uType !== "bo" && (
+      {uinfo?.uType !== "bo" && rqstsDataById?.status && (
         <WorkSpaceChangeOfChiefAccountantAndManagement
           currentUser={currentManagement}
           currentAccountant={currentAccountant}
