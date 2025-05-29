@@ -251,7 +251,7 @@ const CreateInvoice = ({
     <div className="certificate-content">
       <div className="panel-control-certificate-revocation">
         <div className="certificates-revocation-title">
-          <p>Выписывание счета</p>
+          <p>Выставленные услуги</p>
         </div>
         <p style={{ fontWeight: "bold" }}>
           Общая сумма: <span style={{ fontWeight: "normal" }}>{totalSum}c</span>
