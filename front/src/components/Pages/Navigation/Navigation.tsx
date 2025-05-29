@@ -22,64 +22,64 @@ import MenuItem from "@mui/material/MenuItem";
 import "./Navigation.css";
 
 export const Navigation: React.FC = () => {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	const logoutMutate = useMutation(
-		{
-			mutationFn: () => logout(),
-			onSuccess: () => {
-				queryClient.invalidateQueries({ queryKey: ["users", "me"] });
-				queryClient.setQueryData(["users", "me"], null);
-				navigate("/");
-			},
-		},
-		queryClient,
-	);
+  const logoutMutate = useMutation(
+    {
+      mutationFn: () => logout(),
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["users", "me"] });
+        queryClient.setQueryData(["users", "me"], null);
+        navigate("/");
+      },
+    },
+    queryClient
+  );
 
-	const handleLogout = async () => {
-		await logoutMutate.mutateAsync();
-	};
+  const handleLogout = async () => {
+    await logoutMutate.mutateAsync();
+  };
 
-	// UserAvatar
-	const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  // UserAvatar
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
-	const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-		setAnchorElUser((prevAnchorElUser) =>
-			prevAnchorElUser ? null : event.currentTarget,
-		);
-	};
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser((prevAnchorElUser) =>
+      prevAnchorElUser ? null : event.currentTarget
+    );
+  };
 
-	const handleToggleUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-		if (anchorElUser) {
-			setAnchorElUser(null);
-		} else {
-			setAnchorElUser(event.currentTarget);
-		}
-	};
+  const handleToggleUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    if (anchorElUser) {
+      setAnchorElUser(null);
+    } else {
+      setAnchorElUser(event.currentTarget);
+    }
+  };
 
-	const handleCloseUserMenu = () => {
-		setAnchorElUser(null);
-	};
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
-	// getInfo about currentUser
-	const { getMe } = useAuth();
+  // getInfo about currentUser
+  const { getMe } = useAuth();
 
-	const getUinfoQuery = useQuery(
-		{
-			queryKey: ["users", "me"],
-			queryFn: () => getMe(),
-		},
-		queryClient,
-	);
+  const getUinfoQuery = useQuery(
+    {
+      queryKey: ["users", "me"],
+      queryFn: () => getMe(),
+    },
+    queryClient
+  );
 
-	return (
-		<>
-			<section className="sections navigation__section">
-				<div className="container">
-					<div className="navigation__content">
-						{/* <nav className="nav_info"> */}
-						{/* <ul className="nav_info-list"> */}
-						{/* <li className="info_list-item mulish-info-list-item">
+  return (
+    <>
+      <section className="sections navigation__section">
+        <div className="container">
+          <div className="navigation__content">
+            {/* <nav className="nav_info"> */}
+            {/* <ul className="nav_info-list"> */}
+            {/* <li className="info_list-item mulish-info-list-item">
 									<svg
 										width="8px"
 										height="8px"
@@ -120,7 +120,7 @@ export const Navigation: React.FC = () => {
 										<span className=""> 123456789</span>
 									</div>
 								</li> */}
-						{/* <li className="info_list-item mulish-info-list-item">
+            {/* <li className="info_list-item mulish-info-list-item">
 									<svg
 										width="8px"
 										height="8px"
@@ -146,7 +146,7 @@ export const Navigation: React.FC = () => {
 									</div>
 								</li> */}
 
-						{/* <li className="info_list-item mulish-info-list-item">
+            {/* <li className="info_list-item mulish-info-list-item">
 									<svg
 										width="8px"
 										height="8px"
@@ -171,159 +171,159 @@ export const Navigation: React.FC = () => {
 										</span>
 									</div>
 								</li> */}
-						{/* Другие элементы списка */}
-						{/* </ul> */}
-						{/* </nav> */}
+            {/* Другие элементы списка */}
+            {/* </ul> */}
+            {/* </nav> */}
 
-						<div className="nav__log">
-							<Link to="requests" className="nav__log-account">
-								<img src={log} alt="log" className="nav__gerb" />
-								<div className="account-text">
-									<p>Вазорати молияи</p>
-									<p>Ҷумҳурии Тоҷикистон</p>
-								</div>
-							</Link>
-						</div>
+            <div className="nav__log">
+              <Link to="requests" className="nav__log-account">
+                <img src={log} alt="log" className="nav__gerb" />
+                <div className="account-text">
+                  <p>Вазорати молияи</p>
+                  <p>Ҷумҳурии Тоҷикистон</p>
+                </div>
+              </Link>
+            </div>
 
-						<div className="settings">
-							<Link className="nav__notify" to={"notify"}>
-								<NotificationsNoneOutlinedIcon
-									sx={{
-										fontSize: "40px",
-										color: "#959fae",
-										cursor: "pointer",
-										"&:hover": {
-											color: "#afbacb",
-											transition: "all .2s",
-										},
-									}}
-								/>
-							</Link>
-							<div className="user_info" onClick={handleToggleUserMenu}>
-								<Box sx={{ flexGrow: 0 }}>
-									<Tooltip title="Open settings">
-										<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-											<Avatar
-												alt="alt"
-												src={
-													getUinfoQuery.data?.photo
-														? `http://localhost:3000${getUinfoQuery.data.photo}`
-														: ""
-												}
-											/>
-										</IconButton>
-									</Tooltip>
-									<Menu
-										sx={{
-											mt: "100px",
-											"& .MuiMenu-paper": {
-												padding: "0 10px", // Измените padding здесь
-												borderRadius: "7px", // Измените border-radius здесь
-												border: "1px solid #0000000f",
-												boxShadow:
-													" 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-											},
-										}}
-										id="menu-appbar"
-										anchorEl={anchorElUser}
-										anchorOrigin={{
-											vertical: "top",
-											horizontal: "right",
-										}}
-										keepMounted
-										transformOrigin={{
-											vertical: "top",
-											horizontal: "right",
-										}}
-										open={Boolean(anchorElUser)}
-										onClose={handleCloseUserMenu}
-									>
-										<Link to="/uprofile/udetails" className="nav__log-account">
-											<MenuItem
-												onClick={handleCloseUserMenu}
-												sx={{
-													p: 0,
-													minWidth: "200px",
-													display: "flex",
-													alignItems: "center",
-													gap: "5px",
-													padding: "5px",
-													borderRadius: "10px",
-													borderBottomRightRadius: "0",
-													borderBottomLeftRadius: "0",
-													borderBottom: "1px solid #00000015",
-												}}
-											>
-												<div className="user_info-icon">
-													<AccountCircleOutlinedIcon
-														sx={{ color: "#6DACF9" }}
-													/>
-												</div>
-												<Typography
-													sx={{ width: "100%", textAlign: "start", p: 1 }}
-												>
-													Профиль
-												</Typography>
-											</MenuItem>
-										</Link>
-										<MenuItem
-											onClick={handleLogout}
-											sx={{
-												p: 0,
-												minWidth: "200px",
-												display: "flex",
-												alignItems: "center",
-												gap: "5px",
-												padding: "5px",
-												borderRadius: "10px",
-												borderTopRightRadius: "0",
-												borderTopLeftRadius: "0",
-											}}
-										>
-											<div className="user_info-icon">
-												<LogoutIcon sx={{ color: "#6DACF9" }} />
-											</div>
-											<Typography
-												sx={{
-													width: "100%",
-													textAlign: "start",
-													p: 1,
-													color: "#000",
-												}}
-											>
-												Выход
-											</Typography>
-										</MenuItem>
-									</Menu>
-								</Box>
-								{/* <p>{getUinfoQuery.data?.username}</p> */}
-								<svg
-									width="15px"
-									height="15px"
-									viewBox="0 0 24 24"
-									fill="none"
-									className="nav__verification--icon"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										d="M10.5213 2.62368C11.3147 1.75255 12.6853 1.75255 13.4787 2.62368L14.4989 3.74391C14.8998 4.18418 15.4761 4.42288 16.071 4.39508L17.5845 4.32435C18.7614 4.26934 19.7307 5.23857 19.6757 6.41554L19.6049 7.92905C19.5771 8.52388 19.8158 9.10016 20.2561 9.50111L21.3763 10.5213C22.2475 11.3147 22.2475 12.6853 21.3763 13.4787L20.2561 14.4989C19.8158 14.8998 19.5771 15.4761 19.6049 16.071L19.6757 17.5845C19.7307 18.7614 18.7614 19.7307 17.5845 19.6757L16.071 19.6049C15.4761 19.5771 14.8998 19.8158 14.4989 20.2561L13.4787 21.3763C12.6853 22.2475 11.3147 22.2475 10.5213 21.3763L9.50111 20.2561C9.10016 19.8158 8.52388 19.5771 7.92905 19.6049L6.41553 19.6757C5.23857 19.7307 4.26934 18.7614 4.32435 17.5845L4.39508 16.071C4.42288 15.4761 4.18418 14.8998 3.74391 14.4989L2.62368 13.4787C1.75255 12.6853 1.75255 11.3147 2.62368 10.5213L3.74391 9.50111C4.18418 9.10016 4.42288 8.52388 4.39508 7.92905L4.32435 6.41553C4.26934 5.23857 5.23857 4.26934 6.41554 4.32435L7.92905 4.39508C8.52388 4.42288 9.10016 4.18418 9.50111 3.74391L10.5213 2.62368Z"
-										stroke="#000000"
-										strokeWidth="1.5"
-									/>
-									<path
-										d="M9 12L11 14L15 10"
-										stroke="#000000"
-										strokeWidth="1.5"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									/>
-								</svg>
-								<KeyboardArrowDownIcon />
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-		</>
-	);
+            <div className="settings">
+              <Link className="nav__notify" to={"notify"}>
+                <NotificationsNoneOutlinedIcon
+                  sx={{
+                    fontSize: "40px",
+                    color: "#959fae",
+                    cursor: "pointer",
+                    "&:hover": {
+                      color: "#afbacb",
+                      transition: "all .2s",
+                    },
+                  }}
+                />
+              </Link>
+              <div className="user_info" onClick={handleToggleUserMenu}>
+                <Box sx={{ flexGrow: 0 }}>
+                  <Tooltip title={getUinfoQuery.data?.fullName}>
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      <Avatar
+                        alt="alt"
+                        src={
+                          getUinfoQuery.data?.photo
+                            ? `http://localhost:3000${getUinfoQuery.data.photo}`
+                            : ""
+                        }
+                      />
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    sx={{
+                      mt: "100px",
+                      "& .MuiMenu-paper": {
+                        padding: "0 10px", // Измените padding здесь
+                        borderRadius: "7px", // Измените border-radius здесь
+                        border: "1px solid #0000000f",
+                        boxShadow:
+                          " 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+                      },
+                    }}
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    <Link to="/uprofile/udetails" className="nav__log-account">
+                      <MenuItem
+                        onClick={handleCloseUserMenu}
+                        sx={{
+                          p: 0,
+                          minWidth: "200px",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "5px",
+                          padding: "5px",
+                          borderRadius: "10px",
+                          borderBottomRightRadius: "0",
+                          borderBottomLeftRadius: "0",
+                          borderBottom: "1px solid #00000015",
+                        }}
+                      >
+                        <div className="user_info-icon">
+                          <AccountCircleOutlinedIcon
+                            sx={{ color: "#6DACF9" }}
+                          />
+                        </div>
+                        <Typography
+                          sx={{ width: "100%", textAlign: "start", p: 1 }}
+                        >
+                          Профиль
+                        </Typography>
+                      </MenuItem>
+                    </Link>
+                    <MenuItem
+                      onClick={handleLogout}
+                      sx={{
+                        p: 0,
+                        minWidth: "200px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "5px",
+                        padding: "5px",
+                        borderRadius: "10px",
+                        borderTopRightRadius: "0",
+                        borderTopLeftRadius: "0",
+                      }}
+                    >
+                      <div className="user_info-icon">
+                        <LogoutIcon sx={{ color: "#6DACF9" }} />
+                      </div>
+                      <Typography
+                        sx={{
+                          width: "100%",
+                          textAlign: "start",
+                          p: 1,
+                          color: "#000",
+                        }}
+                      >
+                        Выход
+                      </Typography>
+                    </MenuItem>
+                  </Menu>
+                </Box>
+                {/* <p>{getUinfoQuery.data?.username}</p> */}
+                <svg
+                  width="15px"
+                  height="15px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="nav__verification--icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10.5213 2.62368C11.3147 1.75255 12.6853 1.75255 13.4787 2.62368L14.4989 3.74391C14.8998 4.18418 15.4761 4.42288 16.071 4.39508L17.5845 4.32435C18.7614 4.26934 19.7307 5.23857 19.6757 6.41554L19.6049 7.92905C19.5771 8.52388 19.8158 9.10016 20.2561 9.50111L21.3763 10.5213C22.2475 11.3147 22.2475 12.6853 21.3763 13.4787L20.2561 14.4989C19.8158 14.8998 19.5771 15.4761 19.6049 16.071L19.6757 17.5845C19.7307 18.7614 18.7614 19.7307 17.5845 19.6757L16.071 19.6049C15.4761 19.5771 14.8998 19.8158 14.4989 20.2561L13.4787 21.3763C12.6853 22.2475 11.3147 22.2475 10.5213 21.3763L9.50111 20.2561C9.10016 19.8158 8.52388 19.5771 7.92905 19.6049L6.41553 19.6757C5.23857 19.7307 4.26934 18.7614 4.32435 17.5845L4.39508 16.071C4.42288 15.4761 4.18418 14.8998 3.74391 14.4989L2.62368 13.4787C1.75255 12.6853 1.75255 11.3147 2.62368 10.5213L3.74391 9.50111C4.18418 9.10016 4.42288 8.52388 4.39508 7.92905L4.32435 6.41553C4.26934 5.23857 5.23857 4.26934 6.41554 4.32435L7.92905 4.39508C8.52388 4.42288 9.10016 4.18418 9.50111 3.74391L10.5213 2.62368Z"
+                    stroke="#000000"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d="M9 12L11 14L15 10"
+                    stroke="#000000"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <KeyboardArrowDownIcon />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 };
