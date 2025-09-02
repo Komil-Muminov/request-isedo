@@ -111,9 +111,9 @@ const PassiveVPNTFMIS = ({
 
   const currentVPN = vpn.find((v) => {
     if (
-      (v?.userId === currentAccountant?.id &&
+      (rqstsDataById?.pastUserIds?.includes(v?.userId) &&
         rqstsDataById?.reqType === "Смена главного бухгалтера") ||
-      (v?.userId === currentAccountant?.id &&
+      (rqstsDataById?.pastUserIds?.includes(v?.userId) &&
         rqstsDataById?.reqType === "Смена главного бухгалтера и руководителя")
     ) {
       return v;
@@ -126,6 +126,8 @@ const PassiveVPNTFMIS = ({
       return v;
     }
   });
+
+  console.log(currentAccountant);
 
   const currentManagementVPN = vpn.find((v) => {
     if (
