@@ -1,1 +1,55 @@
-[]
+[
+  {
+    "fullName": "Новый главный бухгалтер",
+    "tax": "040083472",
+    "phone": "918314257",
+    "email": "new.chief.accountant",
+    "passport": "A00538231",
+    "role": "Главный бухгалтер",
+    "token": "Есть",
+    "dateTime": "29.07.2025.16:08",
+    "password": "123",
+    "fullNameAccountant": "",
+    "taxAccountant": "",
+    "phoneAccountant": "",
+    "emailAccountant": "",
+    "passportAccountant": "",
+    "roleAccountant": "",
+    "tokenAccountant": "",
+    "certificateSeries": "200000dd1f65124b121773decc00000000аа1f",
+    "passwordAccountant": "123",
+    "reqType": "Смена главного бухгалтера",
+    "stepCode": 1,
+    "stepTask": 0,
+    "status": true,
+    "files": [
+      {
+        "id": 1753787001498,
+        "fileName": "Карор дар бораи аз вазифа озод намудани сармухосиб.",
+        "size": "22.19 КБ",
+        "type": "pdf"
+      },
+      {
+        "id": 1753787319669,
+        "fileName": "Карор дар бораи ба вазифа таъин намудани сармухосиб.",
+        "size": "22.19 КБ",
+        "type": "pdf"
+      },
+      {
+        "id": 1753787322863,
+        "fileName": "Нусхаи шиноснома (сармухосиб).",
+        "size": "22.19 КБ",
+        "type": "pdf"
+      }
+    ],
+    "userId": 2,
+    "organizationId": 1,
+    "services": [],
+    "dataChange": "29.07.2025 в 16:08",
+    "pastUserIds": [
+      5
+    ],
+    "id": 1,
+    "dateChange": "29.07.2025 в 17:29"
+  }
+]
